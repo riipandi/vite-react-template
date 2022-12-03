@@ -7,7 +7,7 @@ export const GitHubButton: FC = () => {
   return (
     <Button
       as={Link}
-      to='http://localhost:3000/https://github.com/riipandi/vite-react-template'
+      to='https://github.com/riipandi/vite-react-template'
       className='inline-flex w-full items-center justify-center gap-x-3 rounded-md border border-transparent bg-blue-600 py-3 px-4 text-center text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 sm:w-auto'
       rel='noreferrer noopener'
       target='_blank'

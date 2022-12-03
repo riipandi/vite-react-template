@@ -66,18 +66,26 @@ image generator that sparks joy, you can setup [automatic GitHub](https://vercel
 deployments so that pushing to master will deploy to production! 🚀
 
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/riipandi/vite-react-template&project-name=vite-react-template&repo-name=my-vite-react-app&env=API_GOTRUE_URL)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/riipandi/vite-react-template)
+
+
 
 #### Cloudflare Deployment
+
 
 You need to add `NODE_VERSION` with value `14.19.0` or `16.15.0` on the environment variables setting.
 Visit [Cloudflare pages docs](https://developers.cloudflare.com/pages/platform/build-configuration/)
 for more information.
+
+
 
 For the preview branch:
 
 ```env
 VITE_PUBLIC_SITE_URL=${CF_PAGES_URL}
 ```
+
+
 
 ## Development
 
@@ -99,3 +107,7 @@ This project is open-sourced software licensed under the [MIT license](https://a
 
 Copyrights in this project are retained by their contributors.
 See the [license file](./LICENSE) for more information.
+
+---
+
+<sub>🤫 Psst! You always can [support my work here](https://github.com/sponsors/riipandi).</sub>

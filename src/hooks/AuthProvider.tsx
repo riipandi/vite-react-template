@@ -6,7 +6,7 @@ export type { User, UserData }
 
 // Instantiate the GoTrue auth client.
 export const auth = new GoTrue({
-  APIUrl: import.meta.env.API_GOTRUE_URL,
+  APIUrl: import.meta.env.VITE_GOTRUE_URL,
   audience: '',
   setCookie: true,
 })

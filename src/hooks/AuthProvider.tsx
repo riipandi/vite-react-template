@@ -1,14 +1,14 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import GoTrue, { User } from 'gotrue-js'
+import GoTrue, { User, UserData } from 'gotrue-js'
 
-const GOTRUE_URL: string = import.meta.env.API_GOTRUE_URL
+export type { User, UserData }
 
 // Instantiate the GoTrue auth client.
 export const auth = new GoTrue({
-  APIUrl: GOTRUE_URL,
+  APIUrl: import.meta.env.API_GOTRUE_URL,
   audience: '',
-  setCookie: false,
+  setCookie: true,
 })
 
 type AuthContext = {
@@ -64,4 +64,8 @@ export function AuthProvider({ children }: { children?: ReactNode }) {
       {children}
     </UserContext.Provider>
   )
+}
+
+export function useAuthentication() {
+  return useContext(UserContext)
 }

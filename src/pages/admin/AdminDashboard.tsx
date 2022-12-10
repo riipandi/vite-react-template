@@ -1,12 +1,11 @@
-import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components/Buttons'
 import { Card, Container } from '@/components/Containers'
-import { UserContext } from '@/hooks/AuthProvider'
+import { useAuthentication } from '@/hooks/AuthProvider'
 
 export default function AdminDashboard() {
-  const { user, logout } = useContext(UserContext)
+  const { user, logout } = useAuthentication()
 
   return (
     <Container>

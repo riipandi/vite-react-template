@@ -1,14 +1,13 @@
-import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Alert } from '@/components/Alerts'
 import { Button } from '@/components/Buttons'
-import { UserContext } from '@/hooks/AuthProvider'
+import { useAuthentication } from '@/hooks/AuthProvider'
 
 import ViteLogo from '~/images/vite.svg'
 
 export default function Home() {
-  const { user, loggedIn } = useContext(UserContext)
+  const { user, loggedIn } = useAuthentication()
   console.log('🪲 ~ user', user)
 
   return (

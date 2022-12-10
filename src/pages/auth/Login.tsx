@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
@@ -8,7 +8,7 @@ import { Card } from '@/components/Containers'
 import { HorizontalDivider } from '@/components/Dividers'
 import { PasswordInput, TextInput } from '@/components/Inputs'
 import { GoogleButton } from '@/components/SocialButton'
-import { auth, UserContext } from '@/hooks/AuthProvider'
+import { auth, useAuthentication } from '@/hooks/AuthProvider'
 
 interface LoginTypes {
   email: string
@@ -16,7 +16,7 @@ interface LoginTypes {
 }
 
 export default function Login() {
-  const { login, loggedOut } = useContext(UserContext)
+  const { login, loggedOut } = useAuthentication()
   const [failed, setFailed] = useState<string | null>()
 
   const {

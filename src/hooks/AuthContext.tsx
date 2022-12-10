@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { type FunctionComponent, useContext } from 'react'
+import { type FunctionComponent } from 'react'
 import { Navigate } from 'react-router-dom'
 
-import { UserContext } from '@/hooks/AuthProvider'
+import { useAuthentication } from '@/hooks/AuthProvider'
 
 /**
  * A higher-order wrapper for the conditional route component
@@ -21,14 +21,14 @@ export function withCondition(
 
 /** A higher-order component implementation for Admin-only restricted pages */
 export const withAdmin = (Component: FunctionComponent) => {
-  const { loggedIn, isAdmin } = useContext(UserContext)
+  const { loggedIn, isAdmin } = useAuthentication()
   return withCondition(Component, loggedIn && isAdmin, '/login?as=admin')
 }
 
 /** A higher-order wrapper, binding the "user logged in" condition and redirect */
 export const withLoggedIn = (Component: FunctionComponent) =>
-  withCondition(Component, useContext(UserContext).loggedIn, '/login?as=user')
+  withCondition(Component, useAuthentication().loggedIn, '/login?as=user')
 
 /** The inverse, showing a page only if a user is logged OUT */
 export const withLoggedOut = (Component: FunctionComponent) =>
-  withCondition(Component, !useContext(UserContext).loggedIn, '/')
+  withCondition(Component, !useAuthentication().loggedIn, '/')

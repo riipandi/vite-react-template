@@ -33,10 +33,10 @@ export const UserContext = createContext(DefaultUserContext)
 
 export function AuthProvider({ children }: { children?: ReactNode }) {
   const navigate = useNavigate()
-  const user: any = auth.currentUser()
+  const user = auth.currentUser()
   const [loggedIn, setLoggedIn] = useState(user !== null)
   const [loggedOut, setLoggedOut] = useState(false)
-  const [isAdmin] = useState(false)
+  const [isAdmin] = useState(user?.role === 'admin')
 
   // This methods would communicate with a backend, obtain/verify a token, etc.
   const login = () => {

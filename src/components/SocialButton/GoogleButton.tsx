@@ -24,7 +24,7 @@ export const GoogleButton: FC = () => {
           fill='#EB4335'
         />
       </svg>
-      Sign in with Google
+      <span>Sign in with Google</span>
     </button>
   )
 }

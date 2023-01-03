@@ -1,6 +1,6 @@
-export function NavBarExpandLight() {
+export function NavBarExpand() {
   return (
-    <div className='flex h-full min-h-screen w-56 flex-col items-center overflow-hidden rounded-r bg-white text-gray-600'>
+    <div className='flex h-full min-h-screen w-56 flex-col items-center overflow-hidden rounded-r bg-white text-gray-600 shadow-sm dark:border-r dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400'>
       <a className='mt-3 flex w-full items-center px-3' href='/'>
         <svg
           className='h-8 w-8 fill-current'
@@ -13,8 +13,11 @@ export function NavBarExpandLight() {
         <span className='ml-2 text-sm font-bold'>Icon+ DNS Manager</span>
       </a>
       <div className='w-full px-2'>
-        <div className='mt-3 flex w-full flex-col items-center border-t border-gray-200'>
-          <a className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200' href='/'>
+        <div className='mt-3 flex w-full flex-col items-center border-t border-gray-200 dark:border-gray-700'>
+          <a
+            className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-300'
+            href='/'
+          >
             <svg
               className='h-6 w-6 stroke-current'
               xmlns='http://www.w3.org/2000/svg'
@@ -31,7 +34,10 @@ export function NavBarExpandLight() {
             </svg>
             <span className='ml-2 text-sm font-medium'>Dasboard</span>
           </a>
-          <a className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200' href='/'>
+          <a
+            className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-300'
+            href='/'
+          >
             <svg
               className='h-6 w-6 stroke-current'
               xmlns='http://www.w3.org/2000/svg'
@@ -48,7 +54,10 @@ export function NavBarExpandLight() {
             </svg>
             <span className='ml-2 text-sm font-medium'>Search</span>
           </a>
-          <a className='mt-2 flex h-12 w-full items-center rounded bg-gray-200 px-3' href='/'>
+          <a
+            className='mt-2 flex h-12 w-full items-center rounded bg-gray-200 px-3 dark:bg-gray-700 dark:text-gray-200'
+            href='/'
+          >
             <svg
               className='h-6 w-6 stroke-current'
               xmlns='http://www.w3.org/2000/svg'
@@ -65,7 +74,10 @@ export function NavBarExpandLight() {
             </svg>
             <span className='ml-2 text-sm font-medium'>Insights</span>
           </a>
-          <a className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200' href='/'>
+          <a
+            className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-300'
+            href='/'
+          >
             <svg
               className='h-6 w-6 stroke-current'
               xmlns='http://www.w3.org/2000/svg'
@@ -83,8 +95,11 @@ export function NavBarExpandLight() {
             <span className='ml-2 text-sm font-medium'>Docs</span>
           </a>
         </div>
-        <div className='mt-2 flex w-full flex-col items-center border-t border-gray-200'>
-          <a className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200' href='/'>
+        <div className='mt-2 flex w-full flex-col items-center border-t border-gray-200 dark:border-gray-700'>
+          <a
+            className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-300'
+            href='/'
+          >
             <svg
               className='h-6 w-6 stroke-current'
               xmlns='http://www.w3.org/2000/svg'
@@ -101,7 +116,10 @@ export function NavBarExpandLight() {
             </svg>
             <span className='ml-2 text-sm font-medium'>Products</span>
           </a>
-          <a className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200' href='/'>
+          <a
+            className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-300'
+            href='/'
+          >
             <svg
               className='h-6 w-6 stroke-current'
               xmlns='http://www.w3.org/2000/svg'
@@ -119,7 +137,7 @@ export function NavBarExpandLight() {
             <span className='ml-2 text-sm font-medium'>Settings</span>
           </a>
           <a
-            className='relative mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200'
+            className='relative mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-300'
             href='/'
           >
             <svg
@@ -137,14 +155,17 @@ export function NavBarExpandLight() {
               />
             </svg>
             <span className='ml-2 text-sm font-medium'>Messages</span>
-            <span className='absolute top-0 left-0 mt-2 ml-2 h-2 w-2 rounded-full bg-indigo-500' />
+            <span className='absolute top-0 left-0 mt-2 ml-2 h-2 w-2 rounded-full bg-red-500' />
           </a>
         </div>
       </div>
 
       <div className='mt-auto mb-2 w-full px-2'>
-        <div className='mt-3 flex w-full flex-col items-center border-t border-gray-200'>
-          <a className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200' href='/'>
+        <div className='mt-3 flex w-full flex-col items-center border-t border-gray-200 dark:border-gray-700'>
+          <a
+            className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-300'
+            href='/'
+          >
             <svg
               className='h-6 w-6 stroke-current'
               xmlns='http://www.w3.org/2000/svg'

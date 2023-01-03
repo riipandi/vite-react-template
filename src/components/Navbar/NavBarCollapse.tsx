@@ -1,6 +1,6 @@
-export function NavBarCollapseDark() {
+export function NavBarCollapse() {
   return (
-    <div className='flex h-full min-h-screen w-16 flex-col items-center overflow-hidden rounded-r bg-gray-900 text-gray-400'>
+    <div className='flex h-full min-h-screen w-16 flex-col items-center overflow-hidden rounded-r bg-white text-gray-700 shadow-sm dark:border-r dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400'>
       <a className='mt-3 flex items-center justify-center' href='/'>
         <svg
           className='h-8 w-8 fill-current'
@@ -11,9 +11,9 @@ export function NavBarCollapseDark() {
           <path d='M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z' />
         </svg>
       </a>
-      <div className='mt-3 flex flex-col items-center border-t border-gray-700'>
+      <div className='mt-3 flex flex-col items-center border-t border-gray-300 dark:border-gray-700'>
         <a
-          className='mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-700 hover:text-gray-300'
+          className='mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300'
           href='/'
         >
           <svg
@@ -32,7 +32,7 @@ export function NavBarCollapseDark() {
           </svg>
         </a>
         <a
-          className='mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-700 hover:text-gray-300'
+          className='mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300'
           href='/'
         >
           <svg
@@ -51,7 +51,7 @@ export function NavBarCollapseDark() {
           </svg>
         </a>
         <a
-          className='mt-2 flex h-12 w-12 items-center justify-center rounded bg-gray-700 text-gray-200'
+          className='mt-2 flex h-12 w-12 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 dark:text-gray-200'
           href='/'
         >
           <svg
@@ -70,7 +70,7 @@ export function NavBarCollapseDark() {
           </svg>
         </a>
         <a
-          className='mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-700 hover:text-gray-300'
+          className='mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300'
           href='/'
         >
           <svg
@@ -89,9 +89,9 @@ export function NavBarCollapseDark() {
           </svg>
         </a>
       </div>
-      <div className='mt-2 flex flex-col items-center border-t border-gray-700'>
+      <div className='mt-2 flex flex-col items-center border-t border-gray-300 dark:border-gray-700'>
         <a
-          className='mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-700 hover:text-gray-300'
+          className='mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300'
           href='/'
         >
           <svg
@@ -110,7 +110,7 @@ export function NavBarCollapseDark() {
           </svg>
         </a>
         <a
-          className='mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-700 hover:text-gray-300'
+          className='mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300'
           href='/'
         >
           <svg
@@ -129,7 +129,7 @@ export function NavBarCollapseDark() {
           </svg>
         </a>
         <a
-          className='relative mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-700 hover:text-gray-300'
+          className='relative mt-2 flex h-12 w-12 items-center justify-center rounded hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300'
           href='/'
         >
           <svg
@@ -146,11 +146,11 @@ export function NavBarCollapseDark() {
               d='M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z'
             />
           </svg>
-          <span className='absolute top-0 left-0 mt-2 ml-2 h-2 w-2 rounded-full bg-indigo-500' />
+          <span className='absolute top-0 left-0 mt-2 ml-2 h-2 w-2 rounded-full bg-red-500' />
         </a>
       </div>
       <a
-        className='mt-auto flex h-16 w-16 items-center justify-center bg-gray-800 hover:bg-gray-700 hover:text-gray-300'
+        className='mt-auto flex h-16 w-16 items-center justify-center bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-gray-300'
         href='/'
       >
         <svg

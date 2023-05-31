@@ -9,7 +9,12 @@ export default defineConfig({
   plugins: [react()],
   envDir: join(__dirname),
   envPrefix: ['API_', 'VITE_'],
-  test: { globals: true, environment: 'jsdom' },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    cache: { dir: './node_modules/.vitest' },
+    include: ['./**/*.{test,spec}.{ts,tsx}'],
+  },
   publicDir: resolve(__dirname, 'public'),
   root: resolve(__dirname, 'src'),
   build: {

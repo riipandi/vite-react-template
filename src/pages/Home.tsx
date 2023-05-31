@@ -8,12 +8,11 @@ import ViteLogo from '~/images/vite.svg'
 
 export default function Home() {
   const { user, loggedIn } = useAuthentication()
-  console.log('🪲 ~ user', user)
 
   return (
     <div className='mx-auto flex h-full min-h-screen w-full flex-col dark:bg-neutral-900'>
       <header className='mb-auto w-full' aria-hidden></header>
-      <div className='mx-auto flex flex-col gap-8 py-10 px-4 sm:px-6 lg:px-8'>
+      <div className='mx-auto flex flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8'>
         <div className='mx-auto flex w-full border-collapse items-center justify-center'>
           <img src={ViteLogo} alt='Vite logo' className='h-28' />
         </div>

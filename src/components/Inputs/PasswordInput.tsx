@@ -76,7 +76,7 @@ export const PasswordInput: PasswordInputComponent = React.forwardRef(
           <input
             id={name}
             name={name}
-            className='block w-full rounded-md border-gray-200 py-3 px-4 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400'
+            className='block w-full rounded-md border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400'
             type={reveal ? 'text' : 'password'}
             aria-describedby={`${name}-error`}
             disabled={disabled}

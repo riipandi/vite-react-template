@@ -4,7 +4,7 @@ export default function Error404() {
   return (
     <div className='mx-auto flex h-full min-h-screen w-full flex-col'>
       <header className='mb-auto w-full' aria-hidden></header>
-      <div className='py-10 px-4 text-center sm:px-6 lg:px-8'>
+      <div className='px-4 py-10 text-center sm:px-6 lg:px-8'>
         <h1 className='block text-7xl font-bold text-gray-800 dark:text-white sm:text-8xl'>404</h1>
         <div className='mt-6 text-lg text-gray-600 dark:text-gray-400 sm:mt-8'>
           <p className='leading-8'>Oops, something went wrong.</p>
@@ -13,7 +13,7 @@ export default function Error404() {
         <div className='mt-8 flex flex-col items-center justify-center'>
           <Link
             to='/'
-            className='inline-flex w-full items-center justify-center gap-2 rounded-md border border-transparent py-2 px-3 text-sm font-semibold text-blue-500 ring-offset-white transition-all hover:text-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-2 dark:ring-offset-slate-900 sm:w-auto'
+            className='inline-flex w-full items-center justify-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-semibold text-blue-500 ring-offset-white transition-all hover:text-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-2 dark:ring-offset-slate-900 sm:w-auto'
           >
             <svg className='h-2.5 w-2.5' width={20} height={20} viewBox='0 0 16 16' fill='none'>
               <path

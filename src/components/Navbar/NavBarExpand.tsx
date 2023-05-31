@@ -155,12 +155,12 @@ export function NavBarExpand() {
               />
             </svg>
             <span className='ml-2 text-sm font-medium'>Messages</span>
-            <span className='absolute top-0 left-0 mt-2 ml-2 h-2 w-2 rounded-full bg-red-500' />
+            <span className='absolute left-0 top-0 ml-2 mt-2 h-2 w-2 rounded-full bg-red-500' />
           </a>
         </div>
       </div>
 
-      <div className='mt-auto mb-2 w-full px-2'>
+      <div className='mb-2 mt-auto w-full px-2'>
         <div className='mt-3 flex w-full flex-col items-center border-t border-gray-200 dark:border-gray-700'>
           <a
             className='mt-2 flex h-12 w-full items-center rounded px-3 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-300'

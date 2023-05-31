@@ -9,6 +9,9 @@ export default defineConfig({
   plugins: [react()],
   envDir: join(__dirname),
   envPrefix: ['API_', 'VITE_'],
+  define: {
+    'import.meta.env.APP_VERSION': `"${process.env.npm_package_version}"`,
+  },
   test: {
     globals: true,
     environment: 'jsdom',

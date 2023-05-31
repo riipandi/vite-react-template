@@ -9,7 +9,7 @@
     <a href="https://aris.mit-license.org">
         <img src="https://img.shields.io/github/license/riipandi/vite-react-template?style=flat-square" alt="License">
     </a>
-    <a href="https://app.netlify.com/sites/vite-react-template/deploys">
+    <a href="https://app.netlify.com/sites/reactivite/deploys">
         <img src="https://api.netlify.com/api/v1/badges/47668315-f674-4560-8f83-52852dae2593/deploy-status" alt="Netlify Status">
     </a>
 </p>

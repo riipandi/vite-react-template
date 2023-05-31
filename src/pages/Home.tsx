@@ -62,6 +62,9 @@ export default function Home() {
             </Link>{' '}
             in 🇮🇩
           </p>
+          <p className='mt-2 text-sm tracking-wide text-gray-600 dark:text-gray-400'>
+            v{import.meta.env.APP_VERSION}
+          </p>
         </div>
       </footer>
     </div>

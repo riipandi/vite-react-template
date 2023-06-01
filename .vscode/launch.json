@@ -46,7 +46,22 @@
         "group": "debug",
         "order": 2
       }
-    }
+    },
+        {
+      "name": "vite:test",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["test:ui"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "presentation": {
+        "hidden": false,
+        "group": "debug",
+        "order": 3
+      }
+    },
   ],
   "compounds": [
     {

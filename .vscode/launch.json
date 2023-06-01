@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Vite",
+      "name": "vite:dev",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "pnpm",
@@ -17,7 +17,7 @@
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
       "presentation": {
-        "hidden": true,
+        "hidden": false,
         "group": "debug",
         "order": 1
       }
@@ -50,8 +50,8 @@
   ],
   "compounds": [
     {
-      "name": "Debug",
-      "configurations": ["Launch Vite", "Launch Chrome"],
+      "name": "run:debug",
+      "configurations": ["vite:dev", "Launch Chrome"],
       "stopAll": true
     }
   ]

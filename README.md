@@ -71,7 +71,7 @@ deployments so that pushing to master will deploy to production! 🚀
 
 #### Cloudflare Deployment
 
-You need to add `NODE_VERSION` with value `14.19.0` or `16.15.0` on the environment variables setting.
+You need to add `NODE_VERSION` with value `18.17.1` or `20.9.0` on the environment variables setting.
 Visit [Cloudflare pages docs](https://developers.cloudflare.com/pages/platform/build-configuration/)
 for more information.
 

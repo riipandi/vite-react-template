@@ -18,8 +18,7 @@
 
 A starter project for [React](https://reactjs.org/) with [Vite](https://vitejs.dev/), [Tailwind CSS](https://tailwindcss.com),
 and [Typescript](https://www.typescriptlang.org/). This starter kit is already pre-configured
-with [absolute import](https://jsdev.org/env/nodejs/absolute-path-imports/),
-[Headless UI](https://headlessui.com), [React Router](https://reactrouter.com/),
+with [absolute import](https://jsdev.org/env/nodejs/absolute-path-imports/), [React Router](https://reactrouter.com/),
 and [other goodies](./package.json). This starter also provides custom authentication
 implementation, in the current example is using [GoTrue](https://github.com/netlify/gotrue) from
 [Netlify](https://www.netlify.com/). But, you can use any authentication provider or your own.
@@ -29,7 +28,6 @@ implementation, in the current example is using [GoTrue](https://github.com/netl
 - [x] [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling.
 - [x] [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
 - [x] [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs.
-- [x] [Headless UI](https://headlessui.com/) - Ustyled and fully accessible UI components.
 - [x] [Hero Icons](https://heroicons.com/) - Beautiful hand-crafted SVG icons.
 - [x] [Typescript](https://www.typescriptlang.org/) - Strongly typed programming language.
 - [x] [React Router DOM](https://reactrouter.com/) - Declarative routing for React.

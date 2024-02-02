@@ -1,4 +1,4 @@
-<p align="center"><img src="./public/images/vite.svg" width="500" height="120" alt="Project Logo"></p>
+<p align="center"><img src="./src/assets/images/vite.svg" width="500" height="120" alt="Project Logo"></p>
 <p align="center">
     <a href="https://github.com/riipandi/vite-react-template/pulse">
         <img src="https://img.shields.io/badge/Contributions-welcome-blue.svg?style=flat-square" alt="Contribution welcome">
@@ -66,7 +66,7 @@ You'll want to fork this repository and deploy your own Next.js website. Once yo
 image generator that sparks joy, you can setup [automatic GitHub](https://vercel.com/github)
 deployments so that pushing to master will deploy to production! 🚀
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/riipandi/vite-react-template&project-name=vite-react-template&repo-name=my-vite-react-app&env=VITE_GOTRUE_URL)
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/riipandi/vite-react-template&project-name=vite-react-template&repo-name=my-vite-react-app&env=APP_BASE_URL)
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/riipandi/vite-react-template)
 
 #### Cloudflare Deployment
@@ -97,11 +97,18 @@ community. Your work means the world! 🌍 ❤️
 
 ## License
 
-This project is open-sourced software licensed under the [MIT license](https://aris.mit-license.org).
+Licensed under either of [Apache License 2.0][license-apache] or [MIT license][license-mit] at your option.
+
+> Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in this project by you,
+> as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.
 
 Copyrights in this project are retained by their contributors.
-See the [license file](./LICENSE) for more information.
+
+See the [LICENSE-APACHE](./LICENSE-APACHE) and [LICENSE-MIT](./LICENSE-MIT) files for more information.
+
+[license-mit]: https://choosealicense.com/licenses/mit/
+[license-apache]: https://choosealicense.com/licenses/apache-2.0/
 
 ---
 
-<sub>🤫 Psst! You always can [support my work here](https://github.com/sponsors/riipandi).</sub>
+<sub>🤫 Psst! If you like my work you can support me via [GitHub sponsors](https://github.com/sponsors/riipandi).</sub>

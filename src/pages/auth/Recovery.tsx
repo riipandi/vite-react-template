@@ -2,10 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-import { Alert } from '@/components/Alerts/Alert'
-import { Button } from '@/components/Buttons'
-import { Card } from '@/components/Containers'
-import { TextInput } from '@/components/Inputs'
+import { Alert, Button, Card, TextField } from '@/components/ui-common'
 import { auth } from '@/hooks/AuthProvider'
 
 interface PasswordRecoveryTypes {
@@ -17,9 +14,9 @@ export default function Recovery() {
   const [failed, setFailed] = useState<string | null>()
 
   const {
-    register,
+    // register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    // formState: { errors, isSubmitting },
   } = useForm<PasswordRecoveryTypes>()
 
   const handleRecoveryPassword = (data: PasswordRecoveryTypes) => {
@@ -34,18 +31,18 @@ export default function Recovery() {
   return (
     <main className='mx-auto w-full max-w-md p-6'>
       {success && <Alert variant='success'>{success}</Alert>}
-      {failed && <Alert variant='danger'>{failed}</Alert>}
+      {failed && <Alert variant='destructive'>{failed}</Alert>}
 
       <Card>
         <div className='p-4 sm:px-7 sm:py-8'>
           <form autoComplete='off' onSubmit={handleSubmit(handleRecoveryPassword)}>
             <div className='grid gap-y-4'>
               <div>
-                <TextInput
+                <TextField
                   label='Email address'
-                  placeholder='somebody@example.com'
-                  {...register('email', { required: true })}
-                  error={errors.email}
+                  // placeholder='somebody@example.com'
+                  // {...register('email', { required: true })}
+                  // error={errors.email}
                 />
               </div>
             </div>
@@ -53,8 +50,8 @@ export default function Recovery() {
               <Button
                 type='submit'
                 variant='primary'
-                disabled={isSubmitting}
-                loading={isSubmitting}
+                // disabled={isSubmitting}
+                // loading={isSubmitting}
               >
                 Recover Password
               </Button>

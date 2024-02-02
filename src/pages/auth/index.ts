@@ -1,3 +1,3 @@
-export { default as Login } from './Login'
-export { default as Recovery } from './Recovery'
-export { default as ResetPassword } from './ResetPassword'
+export { default as Login } from './login'
+export { default as Recovery } from './recovery'
+export { default as ResetPassword } from './reset-password'

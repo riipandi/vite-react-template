@@ -29,7 +29,9 @@ export default function Error404() {
       </div>
       <footer className='mt-auto py-5 text-center'>
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-          <p className='text-sm text-gray-500'>© All Rights Reserved. {new Date().getFullYear()}</p>
+          <p className='text-sm text-gray-500'>
+            © All Rights Reserved. {new Date().getFullYear()}
+          </p>
         </div>
       </footer>
     </div>

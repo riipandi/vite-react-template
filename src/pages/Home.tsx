@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 
-import { Alert } from '@/components/Alerts'
-import { Button } from '@/components/Buttons'
+import { Alert, Button } from '@/components/ui-common'
 import { useAuthentication } from '@/hooks/AuthProvider'
 
-import ViteLogo from '~/images/vite.svg'
+// Assets in public directory cannot be imported from JavaScript.
+// Instead, we use `src/assets` directory.
+import ViteLogo from '../assets/images/vite.svg'
 
 export default function Home() {
   const { user, loggedIn } = useAuthentication()
@@ -23,29 +24,15 @@ export default function Home() {
           </p>
         </div>
         <div className='mt-4 flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-3'>
-          <Button
-            as={Link}
-            to='/dashboard'
-            variant='primary'
-            className='inline-flex items-center justify-center'
-          >
-            User Dashboard
-          </Button>
-          <Button
-            as={Link}
-            to='/admin'
-            variant='danger'
-            className='inline-flex items-center justify-center'
-          >
-            Admin Dashboard
-          </Button>
-          <Button
-            as={'a'}
-            href='https://github.com/riipandi/vite-react-template'
-            className='inline-flex items-center justify-center'
-          >
-            Get Source Code
-          </Button>
+          <Link to='/dashboard' className='inline-flex items-center justify-center'>
+            <Button variant='primary'>User Dashboard</Button>
+          </Link>
+          <Link to='/admin' className='inline-flex items-center justify-center'>
+            <Button variant='destructive'>Admin Dashboard</Button>
+          </Link>
+          <a href='https://github.com/riipandi/vite-react-template'>
+            <Button className='inline-flex items-center justify-center'>Get Source Code</Button>
+          </a>
         </div>
         <div>
           <Alert variant={loggedIn ? 'info' : 'warning'} className='w-full text-center'>

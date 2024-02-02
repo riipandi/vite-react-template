@@ -1,2 +1,3 @@
-export * from './AppLayout'
-export * from './AuthLayout'
+export * from './app-layout'
+export * from './auth-layout'
+export * from './sidebar'

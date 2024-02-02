@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 *.tsbuildinfo
+.vitest
 
 # Editor directories and files
 .vscode/*
@@ -25,3 +26,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Storybook
+/storybook-static
+/public/storybook
+
+# envars
+.env.*
+!.env.example

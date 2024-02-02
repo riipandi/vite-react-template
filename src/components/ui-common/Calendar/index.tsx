@@ -48,7 +48,7 @@ export function Calendar<T extends DateValue>({ errorMessage, ...props }: Calend
         </CalendarGridBody>
       </CalendarGrid>
       {errorMessage && (
-        <Text slot='errorMessage' className='text-destructive-600 text-sm'>
+        <Text slot='errorMessage' className='text-sm text-destructive-600'>
           {errorMessage}
         </Text>
       )}

@@ -42,7 +42,7 @@ export function FieldError(props: FieldErrorProps) {
   return (
     <RACFieldError
       {...props}
-      className={ctrp(props.className, 'text-destructive-600 text-sm forced-colors:text-[Mark]')}
+      className={ctrp(props.className, 'text-sm text-destructive-600 forced-colors:text-[Mark]')}
     />
   )
 }

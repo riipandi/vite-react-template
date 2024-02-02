@@ -88,7 +88,7 @@ export function TagGroup<T extends object>({
       </ColorContext.Provider>
       {description && <Description>{description}</Description>}
       {errorMessage && (
-        <Text slot='errorMessage' className='text-destructive-600 text-sm'>
+        <Text slot='errorMessage' className='text-sm text-destructive-600'>
           {errorMessage}
         </Text>
       )}

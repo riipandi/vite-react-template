@@ -155,7 +155,7 @@ export function NavBarExpand() {
               />
             </svg>
             <span className='ml-2 text-sm font-medium'>Messages</span>
-            <span className='bg-destructive-500 absolute left-0 top-0 ml-2 mt-2 h-2 w-2 rounded-full' />
+            <span className='absolute left-0 top-0 ml-2 mt-2 h-2 w-2 rounded-full bg-destructive-500' />
           </a>
         </div>
       </div>

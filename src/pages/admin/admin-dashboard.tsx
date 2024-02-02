@@ -9,7 +9,7 @@ export default function AdminDashboard() {
   return (
     <Container>
       <Card className='p-8'>
-        <p className='text-destructive-600 mb-2 text-sm font-semibold'>Admin Dashboard</p>
+        <p className='mb-2 text-sm font-semibold text-destructive-600'>Admin Dashboard</p>
         <h1 className='block text-2xl font-bold text-gray-800 dark:text-white sm:text-2xl'>
           Welcome back, {user?.email}
         </h1>

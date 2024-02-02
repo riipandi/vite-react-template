@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { ListBox, ListBoxItem } from '@/components/ui-common/ListBox'
+import { ListBox, ListBoxItem } from '@/components/ui-react-aria/ListBox'
 
 const meta: Meta<typeof ListBox> = {
   component: ListBox,

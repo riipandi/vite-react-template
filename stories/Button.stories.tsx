@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui-common/Button'
+import { Button } from '@/components/ui-react-aria/Button'
 
 export default {
   title: 'Button',

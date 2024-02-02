@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { GridList, GridListItem } from '@/components/ui-common/GridList'
+import { GridList, GridListItem } from '@/components/ui-react-aria/GridList'
 
 const meta: Meta<typeof GridList> = {
   component: GridList,

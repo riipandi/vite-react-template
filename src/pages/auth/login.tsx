@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
 import { GitHubButton, GoogleButton } from '@/components/social-button'
-import { Alert, Button, Card, HorizontalDivider, TextField } from '@/components/ui-common'
+import { Alert, Button, Card, HorizontalDivider, TextField } from '@/components/ui-react-aria'
 import { auth, useAuthentication } from '@/hooks/AuthProvider'
 
 interface LoginTypes {

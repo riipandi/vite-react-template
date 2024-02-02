@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { Button, Card, Container } from '@/components/ui-common'
+import { Button, Card, Container } from '@/components/ui-react-aria'
 import { useAuthentication } from '@/hooks/AuthProvider'
 
 export default function UserDashboard() {

@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { Breadcrumb, Breadcrumbs } from '@/components/ui-common/Breadcrumbs'
+import { Breadcrumb, Breadcrumbs } from '@/components/ui-react-aria/Breadcrumbs'
 
 const meta: Meta<typeof Breadcrumbs> = {
   component: Breadcrumbs,

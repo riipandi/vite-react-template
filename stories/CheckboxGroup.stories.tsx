@@ -1,7 +1,7 @@
 import { Form } from 'react-aria-components'
 
-import { Button } from '@/components/ui-common/Button'
-import { Checkbox, CheckboxGroup } from '@/components/ui-common/Checkbox'
+import { Button } from '@/components/ui-react-aria/Button'
+import { Checkbox, CheckboxGroup } from '@/components/ui-react-aria/Checkbox'
 
 export default {
   title: 'CheckboxGroup',

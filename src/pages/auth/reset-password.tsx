@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom'
 import clsx from 'clsx'
 
-import { Alert, Button, Card, TextField } from '@/components/ui-common'
+import { Alert, Button, Card, TextField } from '@/components/ui-react-aria'
 import { auth } from '@/hooks/AuthProvider'
 
 interface ResetPasswordTypes {

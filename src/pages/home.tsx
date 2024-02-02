@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { Alert, Button } from '@/components/ui-common'
+import { Alert, Button } from '@/components/ui-react-aria'
 import { useAuthentication } from '@/hooks/AuthProvider'
 
 // Assets in public directory cannot be imported from JavaScript.

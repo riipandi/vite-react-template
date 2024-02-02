@@ -1,4 +1,4 @@
-import { Checkbox } from '@/components/ui-common/Checkbox'
+import { Checkbox } from '@/components/ui-react-aria/Checkbox'
 
 export default {
   title: 'Checkbox',

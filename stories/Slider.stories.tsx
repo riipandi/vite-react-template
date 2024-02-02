@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { Slider } from '@/components/ui-common/Slider'
+import { Slider } from '@/components/ui-react-aria/Slider'
 
 const meta: Meta<typeof Slider> = {
   component: Slider,

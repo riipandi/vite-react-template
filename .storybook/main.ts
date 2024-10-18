@@ -1,3 +1,6 @@
+import type { StorybookConfig } from '@storybook/react-vite'
+import { mergeConfig } from 'vite'
+
 const excludedProps = new Set([
   'id',
   'slot',
@@ -12,22 +15,22 @@ const excludedProps = new Set([
   'onInput',
 ])
 
-/** @type { import('@storybook/react-vite').StorybookConfig } */
-const config = {
+const config: StorybookConfig = {
   stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/addon-onboarding',
     '@storybook/addon-interactions',
   ],
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
+  core: {
+    disableTelemetry: true, // 👈 Disables telemetry
+    enableCrashReports: false, // 👈 Appends the crash reports to the telemetry events
   },
+  docs: {},
   typescript: {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
@@ -38,6 +41,13 @@ const config = {
       },
       propFilter: (prop) => !prop.name.startsWith('aria-') && !excludedProps.has(prop.name),
     },
+  },
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      build: {
+        chunkSizeWarningLimit: 1024,
+      },
+    })
   },
 }
 

@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
-
 import { ThemeSwitcher } from '#/components/theme'
 import { Alert, Button } from '#/components/ui-react-aria'
-import { useAuthentication } from '#/hooks/AuthProvider'
+import { useAuthentication } from '#/context/auth/AuthProvider'
 
 // Assets in public directory cannot be imported from JavaScript.
 // Instead, we use `src/assets` directory.
@@ -12,9 +11,9 @@ export default function Home() {
   const { user, loggedIn } = useAuthentication()
 
   return (
-    <div className="mx-auto flex h-full min-h-screen w-full flex-col dark:bg-neutral-900">
-      <header className="mb-auto w-full p-2" aria-hidden>
-        <ThemeSwitcher className="float-right" />
+    <div className="mx-auto flex h-full min-h-screen w-full flex-col">
+      <header className="mb-auto w-full p-4" aria-hidden>
+        <ThemeSwitcher className="float-right size-9" />
       </header>
       <div className="mx-auto flex flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto flex w-full border-collapse items-center justify-center">

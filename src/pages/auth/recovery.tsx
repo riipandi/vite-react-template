@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-
 import { Alert, Button, Card, TextField } from '#/components/ui-react-aria'
-import { auth } from '#/hooks/AuthProvider'
+import { auth } from '#/context/auth/AuthProvider'
 
 interface PasswordRecoveryTypes {
   email: string

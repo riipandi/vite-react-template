@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
-
 import { Button, Card, Container } from '#/components/ui-react-aria'
-import { useAuthentication } from '#/hooks/AuthProvider'
+import { useAuthentication } from '#/context/auth/AuthProvider'
 
 export default function UserDashboard() {
   const { user, logout } = useAuthentication()

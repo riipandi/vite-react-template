@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { Tab, TabList, TabPanel, Tabs } from '@/components/ui-react-aria/Tabs'
+import { Tab, TabList, TabPanel, Tabs } from '#/components/ui-react-aria/Tabs'
 
 const meta: Meta<typeof Tabs> = {
   component: Tabs,

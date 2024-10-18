@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { RangeCalendar } from '@/components/ui-react-aria/RangeCalendar'
+import { RangeCalendar } from '#/components/ui-react-aria/RangeCalendar'
 
 const meta: Meta<typeof RangeCalendar> = {
   component: RangeCalendar,

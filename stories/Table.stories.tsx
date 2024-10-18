@@ -2,7 +2,7 @@ import type { Meta } from '@storybook/react'
 import { useMemo, useState } from 'react'
 import { TableBody } from 'react-aria-components'
 
-import { Cell, Column, Row, Table, TableHeader } from '@/components/ui-react-aria/Table'
+import { Cell, Column, Row, Table, TableHeader } from '#/components/ui-react-aria/Table'
 
 const meta: Meta<typeof Table> = {
   component: Table,

@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { Link } from '@/components/ui-react-aria/Link'
+import { Link } from '#/components/ui-react-aria/Link'
 
 const meta: Meta<typeof Link> = {
   component: Link,

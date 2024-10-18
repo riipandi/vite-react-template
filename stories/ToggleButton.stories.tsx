@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { ToggleButton } from '@/components/ui-react-aria/ToggleButton'
+import { ToggleButton } from '#/components/ui-react-aria/ToggleButton'
 
 const meta: Meta<typeof ToggleButton> = {
   component: ToggleButton,

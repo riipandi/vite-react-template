@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom'
 
-import { useAuthentication } from '@/hooks/AuthProvider'
+import { useAuthentication } from '#/hooks/AuthProvider'
 
 export function PublicLayout() {
   const { loggedIn } = useAuthentication()

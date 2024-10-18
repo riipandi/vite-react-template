@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { Meter } from '@/components/ui-react-aria/Meter'
+import { Meter } from '#/components/ui-react-aria/Meter'
 
 const meta: Meta<typeof Meter> = {
   component: Meter,

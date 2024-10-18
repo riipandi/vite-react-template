@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { Switch } from '@/components/ui-react-aria/Switch'
+import { Switch } from '#/components/ui-react-aria/Switch'
 
 const meta: Meta<typeof Switch> = {
   component: Switch,

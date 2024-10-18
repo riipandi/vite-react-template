@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { Calendar } from '@/components/ui-react-aria/Calendar'
+import { Calendar } from '#/components/ui-react-aria/Calendar'
 
 const meta: Meta<typeof Calendar> = {
   component: Calendar,

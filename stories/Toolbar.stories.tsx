@@ -2,11 +2,11 @@ import type { Meta } from '@storybook/react'
 import { BoldIcon, ItalicIcon, UnderlineIcon } from 'lucide-react'
 import { Group } from 'react-aria-components'
 
-import { Button } from '@/components/ui-react-aria/Button'
-import { Checkbox } from '@/components/ui-react-aria/Checkbox'
-import { Separator } from '@/components/ui-react-aria/Separator'
-import { ToggleButton } from '@/components/ui-react-aria/ToggleButton'
-import { Toolbar } from '@/components/ui-react-aria/Toolbar'
+import { Button } from '#/components/ui-react-aria/Button'
+import { Checkbox } from '#/components/ui-react-aria/Checkbox'
+import { Separator } from '#/components/ui-react-aria/Separator'
+import { ToggleButton } from '#/components/ui-react-aria/ToggleButton'
+import { Toolbar } from '#/components/ui-react-aria/Toolbar'
 
 const meta: Meta<typeof Toolbar> = {
   component: Toolbar,

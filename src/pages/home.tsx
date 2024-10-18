@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 
-import { ThemeSwitcher } from '@/components/theme-switcher'
-import { Alert, Button } from '@/components/ui-react-aria'
-import { useAuthentication } from '@/hooks/AuthProvider'
+import { ThemeSwitcher } from '#/components/theme'
+import { Alert, Button } from '#/components/ui-react-aria'
+import { useAuthentication } from '#/hooks/AuthProvider'
 
 // Assets in public directory cannot be imported from JavaScript.
 // Instead, we use `src/assets` directory.

@@ -2,8 +2,8 @@ import type { Meta } from '@storybook/react'
 import { PrinterIcon, SaveIcon } from 'lucide-react'
 import { TooltipTrigger } from 'react-aria-components'
 
-import { Button } from '@/components/ui-react-aria/Button'
-import { Tooltip } from '@/components/ui-react-aria/Tooltip'
+import { Button } from '#/components/ui-react-aria/Button'
+import { Tooltip } from '#/components/ui-react-aria/Tooltip'
 
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,

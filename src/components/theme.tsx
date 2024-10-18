@@ -1,7 +1,7 @@
 import { Moon, SunDim } from 'lucide-react'
 import { useCallback } from 'react'
 
-import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { useLocalStorage } from '#/hooks/useLocalStorage'
 
 import { Button, ctrp } from './ui-react-aria'
 

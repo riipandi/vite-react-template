@@ -108,7 +108,7 @@
 
         // Absolute paths that re-map imports to additional lookup locations.
         "paths": {
-            "@/*": ["src/*"],
+            "#/*": ["src/*"],
             "~/*": ["public/*"]
         }
     },

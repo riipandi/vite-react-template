@@ -31,6 +31,10 @@ dist-ssr
 /storybook-static
 /public/storybook
 
+# Tests
+/coverage
+/tests-results
+
 # envars
 .env.*
 !.env.example

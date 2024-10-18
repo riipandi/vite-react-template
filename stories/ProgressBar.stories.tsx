@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react'
 
-import { ProgressBar } from '@/components/ui-react-aria/ProgressBar'
+import { ProgressBar } from '#/components/ui-react-aria/ProgressBar'
 
 const meta: Meta<typeof ProgressBar> = {
   component: ProgressBar,

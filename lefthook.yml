@@ -28,7 +28,7 @@ pre-commit:
       files: git diff --name-only main
       glob: "*.{js,ts,jsx,tsx,json},package.json"
       exclude: '(^|/)(tests|stories)\.(ts|tsx)$'
-      run: pnpm exec tsc -b --extendedDiagnostics
+      run: pnpm exec tsc -b
     test-unit:
       glob: "*.{js,ts,jsx,tsx,json},package.json"
       exclude: '(^|/)(tests|stories)\.(ts|tsx)$'

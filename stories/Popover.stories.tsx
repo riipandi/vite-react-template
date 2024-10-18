@@ -2,9 +2,9 @@ import type { Meta } from '@storybook/react'
 import { HelpCircle } from 'lucide-react'
 import { DialogTrigger, Heading } from 'react-aria-components'
 
-import { Button } from '@/components/ui-react-aria/Button'
-import { Dialog } from '@/components/ui-react-aria/Dialog'
-import { Popover } from '@/components/ui-react-aria/Popover'
+import { Button } from '#/components/ui-react-aria/Button'
+import { Dialog } from '#/components/ui-react-aria/Dialog'
+import { Popover } from '#/components/ui-react-aria/Popover'
 
 const meta: Meta<typeof Popover> = {
   component: Popover,

@@ -1,9 +1,9 @@
 import type { Meta } from '@storybook/react'
 import { DialogTrigger } from 'react-aria-components'
 
-import { AlertDialog } from '@/components/ui-react-aria/AlertDialog'
-import { Button } from '@/components/ui-react-aria/Button'
-import { Modal } from '@/components/ui-react-aria/Modal'
+import { AlertDialog } from '#/components/ui-react-aria/AlertDialog'
+import { Button } from '#/components/ui-react-aria/Button'
+import { Modal } from '#/components/ui-react-aria/Modal'
 
 const meta: Meta<typeof AlertDialog> = {
   component: AlertDialog,

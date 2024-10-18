@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom'
 
-import { useAuthentication } from '@/hooks/AuthProvider'
+import { useAuthentication } from '#/hooks/AuthProvider'
 
 import { SideNavbar } from './sidebar'
 

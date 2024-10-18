@@ -112,7 +112,7 @@
             "~/*": ["public/*"]
         }
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx", "stories/**/*.tsx"],
+    "include": ["**/*.ts", "**/*.tsx"],
     "exclude": ["dist", "tests-results"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

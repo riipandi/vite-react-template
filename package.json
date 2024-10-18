@@ -14,6 +14,7 @@
         "storybook": "VITE_CJS_IGNORE_WARNING=true storybook dev -p 6006 --no-open --disable-telemetry",
         "build:storybook": "VITE_CJS_IGNORE_WARNING=true storybook build --disable-telemetry -o storybook-static",
         "preview:storybook": "pnpm dlx serve storybook-static -l 6006 -n -C",
+        "cleanup:dev": "pnpm dlx rimraf dist storybook-static tests-results",
         "pre-commit": "lefthook run pre-commit --force",
         "prepare": "lefthook install || true",
         "test:report": "pnpm dlx serve tests-results -l 8000 -s -n -C",
@@ -30,8 +31,7 @@
         "react-aria-components": "^1.4.1",
         "react-dom": "^18.3.1",
         "react-hook-form": "^7.53.0",
-        "react-router-dom": "^6.27.0",
-        "undici": "^6.20.1"
+        "react-router-dom": "^6.27.0"
     },
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",

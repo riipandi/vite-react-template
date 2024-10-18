@@ -1,59 +1,59 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "type": "npm",
-      "label": "vite: build",
-      "script": "build",
-      "detail": "Build application",
-      "isBackground": false,
-      "presentation": {
-        "reveal": "silent",
-        "showReuseMessage": false,
-        "clear": true,
-        "echo": false,
-        "close": false
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      }
-    },
-    {
-      "type": "npm",
-      "label": "vite: lint",
-      "script": "lint:fix",
-      "detail": "Lint and fix code",
-      "isBackground": false,
-      "presentation": {
-        "reveal": "silent",
-        "showReuseMessage": false,
-        "clear": true,
-        "echo": false,
-        "close": false
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      }
-    },
-    {
-      "type": "npm",
-      "label": "vite: format",
-      "script": "format",
-      "detail": "Format code",
-      "isBackground": false,
-      "presentation": {
-        "reveal": "silent",
-        "showReuseMessage": false,
-        "clear": true,
-        "echo": false,
-        "close": false
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      }
-    }
-  ]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "npm",
+            "label": "vite: build",
+            "script": "build",
+            "detail": "Build application",
+            "isBackground": false,
+            "presentation": {
+                "reveal": "silent",
+                "showReuseMessage": false,
+                "clear": true,
+                "echo": false,
+                "close": false
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "type": "npm",
+            "label": "vite: lint",
+            "script": "lint:fix",
+            "detail": "Lint and fix code",
+            "isBackground": false,
+            "presentation": {
+                "reveal": "silent",
+                "showReuseMessage": false,
+                "clear": true,
+                "echo": false,
+                "close": false
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "type": "npm",
+            "label": "vite: format",
+            "script": "format",
+            "detail": "Format code",
+            "isBackground": false,
+            "presentation": {
+                "reveal": "silent",
+                "showReuseMessage": false,
+                "clear": true,
+                "echo": false,
+                "close": false
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+    ]
 }

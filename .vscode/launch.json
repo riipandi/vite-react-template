@@ -1,73 +1,73 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "vite:dev",
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev"],
-      "skipFiles": ["<node_internals>/**"],
-      "serverReadyAction": {
-        "action": "debugWithChrome",
-        "pattern": "started server on .+, url: (https?://.+)",
-        "webRoot": "${workspaceFolder}",
-        "uriFormat": "%s"
-      },
-      "console": "internalConsole",
-      "internalConsoleOptions": "openOnSessionStart",
-      "presentation": {
-        "hidden": false,
-        "group": "debug",
-        "order": 1
-      }
-    },
-    {
-      "name": "Launch Chrome",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}",
-      "cleanUp": "wholeBrowser",
-      "runtimeArgs": [
-        "--auto-open-devtools-for-tabs",
-        "--start-maximized",
-        "--bwsi",
-        "--allow-insecure-localhost",
-        "--disable-component-update",
-        "--disable-crash-reporter",
-        "--disable-extensions",
-        "--disable-hang-monitor",
-        "--suppress-message-center-popups",
-      ],
-      "internalConsoleOptions": "openOnSessionStart",
-      "presentation": {
-        "hidden": true,
-        "group": "debug",
-        "order": 2
-      }
-    },
+    "version": "0.2.0",
+    "configurations": [
         {
-      "name": "vite:test",
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["test:ui"],
-      "skipFiles": ["<node_internals>/**"],
-      "console": "internalConsole",
-      "internalConsoleOptions": "openOnSessionStart",
-      "presentation": {
-        "hidden": false,
-        "group": "debug",
-        "order": 3
-      }
-    },
-  ],
-  "compounds": [
-    {
-      "name": "run:debug",
-      "configurations": ["vite:dev", "Launch Chrome"],
-      "stopAll": true
-    }
-  ]
+            "name": "vite:dev",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "pnpm",
+            "runtimeArgs": ["dev"],
+            "skipFiles": ["<node_internals>/**"],
+            "serverReadyAction": {
+                "action": "debugWithEdge",
+                "pattern": "started server on .+, url: (https?://.+)",
+                "webRoot": "${workspaceFolder}",
+                "uriFormat": "%s"
+            },
+            "console": "internalConsole",
+            "internalConsoleOptions": "openOnSessionStart",
+            "presentation": {
+                "hidden": false,
+                "group": "debug",
+                "order": 1
+            }
+        },
+        {
+            "name": "Launch Edge",
+            "type": "msedge",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "cleanUp": "wholeBrowser",
+            "runtimeArgs": [
+                "--auto-open-devtools-for-tabs",
+                "--start-maximized",
+                "--bwsi",
+                "--allow-insecure-localhost",
+                "--disable-component-update",
+                "--disable-crash-reporter",
+                "--disable-extensions",
+                "--disable-hang-monitor",
+                "--suppress-message-center-popups"
+            ],
+            "internalConsoleOptions": "openOnSessionStart",
+            "presentation": {
+                "hidden": true,
+                "group": "debug",
+                "order": 2
+            }
+        },
+        {
+            "name": "vite:test",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "pnpm",
+            "runtimeArgs": ["test:ui"],
+            "skipFiles": ["<node_internals>/**"],
+            "console": "internalConsole",
+            "internalConsoleOptions": "openOnSessionStart",
+            "presentation": {
+                "hidden": false,
+                "group": "debug",
+                "order": 3
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "run:debug",
+            "configurations": ["vite:dev", "Launch Edge"],
+            "stopAll": true
+        }
+    ]
 }

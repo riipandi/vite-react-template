@@ -59,7 +59,7 @@
         // "outFile": "./",                                  // Concatenate and emit output to single file
         "outDir": "dist", // Specify output folder for all emitted files
         // "removeComments": true,                           // Remove comments from output
-        "noEmit": true, // Do not emit output (Vite handles building)
+        "noEmit": false, // Do not emit output (Vite handles building)
         // "importHelpers": true,                            // Import helper functions from tslib
         // "importsNotUsedAsValues": "error",                // Specify emit behavior for type-only imports
         // "downlevelIteration": true,                       // Provide full support for iterables
@@ -104,7 +104,7 @@
 
         /* Completeness */
         // "skipDefaultLibCheck": true,                      // Skip type checking of default library declaration files
-        "skipLibCheck": true, // Skip type checking of all declaration files
+        "skipLibCheck": false, // Skip type checking of all declaration files
 
         // Absolute paths that re-map imports to additional lookup locations.
         "paths": {
@@ -112,7 +112,7 @@
             "~/*": ["public/*"]
         }
     },
-    "include": ["**/*.ts", "**/*.tsx"],
-    "exclude": ["dist", "tests-results"],
+    "include": ["src", "stories", ".storybook", "**/*.test.ts", "**/*.spec.ts"],
+    "exclude": ["node_modules", "dist", "tests-results"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

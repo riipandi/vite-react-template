@@ -1,8 +1,10 @@
 {
-  "recommendations": [
-    "bradlc.vscode-tailwindcss",
-    "bungcip.better-toml",
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
-  ]
+    "recommendations": [
+        "biomejs.biome",
+        "bradlc.vscode-tailwindcss",
+        "EditorConfig.EditorConfig",
+        "ms-playwright.playwright",
+        "tamasfe.even-better-toml"
+    ],
+    "unwantedRecommendations": []
 }

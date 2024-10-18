@@ -123,6 +123,6 @@
     "files": {
         "ignoreUnknown": true,
         "include": ["**/*.js", "**/*.mjs", "**/*.ts", "**/*.tsx", "**/*.css", "**/*.json"],
-        "ignore": [".github", ".husky", ".vscode", "dist", "public"]
+        "ignore": ["dist", "public"]
     }
 }

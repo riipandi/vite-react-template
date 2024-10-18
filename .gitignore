@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+vite.config.js
 node_modules
 dist
 dist-ssr
@@ -21,6 +22,7 @@ dist-ssr
 !.vscode/tasks.json
 .idea
 .DS_Store
+.DS_Store?
 *.suo
 *.ntvs*
 *.njsproj

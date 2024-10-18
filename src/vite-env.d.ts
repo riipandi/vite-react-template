@@ -4,6 +4,6 @@ interface ImportMetaEnv {
   readonly APP_VERSION: string
 }
 
-interface ImportMeta {
+export interface ImportMeta {
   readonly env: ImportMetaEnv
 }

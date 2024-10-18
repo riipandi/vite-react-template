@@ -1,4 +1,3 @@
-/// <reference types="vite/client" />
 /// <reference types="vitest" />
 
 import { join, resolve } from 'node:path'

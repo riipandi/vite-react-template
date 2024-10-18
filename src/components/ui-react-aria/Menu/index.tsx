@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react'
+import * as Lucide from 'lucide-react'
 import {
   Menu as AriaMenu,
   MenuItem as AriaMenuItem,
@@ -34,7 +34,7 @@ export function MenuItem(props: MenuItemProps) {
         <>
           {selectionMode !== 'none' && (
             <span className="flex w-4 items-center">
-              {isSelected && <Check aria-hidden className="h-4 w-4" />}
+              {isSelected && <Lucide.Check aria-hidden className="h-4 w-4" />}
             </span>
           )}
           <span className="flex flex-1 items-center gap-2 truncate font-normal group-selected:font-semibold">

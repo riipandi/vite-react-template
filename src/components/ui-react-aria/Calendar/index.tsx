@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import * as Lucide from 'lucide-react'
 import {
   Calendar as AriaCalendar,
   CalendarGridHeader as AriaCalendarGridHeader,
@@ -62,11 +62,19 @@ export function CalendarHeader() {
   return (
     <header className="flex w-full items-center gap-1 px-1 pb-4">
       <Button variant="icon" slot="previous">
-        {direction === 'rtl' ? <ChevronRight aria-hidden /> : <ChevronLeft aria-hidden />}
+        {direction === 'rtl' ? (
+          <Lucide.ChevronRight aria-hidden />
+        ) : (
+          <Lucide.ChevronLeft aria-hidden />
+        )}
       </Button>
       <Heading className="mx-2 flex-1 text-center font-semibold text-xl text-zinc-900 dark:text-zinc-200" />
       <Button variant="icon" slot="next">
-        {direction === 'rtl' ? <ChevronLeft aria-hidden /> : <ChevronRight aria-hidden />}
+        {direction === 'rtl' ? (
+          <Lucide.ChevronLeft aria-hidden />
+        ) : (
+          <Lucide.ChevronRight aria-hidden />
+        )}
       </Button>
     </header>
   )

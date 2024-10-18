@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react'
-import { HelpCircle } from 'lucide-react'
+import * as Lucide from 'lucide-react'
 import { DialogTrigger, Heading } from 'react-aria-components'
 
 import { Button } from '#/components/ui-react-aria/Button'
@@ -22,7 +22,7 @@ export default meta
 export const Example = (args: any) => (
   <DialogTrigger>
     <Button variant="icon" aria-label="Help">
-      <HelpCircle className="h-4 w-4" />
+      <Lucide.HelpCircle className="h-4 w-4" />
     </Button>
     <Popover {...args} className="max-w-[250px]">
       <Dialog>

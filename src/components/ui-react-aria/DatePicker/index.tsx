@@ -1,4 +1,4 @@
-import { CalendarIcon } from 'lucide-react'
+import * as Lucide from 'lucide-react'
 import {
   DatePicker as AriaDatePicker,
   type DatePickerProps as AriaDatePickerProps,
@@ -32,7 +32,7 @@ export function DatePicker<T extends DateValue>({
       <FieldGroup className="w-auto min-w-[208px]">
         <DateInput className="min-w-[150px] flex-1 px-2 py-1.5 text-sm" />
         <Button variant="icon" className="mr-1 w-6 rounded outline-offset-0">
-          <CalendarIcon aria-hidden className="h-4 w-4" />
+          <Lucide.CalendarIcon aria-hidden className="h-4 w-4" />
         </Button>
       </FieldGroup>
       {description && <Description>{description}</Description>}

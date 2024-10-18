@@ -1,4 +1,4 @@
-import { ArrowUp } from 'lucide-react'
+import * as Lucide from 'lucide-react'
 import {
   Cell as AriaCell,
   Column as AriaColumn,
@@ -62,7 +62,7 @@ export function Column(props: ColumnProps) {
                 }`}
               >
                 {sortDirection && (
-                  <ArrowUp
+                  <Lucide.ArrowUp
                     aria-hidden
                     className="h-4 w-4 text-gray-500 dark:text-zinc-400 forced-colors:text-[ButtonText]"
                   />

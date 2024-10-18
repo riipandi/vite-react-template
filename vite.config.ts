@@ -56,7 +56,7 @@ export default defineConfig({
       provider: 'istanbul',
       reporter: ['html-spa', 'text-summary'],
       reportsDirectory: './tests-results/coverage',
-      include: ['src/**/*.{js,jsx,ts,tsx}'],
+      include: ['./src/**/*.{js,jsx,ts,tsx}'],
       cleanOnRerun: true,
       clean: true,
       thresholds: {

@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import * as Lucide from 'lucide-react'
 import {
   NumberField as AriaNumberField,
   type NumberFieldProps as AriaNumberFieldProps,
@@ -28,11 +28,11 @@ export function NumberField({ label, description, errorMessage, ...props }: Numb
               className={fieldBorderStyles({ ...renderProps, class: 'flex flex-col border-s-2' })}
             >
               <StepperButton slot="increment">
-                <ChevronUp aria-hidden className="h-4 w-4" />
+                <Lucide.ChevronUp aria-hidden className="h-4 w-4" />
               </StepperButton>
               <div className={fieldBorderStyles({ ...renderProps, class: 'border-b-2' })} />
               <StepperButton slot="decrement">
-                <ChevronDown aria-hidden className="h-4 w-4" />
+                <Lucide.ChevronDown aria-hidden className="h-4 w-4" />
               </StepperButton>
             </div>
           </>

@@ -1,4 +1,4 @@
-import { AlertTriangle } from 'lucide-react'
+import * as Lucide from 'lucide-react'
 import { Meter as AriaMeter, type MeterProps as AriaMeterProps } from 'react-aria-components'
 
 import { Label } from '../Field'
@@ -23,7 +23,7 @@ export function Meter({ label, ...props }: MeterProps) {
               }`}
             >
               {percentage >= 80 && (
-                <AlertTriangle
+                <Lucide.AlertTriangle
                   aria-label="Alert"
                   className="inline-block h-4 w-4 align-text-bottom"
                 />

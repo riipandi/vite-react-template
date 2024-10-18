@@ -1,4 +1,4 @@
-import { XIcon } from 'lucide-react'
+import * as Lucide from 'lucide-react'
 import { createContext, useContext } from 'react'
 import {
   Tag as AriaTag,
@@ -117,7 +117,7 @@ export function Tag({ children, color, ...props }: TagProps) {
           {children}
           {allowsRemoving && (
             <Button slot="remove" className={removeButtonStyles}>
-              <XIcon aria-hidden className="h-3 w-3" />
+              <Lucide.XIcon aria-hidden className="h-3 w-3" />
             </Button>
           )}
         </>

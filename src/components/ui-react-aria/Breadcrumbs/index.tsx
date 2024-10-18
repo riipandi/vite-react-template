@@ -1,4 +1,4 @@
-import { ChevronRight } from 'lucide-react'
+import * as Lucide from 'lucide-react'
 import { Breadcrumb as AriaBreadcrumb, Breadcrumbs as AriaBreadcrumbs } from 'react-aria-components'
 import type { BreadcrumbProps, BreadcrumbsProps, LinkProps } from 'react-aria-components'
 import { twMerge } from 'tailwind-merge'
@@ -21,7 +21,7 @@ export function Breadcrumb(props: BreadcrumbProps & LinkProps) {
       }
     >
       <Link variant="secondary" {...props} />
-      {props.href && <ChevronRight className="h-3 w-3 text-gray-600 dark:text-zinc-400" />}
+      {props.href && <Lucide.ChevronRight className="h-3 w-3 text-gray-600 dark:text-zinc-400" />}
     </AriaBreadcrumb>
   )
 }

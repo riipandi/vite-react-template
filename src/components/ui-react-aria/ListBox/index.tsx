@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react'
+import * as Lucide from 'lucide-react'
 import {
   ListBox as AriaListBox,
   ListBoxItem as AriaListBoxItem,
@@ -84,7 +84,7 @@ export function DropdownItem(props: ListBoxItemProps) {
             {children}
           </span>
           <span className="flex w-5 items-center">
-            {isSelected && <Check className="h-4 w-4" />}
+            {isSelected && <Lucide.Check className="h-4 w-4" />}
           </span>
         </>
       ))}

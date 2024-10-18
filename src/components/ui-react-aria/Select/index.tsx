@@ -1,13 +1,7 @@
-import { ChevronDown } from 'lucide-react'
-import {
-  Select as AriaSelect,
-  type SelectProps as AriaSelectProps,
-  Button,
-  ListBox,
-  type ListBoxItemProps,
-  SelectValue,
-  type ValidationResult,
-} from 'react-aria-components'
+import * as Lucide from 'lucide-react'
+import { Select as AriaSelect, Button, ListBox, SelectValue } from 'react-aria-components'
+import type { ListBoxItemProps, ValidationResult } from 'react-aria-components'
+import type { SelectProps as AriaSelectProps } from 'react-aria-components'
 import { tv } from 'tailwind-variants'
 
 import { Description, FieldError, Label } from '../Field'
@@ -48,7 +42,7 @@ export function Select<T extends object>({
       {label && <Label>{label}</Label>}
       <Button className={styles}>
         <SelectValue className="flex-1 text-sm placeholder-shown:italic" />
-        <ChevronDown
+        <Lucide.ChevronDown
           aria-hidden
           className="h-4 w-4 text-gray-600 group-disabled:text-gray-200 dark:text-zinc-400 dark:group-disabled:text-zinc-600 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
         />

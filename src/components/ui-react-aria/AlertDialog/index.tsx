@@ -1,4 +1,4 @@
-import { AlertCircleIcon, InfoIcon } from 'lucide-react'
+import * as Lucide from 'lucide-react'
 import type { ReactNode } from 'react'
 import { chain } from 'react-aria'
 import { type DialogProps, Heading } from 'react-aria-components'
@@ -36,7 +36,11 @@ export function AlertDialog({
               variant === 'destructive' ? 'text-destructive-500' : 'text-blue-500'
             }`}
           >
-            {variant === 'destructive' ? <AlertCircleIcon aria-hidden /> : <InfoIcon aria-hidden />}
+            {variant === 'destructive' ? (
+              <Lucide.AlertCircleIcon aria-hidden />
+            ) : (
+              <Lucide.InfoIcon aria-hidden />
+            )}
           </div>
           <p className="mt-3 text-slate-500 dark:text-zinc-400">{children}</p>
           <div className="mt-6 flex justify-end gap-2">

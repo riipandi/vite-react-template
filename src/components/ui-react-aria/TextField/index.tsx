@@ -1,11 +1,11 @@
 import {
   TextField as AriaTextField,
-  TextFieldProps as AriaTextFieldProps,
-  ValidationResult,
+  type TextFieldProps as AriaTextFieldProps,
+  type ValidationResult,
 } from 'react-aria-components'
 import { tv } from 'tailwind-variants'
 
-import { Description, fieldBorderStyles, FieldError, Input, Label } from '../Field'
+import { Description, FieldError, Input, Label, fieldBorderStyles } from '../Field'
 import { ctrp, focusRing } from '../utils'
 
 const inputStyles = tv({

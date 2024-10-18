@@ -1,5 +1,5 @@
-import { Form } from 'react-aria-components'
 import type { Meta } from '@storybook/react'
+import { Form } from 'react-aria-components'
 
 import { Button } from '@/components/ui-react-aria/Button'
 import { DatePicker } from '@/components/ui-react-aria/DatePicker'
@@ -20,9 +20,9 @@ export default meta
 export const Example = (args: any) => <DatePicker {...args} />
 
 export const Validation = (args: any) => (
-  <Form className='flex flex-col items-start gap-2'>
+  <Form className="flex flex-col items-start gap-2">
     <DatePicker {...args} />
-    <Button type='submit' variant='secondary'>
+    <Button type="submit" variant="secondary">
       Submit
     </Button>
   </Form>

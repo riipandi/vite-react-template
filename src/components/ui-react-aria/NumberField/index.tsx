@@ -1,13 +1,13 @@
-import {
-  Button,
-  ButtonProps,
-  NumberField as AriaNumberField,
-  NumberFieldProps as AriaNumberFieldProps,
-  ValidationResult,
-} from 'react-aria-components'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import {
+  NumberField as AriaNumberField,
+  type NumberFieldProps as AriaNumberFieldProps,
+  Button,
+  type ButtonProps,
+  type ValidationResult,
+} from 'react-aria-components'
 
-import { Description, fieldBorderStyles, FieldError, FieldGroup, Input, Label } from '../Field'
+import { Description, FieldError, FieldGroup, Input, Label, fieldBorderStyles } from '../Field'
 import { ctrp } from '../utils'
 
 export interface NumberFieldProps extends AriaNumberFieldProps {
@@ -27,12 +27,12 @@ export function NumberField({ label, description, errorMessage, ...props }: Numb
             <div
               className={fieldBorderStyles({ ...renderProps, class: 'flex flex-col border-s-2' })}
             >
-              <StepperButton slot='increment'>
-                <ChevronUp aria-hidden className='h-4 w-4' />
+              <StepperButton slot="increment">
+                <ChevronUp aria-hidden className="h-4 w-4" />
               </StepperButton>
               <div className={fieldBorderStyles({ ...renderProps, class: 'border-b-2' })} />
-              <StepperButton slot='decrement'>
-                <ChevronDown aria-hidden className='h-4 w-4' />
+              <StepperButton slot="decrement">
+                <ChevronDown aria-hidden className="h-4 w-4" />
               </StepperButton>
             </div>
           </>
@@ -48,7 +48,7 @@ function StepperButton(props: ButtonProps) {
   return (
     <Button
       {...props}
-      className='cursor-default px-0.5 text-gray-500 pressed:bg-gray-100 group-disabled:text-gray-200 dark:text-zinc-400 dark:pressed:bg-zinc-800 dark:group-disabled:text-zinc-600 forced-colors:group-disabled:text-[GrayText]'
+      className="cursor-default pressed:bg-gray-100 px-0.5 text-gray-500 group-disabled:text-gray-200 dark:pressed:bg-zinc-800 dark:text-zinc-400 dark:group-disabled:text-zinc-600 forced-colors:group-disabled:text-[GrayText]"
     />
   )
 }

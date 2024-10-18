@@ -1,17 +1,17 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import {
   Calendar as AriaCalendar,
+  CalendarGridHeader as AriaCalendarGridHeader,
+  type CalendarProps as AriaCalendarProps,
   CalendarCell,
   CalendarGrid,
   CalendarGridBody,
-  CalendarGridHeader as AriaCalendarGridHeader,
   CalendarHeaderCell,
-  CalendarProps as AriaCalendarProps,
-  DateValue,
+  type DateValue,
   Heading,
   Text,
   useLocale,
 } from 'react-aria-components'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { tv } from 'tailwind-variants'
 
 import { Button } from '../Button'
@@ -48,7 +48,7 @@ export function Calendar<T extends DateValue>({ errorMessage, ...props }: Calend
         </CalendarGridBody>
       </CalendarGrid>
       {errorMessage && (
-        <Text slot='errorMessage' className='text-sm text-destructive-600'>
+        <Text slot="errorMessage" className="text-destructive-600 text-sm">
           {errorMessage}
         </Text>
       )}
@@ -60,12 +60,12 @@ export function CalendarHeader() {
   const { direction } = useLocale()
 
   return (
-    <header className='flex w-full items-center gap-1 px-1 pb-4'>
-      <Button variant='icon' slot='previous'>
+    <header className="flex w-full items-center gap-1 px-1 pb-4">
+      <Button variant="icon" slot="previous">
         {direction === 'rtl' ? <ChevronRight aria-hidden /> : <ChevronLeft aria-hidden />}
       </Button>
-      <Heading className='mx-2 flex-1 text-center text-xl font-semibold text-zinc-900 dark:text-zinc-200' />
-      <Button variant='icon' slot='next'>
+      <Heading className="mx-2 flex-1 text-center font-semibold text-xl text-zinc-900 dark:text-zinc-200" />
+      <Button variant="icon" slot="next">
         {direction === 'rtl' ? <ChevronLeft aria-hidden /> : <ChevronRight aria-hidden />}
       </Button>
     </header>
@@ -76,7 +76,7 @@ export function CalendarGridHeader() {
   return (
     <AriaCalendarGridHeader>
       {(day) => (
-        <CalendarHeaderCell className='text-xs font-semibold text-gray-500'>
+        <CalendarHeaderCell className="font-semibold text-gray-500 text-xs">
           {day}
         </CalendarHeaderCell>
       )}

@@ -7,5 +7,5 @@
     "deep": false,
     "install": "prompt",
     "packageManager": "pnpm",
-    "reject": ["typescript"]
+    "reject": []
 }

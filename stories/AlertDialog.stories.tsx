@@ -1,5 +1,5 @@
-import { DialogTrigger } from 'react-aria-components'
 import type { Meta } from '@storybook/react'
+import { DialogTrigger } from 'react-aria-components'
 
 import { AlertDialog } from '@/components/ui-react-aria/AlertDialog'
 import { Button } from '@/components/ui-react-aria/Button'
@@ -17,7 +17,7 @@ export default meta
 
 export const Example = (args: any) => (
   <DialogTrigger>
-    <Button variant='secondary'>Delete…</Button>
+    <Button variant="secondary">Delete…</Button>
     <Modal>
       <AlertDialog {...args} />
     </Modal>

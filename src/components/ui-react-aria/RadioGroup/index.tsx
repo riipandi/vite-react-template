@@ -1,17 +1,17 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import {
-  Radio as RACRadio,
-  RadioGroup as RACRadioGroup,
-  RadioGroupProps as RACRadioGroupProps,
-  RadioProps,
-  ValidationResult,
+  Radio as AriaRadio,
+  RadioGroup as AriaRadioGroup,
+  type RadioGroupProps as AriaRadioGroupProps,
+  type RadioProps,
+  type ValidationResult,
 } from 'react-aria-components'
 import { tv } from 'tailwind-variants'
 
 import { Description, FieldError, Label } from '../Field'
 import { ctrp, focusRing } from '../utils'
 
-export interface RadioGroupProps extends Omit<RACRadioGroupProps, 'children'> {
+export interface RadioGroupProps extends Omit<AriaRadioGroupProps, 'children'> {
   label?: string
   children?: ReactNode
   description?: string
@@ -20,14 +20,14 @@ export interface RadioGroupProps extends Omit<RACRadioGroupProps, 'children'> {
 
 export function RadioGroup(props: RadioGroupProps) {
   return (
-    <RACRadioGroup {...props} className={ctrp(props.className, 'group flex flex-col gap-2')}>
+    <AriaRadioGroup {...props} className={ctrp(props.className, 'group flex flex-col gap-2')}>
       <Label>{props.label}</Label>
-      <div className='flex gap-2 group-orientation-horizontal:gap-4 group-orientation-vertical:flex-col'>
+      <div className="flex gap-2 group-orientation-vertical:flex-col group-orientation-horizontal:gap-4">
         {props.children}
       </div>
       {props.description && <Description>{props.description}</Description>}
       <FieldError>{props.errorMessage}</FieldError>
-    </RACRadioGroup>
+    </AriaRadioGroup>
   )
 }
 
@@ -51,11 +51,11 @@ const styles = tv({
 
 export function Radio(props: RadioProps) {
   return (
-    <RACRadio
+    <AriaRadio
       {...props}
       className={ctrp(
         props.className,
-        'group flex items-center gap-2 text-sm text-gray-800 transition disabled:text-gray-300 dark:text-zinc-200 dark:disabled:text-zinc-600 forced-colors:disabled:text-[GrayText]'
+        'group flex items-center gap-2 text-gray-800 text-sm transition disabled:text-gray-300 dark:text-zinc-200 dark:disabled:text-zinc-600 forced-colors:disabled:text-[GrayText]'
       )}
     >
       {(renderProps) => (
@@ -64,6 +64,6 @@ export function Radio(props: RadioProps) {
           {props.children}
         </>
       )}
-    </RACRadio>
+    </AriaRadio>
   )
 }

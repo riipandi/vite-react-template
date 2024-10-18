@@ -1,23 +1,23 @@
+import { ArrowUp } from 'lucide-react'
 import {
-  Button,
   Cell as AriaCell,
-  CellProps,
-  Collection,
   Column as AriaColumn,
-  ColumnProps,
-  ColumnResizer,
-  composeRenderProps,
-  Group,
-  ResizableTableContainer,
   Row as AriaRow,
-  RowProps,
   Table as AriaTable,
   TableHeader as AriaTableHeader,
-  TableHeaderProps,
-  TableProps,
+  Button,
+  type CellProps,
+  Collection,
+  type ColumnProps,
+  ColumnResizer,
+  Group,
+  ResizableTableContainer,
+  type RowProps,
+  type TableHeaderProps,
+  type TableProps,
+  composeRenderProps,
   useTableOptions,
 } from 'react-aria-components'
-import { ArrowUp } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 import { tv } from 'tailwind-variants'
 
@@ -26,8 +26,8 @@ import { ctrp, focusRing } from '../utils'
 
 export function Table(props: TableProps) {
   return (
-    <ResizableTableContainer className='relative max-h-[280px] w-[550px] scroll-pt-[2.281rem] overflow-auto rounded-md border dark:border-zinc-600'>
-      <AriaTable {...props} className='border-separate border-spacing-0' />
+    <ResizableTableContainer className="relative max-h-[280px] w-[550px] scroll-pt-[2.281rem] overflow-auto rounded-md border dark:border-zinc-600">
+      <AriaTable {...props} className="border-separate border-spacing-0" />
     </ResizableTableContainer>
   )
 }
@@ -48,13 +48,13 @@ export function Column(props: ColumnProps) {
       {...props}
       className={ctrp(
         props.className,
-        'cursor-default text-start text-sm font-semibold text-gray-700 dark:text-zinc-300 [&:focus-within]:z-20 [&:hover]:z-20'
+        'cursor-default text-start font-semibold text-gray-700 text-sm dark:text-zinc-300 [&:focus-within]:z-20 [&:hover]:z-20'
       )}
     >
       {composeRenderProps(props.children, (children, { allowsSorting, sortDirection }) => (
-        <div className='flex items-center'>
-          <Group role='presentation' tabIndex={-1} className={columnStyles}>
-            <span className='truncate'>{children}</span>
+        <div className="flex items-center">
+          <Group role="presentation" tabIndex={-1} className={columnStyles}>
+            <span className="truncate">{children}</span>
             {allowsSorting && (
               <span
                 className={`flex h-4 w-4 items-center justify-center transition ${
@@ -64,7 +64,7 @@ export function Column(props: ColumnProps) {
                 {sortDirection && (
                   <ArrowUp
                     aria-hidden
-                    className='h-4 w-4 text-gray-500 dark:text-zinc-400 forced-colors:text-[ButtonText]'
+                    className="h-4 w-4 text-gray-500 dark:text-zinc-400 forced-colors:text-[ButtonText]"
                   />
                 )}
               </span>
@@ -83,10 +83,12 @@ export function TableHeader<T extends object>(props: TableHeaderProps<T>) {
   return (
     <AriaTableHeader
       {...props}
-      className={twMerge(
-        'sticky top-0 z-10 rounded-t-lg border-b bg-gray-100/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-gray-100 dark:border-b-zinc-700 dark:bg-zinc-700/60 dark:supports-[-moz-appearance:none]:bg-zinc-700 forced-colors:bg-[Canvas]',
-        props.className
-      )}
+      className={(values) =>
+        twMerge(
+          'sticky top-0 z-10 rounded-t-lg border-b bg-gray-100/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-gray-100 dark:border-b-zinc-700 dark:bg-zinc-700/60 dark:supports-[-moz-appearance:none]:bg-zinc-700 forced-colors:bg-[Canvas]',
+          typeof props.className === 'function' ? props.className(values) : props.className
+        )
+      }
     >
       {/* Add extra columns for drag and drop and selection. */}
       {allowsDragging && <Column />}
@@ -94,9 +96,9 @@ export function TableHeader<T extends object>(props: TableHeaderProps<T>) {
         <AriaColumn
           width={36}
           minWidth={36}
-          className='cursor-default p-2 text-start text-sm font-semibold'
+          className="cursor-default p-2 text-start font-semibold text-sm"
         >
-          {selectionMode === 'multiple' && <Checkbox slot='selection' />}
+          {selectionMode === 'multiple' && <Checkbox slot="selection" />}
         </AriaColumn>
       )}
       <Collection items={props.columns}>{props.children}</Collection>
@@ -116,12 +118,12 @@ export function Row<T extends object>({ id, columns, children, ...otherProps }: 
     <AriaRow id={id} {...otherProps} className={rowStyles}>
       {allowsDragging && (
         <Cell>
-          <Button slot='drag'>≡</Button>
+          <Button slot="drag">≡</Button>
         </Cell>
       )}
       {selectionBehavior === 'toggle' && (
         <Cell>
-          <Checkbox slot='selection' />
+          <Checkbox slot="selection" />
         </Cell>
       )}
       <Collection items={columns}>{children}</Collection>

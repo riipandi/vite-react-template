@@ -29,27 +29,27 @@ export default function Recovery() {
   }
 
   return (
-    <main className='mx-auto w-full max-w-md p-6'>
-      {success && <Alert variant='success'>{success}</Alert>}
-      {failed && <Alert variant='destructive'>{failed}</Alert>}
+    <main className="mx-auto w-full max-w-md p-6">
+      {success && <Alert variant="success">{success}</Alert>}
+      {failed && <Alert variant="destructive">{failed}</Alert>}
 
       <Card>
-        <div className='p-4 sm:px-7 sm:py-8'>
-          <form autoComplete='off' onSubmit={handleSubmit(handleRecoveryPassword)}>
-            <div className='grid gap-y-4'>
+        <div className="p-4 sm:px-7 sm:py-8">
+          <form autoComplete="off" onSubmit={handleSubmit(handleRecoveryPassword)}>
+            <div className="grid gap-y-4">
               <div>
                 <TextField
-                  label='Email address'
+                  label="Email address"
                   // placeholder='somebody@example.com'
                   // {...register('email', { required: true })}
                   // error={errors.email}
                 />
               </div>
             </div>
-            <div className='mt-6 grid w-full'>
+            <div className="mt-6 grid w-full">
               <Button
-                type='submit'
-                variant='primary'
+                type="submit"
+                variant="primary"
                 // disabled={isSubmitting}
                 // loading={isSubmitting}
               >
@@ -58,10 +58,10 @@ export default function Recovery() {
             </div>
           </form>
 
-          <div className='mt-8 text-center'>
-            <p className='text-sm text-gray-600 dark:text-gray-400'>
+          <div className="mt-8 text-center">
+            <p className="text-gray-600 text-sm dark:text-gray-400">
               {'Remember your password? '}
-              <Link to='/login' className='text-blue-600 decoration-2 hover:underline'>
+              <Link to="/login" className="text-blue-600 decoration-2 hover:underline">
                 Sign in here
               </Link>
             </p>

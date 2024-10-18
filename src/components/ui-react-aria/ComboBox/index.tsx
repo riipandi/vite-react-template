@@ -1,15 +1,15 @@
+import { ChevronDown } from 'lucide-react'
 import {
   ComboBox as AriaComboBox,
-  ComboBoxProps as AriaComboBoxProps,
+  type ComboBoxProps as AriaComboBoxProps,
   ListBox,
-  ListBoxItemProps,
-  ValidationResult,
+  type ListBoxItemProps,
+  type ValidationResult,
 } from 'react-aria-components'
-import { ChevronDown } from 'lucide-react'
 
 import { Button } from '../Button'
 import { Description, FieldError, FieldGroup, Input, Label } from '../Field'
-import { DropdownItem, DropdownSection, DropdownSectionProps } from '../ListBox'
+import { DropdownItem, DropdownSection, type DropdownSectionProps } from '../ListBox'
 import { Popover } from '../Popover'
 import { ctrp } from '../utils'
 
@@ -33,16 +33,16 @@ export function ComboBox<T extends object>({
       <Label>{label}</Label>
       <FieldGroup>
         <Input />
-        <Button variant='icon' className='mr-1 w-6 rounded outline-offset-0 '>
-          <ChevronDown aria-hidden className='h-4 w-4' />
+        <Button variant="icon" className="mr-1 w-6 rounded outline-offset-0 ">
+          <ChevronDown aria-hidden className="h-4 w-4" />
         </Button>
       </FieldGroup>
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
-      <Popover className='w-[--trigger-width]'>
+      <Popover className="w-[--trigger-width]">
         <ListBox
           items={items}
-          className='max-h-[inherit] overflow-auto p-1 outline-0 [clip-path:inset(0_0_0_0_round_.75rem)]'
+          className="max-h-[inherit] overflow-auto p-1 outline-0 [clip-path:inset(0_0_0_0_round_.75rem)]"
         >
           {children}
         </ListBox>

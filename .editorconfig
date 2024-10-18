@@ -7,18 +7,19 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 indent_style = space
-indent_size = 2
+indent_size = 4
 max_line_length = 100
 
 [*.{json,jsonc,plist}]
 max_line_length = off
-indent_size = 4
+
+[*.{js,cjs,mjs,jsx,ts,tsx,css,html,txt,toml,yml,yaml}]
+indent_size = 2
 
 [*.txt]
 insert_final_newline = false
 trim_trailing_whitespace = false
 max_line_length = off
-indent_size = 2
 
 [{Makefile,**.mk}]
 indent_style = tab

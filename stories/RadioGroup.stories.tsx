@@ -18,9 +18,9 @@ export default {
     description: '',
     children: (
       <>
-        <Radio value='soccer'>Soccer</Radio>
-        <Radio value='baseball'>Baseball</Radio>
-        <Radio value='basketball'>Basketball</Radio>
+        <Radio value="soccer">Soccer</Radio>
+        <Radio value="baseball">Baseball</Radio>
+        <Radio value="basketball">Basketball</Radio>
       </>
     ),
   },
@@ -31,9 +31,9 @@ export const Default = {
 }
 
 export const Validation = (args: any) => (
-  <Form className='flex flex-col items-start gap-2'>
+  <Form className="flex flex-col items-start gap-2">
     <RadioGroup {...args} />
-    <Button type='submit' variant='secondary'>
+    <Button type="submit" variant="secondary">
       Submit
     </Button>
   </Form>

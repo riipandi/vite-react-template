@@ -12,7 +12,7 @@ export const Container = <T extends ElementType = 'div'>({
 }: ContainerProps<T>) => {
   const Component = as || 'div'
   return (
-    <Component className='mx-auto h-full max-w-7xl' {...props}>
+    <Component className="mx-auto h-full max-w-7xl" {...props}>
       {children}
     </Component>
   )

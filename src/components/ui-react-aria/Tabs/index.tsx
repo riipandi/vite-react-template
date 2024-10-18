@@ -1,13 +1,13 @@
 import {
+  Tab as AriaTab,
+  TabList as AriaTabList,
+  TabPanel as AriaTabPanel,
+  Tabs as AriaTabs,
+  type TabListProps,
+  type TabPanelProps,
+  type TabProps,
+  type TabsProps,
   composeRenderProps,
-  Tab as RACTab,
-  TabList as RACTabList,
-  TabListProps,
-  TabPanel as RACTabPanel,
-  TabPanelProps,
-  TabProps,
-  Tabs as RACTabs,
-  TabsProps,
 } from 'react-aria-components'
 import { tv } from 'tailwind-variants'
 
@@ -25,7 +25,7 @@ const tabsStyles = tv({
 
 export function Tabs(props: TabsProps) {
   return (
-    <RACTabs
+    <AriaTabs
       {...props}
       className={composeRenderProps(props.className, (className, renderProps) =>
         tabsStyles({ ...renderProps, className })
@@ -46,7 +46,7 @@ const tabListStyles = tv({
 
 export function TabList<T extends object>(props: TabListProps<T>) {
   return (
-    <RACTabList
+    <AriaTabList
       {...props}
       className={composeRenderProps(props.className, (className, renderProps) =>
         tabListStyles({ ...renderProps, className })
@@ -72,7 +72,7 @@ const tabProps = tv({
 
 export function Tab(props: TabProps) {
   return (
-    <RACTab
+    <AriaTab
       {...props}
       className={composeRenderProps(props.className, (className, renderProps) =>
         tabProps({ ...renderProps, className })
@@ -88,7 +88,7 @@ const tabPanelStyles = tv({
 
 export function TabPanel(props: TabPanelProps) {
   return (
-    <RACTabPanel
+    <AriaTabPanel
       {...props}
       className={composeRenderProps(props.className, (className, renderProps) =>
         tabPanelStyles({ ...renderProps, className })

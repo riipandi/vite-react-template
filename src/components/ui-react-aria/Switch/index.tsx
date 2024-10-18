@@ -1,4 +1,4 @@
-import { Switch as AriaSwitch, SwitchProps as AriaSwitchProps } from 'react-aria-components'
+import { Switch as AriaSwitch, type SwitchProps as AriaSwitchProps } from 'react-aria-components'
 import { tv } from 'tailwind-variants'
 
 import { ctrp, focusRing } from '../utils'
@@ -41,7 +41,7 @@ export function Switch({ children, ...props }: SwitchProps) {
       {...props}
       className={ctrp(
         props.className,
-        'group flex items-center gap-2 text-sm text-gray-800 transition disabled:text-gray-300 dark:text-zinc-200 dark:disabled:text-zinc-600 forced-colors:disabled:text-[GrayText]'
+        'group flex items-center gap-2 text-gray-800 text-sm transition disabled:text-gray-300 dark:text-zinc-200 dark:disabled:text-zinc-600 forced-colors:disabled:text-[GrayText]'
       )}
     >
       {(renderProps) => (

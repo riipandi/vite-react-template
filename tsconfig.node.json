@@ -1,9 +1,12 @@
 {
+    "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
         "composite": true,
         "module": "ESNext",
         "moduleResolution": "Node",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "tsBuildInfoFile": "./node_modules/.tsbuildinfo"
     },
-    "include": ["vite.config.ts"]
+    "include": ["vite.config.ts"],
+    "exclude": ["node_modules"]
 }

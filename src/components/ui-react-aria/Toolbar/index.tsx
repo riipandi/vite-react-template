@@ -1,4 +1,8 @@
-import { composeRenderProps, Toolbar as RACToolbar, ToolbarProps } from 'react-aria-components'
+import {
+  Toolbar as AriaToolbar,
+  type ToolbarProps,
+  composeRenderProps,
+} from 'react-aria-components'
 import { tv } from 'tailwind-variants'
 
 const styles = tv({
@@ -13,7 +17,7 @@ const styles = tv({
 
 export function Toolbar(props: ToolbarProps) {
   return (
-    <RACToolbar
+    <AriaToolbar
       {...props}
       className={composeRenderProps(props.className, (className, renderProps) =>
         styles({ ...renderProps, className })

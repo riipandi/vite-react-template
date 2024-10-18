@@ -1,16 +1,16 @@
+import { XIcon } from 'lucide-react'
 import { createContext, useContext } from 'react'
 import {
-  Button,
-  composeRenderProps,
   Tag as AriaTag,
   TagGroup as AriaTagGroup,
-  TagGroupProps as AriaTagGroupProps,
+  type TagGroupProps as AriaTagGroupProps,
+  type TagProps as AriaTagProps,
+  Button,
   TagList,
-  TagListProps,
-  TagProps as AriaTagProps,
+  type TagListProps,
   Text,
+  composeRenderProps,
 } from 'react-aria-components'
-import { XIcon } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 import { tv } from 'tailwind-variants'
 
@@ -82,13 +82,13 @@ export function TagGroup<T extends object>({
     <AriaTagGroup {...props} className={twMerge('flex flex-col gap-1', props.className)}>
       <Label>{label}</Label>
       <ColorContext.Provider value={props.color || 'gray'}>
-        <TagList items={items} renderEmptyState={renderEmptyState} className='flex flex-wrap gap-1'>
+        <TagList items={items} renderEmptyState={renderEmptyState} className="flex flex-wrap gap-1">
           {children}
         </TagList>
       </ColorContext.Provider>
       {description && <Description>{description}</Description>}
       {errorMessage && (
-        <Text slot='errorMessage' className='text-sm text-destructive-600'>
+        <Text slot="errorMessage" className="text-destructive-600 text-sm">
           {errorMessage}
         </Text>
       )}
@@ -116,8 +116,8 @@ export function Tag({ children, color, ...props }: TagProps) {
         <>
           {children}
           {allowsRemoving && (
-            <Button slot='remove' className={removeButtonStyles}>
-              <XIcon aria-hidden className='h-3 w-3' />
+            <Button slot="remove" className={removeButtonStyles}>
+              <XIcon aria-hidden className="h-3 w-3" />
             </Button>
           )}
         </>

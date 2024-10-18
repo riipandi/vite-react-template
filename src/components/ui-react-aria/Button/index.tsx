@@ -1,19 +1,19 @@
 import {
-  Button as RACButton,
-  ButtonProps as RACButtonProps,
+  Button as AriaButton,
+  type ButtonProps as AriaButtonProps,
   composeRenderProps,
 } from 'react-aria-components'
 import { tv } from 'tailwind-variants'
 
 import { focusRing } from '../utils'
 
-export interface ButtonProps extends RACButtonProps {
+export interface ButtonProps extends AriaButtonProps {
   variant?: 'primary' | 'secondary' | 'destructive' | 'icon'
 }
 
 const button = tv({
   extend: focusRing,
-  base: 'px-4 py-2 text-sm text-center transition rounded-md border border-black/10 dark:border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] dark:shadow-none cursor-default',
+  base: 'px-4 py-2 text-sm text-center transition rounded-md border border-black/10 dark:border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] dark:shadow-none',
   variants: {
     variant: {
       primary: 'bg-primary-600 hover:bg-primary-700 pressed:bg-primary-800 text-white',
@@ -34,7 +34,7 @@ const button = tv({
 
 export function Button(props: ButtonProps) {
   return (
-    <RACButton
+    <AriaButton
       {...props}
       className={composeRenderProps(props.className, (className, renderProps) =>
         button({ ...renderProps, variant: props.variant, className })

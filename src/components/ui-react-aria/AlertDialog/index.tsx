@@ -1,7 +1,7 @@
-import { ReactNode } from 'react'
-import { chain } from 'react-aria'
-import { DialogProps, Heading } from 'react-aria-components'
 import { AlertCircleIcon, InfoIcon } from 'lucide-react'
+import type { ReactNode } from 'react'
+import { chain } from 'react-aria'
+import { type DialogProps, Heading } from 'react-aria-components'
 
 import { Button } from '../Button'
 import { Dialog } from '../Dialog'
@@ -25,22 +25,22 @@ export function AlertDialog({
   ...props
 }: AlertDialogProps) {
   return (
-    <Dialog role='alertdialog' {...props}>
+    <Dialog role="alertdialog" {...props}>
       {({ close }) => (
         <>
-          <Heading slot='title' className='my-0 text-xl font-semibold leading-6'>
+          <Heading slot="title" className="my-0 font-semibold text-xl leading-6">
             {title}
           </Heading>
           <div
-            className={`absolute right-6 top-6 h-6 w-6 stroke-2 ${
+            className={`absolute top-6 right-6 h-6 w-6 stroke-2 ${
               variant === 'destructive' ? 'text-destructive-500' : 'text-blue-500'
             }`}
           >
             {variant === 'destructive' ? <AlertCircleIcon aria-hidden /> : <InfoIcon aria-hidden />}
           </div>
-          <p className='mt-3 text-slate-500 dark:text-zinc-400'>{children}</p>
-          <div className='mt-6 flex justify-end gap-2'>
-            <Button variant='secondary' onPress={close}>
+          <p className="mt-3 text-slate-500 dark:text-zinc-400">{children}</p>
+          <div className="mt-6 flex justify-end gap-2">
+            <Button variant="secondary" onPress={close}>
               {cancelLabel || 'Cancel'}
             </Button>
             <Button

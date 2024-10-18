@@ -1,5 +1,5 @@
-import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 import clsx from 'clsx'
+import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
 type CardProps<T extends ElementType> = {
   as?: T

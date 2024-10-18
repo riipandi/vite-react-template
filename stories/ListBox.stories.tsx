@@ -13,11 +13,11 @@ const meta: Meta<typeof ListBox> = {
 export default meta
 
 export const Example = (args: any) => (
-  <ListBox aria-label='Ice cream flavor' {...args}>
-    <ListBoxItem id='chocolate'>Chocolate</ListBoxItem>
-    <ListBoxItem id='mint'>Mint</ListBoxItem>
-    <ListBoxItem id='strawberry'>Strawberry</ListBoxItem>
-    <ListBoxItem id='vanilla'>Vanilla</ListBoxItem>
+  <ListBox aria-label="Ice cream flavor" {...args}>
+    <ListBoxItem id="chocolate">Chocolate</ListBoxItem>
+    <ListBoxItem id="mint">Mint</ListBoxItem>
+    <ListBoxItem id="strawberry">Strawberry</ListBoxItem>
+    <ListBoxItem id="vanilla">Vanilla</ListBoxItem>
   </ListBox>
 )
 

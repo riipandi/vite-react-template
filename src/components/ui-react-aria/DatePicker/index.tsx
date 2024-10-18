@@ -1,10 +1,10 @@
+import { CalendarIcon } from 'lucide-react'
 import {
   DatePicker as AriaDatePicker,
-  DatePickerProps as AriaDatePickerProps,
-  DateValue,
-  ValidationResult,
+  type DatePickerProps as AriaDatePickerProps,
+  type DateValue,
+  type ValidationResult,
 } from 'react-aria-components'
-import { CalendarIcon } from 'lucide-react'
 
 import { Button } from '../Button'
 import { Calendar } from '../Calendar'
@@ -29,10 +29,10 @@ export function DatePicker<T extends DateValue>({
   return (
     <AriaDatePicker {...props} className={ctrp(props.className, 'group flex flex-col gap-1')}>
       {label && <Label>{label}</Label>}
-      <FieldGroup className='w-auto min-w-[208px]'>
-        <DateInput className='min-w-[150px] flex-1 px-2 py-1.5 text-sm' />
-        <Button variant='icon' className='mr-1 w-6 rounded outline-offset-0'>
-          <CalendarIcon aria-hidden className='h-4 w-4' />
+      <FieldGroup className="w-auto min-w-[208px]">
+        <DateInput className="min-w-[150px] flex-1 px-2 py-1.5 text-sm" />
+        <Button variant="icon" className="mr-1 w-6 rounded outline-offset-0">
+          <CalendarIcon aria-hidden className="h-4 w-4" />
         </Button>
       </FieldGroup>
       {description && <Description>{description}</Description>}

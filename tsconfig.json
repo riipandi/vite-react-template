@@ -1,34 +1,118 @@
 {
+    "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
-        "outDir": "dist",
-        "target": "ESNext",
-        "useDefineForClassFields": true,
-        "lib": ["DOM", "DOM.Iterable", "ESNext"],
-        "allowJs": false,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "module": "ESNext",
-        "moduleResolution": "Node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "react-jsx",
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "incremental": true,
-        "baseUrl": ".",
+        // Compiler options for TypeScript
+        // See https://aka.ms/tsconfig for details
+
+        /* Projects */
+        // "incremental": true,                              // Enable incremental compilation
+        // "composite": true,                                // Enable constraints for project references
+        // "tsBuildInfoFile": "./.tsbuildinfo",              // Specify .tsbuildinfo file location
+        // "disableSourceOfProjectReferenceRedirect": true,  // Disable source file preference for project references
+        // "disableSolutionSearching": true,                 // Opt out of multi-project reference checking
+        // "disableReferencedProjectLoad": true,             // Reduce automatic project loading
+
+        /* Language and Environment */
+        "target": "ES2022", // Set JavaScript language version
+        "lib": ["DOM", "DOM.Iterable", "ES2022"], // Specify library files to include
+        "jsx": "react-jsx", // Specify JSX code generation
+        // "experimentalDecorators": true,                   // Enable experimental decorator support
+        // "emitDecoratorMetadata": true,                    // Emit decorator metadata
+        // "jsxFactory": "",                                 // Specify JSX factory function
+        // "jsxFragmentFactory": "",                         // Specify JSX Fragment reference
+        // "jsxImportSource": "",                            // Specify module for JSX import
+        // "reactNamespace": "",                             // Specify React namespace
+        // "noLib": true,                                    // Disable including default lib files
+        // "useDefineForClassFields": true,                  // Use define semantics for class fields
+        "moduleDetection": "auto", // Control module detection method
+
+        /* Modules */
+        "module": "ESNext", // Specify module code generation
+        "rootDir": ".", // Specify root folder for source files
+        "moduleResolution": "Bundler", // Specify module resolution strategy
+        "baseUrl": ".", // Base directory for non-relative module names
+        // "rootDirs": [],                                   // Allow multiple folders as one for module resolution
+        // "typeRoots": [],                                  // Specify multiple folders for type definitions
+        // "types": ["node", "vite/client"],                 // Type declaration files to include
+        // "allowUmdGlobalAccess": true,                     // Allow accessing UMD globals from modules
+        // "moduleSuffixes": [],                             // List of file name suffixes for module resolution
+        // "allowImportingTsExtensions": true,               // Allow imports with TypeScript file extensions
+        // "resolvePackageJsonExports": true,                // Use package.json 'exports' for resolution
+        // "resolvePackageJsonImports": true,                // Use package.json 'imports' for resolution
+        // "customConditions": [],                           // Custom conditions for resolving imports
+        "resolveJsonModule": true, // Enable importing .json files
+        // "allowArbitraryExtensions": true,                 // Allow importing files with any extension
+        // "noResolve": true,                                // Disallow expanding the number of input files
+
+        /* JavaScript Support */
+        "allowJs": true, // Allow JavaScript files in the project
+        // "checkJs": true,                                  // Enable error reporting in JavaScript files
+        // "maxNodeModuleJsDepth": 1,                        // Maximum depth for checking JavaScript files in node_modules
+
+        /* Emit */
+        "declaration": false, // Generate .d.ts files
+        "disableSizeLimit": false, // Disable size limit for incremental compilation
+        // "declarationMap": true,                           // Generate sourcemaps for .d.ts files
+        // "emitDeclarationOnly": true,                      // Only output .d.ts files
+        "sourceMap": true, // Generate source map files
+        // "inlineSourceMap": true,                          // Include sourcemap files inside JavaScript
+        // "outFile": "./",                                  // Concatenate and emit output to single file
+        "outDir": "dist", // Specify output folder for all emitted files
+        // "removeComments": true,                           // Remove comments from output
+        "noEmit": true, // Do not emit output (Vite handles building)
+        // "importHelpers": true,                            // Import helper functions from tslib
+        // "importsNotUsedAsValues": "error",                // Specify emit behavior for type-only imports
+        // "downlevelIteration": true,                       // Provide full support for iterables
+        // "sourceRoot": "",                                 // Specify root path for debuggers
+        // "mapRoot": "",                                    // Specify location for map files
+        // "inlineSources": true,                            // Include source code in sourcemaps
+        // "emitBOM": true,                                  // Emit a UTF-8 Byte Order Mark
+        // "newLine": "crlf",                                // Set the newline character
+        // "stripInternal": true,                            // Do not emit declarations with @internal
+        // "noEmitHelpers": true,                            // Do not generate custom helper functions
+        // "noEmitOnError": true,                            // Do not emit outputs if errors were reported
+        // "preserveConstEnums": true,                       // Do not erase const enum declarations
+        // "declarationDir": "./",                           // Output directory for generated declarations
+
+        /* Interop Constraints */
+        "verbatimModuleSyntax": true, // Do not transform imports/exports, enforced 'type-only' imports
+        "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
+        "esModuleInterop": true, // Emit additional JavaScript for CommonJS modules
+        // "preserveSymlinks": true,                         // Do not resolve symlinks to their real path
+        "forceConsistentCasingInFileNames": true, // Ensure correct casing in imports
+
+        /* Type Checking */
+        "strict": true, // Enable all strict type-checking options
+        "noImplicitAny": true, // Raise error on expressions and declarations with implied 'any' type
+        // "strictNullChecks": true,                         // Enable strict null checks
+        // "strictFunctionTypes": true,                      // Enable strict checking of function types
+        // "strictBindCallApply": true,                      // Enable strict 'bind', 'call', and 'apply' methods
+        // "strictPropertyInitialization": true,             // Enable strict checking of property initialization
+        // "noImplicitThis": true,                           // Raise error on 'this' expressions with an implied 'any' type
+        // "useUnknownInCatchVariables": true,               // Type catch clause variables as 'unknown'
+        // "alwaysStrict": true,                             // Parse in strict mode and emit "use strict"
+        // "noUnusedLocals": true,                           // Report errors on unused locals
+        // "noUnusedParameters": true,                       // Report errors on unused parameters
+        // "exactOptionalPropertyTypes": true,               // Enable strict checking of optional property types
+        // "noImplicitReturns": true,                        // Report error when not all code paths return a value
+        // "noFallthroughCasesInSwitch": true,               // Report errors for fallthrough cases in switch
+        "noUncheckedIndexedAccess": true, // Include 'undefined' in index signature results, make indexing stricter
+        // "noImplicitOverride": true,                       // Ensure overriding members are marked with override
+        // "noPropertyAccessFromIndexSignature": true,       // Require explicit indexing when accessing properties
+        // "allowUnusedLabels": true,                        // Do not report errors on unused labels
+        // "allowUnreachableCode": true,                     // Do not report errors on unreachable code
+
+        /* Completeness */
+        // "skipDefaultLibCheck": true,                      // Skip type checking of default library declaration files
+        "skipLibCheck": true, // Skip type checking of all declaration files
+
+        // Absolute paths that re-map imports to additional lookup locations.
         "paths": {
             "@/*": ["src/*"],
-            "~/*": ["public/*"],
-        },
+            "~/*": ["public/*"]
+        }
     },
-    "include": ["**/*.ts", "**/*.tsx", "stories/**/*.tsx"],
-    "exclude": ["node_modules"],
-    "references": [{ "path": "./tsconfig.node.json" }],
+    "include": ["src/**/*.ts", "src/**/*.tsx", "stories/**/*.tsx"],
+    "exclude": ["dist", "tests-results"],
+    "references": [{ "path": "./tsconfig.node.json" }]
 }

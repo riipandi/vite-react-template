@@ -33,8 +33,7 @@ any authentication provider or your own.
 - [x] [React Hook Form](https://react-hook-form.com/) - Performant, flexible and extensible forms with easy-to-use validation.
 - [x] [React Testing Library](https://testing-library.com/) - Light-weight solution for testing React components.
 - [x] [Vitest](https://vitest.dev/) - Blazing Fast Unit Test Framework.
-- [x] [ESLint](https://eslint.org/) - Find and fix problems in your JavaScript code.
-- [x] [Prettier](https://prettier.io/) - An opinionated code formatter.
+- [x] [Biome](https://biomejs.dev/) - Format, lint, and more in a fraction of a second.
 
 ## Quick Start
 
@@ -82,11 +81,11 @@ VITE_PUBLIC_SITE_URL=${CF_PAGES_URL}
 
 ## Development
 
-This project uses TypeScript for type checking, [ESLint](https://eslint.org/) for linting which
-is configured in `.eslintrc.js`, and [Prettier](https://prettier.io/) for auto-formatting in
-this project. It's recommended to get TypeScript set up for your editor and install an editor
-plugin (like the [VSCode Prettier plugin](https://s.id/vscode-prettier)) to get auto-formatting
-on saving and get a really great in-editor experience with type checking and auto-complete.
+This project uses TypeScript for type checking, [Biome][biome] for code formatting
+and linting which is configured in [`biome.json`](./biome.json). It's recommended
+to get TypeScript set up for your editor and install an editor plugin (like the
+[VSCode Biome plugin][vscode-biome]) to get auto-formatting on saving and get a
+really great in-editor experience with type checking and auto-complete.
 
 ## Thanks to...
 
@@ -105,9 +104,11 @@ Copyrights in this project are retained by their contributors.
 
 See the [LICENSE-APACHE](./LICENSE-APACHE) and [LICENSE-MIT](./LICENSE-MIT) files for more information.
 
-[license-mit]: https://choosealicense.com/licenses/mit/
-[license-apache]: https://choosealicense.com/licenses/apache-2.0/
-
 ---
 
 <sub>🤫 Psst! If you like my work you can support me via [GitHub sponsors](https://github.com/sponsors/riipandi).</sub>
+
+<!-- link reference definition -->
+[biome]: https://biomejs.dev
+[license-mit]: https://choosealicense.com/licenses/mit/
+[license-apache]: https://choosealicense.com/licenses/apache-2.0/

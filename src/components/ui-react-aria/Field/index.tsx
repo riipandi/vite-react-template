@@ -1,15 +1,15 @@
 import {
-  composeRenderProps,
-  FieldError as RACFieldError,
-  FieldErrorProps,
+  FieldError as AriaFieldError,
+  Input as AriaInput,
+  Label as AriaLabel,
+  type FieldErrorProps,
   Group,
-  GroupProps,
-  Input as RACInput,
-  InputProps,
-  Label as RACLabel,
-  LabelProps,
+  type GroupProps,
+  type InputProps,
+  type LabelProps,
   Text,
-  TextProps,
+  type TextProps,
+  composeRenderProps,
 } from 'react-aria-components'
 import { twMerge } from 'tailwind-merge'
 import { tv } from 'tailwind-variants'
@@ -18,10 +18,10 @@ import { ctrp, focusRing } from '../utils'
 
 export function Label(props: LabelProps) {
   return (
-    <RACLabel
+    <AriaLabel
       {...props}
       className={twMerge(
-        'w-fit cursor-default text-sm font-medium text-gray-500 dark:text-zinc-400',
+        'w-fit cursor-default font-medium text-gray-500 text-sm dark:text-zinc-400',
         props.className
       )}
     />
@@ -32,17 +32,17 @@ export function Description(props: TextProps) {
   return (
     <Text
       {...props}
-      slot='description'
-      className={twMerge('text-sm text-gray-600', props.className)}
+      slot="description"
+      className={twMerge('text-gray-600 text-sm', props.className)}
     />
   )
 }
 
 export function FieldError(props: FieldErrorProps) {
   return (
-    <RACFieldError
+    <AriaFieldError
       {...props}
-      className={ctrp(props.className, 'text-sm text-destructive-600 forced-colors:text-[Mark]')}
+      className={ctrp(props.className, 'text-destructive-600 text-sm forced-colors:text-[Mark]')}
     />
   )
 }
@@ -81,11 +81,11 @@ export function FieldGroup(props: GroupProps) {
 
 export function Input(props: InputProps) {
   return (
-    <RACInput
+    <AriaInput
       {...props}
       className={ctrp(
         props.className,
-        'min-w-0 flex-1 bg-white px-2 py-1.5 text-sm text-gray-800 outline outline-0 disabled:text-gray-200 dark:bg-zinc-900 dark:text-zinc-200 dark:disabled:text-zinc-600'
+        'min-w-0 flex-1 bg-white px-2 py-1.5 text-gray-800 text-sm outline outline-0 disabled:text-gray-200 dark:bg-zinc-900 dark:text-zinc-200 dark:disabled:text-zinc-600'
       )}
     />
   )

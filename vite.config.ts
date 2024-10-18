@@ -1,12 +1,20 @@
-/// <reference types="vitest" />
 /// <reference types="vite/client" />
+/// <reference types="vitest" />
 
-import react from '@vitejs/plugin-react'
 import { join, resolve } from 'node:path'
-import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { visualizer } from 'rollup-plugin-visualizer'
+import { defineConfig, loadEnv } from 'vite'
+import inspect from 'vite-plugin-inspect'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    tsconfigPaths(),
+    !process.env.CI && visualizer({ emitFile: true, template: 'treemap' }),
+    inspect({ build: false, open: false }),
+  ],
   envDir: join(__dirname),
   envPrefix: ['VITE_'],
   define: { 'import.meta.env.APP_VERSION': `"${process.env.npm_package_version}"` },
@@ -18,22 +26,8 @@ export default defineConfig({
     reportCompressedSize: false,
     outDir: resolve(__dirname, 'dist'),
     rollupOptions: {
-      input: {
-        app: resolve(__dirname, 'index.html'),
-      },
+      input: { app: resolve(__dirname, 'index.html') },
     },
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    cache: { dir: './node_modules/.vitest' },
-    include: ['./**/*.{test,spec}.{ts,tsx}'],
-  },
-  resolve: {
-    alias: [
-      { find: '@', replacement: resolve(__dirname, 'src') },
-      { find: '~', replacement: resolve(__dirname, 'public') },
-    ],
   },
   base: '/',
   server: {
@@ -46,5 +40,37 @@ export default defineConfig({
     //     rewrite: (path) => path.replace(/^\//, ''),
     //   },
     // },
+  },
+  test: {
+    environment: 'happy-dom',
+    // Additionally, this is to load ".env.test" during vitest
+    env: loadEnv('test', process.cwd(), ''),
+    // setupFiles: ['./tests/setup-test.ts'],
+    includeSource: ['./src/**/*.{js,jsx,ts,tsx}'],
+    include: ['./src/**/*.{test,spec}.{ts,tsx}'],
+    exclude: ['node_modules', 'tests-e2e'],
+    reporters: process.env.CI ? ['html', 'github-actions'] : ['html', 'default'],
+    outputFile: {
+      json: './tests-results/vitest-results.json',
+      html: './tests-results/index.html',
+    },
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['html-spa', 'text-summary'],
+      reportsDirectory: './tests-results/coverage',
+      include: ['app/**/*.{js,jsx,ts,tsx}'],
+      cleanOnRerun: true,
+      clean: true,
+      thresholds: {
+        global: {
+          statements: 80,
+          branches: 70,
+          functions: 75,
+          lines: 80,
+        },
+      },
+    },
+    dir: './tests',
+    globals: true,
   },
 })

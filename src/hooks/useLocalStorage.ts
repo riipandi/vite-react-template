@@ -7,21 +7,20 @@ export const useLocalStorage = <T>(keyName: string, defaultValue: T) => {
 
       if (value) {
         return JSON.parse(value)
-      } else {
-        window.localStorage.setItem(keyName, JSON.stringify(defaultValue))
-        return defaultValue
       }
-    } catch (err) {
+      window.localStorage.setItem(keyName, JSON.stringify(defaultValue))
+      return defaultValue
+    } catch (_err) {
       return defaultValue
     }
   })
 
-  const setValue = (newValue: T) => {
+  const setValue = (newValue: string) => {
     try {
       window.localStorage.setItem(keyName, JSON.stringify(newValue))
     } catch (err) {
       if (err instanceof Error) {
-        console.error(err.message)
+        console.error('Error setting localStorage:', err)
       }
     }
     setStoredValue(newValue)

@@ -1,17 +1,17 @@
+import { ChevronDown } from 'lucide-react'
 import {
+  Select as AriaSelect,
+  type SelectProps as AriaSelectProps,
   Button,
   ListBox,
-  ListBoxItemProps,
-  Select as AriaSelect,
-  SelectProps as AriaSelectProps,
+  type ListBoxItemProps,
   SelectValue,
-  ValidationResult,
+  type ValidationResult,
 } from 'react-aria-components'
-import { ChevronDown } from 'lucide-react'
 import { tv } from 'tailwind-variants'
 
 import { Description, FieldError, Label } from '../Field'
-import { DropdownItem, DropdownSection, DropdownSectionProps } from '../ListBox'
+import { DropdownItem, DropdownSection, type DropdownSectionProps } from '../ListBox'
 import { Popover } from '../Popover'
 import { ctrp, focusRing } from '../utils'
 
@@ -47,18 +47,18 @@ export function Select<T extends object>({
     <AriaSelect {...props} className={ctrp(props.className, 'group flex flex-col gap-1')}>
       {label && <Label>{label}</Label>}
       <Button className={styles}>
-        <SelectValue className='flex-1 text-sm placeholder-shown:italic' />
+        <SelectValue className="flex-1 text-sm placeholder-shown:italic" />
         <ChevronDown
           aria-hidden
-          className='h-4 w-4 text-gray-600 group-disabled:text-gray-200 dark:text-zinc-400 dark:group-disabled:text-zinc-600 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]'
+          className="h-4 w-4 text-gray-600 group-disabled:text-gray-200 dark:text-zinc-400 dark:group-disabled:text-zinc-600 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
         />
       </Button>
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
-      <Popover className='min-w-[--trigger-width]'>
+      <Popover className="min-w-[--trigger-width]">
         <ListBox
           items={items}
-          className='max-h-[inherit] overflow-auto p-1 outline-none [clip-path:inset(0_0_0_0_round_.75rem)]'
+          className="max-h-[inherit] overflow-auto p-1 outline-none [clip-path:inset(0_0_0_0_round_.75rem)]"
         >
           {children}
         </ListBox>

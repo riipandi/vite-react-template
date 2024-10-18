@@ -1,9 +1,9 @@
 import {
-  Button,
   GridList as AriaGridList,
   GridListItem as AriaGridListItem,
-  GridListItemProps,
-  GridListProps,
+  Button,
+  type GridListItemProps,
+  type GridListProps,
 } from 'react-aria-components'
 import { tv } from 'tailwind-variants'
 
@@ -45,9 +45,9 @@ export function GridListItem({ children, ...props }: GridListItemProps) {
       {({ selectionMode, selectionBehavior, allowsDragging }) => (
         <>
           {/* Add elements for drag and drop and selection. */}
-          {allowsDragging && <Button slot='drag'>≡</Button>}
+          {allowsDragging && <Button slot="drag">≡</Button>}
           {selectionMode === 'multiple' && selectionBehavior === 'toggle' && (
-            <Checkbox slot='selection' />
+            <Checkbox slot="selection" />
           )}
           {children}
         </>

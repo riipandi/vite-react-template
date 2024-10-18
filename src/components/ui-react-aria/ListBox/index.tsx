@@ -1,15 +1,15 @@
+import { Check } from 'lucide-react'
 import {
-  Collection,
-  composeRenderProps,
-  Header,
   ListBox as AriaListBox,
   ListBoxItem as AriaListBoxItem,
-  ListBoxItemProps,
-  ListBoxProps as AriaListBoxProps,
+  type ListBoxProps as AriaListBoxProps,
+  Collection,
+  Header,
+  type ListBoxItemProps,
   Section,
-  SectionProps,
+  type SectionProps,
+  composeRenderProps,
 } from 'react-aria-components'
-import { Check } from 'lucide-react'
 import { tv } from 'tailwind-variants'
 
 import { ctrp, focusRing } from '../utils'
@@ -53,7 +53,7 @@ export function ListBoxItem(props: ListBoxItemProps) {
       {composeRenderProps(props.children, (children) => (
         <>
           {children}
-          <div className='absolute bottom-0 left-4 right-4 hidden h-px bg-white/20 forced-colors:bg-[HighlightText] [.group[data-selected]:has(+[data-selected])_&]:block' />
+          <div className="absolute right-4 bottom-0 left-4 hidden h-px bg-white/20 forced-colors:bg-[HighlightText] [.group[data-selected]:has(+[data-selected])_&]:block" />
         </>
       ))}
     </AriaListBoxItem>
@@ -80,11 +80,11 @@ export function DropdownItem(props: ListBoxItemProps) {
     <AriaListBoxItem {...props} textValue={textValue} className={dropdownItemStyles}>
       {composeRenderProps(props.children, (children, { isSelected }) => (
         <>
-          <span className='flex flex-1 items-center gap-2 truncate font-normal group-selected:font-semibold'>
+          <span className="flex flex-1 items-center gap-2 truncate font-normal group-selected:font-semibold">
             {children}
           </span>
-          <span className='flex w-5 items-center'>
-            {isSelected && <Check className='h-4 w-4' />}
+          <span className="flex w-5 items-center">
+            {isSelected && <Check className="h-4 w-4" />}
           </span>
         </>
       ))}
@@ -98,8 +98,8 @@ export interface DropdownSectionProps<T> extends SectionProps<T> {
 
 export function DropdownSection<T extends object>(props: DropdownSectionProps<T>) {
   return (
-    <Section className="after:block after:h-[5px] after:content-[''] first:-mt-[5px]">
-      <Header className='sticky -top-[5px] z-10 -mx-1 -mt-px truncate border-y bg-gray-100/60 px-4 py-1 text-sm font-semibold text-gray-500 backdrop-blur-md supports-[-moz-appearance:none]:bg-gray-100 dark:border-y-zinc-700 dark:bg-zinc-700/60 dark:text-zinc-300 [&+*]:mt-1'>
+    <Section className="first:-mt-[5px] after:block after:h-[5px] after:content-['']">
+      <Header className="-top-[5px] -mx-1 -mt-px sticky z-10 truncate border-y bg-gray-100/60 px-4 py-1 font-semibold text-gray-500 text-sm backdrop-blur-md supports-[-moz-appearance:none]:bg-gray-100 dark:border-y-zinc-700 dark:bg-zinc-700/60 dark:text-zinc-300 [&+*]:mt-1">
         {props.title}
       </Header>
       <Collection items={props.items}>{props.children}</Collection>

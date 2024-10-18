@@ -1,8 +1,8 @@
 import {
-  composeRenderProps,
-  OverlayArrow,
   Popover as AriaPopover,
-  PopoverProps as AriaPopoverProps,
+  type PopoverProps as AriaPopoverProps,
+  OverlayArrow,
+  composeRenderProps,
 } from 'react-aria-components'
 import { tv } from 'tailwind-variants'
 
@@ -33,14 +33,14 @@ export function Popover({ children, showArrow, className, ...props }: PopoverPro
       )}
     >
       {showArrow && (
-        <OverlayArrow className='group'>
+        <OverlayArrow className="group">
           <svg
             width={12}
             height={12}
-            viewBox='0 0 12 12'
-            className='block fill-white stroke-black/10 stroke-1 group-placement-left:-rotate-90 group-placement-right:rotate-90 group-placement-bottom:rotate-180 dark:fill-[#1f1f21] dark:stroke-zinc-600 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]'
+            viewBox="0 0 12 12"
+            className="group-placement-left:-rotate-90 block fill-white stroke-1 stroke-black/10 group-placement-bottom:rotate-180 group-placement-right:rotate-90 dark:fill-[#1f1f21] dark:stroke-zinc-600 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
           >
-            <path d='M0 0 L6 6 L12 0' />
+            <path d="M0 0 L6 6 L12 0" />
           </svg>
         </OverlayArrow>
       )}

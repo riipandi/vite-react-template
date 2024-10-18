@@ -1,10 +1,10 @@
 import {
+  RangeCalendar as AriaRangeCalendar,
+  type RangeCalendarProps as AriaRangeCalendarProps,
   CalendarCell,
   CalendarGrid,
   CalendarGridBody,
-  DateValue,
-  RangeCalendar as AriaRangeCalendar,
-  RangeCalendarProps as AriaRangeCalendarProps,
+  type DateValue,
   Text,
 } from 'react-aria-components'
 import { tv } from 'tailwind-variants'
@@ -44,13 +44,13 @@ export function RangeCalendar<T extends DateValue>({
   return (
     <AriaRangeCalendar {...props}>
       <CalendarHeader />
-      <CalendarGrid className='[&_td]:px-0'>
+      <CalendarGrid className="[&_td]:px-0">
         <CalendarGridHeader />
         <CalendarGridBody>
           {(date) => (
             <CalendarCell
               date={date}
-              className='group h-9 w-9 cursor-default text-sm outline outline-0 outside-month:text-gray-300 selected:bg-primary-100 invalid:selected:bg-destructive-100 selection-start:rounded-s-full selection-end:rounded-e-full dark:selected:bg-primary-700/30 dark:invalid:selected:bg-destructive-700/30 forced-colors:selected:bg-[Highlight] forced-colors:invalid:selected:bg-[Mark] [td:first-child_&]:rounded-s-full [td:last-child_&]:rounded-e-full'
+              className="group h-9 w-9 cursor-default selected:bg-primary-100 outside-month:text-gray-300 text-sm outline outline-0 selection-start:rounded-s-full selection-end:rounded-e-full invalid:selected:bg-destructive-100 dark:selected:bg-primary-700/30 dark:invalid:selected:bg-destructive-700/30 forced-colors:selected:bg-[Highlight] forced-colors:invalid:selected:bg-[Mark] [td:first-child_&]:rounded-s-full [td:last-child_&]:rounded-e-full"
             >
               {({
                 formattedDate,
@@ -80,7 +80,7 @@ export function RangeCalendar<T extends DateValue>({
         </CalendarGridBody>
       </CalendarGrid>
       {errorMessage && (
-        <Text slot='errorMessage' className='text-sm text-destructive-600'>
+        <Text slot="errorMessage" className="text-destructive-600 text-sm">
           {errorMessage}
         </Text>
       )}

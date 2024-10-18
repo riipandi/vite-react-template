@@ -31,45 +31,45 @@ export default function Login() {
   }
 
   return (
-    <main className='mx-auto w-full max-w-md p-6'>
-      {failed && <Alert variant='destructive'>{failed}</Alert>}
+    <main className="mx-auto w-full max-w-md p-6">
+      {failed && <Alert variant="destructive">{failed}</Alert>}
       {loggedOut && (
-        <Alert variant='success'>
-          <span className='font-bold'>Goodbye!</span> Your session has been terminated.
+        <Alert variant="success">
+          <span className="font-bold">Goodbye!</span> Your session has been terminated.
         </Alert>
       )}
 
       <Card>
-        <div className='p-4 sm:px-7 sm:py-8'>
-          <div className='space-y-2'>
+        <div className="p-4 sm:px-7 sm:py-8">
+          <div className="space-y-2">
             <GoogleButton />
             <GitHubButton />
           </div>
 
-          <HorizontalDivider label='Or' />
+          <HorizontalDivider label="Or" />
 
-          <form autoComplete='off' onSubmit={handleSubmit(handleLogin)}>
-            <div className='grid gap-y-4'>
+          <form autoComplete="off" onSubmit={handleSubmit(handleLogin)}>
+            <div className="grid gap-y-4">
               <div>
                 <TextField
-                  label='Email address'
+                  label="Email address"
                   // {...register('email', { required: true })}
                   // error={errors.email}
                 />
               </div>
 
               <TextField
-                label='Password'
+                label="Password"
                 // disabled={isSubmitting}
                 // {...register('password', { required: true })}
                 // error={errors.password}
                 // withResetLink
               />
             </div>
-            <div className='mt-6 grid w-full'>
+            <div className="mt-6 grid w-full">
               <Button
-                type='submit'
-                variant='primary'
+                type="submit"
+                variant="primary"
                 // disabled={isSubmitting}
                 // loading={isSubmitting}
               >
@@ -78,9 +78,9 @@ export default function Login() {
             </div>
           </form>
 
-          <div className='mt-8 text-center'>
-            <p className='text-sm text-gray-600 dark:text-gray-400'>
-              <Link to='/' className='text-blue-600 decoration-2 hover:underline'>
+          <div className="mt-8 text-center">
+            <p className="text-gray-600 text-sm dark:text-gray-400">
+              <Link to="/" className="text-blue-600 decoration-2 hover:underline">
                 &larr; Go back to homepage
               </Link>
             </p>

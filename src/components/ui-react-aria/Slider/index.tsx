@@ -1,7 +1,7 @@
 import {
   Slider as AriaSlider,
+  type SliderProps as AriaSliderProps,
   SliderOutput,
-  SliderProps as AriaSliderProps,
   SliderThumb,
   SliderTrack,
 } from 'react-aria-components'
@@ -52,20 +52,20 @@ export function Slider<T extends number | number[]>({
       {...props}
       className={ctrp(
         props.className,
-        'grid-cols-[1fr_auto] flex-col items-center gap-2 orientation-horizontal:grid orientation-horizontal:w-64 orientation-vertical:flex'
+        'orientation-vertical:flex orientation-horizontal:grid orientation-horizontal:w-64 grid-cols-[1fr_auto] flex-col items-center gap-2'
       )}
     >
       <Label>{label}</Label>
-      <SliderOutput className='text-sm font-medium text-gray-500 orientation-vertical:hidden dark:text-zinc-400'>
+      <SliderOutput className="orientation-vertical:hidden font-medium text-gray-500 text-sm dark:text-zinc-400">
         {({ state }) => state.values.map((_, i) => state.getThumbValueLabel(i)).join(' – ')}
       </SliderOutput>
-      <SliderTrack className='group col-span-2 flex items-center orientation-horizontal:h-6 orientation-vertical:h-64 orientation-vertical:w-6'>
+      <SliderTrack className="group col-span-2 flex orientation-horizontal:h-6 orientation-vertical:h-64 orientation-vertical:w-6 items-center">
         {({ state, ...renderProps }) => (
           <>
             <div className={trackStyles(renderProps)} />
-            {state.values.map((_, i) => (
+            {state.values.map((val, i) => (
               <SliderThumb
-                key={i}
+                key={val}
                 index={i}
                 aria-label={thumbLabels?.[i]}
                 className={thumbStyles}

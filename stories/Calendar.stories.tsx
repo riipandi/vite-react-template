@@ -12,4 +12,4 @@ const meta: Meta<typeof Calendar> = {
 
 export default meta
 
-export const Example = (args: any) => <Calendar aria-label='Event date' {...args} />
+export const Example = (args: any) => <Calendar aria-label="Event date" {...args} />

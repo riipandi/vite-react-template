@@ -13,11 +13,11 @@ const meta: Meta<typeof GridList> = {
 export default meta
 
 export const Example = (args: any) => (
-  <GridList aria-label='Ice cream flavors' {...args}>
-    <GridListItem id='chocolate'>Chocolate</GridListItem>
-    <GridListItem id='mint'>Mint</GridListItem>
-    <GridListItem id='strawberry'>Strawberry</GridListItem>
-    <GridListItem id='vanilla'>Vanilla</GridListItem>
+  <GridList aria-label="Ice cream flavors" {...args}>
+    <GridListItem id="chocolate">Chocolate</GridListItem>
+    <GridListItem id="mint">Mint</GridListItem>
+    <GridListItem id="strawberry">Strawberry</GridListItem>
+    <GridListItem id="vanilla">Vanilla</GridListItem>
   </GridList>
 )
 

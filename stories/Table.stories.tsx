@@ -1,6 +1,6 @@
+import type { Meta } from '@storybook/react'
 import { useMemo, useState } from 'react'
 import { TableBody } from 'react-aria-components'
-import type { Meta } from '@storybook/react'
 
 import { Cell, Column, Row, Table, TableHeader } from '@/components/ui-react-aria/Table'
 
@@ -35,7 +35,6 @@ export const Example = (args: any) => {
   const items = useMemo(() => {
     const items = rows
       .slice()
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       .sort((a, b) => a[sortDescriptor.column].localeCompare(b[sortDescriptor.column]))
     if (sortDescriptor.direction === 'descending') {
@@ -46,19 +45,19 @@ export const Example = (args: any) => {
 
   return (
     <Table
-      aria-label='Files'
+      aria-label="Files"
       {...args}
       sortDescriptor={sortDescriptor}
       onSortChange={setSortDescriptor}
     >
       <TableHeader>
-        <Column id='name' isRowHeader allowsSorting>
+        <Column id="name" isRowHeader allowsSorting>
           Name
         </Column>
-        <Column id='type' allowsSorting>
+        <Column id="type" allowsSorting>
           Type
         </Column>
-        <Column id='date' allowsSorting>
+        <Column id="date" allowsSorting>
           Date Modified
         </Column>
       </TableHeader>

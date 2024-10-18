@@ -1,7 +1,7 @@
 import {
+  ToggleButton as AriaToggleButton,
+  type ToggleButtonProps,
   composeRenderProps,
-  ToggleButton as RACToggleButton,
-  ToggleButtonProps,
 } from 'react-aria-components'
 import { tv } from 'tailwind-variants'
 
@@ -24,7 +24,7 @@ const styles = tv({
 
 export function ToggleButton(props: ToggleButtonProps) {
   return (
-    <RACToggleButton
+    <AriaToggleButton
       {...props}
       className={composeRenderProps(props.className, (className, renderProps) =>
         styles({ ...renderProps, className })

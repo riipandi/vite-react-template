@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import colors from 'tailwindcss/colors'
 import { fontFamily } from 'tailwindcss/defaultTheme'
 
 export default {
@@ -14,10 +15,10 @@ export default {
         sans: ['Inter Variable', ...fontFamily.sans],
         mono: ['JetBrains Mono Variable', ...fontFamily.mono],
       },
-      colors: ({ colors }) => ({
+      colors: {
         primary: colors.indigo,
         destructive: colors.red,
-      }),
+      },
     },
   },
   plugins: [

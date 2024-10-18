@@ -41,7 +41,7 @@ any authentication provider or your own.
 ### Installation
 
 ```bash
-npx degit riipandi/vite-react-template myapp-name
+npx tiged riipandi/vite-react-template myapp-name
 ```
 
 > Don't forget to change `myapp-name` with your real application name.

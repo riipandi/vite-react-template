@@ -1,0 +1,6 @@
+[
+    {
+        "action": "remove",
+        "files": ["README.md", "LICENSE-APACHE", "LICENSE-MIT", "vercel.json"]
+    }
+]

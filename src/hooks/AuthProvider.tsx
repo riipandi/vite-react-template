@@ -7,7 +7,7 @@ export type { User, UserData }
 // Instantiate the GoTrue auth client.
 export const auth = new GoTrue({
   APIUrl: import.meta.env.VITE_GOTRUE_URL,
-  audience: '',
+  audience: 'vite-react-template',
   setCookie: true,
 })
 

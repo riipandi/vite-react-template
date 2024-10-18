@@ -112,7 +112,7 @@
             "~/*": ["public/*"]
         }
     },
-    "include": ["src", "stories", ".storybook", "**/*.test.ts", "**/*.spec.ts"],
-    "exclude": ["node_modules", "dist", "tests-results"],
+    "include": ["src", "tests", "stories", ".storybook"],
+    "exclude": ["dist", "tests-results", "storybook-static"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

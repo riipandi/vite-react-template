@@ -34,6 +34,7 @@ any authentication provider or your own.
 - [x] [React Testing Library](https://testing-library.com/) - Light-weight solution for testing React components.
 - [x] [Vitest](https://vitest.dev/) - Blazing Fast Unit Test Framework.
 - [x] [Biome](https://biomejs.dev/) - Format, lint, and more in a fraction of a second.
+- [x] [Storybook](https://storybook.js.org/) - UI component explorer for frontend developers.
 
 ## Quick Start
 

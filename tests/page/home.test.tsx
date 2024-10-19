@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest'
 
 import App from '#/app'
 
-describe('App test', () => {
+describe('Homepage', () => {
   test('should render successfully', () => {
     const { baseElement } = render(<App />)
     expect(baseElement).toBeTruthy()

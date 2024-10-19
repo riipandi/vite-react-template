@@ -44,7 +44,7 @@ export default defineConfig({
     environment: 'happy-dom',
     // Additionally, this is to load ".env.test" during vitest
     env: loadEnv('test', process.cwd(), ''),
-    // setupFiles: ['./tests/setup-test.ts'],
+    setupFiles: ['./tests/setup-test.ts'],
     include: ['./**/*.{test,spec}.{ts,tsx}'],
     exclude: ['node_modules', 'tests-e2e'],
     reporters: process.env.CI ? ['html', 'github-actions'] : ['html', 'default'],

@@ -17,7 +17,7 @@ function NotFoundComponent() {
         <div className="mt-8 flex flex-col items-center justify-center">
           <Link
             to="/"
-            className="text-primary-600 hover:text-primary-700 focus:ring-primary-500 dark:text-primary-400 dark:hover:text-primary-300 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-all focus:ring-1 focus:ring-offset-2 focus:outline-none"
+            className="text-primary-600 focus:ring-primary-500 dark:text-primary-400 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-all hover:underline focus:ring-1 focus:ring-offset-2 focus:outline-none"
           >
             <svg className="h-2.5 w-2.5" width={20} height={20} viewBox="0 0 16 16" fill="none">
               <path

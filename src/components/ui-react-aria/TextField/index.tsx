@@ -37,7 +37,7 @@ export function TextField({
       name={name}
       invalid={!!errorMessage}
       disabled={disabled}
-      className={twMerge('flex flex-col gap-1.5', className)}
+      className={twMerge('flex flex-col gap-2', className)}
     >
       {label && <Label>{label}</Label>}
       <Input

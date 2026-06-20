@@ -39,7 +39,7 @@ function LoginComponent() {
   })
 
   return (
-    <main className="mx-auto w-full max-w-md px-4 py-10 sm:px-0">
+    <main className="mx-auto w-full max-w-md py-10">
       {failed && <Alert variant="destructive">{failed}</Alert>}
       {loggedOut && (
         <Alert variant="success">
@@ -48,7 +48,7 @@ function LoginComponent() {
       )}
 
       <Card>
-        <div className="p-6 sm:px-8 sm:py-8">
+        <div className="p-6 sm:p-8">
           <div className="space-y-3">
             <GoogleButton />
             <GitHubButton />

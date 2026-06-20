@@ -52,12 +52,12 @@ function ResetPasswordComponent() {
   }, [token, navigate])
 
   return (
-    <main className="mx-auto w-full max-w-md px-4 py-10 sm:px-0">
+    <main className="mx-auto w-full max-w-md py-10">
       {failed && <Alert variant="destructive">{failed}</Alert>}
 
       <Card>
         {success && (
-          <div className="p-6 sm:px-8 sm:pb-8">
+          <div className="p-6 sm:p-8">
             <Alert variant="success">{success}</Alert>
             <div className="mt-6 grid w-full text-center">
               <Link to="/login">
@@ -67,7 +67,7 @@ function ResetPasswordComponent() {
           </div>
         )}
 
-        <div className={clsx('p-6 sm:px-8 sm:py-8', success && 'hidden')}>
+        <div className={clsx('p-6 sm:p-8', success && 'hidden')}>
           <form
             autoComplete="off"
             onSubmit={(e) => {

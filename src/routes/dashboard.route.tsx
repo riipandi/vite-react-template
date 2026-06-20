@@ -13,7 +13,7 @@ export const Route = createFileRoute('/dashboard')({
 
 function DashboardLayout() {
   return (
-    <main className="flex h-full min-h-screen items-center bg-zinc-100 dark:bg-zinc-900">
+    <main className="flex h-full min-h-screen bg-zinc-100 dark:bg-zinc-900">
       <SideNavbar collapsed={false} />
       <Outlet />
     </main>

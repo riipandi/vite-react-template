@@ -1,7 +1,10 @@
 import { Link } from '@tanstack/react-router'
 
 export const BrandLogo = () => (
-  <Link to="/" className="block w-20 p-5 opacity-80 hover:opacity-100">
+  <Link
+    to="/"
+    className="block w-20 p-5 opacity-80 transition-opacity duration-200 hover:opacity-100"
+  >
     <SVGLogo />
   </Link>
 )

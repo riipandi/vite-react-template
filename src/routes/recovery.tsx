@@ -36,12 +36,12 @@ function RecoveryComponent() {
   })
 
   return (
-    <main className="mx-auto w-full max-w-md px-4 py-10 sm:px-0">
+    <main className="mx-auto w-full max-w-md py-10">
       {success && <Alert variant="success">{success}</Alert>}
       {failed && <Alert variant="destructive">{failed}</Alert>}
 
       <Card>
-        <div className="p-6 sm:px-8 sm:py-8">
+        <div className="p-6 sm:p-8">
           <form
             autoComplete="off"
             onSubmit={(e) => {

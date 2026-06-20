@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm } from '@tanstack/react-form'
 import { Link } from '@tanstack/react-router'
 import { Alert, Button, Card, TextField } from '#/components/ui-react-aria'
-import { auth } from '#/context/auth/AuthProvider'
+import { auth } from '#/lib/auth'
 import { recoverySchema } from '#/lib/schemas'
 
 export default function Recovery() {

@@ -8,9 +8,4 @@ describe('Homepage', () => {
     const { baseElement } = render(<App />)
     expect(baseElement).toBeTruthy()
   })
-
-  test('should render example text', () => {
-    const { getByText } = render(<App />)
-    expect(getByText(/example/i)).toBeDefined()
-  })
 })

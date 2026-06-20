@@ -1,6 +1,7 @@
 // @ts-check
 
 import { join, resolve } from 'node:path'
+import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
@@ -11,6 +12,7 @@ import inspect from 'vite-plugin-inspect'
 export default defineConfig({
   plugins: [
     tailwindcss(),
+    tanstackRouter({ target: 'react', autoCodeSplitting: true }),
     react(),
     !process.env.CI && visualizer({ emitFile: true, template: 'treemap' }),
     inspect({ build: false, open: false }),
@@ -38,6 +40,11 @@ export default defineConfig({
   test: {
     environment: 'happy-dom',
     env: loadEnv('test', process.cwd(), ''),
+    environmentOptions: {
+      happyDOM: {
+        url: 'http://localhost:3000/',
+      },
+    },
     setupFiles: ['./tests/setup-test.ts'],
     include: ['./**/*.{test,spec}.{ts,tsx}'],
     exclude: ['node_modules', 'tests-e2e'],

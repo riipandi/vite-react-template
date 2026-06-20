@@ -1,15 +1,10 @@
-import GoTrue, { type User, type UserData } from 'gotrue-js'
+import { type User, type UserData } from 'gotrue-js'
 import { createContext, useContext, useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 
-export type { User, UserData }
+import { auth } from '#/lib/auth'
 
-// Instantiate the GoTrue auth client.
-export const auth = new GoTrue({
-  APIUrl: import.meta.env.VITE_GOTRUE_URL,
-  audience: 'vite-react-template',
-  setCookie: true,
-})
+export type { User, UserData }
 
 interface AuthContext {
   user?: User | null
@@ -35,13 +30,11 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   const [loggedIn, setLoggedIn] = useState(user !== null)
   const [loggedOut, setLoggedOut] = useState(false)
 
-  // This methods would communicate with a backend, obtain/verify a token, etc.
   const login = () => {
     setLoggedIn(true)
     navigate({ to: '/' })
   }
 
-  // Clear stored cookies and set false for loggedIn state.
   const logout = () => {
     user
       ?.logout()
@@ -50,9 +43,8 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
         setLoggedOut(true)
         navigate({ to: '/login', search: { loggedOut: 'true' } })
       })
-      .catch((error: any) => {
+      .catch((error: unknown) => {
         console.info('Failed to logout user: %o', error)
-        throw error
       })
   }
 

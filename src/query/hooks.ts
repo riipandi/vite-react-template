@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { auth } from '#/context/auth/AuthProvider'
+import { auth } from '#/lib/auth'
 
 /** Fetch current user profile */
 export function useCurrentUser() {

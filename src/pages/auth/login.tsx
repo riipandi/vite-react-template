@@ -3,7 +3,8 @@ import { useForm } from '@tanstack/react-form'
 import { Link } from '@tanstack/react-router'
 import { GitHubButton, GoogleButton } from '#/components/social-button'
 import { Alert, Button, Card, HorizontalDivider, TextField } from '#/components/ui-react-aria'
-import { auth, useAuthentication } from '#/context/auth/AuthProvider'
+import { auth } from '#/lib/auth'
+import { useAuthentication } from '#/context/auth/AuthProvider'
 import { loginSchema } from '#/lib/schemas'
 
 export default function Login() {

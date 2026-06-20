@@ -1,12 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { RouterProvider } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 import { queryClient } from './query/client'
-import { router } from './routes'
+import { router } from './router'
 
 import './assets/styles/fontface.css'
 import './assets/styles/tailwind.css'
@@ -25,8 +23,6 @@ ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
-      <ReactQueryDevtools initialIsOpen={false} />
-      <TanStackRouterDevtools router={router} initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>
 )

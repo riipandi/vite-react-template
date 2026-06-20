@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from '@tanstack/react-form'
 import { Link, useNavigate, useSearch } from '@tanstack/react-router'
 import { Alert, Button, Card, TextField } from '#/components/ui-react-aria'
-import { auth } from '#/context/auth/AuthProvider'
+import { auth } from '#/lib/auth'
 import { resetPasswordSchema } from '#/lib/schemas'
 
 export default function ResetPassword() {

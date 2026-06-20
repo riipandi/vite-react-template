@@ -1,23 +1,21 @@
 // @ts-check
-/// <reference types="vitest" />
 
 import { join, resolve } from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
-import { defineConfig, loadEnv } from 'vite'
+import { loadEnv } from 'vite'
+import { defineConfig } from 'vitest/config'
 import inspect from 'vite-plugin-inspect'
-import tsconfigPaths from 'vite-tsconfig-paths'
-
 
 export default defineConfig({
   plugins: [
     tailwindcss(),
     react(),
-    tsconfigPaths(),
     !process.env.CI && visualizer({ emitFile: true, template: 'treemap' }),
     inspect({ build: false, open: false }),
   ],
+  resolve: { tsconfigPaths: true },
   envDir: join(__dirname),
   envPrefix: ['VITE_'],
   define: { 'import.meta.env.APP_VERSION': `"${process.env.npm_package_version}"` },
@@ -36,17 +34,9 @@ export default defineConfig({
   server: {
     port: 3000,
     strictPort: true,
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://127.0.0.1:3080',
-    //     changeOrigin: true,
-    //     rewrite: (path) => path.replace(/^\//, ''),
-    //   },
-    // },
   },
   test: {
     environment: 'happy-dom',
-    // Additionally, this is to load ".env.test" during vitest
     env: loadEnv('test', process.cwd(), ''),
     setupFiles: ['./tests/setup-test.ts'],
     include: ['./**/*.{test,spec}.{ts,tsx}'],

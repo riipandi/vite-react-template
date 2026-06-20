@@ -30,7 +30,6 @@
         "module": "ESNext", // Specify module code generation
         "rootDir": ".", // Specify root folder for source files
         "moduleResolution": "Bundler", // Specify module resolution strategy
-        "baseUrl": ".", // Base directory for non-relative module names
         // "rootDirs": [],                                   // Allow multiple folders as one for module resolution
         // "typeRoots": [],                                  // Specify multiple folders for type definitions
         // "types": ["node", "vite/client"],                 // Type declaration files to include
@@ -108,8 +107,8 @@
 
         // Absolute paths that re-map imports to additional lookup locations.
         "paths": {
-            "#/*": ["src/*"],
-            "~/*": ["public/*"]
+            "#/*": ["./src/*"],
+            "~/*": ["./public/*"]
         }
     },
     "include": ["src", "tests", "stories", ".storybook"],

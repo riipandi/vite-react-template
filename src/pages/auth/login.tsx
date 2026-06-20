@@ -4,6 +4,7 @@ import { Link } from '@tanstack/react-router'
 import { GitHubButton, GoogleButton } from '#/components/social-button'
 import { Alert, Button, Card, HorizontalDivider, TextField } from '#/components/ui-react-aria'
 import { auth, useAuthentication } from '#/context/auth/AuthProvider'
+import { loginSchema } from '#/lib/schemas'
 
 export default function Login() {
   const { login, loggedOut } = useAuthentication()
@@ -13,6 +14,9 @@ export default function Login() {
     defaultValues: {
       email: '',
       password: '',
+    },
+    validators: {
+      onChange: loginSchema,
     },
     onSubmit: async ({ value }) => {
       setFailed(null)
@@ -60,6 +64,7 @@ export default function Login() {
                       value={field.state.value}
                       onChange={(value: string) => field.handleChange(value)}
                       onBlur={field.handleBlur}
+                      errorMessage={field.state.meta.errors?.[0]?.message}
                     />
                   )}
                 />
@@ -73,6 +78,7 @@ export default function Login() {
                     value={field.state.value}
                     onChange={(value: string) => field.handleChange(value)}
                     onBlur={field.handleBlur}
+                    errorMessage={field.state.meta.errors?.[0]?.message}
                   />
                 )}
               />

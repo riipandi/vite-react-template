@@ -3,6 +3,7 @@ import { useForm } from '@tanstack/react-form'
 import { Link } from '@tanstack/react-router'
 import { Alert, Button, Card, TextField } from '#/components/ui-react-aria'
 import { auth } from '#/context/auth/AuthProvider'
+import { recoverySchema } from '#/lib/schemas'
 
 export default function Recovery() {
   const [success, setSuccess] = useState<string | null>()
@@ -11,6 +12,9 @@ export default function Recovery() {
   const form = useForm({
     defaultValues: {
       email: '',
+    },
+    validators: {
+      onChange: recoverySchema,
     },
     onSubmit: async ({ value }) => {
       setFailed(null)
@@ -47,6 +51,7 @@ export default function Recovery() {
                       value={field.state.value}
                       onChange={(value: string) => field.handleChange(value)}
                       onBlur={field.handleBlur}
+                      errorMessage={field.state.meta.errors?.[0]?.message}
                     />
                   )}
                 />

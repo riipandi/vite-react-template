@@ -4,10 +4,7 @@ import { useForm } from '@tanstack/react-form'
 import { Link, useNavigate, useSearch } from '@tanstack/react-router'
 import { Alert, Button, Card, TextField } from '#/components/ui-react-aria'
 import { auth } from '#/context/auth/AuthProvider'
-
-interface ResetPasswordTypes {
-  password: string
-}
+import { resetPasswordSchema } from '#/lib/schemas'
 
 export default function ResetPassword() {
   const navigate = useNavigate()
@@ -19,6 +16,9 @@ export default function ResetPassword() {
   const form = useForm({
     defaultValues: {
       password: '',
+    },
+    validators: {
+      onChange: resetPasswordSchema,
     },
     onSubmit: async ({ value }) => {
       if (!token) {
@@ -81,6 +81,7 @@ export default function ResetPassword() {
                     value={field.state.value}
                     onChange={(value: string) => field.handleChange(value)}
                     onBlur={field.handleBlur}
+                    errorMessage={field.state.meta.errors?.[0]?.message}
                   />
                 )}
               />

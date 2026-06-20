@@ -1,0 +1,28 @@
+{
+    "$schema": "./node_modules/oxlint/configuration_schema.json",
+    "plugins": ["typescript", "react", "unicorn", "import", "jsx-a11y", "vitest"],
+    "env": {
+        "browser": true,
+        "builtin": true,
+        "vitest": true
+    },
+    "categories": {
+        "correctness": "error",
+        "suspicious": "error"
+    },
+    "rules": {
+        "noConsole": "off",
+        "noDebugger": "off",
+        "typescript/no-explicit-any": "off",
+        "react/jsx-key": "error",
+        "react/no-array-index-key": "error",
+        "react/self-closing-comp": ["error", { "html": true, "component": true }],
+        "import/default": "off",
+        "import/no-cycle": "off",
+        "noUnusedVars": ["error", { "args": "after-used" }],
+        "sort-imports": "off",
+        "typescript/consistent-type-definitions": ["error", "interface"],
+        "typescript/no-unnecessary-type-constraint": "off",
+        "noEmpty": ["error", { "allowEmptyCatch": true }]
+    }
+}

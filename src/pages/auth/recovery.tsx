@@ -1,31 +1,26 @@
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { useForm } from '@tanstack/react-form'
+import { Link } from '@tanstack/react-router'
 import { Alert, Button, Card, TextField } from '#/components/ui-react-aria'
 import { auth } from '#/context/auth/AuthProvider'
-
-interface PasswordRecoveryTypes {
-  email: string
-}
 
 export default function Recovery() {
   const [success, setSuccess] = useState<string | null>()
   const [failed, setFailed] = useState<string | null>()
 
-  const {
-    // register,
-    handleSubmit,
-    // formState: { errors, isSubmitting },
-  } = useForm<PasswordRecoveryTypes>()
-
-  const handleRecoveryPassword = (data: PasswordRecoveryTypes) => {
-    setFailed(null)
-    setSuccess(null)
-    auth
-      .requestPasswordRecovery(data.email)
-      .then(() => setSuccess('Password recovery request sent, check your email.'))
-      .catch((error) => setFailed(`Failed to request password recovery: ${error.message}`))
-  }
+  const form = useForm({
+    defaultValues: {
+      email: '',
+    },
+    onSubmit: async ({ value }) => {
+      setFailed(null)
+      setSuccess(null)
+      auth
+        .requestPasswordRecovery(value.email)
+        .then(() => setSuccess('Password recovery request sent, check your email.'))
+        .catch((error: Error) => setFailed(`Failed to request password recovery: ${error.message}`))
+    },
+  })
 
   return (
     <main className="mx-auto w-full max-w-md p-6">
@@ -34,26 +29,39 @@ export default function Recovery() {
 
       <Card>
         <div className="p-4 sm:px-7 sm:py-8">
-          <form autoComplete="off" onSubmit={handleSubmit(handleRecoveryPassword)}>
+          <form
+            autoComplete="off"
+            onSubmit={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              form.handleSubmit()
+            }}
+          >
             <div className="grid gap-y-4">
               <div>
-                <TextField
-                  label="Email address"
-                  // placeholder='somebody@example.com'
-                  // {...register('email', { required: true })}
-                  // error={errors.email}
+                <form.Field
+                  name="email"
+                  children={(field) => (
+                    <TextField
+                      label="Email address"
+                      value={field.state.value}
+                      onChange={(value: string) => field.handleChange(value)}
+                      onBlur={field.handleBlur}
+                    />
+                  )}
                 />
               </div>
             </div>
+
             <div className="mt-6 grid w-full">
-              <Button
-                type="submit"
-                variant="primary"
-                // disabled={isSubmitting}
-                // loading={isSubmitting}
-              >
-                Recover Password
-              </Button>
+              <form.Subscribe
+                selector={(state) => [state.canSubmit, state.isSubmitting]}
+                children={([canSubmit, isSubmitting]) => (
+                  <Button type="submit" variant="primary" isDisabled={!canSubmit}>
+                    {isSubmitting ? 'Sending...' : 'Recover Password'}
+                  </Button>
+                )}
+              />
             </div>
           </form>
 

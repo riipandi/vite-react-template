@@ -1,3 +1,4 @@
+// @ts-check
 /// <reference types="vitest" />
 
 import { join, resolve } from 'node:path'
@@ -6,6 +7,7 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig, loadEnv } from 'vite'
 import inspect from 'vite-plugin-inspect'
 import tsconfigPaths from 'vite-tsconfig-paths'
+
 
 export default defineConfig({
   plugins: [

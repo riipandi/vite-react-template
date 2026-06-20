@@ -18,7 +18,8 @@
 
 A starter project for [React](https://reactjs.org/) with [Vite](https://vitejs.dev/), [Tailwind CSS](https://tailwindcss.com),
 and [Typescript](https://www.typescriptlang.org/). This starter kit is already pre-configured
-with [absolute import](https://jsdev.org/env/nodejs/absolute-path-imports/), [React Router](https://reactrouter.com/),
+with [absolute import](https://jsdev.org/env/nodejs/absolute-path-imports/), [TanStack Router](https://tanstack.com/router),
+[TanStack Form](https://tanstack.com/form), [Oxlint](https://oxc.rs/docs/guide/usage/linter),
 and [other goodies](./package.json). This starter also provides basic authentication implementation, you can use
 any authentication provider or your own.
 
@@ -29,11 +30,12 @@ any authentication provider or your own.
 - [x] [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs.
 - [x] [Lucide Icons](https://lucide.dev/) - Beautiful & consistent icons made by the community.
 - [x] [Typescript](https://www.typescriptlang.org/) - Strongly typed programming language.
-- [x] [React Router DOM](https://reactrouter.com/) - Declarative routing for React.
-- [x] [React Hook Form](https://react-hook-form.com/) - Performant, flexible and extensible forms with easy-to-use validation.
+- [x] [TanStack Router](https://tanstack.com/router) - Type-safe routing for React.
+- [x] [TanStack Form](https://tanstack.com/form) - Headless, type-safe form state management.
 - [x] [React Testing Library](https://testing-library.com/) - Light-weight solution for testing React components.
 - [x] [Vitest](https://vitest.dev/) - Blazing Fast Unit Test Framework.
-- [x] [Biome](https://biomejs.dev/) - Format, lint, and more in a fraction of a second.
+- [x] [Oxlint](https://oxc.rs/docs/guide/usage/linter) - High-performance JavaScript linter.
+- [x] [Oxfmt](https://oxc.rs/docs/guide/usage/formatter) - High-performance code formatter.
 - [x] [Storybook](https://storybook.js.org/) - UI component explorer for frontend developers.
 
 ## Quick Start
@@ -82,11 +84,12 @@ VITE_PUBLIC_SITE_URL=${CF_PAGES_URL}
 
 ## Development
 
-This project uses TypeScript for type checking, [Biome][biome] for code formatting
-and linting which is configured in [`biome.json`](./biome.json). It's recommended
+This project uses TypeScript for type checking, [Oxlint](https://oxc.rs/docs/guide/usage/linter) for linting
+and [Oxfmt](https://oxc.rs/docs/guide/usage/formatter) for code formatting which are configured in
+[`.oxlintrc.json`](./.oxlintrc.json) and [`.oxfmtrc.json`](./.oxfmtrc.json). It's recommended
 to get TypeScript set up for your editor and install an editor plugin (like the
-[VSCode Biome plugin][vscode-biome]) to get auto-formatting on saving and get a
-really great in-editor experience with type checking and auto-complete.
+[VSCode Oxc plugin](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode)) to get
+auto-formatting on saving and get a really great in-editor experience with type checking and auto-complete.
 
 ## Thanks to...
 
@@ -110,6 +113,5 @@ See the [LICENSE-APACHE](./LICENSE-APACHE) and [LICENSE-MIT](./LICENSE-MIT) file
 <sub>🤫 Psst! If you like my work you can support me via [GitHub sponsors](https://github.com/sponsors/riipandi).</sub>
 
 <!-- link reference definition -->
-[biome]: https://biomejs.dev
 [license-mit]: https://choosealicense.com/licenses/mit/
 [license-apache]: https://choosealicense.com/licenses/apache-2.0/

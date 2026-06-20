@@ -1,33 +1,28 @@
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { useForm } from '@tanstack/react-form'
+import { Link } from '@tanstack/react-router'
 import { GitHubButton, GoogleButton } from '#/components/social-button'
 import { Alert, Button, Card, HorizontalDivider, TextField } from '#/components/ui-react-aria'
 import { auth, useAuthentication } from '#/context/auth/AuthProvider'
-
-interface LoginTypes {
-  email: string
-  password: string
-}
 
 export default function Login() {
   const { login, loggedOut } = useAuthentication()
   const [failed, setFailed] = useState<string | null>()
 
-  const {
-    // register,
-    handleSubmit,
-    // formState: { errors, isSubmitting },
-  } = useForm<LoginTypes>()
-
-  const handleLogin = (data: LoginTypes) => {
-    setFailed(null)
-    const { email, password } = data
-    auth
-      .login(email, password, true)
-      .then((_response) => login())
-      .catch((error) => setFailed(error.message))
-  }
+  const form = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: async ({ value }) => {
+      setFailed(null)
+      const { email, password } = value
+      await auth
+        .login(email, password, true)
+        .then((_response: any) => login())
+        .catch((error: Error) => setFailed(error.message))
+    },
+  })
 
   return (
     <main className="mx-auto w-full max-w-md p-6">
@@ -47,33 +42,51 @@ export default function Login() {
 
           <HorizontalDivider label="Or" />
 
-          <form autoComplete="off" onSubmit={handleSubmit(handleLogin)}>
+          <form
+            autoComplete="off"
+            onSubmit={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              form.handleSubmit()
+            }}
+          >
             <div className="grid gap-y-4">
               <div>
-                <TextField
-                  label="Email address"
-                  // {...register('email', { required: true })}
-                  // error={errors.email}
+                <form.Field
+                  name="email"
+                  children={(field) => (
+                    <TextField
+                      label="Email address"
+                      value={field.state.value}
+                      onChange={(value: string) => field.handleChange(value)}
+                      onBlur={field.handleBlur}
+                    />
+                  )}
                 />
               </div>
 
-              <TextField
-                label="Password"
-                // disabled={isSubmitting}
-                // {...register('password', { required: true })}
-                // error={errors.password}
-                // withResetLink
+              <form.Field
+                name="password"
+                children={(field) => (
+                  <TextField
+                    label="Password"
+                    value={field.state.value}
+                    onChange={(value: string) => field.handleChange(value)}
+                    onBlur={field.handleBlur}
+                  />
+                )}
               />
             </div>
+
             <div className="mt-6 grid w-full">
-              <Button
-                type="submit"
-                variant="primary"
-                // disabled={isSubmitting}
-                // loading={isSubmitting}
-              >
-                Sign in
-              </Button>
+              <form.Subscribe
+                selector={(state) => [state.canSubmit, state.isSubmitting]}
+                children={([canSubmit, isSubmitting]) => (
+                  <Button type="submit" variant="primary" isDisabled={!canSubmit}>
+                    {isSubmitting ? 'Signing in...' : 'Sign in'}
+                  </Button>
+                )}
+              />
             </div>
           </form>
 

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@tanstack/react-router'
 
 export const BrandLogo = () => (
   <Link to="/" className="block w-20 p-5 opacity-80 hover:opacity-100">

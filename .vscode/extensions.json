@@ -1,6 +1,6 @@
 {
     "recommendations": [
-        "biomejs.biome",
+        "oxc.oxc-vscode",
         "bradlc.vscode-tailwindcss",
         "EditorConfig.EditorConfig",
         "ms-playwright.playwright",

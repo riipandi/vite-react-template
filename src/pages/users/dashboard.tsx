@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@tanstack/react-router'
 import { Button, Card, Container } from '#/components/ui-react-aria'
 import { useAuthentication } from '#/context/auth/AuthProvider'
 

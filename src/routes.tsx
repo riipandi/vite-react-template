@@ -1,10 +1,17 @@
-import { Route, createBrowserRouter, createRoutesFromElements, defer } from 'react-router-dom'
+import {
+  createRootRoute,
+  createRoute,
+  createRouter,
+} from '@tanstack/react-router'
 
-import { AppLayout, PublicLayout, RootLayout } from './layouts'
+import { AppLayout } from './layouts/app-layout'
 import { AuthLayout } from './layouts/auth-layout'
-import { Login } from './pages/auth'
+import { PublicLayout } from './layouts/public-layout'
+import { RootLayout } from './layouts/root-layout'
+import { Login, Recovery, ResetPassword } from './pages/auth'
 import Home from './pages/home'
 import { UserDashboard } from './pages/users'
+import Error404 from './pages/404'
 
 // Ideally this would be an API call to server to get logged in user data
 const getUserData = () => {
@@ -17,20 +24,92 @@ const getUserData = () => {
   )
 }
 
-export const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route element={<RootLayout />} loader={() => defer({ userPromise: getUserData() })}>
-      <Route element={<PublicLayout />}>
-        <Route path="/" element={<Home />} />
-      </Route>
+const rootRoute = createRootRoute({
+  component: RootLayout,
+  beforeLoad: async () => {
+    return { userPromise: getUserData() }
+  },
+})
 
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<Login />} />
-      </Route>
+const publicRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  id: 'public',
+  component: PublicLayout,
+})
 
-      <Route path="/dashboard" element={<AppLayout />}>
-        <Route path="overview" element={<UserDashboard />} />
-      </Route>
-    </Route>
-  )
-)
+const indexRoute = createRoute({
+  getParentRoute: () => publicRoute,
+  path: '/',
+  component: Home,
+})
+
+const loginRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  id: 'login-layout',
+  component: AuthLayout,
+})
+
+const loginIndexRoute = createRoute({
+  getParentRoute: () => loginRoute,
+  path: '/login',
+  component: Login,
+})
+
+const dashboardRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/dashboard',
+  component: AppLayout,
+})
+
+const overviewRoute = createRoute({
+  getParentRoute: () => dashboardRoute,
+  path: '/overview',
+  component: UserDashboard,
+})
+
+const recoveryLayout = createRoute({
+  getParentRoute: () => rootRoute,
+  id: 'recovery-layout',
+  component: AuthLayout,
+})
+
+const recoveryRoute = createRoute({
+  getParentRoute: () => recoveryLayout,
+  path: '/recovery',
+  component: Recovery,
+})
+
+const resetPasswordRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/reset-password',
+  component: ResetPassword,
+})
+
+const notFoundRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/$',
+  component: Error404,
+})
+
+const routeTree = rootRoute.addChildren([
+  publicRoute.addChildren([indexRoute]),
+  loginRoute.addChildren([loginIndexRoute]),
+  recoveryLayout.addChildren([recoveryRoute]),
+  dashboardRoute.addChildren([overviewRoute]),
+  resetPasswordRoute,
+  notFoundRoute,
+])
+
+const router = createRouter({
+  routeTree,
+  defaultPreload: 'intent',
+  scrollRestoration: true,
+})
+
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
+
+export { router }

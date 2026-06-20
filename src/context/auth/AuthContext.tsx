@@ -1,5 +1,5 @@
 import type { FunctionComponent } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate } from '@tanstack/react-router'
 
 import { useAuthentication } from '#/context/auth/AuthProvider'
 
@@ -11,19 +11,22 @@ import { useAuthentication } from '#/context/auth/AuthProvider'
 export function withCondition(
   Component: FunctionComponent,
   condition: boolean,
-  redirectTo: string
+  redirectOptions: { to: string; search?: Record<string, string> }
 ) {
   return function InnerComponent(props?: any) {
-    return condition ? <Component {...props} /> : <Navigate to={redirectTo} replace />
+    return condition ? <Component {...props} /> : <Navigate {...redirectOptions} replace />
   }
 }
 
 /** A higher-order wrapper, binding the "user logged in" condition and redirect */
 export const withLoggedIn = (Component: FunctionComponent) => {
   const { loggedIn } = useAuthentication()
-  return withCondition(Component, loggedIn, '/login?as=user')
+  return withCondition(Component, loggedIn, {
+    to: '/login',
+    search: { as: 'user' } as Record<string, string>,
+  })
 }
 
 /** The inverse, showing a page only if a user is logged OUT */
 export const withLoggedOut = (Component: FunctionComponent) =>
-  withCondition(Component, !useAuthentication().loggedIn, '/')
+  withCondition(Component, !useAuthentication().loggedIn, { to: '/' })

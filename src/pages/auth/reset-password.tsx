@@ -1,8 +1,7 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
-import { useSearchParams } from 'react-router-dom'
+import { useForm } from '@tanstack/react-form'
+import { Link, useNavigate, useSearch } from '@tanstack/react-router'
 import { Alert, Button, Card, TextField } from '#/components/ui-react-aria'
 import { auth } from '#/context/auth/AuthProvider'
 
@@ -12,39 +11,39 @@ interface ResetPasswordTypes {
 
 export default function ResetPassword() {
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams('')
-  const token = searchParams.get('recovery_token') as string
+  const search = useSearch({ strict: false })
+  const token = (search as Record<string, string>)['recovery_token'] as string
   const [success, setSuccess] = useState('')
   const [failed, setFailed] = useState('')
 
-  const {
-    // register,
-    handleSubmit,
-    // formState: { errors, isSubmitting },
-  } = useForm<ResetPasswordTypes>()
-
-  const handleResetPassword = (data: ResetPasswordTypes) => {
-    if (!token) {
-      setFailed('You need a recovery token to continue!')
-    }
-    auth
-      .verify('recovery', token)
-      .then((response) => {
-        response
-          .update({ password: data.password })
-          .then((result) => {
-            setSuccess(
-              `Password has been reset. Now, you can login with your email address: ${result.email}`
-            )
-          })
-          .catch((error) => setFailed(`Failed to reset your password: ${error.message}`))
-      })
-      .catch((error) => setFailed(`Failed to reset your password: ${error.message}`))
-  }
+  const form = useForm({
+    defaultValues: {
+      password: '',
+    },
+    onSubmit: async ({ value }) => {
+      if (!token) {
+        setFailed('You need a recovery token to continue!')
+        return
+      }
+      auth
+        .verify('recovery', token)
+        .then((response: any) => {
+          response
+            .update({ password: value.password })
+            .then((result: any) => {
+              setSuccess(
+                `Password has been reset. Now, you can login with your email address: ${result.email}`
+              )
+            })
+            .catch((error: Error) => setFailed(`Failed to reset your password: ${error.message}`))
+        })
+        .catch((error: Error) => setFailed(`Failed to reset your password: ${error.message}`))
+    },
+  })
 
   useEffect(() => {
     if (!token) {
-      navigate('/recovery')
+      navigate({ to: '/recovery' })
     }
   }, [token, navigate])
 
@@ -65,29 +64,37 @@ export default function ResetPassword() {
         )}
 
         <div className={clsx('p-4 sm:px-7 sm:py-8', success && 'hidden')}>
-          <form autoComplete="off" onSubmit={handleSubmit(handleResetPassword)}>
+          <form
+            autoComplete="off"
+            onSubmit={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              form.handleSubmit()
+            }}
+          >
             <div className="grid gap-y-4">
-              <TextField
-                label="New Password"
-                // {...register('password', {
-                //   required: 'You must specify a password',
-                //   minLength: {
-                //     value: 8,
-                //     message: 'Password must have at least 8 characters',
-                //   },
-                // })}
-                // error={errors.password}
+              <form.Field
+                name="password"
+                children={(field) => (
+                  <TextField
+                    label="New Password"
+                    value={field.state.value}
+                    onChange={(value: string) => field.handleChange(value)}
+                    onBlur={field.handleBlur}
+                  />
+                )}
               />
             </div>
+
             <div className="mt-6 grid w-full">
-              <Button
-                type="submit"
-                variant="primary"
-                // disabled={isSubmitting}
-                // loading={isSubmitting}
-              >
-                Reset Password
-              </Button>
+              <form.Subscribe
+                selector={(state) => [state.canSubmit, state.isSubmitting]}
+                children={([canSubmit, isSubmitting]) => (
+                  <Button type="submit" variant="primary" isDisabled={!canSubmit}>
+                    {isSubmitting ? 'Resetting...' : 'Reset Password'}
+                  </Button>
+                )}
+              />
             </div>
           </form>
 

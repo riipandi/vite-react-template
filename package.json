@@ -6,9 +6,9 @@
     "scripts": {
         "dev": "vite",
         "build": "tsc -b && vite build",
-        "check": "biome check . --write",
-        "format": "biome format . --write",
-        "lint": "biome lint . --write",
+        "check": "oxlint --fix && oxfmt --check .",
+        "format": "oxfmt --write .",
+        "lint": "oxlint",
         "preview": "pnpm dlx serve dist -l 3000 -s -n -C",
         "update-deps": "npm-check-updates --configFileName .ncurc.json",
         "storybook": "VITE_CJS_IGNORE_WARNING=true storybook dev -p 6006 --no-open --disable-telemetry",
@@ -24,17 +24,16 @@
         "typecheck": "tsc -b"
     },
     "dependencies": {
+        "@tanstack/react-form": "^1.33.0",
+        "@tanstack/react-router": "^1.170.16",
         "gotrue-js": "^0.9.29",
         "lucide-react": "^0.453.0",
         "react": "^18.3.1",
         "react-aria": "^3.35.1",
         "react-aria-components": "^1.4.1",
-        "react-dom": "^18.3.1",
-        "react-hook-form": "^7.53.1",
-        "react-router-dom": "^6.27.0"
+        "react-dom": "^18.3.1"
     },
     "devDependencies": {
-        "@biomejs/biome": "^1.9.4",
         "@storybook/addon-essentials": "^8.3.6",
         "@storybook/addon-interactions": "^8.3.6",
         "@storybook/addon-links": "^8.3.6",
@@ -60,6 +59,8 @@
         "jsdom": "^25.0.1",
         "lefthook": "^1.7.22",
         "npm-check-updates": "^17.1.4",
+        "oxfmt": "^0.55.0",
+        "oxlint": "^1.70.0",
         "postcss": "^8.4.47",
         "rollup-plugin-visualizer": "^5.12.0",
         "storybook": "^8.3.6",

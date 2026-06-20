@@ -14,16 +14,12 @@ pre-commit:
     format:
       glob: "*.{js,ts,jsx,tsx,json},package.json"
       exclude: '(^|/)(tests|stories)\.(ts|tsx)$'
-      run: pnpm exec biome format {all_files} --write
-    check:
-      glob: "*.{js,ts,jsx,tsx,json},package.json"
-      exclude: '(^|/)(tests|stories)\.(ts|tsx)$'
-      run: pnpm exec biome check {staged_files} --write
+      run: pnpm exec oxfmt --write {all_files}
     lint:
       files: git diff --name-only main
       glob: "*.{js,ts,jsx,tsx,json},package.json"
       exclude: '(^|/)(tests|stories)\.(ts|tsx)$'
-      run: pnpm exec biome lint {staged_files} --write
+      run: pnpm exec oxlint --fix {staged_files}
     typecheck:
       files: git diff --name-only main
       glob: "*.{js,ts,jsx,tsx,json},package.json"

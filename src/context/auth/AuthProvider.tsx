@@ -1,6 +1,6 @@
 import GoTrue, { type User, type UserData } from 'gotrue-js'
 import { createContext, useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from '@tanstack/react-router'
 
 export type { User, UserData }
 
@@ -38,7 +38,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   // This methods would communicate with a backend, obtain/verify a token, etc.
   const login = () => {
     setLoggedIn(true)
-    navigate('/')
+    navigate({ to: '/' })
   }
 
   // Clear stored cookies and set false for loggedIn state.
@@ -48,7 +48,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
       .then((_response: any) => {
         setLoggedIn(false)
         setLoggedOut(true)
-        navigate('/login?loggedOut=true')
+        navigate({ to: '/login', search: { loggedOut: 'true' } })
       })
       .catch((error: any) => {
         console.info('Failed to logout user: %o', error)

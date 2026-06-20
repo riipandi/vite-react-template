@@ -103,7 +103,7 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      // Skip type checking of default library declaration files
-    "skipLibCheck": false, // Skip type checking of all declaration files
+    "skipLibCheck": true,
 
     // Absolute paths that re-map imports to additional lookup locations.
     "paths": {

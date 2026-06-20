@@ -27,8 +27,8 @@ const config: StorybookConfig = {
     options: {},
   },
   core: {
-    disableTelemetry: true, // 👈 Disables telemetry
-    enableCrashReports: false, // 👈 Appends the crash reports to the telemetry events
+    disableTelemetry: true,
+    enableCrashReports: false,
   },
   docs: {},
   typescript: {

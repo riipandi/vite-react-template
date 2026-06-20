@@ -7,7 +7,6 @@ import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { loadEnv } from 'vite'
 import { defineConfig } from 'vitest/config'
-import inspect from 'vite-plugin-inspect'
 
 export default defineConfig({
   plugins: [
@@ -15,7 +14,6 @@ export default defineConfig({
     tanstackRouter({ target: 'react', autoCodeSplitting: true }),
     react(),
     !process.env.CI && visualizer({ emitFile: true, template: 'treemap' }),
-    inspect({ build: false, open: false }),
   ],
   resolve: { tsconfigPaths: true },
   envDir: join(__dirname),

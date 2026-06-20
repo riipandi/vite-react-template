@@ -19,7 +19,7 @@ export default function Home() {
         <div className="mx-auto flex w-full border-collapse items-center justify-center">
           <img src={ViteLogo} alt="Vite logo" className="h-28" />
         </div>
-        <div className="text-center text-gray-600 text-lg sm:mt-8 dark:text-gray-400">
+        <div className="text-center text-lg text-gray-600 sm:mt-8 dark:text-gray-400">
           <p className="leading-8">This is an example starter template React with Vite.</p>
           <p className="leading-8">
             Vite + React + Typescript + Tailwind CSS + TanStack Form + TanStack Router + Vitest
@@ -50,14 +50,19 @@ export default function Home() {
       </div>
       <footer className="mt-auto py-5 text-center">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-gray-600 text-sm tracking-wide dark:text-gray-400">
+          <p className="text-sm tracking-wide text-gray-600 dark:text-gray-400">
             &copy; {new Date().getFullYear()} - Made by{' '}
-            <a href="https://ripandis.com" className="hover:underline" target="_blank" rel="noreferrer">
+            <a
+              href="https://ripandis.com"
+              className="hover:underline"
+              target="_blank"
+              rel="noreferrer"
+            >
               Aris Ripandi
             </a>{' '}
             in 🇮🇩
           </p>
-          <p className="mt-2 text-gray-600 text-sm tracking-wide dark:text-gray-400">
+          <p className="mt-2 text-sm tracking-wide text-gray-600 dark:text-gray-400">
             v{import.meta.env.APP_VERSION}
           </p>
         </div>

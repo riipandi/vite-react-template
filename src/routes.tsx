@@ -1,8 +1,4 @@
-import {
-  createRootRoute,
-  createRoute,
-  createRouter,
-} from '@tanstack/react-router'
+import { createRootRoute, createRoute, createRouter } from '@tanstack/react-router'
 
 import { AppLayout } from './layouts/app-layout'
 import { AuthLayout } from './layouts/auth-layout'
@@ -15,7 +11,7 @@ import Error404 from './pages/404'
 
 // Ideally this would be an API call to server to get logged in user data
 const getUserData = () => {
-  return new Promise((resolve, _reject) =>
+  return new Promise((resolve) =>
     setTimeout(() => {
       const user = window.localStorage.getItem('user')
       resolve(user)

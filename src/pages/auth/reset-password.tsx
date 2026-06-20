@@ -100,7 +100,7 @@ export default function ResetPassword() {
           </form>
 
           <div className="mt-8 text-center">
-            <p className="text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               {'Remember your password? '}
               <Link to="/login" className="text-blue-600 decoration-2 hover:underline">
                 Sign in here

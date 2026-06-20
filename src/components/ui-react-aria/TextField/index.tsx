@@ -60,7 +60,7 @@ export function TextField({
               : '',
             state.disabled
               ? 'border-gray-200 dark:border-zinc-700 forced-colors:border-[GrayText]'
-              : '',
+              : ''
           )
         }
       />

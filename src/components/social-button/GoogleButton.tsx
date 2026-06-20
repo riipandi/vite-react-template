@@ -4,7 +4,7 @@ export const GoogleButton: FC = () => {
   return (
     <button
       type="button"
-      className="inline-flex w-full items-center justify-center gap-2 rounded-md border bg-white px-4 py-2 align-middle font-medium text-gray-700 text-sm shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:focus:ring-offset-gray-800 dark:hover:bg-slate-800 dark:hover:text-white"
+      className="inline-flex w-full items-center justify-center gap-2 rounded-md border bg-white px-4 py-2 align-middle text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-offset-gray-800"
     >
       <svg className="h-auto w-4" width={46} height={47} viewBox="0 0 46 47" fill="none">
         <path

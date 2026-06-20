@@ -23,7 +23,7 @@ export default function Login() {
       const { email, password } = value
       await auth
         .login(email, password, true)
-        .then((_response: any) => login())
+        .then(() => login())
         .catch((error: Error) => setFailed(error.message))
     },
   })
@@ -97,7 +97,7 @@ export default function Login() {
           </form>
 
           <div className="mt-8 text-center">
-            <p className="text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               <Link to="/" className="text-blue-600 decoration-2 hover:underline">
                 &larr; Go back to homepage
               </Link>

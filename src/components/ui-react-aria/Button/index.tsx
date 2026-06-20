@@ -12,12 +12,10 @@ export interface ButtonProps {
 }
 
 const variantStyles: Record<string, string> = {
-  primary:
-    'bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white',
+  primary: 'bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white',
   secondary:
     'bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-gray-800 dark:bg-zinc-600 dark:hover:bg-zinc-500 dark:active:bg-zinc-400 dark:text-zinc-100',
-  destructive:
-    'bg-destructive-700 hover:bg-destructive-800 active:bg-destructive-900 text-white',
+  destructive: 'bg-destructive-700 hover:bg-destructive-800 active:bg-destructive-900 text-white',
   icon: 'border-0 p-1 flex items-center justify-center text-gray-600 hover:bg-black/[5%] active:bg-black/10 dark:text-zinc-400 dark:hover:bg-white/10 dark:active:bg-white/20 disabled:bg-transparent',
 }
 
@@ -42,8 +40,8 @@ export function Button({
       onClick={onClick}
       className={(state) => {
         const base = [
-          'px-4 py-2 text-sm text-center transition rounded-md border border-black/10 dark:border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] dark:shadow-none',
-          'outline outline-blue-600 dark:outline-blue-500 forced-colors:outline-[Highlight] outline-offset-2 outline-0 focus-visible:outline-2',
+          'rounded-md border border-black/10 px-4 py-2 text-center text-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] transition dark:border-white/10 dark:shadow-none',
+          'outline outline-0 outline-offset-2 outline-blue-600 focus-visible:outline-2 dark:outline-blue-500 forced-colors:outline-[Highlight]',
           variantStyles[variant],
           state.disabled ? disabledStyle : '',
         ]

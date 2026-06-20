@@ -42,8 +42,8 @@ const config: StorybookConfig = {
       propFilter: (prop) => !prop.name.startsWith('aria-') && !excludedProps.has(prop.name),
     },
   },
-  async viteFinal(config) {
-    return mergeConfig(config, {
+  async viteFinal(viteConfig) {
+    return mergeConfig(viteConfig, {
       build: {
         chunkSizeWarningLimit: 1024,
       },

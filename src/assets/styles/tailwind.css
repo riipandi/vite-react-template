@@ -1,7 +1,7 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-@plugin "@tailwindcss/forms";
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -37,7 +37,7 @@
 @layer base {
   html,
   body {
-    @apply antialiased min-h-screen scroll-smooth;
+    @apply min-h-screen scroll-smooth antialiased;
   }
 }
 

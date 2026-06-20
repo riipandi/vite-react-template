@@ -11,7 +11,7 @@ export const auth = new GoTrue({
   setCookie: true,
 })
 
-type AuthContext = {
+interface AuthContext {
   user?: User | null
   loggedIn: boolean
   loggedOut: boolean
@@ -45,7 +45,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   const logout = () => {
     user
       ?.logout()
-      .then((_response: any) => {
+      .then(() => {
         setLoggedIn(false)
         setLoggedOut(true)
         navigate({ to: '/login', search: { loggedOut: 'true' } })

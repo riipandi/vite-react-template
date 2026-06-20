@@ -9,15 +9,15 @@ function NotFoundComponent() {
     <div className="mx-auto flex h-full min-h-screen w-full flex-col">
       <header className="mb-auto w-full" aria-hidden />
       <div className="px-4 py-10 text-center sm:px-6 lg:px-8">
-        <h1 className="block text-7xl font-bold text-gray-800 sm:text-8xl dark:text-white">404</h1>
-        <div className="mt-6 text-lg text-gray-600 sm:mt-8 dark:text-gray-400">
+        <h1 className="block text-7xl font-bold text-zinc-800 sm:text-8xl dark:text-white">404</h1>
+        <div className="mt-6 text-lg text-zinc-500 sm:mt-8 dark:text-zinc-400">
           <p className="leading-8">Oops, something went wrong.</p>
           <p className="leading-8">Sorry, we couldn&rsquo;t find your page.</p>
         </div>
         <div className="mt-8 flex flex-col items-center justify-center">
           <Link
             to="/"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-semibold text-blue-500 ring-offset-white transition-all hover:text-blue-700 focus:ring-1 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none sm:w-auto dark:ring-offset-slate-900"
+            className="text-primary-600 hover:text-primary-700 focus:ring-primary-500 dark:text-primary-400 dark:hover:text-primary-300 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-all focus:ring-1 focus:ring-offset-2 focus:outline-none"
           >
             <svg className="h-2.5 w-2.5" width={20} height={20} viewBox="0 0 16 16" fill="none">
               <path
@@ -33,7 +33,9 @@ function NotFoundComponent() {
       </div>
       <footer className="mt-auto py-5 text-center">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm text-gray-500">© All Rights Reserved. {new Date().getFullYear()}</p>
+          <p className="text-sm text-zinc-400">
+            &copy; All Rights Reserved. {new Date().getFullYear()}
+          </p>
         </div>
       </footer>
     </div>

@@ -39,17 +39,17 @@ function LoginComponent() {
   })
 
   return (
-    <main className="mx-auto w-full max-w-md p-6">
+    <main className="mx-auto w-full max-w-md px-4 py-10 sm:px-0">
       {failed && <Alert variant="destructive">{failed}</Alert>}
       {loggedOut && (
         <Alert variant="success">
-          <span className="font-bold">Goodbye!</span> Your session has been terminated.
+          <span className="font-semibold">Goodbye!</span> Your session has been terminated.
         </Alert>
       )}
 
       <Card>
-        <div className="p-4 sm:px-7 sm:py-8">
-          <div className="space-y-2">
+        <div className="p-6 sm:px-8 sm:py-8">
+          <div className="space-y-3">
             <GoogleButton />
             <GitHubButton />
           </div>
@@ -107,8 +107,11 @@ function LoginComponent() {
           </form>
 
           <div className="mt-8 text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              <Link to="/" className="text-blue-600 decoration-2 hover:underline">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">
+              <Link
+                to="/"
+                className="text-primary-600 dark:text-primary-400 decoration-2 hover:underline"
+              >
                 &larr; Go back to homepage
               </Link>
             </p>

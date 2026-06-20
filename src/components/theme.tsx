@@ -10,7 +10,8 @@ interface ThemeSwitcherProps {
 
 export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
   const [savedTheme, setSavedTheme] = useLocalStorage('ui_theme', null)
-  const IconComponent = savedTheme === 'dark' ? Lucide.Moon : Lucide.SunDim
+  const isDark = savedTheme === 'dark'
+  const IconComponent = isDark ? Lucide.Sun : Lucide.Moon
 
   const toggleTheme = useCallback(() => {
     if (savedTheme === 'light') {

@@ -37,7 +37,7 @@ export function TextField({
       name={name}
       invalid={!!errorMessage}
       disabled={disabled}
-      className={twMerge('flex flex-col gap-1', className)}
+      className={twMerge('flex flex-col gap-1.5', className)}
     >
       {label && <Label>{label}</Label>}
       <Input
@@ -49,17 +49,17 @@ export function TextField({
         onBlur={onBlur}
         className={(state) =>
           twMerge(
-            'min-w-0 flex-1 bg-white px-2 py-1.5 text-gray-800 text-sm outline outline-0 disabled:text-gray-200 dark:bg-zinc-900 dark:text-zinc-200 dark:disabled:text-zinc-600',
-            'border-2 rounded-md',
-            'outline outline-blue-600 dark:outline-blue-500 forced-colors:outline-[Highlight] outline-offset-2 outline-0 focus-visible:outline-2',
-            !state.focused
-              ? 'border-gray-300 dark:border-zinc-500 forced-colors:border-[ButtonBorder]'
-              : 'border-gray-600 dark:border-zinc-300 forced-colors:border-[Highlight]',
-            state.valid === false
-              ? 'border-destructive-600 dark:border-destructive-600 forced-colors:border-[Mark]'
+            'min-w-0 flex-1 rounded-md border px-3 py-2 text-sm transition-colors duration-150',
+            'bg-white text-zinc-800 placeholder:text-zinc-400 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500',
+            !state.focused && state.valid === true
+              ? 'border-zinc-300 dark:border-zinc-600 forced-colors:border-[ButtonBorder]'
               : '',
+            state.focused
+              ? 'border-primary-500 ring-2 ring-primary-500/20 dark:border-primary-400 dark:ring-primary-400/20'
+              : '',
+            state.valid === false ? 'border-destructive-500 dark:border-destructive-400' : '',
             state.disabled
-              ? 'border-gray-200 dark:border-zinc-700 forced-colors:border-[GrayText]'
+              ? 'border-zinc-200 bg-zinc-50 text-zinc-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-600'
               : ''
           )
         }

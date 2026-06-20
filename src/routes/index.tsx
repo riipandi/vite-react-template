@@ -3,8 +3,6 @@ import { ThemeSwitcher } from '#/components/theme'
 import { Alert, Button } from '#/components/ui-react-aria'
 import { useAuthentication } from '#/context/auth/AuthProvider'
 import { isAuthenticated } from '#/lib/auth'
-// Assets in public directory cannot be imported from JavaScript.
-// Instead, we use `src/assets` directory.
 import ViteLogo from '../assets/images/vite.svg'
 
 export const Route = createFileRoute('/')({
@@ -25,10 +23,10 @@ function HomeComponent() {
         <ThemeSwitcher className="float-right size-9" />
       </header>
       <div className="mx-auto flex flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8">
-        <div className="mx-auto flex w-full border-collapse items-center justify-center">
+        <div className="mx-auto flex w-full items-center justify-center">
           <img src={ViteLogo} alt="Vite logo" className="h-28" />
         </div>
-        <div className="text-center text-lg text-gray-600 sm:mt-8 dark:text-gray-400">
+        <div className="text-center text-lg text-zinc-500 sm:mt-8 dark:text-zinc-400">
           <p className="leading-8">This is an example starter template React with Vite.</p>
           <p className="leading-8">
             Vite + React + Typescript + Tailwind CSS + TanStack Form + TanStack Router + Vitest
@@ -46,9 +44,7 @@ function HomeComponent() {
             target="_blank"
             rel="noreferrer"
           >
-            <Button variant="secondary" className="inline-flex items-center justify-center">
-              Get Source Code
-            </Button>
+            <Button variant="secondary">Get Source Code</Button>
           </a>
         </div>
         <div>
@@ -59,11 +55,11 @@ function HomeComponent() {
       </div>
       <footer className="mt-auto py-5 text-center">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm tracking-wide text-gray-600 dark:text-gray-400">
+          <p className="text-sm tracking-wide text-zinc-500 dark:text-zinc-400">
             &copy; {new Date().getFullYear()} - Made by{' '}
             <a
               href="https://ripandis.com"
-              className="hover:underline"
+              className="text-primary-600 dark:text-primary-400 hover:underline"
               target="_blank"
               rel="noreferrer"
             >
@@ -71,7 +67,7 @@ function HomeComponent() {
             </a>{' '}
             in 🇮🇩
           </p>
-          <p className="mt-2 text-sm tracking-wide text-gray-600 dark:text-gray-400">
+          <p className="mt-2 text-sm tracking-wide text-zinc-400 dark:text-zinc-500">
             v{import.meta.env.APP_VERSION}
           </p>
         </div>

@@ -36,12 +36,12 @@ function RecoveryComponent() {
   })
 
   return (
-    <main className="mx-auto w-full max-w-md p-6">
+    <main className="mx-auto w-full max-w-md px-4 py-10 sm:px-0">
       {success && <Alert variant="success">{success}</Alert>}
       {failed && <Alert variant="destructive">{failed}</Alert>}
 
       <Card>
-        <div className="p-4 sm:px-7 sm:py-8">
+        <div className="p-6 sm:px-8 sm:py-8">
           <form
             autoComplete="off"
             onSubmit={(e) => {
@@ -80,9 +80,12 @@ function RecoveryComponent() {
           </form>
 
           <div className="mt-8 text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">
               {'Remember your password? '}
-              <Link to="/login" className="text-blue-600 decoration-2 hover:underline">
+              <Link
+                to="/login"
+                className="text-primary-600 dark:text-primary-400 decoration-2 hover:underline"
+              >
                 Sign in here
               </Link>
             </p>

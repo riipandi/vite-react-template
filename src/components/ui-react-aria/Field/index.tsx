@@ -1,11 +1,10 @@
-import type { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export function Label({ children, className }: { children?: ReactNode; className?: string }) {
+export function Label({ children, className }: { children?: React.ReactNode; className?: string }) {
   return (
     <label
       className={twMerge(
-        'w-fit cursor-default font-medium text-gray-500 text-sm dark:text-zinc-400',
+        'w-fit cursor-default font-medium text-sm text-zinc-500 dark:text-zinc-400',
         className
       )}
     >
@@ -14,15 +13,29 @@ export function Label({ children, className }: { children?: ReactNode; className
   )
 }
 
-export function Description({ children, className }: { children?: ReactNode; className?: string }) {
-  return <p className={twMerge('text-gray-600 text-sm', className)}>{children}</p>
+export function Description({
+  children,
+  className,
+}: {
+  children?: React.ReactNode
+  className?: string
+}) {
+  return (
+    <p className={twMerge('text-sm text-zinc-600 dark:text-zinc-400', className)}>{children}</p>
+  )
 }
 
-export function FieldError({ children, className }: { children?: ReactNode; className?: string }) {
+export function FieldError({
+  children,
+  className,
+}: {
+  children?: React.ReactNode
+  className?: string
+}) {
   if (!children) return null
   return (
     <p
-      className={twMerge('text-destructive-600 text-sm forced-colors:text-[Mark]', className)}
+      className={twMerge('text-sm text-destructive-600 forced-colors:text-[Mark]', className)}
       role="alert"
     >
       {children}

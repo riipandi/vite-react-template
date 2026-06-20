@@ -22,7 +22,7 @@ export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
   }, [savedTheme, setSavedTheme])
 
   return (
-    <Button className={ctrp(className, 'px-2')} variant="icon" onPress={toggleTheme}>
+    <Button className={ctrp(className, 'px-2')} variant="icon" onClick={toggleTheme}>
       <IconComponent className="h-5 w-5" />
     </Button>
   )

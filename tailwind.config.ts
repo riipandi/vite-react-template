@@ -26,6 +26,5 @@ export default {
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),
     require('tailwindcss-animate'),
-    require('tailwindcss-react-aria-components'),
   ],
 } satisfies Config

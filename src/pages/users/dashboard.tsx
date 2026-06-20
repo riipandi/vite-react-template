@@ -19,7 +19,7 @@ export default function UserDashboard() {
           <Link to="/">
             <Button variant="primary">Back to homepage</Button>
           </Link>
-          <Button onPress={logout}>Sign Out</Button>
+          <Button onClick={logout}>Sign Out</Button>
         </div>
       </Card>
     </Container>

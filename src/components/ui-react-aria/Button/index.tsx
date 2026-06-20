@@ -1,44 +1,61 @@
-import {
-  Button as AriaButton,
-  type ButtonProps as AriaButtonProps,
-  composeRenderProps,
-} from 'react-aria-components'
-import { tv } from 'tailwind-variants'
+import { Button as BaseButton } from '@base-ui/react/button'
+import type { ButtonState } from '@base-ui/react/button'
 
-import { focusRing } from '../utils'
-
-export interface ButtonProps extends AriaButtonProps {
+export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'destructive' | 'icon'
+  disabled?: boolean
+  isDisabled?: boolean
+  type?: 'button' | 'submit' | 'reset'
+  className?: string | ((state: ButtonState) => string | undefined)
+  children?: React.ReactNode
+  onClick?: (event: React.MouseEvent) => void
 }
 
-const button = tv({
-  extend: focusRing,
-  base: 'px-4 py-2 text-sm text-center transition rounded-md border border-black/10 dark:border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] dark:shadow-none',
-  variants: {
-    variant: {
-      primary: 'bg-primary-600 hover:bg-primary-700 pressed:bg-primary-800 text-white',
-      secondary:
-        'bg-gray-100 hover:bg-gray-200 pressed:bg-gray-300 text-gray-800 dark:bg-zinc-600 dark:hover:bg-zinc-500 dark:pressed:bg-zinc-400 dark:text-zinc-100',
-      destructive:
-        'bg-destructive-700 hover:bg-destructive-800 pressed:bg-destructive-900 text-white',
-      icon: 'border-0 p-1 flex items-center justify-center text-gray-600 hover:bg-black/[5%] pressed:bg-black/10 dark:text-zinc-400 dark:hover:bg-white/10 dark:pressed:bg-white/20 disabled:bg-transparent',
-    },
-    isDisabled: {
-      true: 'bg-gray-100 dark:bg-zinc-800 text-gray-300 dark:text-zinc-600 forced-colors:text-[GrayText] border-black/5 dark:border-white/5',
-    },
-  },
-  defaultVariants: {
-    variant: 'primary',
-  },
-})
+const variantStyles: Record<string, string> = {
+  primary:
+    'bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white',
+  secondary:
+    'bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-gray-800 dark:bg-zinc-600 dark:hover:bg-zinc-500 dark:active:bg-zinc-400 dark:text-zinc-100',
+  destructive:
+    'bg-destructive-700 hover:bg-destructive-800 active:bg-destructive-900 text-white',
+  icon: 'border-0 p-1 flex items-center justify-center text-gray-600 hover:bg-black/[5%] active:bg-black/10 dark:text-zinc-400 dark:hover:bg-white/10 dark:active:bg-white/20 disabled:bg-transparent',
+}
 
-export function Button(props: ButtonProps) {
+const disabledStyle =
+  'bg-gray-100 dark:bg-zinc-800 text-gray-300 dark:text-zinc-600 forced-colors:text-[GrayText] border-black/5 dark:border-white/5'
+
+export function Button({
+  variant = 'primary',
+  disabled,
+  isDisabled,
+  type = 'button',
+  className,
+  children,
+  onClick,
+}: ButtonProps) {
+  const resolvedDisabled = disabled ?? isDisabled
+
   return (
-    <AriaButton
-      {...props}
-      className={composeRenderProps(props.className, (className, renderProps) =>
-        button({ ...renderProps, variant: props.variant, className })
-      )}
-    />
+    <BaseButton
+      disabled={resolvedDisabled}
+      type={type}
+      onClick={onClick}
+      className={(state) => {
+        const base = [
+          'px-4 py-2 text-sm text-center transition rounded-md border border-black/10 dark:border-white/10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] dark:shadow-none',
+          'outline outline-blue-600 dark:outline-blue-500 forced-colors:outline-[Highlight] outline-offset-2 outline-0 focus-visible:outline-2',
+          variantStyles[variant],
+          state.disabled ? disabledStyle : '',
+        ]
+        if (typeof className === 'function') {
+          base.push(className(state) ?? '')
+        } else if (typeof className === 'string') {
+          base.push(className)
+        }
+        return base.filter(Boolean).join(' ')
+      }}
+    >
+      {children}
+    </BaseButton>
   )
 }

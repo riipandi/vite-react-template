@@ -2,6 +2,7 @@ import { createRootRouteWithContext, Outlet, useRouterState } from '@tanstack/re
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import type { QueryClient } from '@tanstack/react-query'
+import { ThemeProvider } from '@lonik/themer'
 
 import { AuthProvider } from '#/context/auth/AuthProvider'
 
@@ -27,11 +28,13 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
 function RootComponent() {
   return (
-    <AuthProvider>
-      <RouterSpinner />
-      <Outlet />
-      <ReactQueryDevtools initialIsOpen={false} />
-      <TanStackRouterDevtools position="bottom-right" />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <RouterSpinner />
+        <Outlet />
+        <ReactQueryDevtools initialIsOpen={false} />
+        <TanStackRouterDevtools position="bottom-right" />
+      </AuthProvider>
+    </ThemeProvider>
   )
 }

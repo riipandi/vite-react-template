@@ -1,8 +1,8 @@
-import { Store } from '@tanstack/store'
+import { createStore, useSelector } from '@tanstack/react-store'
 
-type Theme = 'light' | 'dark'
+export type Theme = 'light' | 'dark'
 
-interface AppState {
+export interface AppState {
   theme: Theme
   sidebarOpen: boolean
 }
@@ -14,7 +14,7 @@ const getInitialTheme = (): Theme => {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
-export const appStore = new Store<AppState>({
+export const appStore = createStore<AppState>({
   theme: getInitialTheme(),
   sidebarOpen: false,
 })
@@ -28,4 +28,12 @@ export const toggleTheme = () => {
 
 export const toggleSidebar = () => {
   appStore.setState((prev) => ({ ...prev, sidebarOpen: !prev.sidebarOpen }))
+}
+
+export function useTheme() {
+  return useSelector(appStore, (state) => state.theme)
+}
+
+export function useSidebarOpen() {
+  return useSelector(appStore, (state) => state.sidebarOpen)
 }

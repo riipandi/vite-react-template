@@ -1,13 +1,60 @@
-import GoTrue from 'gotrue-js'
+import { ofetch } from 'ofetch'
 
-/** GoTrue auth client — single shared instance used by routes and providers */
-export const auth = new GoTrue({
-  APIUrl: import.meta.env.VITE_GOTRUE_URL,
-  audience: 'vite-react-template',
-  setCookie: true,
-})
+export interface User {
+  id: number
+  email: string
+  firstName: string
+  lastName: string
+  username: string
+  image: string
+}
 
-/** Synchronous check — safe to call inside router beforeLoad / loaders */
+export interface LoginResponse {
+  id: number
+  email: string
+  firstName: string
+  lastName: string
+  username: string
+  image: string
+  gender: string
+  accessToken: string
+  refreshToken: string
+}
+
+export interface LoginCredentials {
+  username: string
+  password: string
+}
+
+export async function login(credentials: LoginCredentials): Promise<LoginResponse> {
+  return ofetch<LoginResponse>('https://dummyjson.com/auth/login', {
+    method: 'POST',
+    body: credentials,
+  })
+}
+
+export async function me(token: string): Promise<User> {
+  return ofetch<User>('https://dummyjson.com/auth/me', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
+
+export function getToken(): string | null {
+  if (typeof window === 'undefined') return null
+  return window.localStorage.getItem('access_token')
+}
+
+export function setToken(token: string | null) {
+  if (typeof window === 'undefined') return
+  if (token) {
+    window.localStorage.setItem('access_token', token)
+  } else {
+    window.localStorage.removeItem('access_token')
+  }
+}
+
 export function isAuthenticated(): boolean {
-  return auth.currentUser() !== null
+  return getToken() !== null
 }

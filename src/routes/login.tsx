@@ -4,7 +4,7 @@ import { createFileRoute, Link, redirect } from '@tanstack/react-router'
 import { GitHubButton, GoogleButton } from '#/components/social-button'
 import { Alert, Button, Card, HorizontalDivider, TextField } from '#/components/ui-react-aria'
 import { useAuthentication } from '#/context/auth/AuthProvider'
-import { auth, isAuthenticated } from '#/lib/auth'
+import { isAuthenticated } from '#/lib/auth'
 import { loginSchema } from '#/lib/schemas'
 
 export const Route = createFileRoute('/login')({
@@ -22,7 +22,7 @@ function LoginComponent() {
 
   const form = useForm({
     defaultValues: {
-      email: '',
+      username: '',
       password: '',
     },
     validators: {
@@ -30,11 +30,11 @@ function LoginComponent() {
     },
     onSubmit: async ({ value }) => {
       setFailed(null)
-      const { email, password } = value
-      await auth
-        .login(email, password, true)
-        .then(() => login())
-        .catch((error: Error) => setFailed(error.message))
+      try {
+        await login(value)
+      } catch (error: unknown) {
+        setFailed((error as Error).message)
+      }
     },
   })
 
@@ -67,10 +67,10 @@ function LoginComponent() {
             <div className="grid gap-y-4">
               <div>
                 <form.Field
-                  name="email"
+                  name="username"
                   children={(field) => (
                     <TextField
-                      label="Email address"
+                      label="Username"
                       value={field.state.value}
                       onChange={(value: string) => field.handleChange(value)}
                       onBlur={field.handleBlur}
@@ -80,18 +80,20 @@ function LoginComponent() {
                 />
               </div>
 
-              <form.Field
-                name="password"
-                children={(field) => (
-                  <TextField
-                    label="Password"
-                    value={field.state.value}
-                    onChange={(value: string) => field.handleChange(value)}
-                    onBlur={field.handleBlur}
-                    errorMessage={field.state.meta.errors?.[0]?.message}
-                  />
-                )}
-              />
+              <div>
+                <form.Field
+                  name="password"
+                  children={(field) => (
+                    <TextField
+                      label="Password"
+                      value={field.state.value}
+                      onChange={(value: string) => field.handleChange(value)}
+                      onBlur={field.handleBlur}
+                      errorMessage={field.state.meta.errors?.[0]?.message}
+                    />
+                  )}
+                />
+              </div>
             </div>
 
             <div className="mt-6 grid w-full">

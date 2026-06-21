@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "quoteProps": "as-needed",
+  "ignorePatterns": ["dist", "public", "node_modules", "storybook-static", "tests-results", ".git"],
+  "sortTailwindcss": {
+    "tailwindStylesheet": "./src/assets/styles/tailwind.css",
+    "functions": ["cn", "clx", "clsx", "cva", "tw"]
+  }
+}

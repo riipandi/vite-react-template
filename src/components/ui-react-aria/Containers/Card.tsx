@@ -12,7 +12,7 @@ export const Card = <T extends ElementType = 'div'>({ as, children, className }:
   return (
     <Component
       className={clsx(
-        'rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800',
+        'rounded-xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-800',
         className
       )}
     >

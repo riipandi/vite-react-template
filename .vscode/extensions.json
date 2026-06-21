@@ -1,10 +1,10 @@
 {
-    "recommendations": [
-        "biomejs.biome",
-        "bradlc.vscode-tailwindcss",
-        "EditorConfig.EditorConfig",
-        "ms-playwright.playwright",
-        "tamasfe.even-better-toml"
-    ],
-    "unwantedRecommendations": []
+  "recommendations": [
+    "oxc.oxc-vscode",
+    "bradlc.vscode-tailwindcss",
+    "EditorConfig.EditorConfig",
+    "ms-playwright.playwright",
+    "tamasfe.even-better-toml"
+  ],
+  "unwantedRecommendations": []
 }

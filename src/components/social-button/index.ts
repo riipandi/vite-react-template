@@ -1,2 +1,2 @@
-export * from './GoogleButton'
-export * from './GitHubButton'
+export { GoogleButton } from './SocialButton'
+export { GitHubButton } from './SocialButton'

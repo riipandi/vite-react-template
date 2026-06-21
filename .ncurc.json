@@ -1,11 +1,11 @@
 {
-    "$schema": "https://raw.githubusercontent.com/raineorshine/npm-check-updates/main/src/types/RunOptions.json",
-    "interactive": true,
-    "upgrade": true,
-    "color": true,
-    "root": true,
-    "deep": false,
-    "install": "always",
-    "packageManager": "pnpm",
-    "reject": []
+  "$schema": "https://raw.githubusercontent.com/raineorshine/npm-check-updates/main/src/types/RunOptions.json",
+  "interactive": true,
+  "upgrade": true,
+  "color": true,
+  "root": true,
+  "deep": false,
+  "install": "always",
+  "packageManager": "pnpm",
+  "reject": []
 }

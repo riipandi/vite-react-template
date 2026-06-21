@@ -19,14 +19,15 @@ export const useLocalStorage = <T>(keyName: string, defaultValue: T) => {
       }
       window.localStorage.setItem(keyName, JSON.stringify(defaultValue))
       return defaultValue
-    } catch (_err) {
+    } catch {
       return defaultValue
     }
   })
 
   const setValue = (newValue: T | ((val: T) => T)) => {
     try {
-      const valueToStore = newValue instanceof Function ? newValue(storedValue) : newValue
+      const valueToStore =
+        typeof newValue === 'function' ? (newValue as (val: T) => T)(storedValue) : newValue
       setStoredValue(valueToStore)
       if (typeof window !== 'undefined') {
         window.localStorage.setItem(keyName, JSON.stringify(valueToStore))

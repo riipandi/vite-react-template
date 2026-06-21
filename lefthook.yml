@@ -1,45 +1,34 @@
-# Refer for explanation to following link:
-# https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+assert_lefthook_installed: true
 
-skip_output:
-  - meta           # Skips lefthook version printing
-  - summary        # Skips summary block (successful and failed steps) printing
-  - empty_summary  # Skips summary heading when there are no steps to run
-  - execution_info # Skips printing `EXECUTE > ...` logging
-  - skips          # Skips "skip" printing (i.e. no files matched)
+output:
+  - meta
+  - summary
+  - empty_summary
+  - execution_info
+  - skips
 
 pre-commit:
   parallel: true
-  commands:
-    format:
-      glob: "*.{js,ts,jsx,tsx,json},package.json"
-      exclude: '(^|/)(tests|stories)\.(ts|tsx)$'
-      run: pnpm exec biome format {all_files} --write
-    check:
-      glob: "*.{js,ts,jsx,tsx,json},package.json"
-      exclude: '(^|/)(tests|stories)\.(ts|tsx)$'
-      run: pnpm exec biome check {staged_files} --write
-    lint:
-      files: git diff --name-only main
-      glob: "*.{js,ts,jsx,tsx,json},package.json"
-      exclude: '(^|/)(tests|stories)\.(ts|tsx)$'
-      run: pnpm exec biome lint {staged_files} --write
-    typecheck:
-      files: git diff --name-only main
-      glob: "*.{js,ts,jsx,tsx,json},package.json"
-      exclude: '(^|/)(tests|stories)\.(ts|tsx)$'
-      run: pnpm exec tsc -b
-    test-unit:
-      glob: "*.{js,ts,jsx,tsx,json},package.json"
-      exclude: '(^|/)(tests|stories)\.(ts|tsx)$'
-      run: pnpm run test
-    test-coverage:
-      glob: "*.{js,ts,jsx,tsx,json},package.json"
-      exclude: '(^|/)(tests|stories)\.(ts|tsx)$'
-      run: pnpm run test:coverage
+  jobs:
+    - name: format
+      glob: '*.{js,ts,jsx,tsx,json}'
+      run: pnpm oxfmt --write {staged_files}
+      stage_fixed: true
+
+    - name: lint
+      glob: '*.{js,ts,jsx,tsx}'
+      run: pnpm oxlint --fix {staged_files}
+      stage_fixed: true
+
+    - name: typecheck
+      glob: '*.{ts,tsx,js,jsx,json}'
+      run: pnpm tsc -b
+
+    - name: test-unit
+      glob: '*.{test,spec}.{ts,tsx}'
+      run: pnpm vitest --run
 
 pre-push:
-  commands:
-    npm-audit:
-      tags: frontend security
+  jobs:
+    - name: audit
       run: pnpm audit --prod

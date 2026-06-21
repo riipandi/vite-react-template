@@ -1,29 +1,25 @@
 import * as Lucide from 'lucide-react'
-import { useCallback } from 'react'
-import { useLocalStorage } from '#/context/hooks/useLocalStorage'
 
-import { Button, ctrp } from './ui-react-aria'
+import { useTheme } from '#/stores/app-store'
 
 interface ThemeSwitcherProps {
   className?: string
 }
 
 export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
-  const [savedTheme, setSavedTheme] = useLocalStorage('ui_theme', null)
-  const IconComponent = savedTheme === 'dark' ? Lucide.Moon : Lucide.SunDim
-
-  const toggleTheme = useCallback(() => {
-    if (savedTheme === 'light') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-    setSavedTheme(savedTheme === 'light' ? 'dark' : 'light')
-  }, [savedTheme, setSavedTheme])
+  const theme = useTheme()
+  const IconComponent = theme === 'dark' ? Lucide.Sun : Lucide.Moon
 
   return (
-    <Button className={ctrp(className, 'px-2')} variant="icon" onPress={toggleTheme}>
+    <button
+      type="button"
+      className={className}
+      onClick={() => {
+        document.documentElement.classList.toggle('dark')
+        window.localStorage.setItem('theme', theme === 'dark' ? 'light' : 'dark')
+      }}
+    >
       <IconComponent className="h-5 w-5" />
-    </Button>
+    </button>
   )
 }

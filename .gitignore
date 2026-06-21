@@ -40,3 +40,6 @@ dist-ssr
 # envars
 .env.*
 !.env.example
+
+# Generated files
+/src/routeTree.gen.ts

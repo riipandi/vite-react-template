@@ -1,21 +1,11 @@
-import { composeRenderProps } from 'react-aria-components'
 import { twMerge } from 'tailwind-merge'
-import { tv } from 'tailwind-variants'
 
-export const focusRing = tv({
-  base: 'outline outline-blue-600 dark:outline-blue-500 forced-colors:outline-[Highlight] outline-offset-2',
-  variants: {
-    isFocusVisible: {
-      false: 'outline-0',
-      true: 'outline-2',
-    },
-  },
-})
-
-// Compose className and Tailwind render props.
 export function ctrp<T>(
   className: string | ((v: T) => string) | undefined,
   tw: string
 ): string | ((v: T) => string) {
-  return composeRenderProps(className, (className) => twMerge(tw, className))
+  if (typeof className === 'function') {
+    return (v: T) => twMerge(tw, className(v))
+  }
+  return twMerge(tw, className ?? '')
 }

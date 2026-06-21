@@ -1,38 +1,50 @@
-import { Button } from '#/components/ui-react-aria/Button'
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '#/components/ui-react-aria'
 
-export default {
-  title: 'Button',
+const meta: Meta<typeof Button> = {
+  title: 'UI/Button',
   component: Button,
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'destructive'],
+      options: ['primary', 'secondary', 'destructive', 'icon'],
     },
-  },
-  args: {
-    isDisabled: false,
-    children: 'Button',
+    disabled: { control: 'boolean' },
+    children: { control: 'text' },
   },
 }
 
-export const Primary = {
+export default meta
+type Story = StoryObj<typeof Button>
+
+export const Primary: Story = {
   args: {
     variant: 'primary',
+    children: 'Primary Button',
   },
 }
 
-export const Secondary = {
+export const Secondary: Story = {
   args: {
     variant: 'secondary',
+    children: 'Secondary Button',
   },
 }
 
-export const Destructive = {
+export const Destructive: Story = {
   args: {
     variant: 'destructive',
+    children: 'Delete',
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    variant: 'primary',
+    disabled: true,
+    children: 'Disabled',
   },
 }

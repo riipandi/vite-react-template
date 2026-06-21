@@ -12,12 +12,16 @@ export const Alert: FC<AlertProps> = ({ children, variant = 'info', className })
     <div
       className={clsx(
         'my-4 rounded-md border p-4 text-sm',
-        variant === 'info' && 'border-blue-200 bg-primary-50 text-blue-600',
-        variant === 'success' && 'border border-green-200 bg-green-50 text-green-600',
+        variant === 'info' &&
+          'border-primary-200 bg-primary-50 text-primary-700 dark:border-primary-800 dark:bg-primary-950 dark:text-primary-300',
+        variant === 'success' &&
+          'border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950 dark:text-green-300',
         variant === 'destructive' &&
-          'border border-destructive-200 bg-destructive-50 text-destructive-600 text-sm',
-        variant === 'warning' && 'border border-orange-200 bg-orange-50 text-orange-800 text-sm',
-        variant === 'subtle' && 'border-white/[.1 bg-white/[.1] text-gray-600 dark:text-gray-400',
+          'border-destructive-200 bg-destructive-50 text-destructive-700 dark:border-destructive-800 dark:bg-destructive-950 dark:text-destructive-300',
+        variant === 'warning' &&
+          'border-orange-200 bg-orange-50 text-orange-700 dark:border-orange-800 dark:bg-orange-950 dark:text-orange-300',
+        variant === 'subtle' &&
+          'border-zinc-200 bg-zinc-50 text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400',
         className
       )}
       role="alert"

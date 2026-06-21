@@ -94,6 +94,8 @@ function LoginComponent() {
         x.marginRight.auto,
         x.width['100%'],
         x.maxWidth['28rem'],
+        x.paddingLeft['1rem'],
+        x.paddingRight['1rem'],
         x.paddingTop['2.5rem'],
         x.paddingBottom['2.5rem']
       )}

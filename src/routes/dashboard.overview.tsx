@@ -24,9 +24,6 @@ const styles = stylex.create({
     fontSize: fontSize['2xl'],
     fontWeight: fontWeight.bold,
     color: colors.zinc800,
-    '@media (min-width: 640px)': {
-      fontSize: fontSize['2xl'],
-    },
   },
   description: {
     marginTop: space[2],
@@ -37,11 +34,9 @@ const styles = stylex.create({
     marginTop: space[8],
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    gap: space[2],
+    gap: space[3],
     '@media (min-width: 640px)': {
       flexDirection: 'row',
-      gap: space[3],
     },
   },
 })

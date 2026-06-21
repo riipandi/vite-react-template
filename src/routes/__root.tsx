@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ThemeProvider } from '@lonik/themer'
 import * as stylex from '@stylexjs/stylex'
 import x from '@stylexjs/atoms'
+import { useEffect, useState } from 'react'
 import type { QueryClient } from '@tanstack/react-query'
 
 import { AuthProvider } from '#/context/auth/AuthProvider'
@@ -57,12 +58,24 @@ const styles = stylex.create({
 
 function RouterSpinner() {
   const isLoading = useRouterState({ select: (s) => s.status === 'pending' })
-  return isLoading ? (
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => setVisible(true), 200)
+      return () => clearTimeout(timer)
+    }
+    setVisible(false)
+  }, [isLoading])
+
+  if (!visible) return null
+
+  return (
     <div {...stylex.props(styles.spinnerContainer)}>
       <span {...stylex.props(styles.spinner)} />
       Loading...
     </div>
-  ) : null
+  )
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({

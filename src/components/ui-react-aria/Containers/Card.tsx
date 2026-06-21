@@ -12,6 +12,7 @@ type CardProps<T extends ElementType> = {
 
 const cardStyles = stylex.create({
   base: {
+    width: '100%',
     borderRadius: radius.xl,
     borderWidth: 1,
     borderStyle: 'solid',

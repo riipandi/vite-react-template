@@ -2,6 +2,7 @@ import { Field } from '@base-ui/react/field'
 import { Input } from '@base-ui/react/input'
 import * as stylex from '@stylexjs/stylex'
 import { Description, FieldError, Label } from '../Field'
+import { cx } from '../utils'
 
 import { colors, fontSize, radius, space } from '../../../assets/styles/tokens.stylex'
 
@@ -25,7 +26,7 @@ const fieldStyles = stylex.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    gap: space[2],
+    gap: space[3],
   },
   input: {
     minWidth: 0,
@@ -77,13 +78,13 @@ export function TextField({
   type = 'text',
   name,
 }: TextFieldProps) {
+  const rootSx = stylex.props(fieldStyles.root)
   return (
     <Field.Root
       name={name}
       invalid={!!errorMessage}
       disabled={disabled}
-      {...stylex.props(fieldStyles.root)}
-      className={className}
+      className={cx(rootSx.className, className)}
     >
       {label && <Label>{label}</Label>}
       <Input
@@ -97,7 +98,7 @@ export function TextField({
           const sx = stylex.props(
             fieldStyles.input,
             !state.focused && state.valid !== false && fieldStyles.inputDefault,
-            state.focused && fieldStyles.inputFocused,
+            state.focused && state.valid !== false && fieldStyles.inputFocused,
             state.valid === false && fieldStyles.inputInvalid,
             state.disabled && fieldStyles.inputDisabled
           )

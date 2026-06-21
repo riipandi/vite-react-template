@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsr generate && tsc -b && vite build",
     "check": "oxlint --fix && oxfmt --check .",
     "format": "oxfmt --write .",
     "lint": "oxlint",
@@ -45,6 +45,7 @@
     "@storybook/react": "^10.4.6",
     "@storybook/react-vite": "^10.4.6",
     "@tailwindcss/vite": "^4.3.1",
+    "@tanstack/router-cli": "^1.167.17",
     "@tanstack/router-plugin": "^1.168.18",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",

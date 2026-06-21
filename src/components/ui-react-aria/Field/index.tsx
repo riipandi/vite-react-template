@@ -4,6 +4,7 @@ import { colors, fontSize, fontWeight, space } from '../../../assets/styles/toke
 
 const labelStyles = stylex.create({
   base: {
+    display: 'block',
     width: '100%',
     paddingLeft: space[3],
     cursor: 'default',

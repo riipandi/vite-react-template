@@ -49,6 +49,9 @@ const homeStyles = stylex.create({
     textAlign: 'center',
     fontSize: fontSize.lg,
     color: colors.zinc500,
+    maxWidth: '36rem',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     '@media (min-width: 640px)': {
       marginTop: space[8],
     },
@@ -137,7 +140,7 @@ function HomeComponent() {
           <img src={ViteLogo} alt="Vite logo" {...stylex.props(x.height['7rem'])} />
         </div>
         <div {...stylex.props(homeStyles.tagline)}>
-          <p {...stylex.props(x.lineHeight['2rem'])}>
+          <p {...stylex.props(x.lineHeight['2rem'], x.marginBottom['0.5rem'])}>
             This is an example starter template React with Vite.
           </p>
           <p {...stylex.props(x.lineHeight['2rem'])}>
@@ -148,9 +151,6 @@ function HomeComponent() {
           <Link to="/dashboard">
             <Button variant="primary">User Dashboard</Button>
           </Link>
-          <a href="/admin">
-            <Button variant="destructive">Admin Dashboard</Button>
-          </a>
           <a
             href="https://github.com/riipandi/vite-react-template"
             target="_blank"
@@ -160,7 +160,7 @@ function HomeComponent() {
           </a>
         </div>
         <div>
-          <Alert variant={loggedIn ? 'info' : 'warning'} className="w-full text-center">
+          <Alert variant={loggedIn ? 'info' : 'warning'}>
             {loggedIn ? `Welcome back ${user?.email} 👋` : 'You are not logged in!'}
           </Alert>
         </div>

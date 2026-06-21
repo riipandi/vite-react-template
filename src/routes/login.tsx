@@ -151,6 +151,7 @@ function LoginComponent() {
                   children={(field) => (
                     <TextField
                       label="Password"
+                      type="password"
                       value={field.state.value}
                       onChange={(value: string) => field.handleChange(value)}
                       onBlur={field.handleBlur}

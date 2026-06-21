@@ -12,6 +12,7 @@ interface AlertProps {
 
 const alertStyles = stylex.create({
   base: {
+    width: '100%',
     marginTop: space[4],
     marginBottom: space[4],
     borderRadius: radius.md,

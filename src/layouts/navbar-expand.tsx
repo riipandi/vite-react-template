@@ -26,7 +26,6 @@ const sidebarStyles = stylex.create({
     minHeight: '100vh',
     width: '14rem',
     flexDirection: 'column',
-    alignItems: 'center',
     overflow: 'hidden',
     borderTopRightRadius: radius.lg,
     borderBottomRightRadius: radius.lg,
@@ -59,20 +58,17 @@ const sidebarStyles = stylex.create({
     paddingLeft: space[2],
     paddingRight: space[2],
   },
-  navDivider: {
+  sectionDivider: {
     marginTop: space[3],
-    display: 'flex',
-    width: '100%',
-    flexDirection: 'column',
-    alignItems: 'center',
+    marginBottom: space[1],
     borderTopWidth: 1,
     borderTopStyle: 'solid',
     borderTopColor: colors.zinc200,
   },
   navItem: {
-    marginTop: space[2],
+    marginTop: space[1],
     display: 'flex',
-    height: '3rem',
+    height: '2.75rem',
     width: '100%',
     alignItems: 'center',
     gap: space[3],
@@ -81,6 +77,7 @@ const sidebarStyles = stylex.create({
     paddingRight: space[3],
     textDecoration: 'none',
     color: 'inherit',
+    position: 'relative',
     transitionProperty: 'background-color',
     transitionDuration: '150ms',
     ':hover': {
@@ -99,8 +96,7 @@ const sidebarStyles = stylex.create({
   badge: {
     position: 'absolute',
     top: 0,
-    left: '2rem',
-    marginTop: space[2],
+    right: space[2],
     height: '0.5rem',
     width: '0.5rem',
     borderRadius: '9999px',
@@ -131,40 +127,34 @@ export function NavBarExpand() {
       </Link>
 
       <div {...stylex.props(sidebarStyles.navSection)}>
-        <div {...stylex.props(sidebarStyles.navDivider)}>
-          {navItems.map((item) => (
-            <Link key={item.label} to={item.href} {...stylex.props(sidebarStyles.navItem)}>
-              <item.icon {...stylex.props(sidebarStyles.navIcon)} />
-              <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
-            </Link>
-          ))}
-        </div>
+        <div {...stylex.props(sidebarStyles.sectionDivider)} />
+        {navItems.map((item) => (
+          <Link key={item.label} to={item.href} {...stylex.props(sidebarStyles.navItem)}>
+            <item.icon {...stylex.props(sidebarStyles.navIcon)} />
+            <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
+          </Link>
+        ))}
+      </div>
 
-        <div {...stylex.props(sidebarStyles.navDivider)}>
-          {secondaryItems.map((item) => (
-            <Link
-              key={item.label}
-              to={item.href}
-              {...stylex.props(sidebarStyles.navItem)}
-              style={{ position: 'relative' }}
-            >
-              <item.icon {...stylex.props(sidebarStyles.navIcon)} />
-              <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
-              {item.badge && <span {...stylex.props(sidebarStyles.badge)} />}
-            </Link>
-          ))}
-        </div>
+      <div {...stylex.props(sidebarStyles.navSection)}>
+        <div {...stylex.props(sidebarStyles.sectionDivider)} />
+        {secondaryItems.map((item) => (
+          <Link key={item.label} to={item.href} {...stylex.props(sidebarStyles.navItem)}>
+            <item.icon {...stylex.props(sidebarStyles.navIcon)} />
+            <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
+            {item.badge && <span {...stylex.props(sidebarStyles.badge)} />}
+          </Link>
+        ))}
       </div>
 
       <div {...stylex.props(sidebarStyles.bottomSection)}>
-        <div {...stylex.props(sidebarStyles.navDivider)}>
-          {bottomItems.map((item) => (
-            <Link key={item.label} to={item.href} {...stylex.props(sidebarStyles.navItem)}>
-              <item.icon {...stylex.props(sidebarStyles.navIcon)} />
-              <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
-            </Link>
-          ))}
-        </div>
+        <div {...stylex.props(sidebarStyles.sectionDivider)} />
+        {bottomItems.map((item) => (
+          <Link key={item.label} to={item.href} {...stylex.props(sidebarStyles.navItem)}>
+            <item.icon {...stylex.props(sidebarStyles.navIcon)} />
+            <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
+          </Link>
+        ))}
       </div>
     </div>
   )

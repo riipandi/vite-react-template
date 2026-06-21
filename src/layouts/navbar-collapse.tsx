@@ -33,6 +33,7 @@ const collapseStyles = stylex.create({
   },
   logoLink: {
     marginTop: space[3],
+    marginBottom: space[2],
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -44,28 +45,34 @@ const collapseStyles = stylex.create({
     color: colors.primary600,
   },
   navSection: {
-    marginTop: space[3],
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    width: '100%',
+  },
+  sectionDivider: {
+    marginTop: space[3],
+    marginBottom: space[1],
+    width: '2rem',
     borderTopWidth: 1,
     borderTopStyle: 'solid',
-    borderTopColor: colors.zinc300,
+    borderTopColor: colors.zinc200,
   },
   navLink: {
-    marginTop: space[2],
+    marginTop: space[1],
     display: 'flex',
-    height: '3rem',
-    width: '3rem',
+    height: '2.75rem',
+    width: '2.75rem',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: radius.base,
     color: 'inherit',
     textDecoration: 'none',
+    position: 'relative',
     transitionProperty: 'background-color',
     transitionDuration: '150ms',
     ':hover': {
-      backgroundColor: colors.zinc200,
+      backgroundColor: colors.zinc100,
     },
   },
   navIcon: {
@@ -76,9 +83,7 @@ const collapseStyles = stylex.create({
   badge: {
     position: 'absolute',
     top: 0,
-    left: 0,
-    marginTop: space[2],
-    marginLeft: space[2],
+    right: 0,
     height: '0.5rem',
     width: '0.5rem',
     borderRadius: '9999px',
@@ -86,16 +91,18 @@ const collapseStyles = stylex.create({
   },
   profileSection: {
     marginTop: 'auto',
+    marginBottom: space[2],
     display: 'flex',
-    height: '4rem',
-    width: '4rem',
+    height: '2.75rem',
+    width: '2.75rem',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.zinc200,
+    borderRadius: radius.base,
+    color: 'inherit',
     transitionProperty: 'background-color',
     transitionDuration: '150ms',
     ':hover': {
-      backgroundColor: colors.zinc300,
+      backgroundColor: colors.zinc100,
     },
   },
   profileIcon: {
@@ -120,6 +127,7 @@ export function NavBarCollapse() {
       </Link>
 
       <div {...stylex.props(collapseStyles.navSection)}>
+        <div {...stylex.props(collapseStyles.sectionDivider)} />
         {navItems.map((item) => (
           <Link
             key={item.label}
@@ -133,13 +141,13 @@ export function NavBarCollapse() {
       </div>
 
       <div {...stylex.props(collapseStyles.navSection)}>
+        <div {...stylex.props(collapseStyles.sectionDivider)} />
         {secondaryItems.map((item) => (
           <Link
             key={item.label}
             to={item.href}
             {...stylex.props(collapseStyles.navLink)}
             aria-label={item.label}
-            style={{ position: 'relative' }}
           >
             <item.icon {...stylex.props(collapseStyles.navIcon)} />
             {item.badge && <span {...stylex.props(collapseStyles.badge)} />}

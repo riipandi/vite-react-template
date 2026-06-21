@@ -123,9 +123,7 @@ function NotFoundComponent() {
         <div {...stylex.props(styles.actionWrapper)}>
           <Link to="/" {...stylex.props(styles.backLink)}>
             <svg
-              {...stylex.props(x.height['0.625rem'], x.width['0.625rem'])}
-              width={20}
-              height={20}
+              {...stylex.props(x.height['1rem'], x.width['1rem'])}
               viewBox="0 0 16 16"
               fill="none"
             >

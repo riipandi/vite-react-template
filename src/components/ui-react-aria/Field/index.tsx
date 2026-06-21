@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { colors, fontSize, fontWeight, radius, space } from '../../../assets/styles/tokens.stylex'
+import { colors, fontSize, fontWeight, space } from '../../../assets/styles/tokens.stylex'
 
 const labelStyles = stylex.create({
   base: {
@@ -25,11 +25,9 @@ const descriptionStyles = stylex.create({
 const fieldErrorStyles = stylex.create({
   base: {
     marginTop: space[1],
-    padding: `${space[1.5]} ${space[3]}`,
+    padding: `0 ${space[3]}`,
     fontSize: fontSize.xs,
     color: colors.destructive600,
-    backgroundColor: colors.destructive50,
-    borderRadius: radius.sm,
   },
 })
 

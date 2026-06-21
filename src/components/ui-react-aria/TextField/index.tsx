@@ -34,21 +34,19 @@ const fieldStyles = stylex.create({
     borderRadius: radius.md,
     borderWidth: 1,
     borderStyle: 'solid',
+    borderColor: colors.zinc300,
     paddingLeft: space[3],
     paddingRight: space[3],
     paddingTop: space[2],
     paddingBottom: space[2],
     fontSize: fontSize.sm,
-    backgroundColor: colors.white,
+    backgroundColor: colors.surface,
     color: colors.zinc800,
     '::placeholder': {
       color: colors.zinc400,
     },
     transitionProperty: 'background-color, border-color, box-shadow',
     transitionDuration: '150ms',
-  },
-  inputDefault: {
-    borderColor: colors.zinc300,
   },
   inputFocused: {
     borderColor: colors.primary500,
@@ -97,7 +95,6 @@ export function TextField({
         className={(state: { focused: boolean; valid: boolean | null; disabled: boolean }) => {
           const sx = stylex.props(
             fieldStyles.input,
-            !state.focused && state.valid !== false && fieldStyles.inputDefault,
             state.focused && state.valid !== false && fieldStyles.inputFocused,
             state.valid === false && fieldStyles.inputInvalid,
             state.disabled && fieldStyles.inputDisabled

@@ -49,7 +49,7 @@ const styles = stylex.create({
     alignItems: 'center',
     gap: '0.5rem',
     borderRadius: '0.375rem',
-    backgroundColor: colors.white,
+    backgroundColor: colors.surface,
     padding: '0.75rem 1rem',
     fontSize: '0.875rem',
     boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',

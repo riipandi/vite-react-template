@@ -28,7 +28,7 @@ const socialStyles = stylex.create({
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: colors.zinc200,
-    backgroundColor: colors.white,
+    backgroundColor: colors.surface,
     paddingLeft: space[4],
     paddingRight: space[4],
     paddingTop: '0.625rem',
@@ -37,11 +37,11 @@ const socialStyles = stylex.create({
     fontWeight: fontWeight.medium,
     color: colors.zinc700,
     boxShadow: shadow.sm,
-    transitionProperty: 'all',
+    transitionProperty: 'background-color, border-color, box-shadow, color',
     transitionDuration: '150ms',
     cursor: 'pointer',
     ':hover': {
-      backgroundColor: colors.zinc50,
+      backgroundColor: colors.surfaceHover,
       borderColor: colors.zinc300,
     },
     ':focus-visible': {

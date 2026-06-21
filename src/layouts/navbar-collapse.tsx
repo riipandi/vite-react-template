@@ -28,7 +28,7 @@ const collapseStyles = stylex.create({
     overflow: 'hidden',
     borderTopRightRadius: radius.lg,
     borderBottomRightRadius: radius.lg,
-    backgroundColor: colors.white,
+    backgroundColor: colors.surface,
     boxShadow: shadow.sm,
     transitionProperty: 'background-color, box-shadow',
     transitionDuration: '200ms',
@@ -59,6 +59,8 @@ const collapseStyles = stylex.create({
     borderTopWidth: 1,
     borderTopStyle: 'solid',
     borderTopColor: colors.zinc200,
+    transitionProperty: 'border-color',
+    transitionDuration: '200ms',
   },
   navLink: {
     marginTop: space[1],
@@ -74,7 +76,7 @@ const collapseStyles = stylex.create({
     transitionProperty: 'background-color',
     transitionDuration: '150ms',
     ':hover': {
-      backgroundColor: colors.zinc100,
+      backgroundColor: colors.surfaceHover,
     },
   },
   navIcon: {
@@ -104,7 +106,7 @@ const collapseStyles = stylex.create({
     transitionProperty: 'background-color',
     transitionDuration: '150ms',
     ':hover': {
-      backgroundColor: colors.zinc100,
+      backgroundColor: colors.surfaceHover,
     },
   },
   profileIcon: {

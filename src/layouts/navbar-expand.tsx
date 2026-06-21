@@ -29,7 +29,7 @@ const sidebarStyles = stylex.create({
     overflow: 'hidden',
     borderTopRightRadius: radius.lg,
     borderBottomRightRadius: radius.lg,
-    backgroundColor: colors.white,
+    backgroundColor: colors.surface,
     boxShadow: shadow.sm,
     transitionProperty: 'background-color, box-shadow',
     transitionDuration: '200ms',
@@ -66,6 +66,8 @@ const sidebarStyles = stylex.create({
     borderTopWidth: 1,
     borderTopStyle: 'solid',
     borderTopColor: colors.zinc200,
+    transitionProperty: 'border-color',
+    transitionDuration: '200ms',
   },
   navItem: {
     marginTop: space[1],
@@ -83,7 +85,7 @@ const sidebarStyles = stylex.create({
     transitionProperty: 'background-color',
     transitionDuration: '150ms',
     ':hover': {
-      backgroundColor: colors.zinc100,
+      backgroundColor: colors.surfaceHover,
     },
   },
   navIcon: {

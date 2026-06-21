@@ -20,6 +20,8 @@ const alertStyles = stylex.create({
     borderStyle: 'solid',
     padding: space[4],
     fontSize: fontSize.sm,
+    transitionProperty: 'background-color, border-color, color',
+    transitionDuration: '200ms',
   },
   info: {
     borderColor: colors.primary200,

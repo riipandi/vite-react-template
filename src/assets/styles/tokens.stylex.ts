@@ -10,6 +10,8 @@ export const colors = stylex.defineVars({
   black: '#000000',
   transparent: 'transparent',
   current: 'currentColor',
+  surface: '#ffffff',
+  surfaceHover: '#fafafa',
 
   // Zinc scale
   zinc50: '#fafafa',
@@ -70,6 +72,9 @@ export const colors = stylex.defineVars({
 // ─── Dark Theme ──────────────────────────────────────────────
 // Override color tokens for dark mode.
 export const darkTheme = stylex.createTheme(colors, {
+  surface: '#1a1a1a',
+  surfaceHover: '#27272a',
+
   zinc50: '#18181b',
   zinc100: '#27272a',
   zinc200: '#3f3f46',

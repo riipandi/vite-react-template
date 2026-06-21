@@ -28,7 +28,7 @@ const buttonStyles = stylex.create({
     borderRadius: radius.md,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderColor: colors.zinc200,
     paddingLeft: space[4],
     paddingRight: space[4],
     paddingTop: space[2],
@@ -37,7 +37,7 @@ const buttonStyles = stylex.create({
     fontSize: fontSize.sm,
     fontWeight: fontWeight.medium,
     cursor: 'pointer',
-    transitionProperty: 'all',
+    transitionProperty: 'background-color, border-color, box-shadow, color',
     transitionDuration: '150ms',
     outlineWidth: 0,
     outlineStyle: 'solid',
@@ -59,13 +59,13 @@ const buttonStyles = stylex.create({
     },
   },
   secondary: {
-    backgroundColor: colors.zinc100,
-    color: colors.zinc800,
+    backgroundColor: colors.surface,
+    color: colors.zinc700,
     ':hover': {
-      backgroundColor: colors.zinc200,
+      backgroundColor: colors.surfaceHover,
     },
     ':active': {
-      backgroundColor: colors.zinc300,
+      backgroundColor: colors.zinc200,
     },
   },
   destructive: {
@@ -85,19 +85,19 @@ const buttonStyles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: colors.zinc600,
+    color: colors.zinc500,
     backgroundColor: 'transparent',
     ':hover': {
-      backgroundColor: 'rgba(0, 0, 0, 0.05)',
+      backgroundColor: colors.surfaceHover,
     },
     ':active': {
-      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      backgroundColor: colors.zinc200,
     },
   },
   disabled: {
     backgroundColor: colors.zinc100,
-    color: colors.zinc300,
-    borderColor: 'rgba(0, 0, 0, 0.05)',
+    color: colors.zinc400,
+    borderColor: colors.zinc200,
     cursor: 'not-allowed',
     ':hover': {
       backgroundColor: colors.zinc100,

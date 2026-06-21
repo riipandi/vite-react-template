@@ -16,6 +16,8 @@ const dividerStyles = stylex.create({
     paddingTop: space[5],
     paddingBottom: space[5],
     color: colors.zinc500,
+    transitionProperty: 'color',
+    transitionDuration: '200ms',
   },
   withLabel: {
     alignItems: 'center',
@@ -32,6 +34,8 @@ const dividerStyles = stylex.create({
       borderTopWidth: 1,
       borderTopStyle: 'solid',
       borderTopColor: colors.zinc200,
+      transitionProperty: 'border-color',
+      transitionDuration: '200ms',
     },
   },
   after: {
@@ -42,6 +46,8 @@ const dividerStyles = stylex.create({
       borderTopWidth: 1,
       borderTopStyle: 'solid',
       borderTopColor: colors.zinc200,
+      transitionProperty: 'border-color',
+      transitionDuration: '200ms',
     },
   },
   labelBefore: {

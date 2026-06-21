@@ -17,9 +17,9 @@ const cardStyles = stylex.create({
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: colors.zinc200,
-    backgroundColor: colors.white,
+    backgroundColor: colors.surface,
     boxShadow: shadow.sm,
-    transitionProperty: 'background-color, box-shadow',
+    transitionProperty: 'background-color, border-color, box-shadow',
     transitionDuration: '200ms',
   },
 })

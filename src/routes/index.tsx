@@ -1,5 +1,6 @@
 import { createFileRoute, Link, redirect } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
+import x from '@stylexjs/atoms'
 import { ThemeSwitcher } from '#/components/theme'
 import { Alert, Button } from '#/components/ui-react-aria'
 import { useAuthentication } from '#/context/auth/AuthProvider'
@@ -18,15 +19,6 @@ export const Route = createFileRoute('/')({
 })
 
 const homeStyles = stylex.create({
-  page: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    display: 'flex',
-    height: '100%',
-    minHeight: '100vh',
-    width: '100%',
-    flexDirection: 'column',
-  },
   header: {
     marginBottom: 'auto',
     display: 'flex',
@@ -53,16 +45,6 @@ const homeStyles = stylex.create({
       paddingRight: space[8],
     },
   },
-  logo: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoImg: {
-    height: '7rem',
-  },
   tagline: {
     textAlign: 'center',
     fontSize: fontSize.lg,
@@ -70,9 +52,6 @@ const homeStyles = stylex.create({
     '@media (min-width: 640px)': {
       marginTop: space[8],
     },
-  },
-  taglineText: {
-    lineHeight: '2rem',
   },
   actions: {
     marginTop: space[4],
@@ -85,9 +64,6 @@ const homeStyles = stylex.create({
       flexDirection: 'row',
       gap: space[3],
     },
-  },
-  alertWrapper: {
-    width: '100%',
   },
   footer: {
     marginTop: 'auto',
@@ -134,27 +110,45 @@ function HomeComponent() {
   const { user, loggedIn } = useAuthentication()
 
   return (
-    <div {...stylex.props(homeStyles.page)}>
+    <div
+      {...stylex.props(
+        x.marginLeft.auto,
+        x.marginRight.auto,
+        x.display.flex,
+        x.height['100%'],
+        x.minHeight['100vh'],
+        x.width['100%'],
+        x.flexDirection.column
+      )}
+    >
       <header {...stylex.props(homeStyles.header)} aria-hidden>
-        <ThemeSwitcher className="size-9" />
+        <ThemeSwitcher />
       </header>
       <div {...stylex.props(homeStyles.content)}>
-        <div {...stylex.props(homeStyles.logo)}>
-          <img src={ViteLogo} alt="Vite logo" {...stylex.props(homeStyles.logoImg)} />
+        <div
+          {...stylex.props(
+            x.marginLeft.auto,
+            x.marginRight.auto,
+            x.display.flex,
+            x.alignItems.center,
+            x.justifyContent.center
+          )}
+        >
+          <img src={ViteLogo} alt="Vite logo" {...stylex.props(x.height['7rem'])} />
         </div>
         <div {...stylex.props(homeStyles.tagline)}>
-          <p {...stylex.props(homeStyles.taglineText)}>
+          <p {...stylex.props(x.lineHeight['2rem'])}>
             This is an example starter template React with Vite.
           </p>
-          <p {...stylex.props(homeStyles.taglineText)}>
+          <p {...stylex.props(x.lineHeight['2rem'])}>
             Vite + React + Typescript + StyleX + TanStack Form + TanStack Router + Vitest
           </p>
         </div>
         <div {...stylex.props(homeStyles.actions)}>
-          <Link to="/dashboard" className="inline-flex items-center justify-center">
+          <Link to="/dashboard">
             <Button variant="primary">User Dashboard</Button>
           </Link>
-          <a href="/admin" className="inline-flex items-center justify-center">
+          <a href="/admin">
             <Button variant="destructive">Admin Dashboard</Button>
           </a>
           <a

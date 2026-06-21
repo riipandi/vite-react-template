@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from '@tanstack/react-form'
 import { createFileRoute, Link, redirect } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
+import x from '@stylexjs/atoms'
 import { GitHubButton, GoogleButton } from '#/components/social-button'
 import { Alert, Button, Card, HorizontalDivider, TextField } from '#/components/ui-react-aria'
 import { useAuthentication } from '#/context/auth/AuthProvider'
@@ -20,14 +21,6 @@ export const Route = createFileRoute('/login')({
 })
 
 const loginStyles = stylex.create({
-  main: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: '100%',
-    maxWidth: '28rem',
-    paddingTop: '2.5rem',
-    paddingBottom: '2.5rem',
-  },
   cardBody: {
     padding: space[6],
     '@media (min-width: 640px)': {
@@ -42,9 +35,6 @@ const loginStyles = stylex.create({
   formGrid: {
     display: 'grid',
     rowGap: space[4],
-  },
-  formField: {
-    display: 'block',
   },
   submitWrapper: {
     marginTop: space[6],
@@ -98,7 +88,16 @@ function LoginComponent() {
   })
 
   return (
-    <main {...stylex.props(loginStyles.main)}>
+    <main
+      {...stylex.props(
+        x.marginLeft.auto,
+        x.marginRight.auto,
+        x.width['100%'],
+        x.maxWidth['28rem'],
+        x.paddingTop['2.5rem'],
+        x.paddingBottom['2.5rem']
+      )}
+    >
       {failed && (
         <div {...stylex.props(loginStyles.alertSpacing)}>
           <Alert variant="destructive">{failed}</Alert>

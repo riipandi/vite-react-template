@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
+import x from '@stylexjs/atoms'
 import { isAuthenticated } from '#/lib/auth'
 import { SideNavbar } from '#/layouts/sidebar'
 
@@ -15,17 +16,12 @@ export const Route = createFileRoute('/dashboard')({
 })
 
 const styles = stylex.create({
-  layout: {
-    display: 'flex',
-    height: '100%',
-    minHeight: '100vh',
-    backgroundColor: colors.zinc100,
-  },
+  layout: { backgroundColor: colors.zinc100 },
 })
 
 function DashboardLayout() {
   return (
-    <main {...stylex.props(styles.layout)}>
+    <main {...stylex.props(x.display.flex, x.height['100%'], x.minHeight['100vh'], styles.layout)}>
       <SideNavbar collapsed={false} />
       <Outlet />
     </main>

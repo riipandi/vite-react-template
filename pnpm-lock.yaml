@@ -14,6 +14,9 @@ importers:
       '@lonik/themer':
         specifier: latest
         version: 0.5.4(@tanstack/react-router@1.170.16(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(vite@8.0.16(@types/node@26.0.0)(jiti@2.7.0))
+      '@stylexjs/atoms':
+        specifier: ^0.19.0
+        version: 0.19.0(@stylexjs/stylex@0.19.0)
       '@stylexjs/stylex':
         specifier: ^0.19.0
         version: 0.19.0
@@ -1216,6 +1219,11 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  '@stylexjs/atoms@0.19.0':
+    resolution: {integrity: sha512-zVwn00h2cnNvNPCfP8idE8Ey3xzIWxuj9dtItGq+2kgn2oYbO9pR2vEhrI6Wrud+TDL1XDLUFHlY2iuWZOYYZw==}
+    peerDependencies:
+      '@stylexjs/stylex': 0.19.0
 
   '@stylexjs/babel-plugin@0.19.0':
     resolution: {integrity: sha512-2SnVZIl047TtqKW0nRTn7Irz0kmoot1bxdGDE/HwfwfF7dJYHqwkIFg92s87v3hj7zxJobrHWwDx1p3qvQXW4g==}
@@ -3484,6 +3492,10 @@ snapshots:
       typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
+
+  '@stylexjs/atoms@0.19.0(@stylexjs/stylex@0.19.0)':
+    dependencies:
+      '@stylexjs/stylex': 0.19.0
 
   '@stylexjs/babel-plugin@0.19.0':
     dependencies:

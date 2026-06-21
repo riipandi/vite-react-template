@@ -3,6 +3,7 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ThemeProvider } from '@lonik/themer'
 import * as stylex from '@stylexjs/stylex'
+import x from '@stylexjs/atoms'
 import type { QueryClient } from '@tanstack/react-query'
 
 import { AuthProvider } from '#/context/auth/AuthProvider'
@@ -21,7 +22,6 @@ const spinKeyframes = stylex.keyframes({
 
 const styles = stylex.create({
   root: {
-    minHeight: '100vh',
     backgroundColor: colors.zinc50,
     color: colors.zinc900,
   },
@@ -72,7 +72,7 @@ function RootComponent() {
   const theme = useTheme()
 
   return (
-    <div {...stylex.props(styles.root, theme === 'dark' && darkTheme)}>
+    <div {...stylex.props(x.minHeight['100vh'], styles.root, theme === 'dark' && darkTheme)}>
       <ThemeProvider>
         <AuthProvider>
           <RouterSpinner />

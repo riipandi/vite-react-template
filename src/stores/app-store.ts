@@ -23,7 +23,7 @@ export const toggleTheme = () => {
   const next = appStore.state.theme === 'light' ? 'dark' : 'light'
   appStore.setState((prev) => ({ ...prev, theme: next }))
   window.localStorage.setItem('theme', next)
-  document.documentElement.classList.toggle('dark', next === 'dark')
+  // ponytail: dark class no longer needed — handled via stylex.createTheme
 }
 
 export const toggleSidebar = () => {

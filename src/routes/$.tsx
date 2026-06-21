@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
+import x from '@stylexjs/atoms'
 
 import { colors, fontSize, fontWeight, radius, space } from '../assets/styles/tokens.stylex'
 
@@ -8,19 +9,6 @@ export const Route = createFileRoute('/$')({
 })
 
 const styles = stylex.create({
-  page: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    display: 'flex',
-    height: '100%',
-    minHeight: '100vh',
-    width: '100%',
-    flexDirection: 'column',
-  },
-  header: {
-    marginBottom: 'auto',
-    width: '100%',
-  },
   content: {
     paddingLeft: space[4],
     paddingRight: space[4],
@@ -52,9 +40,6 @@ const styles = stylex.create({
     '@media (min-width: 640px)': {
       marginTop: space[8],
     },
-  },
-  messageLine: {
-    lineHeight: '2rem',
   },
   actionWrapper: {
     marginTop: space[8],
@@ -88,10 +73,6 @@ const styles = stylex.create({
       outlineOffset: 2,
     },
   },
-  backIcon: {
-    height: '0.625rem',
-    width: '0.625rem',
-  },
   footer: {
     marginTop: 'auto',
     paddingTop: space[5],
@@ -121,18 +102,28 @@ const styles = stylex.create({
 
 function NotFoundComponent() {
   return (
-    <div {...stylex.props(styles.page)}>
-      <header {...stylex.props(styles.header)} aria-hidden />
+    <div
+      {...stylex.props(
+        x.marginLeft.auto,
+        x.marginRight.auto,
+        x.display.flex,
+        x.height['100%'],
+        x.minHeight['100vh'],
+        x.width['100%'],
+        x.flexDirection.column
+      )}
+    >
+      <header {...stylex.props(x.marginBottom.auto, x.width['100%'])} aria-hidden />
       <div {...stylex.props(styles.content)}>
         <h1 {...stylex.props(styles.title)}>404</h1>
         <div {...stylex.props(styles.message)}>
-          <p {...stylex.props(styles.messageLine)}>Oops, something went wrong.</p>
-          <p {...stylex.props(styles.messageLine)}>Sorry, we couldn&rsquo;t find your page.</p>
+          <p {...stylex.props(x.lineHeight['2rem'])}>Oops, something went wrong.</p>
+          <p {...stylex.props(x.lineHeight['2rem'])}>Sorry, we couldn&rsquo;t find your page.</p>
         </div>
         <div {...stylex.props(styles.actionWrapper)}>
           <Link to="/" {...stylex.props(styles.backLink)}>
             <svg
-              {...stylex.props(styles.backIcon)}
+              {...stylex.props(x.height['0.625rem'], x.width['0.625rem'])}
               width={20}
               height={20}
               viewBox="0 0 16 16"

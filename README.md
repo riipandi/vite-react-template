@@ -19,9 +19,10 @@
 A starter project for [React](https://reactjs.org/) with [Vite](https://vitejs.dev/), [Tailwind CSS](https://tailwindcss.com),
 and [Typescript](https://www.typescriptlang.org/). This starter kit is already pre-configured
 with [absolute import](https://jsdev.org/env/nodejs/absolute-path-imports/), [TanStack Router](https://tanstack.com/router),
-[TanStack Form](https://tanstack.com/form), [Oxlint](https://oxc.rs/docs/guide/usage/linter),
-and [other goodies](./package.json). This starter also provides basic authentication implementation, you can use
-any authentication provider or your own.
+[TanStack Form](https://tanstack.com/form), [TanStack Query](https://tanstack.com/query),
+[TanStack Store](https://tanstack.com/store), [Oxlint](https://oxc.rs/docs/guide/usage/linter),
+and [other goodies](./package.json). Authentication is implemented using [DummyJSON](https://dummyjson.com) API
+with [ofetch](https://github.com/unjs/ofetch), easily replaceable with your own backend.
 
 ## The Complete Stack
 
@@ -32,6 +33,8 @@ any authentication provider or your own.
 - [x] [Typescript](https://www.typescriptlang.org/) - Strongly typed programming language.
 - [x] [TanStack Router](https://tanstack.com/router) - Type-safe routing for React.
 - [x] [TanStack Form](https://tanstack.com/form) - Headless, type-safe form state management.
+- [x] [TanStack Query](https://tanstack.com/query) - Powerful asynchronous state management.
+- [x] [TanStack Store](https://tanstack.com/store) - Lightweight, type-safe state management.
 - [x] [React Testing Library](https://testing-library.com/) - Light-weight solution for testing React components.
 - [x] [Vitest](https://vitest.dev/) - Blazing Fast Unit Test Framework.
 - [x] [Oxlint](https://oxc.rs/docs/guide/usage/linter) - High-performance JavaScript linter.

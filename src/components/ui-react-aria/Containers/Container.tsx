@@ -15,17 +15,17 @@ const containerStyles = stylex.create({
     marginRight: 'auto',
     width: '100%',
     maxWidth: '80rem',
-    paddingLeft: space[4],
-    paddingRight: space[4],
+    paddingLeft: space[6],
+    paddingRight: space[6],
     paddingTop: space[6],
     paddingBottom: space[6],
     '@media (min-width: 640px)': {
-      paddingLeft: space[6],
-      paddingRight: space[6],
-    },
-    '@media (min-width: 1024px)': {
       paddingLeft: space[8],
       paddingRight: space[8],
+    },
+    '@media (min-width: 1024px)': {
+      paddingLeft: space[10],
+      paddingRight: space[10],
     },
   },
 })

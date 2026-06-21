@@ -42,7 +42,7 @@ const fieldStyles = stylex.create({
     '::placeholder': {
       color: colors.zinc400,
     },
-    transitionProperty: 'border-color, box-shadow',
+    transitionProperty: 'background-color, border-color, box-shadow',
     transitionDuration: '150ms',
   },
   inputDefault: {

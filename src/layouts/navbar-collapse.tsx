@@ -30,6 +30,8 @@ const collapseStyles = stylex.create({
     borderBottomRightRadius: radius.lg,
     backgroundColor: colors.white,
     boxShadow: shadow.sm,
+    transitionProperty: 'background-color, box-shadow',
+    transitionDuration: '200ms',
   },
   logoLink: {
     marginTop: space[3],

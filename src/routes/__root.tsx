@@ -24,6 +24,8 @@ const styles = stylex.create({
   root: {
     backgroundColor: colors.zinc50,
     color: colors.zinc900,
+    transitionProperty: 'background-color, color',
+    transitionDuration: '200ms',
   },
   spinner: {
     display: 'inline-block',

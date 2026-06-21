@@ -1,7 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import * as Lucide from 'lucide-react'
 import * as stylex from '@stylexjs/stylex'
-import x from '@stylexjs/atoms'
 
 import { Button, Card, Container } from '#/components/ui-react-aria'
 import { useAuthentication } from '#/context/auth/AuthProvider'
@@ -29,54 +27,17 @@ const styles = stylex.create({
     fontWeight: fontWeight.bold,
     color: colors.zinc800,
   },
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
-    gap: space[6],
-    marginBottom: space[8],
-  },
-  statCard: {
-    padding: space[6],
-  },
-  statRow: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: space[4],
-  },
-  statIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '3rem',
-    height: '3rem',
-    borderRadius: radius.lg,
-    flexShrink: 0,
-  },
-  statBody: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: space[0.5],
-  },
-  statValue: {
-    fontSize: fontSize['2xl'],
-    fontWeight: fontWeight.bold,
-    color: colors.zinc800,
-  },
-  statLabel: {
-    fontSize: fontSize.sm,
-    color: colors.zinc500,
-  },
-  profileCard: {
+  card: {
     padding: space[8],
   },
-  profileRow: {
+  row: {
     display: 'flex',
     alignItems: 'center',
     gap: space[4],
   },
   avatar: {
-    width: '3.5rem',
-    height: '3.5rem',
+    width: '3rem',
+    height: '3rem',
     borderRadius: radius.full,
     display: 'flex',
     alignItems: 'center',
@@ -85,38 +46,43 @@ const styles = stylex.create({
     color: colors.primary600,
     flexShrink: 0,
   },
-  avatarInitials: {
-    fontSize: fontSize.lg,
+  initial: {
+    fontSize: fontSize.base,
     fontWeight: fontWeight.bold,
+    lineHeight: 1,
   },
-  profileInfo: {
+  info: {
     display: 'flex',
     flexDirection: 'column',
     gap: space[0.5],
+    minWidth: 0,
   },
-  profileName: {
+  name: {
     fontSize: fontSize.base,
     fontWeight: fontWeight.semibold,
     color: colors.zinc800,
   },
-  profileEmail: {
+  email: {
     fontSize: fontSize.sm,
     color: colors.zinc500,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
   },
-  profileActions: {
+  actions: {
     display: 'flex',
     gap: space[3],
     marginTop: space[6],
-    flexDirection: 'column',
-    '@media (min-width: 640px)': {
-      flexDirection: 'row',
-    },
+    paddingTop: space[6],
+    borderTopWidth: 1,
+    borderTopStyle: 'solid',
+    borderTopColor: colors.zinc200,
   },
 })
 
 function DashboardOverviewComponent() {
   const { user, logout } = useAuthentication()
-  const initials = user?.email?.charAt(0).toUpperCase() ?? '?'
+  const initial = user?.email?.charAt(0).toUpperCase() ?? '?'
 
   return (
     <Container>
@@ -125,69 +91,18 @@ function DashboardOverviewComponent() {
         <h1 {...stylex.props(styles.title)}>Overview</h1>
       </div>
 
-      {/* ponytail: stat values hardcoded "—". Replace with real API data when backend connected. */}
-      <div {...stylex.props(styles.grid)}>
-        <Card>
-          <div {...stylex.props(styles.statCard)}>
-            <div {...stylex.props(styles.statRow)}>
-              <div
-                {...stylex.props(styles.statIcon, x.backgroundColor['#eef2ff'], x.color['#6366f1'])}
-              >
-                <Lucide.Users {...stylex.props(x.height['1.5rem'], x.width['1.5rem'])} />
-              </div>
-              <div {...stylex.props(styles.statBody)}>
-                <span {...stylex.props(styles.statValue)}>—</span>
-                <span {...stylex.props(styles.statLabel)}>Active Users</span>
-              </div>
-            </div>
-          </div>
-        </Card>
-
-        <Card>
-          <div {...stylex.props(styles.statCard)}>
-            <div {...stylex.props(styles.statRow)}>
-              <div
-                {...stylex.props(styles.statIcon, x.backgroundColor['#ecfdf5'], x.color['#059669'])}
-              >
-                <Lucide.Activity {...stylex.props(x.height['1.5rem'], x.width['1.5rem'])} />
-              </div>
-              <div {...stylex.props(styles.statBody)}>
-                <span {...stylex.props(styles.statValue)}>—</span>
-                <span {...stylex.props(styles.statLabel)}>Sessions</span>
-              </div>
-            </div>
-          </div>
-        </Card>
-
-        <Card>
-          <div {...stylex.props(styles.statCard)}>
-            <div {...stylex.props(styles.statRow)}>
-              <div
-                {...stylex.props(styles.statIcon, x.backgroundColor['#fef2f2'], x.color['#dc2626'])}
-              >
-                <Lucide.TrendingUp {...stylex.props(x.height['1.5rem'], x.width['1.5rem'])} />
-              </div>
-              <div {...stylex.props(styles.statBody)}>
-                <span {...stylex.props(styles.statValue)}>—</span>
-                <span {...stylex.props(styles.statLabel)}>Revenue</span>
-              </div>
-            </div>
-          </div>
-        </Card>
-      </div>
-
       <Card>
-        <div {...stylex.props(styles.profileCard)}>
-          <div {...stylex.props(styles.profileRow)}>
+        <div {...stylex.props(styles.card)}>
+          <div {...stylex.props(styles.row)}>
             <div {...stylex.props(styles.avatar)}>
-              <span {...stylex.props(styles.avatarInitials)}>{initials}</span>
+              <span {...stylex.props(styles.initial)}>{initial}</span>
             </div>
-            <div {...stylex.props(styles.profileInfo)}>
-              <span {...stylex.props(styles.profileName)}>Welcome back</span>
-              <span {...stylex.props(styles.profileEmail)}>{user?.email ?? '—'}</span>
+            <div {...stylex.props(styles.info)}>
+              <span {...stylex.props(styles.name)}>Welcome back</span>
+              <span {...stylex.props(styles.email)}>{user?.email ?? '—'}</span>
             </div>
           </div>
-          <div {...stylex.props(styles.profileActions)}>
+          <div {...stylex.props(styles.actions)}>
             <Link to="/">
               <Button variant="primary">Back to homepage</Button>
             </Link>

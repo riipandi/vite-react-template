@@ -16,14 +16,26 @@ export const Route = createFileRoute('/dashboard')({
 })
 
 const styles = stylex.create({
-  layout: { backgroundColor: colors.zinc100 },
+  layout: {
+    backgroundColor: colors.zinc50,
+    transitionProperty: 'background-color',
+    transitionDuration: '200ms',
+  },
+  contentArea: {
+    flex: 1,
+    overflowY: 'auto',
+    minWidth: 0,
+  },
 })
 
 function DashboardLayout() {
   return (
     <main {...stylex.props(x.display.flex, x.height['100%'], x.minHeight['100vh'], styles.layout)}>
       <SideNavbar collapsed={false} />
-      <Outlet />
+      <div {...stylex.props(styles.contentArea)}>
+        <Outlet />
+      </div>
     </main>
   )
 }
+

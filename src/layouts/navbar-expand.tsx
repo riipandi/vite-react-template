@@ -1,11 +1,14 @@
 import * as Lucide from 'lucide-react'
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
 
+import { ThemeSwitcher } from '#/components/theme'
 import { colors, fontSize, fontWeight, radius, shadow, space } from '../assets/styles/tokens.stylex'
 
+// ── Nav data ──────────────────────────────────────────────────────────────────
+
 const navItems = [
-  { icon: Lucide.Home, label: 'Dashboard', href: '/dashboard/overview' },
+  { icon: Lucide.LayoutDashboard, label: 'Overview', href: '/dashboard/overview' },
   { icon: Lucide.Search, label: 'Search', href: '#' },
   { icon: Lucide.BarChart3, label: 'Analytics', href: '#' },
   { icon: Lucide.FileText, label: 'Docs', href: '#' },
@@ -19,146 +22,251 @@ const secondaryItems = [
 
 const bottomItems = [{ icon: Lucide.User, label: 'My Account', href: '#' }]
 
+// ── Styles ────────────────────────────────────────────────────────────────────
+
 const sidebarStyles = stylex.create({
   container: {
     display: 'flex',
     height: '100%',
     minHeight: '100vh',
-    width: '14rem',
+    width: '15rem',
     flexDirection: 'column',
     overflow: 'hidden',
-    borderTopRightRadius: radius.lg,
-    borderBottomRightRadius: radius.lg,
+    borderRightWidth: 1,
+    borderRightStyle: 'solid',
+    borderRightColor: colors.zinc200,
     backgroundColor: colors.surface,
     boxShadow: shadow.sm,
-    transitionProperty: 'background-color, box-shadow',
+    transitionProperty: 'background-color, box-shadow, border-color',
     transitionDuration: '200ms',
+    flexShrink: 0,
   },
-  logoLink: {
-    marginTop: space[3],
-    display: 'flex',
-    width: '100%',
-    alignItems: 'center',
-    gap: space[2],
+
+  // Logo area
+  logoSection: {
     paddingLeft: space[4],
     paddingRight: space[4],
+    paddingTop: space[4],
+    paddingBottom: space[4],
+    borderBottomWidth: 1,
+    borderBottomStyle: 'solid',
+    borderBottomColor: colors.zinc100,
+  },
+  logoLink: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: space[2],
     textDecoration: 'none',
+    borderRadius: radius.md,
+    paddingTop: space[1],
+    paddingBottom: space[1],
+  },
+  logoIconWrap: {
+    width: '2rem',
+    height: '2rem',
+    borderRadius: radius.lg,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: `linear-gradient(135deg, ${colors.primary500}, ${colors.primary700})`,
+    flexShrink: 0,
   },
   logoSvg: {
-    height: '2rem',
-    width: '2rem',
-    fill: 'currentColor',
-    color: colors.primary600,
+    height: '1.125rem',
+    width: '1.125rem',
+    fill: colors.white,
+    color: colors.white,
   },
   logoText: {
     fontSize: fontSize.sm,
     fontWeight: fontWeight.bold,
     color: colors.zinc800,
+    letterSpacing: '-0.01em',
   },
-  navSection: {
-    width: '100%',
-    paddingLeft: space[2],
-    paddingRight: space[2],
+  logoVersion: {
+    fontSize: fontSize.xs,
+    color: colors.zinc400,
+    letterSpacing: '0',
   },
-  sectionDivider: {
-    marginTop: space[3],
-    marginBottom: space[1],
-    borderTopWidth: 1,
-    borderTopStyle: 'solid',
-    borderTopColor: colors.zinc200,
-    transitionProperty: 'border-color',
-    transitionDuration: '200ms',
-  },
-  navItem: {
-    marginTop: space[1],
+
+  // Nav sections
+  navContent: {
+    flex: 1,
+    paddingTop: space[3],
+    paddingBottom: space[3],
+    paddingLeft: space[3],
+    paddingRight: space[3],
     display: 'flex',
-    height: '2.75rem',
+    flexDirection: 'column',
+    gap: space[1],
+  },
+  sectionLabel: {
+    paddingLeft: space[3],
+    paddingTop: space[3],
+    paddingBottom: space[1],
+    fontSize: fontSize.xs,
+    fontWeight: fontWeight.semibold,
+    color: colors.zinc400,
+    letterSpacing: '0.07em',
+    textTransform: 'uppercase',
+  },
+
+  // Nav items
+  navItem: {
+    display: 'flex',
+    height: '2.375rem',
     width: '100%',
     alignItems: 'center',
     gap: space[3],
-    borderRadius: radius.base,
+    borderRadius: radius.lg,
     paddingLeft: space[3],
     paddingRight: space[3],
     textDecoration: 'none',
-    color: 'inherit',
+    color: colors.zinc600,
     position: 'relative',
-    transitionProperty: 'background-color',
+    transitionProperty: 'background-color, color',
     transitionDuration: '150ms',
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.medium,
     ':hover': {
-      backgroundColor: colors.surfaceHover,
+      backgroundColor: colors.zinc100,
+      color: colors.zinc900,
+    },
+  },
+  navItemActive: {
+    backgroundColor: colors.primary50,
+    color: colors.primary700,
+    ':hover': {
+      backgroundColor: colors.primary100,
+      color: colors.primary700,
     },
   },
   navIcon: {
-    height: '1.25rem',
-    width: '1.25rem',
+    height: '1rem',
+    width: '1rem',
     stroke: 'currentColor',
+    flexShrink: 0,
   },
   navLabel: {
+    flex: 1,
     fontSize: fontSize.sm,
     fontWeight: fontWeight.medium,
   },
   badge: {
-    position: 'absolute',
-    top: 0,
-    right: space[2],
-    height: '0.5rem',
     width: '0.5rem',
+    height: '0.5rem',
     borderRadius: '9999px',
     backgroundColor: colors.destructive500,
+    flexShrink: 0,
   },
+
+  // Bottom area
   bottomSection: {
-    marginTop: 'auto',
-    marginBottom: space[2],
-    width: '100%',
-    paddingLeft: space[2],
-    paddingRight: space[2],
+    paddingLeft: space[3],
+    paddingRight: space[3],
+    paddingTop: space[3],
+    paddingBottom: space[3],
+    borderTopWidth: 1,
+    borderTopStyle: 'solid',
+    borderTopColor: colors.zinc100,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: space[1],
+  },
+  bottomRow: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingLeft: space[3],
+    paddingRight: space[3],
+  },
+  bottomLabel: {
+    fontSize: fontSize.xs,
+    color: colors.zinc400,
+    fontWeight: fontWeight.medium,
   },
 })
 
+// ── Component ──────────────────────────────────────────────────────────────────
+
 export function NavBarExpand() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+
   return (
     <div {...stylex.props(sidebarStyles.container)}>
-      <Link to="/" {...stylex.props(sidebarStyles.logoLink)}>
-        <svg
-          {...stylex.props(sidebarStyles.logoSvg)}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
-        </svg>
-        <span {...stylex.props(sidebarStyles.logoText)}>ReactiVite</span>
-      </Link>
-
-      <div {...stylex.props(sidebarStyles.navSection)}>
-        <div {...stylex.props(sidebarStyles.sectionDivider)} />
-        {navItems.map((item) => (
-          <Link key={item.label} to={item.href} {...stylex.props(sidebarStyles.navItem)}>
-            <item.icon {...stylex.props(sidebarStyles.navIcon)} />
-            <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
-          </Link>
-        ))}
+      {/* Logo */}
+      <div {...stylex.props(sidebarStyles.logoSection)}>
+        <Link to="/" {...stylex.props(sidebarStyles.logoLink)}>
+          <div {...stylex.props(sidebarStyles.logoIconWrap)}>
+            <svg
+              {...stylex.props(sidebarStyles.logoSvg)}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
+            </svg>
+          </div>
+          <div>
+            <div {...stylex.props(sidebarStyles.logoText)}>ReactiVite</div>
+            <div {...stylex.props(sidebarStyles.logoVersion)}>v0.1.0</div>
+          </div>
+        </Link>
       </div>
 
-      <div {...stylex.props(sidebarStyles.navSection)}>
-        <div {...stylex.props(sidebarStyles.sectionDivider)} />
-        {secondaryItems.map((item) => (
-          <Link key={item.label} to={item.href} {...stylex.props(sidebarStyles.navItem)}>
-            <item.icon {...stylex.props(sidebarStyles.navIcon)} />
-            <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
-            {item.badge && <span {...stylex.props(sidebarStyles.badge)} />}
-          </Link>
-        ))}
+      {/* Main nav */}
+      <div {...stylex.props(sidebarStyles.navContent)}>
+        <p {...stylex.props(sidebarStyles.sectionLabel)}>Main</p>
+        {navItems.map((item) => {
+          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+          return (
+            <Link
+              key={item.label}
+              to={item.href}
+              {...stylex.props(sidebarStyles.navItem, isActive && sidebarStyles.navItemActive)}
+            >
+              <item.icon {...stylex.props(sidebarStyles.navIcon)} />
+              <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
+            </Link>
+          )
+        })}
+
+        <p {...stylex.props(sidebarStyles.sectionLabel)}>Workspace</p>
+        {secondaryItems.map((item) => {
+          const isActive = pathname === item.href
+          return (
+            <Link
+              key={item.label}
+              to={item.href}
+              {...stylex.props(sidebarStyles.navItem, isActive && sidebarStyles.navItemActive)}
+            >
+              <item.icon {...stylex.props(sidebarStyles.navIcon)} />
+              <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
+              {item.badge && <span {...stylex.props(sidebarStyles.badge)} />}
+            </Link>
+          )
+        })}
       </div>
 
+      {/* Bottom: account + theme */}
       <div {...stylex.props(sidebarStyles.bottomSection)}>
-        <div {...stylex.props(sidebarStyles.sectionDivider)} />
-        {bottomItems.map((item) => (
-          <Link key={item.label} to={item.href} {...stylex.props(sidebarStyles.navItem)}>
-            <item.icon {...stylex.props(sidebarStyles.navIcon)} />
-            <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
-          </Link>
-        ))}
+        {bottomItems.map((item) => {
+          const isActive = pathname === item.href
+          return (
+            <Link
+              key={item.label}
+              to={item.href}
+              {...stylex.props(sidebarStyles.navItem, isActive && sidebarStyles.navItemActive)}
+            >
+              <item.icon {...stylex.props(sidebarStyles.navIcon)} />
+              <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
+            </Link>
+          )
+        })}
+        <div {...stylex.props(sidebarStyles.bottomRow)}>
+          <span {...stylex.props(sidebarStyles.bottomLabel)}>Theme</span>
+          <ThemeSwitcher />
+        </div>
       </div>
     </div>
   )

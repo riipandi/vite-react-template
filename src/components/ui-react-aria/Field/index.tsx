@@ -24,10 +24,11 @@ const descriptionStyles = stylex.create({
 
 const fieldErrorStyles = stylex.create({
   base: {
-    marginTop: space[1],
-    padding: `0 ${space[3]}`,
+    paddingLeft: space[3],
+    paddingRight: space[3],
     fontSize: fontSize.xs,
     color: colors.destructive600,
+    lineHeight: '1.4',
   },
 })
 

@@ -24,6 +24,9 @@ export interface ButtonProps {
 
 const buttonStyles = stylex.create({
   base: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: space[2],
     borderRadius: radius.md,
     borderWidth: 1,

@@ -26,7 +26,7 @@ const fieldStyles = stylex.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    gap: space[3],
+    gap: space[1.5],
   },
   input: {
     minWidth: 0,

@@ -1,124 +1,172 @@
 import * as Lucide from 'lucide-react'
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
 
+import { ThemeSwitcher } from '#/components/theme'
 import { colors, radius, shadow, space } from '../assets/styles/tokens.stylex'
 
+// ── Nav data ──────────────────────────────────────────────────────────────────
+
 const navItems = [
-  { icon: Lucide.Home, label: 'Dashboard', href: '/dashboard/overview' },
+  { icon: Lucide.LayoutDashboard, label: 'Overview', href: '/dashboard/overview' },
   { icon: Lucide.Search, label: 'Search', href: '#' },
   { icon: Lucide.BarChart3, label: 'Analytics', href: '#' },
   { icon: Lucide.FileText, label: 'Docs', href: '#' },
 ]
 
 const secondaryItems = [
-  { icon: Lucide.ShoppingCart, label: 'Cart', href: '#' },
+  { icon: Lucide.ShoppingCart, label: 'Products', href: '#' },
   { icon: Lucide.Settings, label: 'Settings', href: '#' },
   { icon: Lucide.Mail, label: 'Messages', href: '#', badge: true },
 ]
+
+// ── Styles ────────────────────────────────────────────────────────────────────
 
 const collapseStyles = stylex.create({
   container: {
     display: 'flex',
     height: '100%',
     minHeight: '100vh',
-    width: '4rem',
+    width: '3.75rem',
     flexDirection: 'column',
     alignItems: 'center',
     overflow: 'hidden',
-    borderTopRightRadius: radius.lg,
-    borderBottomRightRadius: radius.lg,
+    borderRightWidth: 1,
+    borderRightStyle: 'solid',
+    borderRightColor: colors.zinc200,
     backgroundColor: colors.surface,
     boxShadow: shadow.sm,
-    transitionProperty: 'background-color, box-shadow',
+    transitionProperty: 'background-color, box-shadow, border-color',
     transitionDuration: '200ms',
+    flexShrink: 0,
+    paddingTop: space[3],
+    paddingBottom: space[3],
   },
+
+  // Logo
   logoLink: {
-    marginTop: space[3],
-    marginBottom: space[2],
+    width: '2.25rem',
+    height: '2.25rem',
+    borderRadius: radius.lg,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: space[4],
+    background: `linear-gradient(135deg, ${colors.primary500}, ${colors.primary700})`,
+    flexShrink: 0,
   },
   logoSvg: {
-    height: '2rem',
-    width: '2rem',
-    fill: 'currentColor',
-    color: colors.primary600,
+    height: '1.125rem',
+    width: '1.125rem',
+    fill: colors.white,
+    color: colors.white,
   },
+
+  // Divider
+  divider: {
+    width: '2rem',
+    height: '1px',
+    backgroundColor: colors.zinc100,
+    marginBottom: space[2],
+  },
+
+  // Nav
   navSection: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
-  },
-  sectionDivider: {
-    marginTop: space[3],
-    marginBottom: space[1],
-    width: '2rem',
-    borderTopWidth: 1,
-    borderTopStyle: 'solid',
-    borderTopColor: colors.zinc200,
-    transitionProperty: 'border-color',
-    transitionDuration: '200ms',
+    paddingLeft: space[2],
+    paddingRight: space[2],
+    gap: space[1],
+    marginBottom: space[3],
   },
   navLink: {
-    marginTop: space[1],
     display: 'flex',
-    height: '2.75rem',
-    width: '2.75rem',
+    height: '2.375rem',
+    width: '2.375rem',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: radius.base,
-    color: 'inherit',
+    borderRadius: radius.lg,
+    color: colors.zinc500,
     textDecoration: 'none',
     position: 'relative',
-    transitionProperty: 'background-color',
+    transitionProperty: 'background-color, color',
     transitionDuration: '150ms',
     ':hover': {
-      backgroundColor: colors.surfaceHover,
+      backgroundColor: colors.zinc100,
+      color: colors.zinc800,
+    },
+  },
+  navLinkActive: {
+    backgroundColor: colors.primary50,
+    color: colors.primary700,
+    ':hover': {
+      backgroundColor: colors.primary100,
+      color: colors.primary700,
     },
   },
   navIcon: {
-    height: '1.25rem',
-    width: '1.25rem',
+    height: '1rem',
+    width: '1rem',
     stroke: 'currentColor',
   },
   badge: {
     position: 'absolute',
-    top: 0,
-    right: 0,
-    height: '0.5rem',
-    width: '0.5rem',
+    top: '0.25rem',
+    right: '0.25rem',
+    height: '0.4rem',
+    width: '0.4rem',
     borderRadius: '9999px',
     backgroundColor: colors.destructive500,
   },
-  profileSection: {
+
+  // Bottom
+  bottomSection: {
     marginTop: 'auto',
-    marginBottom: space[2],
     display: 'flex',
-    height: '2.75rem',
-    width: '2.75rem',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: space[2],
+    paddingTop: space[3],
+    borderTopWidth: 1,
+    borderTopStyle: 'solid',
+    borderTopColor: colors.zinc100,
+    width: '100%',
+    paddingLeft: space[2],
+    paddingRight: space[2],
+  },
+  userLink: {
+    display: 'flex',
+    height: '2.375rem',
+    width: '2.375rem',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: radius.base,
-    color: 'inherit',
-    transitionProperty: 'background-color',
+    borderRadius: radius.lg,
+    color: colors.zinc500,
+    textDecoration: 'none',
+    transitionProperty: 'background-color, color',
     transitionDuration: '150ms',
     ':hover': {
-      backgroundColor: colors.surfaceHover,
+      backgroundColor: colors.zinc100,
+      color: colors.zinc800,
     },
   },
-  profileIcon: {
-    height: '1.25rem',
-    width: '1.25rem',
+  userIcon: {
+    height: '1rem',
+    width: '1rem',
     stroke: 'currentColor',
   },
 })
 
+// ── Component ──────────────────────────────────────────────────────────────────
+
 export function NavBarCollapse() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+
   return (
     <div {...stylex.props(collapseStyles.container)}>
+      {/* Logo icon */}
       <Link to="/" {...stylex.props(collapseStyles.logoLink)} aria-label="Home">
         <svg
           {...stylex.props(collapseStyles.logoSvg)}
@@ -130,38 +178,52 @@ export function NavBarCollapse() {
         </svg>
       </Link>
 
+      <div {...stylex.props(collapseStyles.divider)} />
+
+      {/* Main nav */}
       <div {...stylex.props(collapseStyles.navSection)}>
-        <div {...stylex.props(collapseStyles.sectionDivider)} />
-        {navItems.map((item) => (
-          <Link
-            key={item.label}
-            to={item.href}
-            {...stylex.props(collapseStyles.navLink)}
-            aria-label={item.label}
-          >
-            <item.icon {...stylex.props(collapseStyles.navIcon)} />
-          </Link>
-        ))}
+        {navItems.map((item) => {
+          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+          return (
+            <Link
+              key={item.label}
+              to={item.href}
+              {...stylex.props(collapseStyles.navLink, isActive && collapseStyles.navLinkActive)}
+              aria-label={item.label}
+            >
+              <item.icon {...stylex.props(collapseStyles.navIcon)} />
+            </Link>
+          )
+        })}
       </div>
 
+      <div {...stylex.props(collapseStyles.divider)} />
+
+      {/* Secondary nav */}
       <div {...stylex.props(collapseStyles.navSection)}>
-        <div {...stylex.props(collapseStyles.sectionDivider)} />
-        {secondaryItems.map((item) => (
-          <Link
-            key={item.label}
-            to={item.href}
-            {...stylex.props(collapseStyles.navLink)}
-            aria-label={item.label}
-          >
-            <item.icon {...stylex.props(collapseStyles.navIcon)} />
-            {item.badge && <span {...stylex.props(collapseStyles.badge)} />}
-          </Link>
-        ))}
+        {secondaryItems.map((item) => {
+          const isActive = pathname === item.href
+          return (
+            <Link
+              key={item.label}
+              to={item.href}
+              {...stylex.props(collapseStyles.navLink, isActive && collapseStyles.navLinkActive)}
+              aria-label={item.label}
+            >
+              <item.icon {...stylex.props(collapseStyles.navIcon)} />
+              {item.badge && <span {...stylex.props(collapseStyles.badge)} />}
+            </Link>
+          )
+        })}
       </div>
 
-      <Link to="/" {...stylex.props(collapseStyles.profileSection)} aria-label="Profile">
-        <Lucide.User {...stylex.props(collapseStyles.profileIcon)} />
-      </Link>
+      {/* Bottom */}
+      <div {...stylex.props(collapseStyles.bottomSection)}>
+        <Link to="/" {...stylex.props(collapseStyles.userLink)} aria-label="My Account">
+          <Lucide.User {...stylex.props(collapseStyles.userIcon)} />
+        </Link>
+        <ThemeSwitcher />
+      </div>
     </div>
   )
 }

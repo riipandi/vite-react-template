@@ -32,22 +32,32 @@ const loginStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: space[3],
-    marginBottom: space[8],
+    gap: space[2],
+    marginBottom: space[6],
+  },
+  logoWrapper: {
+    padding: space[3],
+    borderRadius: '1rem',
+    backgroundColor: colors.zinc50,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: colors.zinc200,
+    marginBottom: space[1],
   },
   logo: {
-    height: '3rem',
-    width: '3rem',
+    height: '2.5rem',
+    width: '2.5rem',
   },
   heading: {
-    fontSize: fontSize.xl,
-    fontWeight: fontWeight.semibold,
+    fontSize: fontSize['2xl'],
+    fontWeight: fontWeight.bold,
     color: colors.zinc900,
+    textAlign: 'center',
   },
   subtitle: {
     fontSize: fontSize.sm,
     color: colors.zinc500,
-    marginTop: space[1],
+    textAlign: 'center',
   },
   socialButtons: {
     display: 'flex',
@@ -56,15 +66,15 @@ const loginStyles = stylex.create({
   },
   formGrid: {
     display: 'grid',
-    rowGap: space[5],
+    rowGap: space[4],
   },
   submitWrapper: {
-    marginTop: space[6],
+    marginTop: space[5],
     display: 'grid',
     width: '100%',
   },
   footer: {
-    marginTop: space[8],
+    marginTop: space[6],
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -165,8 +175,10 @@ function LoginComponent() {
         <Card>
           <div {...stylex.props(loginStyles.cardBody)}>
             <div {...stylex.props(loginStyles.header)}>
-              <div {...stylex.props(loginStyles.logo)}>
-                <ViteLogo />
+              <div {...stylex.props(loginStyles.logoWrapper)}>
+                <div {...stylex.props(loginStyles.logo)}>
+                  <ViteLogo />
+                </div>
               </div>
               <h1 {...stylex.props(loginStyles.heading)}>Sign in to your account</h1>
               <p {...stylex.props(loginStyles.subtitle)}>
@@ -181,6 +193,7 @@ function LoginComponent() {
 
             <HorizontalDivider label="or continue with" />
 
+
             <form
               autoComplete="on"
               onSubmit={(e) => {
@@ -190,36 +203,32 @@ function LoginComponent() {
               }}
             >
               <div {...stylex.props(loginStyles.formGrid)}>
-                <div>
-                  <form.Field
-                    name="username"
-                    children={(field) => (
-                      <TextField
-                        label="Username"
-                        value={field.state.value}
-                        onChange={(value: string) => field.handleChange(value)}
-                        onBlur={field.handleBlur}
-                        errorMessage={field.state.meta.errors?.[0]?.message}
-                      />
-                    )}
-                  />
-                </div>
+                <form.Field
+                  name="username"
+                  children={(field) => (
+                    <TextField
+                      label="Username"
+                      value={field.state.value}
+                      onChange={(value: string) => field.handleChange(value)}
+                      onBlur={field.handleBlur}
+                      errorMessage={field.state.meta.errors?.[0]?.message}
+                    />
+                  )}
+                />
 
-                <div>
-                  <form.Field
-                    name="password"
-                    children={(field) => (
-                      <TextField
-                        label="Password"
-                        type="password"
-                        value={field.state.value}
-                        onChange={(value: string) => field.handleChange(value)}
-                        onBlur={field.handleBlur}
-                        errorMessage={field.state.meta.errors?.[0]?.message}
-                      />
-                    )}
-                  />
-                </div>
+                <form.Field
+                  name="password"
+                  children={(field) => (
+                    <TextField
+                      label="Password"
+                      type="password"
+                      value={field.state.value}
+                      onChange={(value: string) => field.handleChange(value)}
+                      onBlur={field.handleBlur}
+                      errorMessage={field.state.meta.errors?.[0]?.message}
+                    />
+                  )}
+                />
               </div>
 
               <div {...stylex.props(loginStyles.submitWrapper)}>

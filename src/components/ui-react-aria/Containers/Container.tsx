@@ -5,6 +5,7 @@ import { space } from '../../../assets/styles/tokens.stylex'
 
 type ContainerProps<T extends ElementType> = {
   as?: T
+  fluid?: boolean
   children: ReactNode
   className?: string
 } & ComponentPropsWithoutRef<T>
@@ -28,17 +29,31 @@ const containerStyles = stylex.create({
       paddingRight: space[10],
     },
   },
+  fluid: {
+    marginLeft: 0,
+    marginRight: 0,
+    maxWidth: 'none',
+    paddingLeft: space[6],
+    paddingRight: space[6],
+    paddingTop: space[6],
+    paddingBottom: space[6],
+  },
 })
 
 export const Container = <T extends ElementType = 'div'>({
   as,
+  fluid = false,
   children,
   className,
   ...props
 }: ContainerProps<T>) => {
   const Component = as || 'div'
   return (
-    <Component {...stylex.props(containerStyles.base)} className={className} {...props}>
+    <Component
+      {...stylex.props(containerStyles.base, fluid && containerStyles.fluid)}
+      className={className}
+      {...props}
+    >
       {children}
     </Component>
   )

@@ -22,6 +22,7 @@ export interface TextFieldProps {
 
 const fieldStyles = stylex.create({
   root: {
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     gap: space[2],

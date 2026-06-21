@@ -1,9 +1,49 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import * as stylex from '@stylexjs/stylex'
 import { Button, Card, Container } from '#/components/ui-react-aria'
 import { useAuthentication } from '#/context/auth/AuthProvider'
 
+import { colors, fontSize, fontWeight, space } from '../assets/styles/tokens.stylex'
+
 export const Route = createFileRoute('/dashboard/overview')({
   component: DashboardOverviewComponent,
+})
+
+const styles = stylex.create({
+  cardBody: {
+    padding: space[8],
+  },
+  subtitle: {
+    marginBottom: space[2],
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.semibold,
+    color: colors.primary600,
+  },
+  title: {
+    display: 'block',
+    fontSize: fontSize['2xl'],
+    fontWeight: fontWeight.bold,
+    color: colors.zinc800,
+    '@media (min-width: 640px)': {
+      fontSize: fontSize['2xl'],
+    },
+  },
+  description: {
+    marginTop: space[2],
+    fontSize: fontSize.lg,
+    color: colors.zinc600,
+  },
+  actions: {
+    marginTop: space[8],
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: space[2],
+    '@media (min-width: 640px)': {
+      flexDirection: 'row',
+      gap: space[3],
+    },
+  },
 })
 
 function DashboardOverviewComponent() {
@@ -11,19 +51,19 @@ function DashboardOverviewComponent() {
 
   return (
     <Container>
-      <Card className="p-8">
-        <p className="text-primary-600 mb-2 text-sm font-semibold">User Dashboard</p>
-        <h1 className="block text-2xl font-bold text-zinc-800 sm:text-2xl dark:text-white">
-          Welcome back, {user?.email}
-        </h1>
-        <p className="mt-2 text-lg text-zinc-600 dark:text-zinc-400">
-          This should be a dashboard page for general user.
-        </p>
-        <div className="mt-8 flex flex-col items-center gap-2 sm:flex-row sm:gap-3">
-          <Link to="/">
-            <Button variant="primary">Back to homepage</Button>
-          </Link>
-          <Button onClick={logout}>Sign Out</Button>
+      <Card>
+        <div {...stylex.props(styles.cardBody)}>
+          <p {...stylex.props(styles.subtitle)}>User Dashboard</p>
+          <h1 {...stylex.props(styles.title)}>Welcome back, {user?.email}</h1>
+          <p {...stylex.props(styles.description)}>
+            This should be a dashboard page for general user.
+          </p>
+          <div {...stylex.props(styles.actions)}>
+            <Link to="/">
+              <Button variant="primary">Back to homepage</Button>
+            </Link>
+            <Button onClick={logout}>Sign Out</Button>
+          </div>
         </div>
       </Card>
     </Container>

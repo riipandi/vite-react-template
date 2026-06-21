@@ -15,6 +15,21 @@ const config: StorybookConfig = {
   typescript: {
     reactDocgen: 'react-docgen-typescript',
   },
+  async viteFinal(viteConfig) {
+    viteConfig.build = {
+      ...viteConfig.build,
+      chunkSizeWarningLimit: 1200,
+      // Vite 8 uses Rolldown — enable automatic code splitting
+      // to break large chunks (particularly the storybook iframe bundle).
+      // @ref: https://rolldown.rs/reference/OutputOptions.codeSplitting
+      rolldownOptions: {
+        output: {
+          codeSplitting: true,
+        },
+      },
+    }
+    return viteConfig
+  },
 }
 
 export default config

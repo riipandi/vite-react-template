@@ -12,9 +12,5 @@
   "arrowParens": "always",
   "endOfLine": "lf",
   "quoteProps": "as-needed",
-  "ignorePatterns": ["dist", "public", "node_modules", "storybook-static", "tests-results", ".git"],
-  "sortTailwindcss": {
-    "tailwindStylesheet": "./src/assets/styles/tailwind.css",
-    "functions": ["cn", "clx", "clsx", "cva", "tw"]
-  }
+  "ignorePatterns": ["dist", "public", "node_modules", "storybook-static", "tests-results", ".git"]
 }

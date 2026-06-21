@@ -1,5 +1,8 @@
-import clsx from 'clsx'
+import * as stylex from '@stylexjs/stylex'
 import type { FC, ReactNode } from 'react'
+
+import { colors, radius, space, fontSize } from '../../../assets/styles/tokens.stylex'
+import { cx } from '../utils'
 
 interface AlertProps {
   variant?: 'info' | 'success' | 'destructive' | 'warning' | 'subtle'
@@ -7,25 +10,55 @@ interface AlertProps {
   className?: string
 }
 
+const alertStyles = stylex.create({
+  base: {
+    marginTop: space[4],
+    marginBottom: space[4],
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    padding: space[4],
+    fontSize: fontSize.sm,
+  },
+  info: {
+    borderColor: colors.primary200,
+    backgroundColor: colors.primary50,
+    color: colors.primary700,
+  },
+  success: {
+    borderColor: colors.green200,
+    backgroundColor: colors.green50,
+    color: colors.green700,
+  },
+  destructive: {
+    borderColor: colors.destructive200,
+    backgroundColor: colors.destructive50,
+    color: colors.destructive700,
+  },
+  warning: {
+    borderColor: colors.orange200,
+    backgroundColor: colors.orange50,
+    color: colors.orange700,
+  },
+  subtle: {
+    borderColor: colors.zinc200,
+    backgroundColor: colors.zinc50,
+    color: colors.zinc600,
+  },
+})
+
+const variantMap = {
+  info: alertStyles.info,
+  success: alertStyles.success,
+  destructive: alertStyles.destructive,
+  warning: alertStyles.warning,
+  subtle: alertStyles.subtle,
+} as const
+
 export const Alert: FC<AlertProps> = ({ children, variant = 'info', className }) => {
+  const sx = stylex.props(alertStyles.base, variantMap[variant])
   return (
-    <div
-      className={clsx(
-        'my-4 rounded-md border p-4 text-sm',
-        variant === 'info' &&
-          'border-primary-200 bg-primary-50 text-primary-700 dark:border-primary-800 dark:bg-primary-950 dark:text-primary-300',
-        variant === 'success' &&
-          'border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950 dark:text-green-300',
-        variant === 'destructive' &&
-          'border-destructive-200 bg-destructive-50 text-destructive-700 dark:border-destructive-800 dark:bg-destructive-950 dark:text-destructive-300',
-        variant === 'warning' &&
-          'border-orange-200 bg-orange-50 text-orange-700 dark:border-orange-800 dark:bg-orange-950 dark:text-orange-300',
-        variant === 'subtle' &&
-          'border-zinc-200 bg-zinc-50 text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400',
-        className
-      )}
-      role="alert"
-    >
+    <div className={cx(sx.className, className)} style={sx.style} role="alert">
       {children}
     </div>
   )

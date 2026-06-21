@@ -16,7 +16,8 @@
 
 ## Introduction
 
-A starter project for [React](https://reactjs.org/) with [Vite](https://vitejs.dev/), [Tailwind CSS](https://tailwindcss.com),
+A starter project for [React](https://reactjs.org/) with [Vite](https://vitejs.dev/), [StyleX](https://stylexjs.com),
+and [Typescript](https://www.typescriptlang.org/). This starter kit is already pre-configured
 and [Typescript](https://www.typescriptlang.org/). This starter kit is already pre-configured
 with [absolute import](https://jsdev.org/env/nodejs/absolute-path-imports/), [TanStack Router](https://tanstack.com/router),
 [TanStack Form](https://tanstack.com/form), [TanStack Query](https://tanstack.com/query),
@@ -28,7 +29,7 @@ with [ofetch](https://github.com/unjs/ofetch), easily replaceable with your own 
 
 - [x] [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling.
 - [x] [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
-- [x] [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs.
+- [x] [StyleX](https://stylexjs.com/) - The styling system for ambitious user interfaces.
 - [x] [Lucide Icons](https://lucide.dev/) - Beautiful & consistent icons made by the community.
 - [x] [Typescript](https://www.typescriptlang.org/) - Strongly typed programming language.
 - [x] [TanStack Router](https://tanstack.com/router) - Type-safe routing for React.

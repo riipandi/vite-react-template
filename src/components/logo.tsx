@@ -1,10 +1,24 @@
 import { Link } from '@tanstack/react-router'
+import * as stylex from '@stylexjs/stylex'
+
+import { space } from '../assets/styles/tokens.stylex'
+
+const styles = stylex.create({
+  link: {
+    display: 'block',
+    width: '5rem',
+    padding: space[5],
+    opacity: 0.8,
+    transitionProperty: 'opacity',
+    transitionDuration: '200ms',
+    ':hover': {
+      opacity: 1,
+    },
+  },
+})
 
 export const BrandLogo = () => (
-  <Link
-    to="/"
-    className="block w-20 p-5 opacity-80 transition-opacity duration-200 hover:opacity-100"
-  >
+  <Link to="/" {...stylex.props(styles.link)}>
     <SVGLogo />
   </Link>
 )

@@ -1,5 +1,8 @@
-import clsx from 'clsx'
+import * as stylex from '@stylexjs/stylex'
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+
+import { colors, radius, shadow } from '../../../assets/styles/tokens.stylex'
+import { cx } from '../utils'
 
 type CardProps<T extends ElementType> = {
   as?: T
@@ -7,15 +10,22 @@ type CardProps<T extends ElementType> = {
   className?: string
 } & ComponentPropsWithoutRef<T>
 
+const cardStyles = stylex.create({
+  base: {
+    borderRadius: radius.xl,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: colors.zinc200,
+    backgroundColor: colors.white,
+    boxShadow: shadow.sm,
+  },
+})
+
 export const Card = <T extends ElementType = 'div'>({ as, children, className }: CardProps<T>) => {
   const Component = as || 'div'
+  const sx = stylex.props(cardStyles.base)
   return (
-    <Component
-      className={clsx(
-        'rounded-xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-800',
-        className
-      )}
-    >
+    <Component className={cx(sx.className, className)} style={sx.style}>
       {children}
     </Component>
   )

@@ -1,4 +1,15 @@
+import * as stylex from '@stylexjs/stylex'
 import type { FC, ReactNode } from 'react'
+
+import {
+  colors,
+  fontSize,
+  fontWeight,
+  radius,
+  shadow,
+  space,
+} from '../../assets/styles/tokens.stylex'
+import { cx } from '#/components/ui-react-aria/utils'
 
 interface SocialButtonProps {
   icon: ReactNode
@@ -6,21 +17,46 @@ interface SocialButtonProps {
   className?: string
 }
 
+const socialStyles = stylex.create({
+  button: {
+    display: 'inline-flex',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: space[3],
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: colors.zinc200,
+    backgroundColor: colors.white,
+    paddingLeft: space[4],
+    paddingRight: space[4],
+    paddingTop: '0.625rem',
+    paddingBottom: '0.625rem',
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.medium,
+    color: colors.zinc700,
+    boxShadow: shadow.sm,
+    transitionProperty: 'all',
+    transitionDuration: '150ms',
+    cursor: 'pointer',
+    ':hover': {
+      backgroundColor: colors.zinc50,
+      borderColor: colors.zinc300,
+    },
+    ':focus-visible': {
+      outlineWidth: 2,
+      outlineStyle: 'solid',
+      outlineColor: colors.primary500,
+      outlineOffset: 2,
+    },
+  },
+})
+
 function SocialButton({ icon, children, className }: SocialButtonProps) {
+  const sx = stylex.props(socialStyles.button)
   return (
-    <button
-      type="button"
-      className={[
-        'inline-flex w-full items-center justify-center gap-3 rounded-lg border border-zinc-200 bg-white px-4 py-2.5 text-sm font-medium',
-        'text-zinc-700 shadow-sm transition-all duration-150',
-        'hover:bg-zinc-50 hover:border-zinc-300',
-        'focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-white focus:outline-none',
-        'dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300',
-        'dark:hover:bg-zinc-700 dark:hover:border-zinc-600',
-        'dark:focus:ring-offset-zinc-900',
-        className,
-      ].join(' ')}
-    >
+    <button type="button" className={cx(sx.className, className)} style={sx.style}>
       {icon}
       {children}
     </button>

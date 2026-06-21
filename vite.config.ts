@@ -2,15 +2,15 @@
 
 import { join, resolve } from 'node:path'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
-import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+import stylex from '@stylexjs/unplugin/vite'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { loadEnv } from 'vite'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [
-    tailwindcss(),
+    stylex(),
     tanstackRouter({ target: 'react', autoCodeSplitting: true }),
     react(),
     !process.env.CI && visualizer({ emitFile: true, template: 'treemap' }),

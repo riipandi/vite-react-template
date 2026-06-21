@@ -1,7 +1,9 @@
 import { Field } from '@base-ui/react/field'
 import { Input } from '@base-ui/react/input'
-import { twMerge } from 'tailwind-merge'
+import * as stylex from '@stylexjs/stylex'
 import { Description, FieldError, Label } from '../Field'
+
+import { colors, fontSize, radius, space } from '../../../assets/styles/tokens.stylex'
 
 export interface TextFieldProps {
   label?: string
@@ -17,6 +19,48 @@ export interface TextFieldProps {
   type?: string
   name?: string
 }
+
+const fieldStyles = stylex.create({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: space[2],
+  },
+  input: {
+    minWidth: 0,
+    flex: 1,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    paddingLeft: space[3],
+    paddingRight: space[3],
+    paddingTop: space[2],
+    paddingBottom: space[2],
+    fontSize: fontSize.sm,
+    backgroundColor: colors.white,
+    color: colors.zinc800,
+    '::placeholder': {
+      color: colors.zinc400,
+    },
+    transitionProperty: 'colors',
+    transitionDuration: '150ms',
+  },
+  inputDefault: {
+    borderColor: colors.zinc300,
+  },
+  inputFocused: {
+    borderColor: colors.primary500,
+    boxShadow: '0 0 0 2px rgb(99 102 241 / 0.2)',
+  },
+  inputInvalid: {
+    borderColor: colors.destructive500,
+  },
+  inputDisabled: {
+    borderColor: colors.zinc200,
+    backgroundColor: colors.zinc50,
+    color: colors.zinc300,
+  },
+})
 
 export function TextField({
   label,
@@ -37,7 +81,8 @@ export function TextField({
       name={name}
       invalid={!!errorMessage}
       disabled={disabled}
-      className={twMerge('flex flex-col gap-2', className)}
+      {...stylex.props(fieldStyles.root)}
+      className={className}
     >
       {label && <Label>{label}</Label>}
       <Input
@@ -47,22 +92,16 @@ export function TextField({
         defaultValue={defaultValue}
         onValueChange={onChange}
         onBlur={onBlur}
-        className={(state) =>
-          twMerge(
-            'min-w-0 flex-1 rounded-md border px-3 py-2 text-sm transition-colors duration-150',
-            'bg-white text-zinc-800 placeholder:text-zinc-400 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500',
-            !state.focused && state.valid === true
-              ? 'border-zinc-300 dark:border-zinc-600 forced-colors:border-[ButtonBorder]'
-              : '',
-            state.focused
-              ? 'border-primary-500 ring-2 ring-primary-500/20 dark:border-primary-400 dark:ring-primary-400/20'
-              : '',
-            state.valid === false ? 'border-destructive-500 dark:border-destructive-400' : '',
-            state.disabled
-              ? 'border-zinc-200 bg-zinc-50 text-zinc-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-600'
-              : ''
+        className={(state: { focused: boolean; valid: boolean | null; disabled: boolean }) => {
+          const sx = stylex.props(
+            fieldStyles.input,
+            !state.focused && state.valid !== false && fieldStyles.inputDefault,
+            state.focused && fieldStyles.inputFocused,
+            state.valid === false && fieldStyles.inputInvalid,
+            state.disabled && fieldStyles.inputDisabled
           )
-        }
+          return sx.className
+        }}
       />
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>

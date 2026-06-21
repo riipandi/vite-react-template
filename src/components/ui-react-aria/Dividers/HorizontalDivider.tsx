@@ -1,20 +1,74 @@
-import clsx from 'clsx'
+import * as stylex from '@stylexjs/stylex'
 import type { FC } from 'react'
+
+import { colors, fontSize, space } from '../../../assets/styles/tokens.stylex'
+import { cx } from '../utils'
 
 interface HorizontalDividerProps {
   label?: string
   className?: string
 }
 
-export const HorizontalDivider: FC<HorizontalDividerProps> = ({ label, className }) => {
-  const defaultClassName =
-    'flex items-center py-5 dark:text-zinc-500 dark:before:border-zinc-700 dark:after:border-zinc-700 before:border-t before:border-zinc-200 after:border-t after:border-zinc-200'
-  const withLabelClassName =
-    'items-center text-xs uppercase tracking-wider text-zinc-400 before:mr-6 after:ml-6 before:flex-[1_1_0%] after:flex-[1_1_0%]'
+const dividerStyles = stylex.create({
+  base: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingTop: space[5],
+    paddingBottom: space[5],
+    color: colors.zinc500,
+  },
+  withLabel: {
+    alignItems: 'center',
+    fontSize: fontSize.xs,
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    color: colors.zinc400,
+  },
+  before: {
+    '::before': {
+      content: '',
+      display: 'block',
+      flex: '1 1 0%',
+      borderTopWidth: 1,
+      borderTopStyle: 'solid',
+      borderTopColor: colors.zinc200,
+    },
+  },
+  after: {
+    '::after': {
+      content: '',
+      display: 'block',
+      flex: '1 1 0%',
+      borderTopWidth: 1,
+      borderTopStyle: 'solid',
+      borderTopColor: colors.zinc200,
+    },
+  },
+  labelBefore: {
+    '::before': {
+      marginRight: space[6],
+    },
+  },
+  labelAfter: {
+    '::after': {
+      marginLeft: space[6],
+    },
+  },
+})
 
+export const HorizontalDivider: FC<HorizontalDividerProps> = ({ label, className }) => {
+  const hasLabel = !!label
+  const sx = stylex.props(
+    dividerStyles.base,
+    dividerStyles.before,
+    dividerStyles.after,
+    hasLabel && dividerStyles.withLabel,
+    hasLabel && dividerStyles.labelBefore,
+    hasLabel && dividerStyles.labelAfter
+  )
   return (
-    <div className={clsx(defaultClassName, label && withLabelClassName, className)}>
-      {label && label}
+    <div className={cx(sx.className, className)} style={sx.style}>
+      {label}
     </div>
   )
 }

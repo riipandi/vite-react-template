@@ -6,8 +6,7 @@ import { RouterProvider } from '@tanstack/react-router'
 import { queryClient } from './query/client'
 import { router } from './router'
 
-import './assets/styles/fontface.css'
-import './assets/styles/tailwind.css'
+import './assets/styles/global.css'
 
 const rootElement = document.getElementById('root')
 

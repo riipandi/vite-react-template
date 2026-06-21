@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { useForm } from '@tanstack/react-form'
 import { createFileRoute, Link, redirect } from '@tanstack/react-router'
+import * as stylex from '@stylexjs/stylex'
 import { GitHubButton, GoogleButton } from '#/components/social-button'
 import { Alert, Button, Card, HorizontalDivider, TextField } from '#/components/ui-react-aria'
 import { useAuthentication } from '#/context/auth/AuthProvider'
 import { isAuthenticated } from '#/lib/auth'
 import { loginSchema } from '#/lib/schemas'
+
+import { colors, fontSize, fontWeight, space } from '../assets/styles/tokens.stylex'
 
 export const Route = createFileRoute('/login')({
   beforeLoad: () => {
@@ -14,6 +17,62 @@ export const Route = createFileRoute('/login')({
     }
   },
   component: LoginComponent,
+})
+
+const loginStyles = stylex.create({
+  main: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '100%',
+    maxWidth: '28rem',
+    paddingTop: '2.5rem',
+    paddingBottom: '2.5rem',
+  },
+  cardBody: {
+    padding: space[6],
+    '@media (min-width: 640px)': {
+      padding: space[8],
+    },
+  },
+  socialButtons: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: space[3],
+  },
+  formGrid: {
+    display: 'grid',
+    rowGap: space[4],
+  },
+  formField: {
+    display: 'block',
+  },
+  submitWrapper: {
+    marginTop: space[6],
+    display: 'grid',
+    width: '100%',
+  },
+  footer: {
+    marginTop: space[8],
+    textAlign: 'center',
+  },
+  footerText: {
+    fontSize: fontSize.sm,
+    color: colors.zinc500,
+  },
+  backLink: {
+    color: colors.primary600,
+    textDecoration: 'none',
+    textDecorationThickness: 2,
+    ':hover': {
+      textDecoration: 'underline',
+    },
+  },
+  loggedOutMessage: {
+    fontWeight: fontWeight.semibold,
+  },
+  alertSpacing: {
+    marginBottom: space[4],
+  },
 })
 
 function LoginComponent() {
@@ -39,17 +98,24 @@ function LoginComponent() {
   })
 
   return (
-    <main className="mx-auto w-full max-w-md py-10">
-      {failed && <Alert variant="destructive">{failed}</Alert>}
+    <main {...stylex.props(loginStyles.main)}>
+      {failed && (
+        <div {...stylex.props(loginStyles.alertSpacing)}>
+          <Alert variant="destructive">{failed}</Alert>
+        </div>
+      )}
       {loggedOut && (
-        <Alert variant="success">
-          <span className="font-semibold">Goodbye!</span> Your session has been terminated.
-        </Alert>
+        <div {...stylex.props(loginStyles.alertSpacing)}>
+          <Alert variant="success">
+            <span {...stylex.props(loginStyles.loggedOutMessage)}>Goodbye!</span> Your session has
+            been terminated.
+          </Alert>
+        </div>
       )}
 
       <Card>
-        <div className="p-6 sm:p-8">
-          <div className="space-y-3">
+        <div {...stylex.props(loginStyles.cardBody)}>
+          <div {...stylex.props(loginStyles.socialButtons)}>
             <GoogleButton />
             <GitHubButton />
           </div>
@@ -64,7 +130,7 @@ function LoginComponent() {
               form.handleSubmit()
             }}
           >
-            <div className="grid gap-y-4">
+            <div {...stylex.props(loginStyles.formGrid)}>
               <div>
                 <form.Field
                   name="username"
@@ -96,7 +162,7 @@ function LoginComponent() {
               </div>
             </div>
 
-            <div className="mt-6 grid w-full">
+            <div {...stylex.props(loginStyles.submitWrapper)}>
               <form.Subscribe
                 selector={(state) => [state.canSubmit, state.isSubmitting]}
                 children={([canSubmit, isSubmitting]) => (
@@ -108,12 +174,9 @@ function LoginComponent() {
             </div>
           </form>
 
-          <div className="mt-8 text-center">
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">
-              <Link
-                to="/"
-                className="text-primary-600 dark:text-primary-400 decoration-2 hover:underline"
-              >
+          <div {...stylex.props(loginStyles.footer)}>
+            <p {...stylex.props(loginStyles.footerText)}>
+              <Link to="/" {...stylex.props(loginStyles.backLink)}>
                 &larr; Go back to homepage
               </Link>
             </p>

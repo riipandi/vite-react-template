@@ -1,5 +1,16 @@
 import { Button as BaseButton } from '@base-ui/react/button'
 import type { ButtonState } from '@base-ui/react/button'
+import * as stylex from '@stylexjs/stylex'
+
+import {
+  colors,
+  fontSize,
+  fontWeight,
+  radius,
+  shadow,
+  space,
+} from '../../../assets/styles/tokens.stylex'
+import { cx } from '../utils'
 
 export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'destructive' | 'icon'
@@ -11,17 +22,101 @@ export interface ButtonProps {
   onClick?: (event: React.MouseEvent) => void
 }
 
-const variantStyles: Record<string, string> = {
-  primary: 'bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white shadow-sm',
-  secondary:
-    'bg-zinc-100 hover:bg-zinc-200 active:bg-zinc-300 text-zinc-800 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-500 dark:text-zinc-100',
-  destructive:
-    'bg-destructive-600 hover:bg-destructive-700 active:bg-destructive-800 text-white shadow-sm',
-  icon: 'border-0 p-1 flex items-center justify-center text-zinc-600 hover:bg-black/[5%] active:bg-black/10 dark:text-zinc-400 dark:hover:bg-white/10 dark:active:bg-white/20 disabled:bg-transparent',
-}
-
-const disabledStyle =
-  'bg-zinc-100 dark:bg-zinc-800 text-zinc-300 dark:text-zinc-600 forced-colors:text-[GrayText] border-black/5 dark:border-white/5'
+const buttonStyles = stylex.create({
+  base: {
+    gap: space[2],
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+    paddingLeft: space[4],
+    paddingRight: space[4],
+    paddingTop: space[2],
+    paddingBottom: space[2],
+    textAlign: 'center',
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.medium,
+    cursor: 'pointer',
+    transitionProperty: 'all',
+    transitionDuration: '150ms',
+    outlineWidth: 0,
+    outlineStyle: 'solid',
+    outlineColor: colors.blue600,
+    outlineOffset: '2px',
+    ':focus-visible': {
+      outlineWidth: 2,
+    },
+  },
+  primary: {
+    backgroundColor: colors.primary600,
+    color: colors.white,
+    boxShadow: shadow.sm,
+    ':hover': {
+      backgroundColor: colors.primary700,
+    },
+    ':active': {
+      backgroundColor: colors.primary800,
+    },
+  },
+  secondary: {
+    backgroundColor: colors.zinc100,
+    color: colors.zinc800,
+    ':hover': {
+      backgroundColor: colors.zinc200,
+    },
+    ':active': {
+      backgroundColor: colors.zinc300,
+    },
+  },
+  destructive: {
+    backgroundColor: colors.destructive600,
+    color: colors.white,
+    boxShadow: shadow.sm,
+    ':hover': {
+      backgroundColor: colors.destructive700,
+    },
+    ':active': {
+      backgroundColor: colors.destructive800,
+    },
+  },
+  icon: {
+    borderWidth: 0,
+    padding: space[1],
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: colors.zinc600,
+    backgroundColor: 'transparent',
+    ':hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    },
+    ':active': {
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    },
+  },
+  disabled: {
+    backgroundColor: colors.zinc100,
+    color: colors.zinc300,
+    borderColor: 'rgba(0, 0, 0, 0.05)',
+    cursor: 'not-allowed',
+    ':hover': {
+      backgroundColor: colors.zinc100,
+    },
+    ':active': {
+      backgroundColor: colors.zinc100,
+    },
+  },
+  iconDisabled: {
+    backgroundColor: 'transparent',
+    color: colors.zinc300,
+    ':hover': {
+      backgroundColor: 'transparent',
+    },
+    ':active': {
+      backgroundColor: 'transparent',
+    },
+  },
+})
 
 export function Button({
   variant = 'primary',
@@ -34,25 +129,32 @@ export function Button({
 }: ButtonProps) {
   const resolvedDisabled = disabled ?? isDisabled
 
+  const getStyles = (state: ButtonState) => {
+    const sx = stylex.props(
+      buttonStyles.base,
+      variant === 'primary' && buttonStyles.primary,
+      variant === 'secondary' && buttonStyles.secondary,
+      variant === 'destructive' && buttonStyles.destructive,
+      variant === 'icon' && buttonStyles.icon,
+      state.disabled && variant !== 'icon' && buttonStyles.disabled,
+      state.disabled && variant === 'icon' && buttonStyles.iconDisabled
+    )
+
+    if (typeof className === 'function') {
+      return cx(sx.className, className(state))
+    }
+    if (typeof className === 'string') {
+      return cx(sx.className, className)
+    }
+    return sx.className
+  }
+
   return (
     <BaseButton
       disabled={resolvedDisabled}
       type={type}
       onClick={onClick}
-      className={(state) => {
-        const base = [
-          'gap-2 rounded-md border border-black/10 px-4 py-2 text-center text-sm font-medium shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] transition-all duration-150 dark:border-white/10 dark:shadow-none',
-          'outline outline-0 outline-offset-2 outline-blue-600 focus-visible:outline-2 dark:outline-blue-500 forced-colors:outline-[Highlight]',
-          variantStyles[variant],
-          state.disabled ? disabledStyle : '',
-        ]
-        if (typeof className === 'function') {
-          base.push(className(state) ?? '')
-        } else if (typeof className === 'string') {
-          base.push(className)
-        }
-        return base.filter(Boolean).join(' ')
-      }}
+      className={(state) => getStyles(state)}
     >
       {children}
     </BaseButton>

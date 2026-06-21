@@ -1,25 +1,143 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import * as stylex from '@stylexjs/stylex'
+
+import { colors, fontSize, fontWeight, radius, space } from '../assets/styles/tokens.stylex'
 
 export const Route = createFileRoute('/$')({
   component: NotFoundComponent,
 })
 
+const styles = stylex.create({
+  page: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'flex',
+    height: '100%',
+    minHeight: '100vh',
+    width: '100%',
+    flexDirection: 'column',
+  },
+  header: {
+    marginBottom: 'auto',
+    width: '100%',
+  },
+  content: {
+    paddingLeft: space[4],
+    paddingRight: space[4],
+    paddingTop: '2.5rem',
+    paddingBottom: '2.5rem',
+    textAlign: 'center',
+    '@media (min-width: 640px)': {
+      paddingLeft: space[6],
+      paddingRight: space[6],
+    },
+    '@media (min-width: 1024px)': {
+      paddingLeft: space[8],
+      paddingRight: space[8],
+    },
+  },
+  title: {
+    display: 'block',
+    fontSize: fontSize['7xl'],
+    fontWeight: fontWeight.bold,
+    color: colors.zinc800,
+    '@media (min-width: 640px)': {
+      fontSize: fontSize['8xl'],
+    },
+  },
+  message: {
+    marginTop: space[6],
+    fontSize: fontSize.lg,
+    color: colors.zinc500,
+    '@media (min-width: 640px)': {
+      marginTop: space[8],
+    },
+  },
+  messageLine: {
+    lineHeight: '2rem',
+  },
+  actionWrapper: {
+    marginTop: space[8],
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  backLink: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: space[2],
+    borderRadius: radius.md,
+    paddingLeft: space[3],
+    paddingRight: space[3],
+    paddingTop: space[2],
+    paddingBottom: space[2],
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.semibold,
+    color: colors.primary600,
+    textDecoration: 'none',
+    transitionProperty: 'all',
+    transitionDuration: '150ms',
+    ':hover': {
+      textDecoration: 'underline',
+    },
+    ':focus-visible': {
+      outlineWidth: 1,
+      outlineStyle: 'solid',
+      outlineColor: colors.primary500,
+      outlineOffset: 2,
+    },
+  },
+  backIcon: {
+    height: '0.625rem',
+    width: '0.625rem',
+  },
+  footer: {
+    marginTop: 'auto',
+    paddingTop: space[5],
+    paddingBottom: space[5],
+    textAlign: 'center',
+  },
+  footerInner: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    maxWidth: '80rem',
+    paddingLeft: space[4],
+    paddingRight: space[4],
+    '@media (min-width: 640px)': {
+      paddingLeft: space[6],
+      paddingRight: space[6],
+    },
+    '@media (min-width: 1024px)': {
+      paddingLeft: space[8],
+      paddingRight: space[8],
+    },
+  },
+  footerText: {
+    fontSize: fontSize.sm,
+    color: colors.zinc400,
+  },
+})
+
 function NotFoundComponent() {
   return (
-    <div className="mx-auto flex h-full min-h-screen w-full flex-col">
-      <header className="mb-auto w-full" aria-hidden />
-      <div className="px-4 py-10 text-center sm:px-6 lg:px-8">
-        <h1 className="block text-7xl font-bold text-zinc-800 sm:text-8xl dark:text-white">404</h1>
-        <div className="mt-6 text-lg text-zinc-500 sm:mt-8 dark:text-zinc-400">
-          <p className="leading-8">Oops, something went wrong.</p>
-          <p className="leading-8">Sorry, we couldn&rsquo;t find your page.</p>
+    <div {...stylex.props(styles.page)}>
+      <header {...stylex.props(styles.header)} aria-hidden />
+      <div {...stylex.props(styles.content)}>
+        <h1 {...stylex.props(styles.title)}>404</h1>
+        <div {...stylex.props(styles.message)}>
+          <p {...stylex.props(styles.messageLine)}>Oops, something went wrong.</p>
+          <p {...stylex.props(styles.messageLine)}>Sorry, we couldn&rsquo;t find your page.</p>
         </div>
-        <div className="mt-8 flex flex-col items-center justify-center">
-          <Link
-            to="/"
-            className="text-primary-600 focus:ring-primary-500 dark:text-primary-400 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-all hover:underline focus:ring-1 focus:ring-offset-2 focus:outline-none"
-          >
-            <svg className="h-2.5 w-2.5" width={20} height={20} viewBox="0 0 16 16" fill="none">
+        <div {...stylex.props(styles.actionWrapper)}>
+          <Link to="/" {...stylex.props(styles.backLink)}>
+            <svg
+              {...stylex.props(styles.backIcon)}
+              width={20}
+              height={20}
+              viewBox="0 0 16 16"
+              fill="none"
+            >
               <path
                 d="M11.2792 1.64001L5.63273 7.28646C5.43747 7.48172 5.43747 7.79831 5.63273 7.99357L11.2792 13.64"
                 stroke="currentColor"
@@ -31,9 +149,9 @@ function NotFoundComponent() {
           </Link>
         </div>
       </div>
-      <footer className="mt-auto py-5 text-center">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm text-zinc-400">
+      <footer {...stylex.props(styles.footer)}>
+        <div {...stylex.props(styles.footerInner)}>
+          <p {...stylex.props(styles.footerText)}>
             &copy; All Rights Reserved. {new Date().getFullYear()}
           </p>
         </div>

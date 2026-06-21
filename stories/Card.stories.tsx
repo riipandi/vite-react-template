@@ -31,10 +31,3 @@ export const InsideContainer: Story = {
     children: 'A card placed inside a container component.',
   },
 }
-
-export const WithCustomClass: Story = {
-  args: {
-    children: 'Card with custom padding class.',
-    className: 'p-12',
-  },
-}

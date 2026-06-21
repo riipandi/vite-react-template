@@ -1,9 +1,12 @@
 import { createFileRoute, Link, redirect } from '@tanstack/react-router'
+import * as stylex from '@stylexjs/stylex'
 import { ThemeSwitcher } from '#/components/theme'
 import { Alert, Button } from '#/components/ui-react-aria'
 import { useAuthentication } from '#/context/auth/AuthProvider'
 import { isAuthenticated } from '#/lib/auth'
 import ViteLogo from '../assets/images/vite.svg'
+
+import { colors, fontSize, space } from '../assets/styles/tokens.stylex'
 
 export const Route = createFileRoute('/')({
   beforeLoad: () => {
@@ -14,25 +17,140 @@ export const Route = createFileRoute('/')({
   component: HomeComponent,
 })
 
+const homeStyles = stylex.create({
+  page: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'flex',
+    height: '100%',
+    minHeight: '100vh',
+    width: '100%',
+    flexDirection: 'column',
+  },
+  header: {
+    marginBottom: 'auto',
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'flex-end',
+    padding: space[4],
+  },
+  content: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: space[8],
+    paddingLeft: space[4],
+    paddingRight: space[4],
+    paddingTop: '2.5rem',
+    paddingBottom: '2.5rem',
+    '@media (min-width: 640px)': {
+      paddingLeft: space[6],
+      paddingRight: space[6],
+    },
+    '@media (min-width: 1024px)': {
+      paddingLeft: space[8],
+      paddingRight: space[8],
+    },
+  },
+  logo: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoImg: {
+    height: '7rem',
+  },
+  tagline: {
+    textAlign: 'center',
+    fontSize: fontSize.lg,
+    color: colors.zinc500,
+    '@media (min-width: 640px)': {
+      marginTop: space[8],
+    },
+  },
+  taglineText: {
+    lineHeight: '2rem',
+  },
+  actions: {
+    marginTop: space[4],
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: space[2],
+    '@media (min-width: 640px)': {
+      flexDirection: 'row',
+      gap: space[3],
+    },
+  },
+  alertWrapper: {
+    width: '100%',
+  },
+  footer: {
+    marginTop: 'auto',
+    paddingTop: space[5],
+    paddingBottom: space[5],
+    textAlign: 'center',
+  },
+  footerInner: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    maxWidth: '80rem',
+    paddingLeft: space[4],
+    paddingRight: space[4],
+    '@media (min-width: 640px)': {
+      paddingLeft: space[6],
+      paddingRight: space[6],
+    },
+    '@media (min-width: 1024px)': {
+      paddingLeft: space[8],
+      paddingRight: space[8],
+    },
+  },
+  footerText: {
+    fontSize: fontSize.sm,
+    letterSpacing: '0.025em',
+    color: colors.zinc500,
+  },
+  footerLink: {
+    color: colors.primary600,
+    textDecoration: 'none',
+    ':hover': {
+      textDecoration: 'underline',
+    },
+  },
+  footerSubText: {
+    marginTop: space[2],
+    fontSize: fontSize.sm,
+    letterSpacing: '0.025em',
+    color: colors.zinc400,
+  },
+})
+
 function HomeComponent() {
   const { user, loggedIn } = useAuthentication()
 
   return (
-    <div className="mx-auto flex h-full min-h-screen w-full flex-col">
-      <header className="mb-auto flex w-full justify-end p-4" aria-hidden>
+    <div {...stylex.props(homeStyles.page)}>
+      <header {...stylex.props(homeStyles.header)} aria-hidden>
         <ThemeSwitcher className="size-9" />
       </header>
-      <div className="mx-auto flex flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8">
-        <div className="mx-auto flex items-center justify-center">
-          <img src={ViteLogo} alt="Vite logo" className="h-28" />
+      <div {...stylex.props(homeStyles.content)}>
+        <div {...stylex.props(homeStyles.logo)}>
+          <img src={ViteLogo} alt="Vite logo" {...stylex.props(homeStyles.logoImg)} />
         </div>
-        <div className="text-center text-lg text-zinc-500 sm:mt-8 dark:text-zinc-400">
-          <p className="leading-8">This is an example starter template React with Vite.</p>
-          <p className="leading-8">
-            Vite + React + Typescript + Tailwind CSS + TanStack Form + TanStack Router + Vitest
+        <div {...stylex.props(homeStyles.tagline)}>
+          <p {...stylex.props(homeStyles.taglineText)}>
+            This is an example starter template React with Vite.
+          </p>
+          <p {...stylex.props(homeStyles.taglineText)}>
+            Vite + React + Typescript + StyleX + TanStack Form + TanStack Router + Vitest
           </p>
         </div>
-        <div className="mt-4 flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-3">
+        <div {...stylex.props(homeStyles.actions)}>
           <Link to="/dashboard" className="inline-flex items-center justify-center">
             <Button variant="primary">User Dashboard</Button>
           </Link>
@@ -53,13 +171,13 @@ function HomeComponent() {
           </Alert>
         </div>
       </div>
-      <footer className="mt-auto py-5 text-center">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm tracking-wide text-zinc-500 dark:text-zinc-400">
+      <footer {...stylex.props(homeStyles.footer)}>
+        <div {...stylex.props(homeStyles.footerInner)}>
+          <p {...stylex.props(homeStyles.footerText)}>
             &copy; {new Date().getFullYear()} - Made by{' '}
             <a
               href="https://ripandis.com"
-              className="text-primary-600 dark:text-primary-400 hover:underline"
+              {...stylex.props(homeStyles.footerLink)}
               target="_blank"
               rel="noreferrer"
             >
@@ -67,9 +185,7 @@ function HomeComponent() {
             </a>{' '}
             in 🇮🇩
           </p>
-          <p className="mt-2 text-sm tracking-wide text-zinc-400 dark:text-zinc-500">
-            v{import.meta.env.APP_VERSION}
-          </p>
+          <p {...stylex.props(homeStyles.footerSubText)}>v{import.meta.env.APP_VERSION}</p>
         </div>
       </footer>
     </div>

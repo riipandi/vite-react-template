@@ -1,11 +1,7 @@
-import { twMerge } from 'tailwind-merge'
-
-export function ctrp<T>(
-  className: string | ((v: T) => string) | undefined,
-  tw: string
-): string | ((v: T) => string) {
-  if (typeof className === 'function') {
-    return (v: T) => twMerge(tw, className(v))
-  }
-  return twMerge(tw, className ?? '')
+/**
+ * Merge class names, filtering out falsy values.
+ * Useful when combining StyleX className with external className props.
+ */
+export function cx(...classes: (string | false | null | undefined)[]): string {
+  return classes.filter(Boolean).join(' ')
 }

@@ -1,15 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import type { FC, ReactNode } from 'react'
-import { cx } from '#/lib/utils'
 import { colors, radius, space, fontSize } from '#/styles/tokens.stylex'
 
-interface AlertProps {
-  variant?: 'info' | 'success' | 'destructive' | 'warning' | 'subtle'
-  children: ReactNode
-  className?: string
-}
-
-const alertStyles = stylex.create({
+export const alertStyles = stylex.create({
   base: {
     width: '100%',
     borderRadius: radius.lg,
@@ -56,20 +48,3 @@ const alertStyles = stylex.create({
     color: colors.zinc600
   }
 })
-
-const variantMap = {
-  info: alertStyles.info,
-  success: alertStyles.success,
-  destructive: alertStyles.destructive,
-  warning: alertStyles.warning,
-  subtle: alertStyles.subtle
-} as const
-
-export const Alert: FC<AlertProps> = ({ children, variant = 'info', className }) => {
-  const sx = stylex.props(alertStyles.base, variantMap[variant])
-  return (
-    <div className={cx(sx.className, className)} style={sx.style} role='alert'>
-      {children}
-    </div>
-  )
-}

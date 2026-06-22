@@ -1,14 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import type { FC } from 'react'
-import { cx } from '#/lib/utils'
 import { colors, fontSize, space } from '#/styles/tokens.stylex'
 
-interface HorizontalDividerProps {
-  label?: string
-  className?: string
-}
-
-const dividerStyles = stylex.create({
+export const dividerStyles = stylex.create({
   base: {
     display: 'flex',
     alignItems: 'center',
@@ -60,20 +53,3 @@ const dividerStyles = stylex.create({
     }
   }
 })
-
-export const HorizontalDivider: FC<HorizontalDividerProps> = ({ label, className }) => {
-  const hasLabel = !!label
-  const sx = stylex.props(
-    dividerStyles.base,
-    dividerStyles.before,
-    dividerStyles.after,
-    hasLabel && dividerStyles.withLabel,
-    hasLabel && dividerStyles.labelBefore,
-    hasLabel && dividerStyles.labelAfter
-  )
-  return (
-    <div className={cx(sx.className, className)} style={sx.style}>
-      {label}
-    </div>
-  )
-}

@@ -40,9 +40,6 @@
         "**/*.yml",
         "**/*.yaml",
         "**/*.toml",
-        "/storybook-static/**",
-        "/build/**",
-        "/tests-results/**",
         "/public/**"
     ]
 }

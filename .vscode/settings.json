@@ -10,6 +10,7 @@
         "wrangler.json": "jsonc"
     },
     "files.readonlyInclude": {
+        "**/.output/**": true,
         "**/routeTree.gen.ts": true,
         "**/routes.gen.ts": true,
         "**/build/**": true,
@@ -18,6 +19,7 @@
         "**/specs/**": true
     },
     "files.watcherExclude": {
+        "**/.output/**": true,
         "**/routeTree.gen.ts": true,
         "**/routes.gen.ts": true,
         "**/build/**": true,
@@ -26,7 +28,7 @@
         "**/specs/**": true
     },
     "search.exclude": {
-        "**/.output": true,
+        "**/.output/**": true,
         "**/routeTree.gen.ts": true,
         "**/routes.gen.ts": true,
         "**/build/**": true,

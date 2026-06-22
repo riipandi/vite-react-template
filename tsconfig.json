@@ -36,5 +36,5 @@
         }
     },
     "include": ["**/*.ts", "**/*.tsx"],
-    "exclude": ["node_modules", "build", "dist", "storybook-static", "tests-results"]
+    "exclude": ["node_modules", ".output", ".tanstack", "dist"]
 }

@@ -35,7 +35,7 @@ build/
 dist/
 dist-ssr/
 release/
-output/
+/output/
 /out/
 .react-email/
 .build/
@@ -67,7 +67,6 @@ compose.env*
 # Disable this line in your real app
 /playwright/.cache/
 /playwright-report/
-/tests-results/
 /blob-report/
 .playwright/
 

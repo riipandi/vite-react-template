@@ -29,5 +29,5 @@
         "typescript/no-unnecessary-type-constraint": "off",
         "no-empty": ["error", { "allowEmptyCatch": true }]
     },
-    "ignorePatterns": ["/storybook-static/**"]
+    "ignorePatterns": [".output/**"]
 }

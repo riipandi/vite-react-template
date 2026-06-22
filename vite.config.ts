@@ -47,13 +47,13 @@ export default defineConfig({
     exclude: ['node_modules', 'tests-e2e'],
     reporters: process.env.CI ? ['html', 'github-actions'] : ['html', 'default'],
     outputFile: {
-      json: './tests-results/vitest-results.json',
-      html: './tests-results/index.html'
+      json: './.output/tests-results/vitest-results.json',
+      html: './.output/tests-results/index.html'
     },
     coverage: {
       provider: 'istanbul',
       reporter: ['html-spa', 'text-summary'],
-      reportsDirectory: './tests-results/coverage',
+      reportsDirectory: './.output/tests-results/coverage',
       include: ['./src/**/*.{js,jsx,ts,tsx}'],
       cleanOnRerun: true,
       clean: true,

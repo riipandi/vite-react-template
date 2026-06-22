@@ -1,7 +1,6 @@
 import stylex from '@stylexjs/unplugin/vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
-import path from 'node:path'
 import { join, resolve } from 'node:path'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { loadEnv } from 'vite'
@@ -10,11 +9,11 @@ import { defineConfig } from 'vitest/config'
 export default defineConfig({
   plugins: [
     stylex({
-      aliases: { '#/*': path.join(__dirname, './src/*') }
+      aliases: { '#/*': join(__dirname, './src/*') }
     }),
     tanstackRouter({
-      routesDirectory: path.resolve('./src/routes'),
-      generatedRouteTree: path.resolve('./src/routes.gen.ts'),
+      routesDirectory: resolve('./src/routes'),
+      generatedRouteTree: resolve('./src/routes.gen.ts'),
       autoCodeSplitting: true,
       target: 'react'
     }),
@@ -41,9 +40,7 @@ export default defineConfig({
     environment: 'happy-dom',
     env: loadEnv('test', process.cwd(), ''),
     environmentOptions: {
-      happyDOM: {
-        url: 'http://localhost:3000/'
-      }
+      happyDOM: { url: 'http://localhost:3000/' }
     },
     setupFiles: ['./tests/setup-test.ts'],
     include: ['./**/*.{test,spec}.{ts,tsx}'],

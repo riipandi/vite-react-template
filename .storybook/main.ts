@@ -1,34 +1,33 @@
 import type { StorybookConfig } from '@storybook/react-vite'
+import { mergeConfig } from 'vite'
 
 const config: StorybookConfig = {
   stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-docs'],
-  framework: {
-    name: '@storybook/react-vite',
-    options: {}
-  },
+  addons: [
+    '@storybook/addon-a11y',
+    '@storybook/addon-docs',
+    '@storybook/addon-links',
+    '@storybook/addon-mcp',
+    '@storybook/addon-vitest',
+    '@github-ui/storybook-addon-performance-panel'
+  ],
+  framework: '@storybook/react-vite',
   core: {
     disableTelemetry: true,
+    disableWhatsNewNotifications: true,
     enableCrashReports: false
   },
-  docs: {},
-  typescript: {
-    reactDocgen: 'react-docgen-typescript'
-  },
+  features: { backgrounds: false },
+  typescript: { reactDocgen: 'react-docgen-typescript' },
   async viteFinal(viteConfig) {
-    viteConfig.build = {
-      ...viteConfig.build,
-      chunkSizeWarningLimit: 1200,
-      // Vite 8 uses Rolldown — enable automatic code splitting
-      // to break large chunks (particularly the storybook iframe bundle).
-      // @ref: https://rolldown.rs/reference/OutputOptions.codeSplitting
-      rolldownOptions: {
-        output: {
-          codeSplitting: true
+    return mergeConfig(viteConfig, {
+      build: {
+        chunkSizeWarningLimit: 1024 * 2,
+        rolldownOptions: {
+          output: { codeSplitting: true }
         }
       }
-    }
-    return viteConfig
+    })
   }
 }
 

@@ -1,9 +1,8 @@
-import * as Lucide from 'lucide-react'
-import { Link, useRouterState } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
-
+import { Link, useRouterState } from '@tanstack/react-router'
+import * as Lucide from 'lucide-react'
+import { colors, radius, shadow, space } from '#/assets/styles/tokens.stylex'
 import { ThemeSwitcher } from '#/components/theme-switcher'
-import { colors, radius, shadow, space } from '../assets/styles/tokens.stylex'
 
 // ── Nav data ──────────────────────────────────────────────────────────────────
 
@@ -11,13 +10,13 @@ const navItems = [
   { icon: Lucide.LayoutDashboard, label: 'Overview', href: '/dashboard/overview' },
   { icon: Lucide.Search, label: 'Search', href: '#' },
   { icon: Lucide.BarChart3, label: 'Analytics', href: '#' },
-  { icon: Lucide.FileText, label: 'Docs', href: '#' },
+  { icon: Lucide.FileText, label: 'Docs', href: '#' }
 ]
 
 const secondaryItems = [
   { icon: Lucide.ShoppingCart, label: 'Products', href: '#' },
   { icon: Lucide.Settings, label: 'Settings', href: '#' },
-  { icon: Lucide.Mail, label: 'Messages', href: '#', badge: true },
+  { icon: Lucide.Mail, label: 'Messages', href: '#', badge: true }
 ]
 
 // ── Styles ────────────────────────────────────────────────────────────────────
@@ -39,7 +38,7 @@ const collapseStyles = stylex.create({
     transitionDuration: '200ms',
     flexShrink: 0,
     paddingTop: space[3],
-    paddingBottom: space[3],
+    paddingBottom: space[3]
   },
 
   // Logo
@@ -52,13 +51,13 @@ const collapseStyles = stylex.create({
     justifyContent: 'center',
     marginBottom: space[4],
     background: `linear-gradient(135deg, ${colors.primary500}, ${colors.primary700})`,
-    flexShrink: 0,
+    flexShrink: 0
   },
   logoSvg: {
     height: '1.125rem',
     width: '1.125rem',
     fill: colors.white,
-    color: colors.white,
+    color: colors.white
   },
 
   // Divider
@@ -66,7 +65,7 @@ const collapseStyles = stylex.create({
     width: '2rem',
     height: '1px',
     backgroundColor: colors.zinc100,
-    marginBottom: space[2],
+    marginBottom: space[2]
   },
 
   // Nav
@@ -78,7 +77,7 @@ const collapseStyles = stylex.create({
     paddingLeft: space[2],
     paddingRight: space[2],
     gap: space[1],
-    marginBottom: space[3],
+    marginBottom: space[3]
   },
   navLink: {
     display: 'flex',
@@ -94,16 +93,16 @@ const collapseStyles = stylex.create({
     transitionDuration: '150ms',
     ':hover': {
       backgroundColor: colors.zinc100,
-      color: colors.zinc800,
-    },
+      color: colors.zinc800
+    }
   },
   navLinkActive: {
     backgroundColor: colors.primary50,
     color: colors.primary700,
     ':hover': {
       backgroundColor: colors.primary100,
-      color: colors.primary700,
-    },
+      color: colors.primary700
+    }
   },
   activeAccent: {
     position: 'absolute',
@@ -112,12 +111,12 @@ const collapseStyles = stylex.create({
     bottom: '0.375rem',
     width: '3px',
     borderRadius: '9999px',
-    backgroundColor: colors.primary500,
+    backgroundColor: colors.primary500
   },
   navIcon: {
     height: '1rem',
     width: '1rem',
-    stroke: 'currentColor',
+    stroke: 'currentColor'
   },
   badge: {
     position: 'absolute',
@@ -126,7 +125,7 @@ const collapseStyles = stylex.create({
     height: '0.4rem',
     width: '0.4rem',
     borderRadius: '9999px',
-    backgroundColor: colors.destructive500,
+    backgroundColor: colors.destructive500
   },
 
   // Bottom
@@ -142,7 +141,7 @@ const collapseStyles = stylex.create({
     borderTopColor: colors.zinc100,
     width: '100%',
     paddingLeft: space[2],
-    paddingRight: space[2],
+    paddingRight: space[2]
   },
   userLink: {
     display: 'flex',
@@ -157,14 +156,14 @@ const collapseStyles = stylex.create({
     transitionDuration: '150ms',
     ':hover': {
       backgroundColor: colors.zinc100,
-      color: colors.zinc800,
-    },
+      color: colors.zinc800
+    }
   },
   userIcon: {
     height: '1rem',
     width: '1rem',
-    stroke: 'currentColor',
-  },
+    stroke: 'currentColor'
+  }
 })
 
 // ── Component ──────────────────────────────────────────────────────────────────
@@ -178,14 +177,14 @@ export function NavBarCollapse() {
   return (
     <div {...stylex.props(collapseStyles.container)}>
       {/* Logo icon */}
-      <Link to="/" {...stylex.props(collapseStyles.logoLink)} aria-label="Home">
+      <Link to='/' {...stylex.props(collapseStyles.logoLink)} aria-label='Home'>
         <svg
           {...stylex.props(collapseStyles.logoSvg)}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 20 20'
+          fill='currentColor'
         >
-          <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
+          <path d='M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z' />
         </svg>
       </Link>
 
@@ -232,10 +231,10 @@ export function NavBarCollapse() {
 
       {/* Bottom */}
       <div {...stylex.props(collapseStyles.bottomSection)}>
-        <Link to="/" {...stylex.props(collapseStyles.userLink)} aria-label="My Account">
+        <Link to='/' {...stylex.props(collapseStyles.userLink)} aria-label='My Account'>
           <Lucide.User {...stylex.props(collapseStyles.userIcon)} />
         </Link>
-        <ThemeSwitcher />
+        <ThemeSwitcher hideLabel />
       </div>
     </div>
   )

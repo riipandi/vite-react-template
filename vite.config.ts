@@ -1,23 +1,29 @@
-// @ts-check
-
-import { join, resolve } from 'node:path'
+import stylex from '@stylexjs/unplugin/vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
-import stylex from '@stylexjs/unplugin/vite'
+import path from 'node:path'
+import { join, resolve } from 'node:path'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { loadEnv } from 'vite'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [
-    stylex(),
-    tanstackRouter({ target: 'react', autoCodeSplitting: true }),
+    stylex({
+      aliases: { '#/*': path.join(__dirname, './src/*') }
+    }),
+    tanstackRouter({
+      routesDirectory: path.resolve('./src/routes'),
+      generatedRouteTree: path.resolve('./src/routes.gen.ts'),
+      autoCodeSplitting: true,
+      target: 'react'
+    }),
     react(),
-    !process.env.CI && visualizer({ emitFile: true, template: 'treemap' }),
+    !process.env.CI && visualizer({ emitFile: true, template: 'treemap' })
   ],
   resolve: { tsconfigPaths: true },
   envDir: join(__dirname),
-  envPrefix: ['VITE_'],
+  envPrefix: ['VITE_', 'PUBLIC_'],
   define: { 'import.meta.env.APP_VERSION': `"${process.env.npm_package_version}"` },
   publicDir: resolve(__dirname, 'public'),
   root: resolve(__dirname),
@@ -27,21 +33,17 @@ export default defineConfig({
     reportCompressedSize: false,
     outDir: resolve(__dirname, 'dist'),
     rollupOptions: {
-      input: { app: resolve(__dirname, 'index.html') },
-    },
+      input: { app: resolve(__dirname, 'index.html') }
+    }
   },
-  base: '/',
-  server: {
-    port: 3000,
-    strictPort: true,
-  },
+  server: { port: 3000, strictPort: true },
   test: {
     environment: 'happy-dom',
     env: loadEnv('test', process.cwd(), ''),
     environmentOptions: {
       happyDOM: {
-        url: 'http://localhost:3000/',
-      },
+        url: 'http://localhost:3000/'
+      }
     },
     setupFiles: ['./tests/setup-test.ts'],
     include: ['./**/*.{test,spec}.{ts,tsx}'],
@@ -49,7 +51,7 @@ export default defineConfig({
     reporters: process.env.CI ? ['html', 'github-actions'] : ['html', 'default'],
     outputFile: {
       json: './tests-results/vitest-results.json',
-      html: './tests-results/index.html',
+      html: './tests-results/index.html'
     },
     coverage: {
       provider: 'istanbul',
@@ -63,11 +65,11 @@ export default defineConfig({
           statements: 80,
           branches: 70,
           functions: 75,
-          lines: 80,
-        },
-      },
+          lines: 80
+        }
+      }
     },
     dir: './tests',
-    globals: true,
-  },
+    globals: true
+  }
 })

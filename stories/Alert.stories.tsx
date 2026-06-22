@@ -5,15 +5,15 @@ const meta: Meta<typeof Alert> = {
   title: 'UI/Alert',
   component: Alert,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   argTypes: {
     variant: {
       control: 'select',
-      options: ['info', 'warning', 'success', 'destructive'],
+      options: ['info', 'warning', 'success', 'destructive']
     },
-    children: { control: 'text' },
-  },
+    children: { control: 'text' }
+  }
 }
 
 export default meta
@@ -22,27 +22,27 @@ type Story = StoryObj<typeof Alert>
 export const Info: Story = {
   args: {
     variant: 'info',
-    children: 'This is an informational message.',
-  },
+    children: 'This is an informational message.'
+  }
 }
 
 export const Success: Story = {
   args: {
     variant: 'success',
-    children: 'Operation completed successfully!',
-  },
+    children: 'Operation completed successfully!'
+  }
 }
 
 export const Warning: Story = {
   args: {
     variant: 'warning',
-    children: 'Please check your input before submitting.',
-  },
+    children: 'Please check your input before submitting.'
+  }
 }
 
 export const Destructive: Story = {
   args: {
     variant: 'destructive',
-    children: 'An error occurred while processing your request.',
-  },
+    children: 'An error occurred while processing your request.'
+  }
 }

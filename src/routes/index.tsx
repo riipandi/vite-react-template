@@ -1,14 +1,13 @@
-import { createFileRoute, Link, redirect } from '@tanstack/react-router'
-import * as stylex from '@stylexjs/stylex'
 import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import { createFileRoute, Link, redirect } from '@tanstack/react-router'
+import ViteLogo from '#/assets/images/vite.svg'
+import { colors, fontSize, space } from '#/assets/styles/tokens.stylex'
 import { ThemeSwitcher } from '#/components/theme-switcher'
 import { Alert } from '#/components/ui/alert'
 import { Button } from '#/components/ui/button'
 import { useAuthentication } from '#/context/auth/AuthProvider'
 import { isAuthenticated } from '#/lib/auth'
-import ViteLogo from '../assets/images/vite.svg'
-
-import { colors, fontSize, space } from '../assets/styles/tokens.stylex'
 
 export const Route = createFileRoute('/')({
   beforeLoad: () => {
@@ -16,7 +15,7 @@ export const Route = createFileRoute('/')({
       throw redirect({ to: '/dashboard/overview' })
     }
   },
-  component: HomeComponent,
+  component: HomeComponent
 })
 
 const homeStyles = stylex.create({
@@ -25,7 +24,7 @@ const homeStyles = stylex.create({
     display: 'flex',
     width: '100%',
     justifyContent: 'flex-end',
-    padding: space[4],
+    padding: space[4]
   },
   content: {
     marginLeft: 'auto',
@@ -39,12 +38,12 @@ const homeStyles = stylex.create({
     paddingBottom: '2.5rem',
     '@media (min-width: 640px)': {
       paddingLeft: space[6],
-      paddingRight: space[6],
+      paddingRight: space[6]
     },
     '@media (min-width: 1024px)': {
       paddingLeft: space[8],
-      paddingRight: space[8],
-    },
+      paddingRight: space[8]
+    }
   },
   tagline: {
     textAlign: 'center',
@@ -54,8 +53,8 @@ const homeStyles = stylex.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     '@media (min-width: 640px)': {
-      marginTop: space[8],
-    },
+      marginTop: space[8]
+    }
   },
   actions: {
     marginTop: space[4],
@@ -66,14 +65,14 @@ const homeStyles = stylex.create({
     gap: space[2],
     '@media (min-width: 640px)': {
       flexDirection: 'row',
-      gap: space[3],
-    },
+      gap: space[3]
+    }
   },
   footer: {
     marginTop: 'auto',
     paddingTop: space[5],
     paddingBottom: space[5],
-    textAlign: 'center',
+    textAlign: 'center'
   },
   footerInner: {
     marginLeft: 'auto',
@@ -83,31 +82,31 @@ const homeStyles = stylex.create({
     paddingRight: space[4],
     '@media (min-width: 640px)': {
       paddingLeft: space[6],
-      paddingRight: space[6],
+      paddingRight: space[6]
     },
     '@media (min-width: 1024px)': {
       paddingLeft: space[8],
-      paddingRight: space[8],
-    },
+      paddingRight: space[8]
+    }
   },
   footerText: {
     fontSize: fontSize.sm,
     letterSpacing: '0.025em',
-    color: colors.zinc500,
+    color: colors.zinc500
   },
   footerLink: {
     color: colors.primary600,
     textDecoration: 'none',
     ':hover': {
-      textDecoration: 'underline',
-    },
+      textDecoration: 'underline'
+    }
   },
   footerSubText: {
     marginTop: space[2],
     fontSize: fontSize.sm,
     letterSpacing: '0.025em',
-    color: colors.zinc400,
-  },
+    color: colors.zinc400
+  }
 })
 
 function HomeComponent() {
@@ -138,7 +137,7 @@ function HomeComponent() {
             x.justifyContent.center
           )}
         >
-          <img src={ViteLogo} alt="Vite logo" {...stylex.props(x.height['7rem'])} />
+          <img src={ViteLogo} alt='Vite logo' {...stylex.props(x.height['7rem'])} />
         </div>
         <div {...stylex.props(homeStyles.tagline)}>
           <p {...stylex.props(x.lineHeight['2rem'], x.marginBottom['0.5rem'])}>
@@ -149,15 +148,15 @@ function HomeComponent() {
           </p>
         </div>
         <div {...stylex.props(homeStyles.actions)}>
-          <Link to="/dashboard">
-            <Button variant="primary">User Dashboard</Button>
+          <Link to='/dashboard'>
+            <Button variant='primary'>User Dashboard</Button>
           </Link>
           <a
-            href="https://github.com/riipandi/vite-react-template"
-            target="_blank"
-            rel="noreferrer"
+            href='https://github.com/riipandi/vite-react-template'
+            target='_blank'
+            rel='noreferrer'
           >
-            <Button variant="secondary">Get Source Code</Button>
+            <Button variant='secondary'>Get Source Code</Button>
           </a>
         </div>
         <div>
@@ -171,10 +170,10 @@ function HomeComponent() {
           <p {...stylex.props(homeStyles.footerText)}>
             &copy; {new Date().getFullYear()} - Made by{' '}
             <a
-              href="https://ripandis.com"
+              href='https://ripandis.com'
               {...stylex.props(homeStyles.footerLink)}
-              target="_blank"
-              rel="noreferrer"
+              target='_blank'
+              rel='noreferrer'
             >
               Aris Ripandi
             </a>{' '}

@@ -1,15 +1,7 @@
 import { Button as BaseButton } from '@base-ui/react/button'
 import type { ButtonState } from '@base-ui/react/button'
 import * as stylex from '@stylexjs/stylex'
-
-import {
-  colors,
-  fontSize,
-  fontWeight,
-  radius,
-  shadow,
-  space,
-} from '../../assets/styles/tokens.stylex'
+import { colors, fontSize, fontWeight, radius, shadow, space } from '#/assets/styles/tokens.stylex'
 import { cx } from '#/lib/utils'
 
 export interface ButtonProps {
@@ -47,40 +39,40 @@ const buttonStyles = stylex.create({
     outlineColor: colors.blue600,
     outlineOffset: '2px',
     ':focus-visible': {
-      outlineWidth: 2,
-    },
+      outlineWidth: 2
+    }
   },
   primary: {
     backgroundColor: colors.primary600,
     color: colors.white,
     boxShadow: shadow.sm,
     ':hover': {
-      backgroundColor: colors.primary700,
+      backgroundColor: colors.primary700
     },
     ':active': {
-      backgroundColor: colors.primary800,
-    },
+      backgroundColor: colors.primary800
+    }
   },
   secondary: {
     backgroundColor: colors.surface,
     color: colors.zinc700,
     ':hover': {
-      backgroundColor: colors.surfaceHover,
+      backgroundColor: colors.surfaceHover
     },
     ':active': {
-      backgroundColor: colors.zinc200,
-    },
+      backgroundColor: colors.zinc200
+    }
   },
   destructive: {
     backgroundColor: colors.destructive600,
     color: colors.white,
     boxShadow: shadow.sm,
     ':hover': {
-      backgroundColor: colors.destructive700,
+      backgroundColor: colors.destructive700
     },
     ':active': {
-      backgroundColor: colors.destructive800,
-    },
+      backgroundColor: colors.destructive800
+    }
   },
   icon: {
     borderWidth: 0,
@@ -91,11 +83,11 @@ const buttonStyles = stylex.create({
     color: colors.zinc500,
     backgroundColor: 'transparent',
     ':hover': {
-      backgroundColor: colors.surfaceHover,
+      backgroundColor: colors.surfaceHover
     },
     ':active': {
-      backgroundColor: colors.zinc200,
-    },
+      backgroundColor: colors.zinc200
+    }
   },
   disabled: {
     backgroundColor: colors.zinc100,
@@ -103,22 +95,22 @@ const buttonStyles = stylex.create({
     borderColor: colors.zinc200,
     cursor: 'not-allowed',
     ':hover': {
-      backgroundColor: colors.zinc100,
+      backgroundColor: colors.zinc100
     },
     ':active': {
-      backgroundColor: colors.zinc100,
-    },
+      backgroundColor: colors.zinc100
+    }
   },
   iconDisabled: {
     backgroundColor: 'transparent',
     color: colors.zinc300,
     ':hover': {
-      backgroundColor: 'transparent',
+      backgroundColor: 'transparent'
     },
     ':active': {
-      backgroundColor: 'transparent',
-    },
-  },
+      backgroundColor: 'transparent'
+    }
+  }
 })
 
 export function Button({
@@ -128,7 +120,7 @@ export function Button({
   type = 'button',
   className,
   children,
-  onClick,
+  onClick
 }: ButtonProps) {
   const resolvedDisabled = disabled ?? isDisabled
 

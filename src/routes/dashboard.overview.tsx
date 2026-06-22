@@ -1,17 +1,15 @@
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
-import * as stylex from '@stylexjs/stylex'
-import x from '@stylexjs/atoms'
-
+import { colors, fontSize, fontWeight, radius, shadow, space } from '#/assets/styles/tokens.stylex'
 import { Button } from '#/components/ui/button'
 import { Card } from '#/components/ui/card'
 import { Container } from '#/components/ui/container'
 import { useAuthentication } from '#/context/auth/AuthProvider'
 
-import { colors, fontSize, fontWeight, radius, shadow, space } from '../assets/styles/tokens.stylex'
-
 export const Route = createFileRoute('/dashboard/overview')({
-  component: DashboardOverviewComponent,
+  component: DashboardOverviewComponent
 })
 
 // ── Stat card data ───────────────────────────────────────────────────────────
@@ -23,7 +21,7 @@ const stats = [
     change: '+12.5%',
     positive: true,
     icon: Lucide.Users,
-    color: 'primary' as const,
+    color: 'primary' as const
   },
   {
     label: 'Revenue',
@@ -31,7 +29,7 @@ const stats = [
     change: '+8.2%',
     positive: true,
     icon: Lucide.DollarSign,
-    color: 'green' as const,
+    color: 'green' as const
   },
   {
     label: 'Active Sessions',
@@ -39,7 +37,7 @@ const stats = [
     change: '-2.1%',
     positive: false,
     icon: Lucide.Activity,
-    color: 'orange' as const,
+    color: 'orange' as const
   },
   {
     label: 'Pending Tasks',
@@ -47,8 +45,8 @@ const stats = [
     change: '+4 today',
     positive: false,
     icon: Lucide.ClipboardList,
-    color: 'destructive' as const,
-  },
+    color: 'destructive' as const
+  }
 ]
 
 // ── Activity feed data ────────────────────────────────────────────────────────
@@ -60,7 +58,7 @@ const activity = [
     action: 'Created a new project',
     time: '2 min ago',
     avatar: 'AJ',
-    type: 'create' as const,
+    type: 'create' as const
   },
   {
     id: 2,
@@ -68,7 +66,7 @@ const activity = [
     action: 'Completed task #482',
     time: '14 min ago',
     avatar: 'BM',
-    type: 'complete' as const,
+    type: 'complete' as const
   },
   {
     id: 3,
@@ -76,7 +74,7 @@ const activity = [
     action: 'Left a comment on Dashboard v2',
     time: '1 hr ago',
     avatar: 'CW',
-    type: 'comment' as const,
+    type: 'comment' as const
   },
   {
     id: 4,
@@ -84,7 +82,7 @@ const activity = [
     action: 'Uploaded 3 files to Media Library',
     time: '3 hr ago',
     avatar: 'DK',
-    type: 'upload' as const,
+    type: 'upload' as const
   },
   {
     id: 5,
@@ -92,8 +90,8 @@ const activity = [
     action: 'Invited 2 new team members',
     time: 'Yesterday',
     avatar: 'ET',
-    type: 'invite' as const,
-  },
+    type: 'invite' as const
+  }
 ]
 
 // ── Weekly chart data ─────────────────────────────────────────────────────────
@@ -105,7 +103,7 @@ const weeklyData = [
   { day: 'Thu', value: 88 },
   { day: 'Fri', value: 62 },
   { day: 'Sat', value: 35 },
-  { day: 'Sun', value: 48 },
+  { day: 'Sun', value: 48 }
 ]
 
 const maxValue = Math.max(...weeklyData.map((d) => d.value))
@@ -119,30 +117,30 @@ const styles = stylex.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     marginBottom: space[10],
-    gap: space[4],
+    gap: space[4]
   },
   pageHeaderLeft: {
     display: 'flex',
     flexDirection: 'column',
-    gap: space[1],
+    gap: space[1]
   },
   pageLabel: {
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
-    color: colors.primary600,
+    color: colors.primary600
   },
   pageTitle: {
     fontSize: fontSize['2xl'],
     fontWeight: fontWeight.bold,
     color: colors.zinc900,
-    lineHeight: '1.2',
+    lineHeight: '1.2'
   },
   pageSubtitle: {
     fontSize: fontSize.sm,
     color: colors.zinc500,
-    marginTop: space[1],
+    marginTop: space[1]
   },
 
   // Section
@@ -150,12 +148,12 @@ const styles = stylex.create({
     fontSize: fontSize.base,
     fontWeight: fontWeight.semibold,
     color: colors.zinc800,
-    marginBottom: space[4],
+    marginBottom: space[4]
   },
   sectionTitleWithAction: {
     fontSize: fontSize.base,
     fontWeight: fontWeight.semibold,
-    color: colors.zinc800,
+    color: colors.zinc800
   },
 
   // Stat grid
@@ -165,22 +163,22 @@ const styles = stylex.create({
     gap: space[5],
     marginBottom: space[8],
     '@media (min-width: 640px)': {
-      gridTemplateColumns: 'repeat(2, 1fr)',
+      gridTemplateColumns: 'repeat(2, 1fr)'
     },
     '@media (min-width: 1024px)': {
-      gridTemplateColumns: 'repeat(4, 1fr)',
-    },
+      gridTemplateColumns: 'repeat(4, 1fr)'
+    }
   },
 
   // Individual stat card
   statCard: {
-    padding: space[5],
+    padding: space[5]
   },
   statTop: {
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    marginBottom: space[3],
+    marginBottom: space[3]
   },
   statIconPrimary: {
     width: '2.25rem',
@@ -191,7 +189,7 @@ const styles = stylex.create({
     justifyContent: 'center',
     backgroundColor: colors.primary100,
     color: colors.primary600,
-    flexShrink: 0,
+    flexShrink: 0
   },
   statIconGreen: {
     width: '2.25rem',
@@ -202,7 +200,7 @@ const styles = stylex.create({
     justifyContent: 'center',
     backgroundColor: colors.green50,
     color: colors.green700,
-    flexShrink: 0,
+    flexShrink: 0
   },
   statIconOrange: {
     width: '2.25rem',
@@ -213,7 +211,7 @@ const styles = stylex.create({
     justifyContent: 'center',
     backgroundColor: colors.orange50,
     color: colors.orange700,
-    flexShrink: 0,
+    flexShrink: 0
   },
   statIconDestructive: {
     width: '2.25rem',
@@ -224,21 +222,21 @@ const styles = stylex.create({
     justifyContent: 'center',
     backgroundColor: colors.destructive50,
     color: colors.destructive600,
-    flexShrink: 0,
+    flexShrink: 0
   },
   statValue: {
     fontSize: fontSize['2xl'],
     fontWeight: fontWeight.bold,
     color: colors.zinc900,
     lineHeight: '1',
-    marginBottom: space[1],
+    marginBottom: space[1]
   },
   statLabel: {
     fontSize: fontSize.xs,
     color: colors.zinc500,
     fontWeight: fontWeight.medium,
     textTransform: 'uppercase',
-    letterSpacing: '0.04em',
+    letterSpacing: '0.04em'
   },
   statChangePositive: {
     display: 'inline-flex',
@@ -247,7 +245,7 @@ const styles = stylex.create({
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
     color: colors.green700,
-    marginTop: space[2],
+    marginTop: space[2]
   },
   statChangeNegative: {
     display: 'inline-flex',
@@ -256,26 +254,26 @@ const styles = stylex.create({
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
     color: colors.destructive600,
-    marginTop: space[2],
+    marginTop: space[2]
   },
 
   // Chart card
   chartCard: {
     padding: space[6],
-    marginBottom: space[10],
+    marginBottom: space[10]
   },
   chartHeader: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: space[5],
+    marginBottom: space[5]
   },
   chartContainer: {
     display: 'flex',
     alignItems: 'flex-end',
     gap: space[2],
     height: '8rem',
-    paddingTop: space[1],
+    paddingTop: space[1]
   },
   chartBar: {
     flex: 1,
@@ -283,13 +281,13 @@ const styles = stylex.create({
     minHeight: space[2],
     position: 'relative',
     transitionProperty: 'height, background-color',
-    transitionDuration: '200ms',
+    transitionDuration: '200ms'
   },
   chartBarPrimary: {
     backgroundColor: colors.primary500,
     ':hover': {
-      backgroundColor: colors.primary600,
-    },
+      backgroundColor: colors.primary600
+    }
   },
   chartBarLabel: {
     position: 'absolute',
@@ -298,7 +296,7 @@ const styles = stylex.create({
     transform: 'translateX(-50%)',
     fontSize: fontSize.xs,
     color: colors.zinc400,
-    whiteSpace: 'nowrap',
+    whiteSpace: 'nowrap'
   },
   chartBarValue: {
     position: 'absolute',
@@ -308,7 +306,7 @@ const styles = stylex.create({
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
     color: colors.zinc600,
-    whiteSpace: 'nowrap',
+    whiteSpace: 'nowrap'
   },
 
   // Bottom grid (activity + user card)
@@ -318,29 +316,29 @@ const styles = stylex.create({
     gridTemplateColumns: '1fr',
     marginTop: space[10],
     '@media (min-width: 1024px)': {
-      gridTemplateColumns: '1fr 22rem',
-    },
+      gridTemplateColumns: '1fr 22rem'
+    }
   },
 
   // Activity feed
   activityCard: {
-    padding: space[7],
+    padding: space[7]
   },
   activityHeader: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: space[5],
+    marginBottom: space[5]
   },
   activityList: {
     display: 'flex',
     flexDirection: 'column',
-    gap: space[4],
+    gap: space[4]
   },
   activityItem: {
     display: 'flex',
     alignItems: 'flex-start',
-    gap: space[3],
+    gap: space[3]
   },
   activityAvatar: {
     width: '2.25rem',
@@ -354,39 +352,39 @@ const styles = stylex.create({
     fontSize: fontSize.xs,
     fontWeight: fontWeight.bold,
     flexShrink: 0,
-    letterSpacing: '-0.025em',
+    letterSpacing: '-0.025em'
   },
   activityContent: {
     display: 'flex',
     flexDirection: 'column',
     gap: space['0.5'],
     minWidth: 0,
-    flex: 1,
+    flex: 1
   },
   activityUser: {
     fontSize: fontSize.sm,
     fontWeight: fontWeight.semibold,
-    color: colors.zinc800,
+    color: colors.zinc800
   },
   activityAction: {
     fontSize: fontSize.sm,
-    color: colors.zinc500,
+    color: colors.zinc500
   },
   activityTime: {
     fontSize: fontSize.xs,
     color: colors.zinc400,
-    marginTop: space['0.5'],
+    marginTop: space['0.5']
   },
   activityDivider: {
     height: '1px',
     backgroundColor: colors.zinc100,
     marginTop: space[4],
-    marginBottom: space['0'],
+    marginBottom: space['0']
   },
 
   // User card
   profileCard: {
-    padding: space[7],
+    padding: space[7]
   },
   profileHeader: {
     display: 'flex',
@@ -397,7 +395,7 @@ const styles = stylex.create({
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
     borderBottomColor: colors.zinc100,
-    marginBottom: space[5],
+    marginBottom: space[5]
   },
   profileAvatar: {
     width: '4rem',
@@ -410,19 +408,19 @@ const styles = stylex.create({
     color: colors.white,
     fontSize: fontSize.xl,
     fontWeight: fontWeight.bold,
-    boxShadow: shadow.md,
+    boxShadow: shadow.md
   },
   profileInfo: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: space['0.5'],
+    gap: space['0.5']
   },
   profileName: {
     fontSize: fontSize.base,
     fontWeight: fontWeight.semibold,
     color: colors.zinc900,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   profileEmail: {
     fontSize: fontSize.sm,
@@ -431,7 +429,7 @@ const styles = stylex.create({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
-    maxWidth: '100%',
+    maxWidth: '100%'
   },
   profileBadge: {
     display: 'inline-flex',
@@ -444,13 +442,13 @@ const styles = stylex.create({
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
     backgroundColor: colors.primary100,
-    color: colors.primary700,
+    color: colors.primary700
   },
   profileStats: {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
     gap: space[2],
-    marginBottom: space[5],
+    marginBottom: space[5]
   },
   profileStat: {
     display: 'flex',
@@ -459,31 +457,31 @@ const styles = stylex.create({
     gap: space['0.5'],
     padding: space[3],
     borderRadius: radius.lg,
-    backgroundColor: colors.zinc50,
+    backgroundColor: colors.zinc50
   },
   profileStatValue: {
     fontSize: fontSize.base,
     fontWeight: fontWeight.bold,
-    color: colors.zinc900,
+    color: colors.zinc900
   },
   profileStatLabel: {
     fontSize: fontSize.xs,
     color: colors.zinc500,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   profileActions: {
     display: 'flex',
     flexDirection: 'column',
-    gap: space[2],
+    gap: space[2]
   },
   profileActionLink: {
     display: 'block',
-    width: '100%',
+    width: '100%'
   },
   profileActionButton: {
     width: '100%',
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 })
 
 // ── Helper: icon container per variant ────────────────────────────────────────
@@ -493,7 +491,7 @@ const iconContainerStyle = (color: 'primary' | 'green' | 'orange' | 'destructive
     primary: styles.statIconPrimary,
     green: styles.statIconGreen,
     orange: styles.statIconOrange,
-    destructive: styles.statIconDestructive,
+    destructive: styles.statIconDestructive
   }
   return map[color]
 }
@@ -557,11 +555,11 @@ function DashboardOverviewComponent() {
         </div>
 
         <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
-          <Button variant="secondary">
+          <Button variant='secondary'>
             <Lucide.Download size={15} />
             Export
           </Button>
-          <Button variant="primary">
+          <Button variant='primary'>
             <Lucide.Plus size={15} />
             New Project
           </Button>
@@ -612,7 +610,7 @@ function DashboardOverviewComponent() {
           <div {...stylex.props(styles.activityCard)}>
             <div {...stylex.props(styles.activityHeader)}>
               <p {...stylex.props(styles.sectionTitle)}>Recent Activity</p>
-              <Button variant="secondary">View all</Button>
+              <Button variant='secondary'>View all</Button>
             </div>
 
             <div {...stylex.props(styles.activityList)}>
@@ -663,9 +661,9 @@ function DashboardOverviewComponent() {
             </div>
 
             <div {...stylex.props(styles.profileActions)}>
-              <Link to="/" {...stylex.props(styles.profileActionLink)}>
+              <Link to='/' {...stylex.props(styles.profileActionLink)}>
                 <Button
-                  variant="secondary"
+                  variant='secondary'
                   className={stylex.props(styles.profileActionButton).className}
                 >
                   <Lucide.Home size={14} />
@@ -673,7 +671,7 @@ function DashboardOverviewComponent() {
                 </Button>
               </Link>
               <Button
-                variant="destructive"
+                variant='destructive'
                 onClick={logout}
                 className={stylex.props(styles.profileActionButton).className}
               >

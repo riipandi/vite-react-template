@@ -1,12 +1,11 @@
+import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
-import * as stylex from '@stylexjs/stylex'
 import { useEffect } from 'react'
-
-import { isAuthenticated } from '#/lib/auth'
+import { colors, radius, space } from '#/assets/styles/tokens.stylex'
 import { SideNavbar } from '#/layouts/sidebar'
+import { isAuthenticated } from '#/lib/auth'
 import { useSidebarOpen, toggleSidebar } from '#/stores/app-store'
-import { colors, radius, space } from '../assets/styles/tokens.stylex'
 
 export const Route = createFileRoute('/dashboard')({
   beforeLoad: () => {
@@ -14,7 +13,7 @@ export const Route = createFileRoute('/dashboard')({
       throw redirect({ to: '/login' })
     }
   },
-  component: DashboardLayout,
+  component: DashboardLayout
 })
 
 const styles = stylex.create({
@@ -26,13 +25,13 @@ const styles = stylex.create({
     overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
-    position: 'relative',
+    position: 'relative'
   },
   body: {
     display: 'flex',
     flex: 1,
     minWidth: 0,
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   mobileHeader: {
     display: 'none',
@@ -46,13 +45,13 @@ const styles = stylex.create({
     borderBottomStyle: 'solid',
     borderBottomColor: colors.zinc200,
     '@media (max-width: 767px)': {
-      display: 'flex',
-    },
+      display: 'flex'
+    }
   },
   mobileHeaderTitle: {
     fontSize: '0.875rem',
     fontWeight: 700,
-    color: colors.zinc800,
+    color: colors.zinc800
   },
   hamburger: {
     display: 'flex',
@@ -66,8 +65,8 @@ const styles = stylex.create({
     color: colors.zinc600,
     cursor: 'pointer',
     ':hover': {
-      backgroundColor: colors.zinc100,
-    },
+      backgroundColor: colors.zinc100
+    }
   },
   sidebarWrapper: {
     flexShrink: 0,
@@ -79,27 +78,27 @@ const styles = stylex.create({
       zIndex: 40,
       transform: 'translateX(-100%)',
       transitionProperty: 'transform',
-      transitionDuration: '200ms',
-    },
+      transitionDuration: '200ms'
+    }
   },
   sidebarOpen: {
     '@media (max-width: 767px)': {
-      transform: 'translateX(0)',
-    },
+      transform: 'translateX(0)'
+    }
   },
   backdrop: {
     position: 'fixed',
     inset: 0,
     zIndex: 30,
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)'
   },
   contentArea: {
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
     overflowY: 'auto',
-    minWidth: 0,
-  },
+    minWidth: 0
+  }
 })
 
 function DashboardLayout() {
@@ -118,10 +117,10 @@ function DashboardLayout() {
       {/* Mobile header — full width on mobile, hidden on desktop */}
       <div {...stylex.props(styles.mobileHeader)}>
         <button
-          type="button"
+          type='button'
           onClick={toggleSidebar}
           {...stylex.props(styles.hamburger)}
-          aria-label="Toggle navigation"
+          aria-label='Toggle navigation'
         >
           <Lucide.Menu size={20} />
         </button>

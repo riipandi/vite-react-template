@@ -1,0 +1,105 @@
+{
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.oxc": "always"
+    },
+    "files.associations": {
+        "*.vars": "dotenv",
+        "*.yaml.example": "yaml",
+        "*.yml.example": "yaml",
+        "wrangler.json": "jsonc"
+    },
+    "files.readonlyInclude": {
+        "**/routeTree.gen.ts": true,
+        "**/routes.gen.ts": true,
+        "**/build/**": true,
+        "**/dist/**": true,
+        "**/generated/**": true,
+        "**/specs/**": true
+    },
+    "files.watcherExclude": {
+        "**/routeTree.gen.ts": true,
+        "**/routes.gen.ts": true,
+        "**/build/**": true,
+        "**/dist/**": true,
+        "**/generated/**": true,
+        "**/specs/**": true
+    },
+    "search.exclude": {
+        "**/.output": true,
+        "**/routeTree.gen.ts": true,
+        "**/routes.gen.ts": true,
+        "**/build/**": true,
+        "**/dist/**": true,
+        "**/generated/**": true,
+        "**/specs/**": true
+    },
+    "[css]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[dockerfile]": {
+        "editor.defaultFormatter": "docker.docker"
+    },
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.defaultFormatter": "redhat.vscode-yaml",
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode",
+        "editor.tabSize": 4
+    },
+    "[javascript]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports.biome": "explicit"
+        },
+        "editor.defaultFormatter": "oxc.oxc-vscode",
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true
+    },
+    "[javascriptreact]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports.biome": "explicit"
+        },
+        "editor.defaultFormatter": "oxc.oxc-vscode",
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true
+    },
+    "[json]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "darkriszty.markdown-table-prettify"
+    },
+    "[tailwindcss]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[toml]": {
+        "editor.defaultFormatter": "Shellomo.enhanced-toml",
+        "editor.formatOnSave": false
+    },
+    "[typescript]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports.biome": "explicit"
+        },
+        "editor.defaultFormatter": "oxc.oxc-vscode",
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true
+    },
+    "[typescriptreact]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports.biome": "explicit"
+        },
+        "editor.defaultFormatter": "oxc.oxc-vscode",
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true
+    }
+}

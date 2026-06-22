@@ -1,6 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-
-import { colors, fontSize, fontWeight, space } from '../../assets/styles/tokens.stylex'
+import { colors, fontSize, fontWeight, space } from '#/assets/styles/tokens.stylex'
 
 const labelStyles = stylex.create({
   base: {
@@ -11,8 +10,8 @@ const labelStyles = stylex.create({
     cursor: 'default',
     fontWeight: fontWeight.medium,
     fontSize: fontSize.sm,
-    color: colors.zinc500,
-  },
+    color: colors.zinc500
+  }
 })
 
 const descriptionStyles = stylex.create({
@@ -20,8 +19,8 @@ const descriptionStyles = stylex.create({
     margin: 0,
     fontSize: fontSize.sm,
     color: colors.zinc600,
-    paddingLeft: space[3],
-  },
+    paddingLeft: space[3]
+  }
 })
 
 const fieldErrorStyles = stylex.create({
@@ -31,8 +30,8 @@ const fieldErrorStyles = stylex.create({
     paddingTop: 0,
     fontSize: fontSize.xs,
     color: colors.destructive600,
-    lineHeight: 1.25,
-  },
+    lineHeight: 1.25
+  }
 })
 
 export function Label({ children, className }: { children?: React.ReactNode; className?: string }) {
@@ -45,7 +44,7 @@ export function Label({ children, className }: { children?: React.ReactNode; cla
 
 export function Description({
   children,
-  className,
+  className
 }: {
   children?: React.ReactNode
   className?: string
@@ -59,14 +58,14 @@ export function Description({
 
 export function FieldError({
   children,
-  className,
+  className
 }: {
   children?: React.ReactNode
   className?: string
 }) {
   if (!children) return null
   return (
-    <p {...stylex.props(fieldErrorStyles.base)} className={className} role="alert">
+    <p {...stylex.props(fieldErrorStyles.base)} className={className} role='alert'>
       {children}
     </p>
   )

@@ -6,11 +6,11 @@ const meta: Meta<typeof Card> = {
   title: 'UI/Card',
   component: Card,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   argTypes: {
-    children: { control: 'text' },
-  },
+    children: { control: 'text' }
+  }
 }
 
 export default meta
@@ -18,8 +18,8 @@ type Story = StoryObj<typeof Card>
 
 export const Default: Story = {
   args: {
-    children: 'This is a card with default styling.',
-  },
+    children: 'This is a card with default styling.'
+  }
 }
 
 export const InsideContainer: Story = {
@@ -29,6 +29,6 @@ export const InsideContainer: Story = {
     </Container>
   ),
   args: {
-    children: 'A card placed inside a container component.',
-  },
+    children: 'A card placed inside a container component.'
+  }
 }

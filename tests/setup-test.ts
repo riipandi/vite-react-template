@@ -18,7 +18,7 @@ vi.mock('@stylexjs/atoms', () => {
     },
     apply() {
       return {}
-    },
+    }
   }
   const proxy = new Proxy({}, handler)
   return { default: proxy }

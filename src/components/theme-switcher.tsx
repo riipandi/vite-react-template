@@ -1,152 +1,150 @@
-import { useState } from 'react'
-import * as Lucide from 'lucide-react'
 import * as stylex from '@stylexjs/stylex'
-
+import * as Lucide from 'lucide-react'
+import { useCallback, useState } from 'react'
+import { colors, fontSize, fontWeight, radius, shadow, space } from '#/assets/styles/tokens.stylex'
 import { useTheme, toggleTheme } from '#/stores/app-store'
-import { colors, fontSize, fontWeight, radius, space } from '../assets/styles/tokens.stylex'
 
 interface ThemeSwitcherProps {
-  /** When true, renders a full-width sidebar-style row button. Default: compact pill. */
   variant?: 'sidebar' | 'compact'
+  hideLabel?: boolean
   className?: string
 }
 
-// ── Keyframes ─────────────────────────────────────────────────────────────────
-
 const iconSwap = stylex.keyframes({
-  '0%': { transform: 'rotate(0deg) scale(1)', opacity: '1' },
-  '30%': { transform: 'rotate(-90deg) scale(0.5)', opacity: '0' },
-  '70%': { transform: 'rotate(90deg) scale(0.5)', opacity: '0' },
-  '100%': { transform: 'rotate(0deg) scale(1)', opacity: '1' },
+  '0%': { transform: 'scale(1)', opacity: '1' },
+  '50%': { transform: 'scale(0.5)', opacity: '0' },
+  '100%': { transform: 'scale(1)', opacity: '1' }
 })
 
-// ── Styles ────────────────────────────────────────────────────────────────────
-
 const styles = stylex.create({
-  // Shared base
   base: {
     display: 'inline-flex',
     alignItems: 'center',
     gap: space[2],
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: colors.zinc200,
-    borderRadius: radius.lg,
-    backgroundColor: colors.zinc50,
+    borderRadius: radius.full,
+    backgroundColor: colors.zinc100,
     color: colors.zinc600,
     cursor: 'pointer',
     fontSize: fontSize.sm,
     fontWeight: fontWeight.medium,
     fontFamily: 'inherit',
-    transitionProperty: 'background-color, color, border-color',
-    transitionDuration: '200ms',
+    lineHeight: 1,
+    whiteSpace: 'nowrap',
+    transitionProperty: 'background-color, color, transform, box-shadow',
+    transitionDuration: '150ms',
+    transitionTimingFunction: 'ease-in-out',
     ':hover': {
-      backgroundColor: colors.zinc100,
-      borderColor: colors.zinc300,
-      color: colors.zinc800,
+      backgroundColor: colors.zinc200,
+      color: colors.zinc900,
+      boxShadow: shadow.sm
+    },
+    ':active': {
+      transform: 'scale(0.98)'
     },
     ':focus-visible': {
       outlineWidth: 2,
       outlineStyle: 'solid',
       outlineColor: colors.primary500,
-      outlineOffset: 2,
-    },
+      outlineOffset: 2
+    }
   },
-
-  // Compact pill — homepage header
   compact: {
-    height: '2rem',
-    paddingLeft: space[2],
-    paddingRight: space[2],
-    borderRadius: radius.full,
+    height: '2.25rem',
+    paddingLeft: space[2.5],
+    paddingRight: space[3]
   },
-
-  // Full-width row — sidebar bottom
+  compactIconOnly: {
+    width: '2.25rem',
+    height: '2.25rem',
+    padding: 0,
+    justifyContent: 'center'
+  },
   sidebar: {
     justifyContent: 'flex-start',
     width: '100%',
-    height: '2.25rem',
+    height: '2.5rem',
     paddingLeft: space[3],
     paddingRight: space[3],
+    borderRadius: radius.lg
   },
-
-  // Icon badge
+  sidebarIconOnly: {
+    width: '2.375rem',
+    height: '2.375rem',
+    padding: 0,
+    borderRadius: radius.lg,
+    justifyContent: 'center'
+  },
   iconWrap: {
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '1.375rem',
-    height: '1.375rem',
-    borderRadius: radius.md,
-    backgroundColor: colors.primary100,
-    color: colors.primary600,
     flexShrink: 0,
-    transitionProperty: 'background-color, color',
-    transitionDuration: '200ms',
-  },
-
-  iconWrapCompact: {
     width: '1.25rem',
-    height: '1.25rem',
-    borderRadius: radius.sm,
-    backgroundColor: 'transparent',
-    color: 'inherit',
+    height: '1.25rem'
   },
-
   iconAnimating: {
     animationName: iconSwap,
-    animationDuration: '400ms',
+    animationDuration: '350ms',
     animationTimingFunction: 'ease-in-out',
-    animationFillMode: 'both',
+    animationFillMode: 'both'
   },
-
   label: {
     userSelect: 'none',
+    letterSpacing: '0.01em'
   },
-
   labelGrow: {
-    flex: 1,
-  },
+    flex: 1
+  }
 })
 
-// ── Component ─────────────────────────────────────────────────────────────────
-
-export function ThemeSwitcher({ variant = 'compact', className }: ThemeSwitcherProps) {
+export function ThemeSwitcher({
+  variant = 'compact',
+  hideLabel = false,
+  className
+}: ThemeSwitcherProps) {
   const theme = useTheme()
   const [animating, setAnimating] = useState(false)
   const isDark = theme === 'dark'
+  const isSidebar = variant === 'sidebar'
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     if (animating) return
     setAnimating(true)
     toggleTheme()
-    setTimeout(() => setAnimating(false), 450)
-  }
+  }, [animating])
+
+  const handleAnimEnd = useCallback(() => setAnimating(false), [])
 
   const IconComponent = isDark ? Lucide.Sun : Lucide.Moon
-  const isSidebar = variant === 'sidebar'
+
+  const buttonStyles = hideLabel
+    ? isSidebar
+      ? styles.sidebarIconOnly
+      : styles.compactIconOnly
+    : isSidebar
+      ? styles.sidebar
+      : styles.compact
 
   return (
     <button
-      type="button"
+      type='button'
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
-      {...stylex.props(styles.base, isSidebar ? styles.sidebar : styles.compact)}
+      {...stylex.props(styles.base, buttonStyles)}
       className={className}
       onClick={handleClick}
     >
       <span
-        {...stylex.props(
-          styles.iconWrap,
-          !isSidebar && styles.iconWrapCompact,
-          animating && styles.iconAnimating
-        )}
+        {...stylex.props(styles.iconWrap, animating && styles.iconAnimating)}
+        onAnimationEnd={handleAnimEnd}
       >
-        <IconComponent size={isSidebar ? 13 : 14} />
+        <IconComponent size={isSidebar ? 18 : 16} strokeWidth={1.5} />
       </span>
-      <span {...stylex.props(styles.label, isSidebar && styles.labelGrow)}>
-        {isDark ? 'Light mode' : 'Dark mode'}
-      </span>
+      {!hideLabel && (
+        <span {...stylex.props(styles.label, isSidebar && styles.labelGrow)}>
+          {isDark ? 'Light mode' : 'Dark mode'}
+        </span>
+      )}
     </button>
   )
 }

@@ -1,6 +1,6 @@
 [
-  {
-    "action": "remove",
-    "files": ["README.md", "LICENSE-APACHE", "LICENSE-MIT", "vercel.json"]
-  }
+    {
+        "action": "remove",
+        "files": ["LICENSE-APACHE", "LICENSE-MIT", "DEPLOY.md", "README.md", "AGENTS.md"]
+    }
 ]

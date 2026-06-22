@@ -1,9 +1,8 @@
-import * as Lucide from 'lucide-react'
-import { Link, useRouterState } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
-
+import { Link, useRouterState } from '@tanstack/react-router'
+import * as Lucide from 'lucide-react'
+import { colors, fontSize, fontWeight, radius, shadow, space } from '#/assets/styles/tokens.stylex'
 import { ThemeSwitcher } from '#/components/theme-switcher'
-import { colors, fontSize, fontWeight, radius, shadow, space } from '../assets/styles/tokens.stylex'
 
 // ── Nav data ──────────────────────────────────────────────────────────────────
 
@@ -11,13 +10,13 @@ const navItems = [
   { icon: Lucide.LayoutDashboard, label: 'Overview', href: '/dashboard/overview' },
   { icon: Lucide.Search, label: 'Search', href: '#' },
   { icon: Lucide.BarChart3, label: 'Analytics', href: '#' },
-  { icon: Lucide.FileText, label: 'Docs', href: '#' },
+  { icon: Lucide.FileText, label: 'Docs', href: '#' }
 ]
 
 const secondaryItems = [
   { icon: Lucide.ShoppingCart, label: 'Products', href: '#' },
   { icon: Lucide.Settings, label: 'Settings', href: '#' },
-  { icon: Lucide.Mail, label: 'Messages', href: '#', badge: true },
+  { icon: Lucide.Mail, label: 'Messages', href: '#', badge: true }
 ]
 
 const bottomItems = [{ icon: Lucide.User, label: 'My Account', href: '#' }]
@@ -38,7 +37,7 @@ const sidebarStyles = stylex.create({
     boxShadow: shadow.sm,
     transitionProperty: 'background-color, box-shadow, border-color',
     transitionDuration: '200ms',
-    flexShrink: 0,
+    flexShrink: 0
   },
 
   // Logo area
@@ -49,7 +48,7 @@ const sidebarStyles = stylex.create({
     paddingBottom: space[4],
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: colors.zinc100,
+    borderBottomColor: colors.zinc100
   },
   logoLink: {
     display: 'inline-flex',
@@ -58,7 +57,7 @@ const sidebarStyles = stylex.create({
     textDecoration: 'none',
     borderRadius: radius.md,
     paddingTop: space[1],
-    paddingBottom: space[1],
+    paddingBottom: space[1]
   },
   logoIconWrap: {
     width: '2rem',
@@ -68,24 +67,24 @@ const sidebarStyles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     background: `linear-gradient(135deg, ${colors.primary500}, ${colors.primary700})`,
-    flexShrink: 0,
+    flexShrink: 0
   },
   logoSvg: {
     height: '1.125rem',
     width: '1.125rem',
     fill: colors.white,
-    color: colors.white,
+    color: colors.white
   },
   logoText: {
     fontSize: fontSize.sm,
     fontWeight: fontWeight.bold,
     color: colors.zinc800,
-    letterSpacing: '-0.01em',
+    letterSpacing: '-0.01em'
   },
   logoVersion: {
     fontSize: fontSize.xs,
     color: colors.zinc400,
-    letterSpacing: '0',
+    letterSpacing: '0'
   },
 
   // Nav sections
@@ -98,7 +97,7 @@ const sidebarStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: space[1],
-    overflowY: 'auto',
+    overflowY: 'auto'
   },
   sectionLabel: {
     paddingLeft: space[3],
@@ -109,7 +108,7 @@ const sidebarStyles = stylex.create({
     color: colors.zinc400,
     letterSpacing: '0.07em',
     textTransform: 'uppercase',
-    userSelect: 'none',
+    userSelect: 'none'
   },
 
   // Nav items with left accent bar
@@ -131,16 +130,16 @@ const sidebarStyles = stylex.create({
     fontWeight: fontWeight.medium,
     ':hover': {
       backgroundColor: colors.zinc100,
-      color: colors.zinc900,
-    },
+      color: colors.zinc900
+    }
   },
   navItemActive: {
     backgroundColor: colors.primary50,
     color: colors.primary700,
     ':hover': {
       backgroundColor: colors.primary100,
-      color: colors.primary700,
-    },
+      color: colors.primary700
+    }
   },
   activeAccent: {
     position: 'absolute',
@@ -149,25 +148,25 @@ const sidebarStyles = stylex.create({
     bottom: '0.375rem',
     width: '3px',
     borderRadius: '9999px',
-    backgroundColor: colors.primary500,
+    backgroundColor: colors.primary500
   },
   navIcon: {
     height: '1rem',
     width: '1rem',
     stroke: 'currentColor',
-    flexShrink: 0,
+    flexShrink: 0
   },
   navLabel: {
     flex: 1,
     fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
+    fontWeight: fontWeight.medium
   },
   badge: {
     width: '0.5rem',
     height: '0.5rem',
     borderRadius: '9999px',
     backgroundColor: colors.destructive500,
-    flexShrink: 0,
+    flexShrink: 0
   },
 
   // Bottom area
@@ -181,7 +180,7 @@ const sidebarStyles = stylex.create({
     borderTopColor: colors.zinc100,
     display: 'flex',
     flexDirection: 'column',
-    gap: space[1],
+    gap: space[1]
   },
   bottomRow: {
     display: 'flex',
@@ -191,12 +190,12 @@ const sidebarStyles = stylex.create({
     paddingRight: space[3],
     paddingTop: space[2],
     paddingBottom: space[2],
-    gap: space[3],
+    gap: space[3]
   },
   bottomLabelGroup: {
     display: 'flex',
     alignItems: 'center',
-    gap: space[2],
+    gap: space[2]
   },
   bottomLabel: {
     fontSize: fontSize.xs,
@@ -204,14 +203,14 @@ const sidebarStyles = stylex.create({
     fontWeight: fontWeight.semibold,
     letterSpacing: '0.04em',
     textTransform: 'uppercase',
-    userSelect: 'none',
+    userSelect: 'none'
   },
   bottomDot: {
     width: '0.375rem',
     height: '0.375rem',
     borderRadius: '9999px',
-    backgroundColor: colors.zinc400,
-  },
+    backgroundColor: colors.zinc400
+  }
 })
 
 // ── Component ──────────────────────────────────────────────────────────────────
@@ -226,15 +225,15 @@ export function NavBarExpand() {
     <div {...stylex.props(sidebarStyles.container)}>
       {/* Logo */}
       <div {...stylex.props(sidebarStyles.logoSection)}>
-        <Link to="/" {...stylex.props(sidebarStyles.logoLink)}>
+        <Link to='/' {...stylex.props(sidebarStyles.logoLink)}>
           <div {...stylex.props(sidebarStyles.logoIconWrap)}>
             <svg
               {...stylex.props(sidebarStyles.logoSvg)}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 20 20'
+              fill='currentColor'
             >
-              <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
+              <path d='M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z' />
             </svg>
           </div>
           <div>
@@ -296,7 +295,7 @@ export function NavBarExpand() {
             </Link>
           )
         })}
-        <ThemeSwitcher variant="sidebar" />
+        <ThemeSwitcher variant='sidebar' />
       </div>
     </div>
   )

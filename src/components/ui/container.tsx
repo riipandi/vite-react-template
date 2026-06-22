@@ -1,7 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
-
-import { space } from '../../assets/styles/tokens.stylex'
+import { space } from '#/assets/styles/tokens.stylex'
 import { cx } from '#/lib/utils'
 
 type ContainerProps<T extends ElementType> = {
@@ -26,14 +25,14 @@ const containerStyles = stylex.create({
       paddingLeft: space[6],
       paddingRight: space[6],
       paddingTop: space[8],
-      paddingBottom: space[10],
+      paddingBottom: space[10]
     },
     '@media (min-width: 1024px)': {
       paddingLeft: space[8],
       paddingRight: space[8],
       paddingTop: space[10],
-      paddingBottom: space[12],
-    },
+      paddingBottom: space[12]
+    }
   },
   fluid: {
     marginLeft: 0,
@@ -47,15 +46,15 @@ const containerStyles = stylex.create({
       paddingLeft: space[6],
       paddingRight: space[6],
       paddingTop: space[8],
-      paddingBottom: space[10],
+      paddingBottom: space[10]
     },
     '@media (min-width: 1024px)': {
       paddingLeft: space[10],
       paddingRight: space[10],
       paddingTop: space[10],
-      paddingBottom: space[12],
-    },
-  },
+      paddingBottom: space[12]
+    }
+  }
 })
 
 export const Container = <T extends ElementType = 'div'>({

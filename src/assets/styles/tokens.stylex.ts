@@ -66,7 +66,7 @@ export const colors = stylex.defineVars({
   // Blue
   blue400: '#60a5fa',
   blue500: '#3b82f6',
-  blue600: '#2563eb',
+  blue600: '#2563eb'
 })
 
 // ─── Dark Theme ──────────────────────────────────────────────
@@ -119,14 +119,14 @@ export const darkTheme = stylex.createTheme(colors, {
   orange50: '#431407',
   orange200: '#9a3412',
   orange700: '#fed7aa',
-  orange950: '#fff7ed',
+  orange950: '#fff7ed'
 })
 
 // ─── Misc Tokens (no dark mode needed) ───────────────────────
 
 export const font = stylex.defineVars({
   sans: '"Inter Variable", ui-sans-serif, system-ui, sans-serif',
-  mono: '"JetBrains Mono Variable", ui-monospace, monospace',
+  mono: '"JetBrains Mono Variable", ui-monospace, monospace'
 })
 
 export const space = stylex.defineVars({
@@ -164,7 +164,7 @@ export const space = stylex.defineVars({
   '64': '16rem',
   '72': '18rem',
   '80': '20rem',
-  '96': '24rem',
+  '96': '24rem'
 })
 
 export const radius = stylex.defineVars({
@@ -176,14 +176,14 @@ export const radius = stylex.defineVars({
   xl: '0.75rem',
   '2xl': '1rem',
   '3xl': '1.5rem',
-  full: '9999px',
+  full: '9999px'
 })
 
 export const shadow = stylex.defineVars({
   sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
   md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
   lg: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-  xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+  xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)'
 })
 
 export const fontSize = stylex.defineVars({
@@ -199,12 +199,12 @@ export const fontSize = stylex.defineVars({
   '6xl': '3.75rem',
   '7xl': '4.5rem',
   '8xl': '6rem',
-  '9xl': '8rem',
+  '9xl': '8rem'
 })
 
 export const fontWeight = stylex.defineVars({
   normal: '400',
   medium: '500',
   semibold: '600',
-  bold: '700',
+  bold: '700'
 })

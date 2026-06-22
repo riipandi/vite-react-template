@@ -1,10 +1,9 @@
 import { Field } from '@base-ui/react/field'
 import { Input } from '@base-ui/react/input'
 import * as stylex from '@stylexjs/stylex'
-import { Description, FieldError, Label } from './field'
+import { colors, fontSize, radius, space } from '#/assets/styles/tokens.stylex'
 import { cx } from '#/lib/utils'
-
-import { colors, fontSize, radius, space } from '../../assets/styles/tokens.stylex'
+import { Description, FieldError, Label } from './field'
 
 export interface TextFieldProps {
   label?: string
@@ -26,7 +25,7 @@ const fieldStyles = stylex.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    gap: space[1],
+    gap: space[1]
   },
   input: {
     minWidth: 0,
@@ -43,23 +42,23 @@ const fieldStyles = stylex.create({
     backgroundColor: colors.surface,
     color: colors.zinc800,
     '::placeholder': {
-      color: colors.zinc400,
+      color: colors.zinc400
     },
     transitionProperty: 'background-color, border-color, box-shadow',
-    transitionDuration: '150ms',
+    transitionDuration: '150ms'
   },
   inputFocused: {
     borderColor: colors.primary500,
-    boxShadow: '0 0 0 2px rgb(99 102 241 / 0.2)',
+    boxShadow: '0 0 0 2px rgb(99 102 241 / 0.2)'
   },
   inputInvalid: {
-    borderColor: colors.destructive500,
+    borderColor: colors.destructive500
   },
   inputDisabled: {
     borderColor: colors.zinc200,
     backgroundColor: colors.zinc50,
-    color: colors.zinc300,
-  },
+    color: colors.zinc300
+  }
 })
 
 export function TextField({
@@ -74,7 +73,7 @@ export function TextField({
   disabled,
   className,
   type = 'text',
-  name,
+  name
 }: TextFieldProps) {
   const rootSx = stylex.props(fieldStyles.root)
   return (

@@ -12,6 +12,6 @@ export function useCurrentUser() {
       return user
     },
     staleTime: 1000 * 60 * 2,
-    enabled: !!token,
+    enabled: !!token
   })
 }

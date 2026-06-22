@@ -1,11 +1,10 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import * as stylex from '@stylexjs/stylex'
 import x from '@stylexjs/atoms'
-
-import { colors, fontSize, fontWeight, radius, space } from '../assets/styles/tokens.stylex'
+import * as stylex from '@stylexjs/stylex'
+import { createFileRoute, Link } from '@tanstack/react-router'
+import { colors, fontSize, fontWeight, radius, space } from '#/assets/styles/tokens.stylex'
 
 export const Route = createFileRoute('/$')({
-  component: NotFoundComponent,
+  component: NotFoundComponent
 })
 
 const styles = stylex.create({
@@ -17,12 +16,12 @@ const styles = stylex.create({
     textAlign: 'center',
     '@media (min-width: 640px)': {
       paddingLeft: space[6],
-      paddingRight: space[6],
+      paddingRight: space[6]
     },
     '@media (min-width: 1024px)': {
       paddingLeft: space[8],
-      paddingRight: space[8],
-    },
+      paddingRight: space[8]
+    }
   },
   title: {
     display: 'block',
@@ -30,23 +29,23 @@ const styles = stylex.create({
     fontWeight: fontWeight.bold,
     color: colors.zinc800,
     '@media (min-width: 640px)': {
-      fontSize: fontSize['8xl'],
-    },
+      fontSize: fontSize['8xl']
+    }
   },
   message: {
     marginTop: space[6],
     fontSize: fontSize.lg,
     color: colors.zinc500,
     '@media (min-width: 640px)': {
-      marginTop: space[8],
-    },
+      marginTop: space[8]
+    }
   },
   actionWrapper: {
     marginTop: space[8],
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   backLink: {
     display: 'inline-flex',
@@ -64,20 +63,20 @@ const styles = stylex.create({
     transitionProperty: 'all',
     transitionDuration: '150ms',
     ':hover': {
-      textDecoration: 'underline',
+      textDecoration: 'underline'
     },
     ':focus-visible': {
       outlineWidth: 1,
       outlineStyle: 'solid',
       outlineColor: colors.primary500,
-      outlineOffset: 2,
-    },
+      outlineOffset: 2
+    }
   },
   footer: {
     marginTop: 'auto',
     paddingTop: space[5],
     paddingBottom: space[5],
-    textAlign: 'center',
+    textAlign: 'center'
   },
   footerInner: {
     marginLeft: 'auto',
@@ -87,17 +86,17 @@ const styles = stylex.create({
     paddingRight: space[4],
     '@media (min-width: 640px)': {
       paddingLeft: space[6],
-      paddingRight: space[6],
+      paddingRight: space[6]
     },
     '@media (min-width: 1024px)': {
       paddingLeft: space[8],
-      paddingRight: space[8],
-    },
+      paddingRight: space[8]
+    }
   },
   footerText: {
     fontSize: fontSize.sm,
-    color: colors.zinc400,
-  },
+    color: colors.zinc400
+  }
 })
 
 function NotFoundComponent() {
@@ -121,17 +120,17 @@ function NotFoundComponent() {
           <p {...stylex.props(x.lineHeight['2rem'])}>Sorry, we couldn&rsquo;t find your page.</p>
         </div>
         <div {...stylex.props(styles.actionWrapper)}>
-          <Link to="/" {...stylex.props(styles.backLink)}>
+          <Link to='/' {...stylex.props(styles.backLink)}>
             <svg
               {...stylex.props(x.height['1rem'], x.width['1rem'])}
-              viewBox="0 0 16 16"
-              fill="none"
+              viewBox='0 0 16 16'
+              fill='none'
             >
               <path
-                d="M11.2792 1.64001L5.63273 7.28646C5.43747 7.48172 5.43747 7.79831 5.63273 7.99357L11.2792 13.64"
-                stroke="currentColor"
+                d='M11.2792 1.64001L5.63273 7.28646C5.43747 7.48172 5.43747 7.79831 5.63273 7.99357L11.2792 13.64'
+                stroke='currentColor'
                 strokeWidth={2}
-                strokeLinecap="round"
+                strokeLinecap='round'
               />
             </svg>
             Back to main page

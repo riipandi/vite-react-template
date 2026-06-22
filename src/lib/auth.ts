@@ -29,15 +29,15 @@ export interface LoginCredentials {
 export async function login(credentials: LoginCredentials): Promise<LoginResponse> {
   return ofetch<LoginResponse>('https://dummyjson.com/auth/login', {
     method: 'POST',
-    body: credentials,
+    body: credentials
   })
 }
 
 export async function me(token: string): Promise<User> {
   return ofetch<User>('https://dummyjson.com/auth/me', {
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   })
 }
 

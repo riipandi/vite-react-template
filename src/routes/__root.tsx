@@ -1,14 +1,13 @@
+import { ThemeProvider } from '@lonik/themer'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import type { QueryClient } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createRootRouteWithContext, Outlet, useRouterState } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { ThemeProvider } from '@lonik/themer'
-import * as stylex from '@stylexjs/stylex'
-import x from '@stylexjs/atoms'
 import { useEffect, useState } from 'react'
-import type { QueryClient } from '@tanstack/react-query'
-
+import { colors, darkTheme } from '#/assets/styles/tokens.stylex'
 import { AuthProvider } from '#/context/auth/AuthProvider'
-import { colors, darkTheme } from '../assets/styles/tokens.stylex'
 import { useTheme } from '#/stores/app-store'
 
 /** The shape injected into every route's context */
@@ -18,7 +17,7 @@ export interface RouterContext {
 
 const spinKeyframes = stylex.keyframes({
   '0%': { transform: 'rotate(0deg)' },
-  '100%': { transform: 'rotate(360deg)' },
+  '100%': { transform: 'rotate(360deg)' }
 })
 
 const styles = stylex.create({
@@ -26,7 +25,7 @@ const styles = stylex.create({
     backgroundColor: colors.zinc50,
     color: colors.zinc900,
     transitionProperty: 'background-color, color',
-    transitionDuration: '200ms',
+    transitionDuration: '200ms'
   },
   spinner: {
     display: 'inline-block',
@@ -38,7 +37,7 @@ const styles = stylex.create({
     borderTopColor: 'transparent',
     animationName: spinKeyframes,
     animationDuration: '1s',
-    animationIterationCount: 'infinite',
+    animationIterationCount: 'infinite'
   },
   spinnerContainer: {
     position: 'fixed',
@@ -52,8 +51,8 @@ const styles = stylex.create({
     backgroundColor: colors.surface,
     padding: '0.75rem 1rem',
     fontSize: '0.875rem',
-    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-  },
+    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)'
+  }
 })
 
 function RouterSpinner() {
@@ -80,7 +79,7 @@ function RouterSpinner() {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootComponent,
-  notFoundComponent: () => <Outlet />, // handled by `/$` catch-all
+  notFoundComponent: () => <Outlet /> // handled by `/$` catch-all
 })
 
 function RootComponent() {
@@ -93,7 +92,7 @@ function RootComponent() {
           <RouterSpinner />
           <Outlet />
           <ReactQueryDevtools initialIsOpen={false} />
-          <TanStackRouterDevtools position="bottom-right" />
+          <TanStackRouterDevtools position='bottom-right' />
         </AuthProvider>
       </ThemeProvider>
     </div>

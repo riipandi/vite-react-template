@@ -7,9 +7,8 @@ export interface User {
   image: string
 }
 
-import { createContext, useContext, useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-
+import { createContext, useContext, useState } from 'react'
 import { isAuthenticated, login, setToken, type LoginResponse } from '#/lib/auth'
 
 export type { LoginResponse }
@@ -27,7 +26,7 @@ export const DefaultUserContext: AuthContext = {
   loggedIn: false,
   loggedOut: false,
   login: async () => {},
-  logout: () => {},
+  logout: () => {}
 }
 
 export const UserContext = createContext(DefaultUserContext)
@@ -48,7 +47,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
       firstName: response.firstName,
       lastName: response.lastName,
       username: response.username,
-      image: response.image,
+      image: response.image
     })
     setLoggedIn(true)
     navigate({ to: '/dashboard/overview' })

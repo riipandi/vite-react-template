@@ -55,7 +55,7 @@ npx tiged riipandi/vite-react-template myapp-name
 ### Up and Running
 
 | NPM               | Yarn           | PNPM           | Description              |
-| ----------------- | -------------- | -------------- | ------------------------ |
+|-------------------|----------------|----------------|--------------------------|
 | `npm install`     | `yarn`         | `pnpm install` | install the dependencies |
 | `npm run dev`     | `yarn dev`     | `pnpm dev`     | serve with hot reload    |
 | `npm run build`   | `yarn build`   | `pnpm build`   | build for production     |
@@ -71,7 +71,7 @@ You'll want to fork this repository and deploy your own Next.js website. Once yo
 image generator that sparks joy, you can setup [automatic GitHub](https://vercel.com/github)
 deployments so that pushing to master will deploy to production! 🚀
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/riipandi/vite-react-template&project-name=vite-react-template&repo-name=my-vite-react-app&env=VITE_PUBLIC_SITE_URL)
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/riipandi/vite-react-template&project-name=vite-react-template&repo-name=my-vite-react-app&env=PUBLIC_SITE_URL)
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/riipandi/vite-react-template)
 
 #### Cloudflare Deployment
@@ -83,7 +83,7 @@ for more information.
 For the preview branch:
 
 ```env
-VITE_PUBLIC_SITE_URL=${CF_PAGES_URL}
+PUBLIC_SITE_URL=${CF_PAGES_URL}
 ```
 
 ## Development

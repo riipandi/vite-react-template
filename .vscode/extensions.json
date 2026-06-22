@@ -1,9 +1,11 @@
 {
-  "recommendations": [
-    "oxc.oxc-vscode",
-    "EditorConfig.EditorConfig",
-    "ms-playwright.playwright",
-    "tamasfe.even-better-toml"
-  ],
-  "unwantedRecommendations": []
+    "recommendations": [
+        "darkriszty.markdown-table-prettify",
+        "EditorConfig.EditorConfig",
+        "foxundermoon.shell-format",
+        "ms-playwright.playwright",
+        "oxc.oxc-vscode",
+        "redhat.vscode-yaml",
+        "Shellomo.enhanced-toml"
+    ]
 }

@@ -16,7 +16,7 @@ const getInitialTheme = (): Theme => {
 
 export const appStore = createStore<AppState>({
   theme: getInitialTheme(),
-  sidebarOpen: false,
+  sidebarOpen: false
 })
 
 export const toggleTheme = () => {

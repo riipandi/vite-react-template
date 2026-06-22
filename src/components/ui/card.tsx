@@ -1,7 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
-
-import { colors, radius, shadow } from '../../assets/styles/tokens.stylex'
+import { colors, radius, shadow } from '#/assets/styles/tokens.stylex'
 import { cx } from '#/lib/utils'
 
 type CardProps<T extends ElementType> = {
@@ -20,8 +19,8 @@ const cardStyles = stylex.create({
     backgroundColor: colors.surface,
     boxShadow: shadow.sm,
     transitionProperty: 'background-color, border-color, box-shadow',
-    transitionDuration: '200ms',
-  },
+    transitionDuration: '200ms'
+  }
 })
 
 export const Card = <T extends ElementType = 'div'>({ as, children, className }: CardProps<T>) => {

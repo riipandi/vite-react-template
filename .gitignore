@@ -1,45 +1,104 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-vite.config.js
-node_modules
-dist
-dist-ssr
-*.local
-*.tsbuildinfo
-.vitest
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-!.vscode/launch.json
-!.vscode/tasks.json
-.idea
+/.docs
+/.idea
+/.pnp
+/.husky
+.pnp.js
 .DS_Store
 .DS_Store?
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# Storybook
-/storybook-static
-/public/storybook
-
-# Tests
 /coverage
-/tests-results
+/[Tt]emp/
+/[Tt]mp/
+/vendor/
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+node_modules/
+*tsbuildinfo
+npm-debug.log*
+.unikraft
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/mcp.json
+!.vscode/tasks.json
+*.bak
 
-# envars
+# SQLite
+*.sqlite*
+*.sqlite3*
+*.db
+
+# Output directory
+build/
+dist/
+dist-ssr/
+release/
+output/
+/out/
+.react-email/
+.build/
+.data
+.cache
+.nitro
+.output
+.wrangler
+.netlify
+.wireit
+.temp
+.tmp
+
+# Vite & Vitest config
+vite.config.*
+!vite.config.ts
+vitest.config.*
+!vitest.config.ts
+vitest.workspace.*
+!vitest.workspace.ts
+
+# Envars
 .env.*
 !.env.example
+compose.env*
+!compose.env.example
+.*.vars
+
+# Disable this line in your real app
+/playwright/.cache/
+/playwright-report/
+/tests-results/
+/blob-report/
+.playwright/
+
+# Sentry Config File
+.sentryclirc
+
+# Storybook
+*storybook.log
+storybook-static/
 
 # Generated files
-/src/routeTree.gen.ts
+.tanstack/
+routeTree.gen.ts
+routes.gen.ts
+*.gen.ts
+
+# Miscellaneous
+pnpm-exec-summary.json
+slim.report.json
+RELEASE.md
+audit.json
+sbom-*
+/storage/
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate*
+terraform.tfvars*
+!terraform.tfvars.example
+
+# fly.io
+fly*.toml*
+!fly*.toml.example

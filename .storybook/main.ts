@@ -5,15 +5,15 @@ const config: StorybookConfig = {
   addons: ['@storybook/addon-links', '@storybook/addon-docs'],
   framework: {
     name: '@storybook/react-vite',
-    options: {},
+    options: {}
   },
   core: {
     disableTelemetry: true,
-    enableCrashReports: false,
+    enableCrashReports: false
   },
   docs: {},
   typescript: {
-    reactDocgen: 'react-docgen-typescript',
+    reactDocgen: 'react-docgen-typescript'
   },
   async viteFinal(viteConfig) {
     viteConfig.build = {
@@ -24,12 +24,12 @@ const config: StorybookConfig = {
       // @ref: https://rolldown.rs/reference/OutputOptions.codeSplitting
       rolldownOptions: {
         output: {
-          codeSplitting: true,
-        },
-      },
+          codeSplitting: true
+        }
+      }
     }
     return viteConfig
-  },
+  }
 }
 
 export default config

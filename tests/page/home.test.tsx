@@ -1,10 +1,9 @@
-import { render } from '@testing-library/react'
-import { describe, expect, test } from 'vitest'
-import App from '#/app'
+import { describe, expect, it } from 'vitest'
+import { renderPage } from '../helpers'
 
 describe('Homepage', () => {
-  test('should render successfully', () => {
-    const { baseElement } = render(<App />)
+  it('should render successfully', async () => {
+    const { baseElement } = await renderPage('/')
     expect(baseElement).toBeTruthy()
   })
 })

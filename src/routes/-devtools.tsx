@@ -11,7 +11,7 @@ export default function DevTools({ queryClient }: { queryClient: QueryClient }) 
       panelLocation: 'bottom',
       inspectHotkey: ['Alt', 'CtrlOrMeta'],
       openHotkey: ['Shift', 'D'],
-      triggerHidden: true,
+      triggerHidden: false,
       requireUrlFlag: false,
       urlFlag: 'devtools',
       theme: 'dark'

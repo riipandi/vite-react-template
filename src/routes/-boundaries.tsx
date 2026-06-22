@@ -145,5 +145,52 @@ export function GlobalNotFound() {
 }
 
 export function GlobalError({ error, reset }: ErrorComponentProps) {
-  return null
+  return (
+    <div
+      {...stylex.props(
+        x.marginLeft.auto,
+        x.marginRight.auto,
+        x.display.flex,
+        x.height['100%'],
+        x.minHeight['100vh'],
+        x.width['100%'],
+        x.flexDirection.column
+      )}
+    >
+      <header {...stylex.props(x.marginBottom.auto, x.width['100%'])} aria-hidden />
+      <div {...stylex.props(styles.content)}>
+        <h1 {...stylex.props(styles.title)}>Oops!</h1>
+        <div {...stylex.props(styles.message)}>
+          <p {...stylex.props(x.lineHeight['2rem'])}>Something went wrong.</p>
+          <p {...stylex.props(x.lineHeight['2rem'], x.fontSize.sm)}>
+            {error?.message ?? 'An unexpected error occurred.'}
+          </p>
+        </div>
+        <div {...stylex.props(styles.actionWrapper)}>
+          <button type='button' onClick={reset} {...stylex.props(styles.backLink)}>
+            <svg
+              {...stylex.props(x.height['1rem'], x.width['1rem'])}
+              viewBox='0 0 16 16'
+              fill='none'
+            >
+              <path
+                d='M11.2792 1.64001L5.63273 7.28646C5.43747 7.48172 5.43747 7.79831 5.63273 7.99357L11.2792 13.64'
+                stroke='currentColor'
+                strokeWidth={2}
+                strokeLinecap='round'
+              />
+            </svg>
+            Try again
+          </button>
+        </div>
+      </div>
+      <footer {...stylex.props(styles.footer)}>
+        <div {...stylex.props(styles.footerInner)}>
+          <p {...stylex.props(styles.footerText)}>
+            &copy; All Rights Reserved. {new Date().getFullYear()}
+          </p>
+        </div>
+      </footer>
+    </div>
+  )
 }

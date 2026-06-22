@@ -1,8 +1,6 @@
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createFileRoute, Outlet, useRouterState } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { useEffect, useState } from 'react'
 import { AuthProvider } from '#/guards/auth-provider'
 import { ThemeProvider } from '#/routes/-theme'
@@ -84,8 +82,6 @@ function RouteComponent() {
         <AuthProvider>
           <RouterSpinner />
           <Outlet />
-          <ReactQueryDevtools initialIsOpen={false} />
-          <TanStackRouterDevtools position='bottom-right' />
         </AuthProvider>
       </ThemeProvider>
     </div>

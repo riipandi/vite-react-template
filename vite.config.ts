@@ -1,4 +1,5 @@
 import stylex from '@stylexjs/unplugin/vite'
+import { devtools } from '@tanstack/devtools-vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
 import { join, resolve } from 'node:path'
@@ -6,8 +7,11 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import { loadEnv } from 'vite'
 import { defineConfig } from 'vitest/config'
 
+const isTestOrCI = process.env.CI || process.env.VITEST
+
 export default defineConfig({
   plugins: [
+    devtools(),
     stylex({
       useCSSLayers: true,
       aliases: { '#/*': join(__dirname, './src/*') }
@@ -19,7 +23,7 @@ export default defineConfig({
       target: 'react'
     }),
     react(),
-    !process.env.CI && visualizer({ emitFile: true, template: 'treemap' })
+    !isTestOrCI && visualizer({ emitFile: true })
   ],
   resolve: { tsconfigPaths: true },
   envDir: join(__dirname),
@@ -68,6 +72,7 @@ export default defineConfig({
       }
     },
     dir: './tests',
-    globals: true
+    globals: true,
+    teardownTimeout: 0
   }
 })

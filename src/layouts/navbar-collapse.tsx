@@ -2,7 +2,7 @@ import * as Lucide from 'lucide-react'
 import { Link, useRouterState } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
 
-import { ThemeSwitcher } from '#/components/theme'
+import { ThemeSwitcher } from '#/components/theme-switcher'
 import { colors, radius, shadow, space } from '../assets/styles/tokens.stylex'
 
 // ── Nav data ──────────────────────────────────────────────────────────────────

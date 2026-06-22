@@ -9,7 +9,7 @@ import {
   shadow,
   space,
 } from '../../assets/styles/tokens.stylex'
-import { cx } from '#/components/ui-react-aria/utils'
+import { cx } from '#/lib/utils'
 
 interface SocialButtonProps {
   icon: ReactNode

@@ -1,10 +1,10 @@
 import { Field } from '@base-ui/react/field'
 import { Input } from '@base-ui/react/input'
 import * as stylex from '@stylexjs/stylex'
-import { Description, FieldError, Label } from '../Field'
-import { cx } from '../utils'
+import { Description, FieldError, Label } from './field'
+import { cx } from '#/lib/utils'
 
-import { colors, fontSize, radius, space } from '../../../assets/styles/tokens.stylex'
+import { colors, fontSize, radius, space } from '../../assets/styles/tokens.stylex'
 
 export interface TextFieldProps {
   label?: string
@@ -26,7 +26,7 @@ const fieldStyles = stylex.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    gap: space[2],
+    gap: space[1],
   },
   input: {
     minWidth: 0,

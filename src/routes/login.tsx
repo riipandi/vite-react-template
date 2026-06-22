@@ -3,8 +3,12 @@ import { useForm } from '@tanstack/react-form'
 import { createFileRoute, Link, redirect } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
 import x from '@stylexjs/atoms'
-import { GitHubButton, GoogleButton } from '#/components/social-button'
-import { Alert, Button, Card, HorizontalDivider, TextField } from '#/components/ui-react-aria'
+import { GitHubButton, GoogleButton } from '#/components/social-buttons'
+import { Alert } from '#/components/ui/alert'
+import { Button } from '#/components/ui/button'
+import { Card } from '#/components/ui/card'
+import { HorizontalDivider } from '#/components/ui/divider'
+import { TextField } from '#/components/ui/text-field'
 import { useAuthentication } from '#/context/auth/AuthProvider'
 import { isAuthenticated } from '#/lib/auth'
 import { loginSchema } from '#/lib/schemas'
@@ -66,7 +70,7 @@ const loginStyles = stylex.create({
   },
   formGrid: {
     display: 'grid',
-    rowGap: space[5],
+    rowGap: space[4],
   },
   submitWrapper: {
     marginTop: space[7],

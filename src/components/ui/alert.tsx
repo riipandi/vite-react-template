@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
 import type { FC, ReactNode } from 'react'
 
-import { colors, radius, space, fontSize } from '../../../assets/styles/tokens.stylex'
-import { cx } from '../utils'
+import { colors, radius, space, fontSize } from '../../assets/styles/tokens.stylex'
+import { cx } from '#/lib/utils'
 
 interface AlertProps {
   variant?: 'info' | 'success' | 'destructive' | 'warning' | 'subtle'

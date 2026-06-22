@@ -1,11 +1,12 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { colors, fontSize, fontWeight, space } from '../../../assets/styles/tokens.stylex'
+import { colors, fontSize, fontWeight, space } from '../../assets/styles/tokens.stylex'
 
 const labelStyles = stylex.create({
   base: {
     display: 'block',
     width: '100%',
+    margin: 0,
     paddingLeft: space[3],
     cursor: 'default',
     fontWeight: fontWeight.medium,
@@ -16,6 +17,7 @@ const labelStyles = stylex.create({
 
 const descriptionStyles = stylex.create({
   base: {
+    margin: 0,
     fontSize: fontSize.sm,
     color: colors.zinc600,
     paddingLeft: space[3],
@@ -24,12 +26,12 @@ const descriptionStyles = stylex.create({
 
 const fieldErrorStyles = stylex.create({
   base: {
+    margin: 0,
     paddingLeft: space[3],
-    paddingRight: space[3],
-    paddingTop: space['0.5'],
-    fontSize: fontSize.sm,
+    paddingTop: 0,
+    fontSize: fontSize.xs,
     color: colors.destructive600,
-    lineHeight: '1.4',
+    lineHeight: 1.25,
   },
 })
 

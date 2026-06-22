@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
 import type { FC } from 'react'
 
-import { colors, fontSize, space } from '../../../assets/styles/tokens.stylex'
-import { cx } from '../utils'
+import { colors, fontSize, space } from '../../assets/styles/tokens.stylex'
+import { cx } from '#/lib/utils'
 
 interface HorizontalDividerProps {
   label?: string

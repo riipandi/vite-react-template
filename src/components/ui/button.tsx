@@ -9,8 +9,8 @@ import {
   radius,
   shadow,
   space,
-} from '../../../assets/styles/tokens.stylex'
-import { cx } from '../utils'
+} from '../../assets/styles/tokens.stylex'
+import { cx } from '#/lib/utils'
 
 export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'destructive' | 'icon'

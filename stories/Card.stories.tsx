@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Card, Container } from '#/components/ui-react-aria'
+import { Card } from '#/components/ui/card'
+import { Container } from '#/components/ui/container'
 
 const meta: Meta<typeof Card> = {
   title: 'UI/Card',

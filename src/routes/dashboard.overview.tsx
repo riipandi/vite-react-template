@@ -3,7 +3,9 @@ import * as Lucide from 'lucide-react'
 import * as stylex from '@stylexjs/stylex'
 import x from '@stylexjs/atoms'
 
-import { Button, Card, Container } from '#/components/ui-react-aria'
+import { Button } from '#/components/ui/button'
+import { Card } from '#/components/ui/card'
+import { Container } from '#/components/ui/container'
 import { useAuthentication } from '#/context/auth/AuthProvider'
 
 import { colors, fontSize, fontWeight, radius, shadow, space } from '../assets/styles/tokens.stylex'

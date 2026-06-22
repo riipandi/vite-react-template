@@ -1,7 +1,7 @@
 import { Field } from '@base-ui/react/field'
 import { Input } from '@base-ui/react/input'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from '#/lib/utils'
+import { clx } from '#/libraries/utils'
 import { Description, FieldError, Label } from '../field'
 import { fieldStyles } from './text-field.stylex'
 
@@ -40,7 +40,7 @@ export function TextField({
       name={name}
       invalid={!!errorMessage}
       disabled={disabled}
-      className={cx(rootSx.className, className)}
+      className={clx(rootSx.className, className)}
     >
       {label && <Label>{label}</Label>}
       <Input

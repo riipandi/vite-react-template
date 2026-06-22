@@ -1,7 +1,7 @@
 import { Button as BaseButton } from '@base-ui/react/button'
 import type { ButtonState } from '@base-ui/react/button'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from '#/lib/utils'
+import { clx } from '#/libraries/utils'
 import { buttonStyles } from './button.stylex'
 
 export interface ButtonProps {
@@ -37,10 +37,10 @@ export function Button({
     )
 
     if (typeof className === 'function') {
-      return cx(sx.className, className(state))
+      return clx(sx.className, className(state))
     }
     if (typeof className === 'string') {
-      return cx(sx.className, className)
+      return clx(sx.className, className)
     }
     return sx.className
   }

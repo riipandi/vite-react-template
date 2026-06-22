@@ -1,7 +1,7 @@
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Link } from '@tanstack/react-router'
-import { space } from '#/styles/tokens.stylex'
+import { space } from '#/styles/token.stylex'
 
 const styles = stylex.create({
   link: {

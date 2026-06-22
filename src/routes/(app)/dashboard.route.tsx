@@ -2,12 +2,12 @@ import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { useEffect } from 'react'
-import { SideNavbar } from '#/layouts/sidebar'
-import { isAuthenticated } from '#/lib/auth'
+import { isAuthenticated } from '#/libraries/auth'
 import { useSidebarOpen, toggleSidebar } from '#/stores/app-store'
-import { colors, radius, space } from '#/styles/tokens.stylex'
+import { colors, radius, space } from '#/styles/token.stylex'
+import { SideNavbar } from './-sidebar'
 
-export const Route = createFileRoute('/dashboard')({
+export const Route = createFileRoute('/(app)/dashboard')({
   beforeLoad: () => {
     if (!isAuthenticated()) {
       throw redirect({ to: '/login' })

@@ -9,19 +9,10 @@ import { Button } from '#/components/ui/button'
 import { Card } from '#/components/ui/card'
 import { HorizontalDivider } from '#/components/ui/divider'
 import { TextField } from '#/components/ui/text-field'
-import { useAuthentication } from '#/context/auth/AuthProvider'
-import { isAuthenticated } from '#/lib/auth'
-import { loginSchema } from '#/lib/schemas'
-import { colors, fontSize, fontWeight, space } from '#/styles/tokens.stylex'
-
-export const Route = createFileRoute('/login')({
-  beforeLoad: () => {
-    if (isAuthenticated()) {
-      throw redirect({ to: '/dashboard/overview' })
-    }
-  },
-  component: LoginComponent
-})
+import { useAuthentication } from '#/guards/auth-provider'
+import { isAuthenticated } from '#/libraries/auth'
+import { loginSchema } from '#/libraries/schemas'
+import { colors, fontSize, fontWeight, space } from '#/styles/token.stylex'
 
 const loginStyles = stylex.create({
   wrapper: {
@@ -128,7 +119,16 @@ const ViteLogo = () => (
   </svg>
 )
 
-function LoginComponent() {
+export const Route = createFileRoute('/(auth)/login')({
+  component: RouteComponent,
+  beforeLoad: () => {
+    if (isAuthenticated()) {
+      throw redirect({ to: '/dashboard/overview' })
+    }
+  }
+})
+
+function RouteComponent() {
   const { login, loggedOut } = useAuthentication()
   const [failed, setFailed] = useState<string | null>()
 

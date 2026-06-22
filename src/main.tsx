@@ -1,26 +1,37 @@
 // oxlint-disable import/no-unassigned-import
-import { QueryClientProvider } from '@tanstack/react-query'
-import { RouterProvider } from '@tanstack/react-router'
-import React from 'react'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
-import { queryClient } from './query/client'
-import { router } from './router'
-import './styles/global.css'
+import { queryClient } from '#/libraries/api-client'
+import { routeTree } from './routes.gen'
+import './main.css'
 
-const rootElement = document.getElementById('root')
+// Create the application router instance.
+const appRoutes = createRouter({
+  routeTree,
+  defaultPreload: 'intent',
+  scrollRestoration: true,
+  context: {
+    queryClient: undefined!
+  }
+})
 
-if (!rootElement) {
-  throw new Error(
-    "Root element not found. Check if it's in your index.html or if the id is correct."
-  )
+// Register the router instance for type safety.
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof appRoutes
+  }
+  interface StaticDataRouteOption {
+    pageTitle?: string
+  }
 }
 
-// When you use Strict Mode, React renders each component twice to help you find unexpected side effects.
-// @ref: https://react.dev/blog/2022/03/08/react-18-upgrade-guide#react
-ReactDOM.createRoot(rootElement).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  </React.StrictMode>
-)
+// Create root element and ensure exists.
+const rootElement = document.getElementById('root')
+if (!rootElement) {
+  throw new Error('Root element missing. Verify the element exists and the ID is correct.')
+}
+
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement)
+  root.render(<RouterProvider router={appRoutes} context={{ queryClient }} />)
+}

@@ -5,10 +5,10 @@ import * as Lucide from 'lucide-react'
 import { Button } from '#/components/ui/button'
 import { Card } from '#/components/ui/card'
 import { Container } from '#/components/ui/container'
-import { useAuthentication } from '#/context/auth/AuthProvider'
-import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/tokens.stylex'
+import { useAuthentication } from '#/guards/auth-provider'
+import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
 
-export const Route = createFileRoute('/dashboard/overview')({
+export const Route = createFileRoute('/(app)/dashboard/overview')({
   component: DashboardOverviewComponent
 })
 

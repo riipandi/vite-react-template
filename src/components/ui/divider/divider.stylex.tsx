@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors, fontSize, space } from '#/styles/tokens.stylex'
+import { colors, fontSize, space } from '#/styles/token.stylex'
 
 export const dividerStyles = stylex.create({
   base: {

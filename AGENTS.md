@@ -35,7 +35,7 @@ Run `pnpm lint && pnpm typecheck && pnpm test` before committing. The pre-commit
 
 Configured in `tsconfig.json` and `vite.config.ts`:
 
-- `#/*` → `./src/*` (source imports, e.g. `import { x } from '#/styles/tokens.stylex'`)
+- `#/*` → `./src/*` (source imports, e.g. `import { x } from '#/styles/token.stylex'`)
 - `~/*` → `./public/*`
 
 ## StyleX
@@ -43,7 +43,7 @@ Configured in `tsconfig.json` and `vite.config.ts`:
 Reference: https://stylexjs.com/docs/llm-resources#style-authoring-guide
 
 - Files use `*.stylex.ts` extension for theme/token definitions.
-- Token file: `src/styles/tokens.stylex.ts` — exports `colors`, `darkTheme`, `font`, `space`, `radius`, `shadow`, `fontSize`, `fontWeight`.
+- Token file: `src/styles/token.stylex.ts` — exports `colors`, `darkTheme`, `font`, `space`, `radius`, `shadow`, `fontSize`, `fontWeight`.
 - StyleX unplugin is configured in `vite.config.ts` with `useCSSLayers: true` and alias `#/*`.
 - **Tests require mocking `@stylexjs/atoms`** — the mock is in `tests/setup-test.ts`. It's a compile-time transform; Vitest doesn't run the Babel transform, so the runtime Proxy mock is needed.
 - Use `stylex.props()` to apply styles, not `className` or `style` directly.

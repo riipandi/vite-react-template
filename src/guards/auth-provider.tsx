@@ -9,7 +9,7 @@ export interface User {
 
 import { useNavigate } from '@tanstack/react-router'
 import { createContext, useContext, useState } from 'react'
-import { isAuthenticated, login, setToken, type LoginResponse } from '#/lib/auth'
+import { isAuthenticated, login, setToken, type LoginResponse } from '#/libraries/auth'
 
 export type { LoginResponse }
 

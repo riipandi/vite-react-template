@@ -1,11 +1,7 @@
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { colors, fontSize, fontWeight, radius, space } from '#/styles/tokens.stylex'
-
-export const Route = createFileRoute('/$')({
-  component: NotFoundComponent
-})
+import { Link, type ErrorComponentProps } from '@tanstack/react-router'
+import { colors, fontSize, fontWeight, radius, space } from '#/styles/token.stylex'
 
 const styles = stylex.create({
   content: {
@@ -99,7 +95,7 @@ const styles = stylex.create({
   }
 })
 
-function NotFoundComponent() {
+export function GlobalNotFound() {
   return (
     <div
       {...stylex.props(
@@ -146,4 +142,8 @@ function NotFoundComponent() {
       </footer>
     </div>
   )
+}
+
+export function GlobalError({ error, reset }: ErrorComponentProps) {
+  return null
 }

@@ -5,11 +5,11 @@ import { Link, createFileRoute, redirect } from '@tanstack/react-router'
 import { ThemeSwitcher } from '#/components/theme-switcher'
 import { Alert } from '#/components/ui/alert'
 import { Button } from '#/components/ui/button'
-import { useAuthentication } from '#/context/auth/AuthProvider'
-import { isAuthenticated } from '#/lib/auth'
-import { colors, fontSize, space } from '#/styles/tokens.stylex'
+import { useAuthentication } from '#/guards/auth-provider'
+import { isAuthenticated } from '#/libraries/auth'
+import { colors, fontSize, space } from '#/styles/token.stylex'
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute('/(app)/')({
   beforeLoad: () => {
     if (isAuthenticated()) {
       throw redirect({ to: '/dashboard/overview' })

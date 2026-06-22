@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors, radius, shadow } from '#/styles/tokens.stylex'
+import { colors, radius, shadow } from '#/styles/token.stylex'
 
 export const cardStyles = stylex.create({
   base: {

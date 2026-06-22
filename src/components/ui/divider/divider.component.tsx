@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import type { FC } from 'react'
-import { cx } from '#/lib/utils'
+import { clx } from '#/libraries/utils'
 import { dividerStyles } from './divider.stylex'
 
 interface HorizontalDividerProps {
@@ -19,7 +19,7 @@ export const HorizontalDivider: FC<HorizontalDividerProps> = ({ label, className
     hasLabel && dividerStyles.labelAfter
   )
   return (
-    <div className={cx(sx.className, className)} style={sx.style}>
+    <div className={clx(sx.className, className)} style={sx.style}>
       {label}
     </div>
   )

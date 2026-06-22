@@ -2,7 +2,7 @@ import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { useTheme, toggleTheme } from '#/stores/app-store'
-import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/tokens.stylex'
+import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
 
 interface ThemeSwitcherProps {
   variant?: 'sidebar' | 'compact'

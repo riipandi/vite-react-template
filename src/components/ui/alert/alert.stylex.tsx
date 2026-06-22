@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors, radius, space, fontSize } from '#/styles/tokens.stylex'
+import { colors, radius, space, fontSize } from '#/styles/token.stylex'
 
 export const alertStyles = stylex.create({
   base: {

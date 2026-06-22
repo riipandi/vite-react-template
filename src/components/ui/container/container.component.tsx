@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
-import { cx } from '#/lib/utils'
+import { clx } from '#/libraries/utils'
 import { containerStyles } from './container.stylex'
 
 type ContainerProps<T extends ElementType> = {
@@ -20,7 +20,7 @@ export const Container = <T extends ElementType = 'div'>({
   const Component = as || 'div'
   const sx = stylex.props(containerStyles.base, fluid && containerStyles.fluid)
   return (
-    <Component className={cx(sx.className, className)} style={sx.style} {...props}>
+    <Component className={clx(sx.className, className)} style={sx.style} {...props}>
       {children}
     </Component>
   )

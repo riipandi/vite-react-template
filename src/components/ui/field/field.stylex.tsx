@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors, fontSize, fontWeight, space } from '#/styles/tokens.stylex'
+import { colors, fontSize, fontWeight, space } from '#/styles/token.stylex'
 
 export const labelStyles = stylex.create({
   base: {

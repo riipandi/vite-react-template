@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/styles/tokens.stylex'
+import { space } from '#/styles/token.stylex'
 
 export const containerStyles = stylex.create({
   base: {

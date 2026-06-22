@@ -26,7 +26,8 @@ const fieldErrorStyles = stylex.create({
   base: {
     paddingLeft: space[3],
     paddingRight: space[3],
-    fontSize: fontSize.xs,
+    paddingTop: space['0.5'],
+    fontSize: fontSize.sm,
     color: colors.destructive600,
     lineHeight: '1.4',
   },

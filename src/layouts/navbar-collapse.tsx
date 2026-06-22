@@ -106,6 +106,15 @@ const collapseStyles = stylex.create({
       color: colors.primary700,
     },
   },
+  activeAccent: {
+    position: 'absolute',
+    left: '0.125rem',
+    top: '0.375rem',
+    bottom: '0.375rem',
+    width: '3px',
+    borderRadius: '9999px',
+    backgroundColor: colors.primary500,
+  },
   navIcon: {
     height: '1rem',
     width: '1rem',
@@ -164,6 +173,9 @@ const collapseStyles = stylex.create({
 export function NavBarCollapse() {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
 
+  const isActiveRoute = (href: string) =>
+    href !== '#' && (pathname === href || pathname.startsWith(href))
+
   return (
     <div {...stylex.props(collapseStyles.container)}>
       {/* Logo icon */}
@@ -183,7 +195,7 @@ export function NavBarCollapse() {
       {/* Main nav */}
       <div {...stylex.props(collapseStyles.navSection)}>
         {navItems.map((item) => {
-          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+          const isActive = isActiveRoute(item.href)
           return (
             <Link
               key={item.label}
@@ -191,6 +203,7 @@ export function NavBarCollapse() {
               {...stylex.props(collapseStyles.navLink, isActive && collapseStyles.navLinkActive)}
               aria-label={item.label}
             >
+              {isActive && <span {...stylex.props(collapseStyles.activeAccent)} />}
               <item.icon {...stylex.props(collapseStyles.navIcon)} />
             </Link>
           )
@@ -202,7 +215,7 @@ export function NavBarCollapse() {
       {/* Secondary nav */}
       <div {...stylex.props(collapseStyles.navSection)}>
         {secondaryItems.map((item) => {
-          const isActive = pathname === item.href
+          const isActive = isActiveRoute(item.href)
           return (
             <Link
               key={item.label}
@@ -210,6 +223,7 @@ export function NavBarCollapse() {
               {...stylex.props(collapseStyles.navLink, isActive && collapseStyles.navLinkActive)}
               aria-label={item.label}
             >
+              {isActive && <span {...stylex.props(collapseStyles.activeAccent)} />}
               <item.icon {...stylex.props(collapseStyles.navIcon)} />
               {item.badge && <span {...stylex.props(collapseStyles.badge)} />}
             </Link>

@@ -99,6 +99,7 @@ const sidebarStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: space[1],
+    overflowY: 'auto',
   },
   sectionLabel: {
     paddingLeft: space[3],
@@ -109,12 +110,13 @@ const sidebarStyles = stylex.create({
     color: colors.zinc400,
     letterSpacing: '0.07em',
     textTransform: 'uppercase',
+    userSelect: 'none',
   },
 
-  // Nav items
+  // Nav items with left accent bar
   navItem: {
     display: 'flex',
-    height: '2.375rem',
+    height: '2.5rem',
     width: '100%',
     alignItems: 'center',
     gap: space[3],
@@ -140,6 +142,15 @@ const sidebarStyles = stylex.create({
       backgroundColor: colors.primary100,
       color: colors.primary700,
     },
+  },
+  activeAccent: {
+    position: 'absolute',
+    left: 0,
+    top: '0.375rem',
+    bottom: '0.375rem',
+    width: '3px',
+    borderRadius: '9999px',
+    backgroundColor: colors.primary500,
   },
   navIcon: {
     height: '1rem',
@@ -179,11 +190,28 @@ const sidebarStyles = stylex.create({
     justifyContent: 'space-between',
     paddingLeft: space[3],
     paddingRight: space[3],
+    paddingTop: space[2],
+    paddingBottom: space[2],
+    gap: space[3],
+  },
+  bottomLabelGroup: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: space[2],
   },
   bottomLabel: {
     fontSize: fontSize.xs,
-    color: colors.zinc400,
-    fontWeight: fontWeight.medium,
+    color: colors.zinc500,
+    fontWeight: fontWeight.semibold,
+    letterSpacing: '0.04em',
+    textTransform: 'uppercase',
+    userSelect: 'none',
+  },
+  bottomDot: {
+    width: '0.375rem',
+    height: '0.375rem',
+    borderRadius: '9999px',
+    backgroundColor: colors.zinc400,
   },
 })
 
@@ -191,6 +219,9 @@ const sidebarStyles = stylex.create({
 
 export function NavBarExpand() {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
+
+  const isActiveRoute = (href: string) =>
+    href !== '#' && (pathname === href || pathname.startsWith(href))
 
   return (
     <div {...stylex.props(sidebarStyles.container)}>
@@ -218,13 +249,14 @@ export function NavBarExpand() {
       <div {...stylex.props(sidebarStyles.navContent)}>
         <p {...stylex.props(sidebarStyles.sectionLabel)}>Main</p>
         {navItems.map((item) => {
-          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+          const isActive = isActiveRoute(item.href)
           return (
             <Link
               key={item.label}
               to={item.href}
               {...stylex.props(sidebarStyles.navItem, isActive && sidebarStyles.navItemActive)}
             >
+              {isActive && <span {...stylex.props(sidebarStyles.activeAccent)} />}
               <item.icon {...stylex.props(sidebarStyles.navIcon)} />
               <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
             </Link>
@@ -233,13 +265,14 @@ export function NavBarExpand() {
 
         <p {...stylex.props(sidebarStyles.sectionLabel)}>Workspace</p>
         {secondaryItems.map((item) => {
-          const isActive = pathname === item.href
+          const isActive = isActiveRoute(item.href)
           return (
             <Link
               key={item.label}
               to={item.href}
               {...stylex.props(sidebarStyles.navItem, isActive && sidebarStyles.navItemActive)}
             >
+              {isActive && <span {...stylex.props(sidebarStyles.activeAccent)} />}
               <item.icon {...stylex.props(sidebarStyles.navIcon)} />
               <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
               {item.badge && <span {...stylex.props(sidebarStyles.badge)} />}
@@ -251,20 +284,24 @@ export function NavBarExpand() {
       {/* Bottom: account + theme */}
       <div {...stylex.props(sidebarStyles.bottomSection)}>
         {bottomItems.map((item) => {
-          const isActive = pathname === item.href
+          const isActive = isActiveRoute(item.href)
           return (
             <Link
               key={item.label}
               to={item.href}
               {...stylex.props(sidebarStyles.navItem, isActive && sidebarStyles.navItemActive)}
             >
+              {isActive && <span {...stylex.props(sidebarStyles.activeAccent)} />}
               <item.icon {...stylex.props(sidebarStyles.navIcon)} />
               <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
             </Link>
           )
         })}
         <div {...stylex.props(sidebarStyles.bottomRow)}>
-          <span {...stylex.props(sidebarStyles.bottomLabel)}>Theme</span>
+          <div {...stylex.props(sidebarStyles.bottomLabelGroup)}>
+            <span {...stylex.props(sidebarStyles.bottomDot)} />
+            <span {...stylex.props(sidebarStyles.bottomLabel)}>Theme</span>
+          </div>
           <ThemeSwitcher />
         </div>
       </div>

@@ -35,25 +35,35 @@ export const UserContext = createContext(DefaultUserContext)
 export function AuthProvider({ children }: React.PropsWithChildren) {
   const navigate = useNavigate()
   const token = isAuthenticated()
+  const [user, setUser] = useState<User | null>(null)
   const [loggedIn, setLoggedIn] = useState(token)
   const [loggedOut, setLoggedOut] = useState(false)
 
   const handleLogin = async (credentials: { username: string; password: string }) => {
     const response = await login(credentials)
     setToken(response.accessToken)
+    setUser({
+      id: response.id,
+      email: response.email,
+      firstName: response.firstName,
+      lastName: response.lastName,
+      username: response.username,
+      image: response.image,
+    })
     setLoggedIn(true)
     navigate({ to: '/dashboard/overview' })
   }
 
   const logout = () => {
     setToken(null)
+    setUser(null)
     setLoggedIn(false)
     setLoggedOut(true)
     navigate({ to: '/login', search: { loggedOut: 'true' } })
   }
 
   return (
-    <UserContext.Provider value={{ user: null, loggedIn, loggedOut, login: handleLogin, logout }}>
+    <UserContext.Provider value={{ user, loggedIn, loggedOut, login: handleLogin, logout }}>
       {children}
     </UserContext.Provider>
   )

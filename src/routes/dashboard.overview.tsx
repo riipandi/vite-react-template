@@ -94,6 +94,20 @@ const activity = [
   },
 ]
 
+// ── Weekly chart data ─────────────────────────────────────────────────────────
+
+const weeklyData = [
+  { day: 'Mon', value: 40 },
+  { day: 'Tue', value: 72 },
+  { day: 'Wed', value: 55 },
+  { day: 'Thu', value: 88 },
+  { day: 'Fri', value: 62 },
+  { day: 'Sat', value: 35 },
+  { day: 'Sun', value: 48 },
+]
+
+const maxValue = Math.max(...weeklyData.map((d) => d.value))
+
 // ── Styles ───────────────────────────────────────────────────────────────────
 
 const styles = stylex.create({
@@ -102,7 +116,7 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    marginBottom: space[8],
+    marginBottom: space[10],
     gap: space[4],
   },
   pageHeaderLeft: {
@@ -136,12 +150,17 @@ const styles = stylex.create({
     color: colors.zinc800,
     marginBottom: space[4],
   },
+  sectionTitleWithAction: {
+    fontSize: fontSize.base,
+    fontWeight: fontWeight.semibold,
+    color: colors.zinc800,
+  },
 
   // Stat grid
   statsGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(1, 1fr)',
-    gap: space[4],
+    gap: space[5],
     marginBottom: space[8],
     '@media (min-width: 640px)': {
       gridTemplateColumns: 'repeat(2, 1fr)',
@@ -238,10 +257,62 @@ const styles = stylex.create({
     marginTop: space[2],
   },
 
+  // Chart card
+  chartCard: {
+    padding: space[6],
+    marginBottom: space[10],
+  },
+  chartHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: space[5],
+  },
+  chartContainer: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    gap: space[2],
+    height: '8rem',
+    paddingTop: space[1],
+  },
+  chartBar: {
+    flex: 1,
+    borderRadius: radius.md,
+    minHeight: space[2],
+    position: 'relative',
+    transitionProperty: 'height, background-color',
+    transitionDuration: '200ms',
+  },
+  chartBarPrimary: {
+    backgroundColor: colors.primary500,
+    ':hover': {
+      backgroundColor: colors.primary600,
+    },
+  },
+  chartBarLabel: {
+    position: 'absolute',
+    bottom: '-1.25rem',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    fontSize: fontSize.xs,
+    color: colors.zinc400,
+    whiteSpace: 'nowrap',
+  },
+  chartBarValue: {
+    position: 'absolute',
+    top: '-1.25rem',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    fontSize: fontSize.xs,
+    fontWeight: fontWeight.semibold,
+    color: colors.zinc600,
+    whiteSpace: 'nowrap',
+  },
+
   // Bottom grid (activity + user card)
   bottomGrid: {
     display: 'grid',
-    gap: space[6],
+    gap: space[8],
     gridTemplateColumns: '1fr',
     '@media (min-width: 1024px)': {
       gridTemplateColumns: '1fr 22rem',
@@ -250,7 +321,7 @@ const styles = stylex.create({
 
   // Activity feed
   activityCard: {
-    padding: space[6],
+    padding: space[7],
   },
   activityHeader: {
     display: 'flex',
@@ -312,7 +383,7 @@ const styles = stylex.create({
 
   // User card
   profileCard: {
-    padding: space[6],
+    padding: space[7],
   },
   profileHeader: {
     display: 'flex',
@@ -337,6 +408,12 @@ const styles = stylex.create({
     fontSize: fontSize.xl,
     fontWeight: fontWeight.bold,
     boxShadow: shadow.md,
+  },
+  profileInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: space['0.5'],
   },
   profileName: {
     fontSize: fontSize.base,
@@ -418,12 +495,44 @@ const iconContainerStyle = (color: 'primary' | 'green' | 'orange' | 'destructive
   return map[color]
 }
 
+// ── Weekly mini chart ──────────────────────────────────────────────────────────
+
+function WeeklyChart() {
+  return (
+    <Card>
+      <div {...stylex.props(styles.chartCard)}>
+        <div {...stylex.props(styles.chartHeader)}>
+          <p {...stylex.props(styles.sectionTitle)}>Weekly Activity</p>
+          <span {...stylex.props(styles.statLabel)}>Last 7 days</span>
+        </div>
+        <div {...stylex.props(styles.chartContainer)}>
+          {weeklyData.map((d) => {
+            const heightPct = Math.max((d.value / maxValue) * 100, 8)
+            return (
+              <div
+                key={d.day}
+                {...stylex.props(styles.chartBar, styles.chartBarPrimary)}
+                style={{ height: `${heightPct}%` }}
+              >
+                <span {...stylex.props(styles.chartBarValue)}>{d.value}</span>
+                <span {...stylex.props(styles.chartBarLabel)}>{d.day}</span>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </Card>
+  )
+}
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 function DashboardOverviewComponent() {
   const { user, logout } = useAuthentication()
-  const initial = user?.email?.charAt(0).toUpperCase() ?? '?'
-  const email = user?.email ?? '—'
+  const displayName =
+    user?.firstName?.trim() || user?.username?.trim() || user?.email?.split('@')[0] || 'Guest'
+  const initial = displayName.charAt(0).toUpperCase()
+  const email = user?.email ?? 'Sign in to sync your account'
 
   const now = new Date()
   const hour = now.getHours()
@@ -436,7 +545,8 @@ function DashboardOverviewComponent() {
         <div {...stylex.props(styles.pageHeaderLeft)}>
           <p {...stylex.props(styles.pageLabel)}>Dashboard</p>
           <h1 {...stylex.props(styles.pageTitle)}>
-            {greeting}, {initial}!
+            {greeting}
+            {displayName !== 'Guest' ? `, ${displayName}` : ''}!
           </h1>
           <p {...stylex.props(styles.pageSubtitle)}>
             Here&apos;s what&apos;s happening across your workspace today.
@@ -476,7 +586,11 @@ function DashboardOverviewComponent() {
                     stat.positive ? styles.statChangePositive : styles.statChangeNegative
                   )}
                 >
-                  {stat.positive ? <Lucide.TrendingUp size={12} /> : <Lucide.TrendingDown size={12} />}
+                  {stat.positive ? (
+                    <Lucide.TrendingUp size={12} />
+                  ) : (
+                    <Lucide.TrendingDown size={12} />
+                  )}
                   {stat.change} vs last month
                 </div>
               </div>
@@ -484,6 +598,9 @@ function DashboardOverviewComponent() {
           )
         })}
       </div>
+
+      {/* Weekly chart */}
+      <WeeklyChart />
 
       {/* Bottom grid */}
       <div {...stylex.props(styles.bottomGrid)}>
@@ -506,9 +623,7 @@ function DashboardOverviewComponent() {
                       <span {...stylex.props(styles.activityTime)}>{item.time}</span>
                     </div>
                   </div>
-                  {idx < activity.length - 1 && (
-                    <div {...stylex.props(styles.activityDivider)} />
-                  )}
+                  {idx < activity.length - 1 && <div {...stylex.props(styles.activityDivider)} />}
                 </div>
               ))}
             </div>
@@ -522,8 +637,8 @@ function DashboardOverviewComponent() {
 
             <div {...stylex.props(styles.profileHeader)}>
               <div {...stylex.props(styles.profileAvatar)}>{initial}</div>
-              <div>
-                <div {...stylex.props(styles.profileName)}>Account</div>
+              <div {...stylex.props(styles.profileInfo)}>
+                <div {...stylex.props(styles.profileName)}>{displayName}</div>
                 <div {...stylex.props(styles.profileEmail)}>{email}</div>
               </div>
               <span {...stylex.props(styles.profileBadge)}>Admin</span>
@@ -546,12 +661,19 @@ function DashboardOverviewComponent() {
 
             <div {...stylex.props(styles.profileActions)}>
               <Link to="/" {...stylex.props(styles.profileActionLink)}>
-                <Button variant="secondary" className={stylex.props(styles.profileActionButton).className}>
+                <Button
+                  variant="secondary"
+                  className={stylex.props(styles.profileActionButton).className}
+                >
                   <Lucide.Home size={14} />
                   Back to Homepage
                 </Button>
               </Link>
-              <Button variant="destructive" onClick={logout} className={stylex.props(styles.profileActionButton).className}>
+              <Button
+                variant="destructive"
+                onClick={logout}
+                className={stylex.props(styles.profileActionButton).className}
+              >
                 <Lucide.LogOut size={14} />
                 Sign Out
               </Button>

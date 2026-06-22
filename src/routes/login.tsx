@@ -66,10 +66,10 @@ const loginStyles = stylex.create({
   },
   formGrid: {
     display: 'grid',
-    rowGap: space[4],
+    rowGap: space[5],
   },
   submitWrapper: {
-    marginTop: space[5],
+    marginTop: space[7],
     display: 'grid',
     width: '100%',
   },
@@ -192,7 +192,6 @@ function LoginComponent() {
             </div>
 
             <HorizontalDivider label="or continue with" />
-
 
             <form
               autoComplete="on"

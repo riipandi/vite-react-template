@@ -14,8 +14,14 @@ interface ThemeSwitcherProps {
 
 const spinOut = stylex.keyframes({
   '0%': { transform: 'rotate(0deg) scale(1)', opacity: '1' },
-  '50%': { transform: 'rotate(90deg) scale(0.6)', opacity: '0' },
+  '40%': { transform: 'rotate(-15deg) scale(0.7)', opacity: '0.4' },
   '100%': { transform: 'rotate(180deg) scale(1)', opacity: '1' },
+})
+
+const pulseGlow = stylex.keyframes({
+  '0%': { boxShadow: '0 0 0 0 rgb(99 102 241 / 0.45)' },
+  '70%': { boxShadow: '0 0 0 8px rgb(99 102 241 / 0)' },
+  '100%': { boxShadow: '0 0 0 0 rgb(99 102 241 / 0)' },
 })
 
 // ── Styles ────────────────────────────────────────────────────────────────────
@@ -23,14 +29,26 @@ const spinOut = stylex.keyframes({
 const styles = stylex.create({
   button: {
     position: 'relative',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: space[2],
     borderRadius: radius.lg,
-    padding: space[2],
-    color: colors.zinc500,
-    transitionProperty: 'background-color, color, box-shadow',
+    paddingLeft: space[2],
+    paddingRight: space[2],
+    paddingTop: space[1.5],
+    paddingBottom: space[1.5],
+    color: colors.zinc600,
+    backgroundColor: colors.zinc100,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: colors.zinc200,
+    transitionProperty: 'background-color, color, border-color, box-shadow',
     transitionDuration: '200ms',
     ':hover': {
-      backgroundColor: colors.zinc100,
-      color: colors.zinc800,
+      backgroundColor: colors.zinc200,
+      color: colors.zinc900,
+      borderColor: colors.zinc300,
     },
     ':focus-visible': {
       outlineWidth: 2,
@@ -46,9 +64,26 @@ const styles = stylex.create({
   },
   iconAnimating: {
     animationName: spinOut,
-    animationDuration: '350ms',
+    animationDuration: '400ms',
     animationTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
     animationFillMode: 'both',
+  },
+  pulse: {
+    animationName: pulseGlow,
+    animationDuration: '500ms',
+    animationTimingFunction: 'ease-out',
+    animationFillMode: 'both',
+  },
+  // Indicator showing current theme
+  indicator: {
+    width: '0.375rem',
+    height: '0.375rem',
+    borderRadius: '9999px',
+    backgroundColor: colors.zinc400,
+    flexShrink: 0,
+  },
+  indicatorDark: {
+    backgroundColor: colors.primary400,
   },
 })
 
@@ -62,33 +97,29 @@ export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
     if (animating) return
     setAnimating(true)
     toggleTheme()
-    setTimeout(() => setAnimating(false), 400)
+    setTimeout(() => setAnimating(false), 450)
   }
 
-  const IconComponent = theme === 'dark' ? Lucide.Sun : Lucide.Moon
+  const isDark = theme === 'dark'
+  const IconComponent = isDark ? Lucide.Sun : Lucide.Moon
 
   return (
     <button
       type="button"
-      title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       {...stylex.props(
-        x.display['inline-flex'],
-        x.alignItems.center,
-        x.justifyContent.center,
         x.cursor.pointer,
         x.borderWidth['0'],
-        x.backgroundColor.transparent,
         x.outlineStyle.none,
-        styles.button
+        styles.button,
+        animating && styles.pulse
       )}
       className={className}
       onClick={handleClick}
     >
-      <IconComponent
-        size={16}
-        {...stylex.props(styles.icon, animating && styles.iconAnimating)}
-      />
+      <span {...stylex.props(styles.indicator, isDark && styles.indicatorDark)} />
+      <IconComponent size={14} {...stylex.props(styles.icon, animating && styles.iconAnimating)} />
     </button>
   )
 }

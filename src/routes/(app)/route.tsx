@@ -4,7 +4,7 @@ import { createFileRoute, Outlet, useRouterState } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { AuthProvider } from '#/guards/auth-provider'
 import { ThemeProvider } from '#/routes/-theme'
-import { useTheme } from '#/stores/app-store'
+import { useTheme } from '#/stores/app.store'
 import { colors, darkTheme } from '#/styles/token.stylex'
 
 const spinKeyframes = stylex.keyframes({

@@ -3,7 +3,7 @@ import { createFileRoute, Outlet, redirect, useRouterState } from '@tanstack/rea
 import * as Lucide from 'lucide-react'
 import { useEffect } from 'react'
 import { isAuthenticated } from '#/libraries/auth'
-import { useSidebarOpen, toggleSidebar } from '#/stores/app-store'
+import { useSidebarOpen, toggleSidebar } from '#/stores/app.store'
 import { colors, radius, space } from '#/styles/token.stylex'
 import { SideNavbar } from './-sidebar'
 

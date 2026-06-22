@@ -314,6 +314,7 @@ const styles = stylex.create({
     display: 'grid',
     gap: space[8],
     gridTemplateColumns: '1fr',
+    marginTop: space[10],
     '@media (min-width: 1024px)': {
       gridTemplateColumns: '1fr 22rem',
     },

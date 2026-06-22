@@ -26,7 +26,6 @@ const collapseStyles = stylex.create({
   container: {
     display: 'flex',
     height: '100%',
-    minHeight: '100vh',
     width: '3.75rem',
     flexDirection: 'column',
     alignItems: 'center',

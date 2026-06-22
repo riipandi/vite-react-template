@@ -28,7 +28,6 @@ const sidebarStyles = stylex.create({
   container: {
     display: 'flex',
     height: '100%',
-    minHeight: '100vh',
     width: '15rem',
     flexDirection: 'column',
     overflow: 'hidden',
@@ -297,13 +296,7 @@ export function NavBarExpand() {
             </Link>
           )
         })}
-        <div {...stylex.props(sidebarStyles.bottomRow)}>
-          <div {...stylex.props(sidebarStyles.bottomLabelGroup)}>
-            <span {...stylex.props(sidebarStyles.bottomDot)} />
-            <span {...stylex.props(sidebarStyles.bottomLabel)}>Theme</span>
-          </div>
-          <ThemeSwitcher />
-        </div>
+        <ThemeSwitcher variant="sidebar" />
       </div>
     </div>
   )

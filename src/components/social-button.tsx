@@ -1,12 +1,11 @@
 import * as stylex from '@stylexjs/stylex'
 import type { FC, ReactNode } from 'react'
-import { clx } from '#/libraries/utils'
 import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
 
 interface SocialButtonProps {
   icon: ReactNode
   children: ReactNode
-  className?: string
+  style?: stylex.StyleXStyles
 }
 
 const socialStyles = stylex.create({
@@ -45,10 +44,9 @@ const socialStyles = stylex.create({
   }
 })
 
-function SocialButton({ icon, children, className }: SocialButtonProps) {
-  const sx = stylex.props(socialStyles.button)
+function SocialButton({ icon, children, style }: SocialButtonProps) {
   return (
-    <button type='button' className={clx(sx.className, className)} style={sx.style}>
+    <button type='button' {...stylex.props(socialStyles.button, style)}>
       {icon}
       {children}
     </button>

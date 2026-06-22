@@ -1,7 +1,7 @@
-import { ThemeProvider as LonikThemer, useTheme } from '@lonik/themer'
+import { ThemeProvider as LonikThemer, useTheme as useLonikTheme } from '@lonik/themer'
+import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { Activity } from 'react'
-import { clx } from '#/libraries/utils'
+import { colors, radius, space } from '#/styles/token.stylex'
 
 export function ThemeProvider(props: React.PropsWithChildren) {
   return (
@@ -19,6 +19,9 @@ export function ThemeProvider(props: React.PropsWithChildren) {
   )
 }
 
+/** Convenience re-export so consumers only import from `-theme`. */
+export const useTheme = useLonikTheme
+
 const cycle: Record<string, string> = { light: 'dark', dark: 'system', system: 'light' }
 const labels: Record<string, string> = {
   light: 'Switch to dark mode',
@@ -26,27 +29,49 @@ const labels: Record<string, string> = {
   system: 'Switch to light mode'
 }
 
-export function ThemeSwitcher({ className }: { className?: string }) {
+const styles = stylex.create({
+  wrapper: {
+    display: 'inline-flex'
+  },
+  base: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: radius.lg,
+    padding: space[2],
+    color: colors.zinc500,
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    cursor: 'pointer',
+    transitionProperty: 'background-color, color',
+    transitionDuration: '150ms',
+    ':hover': {
+      backgroundColor: colors.zinc100,
+      color: colors.zinc800
+    }
+  },
+  icon: {
+    height: '1rem',
+    width: '1rem',
+    stroke: 'currentColor'
+  }
+})
+
+export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme()
   const current = theme ?? 'system'
 
   return (
-    <div className={clx(className)}>
+    <div {...stylex.props(styles.wrapper)}>
       <button
         type='button'
         onClick={() => setTheme(cycle[current] ?? 'light')}
-        className='rounded-lg p-2 text-foreground-neutral-faded transition hover:bg-background-neutral-faded hover:text-foreground-neutral'
+        {...stylex.props(styles.base)}
         aria-label={labels[current]}
       >
-        <Activity mode={current === 'light' ? 'visible' : 'hidden'}>
-          <Lucide.Sun className='size-4' />
-        </Activity>
-        <Activity mode={current === 'dark' ? 'visible' : 'hidden'}>
-          <Lucide.Moon className='size-4' />
-        </Activity>
-        <Activity mode={current === 'system' ? 'visible' : 'hidden'}>
-          <Lucide.Monitor className='size-4' />
-        </Activity>
+        {current === 'light' && <Lucide.Sun {...stylex.props(styles.icon)} />}
+        {current === 'dark' && <Lucide.Moon {...stylex.props(styles.icon)} />}
+        {current === 'system' && <Lucide.Monitor {...stylex.props(styles.icon)} />}
       </button>
     </div>
   )

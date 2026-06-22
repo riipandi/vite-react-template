@@ -1,12 +1,11 @@
 import * as stylex from '@stylexjs/stylex'
 import type { FC, ReactNode } from 'react'
-import { clx } from '#/libraries/utils'
 import { alertStyles } from './alert.stylex'
 
 interface AlertProps {
   variant?: 'info' | 'success' | 'destructive' | 'warning' | 'subtle'
   children: ReactNode
-  className?: string
+  style?: stylex.StyleXStyles
 }
 
 const variantMap = {
@@ -17,10 +16,9 @@ const variantMap = {
   subtle: alertStyles.subtle
 } as const
 
-export const Alert: FC<AlertProps> = ({ children, variant = 'info', className }) => {
-  const sx = stylex.props(alertStyles.base, variantMap[variant])
+export const Alert: FC<AlertProps> = ({ children, variant = 'info', style }) => {
   return (
-    <div className={clx(sx.className, className)} style={sx.style} role='alert'>
+    <div {...stylex.props(alertStyles.base, variantMap[variant], style)} role='alert'>
       {children}
     </div>
   )

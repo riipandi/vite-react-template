@@ -1,7 +1,6 @@
 import { Field } from '@base-ui/react/field'
 import { Input } from '@base-ui/react/input'
 import * as stylex from '@stylexjs/stylex'
-import { clx } from '#/libraries/utils'
 import { Description, FieldError, Label } from '../field'
 import { fieldStyles } from './text-field.stylex'
 
@@ -15,7 +14,7 @@ export interface TextFieldProps {
   onBlur?: () => void
   placeholder?: string
   disabled?: boolean
-  className?: string
+  style?: stylex.StyleXStyles
   type?: string
   name?: string
 }
@@ -30,18 +29,14 @@ export function TextField({
   onBlur,
   placeholder,
   disabled,
-  className,
+  style,
   type = 'text',
   name
 }: TextFieldProps) {
-  const rootSx = stylex.props(fieldStyles.root)
+  const rootClassName = stylex.props(fieldStyles.root, style).className
+
   return (
-    <Field.Root
-      name={name}
-      invalid={!!errorMessage}
-      disabled={disabled}
-      className={clx(rootSx.className, className)}
-    >
+    <Field.Root name={name} invalid={!!errorMessage} disabled={disabled} className={rootClassName}>
       {label && <Label>{label}</Label>}
       <Input
         type={type}

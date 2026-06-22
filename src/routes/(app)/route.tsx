@@ -1,11 +1,8 @@
-import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, useRouterState } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { AuthProvider } from '#/guards/auth-provider'
-import { ThemeProvider } from '#/routes/-theme'
-import { useTheme } from '#/stores/app.store'
-import { colors, darkTheme } from '#/styles/token.stylex'
+import { colors } from '#/styles/token.stylex'
 
 const spinKeyframes = stylex.keyframes({
   '0%': { transform: 'rotate(0deg)' },
@@ -13,12 +10,6 @@ const spinKeyframes = stylex.keyframes({
 })
 
 const styles = stylex.create({
-  root: {
-    backgroundColor: colors.zinc50,
-    color: colors.zinc900,
-    transitionProperty: 'background-color, color',
-    transitionDuration: '200ms'
-  },
   spinner: {
     display: 'inline-block',
     height: '0.75rem',
@@ -74,16 +65,10 @@ export const Route = createFileRoute('/(app)')({
 })
 
 function RouteComponent() {
-  const theme = useTheme()
-
   return (
-    <div {...stylex.props(x.minHeight['100vh'], styles.root, theme === 'dark' && darkTheme)}>
-      <ThemeProvider>
-        <AuthProvider>
-          <RouterSpinner />
-          <Outlet />
-        </AuthProvider>
-      </ThemeProvider>
-    </div>
+    <AuthProvider>
+      <RouterSpinner />
+      <Outlet />
+    </AuthProvider>
   )
 }

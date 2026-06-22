@@ -1,7 +1,6 @@
 import { Button as BaseButton } from '@base-ui/react/button'
 import type { ButtonState } from '@base-ui/react/button'
 import * as stylex from '@stylexjs/stylex'
-import { clx } from '#/libraries/utils'
 import { buttonStyles } from './button.stylex'
 
 export interface ButtonProps {
@@ -9,7 +8,7 @@ export interface ButtonProps {
   disabled?: boolean
   isDisabled?: boolean
   type?: 'button' | 'submit' | 'reset'
-  className?: string | ((state: ButtonState) => string | undefined)
+  style?: stylex.StyleXStyles
   children?: React.ReactNode
   onClick?: (event: React.MouseEvent) => void
 }
@@ -19,38 +18,30 @@ export function Button({
   disabled,
   isDisabled,
   type = 'button',
-  className,
+  style,
   children,
   onClick
 }: ButtonProps) {
   const resolvedDisabled = disabled ?? isDisabled
 
-  const getStyles = (state: ButtonState) => {
-    const sx = stylex.props(
+  const getClassName = (state: ButtonState) =>
+    stylex.props(
       buttonStyles.base,
       variant === 'primary' && buttonStyles.primary,
       variant === 'secondary' && buttonStyles.secondary,
       variant === 'destructive' && buttonStyles.destructive,
       variant === 'icon' && buttonStyles.icon,
       state.disabled && variant !== 'icon' && buttonStyles.disabled,
-      state.disabled && variant === 'icon' && buttonStyles.iconDisabled
-    )
-
-    if (typeof className === 'function') {
-      return clx(sx.className, className(state))
-    }
-    if (typeof className === 'string') {
-      return clx(sx.className, className)
-    }
-    return sx.className
-  }
+      state.disabled && variant === 'icon' && buttonStyles.iconDisabled,
+      style
+    ).className
 
   return (
     <BaseButton
       disabled={resolvedDisabled}
       type={type}
       onClick={onClick}
-      className={(state) => getStyles(state)}
+      className={(state) => getClassName(state)}
     >
       {children}
     </BaseButton>

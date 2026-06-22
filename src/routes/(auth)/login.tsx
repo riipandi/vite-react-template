@@ -1,7 +1,7 @@
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useForm } from '@tanstack/react-form'
-import { createFileRoute, Link, redirect } from '@tanstack/react-router'
+import { createFileRoute, Link, redirect, useSearch } from '@tanstack/react-router'
 import { useState } from 'react'
 import { GitHubButton, GoogleButton } from '#/components/social-button'
 import { Alert } from '#/components/ui/alert'
@@ -10,9 +10,13 @@ import { Card } from '#/components/ui/card'
 import { HorizontalDivider } from '#/components/ui/divider'
 import { TextField } from '#/components/ui/text-field'
 import { useAuthentication } from '#/guards/auth-provider'
-import { isAuthenticated } from '#/libraries/auth'
+import { getErrorMessage, isAuthenticated } from '#/libraries/auth'
 import { loginSchema } from '#/schemas/auth.schema'
 import { colors, fontSize, fontWeight, space } from '#/styles/token.stylex'
+
+interface LoginSearchParams {
+  loggedOut?: string
+}
 
 const loginStyles = stylex.create({
   wrapper: {
@@ -120,6 +124,9 @@ const ViteLogo = () => (
 )
 
 export const Route = createFileRoute('/(auth)/login')({
+  validateSearch: (search: Record<string, unknown>): LoginSearchParams => ({
+    loggedOut: typeof search.loggedOut === 'string' ? search.loggedOut : undefined
+  }),
   component: RouteComponent,
   beforeLoad: () => {
     if (isAuthenticated()) {
@@ -129,8 +136,12 @@ export const Route = createFileRoute('/(auth)/login')({
 })
 
 function RouteComponent() {
-  const { login, loggedOut } = useAuthentication()
+  const { login } = useAuthentication()
+  const { loggedOut } = useSearch({ from: Route.id })
   const [failed, setFailed] = useState<string | null>()
+
+  // Clear the "goodbye" message as soon as the user interacts with the form.
+  const clearAlerts = () => setFailed(null)
 
   const form = useForm({
     defaultValues: {
@@ -145,7 +156,7 @@ function RouteComponent() {
       try {
         await login(value)
       } catch (error: unknown) {
-        setFailed((error as Error).message)
+        setFailed(getErrorMessage(error))
       }
     }
   })
@@ -166,7 +177,7 @@ function RouteComponent() {
             <Alert variant='destructive'>{failed}</Alert>
           </div>
         )}
-        {loggedOut && (
+        {loggedOut && !failed && (
           <div {...stylex.props(loginStyles.alertSpacing)}>
             <Alert variant='success'>
               <span {...stylex.props(loginStyles.loggedOutMessage)}>Goodbye!</span> Your session has
@@ -211,7 +222,10 @@ function RouteComponent() {
                     <TextField
                       label='Username'
                       value={field.state.value}
-                      onChange={(value: string) => field.handleChange(value)}
+                      onChange={(value: string) => {
+                        clearAlerts()
+                        field.handleChange(value)
+                      }}
                       onBlur={field.handleBlur}
                       errorMessage={field.state.meta.errors?.[0]?.message}
                     />
@@ -225,7 +239,10 @@ function RouteComponent() {
                       label='Password'
                       type='password'
                       value={field.state.value}
-                      onChange={(value: string) => field.handleChange(value)}
+                      onChange={(value: string) => {
+                        clearAlerts()
+                        field.handleChange(value)
+                      }}
                       onBlur={field.handleBlur}
                       errorMessage={field.state.meta.errors?.[0]?.message}
                     />

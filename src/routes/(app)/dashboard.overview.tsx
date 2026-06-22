@@ -662,19 +662,12 @@ function DashboardOverviewComponent() {
 
             <div {...stylex.props(styles.profileActions)}>
               <Link to='/' {...stylex.props(styles.profileActionLink)}>
-                <Button
-                  variant='secondary'
-                  className={stylex.props(styles.profileActionButton).className}
-                >
+                <Button variant='secondary' style={styles.profileActionButton}>
                   <Lucide.Home size={14} />
                   Back to Homepage
                 </Button>
               </Link>
-              <Button
-                variant='destructive'
-                onClick={logout}
-                className={stylex.props(styles.profileActionButton).className}
-              >
+              <Button variant='destructive' onClick={logout} style={styles.profileActionButton}>
                 <Lucide.LogOut size={14} />
                 Sign Out
               </Button>

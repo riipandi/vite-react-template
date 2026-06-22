@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import type { FC, ReactNode } from 'react'
-import { colors, fontSize, fontWeight, radius, shadow, space } from '#/assets/styles/tokens.stylex'
 import { cx } from '#/lib/utils'
+import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/tokens.stylex'
 
 interface SocialButtonProps {
   icon: ReactNode

@@ -6,9 +6,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createRootRouteWithContext, Outlet, useRouterState } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { useEffect, useState } from 'react'
-import { colors, darkTheme } from '#/assets/styles/tokens.stylex'
 import { AuthProvider } from '#/context/auth/AuthProvider'
 import { useTheme } from '#/stores/app-store'
+import { colors, darkTheme } from '#/styles/tokens.stylex'
 
 /** The shape injected into every route's context */
 export interface RouterContext {

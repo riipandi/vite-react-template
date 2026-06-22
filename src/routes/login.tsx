@@ -3,7 +3,6 @@ import * as stylex from '@stylexjs/stylex'
 import { useForm } from '@tanstack/react-form'
 import { createFileRoute, Link, redirect } from '@tanstack/react-router'
 import { useState } from 'react'
-import { colors, fontSize, fontWeight, space } from '#/assets/styles/tokens.stylex'
 import { GitHubButton, GoogleButton } from '#/components/social-button'
 import { Alert } from '#/components/ui/alert'
 import { Button } from '#/components/ui/button'
@@ -13,6 +12,7 @@ import { TextField } from '#/components/ui/text-field'
 import { useAuthentication } from '#/context/auth/AuthProvider'
 import { isAuthenticated } from '#/lib/auth'
 import { loginSchema } from '#/lib/schemas'
+import { colors, fontSize, fontWeight, space } from '#/styles/tokens.stylex'
 
 export const Route = createFileRoute('/login')({
   beforeLoad: () => {

@@ -1,7 +1,7 @@
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { colors, fontSize, fontWeight, radius, space } from '#/assets/styles/tokens.stylex'
+import { colors, fontSize, fontWeight, radius, space } from '#/styles/tokens.stylex'
 
 export const Route = createFileRoute('/$')({
   component: NotFoundComponent

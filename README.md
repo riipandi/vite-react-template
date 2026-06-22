@@ -1,4 +1,4 @@
-<p align="center"><img src="./src/assets/images/vite.svg" width="500" height="120" alt="Project Logo"></p>
+<p align="center"><img src="./public/images/vite.svg" width="500" height="120" alt="Project Logo"></p>
 <p align="center">
     <a href="https://github.com/riipandi/vite-react-template/pulse">
         <img src="https://img.shields.io/badge/Contributions-welcome-blue.svg?style=flat-square" alt="Contribution welcome">

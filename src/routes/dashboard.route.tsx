@@ -2,10 +2,10 @@ import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { useEffect } from 'react'
-import { colors, radius, space } from '#/assets/styles/tokens.stylex'
 import { SideNavbar } from '#/layouts/sidebar'
 import { isAuthenticated } from '#/lib/auth'
 import { useSidebarOpen, toggleSidebar } from '#/stores/app-store'
+import { colors, radius, space } from '#/styles/tokens.stylex'
 
 export const Route = createFileRoute('/dashboard')({
   beforeLoad: () => {

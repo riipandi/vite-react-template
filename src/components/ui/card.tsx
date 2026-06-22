@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
-import { colors, radius, shadow } from '#/assets/styles/tokens.stylex'
 import { cx } from '#/lib/utils'
+import { colors, radius, shadow } from '#/styles/tokens.stylex'
 
 type CardProps<T extends ElementType> = {
   as?: T

@@ -1,13 +1,13 @@
+import ViteLogo from '/images/vite.svg'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { createFileRoute, Link, redirect } from '@tanstack/react-router'
-import ViteLogo from '#/assets/images/vite.svg'
-import { colors, fontSize, space } from '#/assets/styles/tokens.stylex'
+import { Link, createFileRoute, redirect } from '@tanstack/react-router'
 import { ThemeSwitcher } from '#/components/theme-switcher'
 import { Alert } from '#/components/ui/alert'
 import { Button } from '#/components/ui/button'
 import { useAuthentication } from '#/context/auth/AuthProvider'
 import { isAuthenticated } from '#/lib/auth'
+import { colors, fontSize, space } from '#/styles/tokens.stylex'
 
 export const Route = createFileRoute('/')({
   beforeLoad: () => {

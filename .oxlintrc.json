@@ -11,23 +11,24 @@
         "suspicious": "error"
     },
     "rules": {
+        "import/default": "warn",
+        "import/no-absolute-path": "allow",
+        "import/no-cycle": "warn",
+        "import/no-unassigned-import": "warn",
         "no-console": "off",
-        "no-debugger": "off",
-        "typescript/triple-slash-reference": "allow",
-        "typescript/no-explicit-any": "off",
+        "no-debugger": "warn",
+        "no-empty": ["error", { "allowEmptyCatch": true }],
+        "no-unused-vars": ["error", { "args": "after-used" }],
         "react/jsx-key": "error",
         "react/no-array-index-key": "error",
-        "react/self-closing-comp": ["error", { "html": true, "component": true }],
-        "react/react-in-jsx-scope": "off",
         "react/no-children-prop": "off",
-        "import/default": "off",
-        "import/no-cycle": "off",
-        "no-unused-vars": ["error", { "args": "after-used" }],
-        "import/no-unassigned-import": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/self-closing-comp": ["error", { "html": true, "component": true }],
         "sort-imports": "off",
         "typescript/consistent-type-definitions": ["error", "interface"],
+        "typescript/no-explicit-any": "error",
         "typescript/no-unnecessary-type-constraint": "off",
-        "no-empty": ["error", { "allowEmptyCatch": true }]
+        "typescript/triple-slash-reference": "allow"
     },
     "ignorePatterns": [".output/**"]
 }

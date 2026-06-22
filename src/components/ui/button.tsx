@@ -1,8 +1,8 @@
 import { Button as BaseButton } from '@base-ui/react/button'
 import type { ButtonState } from '@base-ui/react/button'
 import * as stylex from '@stylexjs/stylex'
-import { colors, fontSize, fontWeight, radius, shadow, space } from '#/assets/styles/tokens.stylex'
 import { cx } from '#/lib/utils'
+import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/tokens.stylex'
 
 export interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'destructive' | 'icon'

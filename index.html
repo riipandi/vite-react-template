@@ -1,15 +1,45 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="system">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Minimal React Vite StyleX starter kit" />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net/" crossorigin />
+    <meta name="description" content="TanStack React + Base UI starter application" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#5a58f2" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000d1a" />
+
+    <!-- Favicon and Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="any" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+
+    <!-- Preload Fonts -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="https://cdn.jsdelivr.net/fontsource/fonts/mona-sans:vf@latest/latin-wght-normal.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono:vf@latest/latin-wght-normal.woff2"
+      crossorigin
+    />
+
+    <!-- Page Title -->
     <title>Vite React StyleX</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root" class="isolate"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

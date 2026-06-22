@@ -2,11 +2,11 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
-import { colors, fontSize, fontWeight, radius, shadow, space } from '#/assets/styles/tokens.stylex'
 import { Button } from '#/components/ui/button'
 import { Card } from '#/components/ui/card'
 import { Container } from '#/components/ui/container'
 import { useAuthentication } from '#/context/auth/AuthProvider'
+import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/tokens.stylex'
 
 export const Route = createFileRoute('/dashboard/overview')({
   component: DashboardOverviewComponent

@@ -9,6 +9,7 @@ import { defineConfig } from 'vitest/config'
 export default defineConfig({
   plugins: [
     stylex({
+      useCSSLayers: true,
       aliases: { '#/*': join(__dirname, './src/*') }
     }),
     tanstackRouter({

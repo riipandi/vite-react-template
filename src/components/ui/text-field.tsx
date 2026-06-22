@@ -1,8 +1,8 @@
 import { Field } from '@base-ui/react/field'
 import { Input } from '@base-ui/react/input'
 import * as stylex from '@stylexjs/stylex'
-import { colors, fontSize, radius, space } from '#/assets/styles/tokens.stylex'
 import { cx } from '#/lib/utils'
+import { colors, fontSize, radius, space } from '#/styles/tokens.stylex'
 import { Description, FieldError, Label } from './field'
 
 export interface TextFieldProps {

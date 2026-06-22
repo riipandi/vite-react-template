@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
-import { space } from '#/assets/styles/tokens.stylex'
 import { cx } from '#/lib/utils'
+import { space } from '#/styles/tokens.stylex'
 
 type ContainerProps<T extends ElementType> = {
   as?: T

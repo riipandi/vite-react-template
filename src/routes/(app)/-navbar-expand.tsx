@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
-import { ThemeSwitcher } from '#/components/theme-switcher'
+import { ThemeSwitcher } from '#/routes/-theme'
 import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
 
 // ── Nav data ──────────────────────────────────────────────────────────────────
@@ -295,7 +295,7 @@ export function NavBarExpand() {
             </Link>
           )
         })}
-        <ThemeSwitcher variant='sidebar' />
+        <ThemeSwitcher />
       </div>
     </div>
   )

@@ -11,7 +11,7 @@ import { HorizontalDivider } from '#/components/ui/divider'
 import { TextField } from '#/components/ui/text-field'
 import { useAuthentication } from '#/guards/auth-provider'
 import { isAuthenticated } from '#/libraries/auth'
-import { loginSchema } from '#/libraries/schemas'
+import { loginSchema } from '#/schemas/auth.schema'
 import { colors, fontSize, fontWeight, space } from '#/styles/token.stylex'
 
 const loginStyles = stylex.create({

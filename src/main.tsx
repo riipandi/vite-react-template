@@ -2,8 +2,9 @@
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
 import { queryClient } from '#/libraries/api-client'
-import { routeTree } from './routes.gen'
+import type { BreadcrumbValue } from '#/routes/__root'
 import './main.css'
+import { routeTree } from './routes.gen'
 
 // Create the application router instance.
 const appRoutes = createRouter({
@@ -22,6 +23,7 @@ declare module '@tanstack/react-router' {
   }
   interface StaticDataRouteOption {
     pageTitle?: string
+    breadcrumb?: BreadcrumbValue
   }
 }
 

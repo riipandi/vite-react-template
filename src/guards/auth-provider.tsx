@@ -1,17 +1,7 @@
-export interface User {
-  id: number
-  email: string
-  firstName: string
-  lastName: string
-  username: string
-  image: string
-}
-
 import { useNavigate } from '@tanstack/react-router'
 import { createContext, useContext, useState } from 'react'
-import { isAuthenticated, login, setToken, type LoginResponse } from '#/libraries/auth'
-
-export type { LoginResponse }
+import { isAuthenticated, login, setToken } from '#/libraries/auth'
+import type { User } from '#/schemas/user.schema'
 
 interface AuthContext {
   user: User | null

@@ -1,30 +1,6 @@
 import { ofetch } from 'ofetch'
-
-export interface User {
-  id: number
-  email: string
-  firstName: string
-  lastName: string
-  username: string
-  image: string
-}
-
-export interface LoginResponse {
-  id: number
-  email: string
-  firstName: string
-  lastName: string
-  username: string
-  image: string
-  gender: string
-  accessToken: string
-  refreshToken: string
-}
-
-export interface LoginCredentials {
-  username: string
-  password: string
-}
+import type { LoginCredentials, LoginResponse } from '#/schemas/auth.schema'
+import type { User } from '#/schemas/user.schema'
 
 export async function login(credentials: LoginCredentials): Promise<LoginResponse> {
   return ofetch<LoginResponse>('https://dummyjson.com/auth/login', {

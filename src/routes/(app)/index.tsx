@@ -2,11 +2,11 @@ import ViteLogo from '/images/vite.svg'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Link, createFileRoute, redirect } from '@tanstack/react-router'
-import { ThemeSwitcher } from '#/components/theme-switcher'
 import { Alert } from '#/components/ui/alert'
 import { Button } from '#/components/ui/button'
 import { useAuthentication } from '#/guards/auth-provider'
 import { isAuthenticated } from '#/libraries/auth'
+import { ThemeSwitcher } from '#/routes/-theme'
 import { colors, fontSize, space } from '#/styles/token.stylex'
 
 export const Route = createFileRoute('/(app)/')({

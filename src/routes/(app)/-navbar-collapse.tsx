@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
-import { ThemeSwitcher } from '#/components/theme-switcher'
+import { ThemeSwitcher } from '#/routes/-theme'
 import { colors, radius, shadow, space } from '#/styles/token.stylex'
 
 // ── Nav data ──────────────────────────────────────────────────────────────────
@@ -234,7 +234,7 @@ export function NavBarCollapse() {
         <Link to='/' {...stylex.props(collapseStyles.userLink)} aria-label='My Account'>
           <Lucide.User {...stylex.props(collapseStyles.userIcon)} />
         </Link>
-        <ThemeSwitcher hideLabel />
+        <ThemeSwitcher />
       </div>
     </div>
   )

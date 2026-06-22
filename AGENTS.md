@@ -1,93 +1,61 @@
 # Agent Instructions
 
-## Project Overview
-
-React 19 + Vite 8 SPA with StyleX styling, TanStack Router/Form/Query, and TypeScript 6. Uses pnpm as package manager.
+React 19 + Vite 8 + TypeScript 6 SPA. StyleX styling. TanStack Router/Form/Query. Package manager: **pnpm**.
 
 ## Commands
+Check `package.json` → `scripts` for all available commands. Key facts:
+- `pnpm build` runs in sequence: `tsr generate` → `tsc -b` → `vite build`
+- Never skip `tsr generate` — produces `src/routes.gen.ts` (router import)
+- Never edit `routes.gen.ts` manually
+- Pre-commit gate: `pnpm lint && pnpm typecheck && pnpm test`
+- Pre-push: `pnpm audit --prod`
 
-All commands use `pnpm` (detected from `pnpm-lock.yaml` and `packageManager` field).
+## Pre-commit Gate
+- Run `pnpm lint && pnpm typecheck && pnpm test` before committing.
+- Hook order: format → lint → typecheck → test (staged files). Pre-push: `pnpm audit --prod`.
 
-```bash
-pnpm build          # tsr generate → tsc -b → vite build (order matters)
-pnpm dev            # Vite dev server on port 3000
-pnpm typecheck      # tsc -b --noEmit
-pnpm lint           # oxlint --fix .
-pnpm format         # oxfmt --write .
-pnpm check          # oxfmt --check (CI format validation)
-pnpm test           # vitest --run (single run)
-pnpm test:ui        # vitest --ui (interactive)
-pnpm test:coverage  # vitest run --coverage
-pnpm storybook      # Storybook dev on port 6006
-pnpm knip           # Dead code / unused dep detection
-```
-
-## Verification Order
-
-Run `pnpm lint && pnpm typecheck && pnpm test` before committing. The pre-commit hook runs format → lint → typecheck → test in parallel on staged files.
-
-## Build Details
-
-- `pnpm build` runs three steps in sequence: `tsr generate` (TanStack Router codegen), `tsc -b` (type-check), `vite build` (bundle). Do not skip `tsr generate` — it produces `src/routes.gen.ts` which the router imports.
-- `pnpm cleanup` removes generated files: `.output`, `.tanstack`, `src/routes.gen.ts`, `dist`, `node_modules`.
+## Critical: Build
+- `pnpm build` must run `tsr generate` first — it produces `src/routes.gen.ts`.
+- Never skip. Never edit `routes.gen.ts` manually.
 
 ## Path Aliases
-
-Configured in `tsconfig.json` and `vite.config.ts`:
-
-- `#/*` → `./src/*` (source imports, e.g. `import { x } from '#/styles/token.stylex'`)
+- `#/*` → `./src/*`
 - `~/*` → `./public/*`
 
 ## StyleX
-
-Reference: https://stylexjs.com/docs/llm-resources#style-authoring-guide
-
-- Files use `*.stylex.ts` extension for theme/token definitions.
-- Token file: `src/styles/token.stylex.ts` — exports `colors`, `darkTheme`, `font`, `space`, `radius`, `shadow`, `fontSize`, `fontWeight`.
-- StyleX unplugin is configured in `vite.config.ts` with `useCSSLayers: true` and alias `#/*`.
-- **Tests require mocking `@stylexjs/atoms`** — the mock is in `tests/setup-test.ts`. It's a compile-time transform; Vitest doesn't run the Babel transform, so the runtime Proxy mock is needed.
-- Use `stylex.props()` to apply styles, not `className` or `style` directly.
-- Use `stylex.defineVars()` for themable tokens (must be in `.stylex.ts` files). Use `stylex.defineConsts()` for non-themable constants.
-- Nest pseudo-classes and media queries inside property values, not at the top level.
-- Use longhand properties; use `null` to unset properties.
+- Token file: `src/styles/token.stylex.ts` (exports: `colors`, `darkTheme`, `font`, `space`, `radius`, `shadow`, `fontSize`, `fontWeight`)
+- Theme/token definitions → `*.stylex.ts` files only
+- Apply with `stylex.props()` — not `className`/`style`
+- `stylex.defineVars()` for themable tokens; `stylex.defineConsts()` for non-themable
+- Nest pseudo-classes/media queries inside property values (not top-level)
+- Use longhand properties; `null` to unset
+- Always add unique `id` to each HTML tag
+- **Tests**: mock `@stylexjs/atoms` — setup in `tests/setup-test.ts` (Vitest skips Babel transform)
+- Ref: https://stylexjs.com/docs/llm-resources#style-authoring-guide
 
 ## Linting & Formatting
-
-- **Linter**: oxlint (not ESLint). Config: `.oxlintrc.json`. Plugins: typescript, react, unicorn, import, jsx-a11y, vitest, eslint, oxc.
-- **Formatter**: oxfmt (not Prettier). Config: `.oxfmtrc.json`. Key settings: no semicolons, single quotes, 100 char print width, trailing comma `none`, LF line endings.
-- `typescript/consistent-type-definitions` enforces `interface` (not `type`).
-- `typescript/no-explicit-any` is an error.
+- Linter: **oxlint** (not ESLint). Config: `.oxlintrc.json`
+- Formatter: **oxfmt** (not Prettier). Config: `.oxfmtrc.json`
+- No semicolons, single quotes, 100-char width, no trailing comma, LF
+- `interface` enforced over `type` (`typescript/consistent-type-definitions`)
+- `any` is a lint error
 
 ## Testing
-
-- Framework: Vitest with `happy-dom` environment.
-- Test files live in `tests/` (not colocated with source). Pattern: `tests/**/*.{test,spec}.{ts,tsx}`.
-- Setup file: `tests/setup-test.ts`.
-- Coverage thresholds: 80% statements, 70% branches, 75% functions, 80% lines.
-- Coverage provider: Istanbul.
-- `globals: true` — no need to import `describe`/`it`/`expect`.
-
-## Storybook
-
-- Stories in `stories/` directory (pattern: `*.stories.tsx`).
-- Addons: a11y, docs, links, mcp, vitest, performance-panel.
-- `pnpm storybook:build` outputs to `.output/storybook`.
+- Framework: Vitest + `happy-dom`
+- Test files: `tests/**/*.{test,spec}.{ts,tsx}` (not colocated)
+- Setup: `tests/setup-test.ts`
+- Coverage thresholds: 80% statements, 70% branches, 75% functions, 80% lines
+- `globals: true` — no need to import `describe`/`it`/`expect`
 
 ## Routing
-
-TanStack Router with file-based routing in `src/routes/`. Route tree is auto-generated to `src/routes.gen.ts`. Do not edit `routes.gen.ts` manually — it's regenerated by `tsr generate`.
+File-based routing in `src/routes/`. Route tree auto-generated to `src/routes.gen.ts` via `tsr generate`.
 
 ## Environment Variables
+Prefix: `VITE_` or `PUBLIC_`. Loaded from project root. Example: `.env.example`.
 
-- Prefix: `VITE_` or `PUBLIC_` (see `vite.config.ts` `envPrefix`).
-- `.env.example` shows one var: `PUBLIC_SITE_URL`.
-- Env loaded from project root (`envDir: __dirname`).
-
-## Key Conventions
-
-- ESM only (`"type": "module"` in package.json).
-- React 19 with StrictMode enabled in development.
-- `verbatimModuleSyntax: true` in tsconfig — use `import type` for type-only imports.
-- `noUncheckedIndexedAccess: true` — index signatures return `T | undefined`.
-- `noUnusedLocals: true` and `noUnusedParameters: true` — unused code is a compile error.
-- Lefthook manages git hooks (`lefthook.yml`). Pre-commit runs format, lint, typecheck, test on staged files. Pre-push runs `pnpm audit --prod`.
+## Key Constraints
+- ESM only (`"type": "module"`), Strict Mode in dev
+- `verbatimModuleSyntax: true` → use `import type` for type-only imports
+- `noUncheckedIndexedAccess: true` → indexed access returns `T | undefined`
+- `noUnusedLocals/Parameters: true` → unused = compile error
+- Storybook stories: `stories/*.stories.tsx`

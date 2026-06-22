@@ -14,7 +14,7 @@ export default mergeConfig(
       setupFiles: ['./tests/setup-test.ts'],
       include: ['./**/*.{test,spec}.{ts,tsx}'],
       exclude: ['node_modules', 'tests-e2e'],
-      reporters: process.env.CI ? ['html', 'github-actions'] : ['html', 'default'],
+      reporters: process.env.CI ? ['github-actions'] : ['default', 'html', 'hanging-process'],
       outputFile: {
         json: './.output/tests-results/vitest-results.json',
         html: './.output/tests-results/index.html'

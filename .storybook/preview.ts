@@ -1,7 +1,7 @@
 // oxlint-disable import/no-unassigned-import
 
 import type { Preview } from '@storybook/react-vite'
-import '../src/styles/global.css'
+import '../src/main.css'
 
 const preview: Preview = {
   parameters: {

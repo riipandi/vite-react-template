@@ -27,7 +27,7 @@
         "strictPropertyInitialization": true,
         "target": "esnext",
         "tsBuildInfoFile": ".tanstack/tsbuildinfo",
-        "types": ["vite/client"],
+        "types": ["vite/client", "vitest/config"],
         "useDefineForClassFields": true,
         "verbatimModuleSyntax": true,
         "paths": {
@@ -36,5 +36,5 @@
         }
     },
     "include": ["**/*.ts", "**/*.tsx"],
-    "exclude": ["node_modules", ".output", ".tanstack", "dist"]
+    "exclude": ["node_modules", ".output", ".tanstack", "dist", "public"]
 }

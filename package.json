@@ -61,7 +61,7 @@
         "@types/react": "^19.2.17",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^6.0.2",
-        "@vitest/coverage-istanbul": "^4.1.9",
+        "@vitest/coverage-v8": "^4.1.9",
         "@vitest/ui": "^4.1.9",
         "happy-dom": "^20.10.6",
         "knip": "^6.17.1",

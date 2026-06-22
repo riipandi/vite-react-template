@@ -1,5 +1,5 @@
 {
-    "$schema": "./node_modules/oxlint/configuration_schema.json",
+    "$schema": "https://unpkg.com/oxlint@1.70/configuration_schema.json",
     "plugins": ["typescript", "react", "unicorn", "import", "jsx-a11y", "vitest", "eslint", "oxc"],
     "env": {
         "browser": true,

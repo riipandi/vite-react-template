@@ -1,0 +1,20 @@
+{
+    "$schema": "https://unpkg.com/knip@6.17/schema-jsonc.json",
+    "entry": ["src/main.tsx"],
+    "exclude": ["binaries", "dependencies"],
+    "project": [
+        "src/**/*.{ts,tsx}",
+        "server/**/*.{ts,tsx}",
+        "!src/components/**/*",
+        "!src/**/*.gen.ts",
+        "!src/**/*.d.ts"
+    ],
+    "tanstack-router": {
+        "entry": ["src/routes.gen.{ts,js}"],
+        "project": ["src/**/*.{ts,tsx}"]
+    },
+    "paths": {
+        "#/*": ["./src/*"],
+        "~/*": ["./public/*"]
+    }
+}

@@ -1,6 +1,13 @@
 [
     {
         "action": "remove",
-        "files": ["LICENSE-APACHE", "LICENSE-MIT", "DEPLOY.md", "README.md", "AGENTS.md"]
+        "files": [
+            "LICENSE-APACHE",
+            "LICENSE-MIT",
+            "DEPLOY.md",
+            "README.md",
+            "AGENTS.md",
+            "netlify.toml"
+        ]
     }
 ]

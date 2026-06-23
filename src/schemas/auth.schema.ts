@@ -5,8 +5,6 @@ export const loginSchema = z.object({
   password: z.string().min(1, { error: 'Password is required' })
 })
 
-export type LoginFields = z.infer<typeof loginSchema>
-
 export interface LoginResponse {
   id: number
   email: string

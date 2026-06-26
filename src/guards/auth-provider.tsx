@@ -1,15 +1,14 @@
 import { useNavigate } from '@tanstack/react-router'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect } from 'react'
+import { login, me, tryRefresh } from '#/guards/auth-api'
 import {
-  getToken,
-  getStoredUser,
-  login,
-  me,
-  setToken,
-  clearTokens,
-  setStoredUser,
-  tryRefresh
-} from '#/libraries/auth'
+  authStore,
+  setAuthTokens,
+  setAuthUser,
+  setAuthLoading,
+  clearAuth,
+  useAuth
+} from '#/guards/auth-store'
 import type { User } from '#/schemas/user.schema'
 
 interface AuthContext {
@@ -33,25 +32,21 @@ export const UserContext = createContext(DefaultUserContext)
 
 export function AuthProvider({ children }: React.PropsWithChildren) {
   const navigate = useNavigate()
-  // Hydrate from cache immediately so the UI isn't blank on page reload.
-  const [user, setUser] = useState<User | null>(() => getStoredUser())
-  const [loggedIn, setLoggedIn] = useState(() => getStoredUser() !== null && getToken() !== null)
-  const [isLoading, setIsLoading] = useState(() => getToken() !== null)
+  const { user, isLoading } = useAuth()
+  const loggedIn = user !== null
 
   // On mount, validate stored token by fetching the user profile.
   // If the stored token is stale, attempt a refresh before giving up.
   useEffect(() => {
-    const token = getToken()
+    const token = authStore.state.accessToken
     if (!token) {
-      setIsLoading(false)
+      setAuthLoading(false)
       return
     }
 
     me()
       .then((profile) => {
-        setUser(profile)
-        setStoredUser(profile)
-        setLoggedIn(true)
+        setAuthUser(profile)
       })
       .catch(async () => {
         // Token might be expired — try to refresh first.
@@ -59,30 +54,22 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
         if (refreshed) {
           try {
             const profile = await me()
-            setUser(profile)
-            setStoredUser(profile)
-            setLoggedIn(true)
+            setAuthUser(profile)
           } catch {
-            clearTokens()
-            setStoredUser(null)
-            setUser(null)
-            setLoggedIn(false)
+            clearAuth()
           }
         } else {
-          clearTokens()
-          setStoredUser(null)
-          setUser(null)
-          setLoggedIn(false)
+          clearAuth()
         }
       })
       .finally(() => {
-        setIsLoading(false)
+        setAuthLoading(false)
       })
   }, [])
 
   const handleLogin = async (credentials: { username: string; password: string }) => {
     const response = await login(credentials)
-    setToken(response.accessToken, response.refreshToken)
+    setAuthTokens(response.accessToken, response.refreshToken)
     const profile: User = {
       id: response.id,
       email: response.email,
@@ -91,17 +78,12 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
       username: response.username,
       image: response.image
     }
-    setUser(profile)
-    setStoredUser(profile)
-    setLoggedIn(true)
+    setAuthUser(profile)
     navigate({ to: '/dashboard/overview' })
   }
 
   const handleLogout = () => {
-    clearTokens()
-    setStoredUser(null)
-    setUser(null)
-    setLoggedIn(false)
+    clearAuth()
     navigate({ to: '/login', search: { loggedOut: 'true' } })
   }
 

@@ -5,7 +5,7 @@ import { Link, createFileRoute, redirect } from '@tanstack/react-router'
 import { Alert } from '#/components/ui/alert'
 import { Button } from '#/components/ui/button'
 import { useAuthentication } from '#/guards/auth-provider'
-import { isAuthenticated } from '#/libraries/auth'
+import { isAuthenticated } from '#/guards/auth-store'
 import { ThemeSwitcher } from '#/routes/-theme'
 import { colors, fontSize, space } from '#/styles/token.stylex'
 

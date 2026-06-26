@@ -67,9 +67,9 @@ function RootComponent() {
         <ThemeProvider>
           <ThemedRoot>
             <Outlet />
+            <DevTools queryClient={queryClient} />
           </ThemedRoot>
         </ThemeProvider>
-        <DevTools queryClient={queryClient} />
       </QueryClientProvider>
     </Fragment>
   )

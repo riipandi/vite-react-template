@@ -9,6 +9,9 @@
         "*.yml.example": "yaml",
         "wrangler.json": "jsonc"
     },
+    "files.exclude": {
+        "**/.tanstack": true
+    },
     "files.readonlyInclude": {
         "**/.output/**": true,
         "**/routeTree.gen.ts": true,

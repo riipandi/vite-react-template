@@ -1,5 +1,5 @@
 import { ofetch } from 'ofetch'
-import { setAuthTokens } from '#/guards/auth-store'
+import { authStore, setAuthTokens } from '#/guards/auth-store'
 import type { LoginCredentials, LoginResponse } from '#/guards/auth-types'
 import { api, API_BASE_URL } from '#/libraries/api-client'
 import type { User } from '#/schemas/user.schema'
@@ -21,8 +21,7 @@ export async function me(): Promise<User> {
  * Returns new tokens, throws on failure.
  */
 async function refreshTokens(): Promise<{ accessToken: string; refreshToken: string }> {
-  const storedRefreshToken =
-    typeof window !== 'undefined' ? window.localStorage.getItem('refresh_token') : null
+  const storedRefreshToken = authStore.state.refreshToken
 
   if (!storedRefreshToken) {
     throw new Error('No refresh token available')

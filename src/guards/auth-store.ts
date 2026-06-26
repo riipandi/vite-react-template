@@ -17,17 +17,17 @@ export interface AuthState {
 
 const USER_STORAGE_KEY = 'auth_user'
 
-function gRA(): string | null {
+function getStoredAccessToken(): string | null {
   if (typeof window === 'undefined') return null
   return window.localStorage.getItem('access_token')
 }
 
-function gRR(): string | null {
+function getStoredRefreshToken(): string | null {
   if (typeof window === 'undefined') return null
   return window.localStorage.getItem('refresh_token')
 }
 
-function gSU(): User | null {
+function getStoredUser(): User | null {
   if (typeof window === 'undefined') return null
   try {
     const raw = window.localStorage.getItem(USER_STORAGE_KEY)
@@ -58,20 +58,21 @@ function persistUser(user: User | null) {
   }
 }
 
-function clearPersisted() {
+function clearPersistedAuth() {
   if (typeof window === 'undefined') return
   window.localStorage.removeItem('access_token')
   window.localStorage.removeItem('refresh_token')
+  window.localStorage.removeItem(USER_STORAGE_KEY)
 }
 
 // ── Store ──────────────────────────────────────────────────────────────────
 
 /** Hydrate from localStorage so the UI isn't blank on page reload. */
 const initial: AuthState = {
-  accessToken: gRA(),
-  refreshToken: gRR(),
-  user: gSU(),
-  isLoading: gRA() !== null
+  accessToken: getStoredAccessToken(),
+  refreshToken: getStoredRefreshToken(),
+  user: getStoredUser(),
+  isLoading: getStoredAccessToken() !== null
 }
 
 export const authStore = createStore<AuthState>(initial)
@@ -112,7 +113,7 @@ export function setAuthLoading(isLoading: boolean) {
 
 /** Clear tokens, user, and loading state — used on logout / failed validation. */
 export function clearAuth() {
-  clearPersisted()
+  clearPersistedAuth()
   authStore.setState(() => ({
     accessToken: null,
     refreshToken: null,

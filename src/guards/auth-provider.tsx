@@ -38,46 +38,43 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   // On mount, validate stored token by fetching the user profile.
   // If the stored token is stale, attempt a refresh before giving up.
   useEffect(() => {
+    let cancelled = false
     const token = authStore.state.accessToken
     if (!token) {
       setAuthLoading(false)
       return
     }
 
-    me()
-      .then((profile) => {
-        setAuthUser(profile)
-      })
-      .catch(async () => {
-        // Token might be expired — try to refresh first.
+    async function validate() {
+      try {
+        const profile = await me()
+        if (!cancelled) setAuthUser(profile)
+      } catch {
         const refreshed = await tryRefresh()
-        if (refreshed) {
+        if (!cancelled && refreshed) {
           try {
             const profile = await me()
-            setAuthUser(profile)
+            if (!cancelled) setAuthUser(profile)
           } catch {
-            clearAuth()
+            if (!cancelled) clearAuth()
           }
-        } else {
+        } else if (!cancelled) {
           clearAuth()
         }
-      })
-      .finally(() => {
-        setAuthLoading(false)
-      })
+      } finally {
+        if (!cancelled) setAuthLoading(false)
+      }
+    }
+
+    validate()
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   const handleLogin = async (credentials: { username: string; password: string }) => {
-    const response = await login(credentials)
-    setAuthTokens(response.accessToken, response.refreshToken)
-    const profile: User = {
-      id: response.id,
-      email: response.email,
-      firstName: response.firstName,
-      lastName: response.lastName,
-      username: response.username,
-      image: response.image
-    }
+    const { accessToken, refreshToken, ...profile } = await login(credentials)
+    setAuthTokens(accessToken, refreshToken)
     setAuthUser(profile)
     navigate({ to: '/dashboard/overview' })
   }

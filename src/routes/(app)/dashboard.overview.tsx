@@ -295,7 +295,7 @@ const styles = stylex.create({
     left: '50%',
     transform: 'translateX(-50%)',
     fontSize: fontSize.xs,
-    color: colors.zinc400,
+    color: colors.zinc500,
     whiteSpace: 'nowrap'
   },
   chartBarValue: {
@@ -372,7 +372,7 @@ const styles = stylex.create({
   },
   activityTime: {
     fontSize: fontSize.xs,
-    color: colors.zinc400,
+    color: colors.zinc500,
     marginTop: space['0.5']
   },
   activityDivider: {

@@ -14,7 +14,7 @@ export const fieldStyles = stylex.create({
     borderRadius: radius.md,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: colors.zinc300,
+    borderColor: colors.zinc400,
     paddingLeft: space[3],
     paddingRight: space[3],
     paddingTop: space[2],
@@ -23,7 +23,7 @@ export const fieldStyles = stylex.create({
     backgroundColor: colors.surface,
     color: colors.zinc800,
     '::placeholder': {
-      color: colors.zinc400
+      color: colors.zinc500
     },
     transitionProperty: 'background-color, border-color, box-shadow',
     transitionDuration: '150ms'

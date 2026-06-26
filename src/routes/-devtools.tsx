@@ -7,11 +7,11 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 export default function DevTools({ queryClient }: { queryClient: QueryClient }) {
   const devToolsOptions: Partial<TanStackDevtoolsReactInit> = {
     config: {
-      position: 'bottom-left',
+      position: 'bottom-right',
       panelLocation: 'bottom',
       inspectHotkey: ['Alt', 'CtrlOrMeta'],
       openHotkey: ['Shift', 'D'],
-      triggerHidden: false,
+      hideUntilHover: true,
       requireUrlFlag: false,
       urlFlag: 'devtools',
       theme: 'dark'

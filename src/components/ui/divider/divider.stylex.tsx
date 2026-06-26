@@ -16,7 +16,7 @@ export const dividerStyles = stylex.create({
     fontSize: fontSize.xs,
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
-    color: colors.zinc400
+    color: colors.zinc500
   },
   before: {
     '::before': {

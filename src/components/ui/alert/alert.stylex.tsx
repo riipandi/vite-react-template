@@ -43,7 +43,7 @@ export const alertStyles = stylex.create({
   },
   subtle: {
     borderColor: colors.zinc200,
-    borderLeftColor: colors.zinc400,
+    borderLeftColor: colors.zinc500,
     backgroundColor: colors.zinc50,
     color: colors.zinc600
   }

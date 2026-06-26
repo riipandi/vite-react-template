@@ -27,7 +27,7 @@ export default defineConfig({
   resolve: { tsconfigPaths: true },
   envDir: join(__dirname),
   envPrefix: ['VITE_', 'PUBLIC_'],
-  define: { 'import.meta.env.APP_VERSION': `"${process.env.npm_package_version}"` },
+  define: { 'import.meta.env.PUBLIC_APP_VERSION': `"${process.env.npm_package_version}"` },
   publicDir: resolve(__dirname, 'public'),
   root: resolve(__dirname),
   build: {

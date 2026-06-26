@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AnyRouteMatch } from '@tanstack/react-router'
 import { Outlet, createRootRouteWithContext, useMatches } from '@tanstack/react-router'
 import { Fragment } from 'react'
+import { AuthProvider } from '#/guards/auth-provider'
 import { ThemeProvider, useTheme } from '#/routes/-theme'
 import { colors, darkTheme } from '#/styles/token.stylex'
 import { GlobalNotFound, GlobalError } from './-boundaries'
@@ -65,10 +66,12 @@ function RootComponent() {
       <title>{pageTitle ? `${pageTitle} - MyApplication` : 'MyApplication'}</title>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
-          <ThemedRoot>
-            <Outlet />
-            <DevTools queryClient={queryClient} />
-          </ThemedRoot>
+          <AuthProvider>
+            <ThemedRoot>
+              <Outlet />
+              <DevTools queryClient={queryClient} />
+            </ThemedRoot>
+          </AuthProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </Fragment>

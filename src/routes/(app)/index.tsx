@@ -94,18 +94,11 @@ const homeStyles = stylex.create({
     letterSpacing: '0.025em',
     color: colors.zinc500
   },
-  footerLink: {
-    color: colors.primary600,
-    textDecoration: 'none',
-    ':hover': {
-      textDecoration: 'underline'
-    }
-  },
   footerSubText: {
     marginTop: space[2],
     fontSize: fontSize.sm,
     letterSpacing: '0.025em',
-    color: colors.zinc400
+    color: colors.zinc500
   }
 })
 
@@ -168,18 +161,12 @@ function HomeComponent() {
       <footer {...stylex.props(homeStyles.footer)}>
         <div {...stylex.props(homeStyles.footerInner)}>
           <p {...stylex.props(homeStyles.footerText)}>
-            &copy; {new Date().getFullYear()} - Made by{' '}
-            <a
-              href='https://ripandis.com'
-              {...stylex.props(homeStyles.footerLink)}
-              target='_blank'
-              rel='noreferrer'
-            >
-              Aris Ripandi
-            </a>{' '}
-            in 🇮🇩
+            &copy; {new Date().getFullYear()}
+            {' - '}
+            <span {...stylex.props(homeStyles.footerSubText)}>
+              v{import.meta.env.PUBLIC_APP_VERSION}
+            </span>
           </p>
-          <p {...stylex.props(homeStyles.footerSubText)}>v{import.meta.env.APP_VERSION}</p>
         </div>
       </footer>
     </div>

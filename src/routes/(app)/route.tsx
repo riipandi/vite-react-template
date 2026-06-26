@@ -1,7 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, useRouterState } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import { AuthProvider } from '#/guards/auth-provider'
 import { colors } from '#/styles/token.stylex'
 
 const spinKeyframes = stylex.keyframes({
@@ -16,7 +15,7 @@ const styles = stylex.create({
     width: '0.75rem',
     borderRadius: '9999px',
     borderWidth: '2px',
-    borderColor: colors.blue500,
+    borderColor: colors.primary500,
     borderTopColor: 'transparent',
     animationName: spinKeyframes,
     animationDuration: '1s',
@@ -66,9 +65,9 @@ export const Route = createFileRoute('/(app)')({
 
 function RouteComponent() {
   return (
-    <AuthProvider>
+    <>
       <RouterSpinner />
       <Outlet />
-    </AuthProvider>
+    </>
   )
 }

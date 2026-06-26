@@ -23,7 +23,7 @@ export const buttonStyles = stylex.create({
     transitionDuration: '150ms',
     outlineWidth: 0,
     outlineStyle: 'solid',
-    outlineColor: colors.blue600,
+    outlineColor: colors.primary600,
     outlineOffset: '2px',
     ':focus-visible': {
       outlineWidth: 2

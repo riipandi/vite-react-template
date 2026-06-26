@@ -91,7 +91,7 @@ const styles = stylex.create({
   },
   footerText: {
     fontSize: fontSize.sm,
-    color: colors.zinc400
+    color: colors.zinc500
   }
 })
 

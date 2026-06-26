@@ -83,7 +83,7 @@ const sidebarStyles = stylex.create({
   },
   logoVersion: {
     fontSize: fontSize.xs,
-    color: colors.zinc400,
+    color: colors.zinc500,
     letterSpacing: '0'
   },
 
@@ -105,7 +105,7 @@ const sidebarStyles = stylex.create({
     paddingBottom: space[1],
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
-    color: colors.zinc400,
+    color: colors.zinc500,
     letterSpacing: '0.07em',
     textTransform: 'uppercase',
     userSelect: 'none'
@@ -205,11 +205,21 @@ const sidebarStyles = stylex.create({
     textTransform: 'uppercase',
     userSelect: 'none'
   },
+  themeRow: {
+    display: 'flex',
+    height: '2.5rem',
+    width: '100%',
+    alignItems: 'center',
+    gap: space[3],
+    borderRadius: radius.lg,
+    paddingLeft: space[1],
+    paddingRight: space[1]
+  },
   bottomDot: {
     width: '0.375rem',
     height: '0.375rem',
     borderRadius: '9999px',
-    backgroundColor: colors.zinc400
+    backgroundColor: colors.zinc500
   }
 })
 
@@ -238,7 +248,9 @@ export function NavBarExpand() {
           </div>
           <div>
             <div {...stylex.props(sidebarStyles.logoText)}>ReactiVite</div>
-            <div {...stylex.props(sidebarStyles.logoVersion)}>v0.1.0</div>
+            <div {...stylex.props(sidebarStyles.logoVersion)}>
+              {import.meta.env.PUBLIC_APP_VERSION}
+            </div>
           </div>
         </Link>
       </div>
@@ -295,7 +307,9 @@ export function NavBarExpand() {
             </Link>
           )
         })}
-        <ThemeSwitcher />
+        <div {...stylex.props(sidebarStyles.themeRow)}>
+          <ThemeSwitcher />
+        </div>
       </div>
     </div>
   )

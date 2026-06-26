@@ -1,6 +1,15 @@
 import { useNavigate } from '@tanstack/react-router'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { getToken, login, me, setToken } from '#/libraries/auth'
+import {
+  getToken,
+  getStoredUser,
+  login,
+  me,
+  setToken,
+  clearTokens,
+  setStoredUser,
+  tryRefresh
+} from '#/libraries/auth'
 import type { User } from '#/schemas/user.schema'
 
 interface AuthContext {
@@ -24,11 +33,13 @@ export const UserContext = createContext(DefaultUserContext)
 
 export function AuthProvider({ children }: React.PropsWithChildren) {
   const navigate = useNavigate()
-  const [user, setUser] = useState<User | null>(null)
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  // Hydrate from cache immediately so the UI isn't blank on page reload.
+  const [user, setUser] = useState<User | null>(() => getStoredUser())
+  const [loggedIn, setLoggedIn] = useState(() => getStoredUser() !== null && getToken() !== null)
+  const [isLoading, setIsLoading] = useState(() => getToken() !== null)
 
   // On mount, validate stored token by fetching the user profile.
+  // If the stored token is stale, attempt a refresh before giving up.
   useEffect(() => {
     const token = getToken()
     if (!token) {
@@ -36,14 +47,33 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
       return
     }
 
-    me(token)
+    me()
       .then((profile) => {
         setUser(profile)
+        setStoredUser(profile)
         setLoggedIn(true)
       })
-      .catch(() => {
-        // Token is invalid or expired — clear it.
-        setToken(null)
+      .catch(async () => {
+        // Token might be expired — try to refresh first.
+        const refreshed = await tryRefresh()
+        if (refreshed) {
+          try {
+            const profile = await me()
+            setUser(profile)
+            setStoredUser(profile)
+            setLoggedIn(true)
+          } catch {
+            clearTokens()
+            setStoredUser(null)
+            setUser(null)
+            setLoggedIn(false)
+          }
+        } else {
+          clearTokens()
+          setStoredUser(null)
+          setUser(null)
+          setLoggedIn(false)
+        }
       })
       .finally(() => {
         setIsLoading(false)
@@ -52,21 +82,24 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
 
   const handleLogin = async (credentials: { username: string; password: string }) => {
     const response = await login(credentials)
-    setToken(response.accessToken)
-    setUser({
+    setToken(response.accessToken, response.refreshToken)
+    const profile: User = {
       id: response.id,
       email: response.email,
       firstName: response.firstName,
       lastName: response.lastName,
       username: response.username,
       image: response.image
-    })
+    }
+    setUser(profile)
+    setStoredUser(profile)
     setLoggedIn(true)
     navigate({ to: '/dashboard/overview' })
   }
 
   const handleLogout = () => {
-    setToken(null)
+    clearTokens()
+    setStoredUser(null)
     setUser(null)
     setLoggedIn(false)
     navigate({ to: '/login', search: { loggedOut: 'true' } })

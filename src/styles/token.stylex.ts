@@ -26,18 +26,18 @@ export const colors = stylex.defineVars({
   zinc900: '#18181b',
   zinc950: '#09090b',
 
-  // Primary (Indigo)
-  primary50: '#eef2ff',
-  primary100: '#e0e7ff',
-  primary200: '#c7d2fe',
-  primary300: '#a5b4fc',
-  primary400: '#818cf8',
-  primary500: '#6366f1',
-  primary600: '#4f46e5',
-  primary700: '#4338ca',
-  primary800: '#3730a3',
-  primary900: '#312e81',
-  primary950: '#1e1b4b',
+  // Primary (Professional Blue)
+  primary50: '#eff6ff',
+  primary100: '#dbeafe',
+  primary200: '#bfdbfe',
+  primary300: '#93c5fd',
+  primary400: '#60a5fa',
+  primary500: '#3b82f6',
+  primary600: '#2563eb',
+  primary700: '#1d4ed8',
+  primary800: '#1e40af',
+  primary900: '#1e3a8a',
+  primary950: '#172554',
 
   // Destructive (Red)
   destructive50: '#fef2f2',
@@ -61,12 +61,7 @@ export const colors = stylex.defineVars({
   orange50: '#fff7ed',
   orange200: '#fed7aa',
   orange700: '#c2410c',
-  orange950: '#431407',
-
-  // Blue
-  blue400: '#60a5fa',
-  blue500: '#3b82f6',
-  blue600: '#2563eb'
+  orange950: '#431407'
 })
 
 // ─── Dark Theme ──────────────────────────────────────────────
@@ -87,17 +82,17 @@ export const darkTheme = stylex.createTheme(colors, {
   zinc900: '#fafafa',
   zinc950: '#ffffff',
 
-  primary50: '#1e1b4b',
-  primary100: '#312e81',
-  primary200: '#3730a3',
-  primary300: '#4338ca',
-  primary400: '#4f46e5',
-  primary500: '#6366f1',
-  primary600: '#818cf8',
-  primary700: '#a5b4fc',
-  primary800: '#c7d2fe',
-  primary900: '#e0e7ff',
-  primary950: '#eef2ff',
+  primary50: '#172554',
+  primary100: '#1e3a8a',
+  primary200: '#1e40af',
+  primary300: '#1d4ed8',
+  primary400: '#2563eb',
+  primary500: '#3b82f6',
+  primary600: '#60a5fa',
+  primary700: '#93c5fd',
+  primary800: '#bfdbfe',
+  primary900: '#dbeafe',
+  primary950: '#eff6ff',
 
   destructive50: '#450a0a',
   destructive100: '#7f1d1d',

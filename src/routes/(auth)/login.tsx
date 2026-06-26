@@ -1,4 +1,3 @@
-import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useForm } from '@tanstack/react-form'
 import { createFileRoute, Link, redirect, useSearch } from '@tanstack/react-router'
@@ -19,10 +18,6 @@ interface LoginSearchParams {
 }
 
 const loginStyles = stylex.create({
-  wrapper: {
-    width: '100%',
-    maxWidth: '28rem'
-  },
   cardBody: {
     padding: space[8]
   },
@@ -138,7 +133,7 @@ export const Route = createFileRoute('/(auth)/login')({
 function RouteComponent() {
   const { login } = useAuthentication()
   const { loggedOut } = useSearch({ from: Route.id })
-  const [failed, setFailed] = useState<string | null>()
+  const [failed, setFailed] = useState<string | null>(null)
 
   // Clear the "goodbye" message as soon as the user interacts with the form.
   const clearAlerts = () => setFailed(null)
@@ -162,115 +157,106 @@ function RouteComponent() {
   })
 
   return (
-    <main
-      {...stylex.props(
-        x.minHeight['100vh'],
-        x.display.flex,
-        x.alignItems.center,
-        x.justifyContent.center,
-        x.padding['1rem']
+    <>
+      {failed && (
+        <div id='login-alert-error' {...stylex.props(loginStyles.alertSpacing)}>
+          <Alert variant='destructive'>{failed}</Alert>
+        </div>
       )}
-    >
-      <div {...stylex.props(loginStyles.wrapper)}>
-        {failed && (
-          <div {...stylex.props(loginStyles.alertSpacing)}>
-            <Alert variant='destructive'>{failed}</Alert>
-          </div>
-        )}
-        {loggedOut && !failed && (
-          <div {...stylex.props(loginStyles.alertSpacing)}>
-            <Alert variant='success'>
-              <span {...stylex.props(loginStyles.loggedOutMessage)}>Goodbye!</span> Your session has
-              been terminated.
-            </Alert>
-          </div>
-        )}
+      {loggedOut && !failed && (
+        <div id='login-alert-goodbye' {...stylex.props(loginStyles.alertSpacing)}>
+          <Alert variant='success'>
+            <span {...stylex.props(loginStyles.loggedOutMessage)}>Goodbye!</span> Your session has
+            been terminated.
+          </Alert>
+        </div>
+      )}
 
-        <Card>
-          <div {...stylex.props(loginStyles.cardBody)}>
-            <div {...stylex.props(loginStyles.header)}>
-              <div {...stylex.props(loginStyles.logoWrapper)}>
-                <div {...stylex.props(loginStyles.logo)}>
-                  <ViteLogo />
-                </div>
+      <Card id='login-card'>
+        <div {...stylex.props(loginStyles.cardBody)}>
+          <div {...stylex.props(loginStyles.header)}>
+            <div {...stylex.props(loginStyles.logoWrapper)}>
+              <div {...stylex.props(loginStyles.logo)}>
+                <ViteLogo />
               </div>
-              <h1 {...stylex.props(loginStyles.heading)}>Sign in to your account</h1>
-              <p {...stylex.props(loginStyles.subtitle)}>
-                Welcome back! Please enter your credentials.
-              </p>
+            </div>
+            <h1 {...stylex.props(loginStyles.heading)}>Sign in to your account</h1>
+            <p {...stylex.props(loginStyles.subtitle)}>
+              Welcome back! Please enter your credentials.
+            </p>
+          </div>
+
+          <div {...stylex.props(loginStyles.socialButtons)}>
+            <GoogleButton />
+            <GitHubButton />
+          </div>
+
+          <HorizontalDivider label='or continue with' />
+
+          <form
+            id='login-form'
+            autoComplete='on'
+            onSubmit={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              form.handleSubmit()
+            }}
+          >
+            <div {...stylex.props(loginStyles.formGrid)}>
+              <form.Field
+                name='username'
+                children={(field) => (
+                  <TextField
+                    label='Username'
+                    value={field.state.value}
+                    onChange={(value: string) => {
+                      clearAlerts()
+                      field.handleChange(value)
+                    }}
+                    onBlur={field.handleBlur}
+                    errorMessage={field.state.meta.errors?.[0]?.message}
+                  />
+                )}
+              />
+
+              <form.Field
+                name='password'
+                children={(field) => (
+                  <TextField
+                    label='Password'
+                    type='password'
+                    value={field.state.value}
+                    onChange={(value: string) => {
+                      clearAlerts()
+                      field.handleChange(value)
+                    }}
+                    onBlur={field.handleBlur}
+                    errorMessage={field.state.meta.errors?.[0]?.message}
+                  />
+                )}
+              />
             </div>
 
-            <div {...stylex.props(loginStyles.socialButtons)}>
-              <GoogleButton />
-              <GitHubButton />
+            <div {...stylex.props(loginStyles.submitWrapper)}>
+              <form.Subscribe
+                selector={(state) => [state.canSubmit, state.isSubmitting]}
+                children={([canSubmit, isSubmitting]) => (
+                  <Button type='submit' variant='primary' isDisabled={!canSubmit}>
+                    {isSubmitting ? 'Signing in...' : 'Sign in'}
+                  </Button>
+                )}
+              />
             </div>
+          </form>
 
-            <HorizontalDivider label='or continue with' />
-
-            <form
-              autoComplete='on'
-              onSubmit={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                form.handleSubmit()
-              }}
-            >
-              <div {...stylex.props(loginStyles.formGrid)}>
-                <form.Field
-                  name='username'
-                  children={(field) => (
-                    <TextField
-                      label='Username'
-                      value={field.state.value}
-                      onChange={(value: string) => {
-                        clearAlerts()
-                        field.handleChange(value)
-                      }}
-                      onBlur={field.handleBlur}
-                      errorMessage={field.state.meta.errors?.[0]?.message}
-                    />
-                  )}
-                />
-
-                <form.Field
-                  name='password'
-                  children={(field) => (
-                    <TextField
-                      label='Password'
-                      type='password'
-                      value={field.state.value}
-                      onChange={(value: string) => {
-                        clearAlerts()
-                        field.handleChange(value)
-                      }}
-                      onBlur={field.handleBlur}
-                      errorMessage={field.state.meta.errors?.[0]?.message}
-                    />
-                  )}
-                />
-              </div>
-
-              <div {...stylex.props(loginStyles.submitWrapper)}>
-                <form.Subscribe
-                  selector={(state) => [state.canSubmit, state.isSubmitting]}
-                  children={([canSubmit, isSubmitting]) => (
-                    <Button type='submit' variant='primary' isDisabled={!canSubmit}>
-                      {isSubmitting ? 'Signing in...' : 'Sign in'}
-                    </Button>
-                  )}
-                />
-              </div>
-            </form>
-
-            <div {...stylex.props(loginStyles.footer)}>
-              <span {...stylex.props(loginStyles.footerText)}>Back to</span>
-              <Link to='/' {...stylex.props(loginStyles.backLink)}>
-                homepage
-              </Link>
-            </div>
+          <div {...stylex.props(loginStyles.footer)}>
+            <span {...stylex.props(loginStyles.footerText)}>Back to</span>
+            <Link to='/' {...stylex.props(loginStyles.backLink)}>
+              homepage
+            </Link>
           </div>
-        </Card>
-      </div>
-    </main>
+        </div>
+      </Card>
+    </>
   )
 }

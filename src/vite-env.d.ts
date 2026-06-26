@@ -1,9 +1,10 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly APP_VERSION: string
+  readonly PUBLIC_APP_VERSION: string
+  readonly PUBLIC_API_BASE_URL?: string
 }
 
-export interface ImportMeta {
+interface ImportMeta {
   readonly env: ImportMetaEnv
 }

@@ -21,45 +21,39 @@ export const buttonStyles = stylex.create({
     cursor: 'pointer',
     transitionProperty: 'background-color, border-color, box-shadow, color',
     transitionDuration: '150ms',
-    outlineWidth: 0,
+    outlineWidth: {
+      default: 0,
+      ':focus-visible': 2
+    },
     outlineStyle: 'solid',
     outlineColor: colors.primary600,
-    outlineOffset: '2px',
-    ':focus-visible': {
-      outlineWidth: 2
-    }
+    outlineOffset: '2px'
   },
   primary: {
-    backgroundColor: colors.primary600,
-    color: colors.white,
-    boxShadow: shadow.sm,
-    ':hover': {
-      backgroundColor: colors.primary700
+    backgroundColor: {
+      default: colors.primary600,
+      ':hover': colors.primary700,
+      ':active': colors.primary800
     },
-    ':active': {
-      backgroundColor: colors.primary800
-    }
+    color: colors.white,
+    boxShadow: shadow.sm
   },
   secondary: {
-    backgroundColor: colors.surface,
-    color: colors.zinc700,
-    ':hover': {
-      backgroundColor: colors.surfaceHover
+    backgroundColor: {
+      default: colors.surface,
+      ':hover': colors.surfaceHover,
+      ':active': colors.zinc200
     },
-    ':active': {
-      backgroundColor: colors.zinc200
-    }
+    color: colors.zinc700
   },
   destructive: {
-    backgroundColor: colors.destructive600,
-    color: colors.white,
-    boxShadow: shadow.sm,
-    ':hover': {
-      backgroundColor: colors.destructive700
+    backgroundColor: {
+      default: colors.destructive600,
+      ':hover': colors.destructive700,
+      ':active': colors.destructive800
     },
-    ':active': {
-      backgroundColor: colors.destructive800
-    }
+    color: colors.white,
+    boxShadow: shadow.sm
   },
   icon: {
     borderWidth: 0,
@@ -67,35 +61,33 @@ export const buttonStyles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: colors.zinc500,
-    backgroundColor: 'transparent',
-    ':hover': {
-      backgroundColor: colors.surfaceHover
+    color: {
+      default: colors.zinc500,
+      ':hover': colors.zinc500,
+      ':active': colors.zinc500
     },
-    ':active': {
-      backgroundColor: colors.zinc200
+    backgroundColor: {
+      default: 'transparent',
+      ':hover': colors.surfaceHover,
+      ':active': colors.zinc200
     }
   },
   disabled: {
-    backgroundColor: colors.zinc100,
+    backgroundColor: {
+      default: colors.zinc100,
+      ':hover': colors.zinc100,
+      ':active': colors.zinc100
+    },
     color: colors.zinc400,
     borderColor: colors.zinc200,
-    cursor: 'not-allowed',
-    ':hover': {
-      backgroundColor: colors.zinc100
-    },
-    ':active': {
-      backgroundColor: colors.zinc100
-    }
+    cursor: 'not-allowed'
   },
   iconDisabled: {
-    backgroundColor: 'transparent',
-    color: colors.zinc300,
-    ':hover': {
-      backgroundColor: 'transparent'
+    backgroundColor: {
+      default: 'transparent',
+      ':hover': 'transparent',
+      ':active': 'transparent'
     },
-    ':active': {
-      backgroundColor: 'transparent'
-    }
+    color: colors.zinc300
   }
 })

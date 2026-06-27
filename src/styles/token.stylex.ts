@@ -3,6 +3,10 @@ import * as stylex from '@stylexjs/stylex'
 // ─── Design Token Variables ─────────────────────────────────
 // Light mode values are the defaults.
 // Dark mode is handled via `createTheme` applied at the root.
+//
+// Use defineVars for all tokens — even non-themed ones — because
+// the current @stylexjs/stylex 0.19.0 doesn't expose defineConsts
+// in its public type declarations.
 
 export const colors = stylex.defineVars({
   // Base
@@ -117,7 +121,8 @@ export const darkTheme = stylex.createTheme(colors, {
   orange950: '#fff7ed'
 })
 
-// ─── Misc Tokens (no dark mode needed) ───────────────────────
+// ─── Non-themed Tokens ──────────────────────────────────────
+// These don't need runtime theming but use defineVars for TS compat.
 
 export const font = stylex.defineVars({
   sans: '"Inter Variable", ui-sans-serif, system-ui, sans-serif',

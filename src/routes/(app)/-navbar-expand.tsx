@@ -19,8 +19,6 @@ const secondaryItems = [
   { icon: Lucide.Mail, label: 'Messages', href: '#', badge: true }
 ]
 
-const bottomItems = [{ icon: Lucide.User, label: 'My Account', href: '#' }]
-
 // ── Styles ────────────────────────────────────────────────────────────────────
 
 const sidebarStyles = stylex.create({
@@ -122,23 +120,28 @@ const sidebarStyles = stylex.create({
     paddingLeft: space[3],
     paddingRight: space[3],
     textDecoration: 'none',
-    color: colors.zinc600,
+    color: {
+      default: colors.zinc600,
+      ':hover': colors.zinc900
+    },
     position: 'relative',
     transitionProperty: 'background-color, color',
     transitionDuration: '150ms',
     fontSize: fontSize.sm,
     fontWeight: fontWeight.medium,
-    ':hover': {
-      backgroundColor: colors.zinc100,
-      color: colors.zinc900
+    backgroundColor: {
+      default: 'transparent',
+      ':hover': colors.zinc100
     }
   },
   navItemActive: {
-    backgroundColor: colors.primary50,
-    color: colors.primary700,
-    ':hover': {
-      backgroundColor: colors.primary100,
-      color: colors.primary700
+    backgroundColor: {
+      default: colors.primary50,
+      ':hover': colors.primary100
+    },
+    color: {
+      default: colors.primary700,
+      ':hover': colors.primary700
     }
   },
   activeAccent: {
@@ -169,57 +172,26 @@ const sidebarStyles = stylex.create({
     flexShrink: 0
   },
 
-  // Bottom area
+  // Bottom area: account link + theme switcher
   bottomSection: {
-    paddingLeft: space[3],
-    paddingRight: space[3],
-    paddingTop: space[3],
-    paddingBottom: space[3],
-    borderTopWidth: 1,
-    borderTopStyle: 'solid',
-    borderTopColor: colors.zinc100,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: space[1]
-  },
-  bottomRow: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     paddingLeft: space[3],
     paddingRight: space[3],
     paddingTop: space[2],
     paddingBottom: space[2],
-    gap: space[3]
+    borderTopWidth: 1,
+    borderTopStyle: 'solid',
+    borderTopColor: colors.zinc200
   },
-  bottomLabelGroup: {
+  bottomRow: {
     display: 'flex',
     alignItems: 'center',
-    gap: space[2]
+    justifyContent: 'space-between'
   },
-  bottomLabel: {
-    fontSize: fontSize.xs,
-    color: colors.zinc500,
-    fontWeight: fontWeight.semibold,
-    letterSpacing: '0.04em',
-    textTransform: 'uppercase',
-    userSelect: 'none'
-  },
-  themeRow: {
-    display: 'flex',
-    height: '2.5rem',
-    width: '100%',
-    alignItems: 'center',
-    gap: space[3],
-    borderRadius: radius.lg,
-    paddingLeft: space[1],
-    paddingRight: space[1]
-  },
-  bottomDot: {
-    width: '0.375rem',
-    height: '0.375rem',
-    borderRadius: '9999px',
-    backgroundColor: colors.zinc500
+  accountLink: {
+    gap: space[2],
+    borderWidth: 0,
+    cursor: 'pointer',
+    fontFamily: 'inherit'
   }
 })
 
@@ -293,21 +265,11 @@ export function NavBarExpand() {
 
       {/* Bottom: account + theme */}
       <div {...stylex.props(sidebarStyles.bottomSection)}>
-        {bottomItems.map((item) => {
-          const isActive = isActiveRoute(item.href)
-          return (
-            <Link
-              key={item.label}
-              to={item.href}
-              {...stylex.props(sidebarStyles.navItem, isActive && sidebarStyles.navItemActive)}
-            >
-              {isActive && <span {...stylex.props(sidebarStyles.activeAccent)} />}
-              <item.icon {...stylex.props(sidebarStyles.navIcon)} />
-              <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>
-            </Link>
-          )
-        })}
-        <div {...stylex.props(sidebarStyles.themeRow)}>
+        <div {...stylex.props(sidebarStyles.bottomRow)}>
+          <button type='button' {...stylex.props(sidebarStyles.navItem, sidebarStyles.accountLink)}>
+            <Lucide.User {...stylex.props(sidebarStyles.navIcon)} />
+            <span {...stylex.props(sidebarStyles.navLabel)}>My Account</span>
+          </button>
           <ThemeSwitcher />
         </div>
       </div>

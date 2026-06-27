@@ -39,16 +39,18 @@ const styles = stylex.create({
     justifyContent: 'center',
     borderRadius: radius.lg,
     padding: space[2],
-    color: colors.zinc500,
-    backgroundColor: 'transparent',
+    color: {
+      default: colors.zinc500,
+      ':hover': colors.zinc800
+    },
+    backgroundColor: {
+      default: 'transparent',
+      ':hover': colors.zinc100
+    },
     borderWidth: 0,
     cursor: 'pointer',
     transitionProperty: 'background-color, color',
-    transitionDuration: '150ms',
-    ':hover': {
-      backgroundColor: colors.zinc100,
-      color: colors.zinc800
-    }
+    transitionDuration: '150ms'
   },
   icon: {
     height: '1rem',

@@ -32,18 +32,18 @@ const homeStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: space[8],
-    paddingLeft: space[4],
-    paddingRight: space[4],
-    paddingTop: '2.5rem',
-    paddingBottom: '2.5rem',
-    '@media (min-width: 640px)': {
-      paddingLeft: space[6],
-      paddingRight: space[6]
+    paddingLeft: {
+      default: space[4],
+      '@media (min-width: 640px)': space[6],
+      '@media (min-width: 1024px)': space[8]
     },
-    '@media (min-width: 1024px)': {
-      paddingLeft: space[8],
-      paddingRight: space[8]
-    }
+    paddingRight: {
+      default: space[4],
+      '@media (min-width: 640px)': space[6],
+      '@media (min-width: 1024px)': space[8]
+    },
+    paddingTop: '2.5rem',
+    paddingBottom: '2.5rem'
   },
   tagline: {
     textAlign: 'center',
@@ -52,20 +52,23 @@ const homeStyles = stylex.create({
     maxWidth: '36rem',
     marginLeft: 'auto',
     marginRight: 'auto',
-    '@media (min-width: 640px)': {
-      marginTop: space[8]
+    marginTop: {
+      default: 0,
+      '@media (min-width: 640px)': space[8]
     }
   },
   actions: {
     marginTop: space[4],
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: {
+      default: 'column',
+      '@media (min-width: 640px)': 'row'
+    },
     alignItems: 'center',
     justifyContent: 'center',
-    gap: space[2],
-    '@media (min-width: 640px)': {
-      flexDirection: 'row',
-      gap: space[3]
+    gap: {
+      default: space[2],
+      '@media (min-width: 640px)': space[3]
     }
   },
   footer: {
@@ -78,15 +81,15 @@ const homeStyles = stylex.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     maxWidth: '80rem',
-    paddingLeft: space[4],
-    paddingRight: space[4],
-    '@media (min-width: 640px)': {
-      paddingLeft: space[6],
-      paddingRight: space[6]
+    paddingLeft: {
+      default: space[4],
+      '@media (min-width: 640px)': space[6],
+      '@media (min-width: 1024px)': space[8]
     },
-    '@media (min-width: 1024px)': {
-      paddingLeft: space[8],
-      paddingRight: space[8]
+    paddingRight: {
+      default: space[4],
+      '@media (min-width: 640px)': space[6],
+      '@media (min-width: 1024px)': space[8]
     }
   },
   footerText: {

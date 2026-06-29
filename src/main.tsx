@@ -3,8 +3,8 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
 import { queryClient } from '#/libraries/api-client'
 import type { BreadcrumbValue } from '#/routes/__root'
-import './main.css'
 import { routeTree } from './routes.gen'
+import './main.css'
 
 // Create the application router instance.
 const appRoutes = createRouter({

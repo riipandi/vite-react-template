@@ -1,10 +1,16 @@
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
+import { isAuthenticated } from '#/guards/auth-store'
 import { ThemeSwitcher } from '#/routes/-theme'
 import { space } from '#/styles/token.stylex'
 
 export const Route = createFileRoute('/(auth)')({
+  beforeLoad: () => {
+    if (isAuthenticated()) {
+      throw redirect({ to: '/dashboard/overview' })
+    }
+  },
   component: RouteComponent
 })
 

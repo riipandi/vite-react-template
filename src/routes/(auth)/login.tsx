@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
 import { useForm } from '@tanstack/react-form'
-import { createFileRoute, Link, redirect, useSearch } from '@tanstack/react-router'
+import { createFileRoute, Link, useSearch } from '@tanstack/react-router'
 import { useState } from 'react'
+import { z } from 'zod'
 import { GitHubButton, GoogleButton } from '#/components/social-button'
 import { Alert } from '#/components/ui/alert'
 import { Button } from '#/components/ui/button'
@@ -9,14 +10,9 @@ import { Card } from '#/components/ui/card'
 import { HorizontalDivider } from '#/components/ui/divider'
 import { TextField } from '#/components/ui/text-field'
 import { useAuthentication } from '#/guards/auth-provider'
-import { isAuthenticated } from '#/guards/auth-store'
 import { getErrorMessage } from '#/guards/auth-utils'
 import { loginSchema } from '#/schemas/auth.schema'
 import { colors, fontSize, fontWeight, space } from '#/styles/token.stylex'
-
-interface LoginSearchParams {
-  loggedOut?: string
-}
 
 const loginStyles = stylex.create({
   cardBody: {
@@ -120,15 +116,10 @@ const ViteLogo = () => (
 )
 
 export const Route = createFileRoute('/(auth)/login')({
-  validateSearch: (search: Record<string, unknown>): LoginSearchParams => ({
-    loggedOut: typeof search.loggedOut === 'string' ? search.loggedOut : undefined
-  }),
   component: RouteComponent,
-  beforeLoad: () => {
-    if (isAuthenticated()) {
-      throw redirect({ to: '/dashboard/overview' })
-    }
-  }
+  validateSearch: z.object({
+    loggedOut: z.coerce.boolean().optional()
+  })
 })
 
 function RouteComponent() {

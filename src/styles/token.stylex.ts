@@ -1,12 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
 
+const DARK = '@media (prefers-color-scheme: dark)'
+
 // ─── Design Token Variables ─────────────────────────────────
-// Light mode values are the defaults.
-// Dark mode is handled via `createTheme` applied at the root.
-//
-// Use defineVars for all tokens — even non-themed ones — because
-// the current @stylexjs/stylex 0.19.0 doesn't expose defineConsts
-// in its public type declarations.
 
 export const colors = stylex.defineVars({
   // Base
@@ -14,62 +10,66 @@ export const colors = stylex.defineVars({
   black: '#000000',
   transparent: 'transparent',
   current: 'currentColor',
-  surface: '#ffffff',
-  surfaceHover: '#fafafa',
+
+  // Surface
+  surface: { default: '#ffffff', [DARK]: '#1a1a1a' },
+  surfaceHover: { default: '#fafafa', [DARK]: '#27272a' },
 
   // Zinc scale
-  zinc50: '#fafafa',
-  zinc100: '#f4f4f5',
-  zinc200: '#e4e4e7',
-  zinc300: '#d4d4d8',
-  zinc400: '#a1a1aa',
-  zinc500: '#71717a',
-  zinc600: '#52525b',
-  zinc700: '#3f3f46',
-  zinc800: '#27272a',
-  zinc900: '#18181b',
-  zinc950: '#09090b',
+  zinc50: { default: '#fafafa', [DARK]: '#18181b' },
+  zinc100: { default: '#f4f4f5', [DARK]: '#27272a' },
+  zinc200: { default: '#e4e4e7', [DARK]: '#3f3f46' },
+  zinc300: { default: '#d4d4d8', [DARK]: '#52525b' },
+  zinc400: { default: '#a1a1aa', [DARK]: '#71717a' },
+  zinc500: { default: '#71717a', [DARK]: '#a1a1aa' },
+  zinc600: { default: '#52525b', [DARK]: '#d4d4d8' },
+  zinc700: { default: '#3f3f46', [DARK]: '#e4e4e7' },
+  zinc800: { default: '#27272a', [DARK]: '#f4f4f5' },
+  zinc900: { default: '#18181b', [DARK]: '#fafafa' },
+  zinc950: { default: '#09090b', [DARK]: '#ffffff' },
 
-  // Primary (Professional Blue)
-  primary50: '#eff6ff',
-  primary100: '#dbeafe',
-  primary200: '#bfdbfe',
-  primary300: '#93c5fd',
-  primary400: '#60a5fa',
+  // Primary blue
+  primary50: { default: '#eff6ff', [DARK]: '#172554' },
+  primary100: { default: '#dbeafe', [DARK]: '#1e3a8a' },
+  primary200: { default: '#bfdbfe', [DARK]: '#1e40af' },
+  primary300: { default: '#93c5fd', [DARK]: '#1d4ed8' },
+  primary400: { default: '#60a5fa', [DARK]: '#2563eb' },
   primary500: '#3b82f6',
-  primary600: '#2563eb',
-  primary700: '#1d4ed8',
-  primary800: '#1e40af',
-  primary900: '#1e3a8a',
-  primary950: '#172554',
+  primary600: { default: '#2563eb', [DARK]: '#60a5fa' },
+  primary700: { default: '#1d4ed8', [DARK]: '#93c5fd' },
+  primary800: { default: '#1e40af', [DARK]: '#bfdbfe' },
+  primary900: { default: '#1e3a8a', [DARK]: '#dbeafe' },
+  primary950: { default: '#172554', [DARK]: '#eff6ff' },
 
-  // Destructive (Red)
-  destructive50: '#fef2f2',
-  destructive100: '#fee2e2',
-  destructive200: '#fecaca',
-  destructive300: '#fca5a5',
-  destructive400: '#f87171',
+  // Destructive red
+  destructive50: { default: '#fef2f2', [DARK]: '#450a0a' },
+  destructive100: { default: '#fee2e2', [DARK]: '#7f1d1d' },
+  destructive200: { default: '#fecaca', [DARK]: '#991b1b' },
+  destructive300: { default: '#fca5a5', [DARK]: '#b91c1c' },
+  destructive400: { default: '#f87171', [DARK]: '#dc2626' },
   destructive500: '#ef4444',
-  destructive600: '#dc2626',
-  destructive700: '#b91c1c',
-  destructive800: '#991b1b',
-  destructive900: '#7f1d1d',
-  destructive950: '#450a0a',
+  destructive600: { default: '#dc2626', [DARK]: '#f87171' },
+  destructive700: { default: '#b91c1c', [DARK]: '#fca5a5' },
+  destructive800: { default: '#991b1b', [DARK]: '#fecaca' },
+  destructive900: { default: '#7f1d1d', [DARK]: '#fee2e2' },
+  destructive950: { default: '#450a0a', [DARK]: '#fef2f2' },
 
-  // Alert colors
-  green50: '#f0fdf4',
-  green200: '#bbf7d0',
-  green700: '#15803d',
-  green950: '#052e16',
+  // Green
+  green50: { default: '#f0fdf4', [DARK]: '#052e16' },
+  green200: { default: '#bbf7d0', [DARK]: '#166534' },
+  green700: { default: '#15803d', [DARK]: '#bbf7d0' },
+  green950: { default: '#052e16', [DARK]: '#f0fdf4' },
 
-  orange50: '#fff7ed',
-  orange200: '#fed7aa',
-  orange700: '#c2410c',
-  orange950: '#431407'
+  // Orange
+  orange50: { default: '#fff7ed', [DARK]: '#431407' },
+  orange200: { default: '#fed7aa', [DARK]: '#9a3412' },
+  orange700: { default: '#c2410c', [DARK]: '#fed7aa' },
+  orange950: { default: '#431407', [DARK]: '#fff7ed' }
 })
 
-// ─── Dark Theme ──────────────────────────────────────────────
-// Override color tokens for dark mode.
+// ─── Dark Theme Override ───────────────────────────────────
+// Manual toggle via @lonik/themer — applied as a CSS class that
+// takes precedence over the @media (prefers-color-scheme) defaults.
 export const darkTheme = stylex.createTheme(colors, {
   surface: '#1a1a1a',
   surfaceHover: '#27272a',
@@ -121,8 +121,7 @@ export const darkTheme = stylex.createTheme(colors, {
   orange950: '#fff7ed'
 })
 
-// ─── Non-themed Tokens ──────────────────────────────────────
-// These don't need runtime theming but use defineVars for TS compat.
+// ─── Non-themed Tokens ────────────────────────────────────
 
 export const font = stylex.defineVars({
   sans: '"Inter Variable", ui-sans-serif, system-ui, sans-serif',

@@ -1,14 +1,8 @@
 import { useNavigate } from '@tanstack/react-router'
 import { createContext, useContext, useEffect } from 'react'
 import { login, me, tryRefresh } from '#/guards/auth-api'
-import {
-  authStore,
-  setAuthTokens,
-  setAuthUser,
-  setAuthLoading,
-  clearAuth,
-  useAuth
-} from '#/guards/auth-store'
+import { authStore, setAuthTokens, setAuthUser, setAuthLoading } from '#/guards/auth-store'
+import { clearAuth, useAuth } from '#/guards/auth-store'
 import type { User } from '#/schemas/user.schema'
 
 interface AuthContext {
@@ -81,16 +75,23 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
 
   const handleLogout = () => {
     clearAuth()
-    navigate({ to: '/login', search: { loggedOut: 'true' } })
+    navigate({
+      to: '/login',
+      search: {
+        loggedOut: true
+      }
+    })
   }
 
-  return (
-    <UserContext.Provider
-      value={{ user, loggedIn, isLoading, login: handleLogin, logout: handleLogout }}
-    >
-      {children}
-    </UserContext.Provider>
-  )
+  const context = {
+    user,
+    loggedIn,
+    isLoading,
+    login: handleLogin,
+    logout: handleLogout
+  } satisfies AuthContext
+
+  return <UserContext.Provider value={context}>{children}</UserContext.Provider>
 }
 
 export function useAuthentication() {

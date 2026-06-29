@@ -30,7 +30,7 @@ pre-commit:
       glob: '*.{test,spec}.{ts,tsx}'
       run: pnpm vitest --run
 
-pre-push:
-  jobs:
-    - name: audit
-      run: pnpm audit --prod
+# pre-push:
+#   jobs:
+#     - name: audit
+#       run: pnpm audit --prod

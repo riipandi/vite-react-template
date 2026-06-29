@@ -8,7 +8,7 @@ export const Route = createFileRoute('/(auth)')({
   component: RouteComponent
 })
 
-const authStyles = stylex.create({
+const styles = stylex.create({
   wrapper: {
     width: '100%',
     maxWidth: '28rem'
@@ -35,10 +35,10 @@ function RouteComponent() {
         x.padding['1rem']
       )}
     >
-      <header id='auth-header' {...stylex.props(authStyles.header)}>
+      <header id='auth-header' {...stylex.props(styles.header)}>
         <ThemeSwitcher />
       </header>
-      <div id='auth-card-wrapper' {...stylex.props(authStyles.wrapper)}>
+      <div id='auth-card-wrapper' {...stylex.props(styles.wrapper)}>
         <Outlet />
       </div>
     </main>

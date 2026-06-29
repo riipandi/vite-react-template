@@ -1,4 +1,4 @@
-import { ThemeProvider as LonikThemer, useTheme as useLonikTheme } from '@lonik/themer'
+import { ThemeProvider as LonikThemer, useTheme } from '@lonik/themer'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import { colors, radius, space } from '#/styles/token.stylex'
@@ -19,10 +19,8 @@ export function ThemeProvider(props: React.PropsWithChildren) {
   )
 }
 
-/** Convenience re-export so consumers only import from `-theme`. */
-export const useTheme = useLonikTheme
-
 const cycle: Record<string, string> = { light: 'dark', dark: 'system', system: 'light' }
+
 const labels: Record<string, string> = {
   light: 'Switch to dark mode',
   dark: 'Switch to system mode',

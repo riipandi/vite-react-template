@@ -1,7 +1,7 @@
 import { ofetch } from 'ofetch'
 import { authStore, setAuthTokens } from '#/guards/auth-store'
-import type { LoginCredentials, LoginResponse } from '#/guards/auth-types'
 import { api, API_BASE_URL } from '#/libraries/api-client'
+import type { LoginCredentials, LoginResponse } from '#/schemas/auth.schema'
 import type { User } from '#/schemas/user.schema'
 
 export async function login(credentials: LoginCredentials): Promise<LoginResponse> {

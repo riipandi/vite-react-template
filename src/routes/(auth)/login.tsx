@@ -10,8 +10,8 @@ import { HorizontalDivider } from '#/components/ui/divider'
 import { TextField } from '#/components/ui/text-field'
 import { useAuthentication } from '#/guards/auth-provider'
 import { isAuthenticated } from '#/guards/auth-store'
-import { loginSchema } from '#/guards/auth-types'
 import { getErrorMessage } from '#/guards/auth-utils'
+import { loginSchema } from '#/schemas/auth.schema'
 import { colors, fontSize, fontWeight, space } from '#/styles/token.stylex'
 
 interface LoginSearchParams {

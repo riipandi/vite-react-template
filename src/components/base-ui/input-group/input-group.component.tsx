@@ -1,4 +1,4 @@
-import '../shared/input-base.css'
+import '../../../styles/shared/input-base.css'
 import './style.css'
 
 function InputWrapper({ children, ...props }: React.ComponentProps<'label'>) {

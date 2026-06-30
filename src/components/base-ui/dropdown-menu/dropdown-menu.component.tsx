@@ -1,7 +1,7 @@
 import { Menu as MenuPrimitive } from '@base-ui/react/menu'
 import { ArrowDown } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import '../shared/menu-base.css'
+import '../../../styles/shared/menu-base.css'
 
 function DropdownMenu(props: MenuPrimitive.Root.Props) {
   return <MenuPrimitive.Root {...props} />

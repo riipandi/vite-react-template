@@ -1,4 +1,4 @@
-import '../shared/dialog-base.css'
+import '../../../styles/shared/dialog-base.css'
 import './style.css'
 import { Dialog as DialogPrimitive } from '@base-ui/react/dialog'
 import { Cancel01Icon } from '@hugeicons/core-free-icons'

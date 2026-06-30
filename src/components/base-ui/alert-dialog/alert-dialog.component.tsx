@@ -1,5 +1,5 @@
 import './style.css'
-import '../shared/dialog-base.css'
+import '../../../styles/shared/dialog-base.css'
 import { AlertDialog as AlertDialogPrimitive } from '@base-ui/react/alert-dialog'
 import { Cancel01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'

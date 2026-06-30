@@ -1,4 +1,4 @@
-import '../shared/select-base.css'
+import '../../../styles/shared/select-base.css'
 import './style.css'
 import { Combobox as ComboboxPrimitive } from '@base-ui/react'
 import { Cancel01Icon, UnfoldMoreIcon } from '@hugeicons/core-free-icons'

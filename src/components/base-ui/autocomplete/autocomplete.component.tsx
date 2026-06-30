@@ -1,5 +1,5 @@
 import './style.css'
-import '../shared/select-base.css'
+import '../../../styles/shared/select-base.css'
 import { Autocomplete as AutocompletePrimitive } from '@base-ui/react/autocomplete'
 import { Cancel01Icon, UnfoldMoreIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'

@@ -17,64 +17,40 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
+import { accordionStyles } from './accordion.stylex'
 
-export const accordionStyles = tv({
-  base: 'flex flex-col',
-  slots: {
-    item: 'border-border-neutral border-b last:border-b-0',
-    header: '',
-    trigger: [
-      'flex cursor-pointer items-center gap-2 py-3 transition-colors duration-100 select-none',
-      'focus-visible:outline-primary focus-visible:ring-border-primary focus:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2',
-      'w-full text-left leading-relaxed font-medium [&>svg:not([class*=size-])]:size-4 [&>svg:not([class*=text-])]:text-current',
-      '**:data-[slot=expandable-indicator]:transition-all **:data-[slot=expandable-indicator]:duration-100',
-      'hover:not-data-disabled:text-foreground-neutral/70 data-disabled:cursor-not-allowed data-disabled:opacity-60'
-    ],
-    panel: [
-      'flex flex-col gap-2 overflow-hidden transition-all ease-out',
-      'h-(--accordion-panel-height) [&[hidden]:not([hidden=until-found])]:hidden',
-      'data-ending-style:h-0 data-starting-style:h-0'
-    ],
-    panelContent: 'pb-3'
-  },
-  variants: {
-    expandableIndicator: {
-      true: {
-        trigger: [
-          'data-expandable:after:bg-chevron-down-dark dark:data-expandable:after:bg-chevron-down data-expandable:after:ml-auto data-expandable:after:size-4',
-          'data-expandable:after:shrink-0 data-expandable:after:transition-transform data-expandable:after:duration-100',
-          'data-expandable:data-panel-open:after:rotate-180'
-        ]
-      },
-      false: {}
-    }
-  },
-  defaultVariants: {
-    expandableIndicator: true
-  }
-})
+export type AccordionRootProps = React.ComponentProps<typeof BaseAccordion.Root> & {
+  xstyle?: StyleXStyles
+}
+export type AccordionItemProps = React.ComponentProps<typeof BaseAccordion.Item> & {
+  xstyle?: StyleXStyles
+}
+export type AccordionHeaderProps = React.ComponentProps<typeof BaseAccordion.Header> & {
+  xstyle?: StyleXStyles
+}
+export type AccordionTriggerProps = React.ComponentProps<typeof BaseAccordion.Trigger> & {
+  expandableIndicator?: boolean
+  xstyle?: StyleXStyles
+}
+export type AccordionPanelProps = React.ComponentProps<typeof BaseAccordion.Panel> & {
+  xstyle?: StyleXStyles
+}
 
-export type AccordionRootProps = React.ComponentProps<typeof BaseAccordion.Root>
-export type AccordionItemProps = React.ComponentProps<typeof BaseAccordion.Item>
-export type AccordionHeaderProps = React.ComponentProps<typeof BaseAccordion.Header>
-export type AccordionTriggerProps = React.ComponentProps<typeof BaseAccordion.Trigger> &
-  VariantProps<typeof accordionStyles>
-export type AccordionPanelProps = React.ComponentProps<typeof BaseAccordion.Panel>
-
-export function Accordion({ className, ...props }: AccordionRootProps) {
-  const styles = accordionStyles()
+export function Accordion({ xstyle, ...props }: AccordionRootProps) {
   return (
-    <BaseAccordion.Root data-slot='accordion' className={cx(styles.base(), className)} {...props} />
+    <BaseAccordion.Root
+      data-slot='accordion'
+      {...stylex.props(accordionStyles.root, xstyle)}
+      {...props}
+    />
   )
 }
 
-export function AccordionItem({ className, children, ...props }: AccordionItemProps) {
-  const styles = accordionStyles()
+export function AccordionItem({ children, xstyle, ...props }: AccordionItemProps) {
   return (
     <BaseAccordion.Item
       data-slot='accordion-item'
-      className={cx(styles.item(), className)}
+      {...stylex.props(accordionStyles.item, xstyle)}
       {...props}
     >
       {children}
@@ -82,12 +58,11 @@ export function AccordionItem({ className, children, ...props }: AccordionItemPr
   )
 }
 
-export function AccordionHeader({ className, children, ...props }: AccordionHeaderProps) {
-  const styles = accordionStyles()
+export function AccordionHeader({ children, xstyle, ...props }: AccordionHeaderProps) {
   return (
     <BaseAccordion.Header
       data-slot='accordion-header'
-      className={cx(styles.header(), className)}
+      {...stylex.props(accordionStyles.header, xstyle)}
       {...props}
     >
       {children}
@@ -96,30 +71,32 @@ export function AccordionHeader({ className, children, ...props }: AccordionHead
 }
 
 export function AccordionTrigger({
-  className,
   expandableIndicator = true,
+  xstyle,
   ...props
 }: AccordionTriggerProps) {
-  const styles = accordionStyles({ expandableIndicator })
   return (
     <BaseAccordion.Trigger
       data-slot='accordion-trigger'
       data-expandable={expandableIndicator ? true : undefined}
-      className={cx(styles.trigger(), className)}
+      {...stylex.props(
+        accordionStyles.trigger,
+        expandableIndicator && accordionStyles.expandableIndicator,
+        xstyle
+      )}
       {...props}
     />
   )
 }
 
-export function AccordionPanel({ className, children, ...props }: AccordionPanelProps) {
-  const styles = accordionStyles()
+export function AccordionPanel({ children, xstyle, ...props }: AccordionPanelProps) {
   return (
     <BaseAccordion.Panel
       data-slot='accordion-panel'
-      className={cx(styles.panel(), className)}
+      {...stylex.props(accordionStyles.panel, xstyle)}
       {...props}
     >
-      <div data-slot='accordion-panel-content' className={styles.panelContent()}>
+      <div data-slot='accordion-panel-content' {...stylex.props(accordionStyles.panelContent)}>
         {children}
       </div>
     </BaseAccordion.Panel>

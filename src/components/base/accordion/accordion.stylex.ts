@@ -7,5 +7,6 @@ export const accordionStyles = stylex.create({
   header: {},
   trigger: {},
   panel: {},
-  panelContent: {}
+  panelContent: {},
+  expandableIndicator: {}
 })

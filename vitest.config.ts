@@ -1,4 +1,3 @@
-import { resolve } from 'node:path'
 import { loadEnv } from 'vite'
 import { defineConfig, mergeConfig } from 'vitest/config'
 import viteConfig from './vite.config'
@@ -8,13 +7,12 @@ export default mergeConfig(
   defineConfig({
     test: {
       environment: 'happy-dom',
-      dir: resolve('./tests'),
       env: loadEnv('test', process.cwd(), ''),
       environmentOptions: { happyDOM: { url: 'http://localhost:3000/' } },
       setupFiles: ['./tests/setup-test.ts'],
       include: ['./**/*.{test,spec}.{ts,tsx}'],
       exclude: ['node_modules', 'tests-e2e'],
-      reporters: process.env.CI ? ['github-actions'] : ['default', 'html', 'hanging-process'],
+      reporters: process.env.CI ? ['github-actions'] : ['default', 'html'],
       outputFile: {
         json: './.output/tests-results/vitest-results.json',
         html: './.output/tests-results/index.html'

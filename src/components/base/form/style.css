@@ -1,8 +1,0 @@
-@layer components {
-  [data-ui='form'] {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-24);
-    width: 100%;
-  }
-}

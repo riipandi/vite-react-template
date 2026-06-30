@@ -1,9 +1,0 @@
-@layer components {
-  [data-ui='alert-dialog-portal'] {
-    --alert-dialog-min-width: 500px;
-
-    [data-ui='alert-dialog-content'] {
-      width: var(--alert-dialog-min-width);
-    }
-  }
-}

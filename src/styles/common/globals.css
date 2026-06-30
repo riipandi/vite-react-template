@@ -1,0 +1,36 @@
+@import './fontface.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family:
+    'Mona Sans Variable',
+    system-ui,
+    -apple-system,
+    Roboto,
+    Aptos,
+    Helvetica,
+    sans-serif;
+  color-scheme: dark light;
+}
+
+@layer utilities {
+  .debug {
+    border-width: 1px;
+    border-style: dashed;
+    border-color: #f87171;
+  }
+}

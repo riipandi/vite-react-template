@@ -2,7 +2,7 @@ import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { ThemeSwitcher } from '#/routes/-theme'
-import { colors, radius, shadow, space } from '#/styles/token.stylex'
+import { ui, radius, shadow, space } from '#/styles/token.stylex'
 
 // ── Nav data ──────────────────────────────────────────────────────────────────
 
@@ -31,8 +31,8 @@ const collapseStyles = stylex.create({
     overflow: 'hidden',
     borderRightWidth: 1,
     borderRightStyle: 'solid',
-    borderRightColor: colors.zinc200,
-    backgroundColor: colors.surface,
+    borderRightColor: ui.border,
+    backgroundColor: ui.bg,
     boxShadow: shadow.sm,
     transitionProperty: 'background-color, box-shadow, border-color',
     transitionDuration: '200ms',
@@ -50,21 +50,21 @@ const collapseStyles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: space[4],
-    background: `linear-gradient(135deg, ${colors.primary500}, ${colors.primary700})`,
+    background: `linear-gradient(135deg, ${ui.bgPrimary}, ${ui.bgPrimary})`,
     flexShrink: 0
   },
   logoSvg: {
     height: '1.125rem',
     width: '1.125rem',
-    fill: colors.white,
-    color: colors.white
+    fill: ui.onPrimary,
+    color: ui.onPrimary
   },
 
   // Divider
   divider: {
     width: '2rem',
     height: '1px',
-    backgroundColor: colors.zinc100,
+    backgroundColor: ui.bgNeutralFaded,
     marginBottom: space[2]
   },
 
@@ -86,22 +86,22 @@ const collapseStyles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: radius.lg,
-    color: colors.zinc500,
+    color: ui.fgFaded,
     textDecoration: 'none',
     position: 'relative',
     transitionProperty: 'background-color, color',
     transitionDuration: '150ms',
     ':hover': {
-      backgroundColor: colors.zinc100,
-      color: colors.zinc800
+      backgroundColor: ui.bgNeutralFaded,
+      color: ui.fg
     }
   },
   navLinkActive: {
-    backgroundColor: colors.primary50,
-    color: colors.primary700,
+    backgroundColor: ui.bgPrimaryFaded,
+    color: ui.fgPrimary,
     ':hover': {
-      backgroundColor: colors.primary100,
-      color: colors.primary700
+      backgroundColor: ui.bgPrimaryFaded,
+      color: ui.fgPrimary
     }
   },
   activeAccent: {
@@ -111,7 +111,7 @@ const collapseStyles = stylex.create({
     bottom: '0.375rem',
     width: '3px',
     borderRadius: '9999px',
-    backgroundColor: colors.primary500
+    backgroundColor: ui.bgPrimary
   },
   navIcon: {
     height: '1rem',
@@ -125,7 +125,7 @@ const collapseStyles = stylex.create({
     height: '0.4rem',
     width: '0.4rem',
     borderRadius: '9999px',
-    backgroundColor: colors.destructive500
+    backgroundColor: ui.bgCritical
   },
 
   // Bottom
@@ -138,7 +138,7 @@ const collapseStyles = stylex.create({
     paddingTop: space[3],
     borderTopWidth: 1,
     borderTopStyle: 'solid',
-    borderTopColor: colors.zinc100,
+    borderTopColor: ui.bgNeutralFaded,
     width: '100%',
     paddingLeft: space[2],
     paddingRight: space[2]
@@ -150,13 +150,13 @@ const collapseStyles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: radius.lg,
-    color: colors.zinc500,
+    color: ui.fgFaded,
     textDecoration: 'none',
     transitionProperty: 'background-color, color',
     transitionDuration: '150ms',
     ':hover': {
-      backgroundColor: colors.zinc100,
-      color: colors.zinc800
+      backgroundColor: ui.bgNeutralFaded,
+      color: ui.fg
     }
   },
   userIcon: {

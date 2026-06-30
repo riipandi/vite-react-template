@@ -6,7 +6,7 @@ import { Button } from '#/components/ui/button'
 import { Card } from '#/components/ui/card'
 import { Container } from '#/components/ui/container'
 import { useAuthentication } from '#/guards/auth-provider'
-import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
+import { ui, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
 
 export const Route = createFileRoute('/(app)/dashboard/overview')({
   component: DashboardOverviewComponent
@@ -129,17 +129,17 @@ const styles = stylex.create({
     fontWeight: fontWeight.semibold,
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
-    color: colors.primary600
+    color: ui.fgPrimary
   },
   pageTitle: {
     fontSize: fontSize['2xl'],
     fontWeight: fontWeight.bold,
-    color: colors.zinc900,
+    color: ui.fg,
     lineHeight: '1.2'
   },
   pageSubtitle: {
     fontSize: fontSize.sm,
-    color: colors.zinc500,
+    color: ui.fgFaded,
     marginTop: space[1]
   },
 
@@ -147,13 +147,13 @@ const styles = stylex.create({
   sectionTitle: {
     fontSize: fontSize.base,
     fontWeight: fontWeight.semibold,
-    color: colors.zinc800,
+    color: ui.fg,
     marginBottom: space[4]
   },
   sectionTitleWithAction: {
     fontSize: fontSize.base,
     fontWeight: fontWeight.semibold,
-    color: colors.zinc800
+    color: ui.fg
   },
 
   // Stat grid
@@ -187,8 +187,8 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.primary100,
-    color: colors.primary600,
+    backgroundColor: ui.bgPrimaryFaded,
+    color: ui.fgPrimary,
     flexShrink: 0
   },
   statIconGreen: {
@@ -198,8 +198,8 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.green50,
-    color: colors.green700,
+    backgroundColor: ui.bgPositiveFaded,
+    color: ui.fgPositive,
     flexShrink: 0
   },
   statIconOrange: {
@@ -209,8 +209,8 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.orange50,
-    color: colors.orange700,
+    backgroundColor: ui.bgWarningFaded,
+    color: ui.fgWarning,
     flexShrink: 0
   },
   statIconDestructive: {
@@ -220,20 +220,20 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.destructive50,
-    color: colors.destructive600,
+    backgroundColor: ui.bgCriticalFaded,
+    color: ui.fgCritical,
     flexShrink: 0
   },
   statValue: {
     fontSize: fontSize['2xl'],
     fontWeight: fontWeight.bold,
-    color: colors.zinc900,
+    color: ui.fg,
     lineHeight: '1',
     marginBottom: space[1]
   },
   statLabel: {
     fontSize: fontSize.xs,
-    color: colors.zinc500,
+    color: ui.fgFaded,
     fontWeight: fontWeight.medium,
     textTransform: 'uppercase',
     letterSpacing: '0.04em'
@@ -244,7 +244,7 @@ const styles = stylex.create({
     gap: space[1],
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
-    color: colors.green700,
+    color: ui.fgPositive,
     marginTop: space[2]
   },
   statChangeNegative: {
@@ -253,7 +253,7 @@ const styles = stylex.create({
     gap: space[1],
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
-    color: colors.destructive600,
+    color: ui.fgCritical,
     marginTop: space[2]
   },
 
@@ -284,9 +284,9 @@ const styles = stylex.create({
     transitionDuration: '200ms'
   },
   chartBarPrimary: {
-    backgroundColor: colors.primary500,
+    backgroundColor: ui.bgPrimary,
     ':hover': {
-      backgroundColor: colors.primary600
+      backgroundColor: ui.bgPrimary
     }
   },
   chartBarLabel: {
@@ -295,7 +295,7 @@ const styles = stylex.create({
     left: '50%',
     transform: 'translateX(-50%)',
     fontSize: fontSize.xs,
-    color: colors.zinc500,
+    color: ui.fgFaded,
     whiteSpace: 'nowrap'
   },
   chartBarValue: {
@@ -305,7 +305,7 @@ const styles = stylex.create({
     transform: 'translateX(-50%)',
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
-    color: colors.zinc600,
+    color: ui.fgFaded,
     whiteSpace: 'nowrap'
   },
 
@@ -347,8 +347,8 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.primary100,
-    color: colors.primary700,
+    backgroundColor: ui.bgPrimaryFaded,
+    color: ui.fgPrimary,
     fontSize: fontSize.xs,
     fontWeight: fontWeight.bold,
     flexShrink: 0,
@@ -364,20 +364,20 @@ const styles = stylex.create({
   activityUser: {
     fontSize: fontSize.sm,
     fontWeight: fontWeight.semibold,
-    color: colors.zinc800
+    color: ui.fg
   },
   activityAction: {
     fontSize: fontSize.sm,
-    color: colors.zinc500
+    color: ui.fgFaded
   },
   activityTime: {
     fontSize: fontSize.xs,
-    color: colors.zinc500,
+    color: ui.fgFaded,
     marginTop: space['0.5']
   },
   activityDivider: {
     height: '1px',
-    backgroundColor: colors.zinc100,
+    backgroundColor: ui.bgNeutralFaded,
     marginTop: space[4],
     marginBottom: space['0']
   },
@@ -394,7 +394,7 @@ const styles = stylex.create({
     paddingBottom: space[5],
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: colors.zinc100,
+    borderBottomColor: ui.bgNeutralFaded,
     marginBottom: space[5]
   },
   profileAvatar: {
@@ -404,8 +404,8 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: `linear-gradient(135deg, ${colors.primary400}, ${colors.primary600})`,
-    color: colors.white,
+    background: `linear-gradient(135deg, ${'oklch(0.6 0.18 17.58)'}, ${'oklch(0.4 0.18 17.58)'})`,
+    color: ui.onPrimary,
     fontSize: fontSize.xl,
     fontWeight: fontWeight.bold,
     boxShadow: shadow.md
@@ -419,12 +419,12 @@ const styles = stylex.create({
   profileName: {
     fontSize: fontSize.base,
     fontWeight: fontWeight.semibold,
-    color: colors.zinc900,
+    color: ui.fg,
     textAlign: 'center'
   },
   profileEmail: {
     fontSize: fontSize.sm,
-    color: colors.zinc500,
+    color: ui.fgFaded,
     textAlign: 'center',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -441,8 +441,8 @@ const styles = stylex.create({
     borderRadius: radius.full,
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
-    backgroundColor: colors.primary100,
-    color: colors.primary700
+    backgroundColor: ui.bgPrimaryFaded,
+    color: ui.fgPrimary
   },
   profileStats: {
     display: 'grid',
@@ -457,16 +457,16 @@ const styles = stylex.create({
     gap: space['0.5'],
     padding: space[3],
     borderRadius: radius.lg,
-    backgroundColor: colors.zinc50
+    backgroundColor: ui.bg
   },
   profileStatValue: {
     fontSize: fontSize.base,
     fontWeight: fontWeight.bold,
-    color: colors.zinc900
+    color: ui.fg
   },
   profileStatLabel: {
     fontSize: fontSize.xs,
-    color: colors.zinc500,
+    color: ui.fgFaded,
     textAlign: 'center'
   },
   profileActions: {

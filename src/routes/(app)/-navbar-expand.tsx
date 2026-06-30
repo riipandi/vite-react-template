@@ -2,7 +2,7 @@ import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { ThemeSwitcher } from '#/routes/-theme'
-import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
+import { ui, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
 
 // ── Nav data ──────────────────────────────────────────────────────────────────
 
@@ -30,8 +30,8 @@ const sidebarStyles = stylex.create({
     overflow: 'hidden',
     borderRightWidth: 1,
     borderRightStyle: 'solid',
-    borderRightColor: colors.zinc200,
-    backgroundColor: colors.surface,
+    borderRightColor: ui.border,
+    backgroundColor: ui.bg,
     boxShadow: shadow.sm,
     transitionProperty: 'background-color, box-shadow, border-color',
     transitionDuration: '200ms',
@@ -46,7 +46,7 @@ const sidebarStyles = stylex.create({
     paddingBottom: space[4],
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: colors.zinc100
+    borderBottomColor: ui.bgNeutralFaded
   },
   logoLink: {
     display: 'inline-flex',
@@ -64,24 +64,24 @@ const sidebarStyles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: `linear-gradient(135deg, ${colors.primary500}, ${colors.primary700})`,
+    background: `linear-gradient(135deg, ${ui.bgPrimary}, ${ui.bgPrimary})`,
     flexShrink: 0
   },
   logoSvg: {
     height: '1.125rem',
     width: '1.125rem',
-    fill: colors.white,
-    color: colors.white
+    fill: ui.onPrimary,
+    color: ui.onPrimary
   },
   logoText: {
     fontSize: fontSize.sm,
     fontWeight: fontWeight.bold,
-    color: colors.zinc800,
+    color: ui.fg,
     letterSpacing: '-0.01em'
   },
   logoVersion: {
     fontSize: fontSize.xs,
-    color: colors.zinc500,
+    color: ui.fgFaded,
     letterSpacing: '0'
   },
 
@@ -103,7 +103,7 @@ const sidebarStyles = stylex.create({
     paddingBottom: space[1],
     fontSize: fontSize.xs,
     fontWeight: fontWeight.semibold,
-    color: colors.zinc500,
+    color: ui.fgFaded,
     letterSpacing: '0.07em',
     textTransform: 'uppercase',
     userSelect: 'none'
@@ -121,8 +121,8 @@ const sidebarStyles = stylex.create({
     paddingRight: space[3],
     textDecoration: 'none',
     color: {
-      default: colors.zinc600,
-      ':hover': colors.zinc900
+      default: ui.fgFaded,
+      ':hover': ui.fg
     },
     position: 'relative',
     transitionProperty: 'background-color, color',
@@ -131,17 +131,17 @@ const sidebarStyles = stylex.create({
     fontWeight: fontWeight.medium,
     backgroundColor: {
       default: 'transparent',
-      ':hover': colors.zinc100
+      ':hover': ui.bgNeutralFaded
     }
   },
   navItemActive: {
     backgroundColor: {
-      default: colors.primary50,
-      ':hover': colors.primary100
+      default: ui.bgPrimaryFaded,
+      ':hover': ui.bgPrimaryFaded
     },
     color: {
-      default: colors.primary700,
-      ':hover': colors.primary700
+      default: ui.fgPrimary,
+      ':hover': ui.fgPrimary
     }
   },
   activeAccent: {
@@ -151,7 +151,7 @@ const sidebarStyles = stylex.create({
     bottom: '0.375rem',
     width: '3px',
     borderRadius: '9999px',
-    backgroundColor: colors.primary500
+    backgroundColor: ui.bgPrimary
   },
   navIcon: {
     height: '1rem',
@@ -168,7 +168,7 @@ const sidebarStyles = stylex.create({
     width: '0.5rem',
     height: '0.5rem',
     borderRadius: '9999px',
-    backgroundColor: colors.destructive500,
+    backgroundColor: ui.bgCritical,
     flexShrink: 0
   },
 
@@ -180,7 +180,7 @@ const sidebarStyles = stylex.create({
     paddingBottom: space[2],
     borderTopWidth: 1,
     borderTopStyle: 'solid',
-    borderTopColor: colors.zinc200
+    borderTopColor: ui.border
   },
   bottomRow: {
     display: 'flex',

@@ -82,9 +82,6 @@
     "[markdown]": {
         "editor.defaultFormatter": "darkriszty.markdown-table-prettify"
     },
-    "[tailwindcss]": {
-        "editor.defaultFormatter": "oxc.oxc-vscode"
-    },
     "[toml]": {
         "editor.defaultFormatter": "Shellomo.enhanced-toml",
         "editor.formatOnSave": false

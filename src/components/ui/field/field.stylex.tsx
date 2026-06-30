@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors, fontSize, fontWeight, space } from '#/styles/token.stylex'
+import { ui, fontSize, fontWeight, space } from '#/styles/token.stylex'
 
 export const labelStyles = stylex.create({
   base: {
@@ -10,7 +10,7 @@ export const labelStyles = stylex.create({
     cursor: 'default',
     fontWeight: fontWeight.medium,
     fontSize: fontSize.sm,
-    color: colors.zinc500
+    color: ui.fgFaded
   }
 })
 
@@ -18,7 +18,7 @@ export const descriptionStyles = stylex.create({
   base: {
     margin: 0,
     fontSize: fontSize.sm,
-    color: colors.zinc600,
+    color: ui.fgFaded,
     paddingLeft: space[3]
   }
 })
@@ -29,7 +29,7 @@ export const fieldErrorStyles = stylex.create({
     paddingLeft: space[3],
     paddingTop: 0,
     fontSize: fontSize.xs,
-    color: colors.destructive600,
+    color: ui.fgCritical,
     lineHeight: 1.25
   }
 })

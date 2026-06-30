@@ -1,7 +1,7 @@
 import { ThemeProvider as LonikThemer, useTheme } from '@lonik/themer'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { colors, radius, space } from '#/styles/token.stylex'
+import { ui, radius, space } from '#/styles/token.stylex'
 
 export function ThemeProvider(props: React.PropsWithChildren) {
   return (
@@ -38,12 +38,12 @@ const styles = stylex.create({
     borderRadius: radius.lg,
     padding: space[2],
     color: {
-      default: colors.zinc500,
-      ':hover': colors.zinc800
+      default: ui.fgFaded,
+      ':hover': ui.fg
     },
     backgroundColor: {
       default: 'transparent',
-      ':hover': colors.zinc100
+      ':hover': ui.bgNeutralFaded
     },
     borderWidth: 0,
     cursor: 'pointer',

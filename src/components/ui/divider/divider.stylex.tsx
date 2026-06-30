@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors, fontSize, space } from '#/styles/token.stylex'
+import { ui, fontSize, space } from '#/styles/token.stylex'
 
 export const dividerStyles = stylex.create({
   base: {
@@ -7,7 +7,7 @@ export const dividerStyles = stylex.create({
     alignItems: 'center',
     paddingTop: space[5],
     paddingBottom: space[5],
-    color: colors.zinc500,
+    color: ui.fgFaded,
     transitionProperty: 'color',
     transitionDuration: '200ms'
   },
@@ -16,7 +16,7 @@ export const dividerStyles = stylex.create({
     fontSize: fontSize.xs,
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
-    color: colors.zinc500
+    color: ui.fgFaded
   },
   before: {
     '::before': {
@@ -25,7 +25,7 @@ export const dividerStyles = stylex.create({
       flex: '1 1 0%',
       borderTopWidth: 1,
       borderTopStyle: 'solid',
-      borderTopColor: colors.zinc200,
+      borderTopColor: ui.border,
       transitionProperty: 'border-color',
       transitionDuration: '200ms'
     }
@@ -37,7 +37,7 @@ export const dividerStyles = stylex.create({
       flex: '1 1 0%',
       borderTopWidth: 1,
       borderTopStyle: 'solid',
-      borderTopColor: colors.zinc200,
+      borderTopColor: ui.border,
       transitionProperty: 'border-color',
       transitionDuration: '200ms'
     }

@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors, radius, shadow, space } from '#/styles/token.stylex'
+import { ui, radius, shadow, space } from '#/styles/token.stylex'
 
 export const cardStyles = stylex.create({
   base: {
@@ -7,8 +7,8 @@ export const cardStyles = stylex.create({
     borderRadius: radius.xl,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: colors.zinc200,
-    backgroundColor: colors.surface,
+    borderColor: ui.border,
+    backgroundColor: ui.bg,
     boxShadow: shadow.sm,
     padding: space[4],
     transitionProperty: 'background-color, border-color, box-shadow',

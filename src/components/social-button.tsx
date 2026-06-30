@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import type { FC, ReactNode } from 'react'
-import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
+import { ui, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
 
 interface SocialButtonProps {
   icon: ReactNode
@@ -18,27 +18,27 @@ const socialStyles = stylex.create({
     borderRadius: radius.lg,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: colors.zinc200,
-    backgroundColor: colors.surface,
+    borderColor: ui.border,
+    backgroundColor: ui.bg,
     paddingLeft: space[4],
     paddingRight: space[4],
     paddingTop: '0.625rem',
     paddingBottom: '0.625rem',
     fontSize: fontSize.sm,
     fontWeight: fontWeight.medium,
-    color: colors.zinc700,
+    color: ui.fg,
     boxShadow: shadow.sm,
     transitionProperty: 'background-color, border-color, box-shadow, color',
     transitionDuration: '150ms',
     cursor: 'pointer',
     ':hover': {
-      backgroundColor: colors.surfaceHover,
-      borderColor: colors.zinc300
+      backgroundColor: ui.bgNeutralFaded,
+      borderColor: ui.borderFaded
     },
     ':focus-visible': {
       outlineWidth: 2,
       outlineStyle: 'solid',
-      outlineColor: colors.primary500,
+      outlineColor: ui.fgPrimary,
       outlineOffset: 2
     }
   }

@@ -1,7 +1,7 @@
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Link, type ErrorComponentProps } from '@tanstack/react-router'
-import { colors, fontSize, fontWeight, radius, space } from '#/styles/token.stylex'
+import { ui, fontSize, fontWeight, radius, space } from '#/styles/token.stylex'
 
 const styles = stylex.create({
   content: {
@@ -23,7 +23,7 @@ const styles = stylex.create({
     display: 'block',
     fontSize: fontSize['7xl'],
     fontWeight: fontWeight.bold,
-    color: colors.zinc800,
+    color: ui.fg,
     '@media (min-width: 640px)': {
       fontSize: fontSize['8xl']
     }
@@ -31,7 +31,7 @@ const styles = stylex.create({
   message: {
     marginTop: space[6],
     fontSize: fontSize.lg,
-    color: colors.zinc500,
+    color: ui.fgFaded,
     '@media (min-width: 640px)': {
       marginTop: space[8]
     }
@@ -54,7 +54,7 @@ const styles = stylex.create({
     paddingBottom: space[2],
     fontSize: fontSize.sm,
     fontWeight: fontWeight.semibold,
-    color: colors.primary600,
+    color: ui.fgPrimary,
     textDecoration: 'none',
     transitionProperty: 'all',
     transitionDuration: '150ms',
@@ -64,7 +64,7 @@ const styles = stylex.create({
     ':focus-visible': {
       outlineWidth: 1,
       outlineStyle: 'solid',
-      outlineColor: colors.primary500,
+      outlineColor: ui.fgPrimary,
       outlineOffset: 2
     }
   },
@@ -91,7 +91,7 @@ const styles = stylex.create({
   },
   footerText: {
     fontSize: fontSize.sm,
-    color: colors.zinc500
+    color: ui.fgFaded
   }
 })
 

@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
+import { ui, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
 
 export const buttonStyles = stylex.create({
   base: {
@@ -10,7 +10,7 @@ export const buttonStyles = stylex.create({
     borderRadius: radius.md,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: colors.zinc200,
+    borderColor: ui.border,
     paddingLeft: space[4],
     paddingRight: space[4],
     paddingTop: space[2],
@@ -26,33 +26,33 @@ export const buttonStyles = stylex.create({
       ':focus-visible': 2
     },
     outlineStyle: 'solid',
-    outlineColor: colors.primary600,
+    outlineColor: ui.bgPrimary,
     outlineOffset: '2px'
   },
   primary: {
     backgroundColor: {
-      default: colors.primary600,
-      ':hover': colors.primary700,
-      ':active': colors.primary800
+      default: ui.bgPrimary,
+      ':hover': ui.bgPrimary,
+      ':active': ui.bgPrimary
     },
-    color: colors.white,
+    color: ui.onPrimary,
     boxShadow: shadow.sm
   },
   secondary: {
     backgroundColor: {
-      default: colors.surface,
-      ':hover': colors.surfaceHover,
-      ':active': colors.zinc200
+      default: ui.bg,
+      ':hover': ui.bgNeutralFaded,
+      ':active': ui.bgNeutralFaded
     },
-    color: colors.zinc700
+    color: ui.fg
   },
   destructive: {
     backgroundColor: {
-      default: colors.destructive600,
-      ':hover': colors.destructive700,
-      ':active': colors.destructive800
+      default: ui.bgCritical,
+      ':hover': ui.bgCritical,
+      ':active': ui.bgCritical
     },
-    color: colors.white,
+    color: ui.onPrimary,
     boxShadow: shadow.sm
   },
   icon: {
@@ -62,24 +62,24 @@ export const buttonStyles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     color: {
-      default: colors.zinc500,
-      ':hover': colors.zinc500,
-      ':active': colors.zinc500
+      default: ui.fgFaded,
+      ':hover': ui.fgFaded,
+      ':active': ui.fgFaded
     },
     backgroundColor: {
       default: 'transparent',
-      ':hover': colors.surfaceHover,
-      ':active': colors.zinc200
+      ':hover': ui.bgNeutralFaded,
+      ':active': ui.bgNeutralFaded
     }
   },
   disabled: {
     backgroundColor: {
-      default: colors.zinc100,
-      ':hover': colors.zinc100,
-      ':active': colors.zinc100
+      default: ui.bgNeutralFaded,
+      ':hover': ui.bgNeutralFaded,
+      ':active': ui.bgNeutralFaded
     },
-    color: colors.zinc400,
-    borderColor: colors.zinc200,
+    color: ui.fgFaded,
+    borderColor: ui.border,
     cursor: 'not-allowed'
   },
   iconDisabled: {
@@ -88,6 +88,6 @@ export const buttonStyles = stylex.create({
       ':hover': 'transparent',
       ':active': 'transparent'
     },
-    color: colors.zinc300
+    color: ui.fgDisabled
   }
 })

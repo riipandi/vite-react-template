@@ -7,7 +7,7 @@ import { Outlet, createRootRouteWithContext, useMatches } from '@tanstack/react-
 import { Fragment } from 'react'
 import { AuthProvider } from '#/guards/auth-provider'
 import { ThemeProvider } from '#/routes/-theme'
-import { colors, darkTheme } from '#/styles/token.stylex'
+import { darkTheme, ui, uiDark } from '#/styles/token.stylex'
 import { GlobalNotFound, GlobalError } from './-boundaries'
 import DevTools from './-devtools'
 
@@ -40,7 +40,8 @@ function ThemedRoot({ children }: { children: React.ReactNode }) {
         x.display.flex,
         x.flexDirection.column,
         rootStyles.base,
-        resolvedTheme === 'dark' && darkTheme
+        resolvedTheme === 'dark' && darkTheme,
+        resolvedTheme === 'dark' && uiDark
       )}
     >
       {children}
@@ -50,8 +51,8 @@ function ThemedRoot({ children }: { children: React.ReactNode }) {
 
 const rootStyles = stylex.create({
   base: {
-    backgroundColor: colors.zinc50,
-    color: colors.zinc900,
+    backgroundColor: ui.bg,
+    color: ui.fg,
     transitionProperty: 'background-color, color',
     transitionDuration: '200ms'
   }

@@ -1,6 +1,5 @@
 import './style.css'
 import { Field as FieldPrimitive } from '@base-ui/react/field'
-import { Fieldset as FieldsetPrimitive } from '@base-ui/react/fieldset'
 
 function Field({
   orientation = 'vertical',
@@ -29,30 +28,7 @@ function FieldGroup({ ...props }: React.ComponentProps<'div'>) {
   return <div data-ui='field-group' {...props} />
 }
 
-function Fieldset(props: FieldsetPrimitive.Root.Props) {
-  return <FieldsetPrimitive.Root data-ui='fieldset' {...props} />
-}
-
-function FieldsetDescription(props: React.ComponentProps<'p'>) {
-  return <p {...props} data-ui='fieldset-description' />
-}
-
-function FieldsetLegend(props: FieldsetPrimitive.Legend.Props) {
-  return <FieldsetPrimitive.Legend data-ui='fieldset-legend' {...props} />
-}
-
 const FieldControl = FieldPrimitive.Control
 const FieldValidity = FieldPrimitive.Validity
 
-export {
-  Field,
-  FieldLabel,
-  FieldDescription,
-  FieldError,
-  Fieldset,
-  FieldsetDescription,
-  FieldsetLegend,
-  FieldGroup,
-  FieldControl,
-  FieldValidity
-}
+export { Field, FieldLabel, FieldDescription, FieldError, FieldGroup, FieldControl, FieldValidity }

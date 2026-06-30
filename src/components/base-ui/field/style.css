@@ -46,23 +46,4 @@
     flex-direction: column;
     gap: var(--spacing-12);
   }
-
-  [data-ui='fieldset'] {
-    display: flex;
-    flex-direction: column;
-    border: 0;
-    gap: var(--spacing-16);
-
-    [data-ui='fieldset-legend'] {
-      color: var(--color-on-background);
-      font: var(--font-body-lg);
-      font-weight: 500;
-    }
-
-    [data-ui='fieldset-description'] {
-      margin-top: -12px;
-      color: var(--color-on-surface-variant);
-      font: var(--font-body-md);
-    }
-  }
 }

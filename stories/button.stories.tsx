@@ -4,8 +4,8 @@ import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import * as React from 'react'
 import { fn } from 'storybook/test'
-import { Button } from '#/components/base-ui/button'
-import { Separator } from '#/components/base-ui/separator'
+import { Button } from '#/components/base/button'
+import { Separator } from '#/components/base/separator'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {

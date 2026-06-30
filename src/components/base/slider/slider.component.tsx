@@ -1,1 +1,105 @@
-export default {}
+/**
+ * Allows users to select a value from a range.
+ *
+ * @see: https://base-ui.com/react/components/slider
+ *
+ * BaseUI Anatomy:
+ * <Slider.Root>
+ *   <Slider.Value />
+ *   <Slider.Control>
+ *     <Slider.Track>
+ *       <Slider.Indicator />
+ *       <Slider.Thumb />
+ *     </Slider.Track>
+ *   </Slider.Control>
+ * </Slider.Root>
+ */
+
+import { Slider as BaseSlider } from '@base-ui/react/slider'
+import type { StyleXStyles } from '@stylexjs/stylex'
+import * as stylex from '@stylexjs/stylex'
+import { cx } from 'css-variants'
+
+const sliderStyles = tv({
+  slots: {
+    control: 'flex touch-none items-center select-none',
+    track: [
+      'bg-border-neutral-faded w-full rounded-full',
+      'data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5',
+      'data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full',
+      'data-disabled:cursor-not-allowed data-disabled:opacity-50'
+    ],
+    indicator: 'bg-foreground-primary rounded-full',
+    thumb: [
+      'bg-background-page shadow-shadow-raised size-4 rounded-full shadow-md',
+      'border-border-primary-faded border data-disabled:cursor-not-allowed',
+      'focus-visible:ring-foreground-primary focus-visible:ring-2 focus-visible:ring-offset-2'
+    ]
+  },
+  variants: {
+    size: {
+      sm: {
+        control: 'py-2',
+        track: 'data-[orientation=horizontal]:h-1',
+        thumb: 'size-3.5'
+      },
+      md: {
+        control: 'py-3',
+        track: 'data-[orientation=horizontal]:h-1.5',
+        thumb: 'size-4'
+      },
+      lg: {
+        control: 'py-4',
+        track: 'data-[orientation=horizontal]:h-2',
+        thumb: 'size-5'
+      }
+    }
+  },
+  defaultVariants: {
+    size: 'md'
+  }
+})
+
+export type SliderStyles = VariantProps<typeof sliderStyles>
+
+export function Slider({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseSlider.Root> & VariantProps<typeof sliderStyles>) {
+  return <BaseSlider.Root className={className} {...props} />
+}
+
+export function SliderControl({
+  className,
+  size,
+  ...props
+}: React.ComponentProps<typeof BaseSlider.Control> & VariantProps<typeof sliderStyles>) {
+  const styles = sliderStyles({ size })
+  return <BaseSlider.Control className={cx(styles.control(), className)} {...props} />
+}
+
+export function SliderTrack({
+  className,
+  size,
+  ...props
+}: React.ComponentProps<typeof BaseSlider.Track> & VariantProps<typeof sliderStyles>) {
+  const styles = sliderStyles({ size })
+  return <BaseSlider.Track className={cx(styles.track(), className)} {...props} />
+}
+
+export function SliderIndicator({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseSlider.Indicator> & VariantProps<typeof sliderStyles>) {
+  const styles = sliderStyles()
+  return <BaseSlider.Indicator className={cx(styles.indicator(), className)} {...props} />
+}
+
+export function SliderThumb({
+  className,
+  size,
+  ...props
+}: React.ComponentProps<typeof BaseSlider.Thumb> & VariantProps<typeof sliderStyles>) {
+  const styles = sliderStyles({ size })
+  return <BaseSlider.Thumb className={cx(styles.thumb(), className)} {...props} />
+}

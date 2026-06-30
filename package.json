@@ -33,6 +33,7 @@
         "@tanstack/react-query": "^5.101.2",
         "@tanstack/react-router": "^1.170.16",
         "@tanstack/react-store": "^0.11.0",
+        "css-variants": "^2.3.5",
         "lucide-react": "^1.22.0",
         "ofetch": "^1.5.1",
         "react": "^19.2.7",

@@ -1,1 +1,114 @@
-export default {}
+/**
+ * A container with scrollable content.
+ *
+ * @see: https://base-ui.com/react/components/scroll-area
+ *
+ * BaseUI Anatomy:
+ * <ScrollArea.Root>
+ *   <ScrollArea.Viewport>
+ *     <ScrollArea.Content />
+ *   </ScrollArea.Viewport>
+ *   <ScrollArea.Scrollbar>
+ *     <ScrollArea.Thumb />
+ *   </ScrollArea.Scrollbar>
+ *   <ScrollArea.Corner />
+ * </ScrollArea.Root>
+ */
+
+import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area'
+import type { StyleXStyles } from '@stylexjs/stylex'
+import * as stylex from '@stylexjs/stylex'
+import { cx } from 'css-variants'
+import * as React from 'react'
+
+export const scrollAreaStyles = tv({
+  slots: {
+    root: 'overflow-hidden',
+    viewport: 'size-full overscroll-contain outline-none',
+    scrollbar: [
+      'm-1 flex touch-none overflow-visible select-none',
+      'pointer-events-none opacity-0 transition-opacity delay-300',
+      'data-hovering:opacity-100 data-hovering:delay-0',
+      'data-hovering:pointer-events-auto data-hovering:duration-75',
+      'data-scrolling:opacity-100 data-scrolling:delay-0',
+      'data-scrolling:pointer-events-auto data-scrolling:duration-75'
+    ],
+    thumb: [
+      'bg-background-neutral-faded w-full cursor-default rounded active:cursor-default',
+      'hover:bg-background-neutral transform-gpu transition-all duration-75 ease-out'
+    ]
+  },
+  variants: {
+    orientation: {
+      horizontal: {
+        scrollbar: 'h-1.5 justify-start',
+        thumb: 'h-full w-auto origin-center scale-y-100 hover:translate-y-0 hover:scale-y-[1.4]'
+      },
+      vertical: {
+        scrollbar: 'w-1.5 justify-center',
+        thumb: 'h-auto w-full origin-left scale-x-100 hover:-translate-x-0.5 hover:scale-x-[1.25]'
+      }
+    }
+  },
+  defaultVariants: {
+    orientation: 'vertical'
+  }
+})
+
+export type ScrollAreaRootProps = React.ComponentProps<typeof BaseScrollArea.Root> &
+  VariantProps<typeof scrollAreaStyles> & {
+    scrollbar?: 'horizontal' | 'vertical' | 'both' | false
+  }
+
+export function ScrollArea({
+  children,
+  className,
+  orientation,
+  scrollbar = 'both',
+  ...props
+}: ScrollAreaRootProps) {
+  const styles = scrollAreaStyles({ orientation })
+  return (
+    <BaseScrollArea.Root
+      data-slot='scroll-area'
+      className={cx(styles.root(), className)}
+      {...props}
+    >
+      <BaseScrollArea.Viewport data-slot='scroll-area-viewport' className={cx(styles.viewport())}>
+        {children}
+      </BaseScrollArea.Viewport>
+      <React.Activity mode={scrollbar === 'horizontal' ? 'visible' : 'hidden'}>
+        <ScrollAreaScrollbar orientation='horizontal' />
+      </React.Activity>
+      <React.Activity mode={scrollbar === 'vertical' ? 'visible' : 'hidden'}>
+        <ScrollAreaScrollbar orientation='vertical' />
+      </React.Activity>
+      <React.Activity mode={scrollbar === 'both' ? 'visible' : 'hidden'}>
+        <ScrollAreaScrollbar orientation='horizontal' />
+        <ScrollAreaScrollbar orientation='vertical' />
+      </React.Activity>
+      <BaseScrollArea.Corner />
+    </BaseScrollArea.Root>
+  )
+}
+
+type ScrollAreaScrollbarProps = React.ComponentProps<typeof BaseScrollArea.Scrollbar> &
+  VariantProps<typeof scrollAreaStyles>
+
+function ScrollAreaScrollbar({
+  className,
+  orientation = 'vertical',
+  ...props
+}: ScrollAreaScrollbarProps) {
+  const styles = scrollAreaStyles({ orientation })
+  return (
+    <BaseScrollArea.Scrollbar
+      data-slot='scroll-area-scrollbar'
+      className={cx(styles.scrollbar(), className)}
+      orientation={orientation}
+      {...props}
+    >
+      <BaseScrollArea.Thumb data-slot='scroll-area-thumb' className={cx(styles.thumb())} />
+    </BaseScrollArea.Scrollbar>
+  )
+}

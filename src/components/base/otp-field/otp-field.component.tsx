@@ -1,1 +1,68 @@
-export default {}
+/**
+ * A one-time password input composed of individual character slots.
+ *
+ * @see: https://base-ui.com/react/components/otp-field
+ *
+ * BaseUI Anatomy:
+ * <OTPField.Root>
+ *   <OTPField.Input />
+ *   <OTPField.Separator />
+ * </OTPField.Root>
+ */
+
+import { OTPField as BaseOTPField } from '@base-ui/react/otp-field'
+import type { StyleXStyles } from '@stylexjs/stylex'
+import * as stylex from '@stylexjs/stylex'
+import { cx } from 'css-variants'
+
+const otpFieldStyles = tv({
+  slots: {
+    root: 'flex items-center gap-2',
+    input: [
+      'text-foreground-neutral placeholder:text-foreground-neutral-faded/80 shadow-raised',
+      'h-12 w-10 rounded-md border bg-transparent text-center font-medium border-border-neutral-faded',
+      'focus:outline-foreground-primary focus:outline-2 focus:-outline-offset-1',
+      'disabled:cursor-not-allowed disabled:opacity-70'
+    ],
+    separator: 'text-foreground-neutral-faded bg-transparent text-lg'
+  },
+  variants: {
+    size: {
+      sm: { input: 'h-9 w-10 text-base', separator: 'text-base' },
+      md: { input: 'h-10 w-12 text-lg', separator: 'text-lg' },
+      lg: { input: 'h-12 w-14 text-2xl', separator: 'text-xl' },
+      xl: { input: 'h-14 w-16 text-2xl', separator: 'text-xl' }
+    }
+  },
+  defaultVariants: {
+    size: 'md'
+  }
+})
+
+export type OTPFieldStyles = VariantProps<typeof otpFieldStyles>
+
+export function OTPField({ className, size, ...props }: BaseOTPField.Root.Props & OTPFieldStyles) {
+  const styles = otpFieldStyles({ size })
+  return <BaseOTPField.Root className={cx(styles.root(), className)} {...props} />
+}
+
+export function OTPFieldInput({
+  className,
+  size,
+  ...props
+}: Omit<BaseOTPField.Input.Props, 'size'> & OTPFieldStyles) {
+  const styles = otpFieldStyles({ size })
+  return <BaseOTPField.Input className={cx(styles.input(), className)} {...props} />
+}
+
+export function OTPFieldSeparator({
+  className,
+  size
+}: BaseOTPField.Separator.Props & OTPFieldStyles) {
+  const styles = otpFieldStyles({ size })
+  return (
+    <BaseOTPField.Separator className={cx(styles.separator(), className)}>
+      &ndash;
+    </BaseOTPField.Separator>
+  )
+}

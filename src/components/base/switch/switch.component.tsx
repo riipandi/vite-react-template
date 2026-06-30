@@ -1,1 +1,64 @@
-export default {}
+/**
+ * A switch component that can be on or off.
+ *
+ * @see: https://base-ui.com/react/components/switch
+ *
+ * BaseUI Anatomy:
+ * <Switch.Root>
+ *   <Switch.Thumb />
+ * </Switch.Root>
+ */
+
+import { Switch as BaseSwitch } from '@base-ui/react/switch'
+import type { StyleXStyles } from '@stylexjs/stylex'
+import * as stylex from '@stylexjs/stylex'
+import { cx } from 'css-variants'
+
+const switchStyles = tv({
+  slots: {
+    root: [
+      'flex cursor-pointer items-center rounded-full',
+      'ring-border-neutral bg-background-neutral ring inset-shadow-xs inset-shadow-black/10 dark:inset-shadow-none',
+      'data-checked:bg-background-primary data-checked:ring-border-primary transition-colors duration-75',
+      'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-2',
+      'data-disabled:cursor-not-allowed data-disabled:opacity-70'
+    ],
+    thumb: [
+      'rounded-full bg-white shadow',
+      'transition-transform duration-75 data-checked:translate-x-4'
+    ]
+  },
+  variants: {
+    size: {
+      sm: {
+        root: 'h-3 w-7 px-0.5',
+        thumb: 'size-2'
+      },
+      md: {
+        root: 'h-4 w-8 px-0.5',
+        thumb: 'size-3'
+      },
+      lg: {
+        root: 'h-5 w-9 px-0.5',
+        thumb: 'size-4'
+      }
+    }
+  },
+  defaultVariants: {
+    size: 'md'
+  }
+})
+
+export type SwitchStyles = VariantProps<typeof switchStyles>
+
+export type SwitchProps = React.ComponentProps<typeof BaseSwitch.Root> &
+  VariantProps<typeof switchStyles>
+
+export function Switch({ className, size, ...props }: SwitchProps) {
+  const styles = switchStyles({ size })
+  return (
+    <BaseSwitch.Root data-slot='switch' className={cx(styles.root(), className)} {...props}>
+      <BaseSwitch.Thumb data-slot='switch-thumb' className={styles.thumb()} />
+    </BaseSwitch.Root>
+  )
+}

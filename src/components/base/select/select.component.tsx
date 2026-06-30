@@ -1,1 +1,334 @@
-export default {}
+/**
+ * Displays a list of options for the user to choose from.
+ *
+ * @see: https://base-ui.com/react/components/select
+ *
+ * BaseUI Anatomy:
+ * <Select.Root>
+ *   <Select.Trigger>
+ *     <Select.Value />
+ *     <Select.Icon />
+ *   </Select.Trigger>
+ *   <Select.Portal>
+ *     <Select.Backdrop />
+ *     <Select.Positioner>
+ *       <Select.ScrollUpArrow />
+ *       <Select.Popup>
+ *         <Select.Arrow />
+ *         <Select.List>
+ *           <Select.Item>
+ *             <Select.ItemText />
+ *             <Select.ItemIndicator />
+ *           </Select.Item>
+ *           <Select.Separator />
+ *           <Select.Group>
+ *             <Select.GroupLabel />
+ *           </Select.Group>
+ *         </Select.List>
+ *       </Select.Popup>
+ *       <Select.ScrollDownArrow />
+ *     </Select.Positioner>
+ *   </Select.Portal>
+ * </Select.Root>
+ */
+
+import { Select as BaseSelect } from '@base-ui/react/select'
+import type { StyleXStyles } from '@stylexjs/stylex'
+import * as stylex from '@stylexjs/stylex'
+import { cx } from 'css-variants'
+import * as React from 'react'
+import { Chip } from '../extras/chip'
+
+export interface SelectItem {
+  value: string
+  label: React.ReactNode
+  icon?: React.ReactNode
+}
+
+const selectStyles = tv({
+  base: [
+    'bg-background-elevation-base placeholder:text-foreground-neutral-faded/80 h-9 w-full rounded-sm px-3 text-sm transition-all',
+    'focus:ring-border-primary flex cursor-pointer items-center gap-2 focus:ring-2 focus:outline-0',
+    'data-disabled:cursor-not-allowed data-disabled:opacity-70'
+  ],
+  slots: {
+    portal: 'z-20',
+    positioner: [],
+    backdrop: [],
+    popup: [
+      'group bg-background-elevation-overlay ring-border-neutral shadow-overlay origin-(--transform-origin)',
+      'rounded p-1 ring outline-none max-lg:w-(--anchor-width)'
+    ],
+    arrow: [],
+    scrollUpArrow: [
+      'text-foreground-neutral bg-background-neutral-faded absolute top-1 right-1 left-1 z-10',
+      'flex h-5 items-center justify-around rounded text-xs'
+    ],
+    scrollDownArrow: [
+      'text-foreground-neutral bg-background-neutral-faded absolute right-1 bottom-1 left-1 z-10',
+      'flex h-5 items-center justify-around rounded text-xs'
+    ],
+    list: 'relative max-h-(--available-height) space-y-0 overflow-y-auto',
+    item: [
+      'group-data-[side=none]:min-w-[calc(var(--anchor-width))]',
+      'text-foreground-neutral flex cursor-pointer items-center gap-2 rounded px-3 py-2 select-none',
+      'data-highlighted:not-data-disabled:bg-background-neutral-faded data-selected:not-data-disabled:bg-background-neutral-faded',
+      'data-disabled:text-foreground-neutral-faded/80 focus-visible:outline-none data-disabled:cursor-not-allowed'
+    ],
+    itemText: 'flex items-center gap-2 text-sm [&_svg:not([class*=size-])]:size-3.5',
+    itemIndicator: 'ml-auto',
+    group: 'space-y-0',
+    groupLabel: 'text-foreground-neutral-faded px-2.5 py-1 text-sm font-medium',
+    separator: 'bg-border-neutral-faded my-1 h-px',
+    icon: 'text-foreground-neutral-faded pointer-events-none ml-auto size-3.5',
+    placeholder: 'text-foreground-neutral-faded',
+    chip: 'ml-1.5',
+    valueWrapper: [
+      // FIXME: value overlap
+      'flex min-w-0 flex-1 items-center gap-2 select-none',
+      '[&_svg:not([class*=size-])]:size-3.5',
+      '[&_svg:not([class*=text-])]:text-foreground-neutral'
+    ],
+    valueLabel: 'text-foreground-neutral min-w-0 flex-1 truncate',
+    valueText: 'text-foreground-neutral min-w-0 flex-1 truncate select-none'
+  },
+  variants: {
+    variant: {
+      default: {
+        base: 'bg-background-elevation-base ring-border-neutral hover:not-data-disabled:not-focus:ring-border-primary shadow-raised ring'
+      },
+      subtle: {
+        base: 'bg-background-elevation-base/60 ring-border-neutral hover:not-data-disabled:not-focus:ring-border-primary shadow-raised ring'
+      },
+      ghost: {
+        base: 'hover:not-data-disabled:bg-background-neutral-faded bg-transparent'
+      }
+    }
+  },
+  defaultVariants: {
+    variant: 'default'
+  }
+})
+
+export type SelectRootProps = React.ComponentProps<typeof BaseSelect.Root>
+export type SelectTriggerProps = React.ComponentProps<typeof BaseSelect.Trigger> &
+  VariantProps<typeof selectStyles>
+export type SelectValueProps = React.ComponentProps<typeof BaseSelect.Value> & {
+  placeholder?: string
+}
+export type SelectPopupProps = React.ComponentProps<typeof BaseSelect.Popup> &
+  VariantProps<typeof selectStyles> & {
+    align?: BaseSelect.Positioner.Props['align']
+    alignOffset?: BaseSelect.Positioner.Props['alignOffset']
+    side?: BaseSelect.Positioner.Props['side']
+    sideOffset?: BaseSelect.Positioner.Props['sideOffset']
+    anchor?: BaseSelect.Positioner.Props['anchor']
+    sticky?: BaseSelect.Positioner.Props['sticky']
+    positionMethod?: BaseSelect.Positioner.Props['positionMethod']
+  }
+export type SelectListProps = React.ComponentProps<typeof BaseSelect.List>
+export type SelectItemProps = React.ComponentProps<typeof BaseSelect.Item>
+export type SelectGroupProps = React.ComponentProps<typeof BaseSelect.Group>
+export type SelectGroupLabelProps = React.ComponentProps<typeof BaseSelect.GroupLabel>
+export type SelectSeparatorProps = React.ComponentProps<typeof BaseSelect.Separator>
+
+export function Select({ ...props }: SelectRootProps) {
+  return <BaseSelect.Root {...props} />
+}
+
+export function SelectTrigger({ className, children, variant, ...props }: SelectTriggerProps) {
+  const styles = selectStyles({ variant })
+  return (
+    <BaseSelect.Trigger
+      data-slot='select-trigger'
+      className={cx(styles.base(), className)}
+      {...props}
+    >
+      {children}
+      <BaseSelect.Icon className={cx(styles.icon())}>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+        >
+          <title>Select dropdown icon</title>
+          <polyline points='6 9 12 15 18 9' />
+        </svg>
+      </BaseSelect.Icon>
+    </BaseSelect.Trigger>
+  )
+}
+
+export function SelectValue({
+  className,
+  placeholder = 'Select an option',
+  ...props
+}: SelectValueProps) {
+  return (
+    <BaseSelect.Value data-slot='select-value' className={cx(className)} {...props}>
+      {(value: string | SelectItem | null) => (
+        <SelectRenderValue value={value} placeholder={placeholder} />
+      )}
+    </BaseSelect.Value>
+  )
+}
+
+function SelectRenderValue({
+  value,
+  placeholder
+}: {
+  value: string | SelectItem | SelectItem[] | null
+  placeholder: string
+}) {
+  const styles = selectStyles()
+
+  if (!value || (Array.isArray(value) && value.length === 0)) {
+    return <span className={cx(styles.placeholder())}>{placeholder}</span>
+  }
+
+  if (Array.isArray(value)) {
+    const firstValue = value[0]
+    const firstValueLabel = typeof firstValue === 'object' ? firstValue.label : firstValue
+    const additionalValues =
+      value.length > 1 ? (
+        <Chip className={cx(styles.chip())} size='sm'>
+          +{value.length - 1} more
+        </Chip>
+      ) : (
+        ''
+      )
+
+    return (
+      <div className={cx(styles.valueWrapper())}>
+        <span className={cx(styles.valueText())}>{firstValueLabel}</span>
+        {additionalValues}
+      </div>
+    )
+  }
+
+  if (typeof value === 'object') {
+    return (
+      <div className={cx(styles.valueWrapper())}>
+        {value.icon}
+        <span className={cx(styles.valueLabel())}>{value.label}</span>
+      </div>
+    )
+  }
+
+  return <span className={cx(styles.valueText())}>{value}</span>
+}
+
+export function SelectPopup({
+  children,
+  className,
+  align,
+  alignOffset,
+  side,
+  sideOffset,
+  anchor,
+  sticky,
+  positionMethod,
+  ...props
+}: SelectPopupProps) {
+  const styles = selectStyles()
+  return (
+    <BaseSelect.Portal className={cx(styles.portal())}>
+      <BaseSelect.Backdrop className={cx(styles.backdrop())} />
+      <BaseSelect.Positioner
+        data-slot='select-positioner'
+        className={cx(styles.positioner())}
+        align={align}
+        alignOffset={alignOffset}
+        side={side}
+        sideOffset={sideOffset || 6}
+        anchor={anchor}
+        sticky={sticky}
+        positionMethod={positionMethod}
+      >
+        <BaseSelect.ScrollUpArrow className={cx(styles.scrollUpArrow())} />
+        <BaseSelect.Popup
+          data-slot='select-popup'
+          className={cx(styles.popup(), className)}
+          {...props}
+        >
+          <BaseSelect.Arrow className={cx(styles.arrow())} />
+          {children}
+        </BaseSelect.Popup>
+        <BaseSelect.ScrollDownArrow className={cx(styles.scrollDownArrow())} />
+      </BaseSelect.Positioner>
+    </BaseSelect.Portal>
+  )
+}
+
+export function SelectList({ className, ...props }: SelectListProps) {
+  const styles = selectStyles()
+  return (
+    <BaseSelect.List data-slot='select-list' className={cx(styles.list(), className)} {...props} />
+  )
+}
+
+export function SelectItem({ className, children, value, ...props }: SelectItemProps) {
+  const styles = selectStyles()
+  return (
+    <BaseSelect.Item
+      data-slot='select-item'
+      value={typeof value === 'object' ? value : { value, label: children }}
+      className={cx(styles.item(), className)}
+      {...props}
+    >
+      <BaseSelect.ItemText className={cx(styles.itemText())}>{children}</BaseSelect.ItemText>
+      <BaseSelect.ItemIndicator className={cx(styles.itemIndicator())}>
+        <svg
+          className='text-foreground-primary size-3.5'
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          strokeWidth='3'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+        >
+          <title>Selected checkmark</title>
+          <polyline points='20 6 9 17 4 12' />
+        </svg>
+      </BaseSelect.ItemIndicator>
+    </BaseSelect.Item>
+  )
+}
+
+export function SelectGroup({ className, ...props }: SelectGroupProps) {
+  const styles = selectStyles()
+  return (
+    <BaseSelect.Group
+      data-slot='select-group'
+      className={cx(styles.group(), className)}
+      {...props}
+    />
+  )
+}
+
+export function SelectGroupLabel({ className, ...props }: SelectGroupLabelProps) {
+  const styles = selectStyles()
+  return (
+    <BaseSelect.GroupLabel
+      data-slot='select-group-label'
+      className={cx(styles.groupLabel(), className)}
+      {...props}
+    />
+  )
+}
+
+export function SelectSeparator({ className, ...props }: SelectSeparatorProps) {
+  const styles = selectStyles()
+  return (
+    <BaseSelect.Separator
+      data-slot='select-separator'
+      className={cx(styles.separator(), className)}
+      {...props}
+    />
+  )
+}

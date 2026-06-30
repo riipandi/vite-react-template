@@ -1,1 +1,101 @@
-export default {}
+/**
+ * A group of toggle buttons.
+ *
+ * @see: https://base-ui.com/react/components/toggle-group
+ *
+ * BaseUI Anatomy:
+ * <ToggleGroup />
+ */
+
+import { ToggleGroup as BaseToggleGroup } from '@base-ui/react/toggle-group'
+import type { StyleXStyles } from '@stylexjs/stylex'
+import * as stylex from '@stylexjs/stylex'
+import { cx } from 'css-variants'
+
+export const toggleGroupStyles = tv({
+  base: [
+    'flex items-center gap-1 rounded p-1 ring',
+    '*:data-[slot=toggle]:shadow-none',
+    '*:data-[slot=toggle]:ring-0'
+  ],
+  variants: {
+    variant: {
+      default: 'ring-border-neutral shadow',
+      outline: 'ring-border-neutral',
+      ghost: 'ring-transparent'
+    },
+    size: {
+      sm: [
+        '*:data-[slot=toggle]:px-2.5',
+        '*:data-[slot=toggle]:h-[calc(var(--spacing)*8-4px)]',
+        '*:data-[slot=toggle]:min-w-[calc(var(--spacing)*8-4px)]'
+      ],
+      md: [
+        '*:data-[slot=toggle]:px-3',
+        '*:data-[slot=toggle]:h-[calc(var(--spacing)*9-4px)]',
+        '*:data-[slot=toggle]:min-w-[calc(var(--spacing)*9-4px)]'
+      ],
+      lg: [
+        '*:data-[slot=toggle]:px-4',
+        '*:data-[slot=toggle]:h-[calc(var(--spacing)*11-4px)]',
+        '*:data-[slot=toggle]:min-w-[calc(var(--spacing)*11-4px)]'
+      ]
+    },
+    mode: {
+      icon: ''
+    },
+    orientation: {
+      horizontal: 'flex-row',
+      vertical: 'flex-col'
+    }
+  },
+  compoundVariants: [
+    {
+      mode: 'icon',
+      size: 'sm',
+      class:
+        '*:data-[slot=toggle]:aspect-square *:data-[slot=toggle]:size-8 *:data-[slot=toggle]:p-2'
+    },
+    {
+      mode: 'icon',
+      size: 'md',
+      class:
+        '*:data-[slot=toggle]:aspect-square *:data-[slot=toggle]:size-9 *:data-[slot=toggle]:p-2'
+    },
+    {
+      mode: 'icon',
+      size: 'lg',
+      class:
+        '*:data-[slot=toggle]:aspect-square *:data-[slot=toggle]:size-11 *:data-[slot=toggle]:p-3'
+    }
+  ],
+  defaultVariants: {
+    variant: 'default',
+    size: 'md'
+  }
+})
+
+export type ToggleGroupProps = React.ComponentProps<typeof BaseToggleGroup> &
+  VariantProps<typeof toggleGroupStyles>
+
+export function ToggleGroup({
+  className,
+  orientation,
+  size,
+  variant,
+  mode,
+  ...props
+}: ToggleGroupProps) {
+  const styles = toggleGroupStyles({ variant, orientation, size, mode })
+  return (
+    <BaseToggleGroup
+      data-slot='toggle-group'
+      data-variant={variant}
+      data-size={size}
+      data-mode={mode}
+      orientation={orientation}
+      className={cx(styles, className)}
+      {...props}
+    />
+  )
+}

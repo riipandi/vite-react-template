@@ -32,6 +32,9 @@ importers:
       '@tanstack/react-store':
         specifier: ^0.11.0
         version: 0.11.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      css-variants:
+        specifier: ^2.3.5
+        version: 2.3.5
       lucide-react:
         specifier: ^1.22.0
         version: 1.22.0(react@19.2.7)
@@ -2155,6 +2158,9 @@ packages:
 
   css-mediaquery@0.1.2:
     resolution: {integrity: sha512-COtn4EROW5dBGlE/4PiKnh6rZpAPxDeFLaEEwt4i10jpDMFt2EhQGS79QmmrO+iKCHv0PU/HrOWEhijFd1x99Q==}
+
+  css-variants@2.3.5:
+    resolution: {integrity: sha512-ow3GINTXvpNML1RwJBXas1FwRSCkUxtGLUns4el4/Twtrt4BfkusEsADCYAjohX2Sg4Z+0BqNYE3kQwawMnmXw==}
 
   css.escape@1.5.1:
     resolution: {integrity: sha512-YUifsXXuknHlUsmlgyY0PKzgPOr7/FjCePfHNt0jxm83wHZi44VDMQ7/fGNkjY3/jV1MC+1CmZbaHzugyeRtpg==}
@@ -4820,6 +4826,8 @@ snapshots:
   cookie-es@3.1.1: {}
 
   css-mediaquery@0.1.2: {}
+
+  css-variants@2.3.5: {}
 
   css.escape@1.5.1: {}
 

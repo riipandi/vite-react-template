@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import { Button } from '#/components/base/button'
 import {
   NumberField,
@@ -36,7 +38,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -49,14 +58,14 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='pr-20'>
+    <div {...stylex.props(x.paddingRight['20rem'])}>
       <Toolbar>
         <ToolbarGroup aria-label='Indentation'>
           <ToolbarButton render={<Button color='neutral' variant='ghost' size='md' />} disabled>
-            <Icon.TextIndentIcon weight='bold' />
+            <Lucide.Indent />
           </ToolbarButton>
           <ToolbarButton render={<Button color='neutral' variant='ghost' size='md' />}>
-            <Icon.TextOutdentIcon weight='bold' />
+            <Lucide.Outdent />
           </ToolbarButton>
         </ToolbarGroup>
         <ToolbarSeparator />
@@ -67,7 +76,7 @@ export const Playground: Story = {
             aria-label='Bold'
             value='bold'
           >
-            <Icon.TextBIcon weight='bold' />
+            <Lucide.Bold />
           </ToolbarButton>
           <ToolbarButton
             data-slot='toggle'
@@ -75,7 +84,7 @@ export const Playground: Story = {
             aria-label='Italic'
             value='italic'
           >
-            <Icon.TextItalicIcon weight='bold' />
+            <Lucide.Italic />
           </ToolbarButton>
           <ToolbarButton
             data-slot='toggle'
@@ -83,7 +92,7 @@ export const Playground: Story = {
             aria-label='Underline'
             value='underline'
           >
-            <Icon.TextUnderlineIcon weight='bold' />
+            <Lucide.Underline />
           </ToolbarButton>
         </ToolbarGroup>
         <ToolbarSeparator />
@@ -94,7 +103,7 @@ export const Playground: Story = {
             aria-label='Align left'
             value='align-left'
           >
-            <Icon.AlignLeftIcon weight='bold' />
+            <Lucide.AlignLeft />
           </ToolbarButton>
           <ToolbarButton
             data-slot='toggle'
@@ -102,7 +111,7 @@ export const Playground: Story = {
             aria-label='Align center'
             value='align-center'
           >
-            <Icon.TextAlignCenterIcon weight='bold' />
+            <Lucide.AlignCenter />
           </ToolbarButton>
           <ToolbarButton
             data-slot='toggle'
@@ -110,15 +119,18 @@ export const Playground: Story = {
             aria-label='Align right'
             value='align-right'
           >
-            <Icon.AlignRightIcon weight='bold' />
+            <Lucide.AlignRight />
           </ToolbarButton>
         </ToggleGroup>
         <ToolbarSeparator />
         <Select defaultValue='Arial'>
-          <SelectTrigger variant='ghost' className='w-24'>
-            <SelectValue placeholder='Font' className='max-w-24 truncate' />
+          <SelectTrigger variant='ghost' {...stylex.props(x.width['6rem'])}>
+            <SelectValue
+              placeholder='Font'
+              {...stylex.props(x.maxWidth['6rem'], x.overflow.hidden)}
+            />
           </SelectTrigger>
-          <SelectPopup className='min-w-44'>
+          <SelectPopup {...stylex.props(x.minWidth['11rem'])}>
             <SelectList>
               <SelectItem value='Arial'>Arial</SelectItem>
               <SelectItem value='Times New Roman'>Times New Roman</SelectItem>
@@ -133,19 +145,22 @@ export const Playground: Story = {
         <NumberField defaultValue={14} min={1}>
           <NumberFieldGroup variant='ghost'>
             <NumberFieldDecrement>
-              <Icon.MinusIcon weight='bold' />
+              <Lucide.Minus />
             </NumberFieldDecrement>
-            <ToolbarInput render={<NumberFieldInput className='w-12' />} />
+            <ToolbarInput render={<NumberFieldInput {...stylex.props(x.width['3rem'])} />} />
             <NumberFieldIncrement>
-              <Icon.PlusIcon weight='bold' />
+              <Lucide.Plus />
             </NumberFieldIncrement>
           </NumberFieldGroup>
         </NumberField>
         <ToolbarSeparator />
-        <ToolbarLink className='text-foreground-neutral-faded px-1 text-nowrap'>
+        <ToolbarLink
+          className='text-foreground-neutral-faded text-nowrap'
+          {...stylex.props(x.paddingLeft['0.25rem'], x.paddingRight['0.25rem'])}
+        >
           Saved 5 min ago
         </ToolbarLink>
-        <ToolbarSeparator className='mr-3' />
+        <ToolbarSeparator {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])} />
         <Button color='primary' variant='solid' size='xs'>
           Save
         </Button>

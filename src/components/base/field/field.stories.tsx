@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Field, FieldDescription, FieldError, FieldLabel } from '#/components/base/field'
 import { Input } from '#/components/base/input'
 import {
@@ -19,7 +21,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -32,7 +41,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='w-full min-w-md lg:w-6/12'>
+    <div className='min-w-md lg:w-6/12' {...stylex.props(x.width['100%'])}>
       <Field>
         <FieldLabel htmlFor='name'>Wizard Name</FieldLabel>
         <Input id='name' placeholder='Enter your wizard name' required />
@@ -46,7 +55,7 @@ export const Playground: Story = {
 export const Controlled: Story = {
   args: {},
   render: () => (
-    <div className='w-full'>
+    <div {...stylex.props(x.width['100%'])}>
       <Field>
         <FieldLabel htmlFor='name'>Select Book</FieldLabel>
         <Select>

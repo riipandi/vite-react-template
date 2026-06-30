@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import { IconBox } from '../../extra/icon-box'
 import { Button } from '../button'
 import {
@@ -23,7 +25,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -67,7 +76,7 @@ export const WithIconHeader: Story = {
       <AlertDialogPopup>
         <AlertDialogHeader>
           <IconBox variant='danger' size='sm'>
-            <Icon.SkullIcon weight='bold' />
+            <Lucide.Skull />
           </IconBox>
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
         </AlertDialogHeader>
@@ -77,8 +86,11 @@ export const WithIconHeader: Story = {
           </AlertDialogDescription>
         </AlertDialogBody>
         <AlertDialogFooter>
-          <AlertDialogClose className='min-w-16'>Cancel</AlertDialogClose>
-          <AlertDialogClose className='min-w-16' render={<Button color='critical' size='sm' />}>
+          <AlertDialogClose {...stylex.props(x.minWidth['4rem'])}>Cancel</AlertDialogClose>
+          <AlertDialogClose
+            {...stylex.props(x.minWidth['4rem'])}
+            render={<Button color='critical' size='sm' />}
+          >
             Cast
           </AlertDialogClose>
         </AlertDialogFooter>

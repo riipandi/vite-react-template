@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { Progress, ProgressIndicator, ProgressLabel } from '#/components/base/progress'
 import { ProgressTrack, ProgressValue } from '#/components/base/progress'
+import { fontSize, fontWeight } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Progress',
@@ -24,7 +27,14 @@ const meta = {
   args: { value: 65, min: 0, max: 100 },
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -38,8 +48,11 @@ const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 const colors = ['primary', 'neutral', 'positive', 'warning', 'critical'] as const
 
 const Row = ({ label, children }: React.PropsWithChildren<{ label: string }>) => (
-  <div className='flex items-center gap-4'>
-    <span className='text-foreground-neutral-faded w-16 text-xs font-semibold capitalize'>
+  <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['1rem'])}>
+    <span
+      className='text-foreground-neutral-faded capitalize'
+      {...stylex.props(x.width['4rem'], x.fontSize[fontSize.xs], x.fontWeight[fontWeight.semibold])}
+    >
       {label}
     </span>
     {children}
@@ -47,12 +60,12 @@ const Row = ({ label, children }: React.PropsWithChildren<{ label: string }>) =>
 )
 
 const Grid = ({ children }: React.PropsWithChildren) => (
-  <div className='flex flex-col gap-6'>{children}</div>
+  <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['1.5rem'])}>{children}</div>
 )
 
 export const Playground: Story = {
   render: ({ value, size, color }) => (
-    <div className='w-72'>
+    <div {...stylex.props(x.width['18rem'])}>
       <Progress value={value} size={size} color={color}>
         <ProgressLabel>Export data</ProgressLabel>
         <ProgressValue />
@@ -71,7 +84,7 @@ export const SizeShowcase: Story = {
     <Grid>
       {sizes.map((s) => (
         <Row key={s} label={s}>
-          <div className='w-72'>
+          <div {...stylex.props(x.width['18rem'])}>
             <Progress value={65} size={s}>
               <ProgressLabel>Export data</ProgressLabel>
               <ProgressValue />
@@ -93,7 +106,7 @@ export const VariantShowcase: Story = {
     <Grid>
       {colors.map((v) => (
         <Row key={v} label={v}>
-          <div className='w-72'>
+          <div {...stylex.props(x.width['18rem'])}>
             <Progress value={65} color={v}>
               <ProgressLabel>Export data</ProgressLabel>
               <ProgressValue />
@@ -112,7 +125,7 @@ export const Indeterminate: Story = {
   name: 'Indeterminate',
   parameters: { controls: { disable: true } },
   render: () => (
-    <div className='w-72'>
+    <div {...stylex.props(x.width['18rem'])}>
       <Progress value={null}>
         <ProgressLabel>Loading...</ProgressLabel>
         <ProgressTrack>
@@ -142,7 +155,7 @@ export const Animated: Story = {
     }, [])
 
     return (
-      <div className='w-72'>
+      <div {...stylex.props(x.width['18rem'])}>
         <Progress value={value}>
           <ProgressLabel>Export data</ProgressLabel>
           <ProgressValue />

@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Slider, SliderThumb, SliderTrack } from '#/components/base/slider'
 import { SliderControl, SliderIndicator } from '#/components/base/slider'
+import { fontSize, fontWeight } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Slider',
@@ -16,7 +19,14 @@ const meta = {
   args: { defaultValue: 50 },
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -29,8 +39,16 @@ type Story = StoryObj<typeof meta>
 const sizes = ['sm', 'md', 'lg'] as const
 
 const Row = ({ label, children }: React.PropsWithChildren<{ label: string }>) => (
-  <div className='flex items-center gap-4'>
-    <span className='text-foreground-neutral-faded w-12 text-xs font-semibold uppercase'>
+  <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['1rem'])}>
+    <span
+      className='text-foreground-neutral-faded'
+      {...stylex.props(
+        x.width['3rem'],
+        x.fontSize[fontSize.xs],
+        x.fontWeight[fontWeight.semibold],
+        x.textTransform.uppercase
+      )}
+    >
       {label}
     </span>
     {children}
@@ -38,12 +56,12 @@ const Row = ({ label, children }: React.PropsWithChildren<{ label: string }>) =>
 )
 
 const Grid = ({ children }: React.PropsWithChildren) => (
-  <div className='flex flex-col gap-8'>{children}</div>
+  <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['2rem'])}>{children}</div>
 )
 
 export const Playground: Story = {
   render: ({ defaultValue, disabled }) => (
-    <div className='w-64'>
+    <div {...stylex.props(x.width['16rem'])}>
       <Slider defaultValue={defaultValue} disabled={disabled}>
         <SliderControl>
           <SliderTrack>
@@ -63,7 +81,7 @@ export const SizeShowcase: Story = {
     <Grid>
       {sizes.map((s) => (
         <Row key={s} label={s}>
-          <div className='w-64'>
+          <div {...stylex.props(x.width['16rem'])}>
             <Slider defaultValue={60}>
               <SliderControl>
                 <SliderTrack>
@@ -83,7 +101,7 @@ export const RangeSlider: Story = {
   name: 'Range Slider',
   parameters: { controls: { disable: true } },
   render: () => (
-    <div className='w-64'>
+    <div {...stylex.props(x.width['16rem'])}>
       <Slider defaultValue={[25, 75]}>
         <SliderControl>
           <SliderTrack>
@@ -103,7 +121,7 @@ export const StatesShowcase: Story = {
   render: () => (
     <Grid>
       <Row label='Default'>
-        <div className='w-64'>
+        <div {...stylex.props(x.width['16rem'])}>
           <Slider defaultValue={50}>
             <SliderControl>
               <SliderTrack>
@@ -115,7 +133,7 @@ export const StatesShowcase: Story = {
         </div>
       </Row>
       <Row label='Disabled'>
-        <div className='w-64'>
+        <div {...stylex.props(x.width['16rem'])}>
           <Slider defaultValue={50} disabled>
             <SliderControl>
               <SliderTrack>

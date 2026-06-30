@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { OTPField, OTPFieldInput, OTPFieldSeparator } from '#/components/base/otp-field'
+import { fontSize, fontWeight } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/OTPField',
@@ -35,7 +38,14 @@ export const SizeShowcase: Story = {
   parameters: { controls: { disable: true } },
   args: { length: 6 },
   render: (args) => (
-    <div className='flex flex-col items-start gap-4'>
+    <div
+      {...stylex.props(
+        x.display.flex,
+        x.flexDirection.column,
+        x.alignItems.flexStart,
+        x.gap['1rem']
+      )}
+    >
       {sizes.map((s) => (
         <OTPField key={s} {...args} size={s}>
           <OTPFieldInput size={s} />
@@ -134,9 +144,15 @@ export const Controlled: Story = {
   render: () => {
     const [value, setValue] = React.useState('')
     return (
-      <div className='space-y-4'>
-        <p className='text-foreground-neutral-faded text-sm'>
-          Value: <span className='text-foreground-neutral font-medium'>{value || '(empty)'}</span>
+      <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['1rem'])}>
+        <p className='text-foreground-neutral-faded' {...stylex.props(x.fontSize[fontSize.sm])}>
+          Value:{' '}
+          <span
+            className='text-foreground-neutral'
+            {...stylex.props(x.fontWeight[fontWeight.medium])}
+          >
+            {value || '(empty)'}
+          </span>
         </p>
         <OTPField length={6} value={value} onValueChange={setValue}>
           <OTPFieldInput />

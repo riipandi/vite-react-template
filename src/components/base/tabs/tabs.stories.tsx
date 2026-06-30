@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Field, FieldLabel } from '#/components/base/field'
 import { Fieldset, FieldsetLegend } from '#/components/base/fieldset'
 import { Input } from '#/components/base/input'
@@ -14,7 +16,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -27,7 +36,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <Tabs defaultValue='account' className='w-full min-w-sm lg:w-6/12'>
+    <Tabs defaultValue='account' className='min-w-sm lg:w-6/12' {...stylex.props(x.width['100%'])}>
       <TabsList>
         <TabsItem value='account'>Account</TabsItem>
         <TabsItem value='password'>Password</TabsItem>
@@ -91,8 +100,8 @@ export const Vertical: Story = {
     ]
 
     return (
-      <Tabs defaultValue='explore' orientation='vertical' className='w-full max-w-xl'>
-        <TabsList className='min-w-48'>
+      <Tabs defaultValue='explore' orientation='vertical' {...stylex.props(x.width['100%'])}>
+        <TabsList {...stylex.props(x.minWidth['12rem'])}>
           {tabs.map((tab) => (
             <TabsItem key={tab.value} value={tab.value}>
               {tab.name}
@@ -111,200 +120,200 @@ export const Vertical: Story = {
 
 // // FIXME: indicator styles (https://shadcnstudio.com/docs/components/tabs)
 // export const BottomLine: Story = {
-//   args: {},
-//   render: () => {
-//     const tabs = [
-//       {
-//         name: 'Explore',
-//         value: 'explore',
-//         content: (
-//           <>
-//             Discover <span className='text-foreground font-semibold'>fresh ideas</span>, trending
-//             topics, and hidden gems curated just for you. Start exploring and let your curiosity
-//             lead the way!
-//           </>
-//         )
-//       },
-//       {
-//         name: 'Favorites',
-//         value: 'favorites',
-//         content: (
-//           <>
-//             All your <span className='text-foreground font-semibold'>favorites</span> are saved
-//             here. Revisit articles, collections, and moments you love, any time you want a little
-//             inspiration.
-//           </>
-//         )
-//       },
-//       {
-//         name: 'Surprise Me',
-//         value: 'surprise',
-//         content: (
-//           <>
-//             <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something
-//             unexpected—a fun fact, a quirky tip, or a daily challenge. Come back for a new surprise
-//             every day!
-//           </>
-//         )
-//       }
-//     ]
+// args: {},
+// render: () => {
+// const tabs = [
+// {
+// name: 'Explore',
+// value: 'explore',
+// content: (
+// <>
+// Discover <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>fresh ideas</span>, trending
+// topics, and hidden gems curated just for you. Start exploring and let your curiosity
+// lead the way!
+// </>
+// )
+// },
+// {
+// name: 'Favorites',
+// value: 'favorites',
+// content: (
+// <>
+// All your <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>favorites</span> are saved
+// here. Revisit articles, collections, and moments you love, any time you want a little
+// inspiration.
+// </>
+// )
+// },
+// {
+// name: 'Surprise Me',
+// value: 'surprise',
+// content: (
+// <>
+// <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>Surprise!</span> Here&apos;s something
+// unexpected—a fun fact, a quirky tip, or a daily challenge. Come back for a new surprise
+// every day!
+// </>
+// )
+// }
+// ]
 
-//     return (
-//       <div className='w-full max-w-md'>
-//         <Tabs defaultValue='explore' className='gap-4'>
-//           <TabsList className='bg-background-neutral rounded-none border-b p-0'>
-//             {tabs.map((tab) => (
-//               <TabsItem
-//                 key={tab.value}
-//                 value={tab.value}
-//                 className={clx(
-//                   'bg-background-neutral h-full rounded-none border-0 border-b-2 border-transparent',
-//                   'data-[state=active]:border-primary dark:data-[state=active]:border-primary data-[state=active]:shadow-none'
-//                 )}
-//               >
-//                 {tab.name}
-//               </TabsItem>
-//             ))}
-//           </TabsList>
+// return (
+// <div {...stylex.props(x.width["100%"])}>
+// <Tabs defaultValue='explore' {...stylex.props(x.gap["1rem"])}>
+// <TabsList className='bg-background-neutral rounded-none border-b' {...stylex.props(x.padding["0px"])}>
+// {tabs.map((tab) => (
+// <TabsItem
+// key={tab.value}
+// value={tab.value}
+// className={clx(
+// 'bg-background-neutral h-full rounded-none border-0 border-b-2 border-transparent',
+// 'data-[state=active]:border-primary dark:data-[state=active]:border-primary data-[state=active]:shadow-none'
+// )}
+// >
+// {tab.name}
+// </TabsItem>
+// ))}
+// </TabsList>
 
-//           {tabs.map((tab) => (
-//             <TabsPanel key={tab.value} value={tab.value}>
-//               <Text>{tab.content}</Text>
-//             </TabsPanel>
-//           ))}
-//         </Tabs>
-//       </div>
-//     )
-//   }
+// {tabs.map((tab) => (
+// <TabsPanel key={tab.value} value={tab.value}>
+// <Text>{tab.content}</Text>
+// </TabsPanel>
+// ))}
+// </Tabs>
+// </div>
+// )
+// }
 // }
 
 // // FIXME: indicator styles (https://shadcnstudio.com/docs/components/tabs)
 // export const LiftStyle: Story = {
-//   args: {},
-//   render: () => {
-//     const tabs = [
-//       {
-//         name: 'Explore',
-//         value: 'explore',
-//         content: (
-//           <>
-//             Discover <span className='text-foreground font-semibold'>fresh ideas</span>, trending
-//             topics, and hidden gems curated just for you. Start exploring and let your curiosity
-//             lead the way!
-//           </>
-//         )
-//       },
-//       {
-//         name: 'Favorites',
-//         value: 'favorites',
-//         content: (
-//           <>
-//             All your <span className='text-foreground font-semibold'>favorites</span> are saved
-//             here. Revisit articles, collections, and moments you love, any time you want a little
-//             inspiration.
-//           </>
-//         )
-//       },
-//       {
-//         name: 'Surprise Me',
-//         value: 'surprise',
-//         content: (
-//           <>
-//             <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something
-//             unexpected—a fun fact, a quirky tip, or a daily challenge. Come back for a new surprise
-//             every day!
-//           </>
-//         )
-//       }
-//     ]
-//     return (
-//       <div className='w-full max-w-md'>
-//         <Tabs defaultValue='explore' className='gap-4'>
-//           <TabsList className='bg-background-neutral justify-start rounded-none border-b p-0'>
-//             {tabs.map((tab) => (
-//               <TabsItem
-//                 key={tab.value}
-//                 value={tab.value}
-//                 className='bg-background-neutral border-b-border dark:data-[state=active]:bg-background-neutral data-[state=active]:border-border-neutral data-[state=active]:border-b-background h-full rounded-none rounded-t border border-transparent data-[state=active]:-mb-0.5 data-[state=active]:shadow-none dark:border-b-0 dark:data-[state=active]:-mb-0.5'
-//               >
-//                 {tab.name}
-//               </TabsItem>
-//             ))}
-//           </TabsList>
+// args: {},
+// render: () => {
+// const tabs = [
+// {
+// name: 'Explore',
+// value: 'explore',
+// content: (
+// <>
+// Discover <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>fresh ideas</span>, trending
+// topics, and hidden gems curated just for you. Start exploring and let your curiosity
+// lead the way!
+// </>
+// )
+// },
+// {
+// name: 'Favorites',
+// value: 'favorites',
+// content: (
+// <>
+// All your <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>favorites</span> are saved
+// here. Revisit articles, collections, and moments you love, any time you want a little
+// inspiration.
+// </>
+// )
+// },
+// {
+// name: 'Surprise Me',
+// value: 'surprise',
+// content: (
+// <>
+// <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>Surprise!</span> Here&apos;s something
+// unexpected—a fun fact, a quirky tip, or a daily challenge. Come back for a new surprise
+// every day!
+// </>
+// )
+// }
+// ]
+// return (
+// <div {...stylex.props(x.width["100%"])}>
+// <Tabs defaultValue='explore' {...stylex.props(x.gap["1rem"])}>
+// <TabsList className='bg-background-neutral rounded-none border-b' {...stylex.props(x.justifyContent.flexStart, x.padding["0px"])}>
+// {tabs.map((tab) => (
+// <TabsItem
+// key={tab.value}
+// value={tab.value}
+// className='bg-background-neutral border-b-border dark:data-[state=active]:bg-background-neutral data-[state=active]:border-border-neutral data-[state=active]:border-b-background rounded-none rounded-t border border-transparent data-[state=active]:-mb-0.5 data-[state=active]:shadow-none dark:border-b-0 dark:data-[state=active]:-mb-0.5' {...stylex.props(x.height["100%"])}
+// >
+// {tab.name}
+// </TabsItem>
+// ))}
+// </TabsList>
 
-//           {tabs.map((tab) => (
-//             <TabsPanel key={tab.value} value={tab.value}>
-//               <Text>{tab.content}</Text>
-//             </TabsPanel>
-//           ))}
-//         </Tabs>
-//       </div>
-//     )
-//   }
+// {tabs.map((tab) => (
+// <TabsPanel key={tab.value} value={tab.value}>
+// <Text>{tab.content}</Text>
+// </TabsPanel>
+// ))}
+// </Tabs>
+// </div>
+// )
+// }
 // }
 
 // // FIXME: indicator styles (https://shadcnstudio.com/docs/components/tabs)
 // export const VerticalLine: Story = {
-//   args: {},
-//   render: () => {
-//     const tabs = [
-//       {
-//         name: 'Explore',
-//         value: 'explore',
-//         content: (
-//           <>
-//             Discover <span className='text-foreground font-semibold'>fresh ideas</span>, trending
-//             topics, and hidden gems curated just for you. Start exploring and let your curiosity
-//             lead the way!
-//           </>
-//         )
-//       },
-//       {
-//         name: 'Favorites',
-//         value: 'favorites',
-//         content: (
-//           <>
-//             All your <span className='text-foreground font-semibold'>favorites</span> are saved
-//             here. Revisit articles, collections, and moments you love, any time you want a little
-//             inspiration.
-//           </>
-//         )
-//       },
-//       {
-//         name: 'Surprise Me',
-//         value: 'surprise',
-//         content: (
-//           <>
-//             <span className='text-foreground font-semibold'>Surprise!</span> Here&apos;s something
-//             unexpected—a fun fact, a quirky tip, or a daily challenge. Come back for a new surprise
-//             every day!
-//           </>
-//         )
-//       }
-//     ]
+// args: {},
+// render: () => {
+// const tabs = [
+// {
+// name: 'Explore',
+// value: 'explore',
+// content: (
+// <>
+// Discover <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>fresh ideas</span>, trending
+// topics, and hidden gems curated just for you. Start exploring and let your curiosity
+// lead the way!
+// </>
+// )
+// },
+// {
+// name: 'Favorites',
+// value: 'favorites',
+// content: (
+// <>
+// All your <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>favorites</span> are saved
+// here. Revisit articles, collections, and moments you love, any time you want a little
+// inspiration.
+// </>
+// )
+// },
+// {
+// name: 'Surprise Me',
+// value: 'surprise',
+// content: (
+// <>
+// <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>Surprise!</span> Here&apos;s something
+// unexpected—a fun fact, a quirky tip, or a daily challenge. Come back for a new surprise
+// every day!
+// </>
+// )
+// }
+// ]
 
-//     return (
-//       <div className='w-full max-w-lg'>
-//         <Tabs defaultValue='explore' className='flex-row'>
-//           <TabsList className='bg-background-neutral h-full flex-col rounded-none p-0'>
-//             {tabs.map((tab) => (
-//               <TabsItem
-//                 key={tab.value}
-//                 value={tab.value}
-//                 className='bg-background-neutral data-[state=active]:border-primary dark:data-[state=active]:border-primary h-full w-full justify-start rounded-none border-0 border-l-2 border-transparent data-[state=active]:shadow-none'
-//               >
-//                 {tab.name}
-//               </TabsItem>
-//             ))}
-//           </TabsList>
+// return (
+// <div {...stylex.props(x.width["100%"])}>
+// <Tabs defaultValue='explore' {...stylex.props(x.flexDirection.row)}>
+// <TabsList className='bg-background-neutral rounded-none' {...stylex.props(x.height["100%"], x.flexDirection.column, x.padding["0px"])}>
+// {tabs.map((tab) => (
+// <TabsItem
+// key={tab.value}
+// value={tab.value}
+// className='bg-background-neutral data-[state=active]:border-primary dark:data-[state=active]:border-primary rounded-none border-0 border-l-2 border-transparent data-[state=active]:shadow-none' {...stylex.props(x.height["100%"], x.width["100%"], x.justifyContent.flexStart)}
+// >
+// {tab.name}
+// </TabsItem>
+// ))}
+// </TabsList>
 
-//           {tabs.map((tab) => (
-//             <TabsPanel key={tab.value} value={tab.value}>
-//               <Text>{tab.content}</Text>
-//             </TabsPanel>
-//           ))}
-//         </Tabs>
-//       </div>
-//     )
-//   }
+// {tabs.map((tab) => (
+// <TabsPanel key={tab.value} value={tab.value}>
+// <Text>{tab.content}</Text>
+// </TabsPanel>
+// ))}
+// </Tabs>
+// </div>
+// )
+// }
 // }

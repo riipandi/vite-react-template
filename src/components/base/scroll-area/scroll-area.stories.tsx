@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { ScrollArea } from '#/components/base/scroll-area'
 import { Text } from '#/components/extra/typography'
+import { fontWeight, radius } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/ScrollArea',
@@ -11,7 +14,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -27,9 +37,10 @@ export const Both: Story = {
   render: () => (
     <ScrollArea
       scrollbar='both'
-      className='border-border-neutral h-80 w-full max-w-xl rounded border shadow'
+      className='border-border-neutral max-w-xl border shadow'
+      {...stylex.props(x.height['80rem'], x.width['100%'], x.borderRadius[radius.md])}
     >
-      <div className='space-y-6 p-4'>
+      <div className='space-y-6' {...stylex.props(x.padding['1rem'])}>
         <Text>
           The Da Vinci Code begins with the murder of Jacques Saunière, the curator of the Louvre
           Museum in Paris. Robert Langdon, a Harvard professor of symbology, is summoned to the
@@ -75,9 +86,10 @@ export const VerticalOnly: Story = {
   render: () => (
     <ScrollArea
       scrollbar='vertical'
-      className='border-border-neutral h-80 w-full max-w-xl rounded border shadow'
+      className='border-border-neutral max-w-xl border shadow'
+      {...stylex.props(x.height['80rem'], x.width['100%'], x.borderRadius[radius.md])}
     >
-      <div className='space-y-6 p-4'>
+      <div className='space-y-6' {...stylex.props(x.padding['1rem'])}>
         <Text>
           Harry Potter and the Sorcerer's Stone begins with Harry living in a cupboard under the
           stairs at 4 Privet Drive, treated poorly by his aunt, uncle, and cousin Dudley.
@@ -115,13 +127,24 @@ export const HorizontalOnly: Story = {
   render: () => (
     <ScrollArea
       scrollbar='horizontal'
-      className='border-border-neutral h-32 w-full max-w-xl rounded border shadow'
+      className='border-border-neutral max-w-xl border shadow'
+      {...stylex.props(x.height['32rem'], x.width['100%'], x.borderRadius[radius.md])}
     >
-      <div className='flex gap-4 p-4'>
+      <div {...stylex.props(x.display.flex, x.gap['1rem'], x.padding['1rem'])}>
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
           <div
             key={num}
-            className='bg-background-neutral-faded/20 flex size-20 shrink-0 items-center justify-center rounded font-semibold'
+            className='bg-background-neutral-faded/20'
+            {...stylex.props(
+              x.display.flex,
+              x.width['5rem'],
+              x.height['5rem'],
+              x.flexShrink['0'],
+              x.alignItems.center,
+              x.justifyContent.center,
+              x.borderRadius[radius.md],
+              x.fontWeight[fontWeight.semibold]
+            )}
           >
             {num}
           </div>

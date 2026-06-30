@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -19,7 +21,15 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center p-4'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center,
+          x.padding['1rem']
+        )}
+      >
         <Story />
       </div>
     )
@@ -97,7 +107,12 @@ export const Playground: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Collection</NavigationMenuTrigger>
           <NavigationMenuContent
-            render={<ul className='grid w-100 gap-0.5 md:w-125 md:grid-cols-2' />}
+            render={
+              <ul
+                className='grid md:w-125 md:grid-cols-2'
+                {...stylex.props(x.width['25rem'], x.gap['0.125rem'])}
+              />
+            }
           >
             {gettingStartedItems.map((item) => (
               <ListItem key={item.title} title={item.title} href={item.href}>
@@ -108,7 +123,9 @@ export const Playground: Story = {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Books</NavigationMenuTrigger>
-          <NavigationMenuContent render={<ul className='w-full max-w-128' />}>
+          <NavigationMenuContent
+            render={<ul {...stylex.props(x.width['100%'], x.maxWidth['32rem'])} />}
+          >
             {components.map((component) => (
               <ListItem key={component.title} title={component.title} href={component.href}>
                 {component.description}
@@ -121,7 +138,7 @@ export const Playground: Story = {
             href='https://github.com/riipandi/blueprint-nitrojs'
             render={(props) => (
               <a {...props}>
-                <Icon.GithubLogoIcon strokeWidth={2.5} />
+                <Lucide.GitBranch strokeWidth={2.5} />
                 GitHub
               </a>
             )}
@@ -140,7 +157,12 @@ export const Compact: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger size='compact'>Collection</NavigationMenuTrigger>
           <NavigationMenuContent
-            render={<ul className='grid w-100 gap-0.5 md:w-125 md:grid-cols-2' />}
+            render={
+              <ul
+                className='grid md:w-125 md:grid-cols-2'
+                {...stylex.props(x.width['25rem'], x.gap['0.125rem'])}
+              />
+            }
           >
             {gettingStartedItems.map((item) => (
               <ListItem key={item.title} title={item.title} href={item.href} size='compact'>
@@ -151,7 +173,9 @@ export const Compact: Story = {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger size='compact'>Books</NavigationMenuTrigger>
-          <NavigationMenuContent render={<ul className='w-full max-w-128' />}>
+          <NavigationMenuContent
+            render={<ul {...stylex.props(x.width['100%'], x.maxWidth['32rem'])} />}
+          >
             {components.map((component) => (
               <ListItem
                 key={component.title}
@@ -169,7 +193,7 @@ export const Compact: Story = {
             href='https://github.com/riipandi/blueprint-nitrojs'
             render={(props) => (
               <a {...props}>
-                <Icon.GithubLogoIcon strokeWidth={2.0} />
+                <Lucide.GitBranch strokeWidth={2.0} />
                 GitHub
               </a>
             )}

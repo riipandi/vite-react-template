@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import {
   Combobox,
@@ -24,7 +26,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -49,7 +58,7 @@ export const Playground: Story = {
   render: () => {
     return (
       <Combobox items={options} defaultValue={options[0]}>
-        <ComboboxTrigger className='w-80'>
+        <ComboboxTrigger {...stylex.props(x.width['20rem'])}>
           <ComboboxValue />
         </ComboboxTrigger>
         <ComboboxPopup>
@@ -73,9 +82,9 @@ export const VariantShowcase: Story = {
   args: {},
   render: () => {
     return (
-      <div className='flex flex-col gap-3'>
+      <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.75rem'])}>
         <Combobox items={options} defaultValue={options[0]}>
-          <ComboboxTrigger className='w-80' variant='default'>
+          <ComboboxTrigger {...stylex.props(x.width['20rem'])} variant='default'>
             <ComboboxValue />
           </ComboboxTrigger>
           <ComboboxPopup>
@@ -92,7 +101,7 @@ export const VariantShowcase: Story = {
         </Combobox>
 
         <Combobox items={options} defaultValue={options[0]}>
-          <ComboboxTrigger className='w-80' variant='subtle'>
+          <ComboboxTrigger {...stylex.props(x.width['20rem'])} variant='subtle'>
             <ComboboxValue />
           </ComboboxTrigger>
           <ComboboxPopup>
@@ -109,7 +118,7 @@ export const VariantShowcase: Story = {
         </Combobox>
 
         <Combobox items={options} defaultValue={options[0]}>
-          <ComboboxTrigger className='w-80' pill>
+          <ComboboxTrigger {...stylex.props(x.width['20rem'])} pill>
             <ComboboxValue />
           </ComboboxTrigger>
           <ComboboxPopup>
@@ -126,7 +135,7 @@ export const VariantShowcase: Story = {
         </Combobox>
 
         <Combobox items={options} defaultValue={options[0]}>
-          <ComboboxTrigger className='w-80' variant='ghost'>
+          <ComboboxTrigger {...stylex.props(x.width['20rem'])} variant='ghost'>
             <ComboboxValue />
           </ComboboxTrigger>
           <ComboboxPopup>
@@ -152,7 +161,7 @@ export const MultipleSelect: Story = {
     const anchorRef = React.useRef<HTMLDivElement | null>(null)
 
     return (
-      <div className='w-full max-w-xs'>
+      <div {...stylex.props(x.width['100%'])}>
         <Combobox items={options} multiple>
           <ComboboxInput placeholder='Select books' />
           <ComboboxPopup anchor={anchorRef}>
@@ -195,7 +204,7 @@ export const GroupedItem: Story = {
 
     return (
       <Combobox items={items}>
-        <ComboboxTrigger className='w-80'>
+        <ComboboxTrigger {...stylex.props(x.width['20rem'])}>
           <ComboboxValue />
         </ComboboxTrigger>
         <ComboboxPopup>

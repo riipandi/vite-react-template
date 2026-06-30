@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import {
   ContextMenu,
   ContextMenuPopup,
@@ -15,6 +17,7 @@ import {
   ContextMenuGroupLabel
 } from '#/components/base/context-menu'
 import { Hotkey } from '#/components/extra/hotkey'
+import { radius } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/ContextMenu',
@@ -25,7 +28,15 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center p-20'>
+      <div
+        className='min-w-md p-20'
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -39,7 +50,18 @@ export const Playground: Story = {
   args: {},
   render: () => (
     <ContextMenu>
-      <ContextMenuTrigger className='border-muted text-foreground-neutral-faded flex h-48 w-full items-center justify-center rounded border border-dashed select-none'>
+      <ContextMenuTrigger
+        className='border-muted text-foreground-neutral-faded border border-dashed'
+        {...stylex.props(
+          x.display.flex,
+          x.height['48rem'],
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center,
+          x.borderRadius[radius.md],
+          x.userSelect.none
+        )}
+      >
         Right click here
       </ContextMenuTrigger>
       <ContextMenuPopup>
@@ -57,17 +79,28 @@ export const WithItemIcon: Story = {
   args: {},
   render: () => (
     <ContextMenu>
-      <ContextMenuTrigger className='border-muted text-foreground-neutral-faded flex h-48 w-full items-center justify-center rounded border border-dashed select-none'>
+      <ContextMenuTrigger
+        className='border-muted text-foreground-neutral-faded border border-dashed'
+        {...stylex.props(
+          x.display.flex,
+          x.height['48rem'],
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center,
+          x.borderRadius[radius.md],
+          x.userSelect.none
+        )}
+      >
         Right click here
       </ContextMenuTrigger>
-      <ContextMenuPopup className='w-48'>
+      <ContextMenuPopup {...stylex.props(x.width['12rem'])}>
         <ContextMenuItem>
-          <Icon.BookIcon weight='bold' />
+          <Lucide.Book />
           Open Book
         </ContextMenuItem>
         <ContextMenuSubmenu>
           <ContextMenuSubmenuTrigger>
-            <Icon.StackIcon weight='bold' />
+            <Lucide.Layers />
             Select Novel
           </ContextMenuSubmenuTrigger>
           <ContextMenuSubmenuPopup>
@@ -79,11 +112,11 @@ export const WithItemIcon: Story = {
           </ContextMenuSubmenuPopup>
         </ContextMenuSubmenu>
         <ContextMenuItem>
-          <Icon.ScrollIcon weight='bold' />
+          <Lucide.ScrollText />
           View Painting
         </ContextMenuItem>
         <ContextMenuItem>
-          <Icon.EyeIcon weight='bold' />
+          <Lucide.Eye />
           Examine Clue
         </ContextMenuItem>
       </ContextMenuPopup>
@@ -95,7 +128,18 @@ export const NestedSubMenu: Story = {
   args: {},
   render: () => (
     <ContextMenu>
-      <ContextMenuTrigger className='border-muted text-foreground-neutral-faded flex h-48 w-full items-center justify-center rounded border border-dashed select-none'>
+      <ContextMenuTrigger
+        className='border-muted text-foreground-neutral-faded border border-dashed'
+        {...stylex.props(
+          x.display.flex,
+          x.height['48rem'],
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center,
+          x.borderRadius[radius.md],
+          x.userSelect.none
+        )}
+      >
         Right click here
       </ContextMenuTrigger>
       <ContextMenuPopup>
@@ -130,22 +174,33 @@ export const AdvanceMenu: Story = {
   args: {},
   render: () => (
     <ContextMenu>
-      <ContextMenuTrigger className='border-muted text-foreground-neutral-faded flex h-48 w-full items-center justify-center rounded border border-dashed select-none'>
+      <ContextMenuTrigger
+        className='border-muted text-foreground-neutral-faded border border-dashed'
+        {...stylex.props(
+          x.display.flex,
+          x.height['48rem'],
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center,
+          x.borderRadius[radius.md],
+          x.userSelect.none
+        )}
+      >
         Right click here
       </ContextMenuTrigger>
-      <ContextMenuPopup className='min-w-48'>
+      <ContextMenuPopup {...stylex.props(x.minWidth['12rem'])}>
         <ContextMenuGroup>
           <ContextMenuGroupLabel>Wizard Profile</ContextMenuGroupLabel>
           <ContextMenuItem>
-            <Icon.UserIcon weight='bold' />
+            <Lucide.User />
             Profile
           </ContextMenuItem>
           <ContextMenuItem>
-            <Icon.MagicWandIcon weight='bold' />
+            <Lucide.Wand />
             Learn Spell
           </ContextMenuItem>
           <ContextMenuItem>
-            <Icon.SlidersHorizontalIcon weight='bold' />
+            <Lucide.SlidersHorizontal />
             Settings
           </ContextMenuItem>
         </ContextMenuGroup>
@@ -194,47 +249,58 @@ export const CompactMenu: Story = {
   args: {},
   render: () => (
     <ContextMenu>
-      <ContextMenuTrigger className='border-muted text-foreground-neutral-faded flex h-48 w-full items-center justify-center rounded border border-dashed select-none'>
+      <ContextMenuTrigger
+        className='border-muted text-foreground-neutral-faded border border-dashed'
+        {...stylex.props(
+          x.display.flex,
+          x.height['48rem'],
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center,
+          x.borderRadius[radius.md],
+          x.userSelect.none
+        )}
+      >
         Right click here
       </ContextMenuTrigger>
       <ContextMenuPopup size='compact'>
         <ContextMenuItem>
-          <Icon.SunIcon weight='bold' />
+          <Lucide.Sun />
           Light
         </ContextMenuItem>
         <ContextMenuItem>
-          <Icon.MoonIcon weight='bold' />
+          <Lucide.Moon />
           Dark
         </ContextMenuItem>
         <ContextMenuItem>
-          <Icon.LaptopIcon weight='bold' />
+          <Lucide.Laptop />
           System
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuSubmenu>
           <ContextMenuSubmenuTrigger>
-            <Icon.PaletteIcon weight='bold' />
+            <Lucide.Palette />
             Custom
           </ContextMenuSubmenuTrigger>
           <ContextMenuSubmenuPopup size='compact'>
             <ContextMenuItem>
-              <Icon.PaletteIcon weight='bold' />
+              <Lucide.Palette />
               Tokyo Night
             </ContextMenuItem>
             <ContextMenuItem>
-              <Icon.PaletteIcon weight='bold' />
+              <Lucide.Palette />
               Dracula
             </ContextMenuItem>
             <ContextMenuItem>
-              <Icon.PaletteIcon weight='bold' />
+              <Lucide.Palette />
               Nord
             </ContextMenuItem>
             <ContextMenuItem>
-              <Icon.PaletteIcon weight='bold' />
+              <Lucide.Palette />
               Gruvbox
             </ContextMenuItem>
             <ContextMenuItem>
-              <Icon.PaletteIcon weight='bold' />
+              <Lucide.Palette />
               Catppuccin
             </ContextMenuItem>
           </ContextMenuSubmenuPopup>

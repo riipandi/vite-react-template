@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Checkbox, CheckboxGroup } from '#/components/base/checkbox'
 import { Field, FieldDescription, FieldError, FieldLabel, FieldItem } from '#/components/base/field'
 import { Fieldset, FieldsetLegend } from '#/components/base/fieldset'
@@ -16,7 +18,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -60,7 +69,16 @@ export const Playground: Story = {
 export const Complex: Story = {
   args: {},
   render: () => (
-    <div className='flex max-w-md flex-col gap-6 py-8 xl:w-10/12 2xl:w-8/12'>
+    <div
+      className='max-w-md xl:w-10/12 2xl:w-8/12'
+      {...stylex.props(
+        x.display.flex,
+        x.flexDirection.column,
+        x.gap['1.5rem'],
+        x.paddingTop['8rem'],
+        x.paddingBottom['8rem']
+      )}
+    >
       <Fieldset>
         <FieldsetLegend>Wizard Information</FieldsetLegend>
         <Text>

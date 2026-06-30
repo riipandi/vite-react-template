@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Button } from '#/components/base/button'
 import { Field, FieldError, FieldLabel } from '#/components/base/field'
 import { Fieldset, FieldsetLegend } from '#/components/base/fieldset'
@@ -15,7 +17,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -28,7 +37,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <Form className='w-full max-w-sm'>
+    <Form {...stylex.props(x.width['100%'])}>
       <Fieldset>
         <FieldsetLegend>Personal Information</FieldsetLegend>
         <Text>We need your name and email to create your account.</Text>
@@ -43,7 +52,7 @@ export const Playground: Story = {
           <FieldError match='valueMissing'>This is required</FieldError>
         </Field>
       </Fieldset>
-      <Fieldset className='mt-2'>
+      <Fieldset {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}>
         <Button type='submit' block>
           Create Account
         </Button>

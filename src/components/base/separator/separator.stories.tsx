@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Separator } from '#/components/base/separator'
 import { Text } from '#/components/extra/typography'
 
@@ -11,7 +13,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -24,9 +33,12 @@ type Story = StoryObj<typeof meta>
 export const Horizontal: Story = {
   args: {},
   render: () => (
-    <div className='w-full max-w-sm'>
+    <div {...stylex.props(x.width['100%'])}>
       <span>Chapter 1 begins here.</span>
-      <Separator orientation='horizontal' className='my-4' />
+      <Separator
+        orientation='horizontal'
+        {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}
+      />
       <span>Chapter 2 continues here.</span>
     </div>
   )
@@ -35,7 +47,16 @@ export const Horizontal: Story = {
 export const Vertical: Story = {
   args: {},
   render: () => (
-    <div className='mx-auto flex w-full max-w-sm items-center justify-center gap-3'>
+    <div
+      className='mx-auto max-w-sm'
+      {...stylex.props(
+        x.display.flex,
+        x.width['100%'],
+        x.alignItems.center,
+        x.justifyContent.center,
+        x.gap['0.75rem']
+      )}
+    >
       <Text>Gryffindor</Text>
       <Text>Slytherin</Text>
       <Text>Ravenclaw</Text>
@@ -48,14 +69,23 @@ export const Vertical: Story = {
 export const Divider: Story = {
   args: {},
   render: () => (
-    <div className='flex w-full flex-col'>
-      <Separator className='my-4' contentSide='left'>
+    <div {...stylex.props(x.display.flex, x.width['100%'], x.flexDirection.column)}>
+      <Separator
+        {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}
+        contentSide='left'
+      >
         Chapter 1
       </Separator>
-      <Separator className='my-4' contentSide='center'>
+      <Separator
+        {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}
+        contentSide='center'
+      >
         The Da Vinci Code
       </Separator>
-      <Separator className='my-4' contentSide='right'>
+      <Separator
+        {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}
+        contentSide='right'
+      >
         Harry Potter Series
       </Separator>
     </div>

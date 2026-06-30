@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { fn } from 'storybook/test'
 import { Switch } from '#/components/base/switch'
 import { Label } from '#/components/extra/label'
@@ -21,7 +23,14 @@ const meta = {
   args: { onCheckedChange: fn() },
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -38,14 +47,14 @@ const Row = ({
   children,
   className
 }: React.PropsWithChildren<{ label: string; className?: string }>) => (
-  <div className='flex items-center gap-2'>
+  <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
     <span className={className}>{label}</span>
     {children}
   </div>
 )
 
 const Grid = ({ children }: React.PropsWithChildren) => (
-  <div className='flex flex-col gap-4'>{children}</div>
+  <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['1rem'])}>{children}</div>
 )
 
 export const Playground: Story = {
@@ -79,25 +88,25 @@ export const StatesShowcase: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <Grid>
-      <Row label='Unchecked' className='min-w-32'>
+      <Row label='Unchecked' {...stylex.props(x.minWidth['8rem'])}>
         <Label>
           <Switch />
           <Text>Turn on notifications</Text>
         </Label>
       </Row>
-      <Row label='Checked' className='min-w-32'>
+      <Row label='Checked' {...stylex.props(x.minWidth['8rem'])}>
         <Label>
           <Switch defaultChecked />
           <Text>Turn off notifications</Text>
         </Label>
       </Row>
-      <Row label='Disabled' className='min-w-32'>
+      <Row label='Disabled' {...stylex.props(x.minWidth['8rem'])}>
         <Label>
           <Switch disabled />
           <Text>Default value is off</Text>
         </Label>
       </Row>
-      <Row label='Disabled On' className='min-w-32'>
+      <Row label='Disabled On' {...stylex.props(x.minWidth['8rem'])}>
         <Label>
           <Switch defaultChecked disabled />
           <Text>Default value is on</Text>

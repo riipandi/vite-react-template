@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { Checkbox, CheckboxGroup, CheckboxGroupLabel } from '#/components/base/checkbox'
 import { Label } from '#/components/extra/label'
@@ -12,7 +14,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -78,7 +87,7 @@ export const GroupNested: Story = {
           Wizard Permissions
         </Label>
         {permissions.map((permission) => (
-          <Label key={permission.value} className='pl-4'>
+          <Label key={permission.value} {...stylex.props(x.paddingLeft['1rem'])}>
             <Checkbox value={permission.value} />
             {permission.label}
           </Label>

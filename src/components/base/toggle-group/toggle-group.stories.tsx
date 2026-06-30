@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import { Toggle } from '#/components/base/toggle'
 import { ToggleGroup } from '#/components/base/toggle-group'
 
@@ -12,7 +14,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -25,16 +34,16 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center space-x-6'>
+    <div className='space-x-6' {...stylex.props(x.display.flex, x.alignItems.center)}>
       <ToggleGroup multiple mode='icon' size='md' orientation='horizontal'>
         <Toggle value='bold' aria-label='Bold'>
-          <Icon.TextBIcon weight='bold' />
+          <Lucide.Bold />
         </Toggle>
         <Toggle value='italic' aria-label='Italic'>
-          <Icon.TextItalicIcon weight='bold' />
+          <Lucide.Italic />
         </Toggle>
         <Toggle value='underline' aria-label='Underline'>
-          <Icon.TextUnderlineIcon weight='bold' />
+          <Lucide.Underline />
         </Toggle>
       </ToggleGroup>
     </div>
@@ -44,16 +53,16 @@ export const Playground: Story = {
 export const Vertical: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center space-x-6'>
+    <div className='space-x-6' {...stylex.props(x.display.flex, x.alignItems.center)}>
       <ToggleGroup defaultValue={['start']} mode='icon' size='md' orientation='vertical'>
         <Toggle value='left' aria-label='Left'>
-          <Icon.AlignLeftIcon weight='bold' />
+          <Lucide.AlignLeft />
         </Toggle>
         <Toggle value='center' aria-label='Center'>
-          <Icon.TextAlignCenterIcon weight='bold' />
+          <Lucide.AlignCenter />
         </Toggle>
         <Toggle value='right' aria-label='Right'>
-          <Icon.AlignRightIcon weight='bold' />
+          <Lucide.AlignRight />
         </Toggle>
       </ToggleGroup>
     </div>

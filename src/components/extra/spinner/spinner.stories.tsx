@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Spinner } from '#/components/extra/spinner'
 
 const meta = {
@@ -10,7 +12,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -23,12 +32,12 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center gap-6'>
-      <Spinner className='text-foreground-neutral-faded' />
-      <Spinner className='text-foreground-positive' size='sm' />
-      <Spinner className='text-foreground-warning' size='md' />
-      <Spinner className='text-foreground-critical' size='lg' />
-      <Spinner className='text-foreground-primary' size='xl' />
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['1.5rem'])}>
+      <Spinner color='#999999' />
+      <Spinner color='#22c55e' size='sm' />
+      <Spinner color='#f59e0b' size='md' />
+      <Spinner color='#ef4444' size='lg' />
+      <Spinner color='#a855f7' size='xl' />
       <Spinner size='xs' />
     </div>
   )

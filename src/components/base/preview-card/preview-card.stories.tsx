@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from '#/components/base/preview-card'
 import { Text } from '#/components/extra/typography'
 
@@ -11,7 +13,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -25,17 +34,21 @@ export const Playground: Story = {
   args: {},
   render: () => (
     <PreviewCard>
-      <Text className='w-full xl:w-8/12'>
+      <Text className='xl:w-8/12' {...stylex.props(x.width['100%'])}>
         The Philosopher's Stone is a legendary{' '}
-        <PreviewCardTrigger className='text-primary border-primary cursor-help border-b'>
+        <PreviewCardTrigger
+          className='text-primary border-primary border-b'
+          {...stylex.props(x.cursor.help)}
+        >
           alchemical substance
         </PreviewCardTrigger>{' '}
         capable of turning base metals into gold and granting immortality.
       </Text>
-      <PreviewCardPopup className='max-w-72'>
+      <PreviewCardPopup {...stylex.props(x.maxWidth['18rem'])}>
         <img
           src='https://images.unsplash.com/photo-1618944913480-b67ee16d7b77?q=80&w=2670&auto=format&fit=crop'
-          className='mb-2 h-auto w-full rounded-xs'
+          className='h-auto rounded-xs'
+          {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'], x.width['100%'])}
           alt='Preview'
         />
         <Text className='text-justify text-sm/relaxed'>

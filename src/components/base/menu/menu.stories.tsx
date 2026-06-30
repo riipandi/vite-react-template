@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import { Button } from '#/components/base/button'
 import {
   Menu,
@@ -26,7 +28,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -41,7 +50,7 @@ export const Playground: Story = {
   render: () => (
     <Menu>
       <MenuTrigger render={<Button color='neutral' variant='outline' />}>
-        Menu <Icon.CaretDownIcon weight='bold' />
+        Menu <Lucide.ChevronDown />
       </MenuTrigger>
       <MenuPopup>
         <MenuItem>Cast Spell</MenuItem>
@@ -59,16 +68,16 @@ export const WithItemIcon: Story = {
   render: () => (
     <Menu>
       <MenuTrigger render={<Button color='neutral' variant='outline' />}>
-        Menu <Icon.CaretDownIcon weight='bold' />
+        Menu <Lucide.ChevronDown />
       </MenuTrigger>
-      <MenuPopup className='w-48'>
+      <MenuPopup {...stylex.props(x.width['12rem'])}>
         <MenuItem>
-          <Icon.BookIcon weight='bold' />
+          <Lucide.Book />
           Open Book
         </MenuItem>
         <MenuSubmenu>
           <MenuSubmenuTrigger>
-            <Icon.StackIcon weight='bold' />
+            <Lucide.Layers />
             Select Novel
           </MenuSubmenuTrigger>
           <MenuPopup>
@@ -80,11 +89,11 @@ export const WithItemIcon: Story = {
           </MenuPopup>
         </MenuSubmenu>
         <MenuItem>
-          <Icon.CameraIcon weight='bold' />
+          <Lucide.Camera />
           View Painting
         </MenuItem>
         <MenuItem>
-          <Icon.VideoIcon weight='bold' />
+          <Lucide.Video />
           Watch Scene
         </MenuItem>
       </MenuPopup>
@@ -97,7 +106,7 @@ export const NestedSubMenu: Story = {
   render: () => (
     <Menu>
       <MenuTrigger render={<Button color='neutral' variant='outline' />}>
-        Menu <Icon.CaretDownIcon weight='bold' />
+        Menu <Lucide.ChevronDown />
       </MenuTrigger>
       <MenuPopup>
         <MenuItem>Add to Collection</MenuItem>
@@ -132,7 +141,7 @@ export const NestedCompact: Story = {
   render: () => (
     <Menu>
       <MenuTrigger render={<Button color='neutral' variant='outline' size-='sm' />}>
-        Menu <Icon.CaretDownIcon weight='bold' />
+        Menu <Lucide.ChevronDown />
       </MenuTrigger>
       <MenuPopup size='compact'>
         <MenuItem>Add to Collection</MenuItem>
@@ -167,21 +176,21 @@ export const AdvanceMenu: Story = {
   render: () => (
     <Menu>
       <MenuTrigger render={<Button color='neutral' variant='outline' />}>
-        Menu <Icon.CaretDownIcon weight='bold' />
+        Menu <Lucide.ChevronDown />
       </MenuTrigger>
-      <MenuPopup className='min-w-48'>
+      <MenuPopup {...stylex.props(x.minWidth['12rem'])}>
         <MenuGroup>
           <MenuGroupLabel>Account</MenuGroupLabel>
           <MenuItem>
-            <Icon.UserIcon weight='bold' />
+            <Lucide.User />
             Profile
           </MenuItem>
           <MenuItem>
-            <Icon.RocketIcon weight='bold' />
+            <Lucide.Rocket />
             Upgrade Plan
           </MenuItem>
           <MenuItem>
-            <Icon.SlidersHorizontalIcon weight='bold' />
+            <Lucide.SlidersHorizontal />
             Settings
           </MenuItem>
         </MenuGroup>
@@ -229,46 +238,46 @@ export const CompactMenu: Story = {
   render: () => (
     <Menu>
       <MenuTrigger render={<Button color='neutral' variant='outline' size='sm' />}>
-        Menu <Icon.CaretDownIcon weight='bold' />
+        Menu <Lucide.ChevronDown />
       </MenuTrigger>
       <MenuPopup size='compact'>
         <MenuItem>
-          <Icon.SunIcon weight='bold' />
+          <Lucide.Sun />
           Light
         </MenuItem>
         <MenuItem>
-          <Icon.MoonIcon weight='bold' />
+          <Lucide.Moon />
           Dark
         </MenuItem>
         <MenuItem>
-          <Icon.LaptopIcon weight='bold' />
+          <Lucide.Laptop />
           System
         </MenuItem>
         <MenuSeparator />
         <MenuSubmenu>
           <MenuSubmenuTrigger>
-            <Icon.PaletteIcon weight='bold' />
+            <Lucide.Palette />
             Custom
           </MenuSubmenuTrigger>
           <MenuSubmenuPopup size='compact'>
             <MenuItem>
-              <Icon.PaletteIcon weight='bold' />
+              <Lucide.Palette />
               Tokyo Night
             </MenuItem>
             <MenuItem>
-              <Icon.PaletteIcon weight='bold' />
+              <Lucide.Palette />
               Dracula
             </MenuItem>
             <MenuItem>
-              <Icon.PaletteIcon weight='bold' />
+              <Lucide.Palette />
               Nord
             </MenuItem>
             <MenuItem>
-              <Icon.PaletteIcon weight='bold' />
+              <Lucide.Palette />
               Gruvbox
             </MenuItem>
             <MenuItem>
-              <Icon.PaletteIcon weight='bold' />
+              <Lucide.Palette />
               Catppuccin
             </MenuItem>
           </MenuSubmenuPopup>

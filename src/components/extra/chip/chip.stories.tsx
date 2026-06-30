@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import { Chip, ChipButton } from '#/components/extra/chip'
 
 const meta = {
@@ -11,7 +13,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -24,17 +33,17 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center space-x-3'>
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
       <Chip>
         Gryffindor
         <ChipButton>
-          <Icon.XIcon weight='bold' />
+          <Lucide.X />
         </ChipButton>
       </Chip>
       <Chip>
         Expelliarmus
         <ChipButton>
-          <Icon.XIcon weight='bold' />
+          <Lucide.X />
         </ChipButton>
       </Chip>
     </div>
@@ -44,7 +53,7 @@ export const Playground: Story = {
 export const VariantShowcase: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center space-x-3'>
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
       <Chip>Default</Chip>
       <Chip variant='primary'>Primary</Chip>
       <Chip variant='outline'>Outline</Chip>
@@ -56,7 +65,7 @@ export const VariantShowcase: Story = {
 export const SizeShowcase: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center space-x-3'>
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
       <Chip size='sm'>Small</Chip>
       <Chip size='md'>Medium</Chip>
       <Chip size='lg'>Large</Chip>
@@ -67,13 +76,13 @@ export const SizeShowcase: Story = {
 export const WithIcon: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center space-x-3'>
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
       <Chip>
-        <Icon.BookIcon weight='bold' />
+        <Lucide.Book />
         The Da Vinci Code
       </Chip>
       <Chip>
-        <Icon.MagicWandIcon weight='bold' />
+        <Lucide.Wand />
         Hogwarts
       </Chip>
     </div>

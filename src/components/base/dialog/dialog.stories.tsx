@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import { Button } from '#/components/base/button'
 import {
   Dialog,
@@ -24,7 +26,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -45,7 +54,7 @@ export const Playground: Story = {
         </DialogHeader>
         <DialogBody>
           <DialogDescription>Send your message via owl post to Hogwarts.</DialogDescription>
-          <Textarea placeholder='Enter your message' className='h-28' />
+          <Textarea placeholder='Enter your message' {...stylex.props(x.height['28rem'])} />
         </DialogBody>
         <DialogFooter>
           <DialogClose>Close</DialogClose>
@@ -64,7 +73,7 @@ export const WithIconHeader: Story = {
       <DialogPopup>
         <DialogHeader>
           <IconBox size='sm'>
-            <Icon.ChatIcon weight='bold' />
+            <Lucide.MessageSquare />
           </IconBox>
           <DialogTitle>Decode the Message</DialogTitle>
         </DialogHeader>

@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from '#/components/base/meter'
+import { fontSize } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Meter',
@@ -10,7 +13,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -32,7 +42,10 @@ export const Playground: Story = {
   },
   render: (args) => (
     <Meter {...args}>
-      <div className='col-span-full flex justify-between'>
+      <div
+        className='col-span-full'
+        {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
+      >
         <MeterLabel>Storage Used</MeterLabel>
         <MeterValue />
       </div>
@@ -52,13 +65,18 @@ export const SizeShowcase: Story = {
     max: 100
   },
   render: () => (
-    <div className='flex w-80 flex-col gap-6'>
+    <div
+      {...stylex.props(x.display.flex, x.width['20rem'], x.flexDirection.column, x.gap['1.5rem'])}
+    >
       {sizes.map((s) => (
         <Meter key={s} value={65} min={0} max={100} size={s}>
-          <div className='col-span-full flex justify-between'>
-            <MeterLabel size={s} className='inline-flex gap-1'>
+          <div
+            className='col-span-full'
+            {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
+          >
+            <MeterLabel size={s} className='inline-flex' {...stylex.props(x.gap['0.25rem'])}>
               <span>Size</span>
-              <span className='uppercase'>{s}</span>
+              <span {...stylex.props(x.textTransform.uppercase)}>{s}</span>
             </MeterLabel>
             <MeterValue size={s} />
           </div>
@@ -80,10 +98,15 @@ export const VariantShowcase: Story = {
     max: 100
   },
   render: () => (
-    <div className='flex w-80 flex-col gap-6'>
+    <div
+      {...stylex.props(x.display.flex, x.width['20rem'], x.flexDirection.column, x.gap['1.5rem'])}
+    >
       {colors.map((v) => (
         <Meter key={v} value={v === 'critical' ? 90 : 65} min={0} max={100} color={v}>
-          <div className='col-span-full flex justify-between'>
+          <div
+            className='col-span-full'
+            {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
+          >
             <MeterLabel>{v.charAt(0).toUpperCase() + v.slice(1)}</MeterLabel>
             <MeterValue />
           </div>
@@ -106,9 +129,12 @@ export const StorageExample: Story = {
     color: 'primary'
   },
   render: (args) => (
-    <div className='w-80 space-y-2'>
+    <div className='space-y-2' {...stylex.props(x.width['20rem'])}>
       <Meter {...args}>
-        <div className='col-span-full flex justify-between'>
+        <div
+          className='col-span-full'
+          {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
+        >
           <MeterLabel>Storage</MeterLabel>
           <MeterValue />
         </div>
@@ -116,7 +142,9 @@ export const StorageExample: Story = {
           <MeterIndicator color='primary' />
         </MeterTrack>
       </Meter>
-      <p className='text-foreground-neutral-faded text-xs'>75 GB of 100 GB used</p>
+      <p className='text-foreground-neutral-faded' {...stylex.props(x.fontSize[fontSize.xs])}>
+        75 GB of 100 GB used
+      </p>
     </div>
   )
 }
@@ -131,9 +159,12 @@ export const BatteryExample: Story = {
     color: 'warning'
   },
   render: (args) => (
-    <div className='w-80 space-y-2'>
+    <div className='space-y-2' {...stylex.props(x.width['20rem'])}>
       <Meter {...args}>
-        <div className='col-span-full flex justify-between'>
+        <div
+          className='col-span-full'
+          {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
+        >
           <MeterLabel>Battery</MeterLabel>
           <MeterValue />
         </div>
@@ -141,7 +172,9 @@ export const BatteryExample: Story = {
           <MeterIndicator color='warning' />
         </MeterTrack>
       </Meter>
-      <p className='text-foreground-critical text-xs'>Low battery warning</p>
+      <p className='text-foreground-critical' {...stylex.props(x.fontSize[fontSize.xs])}>
+        Low battery warning
+      </p>
     </div>
   )
 }
@@ -157,9 +190,14 @@ export const WithCustomValue: Story = {
   },
   render: (args) => (
     <Meter {...args}>
-      <div className='col-span-full flex justify-between'>
+      <div
+        className='col-span-full'
+        {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
+      >
         <MeterLabel>API Requests</MeterLabel>
-        <span className='text-foreground-neutral-faded text-sm'>1,450 / 2,000</span>
+        <span className='text-foreground-neutral-faded' {...stylex.props(x.fontSize[fontSize.sm])}>
+          1,450 / 2,000
+        </span>
       </div>
       <MeterTrack>
         <MeterIndicator />

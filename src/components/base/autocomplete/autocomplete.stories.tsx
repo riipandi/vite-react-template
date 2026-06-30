@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import {
   Autocomplete,
   AutocompletePopup,
@@ -20,7 +22,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -59,7 +68,11 @@ export const Playground: Story = {
   render: () => {
     return (
       <Autocomplete items={items}>
-        <AutocompleteInput placeholder='Search for books...' className='w-full lg:w-72' />
+        <AutocompleteInput
+          placeholder='Search for books...'
+          className='lg:w-72'
+          {...stylex.props(x.width['100%'])}
+        />
         <AutocompletePopup>
           <AutocompleteEmpty>No results found</AutocompleteEmpty>
           <AutocompleteList>
@@ -89,7 +102,8 @@ export const VariantSubtle: Story = {
       <Autocomplete items={items}>
         <AutocompleteInput
           placeholder='Search for books...'
-          className='w-full lg:w-72'
+          className='lg:w-72'
+          {...stylex.props(x.width['100%'])}
           variant='subtle'
         />
         <AutocompletePopup>
@@ -121,7 +135,8 @@ export const VariantGhost: Story = {
       <Autocomplete items={items}>
         <AutocompleteInput
           placeholder='Search for books...'
-          className='w-full lg:w-72'
+          className='lg:w-72'
+          {...stylex.props(x.width['100%'])}
           variant='ghost'
         />
         <AutocompletePopup>

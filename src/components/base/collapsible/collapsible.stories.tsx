@@ -1,8 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { Button } from '#/components/base/button'
 import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from '#/components/base/collapsible'
 import { Text } from '#/components/extra/typography'
+import { fontSize, radius } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Collapsible',
@@ -13,7 +16,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -26,8 +36,16 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='flex h-40 w-full items-center justify-center'>
-      <Collapsible className='w-full max-w-sm'>
+    <div
+      {...stylex.props(
+        x.display.flex,
+        x.height['40rem'],
+        x.width['100%'],
+        x.alignItems.center,
+        x.justifyContent.center
+      )}
+    >
+      <Collapsible {...stylex.props(x.width['100%'])}>
         <CollapsibleTrigger>What is the Illuminati?</CollapsibleTrigger>
         <CollapsiblePanel>
           <Text className='text-foreground-neutral-faded'>
@@ -43,8 +61,16 @@ export const Playground: Story = {
 export const Indicator: Story = {
   args: {},
   render: () => (
-    <div className='flex h-40 w-full items-center justify-center'>
-      <Collapsible className='w-full max-w-sm'>
+    <div
+      {...stylex.props(
+        x.display.flex,
+        x.height['40rem'],
+        x.width['100%'],
+        x.alignItems.center,
+        x.justifyContent.center
+      )}
+    >
+      <Collapsible {...stylex.props(x.width['100%'])}>
         <CollapsibleTrigger expandableIndicator>What is the Illuminati?</CollapsibleTrigger>
         <CollapsiblePanel>
           <Text className='text-foreground-neutral-faded'>
@@ -62,17 +88,29 @@ export const InfoCard: Story = {
   render: () => {
     const [isOpen, setIsOpen] = React.useState(false)
     return (
-      <div className='border-border-neutral w-[500px] rounded-lg border p-4'>
-        <Text className='text-sm'>
+      <div
+        className='border-border-neutral w-[500px] border'
+        {...stylex.props(x.borderRadius[radius.lg], x.padding['1rem'])}
+      >
+        <Text {...stylex.props(x.fontSize[fontSize.sm])}>
           ReUI is a open-source collection of UI components and animated effects built with React,
           Typescript, Tailwind CSS, and Motion.
         </Text>
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-          <CollapsiblePanel className='text-sm'>
+          <CollapsiblePanel {...stylex.props(x.fontSize[fontSize.sm])}>
             Pairs beautifully with shadcn/ui. Save time and build your next project faster.
           </CollapsiblePanel>
           <CollapsibleTrigger
-            className='mt-3 w-fit justify-end py-0 text-end text-xs'
+            className='text-end'
+            {...stylex.props(
+              x.marginLeft['0.5rem'],
+              x.marginRight['0.5rem'],
+              x.width.fitContent,
+              x.justifyContent.flexEnd,
+              x.paddingTop['0px'],
+              x.paddingBottom['0px'],
+              x.fontSize[fontSize.xs]
+            )}
             render={<Button size='xs' color='neutral' variant='outline' />}
           >
             {isOpen ? 'Show less' : 'Show more'}

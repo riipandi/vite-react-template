@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import {
   Select,
   SelectPopup,
@@ -22,7 +24,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -46,7 +55,7 @@ export const Playground: Story = {
     ]
 
     return (
-      <div className='w-full max-w-52'>
+      <div {...stylex.props(x.width['100%'], x.maxWidth['13rem'])}>
         <Select items={options}>
           <SelectTrigger>
             <SelectValue placeholder='Hogwarts House' />
@@ -80,7 +89,7 @@ export const MultiSelect: Story = {
     ]
 
     return (
-      <div className='w-full max-w-60'>
+      <div {...stylex.props(x.width['100%'], x.maxWidth['15rem'])}>
         <Select items={options} multiple>
           <SelectTrigger>
             <SelectValue placeholder='Hogwarts Houses' />
@@ -132,9 +141,9 @@ export const GroupItems: Story = {
     ]
 
     return (
-      <div className='w-full max-w-64'>
+      <div {...stylex.props(x.width['100%'], x.maxWidth['16rem'])}>
         <Select>
-          <SelectTrigger className='w-full'>
+          <SelectTrigger {...stylex.props(x.width['100%'])}>
             <SelectValue placeholder='Choose a book' />
           </SelectTrigger>
           <SelectPopup>
@@ -161,13 +170,13 @@ export const ItemWithIcon: Story = {
   args: {},
   render: () => {
     const optionsWithIcon = [
-      { value: 'gryffindor', label: 'Gryffindor', icon: <Icon.LightningIcon weight='bold' /> },
-      { value: 'slytherin', label: 'Slytherin', icon: <Icon.ShieldIcon weight='bold' /> },
-      { value: 'ravenclaw', label: 'Ravenclaw', icon: <Icon.EyeIcon weight='bold' /> }
+      { value: 'gryffindor', label: 'Gryffindor', icon: <Lucide.Zap /> },
+      { value: 'slytherin', label: 'Slytherin', icon: <Lucide.Shield /> },
+      { value: 'ravenclaw', label: 'Ravenclaw', icon: <Lucide.Eye /> }
     ]
 
     return (
-      <div className='w-full max-w-52'>
+      <div {...stylex.props(x.width['100%'], x.maxWidth['13rem'])}>
         <Select items={optionsWithIcon}>
           <SelectTrigger>
             <SelectValue placeholder='Your house' />
@@ -199,7 +208,7 @@ export const DisabledItem: Story = {
       { value: 'unknown', label: 'Ilvermorny', disabled: true }
     ]
     return (
-      <div className='w-full max-w-52'>
+      <div {...stylex.props(x.width['100%'], x.maxWidth['13rem'])}>
         <Select items={options}>
           <SelectTrigger>
             <SelectValue placeholder='Hogwarts House' />

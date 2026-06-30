@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import { Field, FieldLabel } from '#/components/base/field'
 import {
   NumberField,
@@ -19,7 +21,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -32,7 +41,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='flex flex-col gap-6'>
+    <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['1.5rem'])}>
       <Field>
         <NumberField defaultValue={999} min={1} max={10000}>
           <NumberFieldScrubArea>
@@ -40,11 +49,11 @@ export const Playground: Story = {
           </NumberFieldScrubArea>
           <NumberFieldGroup variant='default'>
             <NumberFieldDecrement>
-              <Icon.MinusIcon weight='bold' />
+              <Lucide.Minus />
             </NumberFieldDecrement>
             <NumberFieldInput />
             <NumberFieldIncrement>
-              <Icon.PlusIcon weight='bold' />
+              <Lucide.Plus />
             </NumberFieldIncrement>
           </NumberFieldGroup>
         </NumberField>
@@ -57,11 +66,11 @@ export const Playground: Story = {
           </NumberFieldScrubArea>
           <NumberFieldGroup variant='ghost'>
             <NumberFieldDecrement>
-              <Icon.MinusIcon weight='bold' />
+              <Lucide.Minus />
             </NumberFieldDecrement>
             <NumberFieldInput />
             <NumberFieldIncrement>
-              <Icon.PlusIcon weight='bold' />
+              <Lucide.Plus />
             </NumberFieldIncrement>
           </NumberFieldGroup>
         </NumberField>

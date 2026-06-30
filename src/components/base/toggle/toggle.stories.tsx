@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import { Toggle } from '#/components/base/toggle'
 
 const meta = {
@@ -11,7 +13,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -24,14 +33,14 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center space-x-3'>
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
       <Toggle
         aria-label='Favorite'
         className='data-pressed:*:[svg]:fill-red-500 data-pressed:*:[svg]:stroke-red-500'
         mode='icon'
         size='sm'
       >
-        <Icon.HeartIcon weight='bold' />
+        <Lucide.Heart />
         <span className='sr-only'>Favorite</span>
       </Toggle>
 
@@ -41,7 +50,7 @@ export const Playground: Story = {
         mode='icon'
         size='md'
       >
-        <Icon.StarIcon weight='bold' />
+        <Lucide.Star />
       </Toggle>
 
       <Toggle
@@ -51,7 +60,7 @@ export const Playground: Story = {
         size='md'
         variant='ghost'
       >
-        <Icon.BookmarkIcon weight='bold' />
+        <Lucide.Bookmark />
       </Toggle>
 
       <Toggle
@@ -59,7 +68,7 @@ export const Playground: Story = {
         className='data-pressed:*:[svg]:fill-red-500 data-pressed:*:[svg]:stroke-red-500'
         variant='ghost'
       >
-        <Icon.HeartIcon weight='bold' />
+        <Lucide.Heart />
         Favorite
       </Toggle>
     </div>
@@ -69,14 +78,14 @@ export const Playground: Story = {
 export const SizeShowcase: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center space-x-3'>
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
       <Toggle
         aria-label='Bookmark'
         className='data-pressed:*:[svg]:fill-blue-500 data-pressed:*:[svg]:stroke-blue-500'
         mode='icon'
         size='sm'
       >
-        <Icon.BookmarkIcon weight='bold' />
+        <Lucide.Bookmark />
       </Toggle>
 
       <Toggle
@@ -84,7 +93,7 @@ export const SizeShowcase: Story = {
         className='data-pressed:*:[svg]:fill-red-500 data-pressed:*:[svg]:stroke-red-500'
         size='sm'
       >
-        <Icon.HeartIcon weight='bold' />
+        <Lucide.Heart />
         Favorite
       </Toggle>
 
@@ -95,7 +104,7 @@ export const SizeShowcase: Story = {
         size='md'
         variant='ghost'
       >
-        <Icon.BookmarkIcon weight='bold' />
+        <Lucide.Bookmark />
       </Toggle>
 
       <Toggle
@@ -103,7 +112,7 @@ export const SizeShowcase: Story = {
         className='data-pressed:*:[svg]:fill-red-500 data-pressed:*:[svg]:stroke-red-500'
         size='md'
       >
-        <Icon.HeartIcon weight='bold' />
+        <Lucide.Heart />
         Favorite
       </Toggle>
     </div>

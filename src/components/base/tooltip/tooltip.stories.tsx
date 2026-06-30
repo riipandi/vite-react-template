@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Button } from '#/components/base/button'
 import { Tooltip, TooltipPopup, TooltipTrigger } from '#/components/base/tooltip'
 
@@ -11,7 +13,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -24,7 +33,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='inline-flex items-center space-x-4'>
+    <div className='inline-flex space-x-4' {...stylex.props(x.alignItems.center)}>
       <Tooltip>
         <TooltipTrigger
           render={
@@ -42,7 +51,7 @@ export const Playground: Story = {
 export const Position: Story = {
   args: {},
   render: () => (
-    <div className='inline-flex items-center space-x-4'>
+    <div className='inline-flex space-x-4' {...stylex.props(x.alignItems.center)}>
       <Tooltip>
         <TooltipTrigger
           render={

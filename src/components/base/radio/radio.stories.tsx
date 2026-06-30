@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Radio, RadioGroup } from '#/components/base/radio'
 import { Item, ItemAction, ItemContent, ItemDescription, ItemTitle } from '#/components/extra/item'
 import { Label } from '#/components/extra/label'
@@ -12,7 +14,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -45,22 +54,22 @@ export const Playground: Story = {
 export const WithItem: Story = {
   args: { value: null },
   render: () => (
-    <RadioGroup className='w-full gap-4'>
+    <RadioGroup {...stylex.props(x.width['100%'], x.gap['1rem'])}>
       <Item render={<Label />} variant='outline'>
-        <ItemContent className='px-1'>
+        <ItemContent {...stylex.props(x.paddingLeft['0.25rem'], x.paddingRight['0.25rem'])}>
           <ItemTitle>Standard Wand</ItemTitle>
           <ItemDescription>10 Galleons - Suitable for beginners</ItemDescription>
         </ItemContent>
-        <ItemAction className='p-2'>
+        <ItemAction {...stylex.props(x.padding['0.5rem'])}>
           <Radio value='standard' />
         </ItemAction>
       </Item>
       <Item render={<Label />} variant='outline'>
-        <ItemContent className='px-1'>
+        <ItemContent {...stylex.props(x.paddingLeft['0.25rem'], x.paddingRight['0.25rem'])}>
           <ItemTitle>Premium Wand</ItemTitle>
           <ItemDescription>100 Galleons - Professional quality</ItemDescription>
         </ItemContent>
-        <ItemAction className='p-2'>
+        <ItemAction {...stylex.props(x.padding['0.5rem'])}>
           <Radio value='premium' />
         </ItemAction>
       </Item>

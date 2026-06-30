@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import { Button } from '#/components/base/button'
 import {
   Popover,
@@ -18,7 +20,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -35,7 +44,7 @@ export const Playground: Story = {
       <PopoverTrigger render={<Button color='neutral' variant='outline' />}>
         Learn Spell
       </PopoverTrigger>
-      <PopoverPopup className='w-72'>
+      <PopoverPopup {...stylex.props(x.width['18rem'])}>
         <PopoverTitle>Learn Expelliarmus</PopoverTitle>
         <PopoverDescription>
           Master this disarming charm to protect yourself in magical duels. Taught by Professor
@@ -43,7 +52,7 @@ export const Playground: Story = {
         </PopoverDescription>
         <Button color='neutral' variant='outline' size='xs'>
           Learn Now
-          <Icon.ArrowRightIcon weight='bold' />
+          <Lucide.ArrowRight />
         </Button>
       </PopoverPopup>
     </Popover>

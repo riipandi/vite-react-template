@@ -1,5 +1,7 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage, AvatarIndicator } from '#/components/base/avatar'
 
 const meta = {
@@ -11,7 +13,14 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -28,14 +37,14 @@ const Row = ({
   children,
   className
 }: React.PropsWithChildren<{ label: string; className?: string }>) => (
-  <div className='flex items-center gap-2'>
+  <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
     <span className={className}>{label}</span>
     {children}
   </div>
 )
 
 const Grid = ({ children }: React.PropsWithChildren) => (
-  <div className='flex flex-col gap-4'>{children}</div>
+  <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['1rem'])}>{children}</div>
 )
 
 export const Playground: Story = {
@@ -99,7 +108,7 @@ export const Indicator: Story = {
       <Avatar size='md' className='bg-blue-500 text-white'>
         <AvatarFallback>LV</AvatarFallback>
         <AvatarIndicator position='bottom' className='bg-green-500 text-white' size='lg'>
-          <Icon.CheckCircleIcon weight='bold' />
+          <Lucide.CheckCircle />
         </AvatarIndicator>
       </Avatar>
     </div>

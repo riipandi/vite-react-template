@@ -1,4 +1,11 @@
 import * as stylex from '@stylexjs/stylex'
 // import * as token from '#/styles/tokens.stylex'
 
-export const toolbarStyles = stylex.create({})
+export const toolbarStyles = stylex.create({
+  root: {},
+  button: {},
+  link: {},
+  input: {},
+  group: {},
+  separator: {}
+})

@@ -10,72 +10,30 @@
 import { Separator as BaseSeparator } from '@base-ui/react/separator'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
 import { Activity } from 'react'
+import { separatorStyles, separatorOrientations } from './separator.stylex'
 
-export const separatorStyles = tv({
-  base: 'bg-border-neutral-faded w-full',
-  slots: {
-    label: 'text-foreground-neutral-faded bg-background-page relative z-10 text-sm text-nowrap'
-  },
-  variants: {
-    orientation: {
-      horizontal: {
-        base: 'bg-border-neutral-faded h-px w-full'
-      },
-      vertical: {
-        base: 'bg-border-neutral-faded min-h-4.5 w-px'
-      }
-    },
-    contentSide: {
-      center: {
-        base: [
-          'before:bg-border-neutral-faded after:bg-border-neutral-faded before:h-px before:w-full',
-          'after:h-px after:w-full'
-        ],
-        label: 'px-2'
-      },
-      left: {
-        base: 'after:bg-border-neutral-faded after:h-px after:w-full',
-        label: 'pr-2'
-      },
-      right: {
-        base: 'before:bg-border-neutral-faded before:h-px before:w-full',
-        label: 'pl-2'
-      }
-    }
-  },
-  compoundVariants: [
-    {
-      orientation: 'horizontal',
-      contentSide: ['left', 'center', 'right'],
-      class: {
-        base: 'flex items-center gap-2',
-        label: 'text-foreground-neutral-faded text-sm text-nowrap'
-      }
-    }
-  ],
-  defaultVariants: {
-    orientation: 'horizontal',
-    contentSide: 'center'
-  }
-})
-
-export type SeparatorProps = React.ComponentProps<typeof BaseSeparator> &
-  VariantProps<typeof separatorStyles>
+export type SeparatorProps = React.ComponentProps<typeof BaseSeparator> & {
+  orientation?: 'horizontal' | 'vertical'
+  contentSide?: 'center' | 'left' | 'right'
+  xstyle?: StyleXStyles
+}
 
 export function Separator({
   children,
-  className,
-  orientation,
-  contentSide,
+  orientation = 'horizontal',
+  xstyle,
   ...props
 }: SeparatorProps) {
-  const styles = separatorStyles({ orientation, contentSide })
+  // ans: contentSide styling deferred — omitted from placeholder stylex
   return (
-    <BaseSeparator data-slot='separator' className={cx(styles.base(), className)} {...props}>
+    <BaseSeparator
+      data-slot='separator'
+      {...stylex.props(separatorStyles.base, separatorOrientations[orientation], xstyle)}
+      {...props}
+    >
       <Activity mode={children ? 'visible' : 'hidden'}>
-        <span className={styles.label()}>{children}</span>
+        <span {...stylex.props(separatorStyles.label)}>{children}</span>
       </Activity>
     </BaseSeparator>
   )

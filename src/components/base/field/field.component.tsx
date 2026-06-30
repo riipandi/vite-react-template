@@ -17,69 +17,63 @@
 import { Field as BaseField } from '@base-ui/react/field'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
 import * as React from 'react'
+import { fieldStyles } from './field.stylex'
 
-export const fieldStyles = tv({
-  base: 'flex flex-col gap-2 text-sm font-medium',
-  slots: {
-    item: [
-      'grid grid-cols-[auto_1fr] items-center gap-2',
-      '**:data-[slot=field-description]:col-start-2'
-    ],
-    label: 'text-foreground-neutral flex items-center gap-2',
-    description: 'text-foreground-neutral-faded px-1 text-xs leading-relaxed',
-    error: 'text-foreground-critical px-1 text-xs',
-    errorListParent: 'ml-4 flex list-disc flex-col gap-1',
-    errorList: '',
-    validity: '',
-    control: ''
-  }
-})
-
-export type FieldRootProps = React.ComponentProps<typeof BaseField.Root>
-export type FieldItemProps = React.ComponentProps<typeof BaseField.Item>
-export type FieldLabelProps = React.ComponentProps<typeof BaseField.Label>
-export type FieldDescriptionProps = React.ComponentProps<typeof BaseField.Description>
+export type FieldRootProps = React.ComponentProps<typeof BaseField.Root> & {
+  xstyle?: StyleXStyles
+}
+export type FieldItemProps = React.ComponentProps<typeof BaseField.Item> & {
+  xstyle?: StyleXStyles
+}
+export type FieldLabelProps = React.ComponentProps<typeof BaseField.Label> & {
+  xstyle?: StyleXStyles
+}
+export type FieldDescriptionProps = React.ComponentProps<typeof BaseField.Description> & {
+  xstyle?: StyleXStyles
+}
 export type FieldErrorProps = React.ComponentProps<typeof BaseField.Error> & {
   errors?: Array<{ message?: string } | undefined>
+  xstyle?: StyleXStyles
 }
-export type FieldValidityProps = React.ComponentProps<typeof BaseField.Validity>
-export type FieldControlProps = React.ComponentProps<typeof BaseField.Control>
-
-export function Field({ className, ...props }: FieldRootProps) {
-  const styles = fieldStyles()
-  return <BaseField.Root data-slot='field' className={cx(styles.base(), className)} {...props} />
+export type FieldValidityProps = React.ComponentProps<typeof BaseField.Validity> & {
+  xstyle?: StyleXStyles
+}
+export type FieldControlProps = React.ComponentProps<typeof BaseField.Control> & {
+  xstyle?: StyleXStyles
 }
 
-export function FieldItem({ className, ...props }: FieldItemProps) {
-  const styles = fieldStyles()
+export function Field({ xstyle, ...props }: FieldRootProps) {
+  return <BaseField.Root data-slot='field' {...stylex.props(fieldStyles.base, xstyle)} {...props} />
+}
+
+export function FieldItem({ xstyle, ...props }: FieldItemProps) {
   return (
-    <BaseField.Item data-slot='field-item' className={cx(styles.item(), className)} {...props} />
+    <BaseField.Item data-slot='field-item' {...stylex.props(fieldStyles.item, xstyle)} {...props} />
   )
 }
 
-export function FieldLabel({ className, ...props }: FieldLabelProps) {
-  const styles = fieldStyles()
+export function FieldLabel({ xstyle, ...props }: FieldLabelProps) {
   return (
-    <BaseField.Label data-slot='field-label' className={cx(styles.label(), className)} {...props} />
-  )
-}
-
-export function FieldDescription({ className, ...props }: FieldDescriptionProps) {
-  const styles = fieldStyles()
-  return (
-    <BaseField.Description
-      data-slot='field-description'
-      className={cx(styles.description(), className)}
+    <BaseField.Label
+      data-slot='field-label'
+      {...stylex.props(fieldStyles.label, xstyle)}
       {...props}
     />
   )
 }
 
-export function FieldError({ className, errors, children, ...props }: FieldErrorProps) {
-  const styles = fieldStyles()
+export function FieldDescription({ xstyle, ...props }: FieldDescriptionProps) {
+  return (
+    <BaseField.Description
+      data-slot='field-description'
+      {...stylex.props(fieldStyles.description, xstyle)}
+      {...props}
+    />
+  )
+}
 
+export function FieldError({ errors, children, xstyle, ...props }: FieldErrorProps) {
   const content = React.useMemo(() => {
     if (children) {
       return children
@@ -96,11 +90,12 @@ export function FieldError({ className, errors, children, ...props }: FieldError
     }
 
     return (
-      <ul className={styles.errorListParent()}>
+      <ul {...stylex.props(fieldStyles.errorListParent)}>
         {uniqueErrors.map(
           (error, index) =>
             error?.message && (
-              <li key={index} className={styles.errorList()}>
+              // oxlint-disable-next-line react/no-array-index-key
+              <li key={index} {...stylex.props(fieldStyles.errorList)}>
                 {error.message}
               </li>
             )
@@ -110,17 +105,32 @@ export function FieldError({ className, errors, children, ...props }: FieldError
   }, [children, errors])
 
   return (
-    <BaseField.Error data-slot='field-error' className={cx(styles.error(), className)} {...props}>
+    <BaseField.Error
+      data-slot='field-error'
+      {...stylex.props(fieldStyles.error, xstyle)}
+      {...props}
+    >
       {content}
     </BaseField.Error>
   )
 }
 
-export function FieldValidity({ ...props }: FieldValidityProps) {
-  return <BaseField.Validity data-slot='field-validity' {...props} />
+export function FieldValidity({ xstyle, ...props }: FieldValidityProps) {
+  return (
+    <BaseField.Validity
+      data-slot='field-validity'
+      {...stylex.props(fieldStyles.validity, xstyle)}
+      {...props}
+    />
+  )
 }
 
-export function FieldControl({ ...props }: FieldControlProps) {
-  const styles = fieldStyles()
-  return <BaseField.Control data-slot='field-control' className={styles.control()} {...props} />
+export function FieldControl({ xstyle, ...props }: FieldControlProps) {
+  return (
+    <BaseField.Control
+      data-slot='field-control'
+      {...stylex.props(fieldStyles.control, xstyle)}
+      {...props}
+    />
+  )
 }

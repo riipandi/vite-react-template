@@ -24,210 +24,132 @@
 import { Drawer as BaseDrawer } from '@base-ui/react/drawer'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
 import { createContext, use } from 'react'
+import { drawerStyles, drawerSwipeDirections } from './drawer.stylex'
 
 const DrawerContext = createContext<BaseDrawer.Root.Props['swipeDirection']>('down')
 
-export const drawerStyles = tv({
-  base: '',
-  slots: {
-    backdrop: [
-      'fixed inset-0 min-h-dvh transition-[color,opacity] duration-450 ease-[cubic-bezier(0.32,0.72,0,1)]',
-      'data-ending-style:opacity-0 data-ending-style:duration-[calc(var(--drawer-swipe-strength)*0.4s)]',
-      'data-starting-style:opacity-0 data-swiping:duration-0 supports-backdrop-filter:backdrop-blur-3xl',
-      'bg-black/20 [--backdrop-opacity:0.5] [--bleed:3rem] supports-[-webkit-touch-callout:none]:absolute',
-      'opacity-[calc(var(--backdrop-opacity)*(1-var(--drawer-swipe-progress)))]'
-    ],
-    viewport: [
-      'fixed inset-0 flex [--viewport-padding:0px]',
-      'supports-[-webkit-touch-callout:none]:[--viewport-padding:0.625rem]'
-    ],
-    popup: [
-      'group/popup bg-background-elevation-overlay border-border-neutral text-foreground-neutral relative',
-      'touch-auto overflow-y-auto overscroll-contain border [--bleed:3rem] data-swiping:select-none',
-      'data-ending-style:duration-[calc(var(--drawer-swipe-strength)*0.4s)]',
-      // Nested drawer stacking variables
-      '[--height:max(0px,calc(var(--drawer-frontmost-height,var(--drawer-height))-var(--bleed)))]',
-      '[--peek:1rem]',
-      '[--scale-base:calc(max(0,1-(var(--nested-drawers)*var(--stack-step))))]',
-      '[--scale:clamp(0,calc(var(--scale-base)+(var(--stack-step)*var(--stack-progress))),1)]',
-      '[--shrink:calc(1-var(--scale))]',
-      '[--stack-peek-offset:max(0px,calc((var(--nested-drawers)-var(--stack-progress))*var(--peek)))]',
-      '[--stack-progress:clamp(0,var(--drawer-swipe-progress),1)]',
-      '[--stack-step:0.05]',
-      // Nested drawer overlay (::after pseudo-element)
-      "after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:bg-transparent after:transition-[background-color] after:duration-450 after:ease-[cubic-bezier(0.32,0.72,0,1)] after:content-['']",
-      // Nested drawer states
-      'data-nested-drawer-open:overflow-hidden data-nested-drawer-open:after:bg-black/5 data-nested-drawer-swiping:duration-0'
-    ],
-    content: [
-      'transition-opacity duration-300 ease-[cubic-bezier(0.45,1.005,0,1.005)]',
-      'group-data-nested-drawer-open/popup:opacity-0 group-data-nested-drawer-swiping/popup:opacity-100'
-    ],
-    title: 'text-foreground-neutral text-base font-medium',
-    description: 'text-foreground-neutral-faded mt-1.5 text-sm',
-    handle: [
-      'bg-background-neutral-faded mx-auto mb-4 h-1 w-12 rounded-full transition-opacity duration-200',
-      'group-data-nested-drawer-open/popup:opacity-0 group-data-nested-drawer-swiping/popup:opacity-100'
-    ]
-  },
-  variants: {
-    swipeDirection: {
-      left: {
-        viewport: 'items-stretch justify-start p-(--viewport-padding)',
-        popup: [
-          // Shared horizontal styles
-          'h-full w-[calc(22rem+var(--bleed))] max-w-[calc(100vw-3rem+var(--bleed))] p-6',
-          'supports--webkit-touch-callout-none:max-w-[calc(100vw-20px)] supports-[-webkit-touch-callout:none]:w-[20rem] supports-[-webkit-touch-callout:none]:rounded-lg supports-[-webkit-touch-callout:none]:[--bleed:0px]',
-          // Left-only styles
-          '-ml-(--bleed) origin-[var(--bleed)_50%]',
-          'transform-[translateX(calc(var(--drawer-swipe-movement-x)+var(--stack-peek-offset)+(var(--shrink)*100%)))_scale(var(--scale))]',
-          'rounded-r-2xl border-l pl-[calc(1.5rem+var(--bleed))] shadow',
-          '[transition:transform_450ms_cubic-bezier(0.32,0.72,0,1),box-shadow_450ms_cubic-bezier(0.32,0.72,0,1)]',
-          'data-ending-style:shadow-none data-swiping:duration-0',
-          'supports-[-webkit-touch-callout:none]:ml-0 supports-[-webkit-touch-callout:none]:pl-4',
-          // Left enter/exit
-          'data-ending-style:transform-[translateX(calc(-100%+var(--bleed)-var(--viewport-padding)))]',
-          'data-starting-style:transform-[translateX(calc(-100%+var(--bleed)-var(--viewport-padding)))]'
-        ]
-      },
-      right: {
-        viewport: 'items-stretch justify-end p-(--viewport-padding)',
-        popup: [
-          // Shared horizontal styles
-          'h-full w-[calc(22rem+var(--bleed))] max-w-[calc(100vw-3rem+var(--bleed))] p-6',
-          'supports--webkit-touch-callout-none:max-w-[calc(100vw-20px)] supports-[-webkit-touch-callout:none]:w-[20rem] supports-[-webkit-touch-callout:none]:rounded-lg supports-[-webkit-touch-callout:none]:[--bleed:0px]',
-          // Right-only styles
-          '-mr-(--bleed) origin-[calc(100%-var(--bleed))_50%]',
-          'transform-[translateX(calc(var(--drawer-swipe-movement-x)-var(--stack-peek-offset)-(var(--shrink)*100%)))_scale(var(--scale))]',
-          'rounded-l-2xl border-r pr-[calc(1.5rem+var(--bleed))] shadow',
-          '[transition:transform_450ms_cubic-bezier(0.32,0.72,0,1),box-shadow_450ms_cubic-bezier(0.32,0.72,0,1)]',
-          'data-ending-style:shadow-none data-swiping:duration-0',
-          'supports--webkit-touch-callout-none:pr-4 supports-[-webkit-touch-callout:none]:mr-0',
-          // Right enter/exit
-          'data-ending-style:transform-[translateX(calc(100%-var(--bleed)+var(--viewport-padding)))]',
-          'data-starting-style:transform-[translateX(calc(100%-var(--bleed)+var(--viewport-padding)))]'
-        ]
-      },
-      up: {
-        viewport: 'items-start justify-center',
-        popup: [
-          // Shared vertical styles
-          'max-h-[calc(80vh+var(--bleed))] w-full px-6',
-          // Up-only styles
-          '-mt-(--bleed) h-(--drawer-height,auto) origin-[50%_var(--bleed)]',
-          'transform-[translateY(calc(var(--drawer-swipe-movement-y)+var(--stack-peek-offset)+(var(--shrink)*var(--height))))_scale(var(--scale))]',
-          'rounded-b-2xl border-t pt-[calc(1.5rem+env(safe-area-inset-top,0)+var(--bleed))] pb-4 shadow',
-          '[transition:transform_450ms_cubic-bezier(0.32,0.72,0,1),height_450ms_cubic-bezier(0.32,0.72,0,1),box-shadow_450ms_cubic-bezier(0.32,0.72,0,1)]',
-          'data-ending-style:shadow-none data-nested-drawer-open:h-[calc(var(--height)+var(--bleed))] data-swiping:duration-0',
-          // Up enter/exit
-          'data-ending-style:transform-[translateY(calc(-100%+var(--bleed)))]',
-          'data-starting-style:transform-[translateY(calc(-100%+var(--bleed)))]'
-        ]
-      },
-      down: {
-        viewport: 'items-end justify-center',
-        popup: [
-          // Shared vertical styles
-          'max-h-[calc(80vh+var(--bleed))] w-full px-6',
-          // Down-only styles
-          '-mb-(--bleed) h-(--drawer-height,auto) origin-[50%_calc(100%-var(--bleed))]',
-          'transform-[translateY(calc(var(--drawer-swipe-movement-y)-var(--stack-peek-offset)-(var(--shrink)*var(--height))))_scale(var(--scale))]',
-          'rounded-t-2xl border-b pt-4 pb-[calc(1.5rem+env(safe-area-inset-bottom,0)+var(--bleed))] shadow',
-          '[transition:transform_450ms_cubic-bezier(0.32,0.72,0,1),height_450ms_cubic-bezier(0.32,0.72,0,1),box-shadow_450ms_cubic-bezier(0.32,0.72,0,1)]',
-          'data-ending-style:shadow-none data-nested-drawer-open:h-[calc(var(--height)+var(--bleed))] data-swiping:duration-0',
-          // Down enter/exit
-          'data-ending-style:transform-[translateY(calc(100%-var(--bleed)))]',
-          'data-starting-style:transform-[translateY(calc(100%-var(--bleed)))]'
-        ]
-      }
-    }
-  },
-  compoundVariants: [
-    {
-      swipeDirection: ['down', 'up'],
-      class: {
-        title: 'text-center',
-        description: 'text-center'
-      }
-    }
-  ],
-  defaultVariants: {
-    swipeDirection: 'down'
-  }
-})
+export type DrawerSwipeDirection = keyof typeof drawerSwipeDirections
 
-export type DrawerRootProps = BaseDrawer.Root.Props
-export type DrawerTriggerProps = BaseDrawer.Trigger.Props
-export type DrawerPortalProps = BaseDrawer.Portal.Props
-export type DrawerCloseProps = BaseDrawer.Close.Props
-export type DrawerContentProps = BaseDrawer.Content.Props
-export type DrawerPopupProps = BaseDrawer.Popup.Props & VariantProps<typeof drawerStyles>
-export type DrawerViewportProps = BaseDrawer.Viewport.Props
-export type DrawerTitleProps = BaseDrawer.Title.Props
-export type DrawerDescriptionProps = BaseDrawer.Description.Props
-export type DrawerBackdropProps = BaseDrawer.Backdrop.Props
+export type DrawerRootProps = BaseDrawer.Root.Props & {
+  swipeDirection?: DrawerSwipeDirection
+  xstyle?: StyleXStyles
+}
+export type DrawerTriggerProps = BaseDrawer.Trigger.Props & {
+  xstyle?: StyleXStyles
+}
+export type DrawerPortalProps = BaseDrawer.Portal.Props & {
+  xstyle?: StyleXStyles
+}
+export type DrawerCloseProps = BaseDrawer.Close.Props & {
+  xstyle?: StyleXStyles
+}
+export type DrawerContentProps = BaseDrawer.Content.Props & {
+  xstyle?: StyleXStyles
+}
+export type DrawerPopupProps = BaseDrawer.Popup.Props & {
+  xstyle?: StyleXStyles
+}
+export type DrawerViewportProps = BaseDrawer.Viewport.Props & {
+  xstyle?: StyleXStyles
+}
+export type DrawerTitleProps = BaseDrawer.Title.Props & {
+  xstyle?: StyleXStyles
+}
+export type DrawerDescriptionProps = BaseDrawer.Description.Props & {
+  xstyle?: StyleXStyles
+}
+export type DrawerBackdropProps = BaseDrawer.Backdrop.Props & {
+  xstyle?: StyleXStyles
+}
 
-export function Drawer({ swipeDirection = 'down', ...props }: DrawerRootProps) {
+export function Drawer({ swipeDirection = 'down', xstyle, ...props }: DrawerRootProps) {
   return (
     <DrawerContext value={swipeDirection}>
-      <BaseDrawer.Root data-slot='drawer' swipeDirection={swipeDirection} {...props} />
+      <BaseDrawer.Root
+        data-slot='drawer'
+        swipeDirection={swipeDirection}
+        {...stylex.props(drawerStyles.root, drawerSwipeDirections[swipeDirection], xstyle)}
+        {...props}
+      />
     </DrawerContext>
   )
 }
 
-export function DrawerTrigger({ ...props }: DrawerTriggerProps) {
-  return <BaseDrawer.Trigger {...props} data-slot='drawer-trigger' />
-}
-
-export function DrawerPortal({ className, ...props }: DrawerPortalProps) {
+export function DrawerTrigger({ xstyle, ...props }: DrawerTriggerProps) {
   return (
-    <BaseDrawer.Portal data-slot='drawer-portal' className={cx('z-50', className)} {...props} />
+    <BaseDrawer.Trigger
+      data-slot='drawer-trigger'
+      {...stylex.props(drawerStyles.trigger, xstyle)}
+      {...props}
+    />
   )
 }
 
-export function DrawerClose({ ...props }: DrawerCloseProps) {
-  return <BaseDrawer.Close data-slot='drawer-close' {...props} />
+export function DrawerPortal({ xstyle, ...props }: DrawerPortalProps) {
+  return (
+    <BaseDrawer.Portal
+      data-slot='drawer-portal'
+      {...stylex.props(drawerStyles.portal, xstyle)}
+      {...props}
+    />
+  )
 }
 
-export function DrawerBackdrop({ className, ...props }: DrawerBackdropProps) {
-  const styles = drawerStyles()
+export function DrawerClose({ xstyle, ...props }: DrawerCloseProps) {
+  return (
+    <BaseDrawer.Close
+      data-slot='drawer-close'
+      {...stylex.props(drawerStyles.close, xstyle)}
+      {...props}
+    />
+  )
+}
+
+export function DrawerBackdrop({ xstyle, ...props }: DrawerBackdropProps) {
   return (
     <BaseDrawer.Backdrop
       data-slot='drawer-backdrop'
-      className={cx(styles.backdrop(), className)}
+      {...stylex.props(drawerStyles.backdrop, xstyle)}
       {...props}
     />
   )
 }
 
-export function DrawerViewport({ className, ...props }: DrawerViewportProps) {
+export function DrawerViewport({ xstyle, ...props }: DrawerViewportProps) {
   const dir = use(DrawerContext)
-  const styles = drawerStyles({ swipeDirection: dir })
   return (
     <BaseDrawer.Viewport
       data-slot='drawer-viewport'
-      className={cx(styles.viewport(), className)}
+      {...stylex.props(
+        drawerStyles.viewport,
+        dir && drawerSwipeDirections[dir as DrawerSwipeDirection],
+        xstyle
+      )}
       {...props}
     />
   )
 }
 
-export function DrawerPopup({ className, children, ...props }: DrawerPopupProps) {
+export function DrawerPopup({ children, xstyle, ...props }: DrawerPopupProps) {
   const dir = use(DrawerContext)
-  const styles = drawerStyles({ swipeDirection: dir })
-
   return (
-    <BaseDrawer.Popup data-slot='drawer-popup' className={cx(styles.popup(), className)} {...props}>
-      {dir === 'down' && <div className={styles.handle()} />}
+    <BaseDrawer.Popup
+      data-slot='drawer-popup'
+      {...stylex.props(
+        drawerStyles.popup,
+        dir && drawerSwipeDirections[dir as DrawerSwipeDirection],
+        xstyle
+      )}
+      {...props}
+    >
+      {dir === 'down' && <div data-slot='drawer-handle' {...stylex.props(drawerStyles.handle)} />}
       {children}
     </BaseDrawer.Popup>
   )
 }
 
-export function DrawerContent({ className, ...props }: DrawerContentProps) {
-  const styles = drawerStyles()
+export function DrawerContent({ xstyle, ...props }: DrawerContentProps) {
   return (
     <DrawerPortal>
       <DrawerBackdrop />
@@ -235,7 +157,7 @@ export function DrawerContent({ className, ...props }: DrawerContentProps) {
         <DrawerPopup>
           <BaseDrawer.Content
             data-slot='drawer-content'
-            className={cx(styles.content(), className)}
+            {...stylex.props(drawerStyles.content, xstyle)}
             {...props}
           />
         </DrawerPopup>
@@ -244,25 +166,21 @@ export function DrawerContent({ className, ...props }: DrawerContentProps) {
   )
 }
 
-export function DrawerTitle({ className, ...props }: DrawerTitleProps) {
-  const dir = use(DrawerContext)
-  const styles = drawerStyles({ swipeDirection: dir })
+export function DrawerTitle({ xstyle, ...props }: DrawerTitleProps) {
   return (
     <BaseDrawer.Title
       data-slot='drawer-title'
-      className={cx(styles.title(), className)}
+      {...stylex.props(drawerStyles.title, xstyle)}
       {...props}
     />
   )
 }
 
-export function DrawerDescription({ className, ...props }: DrawerDescriptionProps) {
-  const dir = use(DrawerContext)
-  const styles = drawerStyles({ swipeDirection: dir })
+export function DrawerDescription({ xstyle, ...props }: DrawerDescriptionProps) {
   return (
     <BaseDrawer.Description
       data-slot='drawer-description'
-      className={cx(styles.description(), className)}
+      {...stylex.props(drawerStyles.description, xstyle)}
       {...props}
     />
   )

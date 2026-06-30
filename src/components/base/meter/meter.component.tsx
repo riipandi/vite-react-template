@@ -17,82 +17,76 @@ import { Meter as BaseMeter } from '@base-ui/react/meter'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
 import { cx } from 'css-variants'
+import { meterColors, meterSizes, meterStyles } from './meter.stylex'
 
-const meterStyles = tv({
-  slots: {
-    root: 'grid w-full gap-y-2',
-    label: 'text-foreground-neutral text-sm font-medium',
-    value: 'text-foreground-neutral-faded text-right text-sm',
-    track: 'bg-border-neutral-faded col-span-full overflow-hidden rounded-full',
-    indicator: 'block h-full transition-all duration-300 ease-out'
-  },
-  variants: {
-    size: {
-      xs: { root: 'grid-cols-2', label: 'text-xs', value: 'text-xs', track: 'h-1' },
-      sm: { root: 'grid-cols-2', label: 'text-sm', value: 'text-sm', track: 'h-1.5' },
-      md: { root: 'grid-cols-2', label: 'text-sm', value: 'text-sm', track: 'h-2' },
-      lg: { root: 'grid-cols-2', label: 'text-base', value: 'text-base', track: 'h-2.5' },
-      xl: { root: 'grid-cols-2', label: 'text-base', value: 'text-base', track: 'h-3' }
-    },
-    color: {
-      primary: { indicator: 'bg-background-primary' },
-      neutral: { indicator: 'bg-foreground-neutral' },
-      positive: { indicator: 'bg-background-positive' },
-      warning: { indicator: 'bg-background-warning' },
-      critical: { indicator: 'bg-background-critical' }
-    }
-  },
-  defaultVariants: {
-    color: 'primary',
-    size: 'md'
-  }
-})
+export type MeterSize = keyof typeof meterSizes
+export type MeterColor = keyof typeof meterColors
 
-export type MeterStyles = VariantProps<typeof meterStyles>
-
-export function Meter({ className, size, color, ...props }: BaseMeter.Root.Props & MeterStyles) {
-  const styles = meterStyles({ size, color })
+export function Meter({
+  className,
+  size,
+  color,
+  xstyle,
+  ...props
+}: BaseMeter.Root.Props & { size?: MeterSize; color?: MeterColor; xstyle?: StyleXStyles }) {
   return (
     <BaseMeter.Root
-      className={(state) =>
-        cx(styles.root(), typeof className === 'function' ? className(state) : className)
-      }
+      data-slot='meter'
+      className={(state) => cx(typeof className === 'function' ? className(state) : className)}
+      {...stylex.props(
+        meterStyles.root,
+        size && meterSizes[size],
+        color && meterColors[color],
+        xstyle
+      )}
       {...props}
     />
   )
 }
 
-export function MeterLabel({ className, size, ...props }: BaseMeter.Label.Props & MeterStyles) {
-  const styles = meterStyles({ size })
+export function MeterLabel({
+  className,
+  size,
+  xstyle,
+  ...props
+}: BaseMeter.Label.Props & { size?: MeterSize; xstyle?: StyleXStyles }) {
   return (
     <BaseMeter.Label
-      className={(state) =>
-        cx(styles.label(), typeof className === 'function' ? className(state) : className)
-      }
+      data-slot='meter-label'
+      className={(state) => cx(typeof className === 'function' ? className(state) : className)}
+      {...stylex.props(meterStyles.label, size && meterSizes[size], xstyle)}
       {...props}
     />
   )
 }
 
-export function MeterValue({ className, size, ...props }: BaseMeter.Value.Props & MeterStyles) {
-  const styles = meterStyles({ size })
+export function MeterValue({
+  className,
+  size,
+  xstyle,
+  ...props
+}: BaseMeter.Value.Props & { size?: MeterSize; xstyle?: StyleXStyles }) {
   return (
     <BaseMeter.Value
-      className={(state) =>
-        cx(styles.value(), typeof className === 'function' ? className(state) : className)
-      }
+      data-slot='meter-value'
+      className={(state) => cx(typeof className === 'function' ? className(state) : className)}
+      {...stylex.props(meterStyles.value, size && meterSizes[size], xstyle)}
       {...props}
     />
   )
 }
 
-export function MeterTrack({ className, size, ...props }: BaseMeter.Track.Props & MeterStyles) {
-  const styles = meterStyles({ size })
+export function MeterTrack({
+  className,
+  size,
+  xstyle,
+  ...props
+}: BaseMeter.Track.Props & { size?: MeterSize; xstyle?: StyleXStyles }) {
   return (
     <BaseMeter.Track
-      className={(state) =>
-        cx(styles.track(), typeof className === 'function' ? className(state) : className)
-      }
+      data-slot='meter-track'
+      className={(state) => cx(typeof className === 'function' ? className(state) : className)}
+      {...stylex.props(meterStyles.track, size && meterSizes[size], xstyle)}
       {...props}
     />
   )
@@ -101,14 +95,14 @@ export function MeterTrack({ className, size, ...props }: BaseMeter.Track.Props 
 export function MeterIndicator({
   className,
   color,
+  xstyle,
   ...props
-}: BaseMeter.Indicator.Props & MeterStyles) {
-  const styles = meterStyles({ color })
+}: BaseMeter.Indicator.Props & { color?: MeterColor; xstyle?: StyleXStyles }) {
   return (
     <BaseMeter.Indicator
-      className={(state) =>
-        cx(styles.indicator(), typeof className === 'function' ? className(state) : className)
-      }
+      data-slot='meter-indicator'
+      className={(state) => cx(typeof className === 'function' ? className(state) : className)}
+      {...stylex.props(meterStyles.indicator, color && meterColors[color], xstyle)}
       {...props}
     />
   )

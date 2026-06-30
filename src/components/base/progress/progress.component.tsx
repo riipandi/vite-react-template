@@ -18,97 +18,84 @@ import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
 import { cx } from 'css-variants'
 import * as React from 'react'
+import { progressColors, progressSizes, progressStyles } from './progress.stylex'
 
-const progressStyles = tv({
-  slots: {
-    root: 'grid w-full gap-y-2',
-    label: 'text-foreground-neutral text-sm font-medium',
-    value: 'text-foreground-neutral-faded text-right text-sm',
-    track: 'bg-border-neutral-faded col-span-full overflow-hidden rounded-full',
-    indicator: 'bg-foreground-neutral block h-full transition-all duration-300 ease-out'
-  },
-  variants: {
-    size: {
-      xs: { root: 'grid-cols-2', label: 'text-xs', value: 'text-xs', track: 'h-1' },
-      sm: { root: 'grid-cols-2', label: 'text-sm', value: 'text-sm', track: 'h-1.5' },
-      md: { root: 'grid-cols-2', label: 'text-sm', value: 'text-sm', track: 'h-2' },
-      lg: { root: 'grid-cols-2', label: 'text-base', value: 'text-base', track: 'h-2.5' },
-      xl: { root: 'grid-cols-2', label: 'text-base', value: 'text-base', track: 'h-3' }
-    },
-    color: {
-      primary: { indicator: 'bg-background-primary' },
-      neutral: { indicator: 'bg-foreground-neutral' },
-      positive: { indicator: 'bg-background-positive' },
-      warning: { indicator: 'bg-background-warning' },
-      critical: { indicator: 'bg-background-critical' }
-    }
-  },
-  defaultVariants: {
-    color: 'primary',
-    size: 'md'
-  }
-})
+export type ProgressSize = keyof typeof progressSizes
+export type ProgressColor = keyof typeof progressColors
 
-export type ProgressStyles = VariantProps<typeof progressStyles>
-
-const ProgressContext = React.createContext<ProgressStyles>({
-  color: 'primary',
-  size: 'md'
-})
+const ProgressContext = React.createContext<{ color?: ProgressColor; size?: ProgressSize }>({})
 
 export function Progress({
   className,
   size,
   color,
+  xstyle,
   ...props
-}: BaseProgress.Root.Props & ProgressStyles) {
-  const styles = progressStyles({ size, color })
+}: BaseProgress.Root.Props & {
+  size?: ProgressSize
+  color?: ProgressColor
+  xstyle?: StyleXStyles
+}) {
   return (
     <ProgressContext.Provider value={{ size, color }}>
       <BaseProgress.Root
-        className={(state) =>
-          cx(styles.root(), typeof className === 'function' ? className(state) : className)
-        }
+        data-slot='progress'
+        className={(state) => cx(typeof className === 'function' ? className(state) : className)}
+        {...stylex.props(
+          progressStyles.root,
+          size && progressSizes[size],
+          color && progressColors[color],
+          xstyle
+        )}
         {...props}
       />
     </ProgressContext.Provider>
   )
 }
 
-export function ProgressLabel({ className, ...props }: BaseProgress.Label.Props & ProgressStyles) {
+export function ProgressLabel({
+  className,
+  xstyle,
+  ...props
+}: BaseProgress.Label.Props & { xstyle?: StyleXStyles }) {
   const context = React.useContext(ProgressContext)
-  const styles = progressStyles({ size: context.size })
   return (
     <BaseProgress.Label
-      className={(state) =>
-        cx(styles.label(), typeof className === 'function' ? className(state) : className)
-      }
+      data-slot='progress-label'
+      className={(state) => cx(typeof className === 'function' ? className(state) : className)}
+      {...stylex.props(progressStyles.label, context.size && progressSizes[context.size], xstyle)}
       {...props}
     />
   )
 }
 
-export function ProgressValue({ className, ...props }: BaseProgress.Value.Props & ProgressStyles) {
+export function ProgressValue({
+  className,
+  xstyle,
+  ...props
+}: BaseProgress.Value.Props & { xstyle?: StyleXStyles }) {
   const context = React.useContext(ProgressContext)
-  const styles = progressStyles({ size: context.size })
   return (
     <BaseProgress.Value
-      className={(state) =>
-        cx(styles.value(), typeof className === 'function' ? className(state) : className)
-      }
+      data-slot='progress-value'
+      className={(state) => cx(typeof className === 'function' ? className(state) : className)}
+      {...stylex.props(progressStyles.value, context.size && progressSizes[context.size], xstyle)}
       {...props}
     />
   )
 }
 
-export function ProgressTrack({ className, ...props }: BaseProgress.Track.Props & ProgressStyles) {
+export function ProgressTrack({
+  className,
+  xstyle,
+  ...props
+}: BaseProgress.Track.Props & { xstyle?: StyleXStyles }) {
   const context = React.useContext(ProgressContext)
-  const styles = progressStyles({ size: context.size })
   return (
     <BaseProgress.Track
-      className={(state) =>
-        cx(styles.track(), typeof className === 'function' ? className(state) : className)
-      }
+      data-slot='progress-track'
+      className={(state) => cx(typeof className === 'function' ? className(state) : className)}
+      {...stylex.props(progressStyles.track, context.size && progressSizes[context.size], xstyle)}
       {...props}
     />
   )
@@ -116,15 +103,19 @@ export function ProgressTrack({ className, ...props }: BaseProgress.Track.Props 
 
 export function ProgressIndicator({
   className,
+  xstyle,
   ...props
-}: BaseProgress.Indicator.Props & ProgressStyles) {
+}: BaseProgress.Indicator.Props & { xstyle?: StyleXStyles }) {
   const context = React.useContext(ProgressContext)
-  const styles = progressStyles({ color: context.color })
   return (
     <BaseProgress.Indicator
-      className={(state) =>
-        cx(styles.indicator(), typeof className === 'function' ? className(state) : className)
-      }
+      data-slot='progress-indicator'
+      className={(state) => cx(typeof className === 'function' ? className(state) : className)}
+      {...stylex.props(
+        progressStyles.indicator,
+        context.color && progressColors[context.color],
+        xstyle
+      )}
       {...props}
     />
   )

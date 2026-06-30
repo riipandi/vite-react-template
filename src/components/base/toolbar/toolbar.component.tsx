@@ -7,98 +7,91 @@
  * <Toolbar.Root>
  *   <Toolbar.Button />
  *   <Toolbar.Link />
- *   <Toolbar.Separator />
- *   <Toolbar.Group>
- *     <Toolbar.Button />
- *     <Toolbar.Button />
- *   <Toolbar.Group />
  *   <Toolbar.Input />
+ *   <Toolbar.Group />
+ *   <Toolbar.Separator />
  * </Toolbar.Root>
  */
 
 import { Toolbar as BaseToolbar } from '@base-ui/react/toolbar'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
+import { toolbarStyles } from './toolbar.stylex'
 
-const toolbarStyles = tv({
-  slots: {
-    root: [
-      'bg-background-page ring-border-neutral flex items-center rounded-lg ring',
-      'px-2 py-1 *:data-[slot=toggle-group]:p-0 [&>button]:rounded-sm [&>button]:py-4'
-    ],
-    button: 'rounded-sm',
-    link: 'text-sm',
-    input: '',
-    group: 'flex gap-1',
-    separator: 'bg-background-neutral mx-2 h-5 w-px'
-  }
-})
+export type ToolbarRootProps = React.ComponentProps<typeof BaseToolbar.Root> & {
+  xstyle?: StyleXStyles
+}
+export type ToolbarButtonProps = React.ComponentProps<typeof BaseToolbar.Button> & {
+  xstyle?: StyleXStyles
+}
+export type ToolbarLinkProps = React.ComponentProps<typeof BaseToolbar.Link> & {
+  xstyle?: StyleXStyles
+}
+export type ToolbarInputProps = React.ComponentProps<typeof BaseToolbar.Input> & {
+  xstyle?: StyleXStyles
+}
+export type ToolbarGroupProps = React.ComponentProps<typeof BaseToolbar.Group> & {
+  xstyle?: StyleXStyles
+}
+export type ToolbarSeparatorProps = React.ComponentProps<typeof BaseToolbar.Separator> & {
+  xstyle?: StyleXStyles
+}
 
-export type ToolbarRootProps = React.ComponentProps<typeof BaseToolbar.Root>
-export type ToolbarButtonProps = React.ComponentProps<typeof BaseToolbar.Button>
-export type ToolbarLinkProps = React.ComponentProps<typeof BaseToolbar.Link>
-export type ToolbarInputProps = React.ComponentProps<typeof BaseToolbar.Input>
-export type ToolbarGroupProps = React.ComponentProps<typeof BaseToolbar.Group>
-export type ToolbarSeparatorProps = React.ComponentProps<typeof BaseToolbar.Separator>
-
-export function Toolbar({ className, ...props }: ToolbarRootProps) {
-  const styles = toolbarStyles()
+export function Toolbar({ xstyle, ...props }: ToolbarRootProps) {
   return (
-    <BaseToolbar.Root data-slot='toolbar' className={cx(styles.root(), className)} {...props} />
+    <BaseToolbar.Root
+      data-slot='toolbar'
+      {...stylex.props(toolbarStyles.root, xstyle)}
+      {...props}
+    />
   )
 }
 
-export function ToolbarButton({ className, ...props }: ToolbarButtonProps) {
-  const styles = toolbarStyles()
+export function ToolbarButton({ xstyle, ...props }: ToolbarButtonProps) {
   return (
     <BaseToolbar.Button
       data-slot='toolbar-button'
-      className={cx(styles.button(), className)}
+      {...stylex.props(toolbarStyles.button, xstyle)}
       {...props}
     />
   )
 }
 
-export function ToolbarLink({ className, ...props }: ToolbarLinkProps) {
-  const styles = toolbarStyles()
+export function ToolbarLink({ xstyle, ...props }: ToolbarLinkProps) {
   return (
     <BaseToolbar.Link
       data-slot='toolbar-link'
-      className={cx(styles.link(), className)}
+      {...stylex.props(toolbarStyles.link, xstyle)}
       {...props}
     />
   )
 }
 
-export function ToolbarInput({ className, ...props }: ToolbarInputProps) {
-  const styles = toolbarStyles()
+export function ToolbarInput({ xstyle, ...props }: ToolbarInputProps) {
   return (
     <BaseToolbar.Input
       data-slot='toolbar-input'
-      className={cx(styles.input(), className)}
+      {...stylex.props(toolbarStyles.input, xstyle)}
       {...props}
     />
   )
 }
 
-export function ToolbarGroup({ className, ...props }: ToolbarGroupProps) {
-  const styles = toolbarStyles()
+export function ToolbarGroup({ xstyle, ...props }: ToolbarGroupProps) {
   return (
     <BaseToolbar.Group
       data-slot='toolbar-group'
-      className={cx(styles.group(), className)}
+      {...stylex.props(toolbarStyles.group, xstyle)}
       {...props}
     />
   )
 }
 
-export function ToolbarSeparator({ className, ...props }: ToolbarSeparatorProps) {
-  const styles = toolbarStyles()
+export function ToolbarSeparator({ xstyle, ...props }: ToolbarSeparatorProps) {
   return (
     <BaseToolbar.Separator
       data-slot='toolbar-separator'
-      className={cx(styles.separator(), className)}
+      {...stylex.props(toolbarStyles.separator, xstyle)}
       {...props}
     />
   )

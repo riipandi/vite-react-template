@@ -9,5 +9,6 @@ export const alertDialogStyles = stylex.create({
   title: {},
   body: {},
   description: {},
-  footer: {}
+  footer: {},
+  trigger: {}
 })

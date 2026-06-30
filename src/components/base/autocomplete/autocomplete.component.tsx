@@ -36,90 +36,95 @@
 import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
-import * as React from 'react'
+import { autocompleteStyles, autocompleteVariants } from './autocomplete.stylex'
 
-const autocompleteStyles = tv({
-  base: 'text-foreground-neutral placeholder:text-foreground-neutral-faded/80 h-9 w-full rounded-sm px-3 text-sm leading-tight transition-all disabled:cursor-not-allowed disabled:opacity-70',
-  slots: {
-    positioner: [],
-    popup: [
-      'bg-background-elevation-overlay ring-border-neutral shadow-overlay rounded ring',
-      'transition-[transform,scale,opacity] outline-none',
-      'max-h-[min(var(---available-height),23rem)] w-(--anchor-width)',
-      'data-ending-style:scale-90 data-ending-style:opacity-0',
-      'data-starting-style:scale-90 data-starting-style:opacity-0'
-    ],
-    empty: [
-      'text-foreground-neutral-faded flex items-center justify-center px-2.5 py-3 text-center',
-      'text-sm empty:hidden empty:h-0 empty:p-0'
-    ],
-    list: [
-      'space-y-0 overflow-auto outline-none empty:hidden empty:h-0 empty:p-0 dark:scheme-dark',
-      'max-h-[min(23rem,var(--available-height))] overflow-y-auto p-1 dark:scheme-dark'
-    ],
-    group: 'pb-2 last:pb-0',
-    groupLabel: 'text-foreground-neutral-faded px-2.5 py-1 text-sm font-medium',
-    row: '',
-    item: [
-      'text-foreground-neutral flex cursor-pointer items-center gap-2 rounded px-2.5 py-2 text-sm',
-      'data-highlighted:not-data-disabled:bg-background-neutral-faded data-selected:not-data-disabled:bg-background-neutral-faded',
-      '[&_svg:not([class*=text-])]:text-foreground-neutral focus-visible:outline-none [&_svg:not([class*=size-])]:size-3.5',
-      'data-disabled:cursor-not-allowed data-disabled:opacity-50'
-    ],
-    separator: 'bg-border-neutral-faded my-1 h-px'
-  },
-  variants: {
-    variant: {
-      default: {
-        base: 'bg-background-elevation-base ring-border-neutral hover:not-data-disabled:not-focus:ring-border-primary focus:ring-border-primary shadow-raised rounded ring focus:ring-2 focus:outline-0'
-      },
-      subtle: {
-        base: 'bg-background-elevation-base/60 ring-border-neutral hover:not-data-disabled:not-focus:ring-border-primary focus:ring-border-primary shadow-raised rounded ring focus:ring-2 focus:outline-0'
-      },
-      ghost: 'bg-transparent focus:outline-none'
-    }
-  },
-  defaultVariants: {
-    variant: 'default'
-  }
-})
+export type AutocompleteVariant = keyof typeof autocompleteVariants
 
-export type AutocompleteRootProps = React.ComponentProps<typeof BaseAutocomplete.Root>
-export type AutocompleteInputProps = React.ComponentProps<typeof BaseAutocomplete.Input> &
-  VariantProps<typeof autocompleteStyles>
-export type AutocompletePopupProps = React.ComponentProps<typeof BaseAutocomplete.Popup>
-export type AutocompleteIconProps = React.ComponentProps<typeof BaseAutocomplete.Icon>
-export type AutocompleteClearProps = React.ComponentProps<typeof BaseAutocomplete.Clear>
-export type AutocompleteValueProps = React.ComponentProps<typeof BaseAutocomplete.Value>
-export type AutocompleteTriggerProps = React.ComponentProps<typeof BaseAutocomplete.Trigger>
-export type AutocompleteEmptyProps = React.ComponentProps<typeof BaseAutocomplete.Empty>
-export type AutocompleteListProps = React.ComponentProps<typeof BaseAutocomplete.List>
-export type AutocompleteGroupProps = React.ComponentProps<typeof BaseAutocomplete.Group>
-export type AutocompleteGroupLabelProps = React.ComponentProps<typeof BaseAutocomplete.GroupLabel>
-export type AutocompleteCollectionProps = React.ComponentProps<typeof BaseAutocomplete.Collection>
-export type AutocompleteRowProps = React.ComponentProps<'div'>
-export type AutocompleteItemProps = React.ComponentProps<typeof BaseAutocomplete.Item>
-export type AutocompleteSeparatorProps = React.ComponentProps<typeof BaseAutocomplete.Separator>
-
-export function Autocomplete({ ...props }: AutocompleteRootProps) {
-  return <BaseAutocomplete.Root data-slot='autocomplete' {...props} />
+export type AutocompleteRootProps = React.ComponentProps<typeof BaseAutocomplete.Root> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteInputProps = React.ComponentProps<typeof BaseAutocomplete.Input> & {
+  variant?: AutocompleteVariant
+  xstyle?: StyleXStyles
+}
+export type AutocompletePopupProps = React.ComponentProps<typeof BaseAutocomplete.Popup> & {
+  align?: BaseAutocomplete.Positioner.Props['align']
+  alignOffset?: BaseAutocomplete.Positioner.Props['alignOffset']
+  side?: BaseAutocomplete.Positioner.Props['side']
+  sideOffset?: BaseAutocomplete.Positioner.Props['sideOffset']
+  anchor?: BaseAutocomplete.Positioner.Props['anchor']
+  sticky?: BaseAutocomplete.Positioner.Props['sticky']
+  positionMethod?: BaseAutocomplete.Positioner.Props['positionMethod']
+  xstyle?: StyleXStyles
+}
+export type AutocompleteIconProps = React.ComponentProps<typeof BaseAutocomplete.Icon> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteClearProps = React.ComponentProps<typeof BaseAutocomplete.Clear> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteValueProps = React.ComponentProps<typeof BaseAutocomplete.Value> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteTriggerProps = React.ComponentProps<typeof BaseAutocomplete.Trigger> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteEmptyProps = React.ComponentProps<typeof BaseAutocomplete.Empty> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteListProps = React.ComponentProps<typeof BaseAutocomplete.List> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteGroupProps = React.ComponentProps<typeof BaseAutocomplete.Group> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteGroupLabelProps = React.ComponentProps<
+  typeof BaseAutocomplete.GroupLabel
+> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteCollectionProps = React.ComponentProps<
+  typeof BaseAutocomplete.Collection
+> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteRowProps = React.ComponentProps<'div'> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteItemProps = React.ComponentProps<typeof BaseAutocomplete.Item> & {
+  xstyle?: StyleXStyles
+}
+export type AutocompleteSeparatorProps = React.ComponentProps<typeof BaseAutocomplete.Separator> & {
+  xstyle?: StyleXStyles
 }
 
-export function AutocompleteInput({ className, variant, ...props }: AutocompleteInputProps) {
-  const styles = autocompleteStyles({ variant })
+export function Autocomplete({ xstyle, ...props }: AutocompleteRootProps) {
+  return (
+    <BaseAutocomplete.Root
+      data-slot='autocomplete'
+      {...stylex.props(autocompleteStyles.root, xstyle)}
+      {...props}
+    />
+  )
+}
+
+export function AutocompleteInput({
+  variant = 'default',
+  xstyle,
+  ...props
+}: AutocompleteInputProps) {
   return (
     <BaseAutocomplete.Input
       data-slot='autocomplete-input'
-      className={cx(styles.base(), className)}
+      {...stylex.props(autocompleteStyles.base, autocompleteVariants[variant], xstyle)}
       {...props}
     />
   )
 }
 
 export function AutocompletePopup({
-  className,
   children,
+  xstyle,
   align,
   alignOffset,
   side,
@@ -128,22 +133,16 @@ export function AutocompletePopup({
   sticky,
   positionMethod,
   ...props
-}: AutocompletePopupProps & {
-  align?: BaseAutocomplete.Positioner.Props['align']
-  alignOffset?: BaseAutocomplete.Positioner.Props['alignOffset']
-  side?: BaseAutocomplete.Positioner.Props['side']
-  sideOffset?: BaseAutocomplete.Positioner.Props['sideOffset']
-  anchor?: BaseAutocomplete.Positioner.Props['anchor']
-  sticky?: BaseAutocomplete.Positioner.Props['sticky']
-  positionMethod?: BaseAutocomplete.Positioner.Props['positionMethod']
-}) {
-  const styles = autocompleteStyles()
+}: AutocompletePopupProps) {
   return (
     <BaseAutocomplete.Portal>
-      <BaseAutocomplete.Backdrop />
+      <BaseAutocomplete.Backdrop
+        data-slot='autocomplete-backdrop'
+        {...stylex.props(autocompleteStyles.backdrop)}
+      />
       <BaseAutocomplete.Positioner
         data-slot='autocomplete-positioner'
-        className={cx(styles.positioner())}
+        {...stylex.props(autocompleteStyles.positioner)}
         align={align}
         alignOffset={alignOffset}
         side={side}
@@ -154,7 +153,7 @@ export function AutocompletePopup({
       >
         <BaseAutocomplete.Popup
           data-slot='autocomplete-popup'
-          className={cx(styles.popup(), className)}
+          {...stylex.props(autocompleteStyles.popup, xstyle)}
           {...props}
         >
           {children}
@@ -164,92 +163,119 @@ export function AutocompletePopup({
   )
 }
 
-export function AutocompleteIcon({ ...props }: AutocompleteIconProps) {
-  return <BaseAutocomplete.Icon data-slot='autocomplete-icon' {...props} />
+export function AutocompleteIcon({ xstyle, ...props }: AutocompleteIconProps) {
+  return (
+    <BaseAutocomplete.Icon
+      data-slot='autocomplete-icon'
+      {...stylex.props(autocompleteStyles.icon, xstyle)}
+      {...props}
+    />
+  )
 }
 
-export function AutocompleteClear({ ...props }: AutocompleteClearProps) {
-  return <BaseAutocomplete.Clear data-slot='autocomplete-clear' {...props} />
+export function AutocompleteClear({ xstyle, ...props }: AutocompleteClearProps) {
+  return (
+    <BaseAutocomplete.Clear
+      data-slot='autocomplete-clear'
+      {...stylex.props(autocompleteStyles.clear, xstyle)}
+      {...props}
+    />
+  )
 }
 
-export function AutocompleteValue({ ...props }: AutocompleteValueProps) {
-  return <BaseAutocomplete.Value data-slot='autocomplete-value' {...props} />
+export function AutocompleteValue({ xstyle, ...props }: AutocompleteValueProps) {
+  return (
+    <BaseAutocomplete.Value
+      data-slot='autocomplete-value'
+      {...stylex.props(autocompleteStyles.value, xstyle)}
+      {...props}
+    />
+  )
 }
 
-export function AutocompleteTrigger({ ...props }: AutocompleteTriggerProps) {
-  return <BaseAutocomplete.Trigger data-slot='autocomplete-trigger' {...props} />
+export function AutocompleteTrigger({ xstyle, ...props }: AutocompleteTriggerProps) {
+  return (
+    <BaseAutocomplete.Trigger
+      data-slot='autocomplete-trigger'
+      {...stylex.props(autocompleteStyles.trigger, xstyle)}
+      {...props}
+    />
+  )
 }
 
-export function AutocompleteEmpty({ className, ...props }: AutocompleteEmptyProps) {
-  const styles = autocompleteStyles()
+export function AutocompleteEmpty({ xstyle, ...props }: AutocompleteEmptyProps) {
   return (
     <BaseAutocomplete.Empty
       data-slot='autocomplete-empty'
-      className={cx(styles.empty(), className)}
+      {...stylex.props(autocompleteStyles.empty, xstyle)}
       {...props}
     />
   )
 }
 
-export function AutocompleteList({ className, ...props }: AutocompleteListProps) {
-  const styles = autocompleteStyles()
+export function AutocompleteList({ xstyle, ...props }: AutocompleteListProps) {
   return (
     <BaseAutocomplete.List
       data-slot='autocomplete-list'
-      className={cx(styles.list(), className)}
+      {...stylex.props(autocompleteStyles.list, xstyle)}
       {...props}
     />
   )
 }
 
-export function AutocompleteGroup({ className, ...props }: AutocompleteGroupProps) {
-  const styles = autocompleteStyles()
+export function AutocompleteGroup({ xstyle, ...props }: AutocompleteGroupProps) {
   return (
     <BaseAutocomplete.Group
       data-slot='autocomplete-group'
-      className={cx(styles.group(), className)}
+      {...stylex.props(autocompleteStyles.group, xstyle)}
       {...props}
     />
   )
 }
 
-export function AutocompleteGroupLabel({ className, ...props }: AutocompleteGroupLabelProps) {
-  const styles = autocompleteStyles()
+export function AutocompleteGroupLabel({ xstyle, ...props }: AutocompleteGroupLabelProps) {
   return (
     <BaseAutocomplete.GroupLabel
       data-slot='autocomplete-group-label'
-      className={cx(styles.groupLabel(), className)}
+      {...stylex.props(autocompleteStyles.groupLabel, xstyle)}
       {...props}
     />
   )
 }
 
-export function AutocompleteCollection({ ...props }: AutocompleteCollectionProps) {
-  return <BaseAutocomplete.Collection data-slot='autocomplete-collection' {...props} />
+export function AutocompleteCollection({ xstyle, ...props }: AutocompleteCollectionProps) {
+  return (
+    <BaseAutocomplete.Collection
+      data-slot='autocomplete-collection'
+      {...stylex.props(autocompleteStyles.collection, xstyle)}
+      {...props}
+    />
+  )
 }
 
-export function AutocompleteRow({ className, ...props }: AutocompleteRowProps) {
-  const styles = autocompleteStyles()
-  return <div data-slot='autocomplete-row' className={styles.row({ className })} {...props} />
+export function AutocompleteRow({ children, xstyle, ...props }: AutocompleteRowProps) {
+  return (
+    <div data-slot='autocomplete-row' {...stylex.props(autocompleteStyles.row, xstyle)} {...props}>
+      {children}
+    </div>
+  )
 }
 
-export function AutocompleteItem({ className, ...props }: AutocompleteItemProps) {
-  const styles = autocompleteStyles()
+export function AutocompleteItem({ xstyle, ...props }: AutocompleteItemProps) {
   return (
     <BaseAutocomplete.Item
       data-slot='autocomplete-item'
-      className={cx(styles.item(), className)}
+      {...stylex.props(autocompleteStyles.item, xstyle)}
       {...props}
     />
   )
 }
 
-export function AutocompleteSeparator({ className, ...props }: AutocompleteSeparatorProps) {
-  const styles = autocompleteStyles()
+export function AutocompleteSeparator({ xstyle, ...props }: AutocompleteSeparatorProps) {
   return (
     <BaseAutocomplete.Separator
       data-slot='autocomplete-separator'
-      className={cx(styles.separator(), className)}
+      {...stylex.props(autocompleteStyles.separator, xstyle)}
       {...props}
     />
   )

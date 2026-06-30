@@ -21,9 +21,7 @@
 import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
-
-type TooltipStyles = VariantProps<typeof tooltipStyles>
+import { tooltipStyles } from './tooltip.stylex'
 
 export interface TooltipProps extends BaseTooltip.Root.Props {
   delay?: BaseTooltip.Provider.Props['delay']
@@ -51,9 +49,8 @@ export function TooltipTrigger(props: TooltipTriggerProps) {
   return <BaseTooltip.Trigger data-slot='tooltip-trigger' {...props} />
 }
 
-export interface TooltipPopupProps
-  extends Omit<BaseTooltip.Popup.Props, 'className'>, TooltipStyles {
-  className?: string
+export interface TooltipPopupProps extends Omit<BaseTooltip.Popup.Props, 'className'> {
+  xstyle?: StyleXStyles
   sideOffset?: BaseTooltip.Positioner.Props['sideOffset']
   side?: BaseTooltip.Positioner.Props['side']
   align?: BaseTooltip.Positioner.Props['align']
@@ -62,18 +59,15 @@ export interface TooltipPopupProps
 }
 
 export function TooltipPopup({
-  className,
   children,
-  variant = 'default',
   sideOffset = 8,
   showArrow = true,
   align,
   alignOffset = 0,
   side,
+  xstyle,
   ...props
 }: TooltipPopupProps) {
-  const styles = tooltipStyles({ variant })
-
   return (
     <BaseTooltip.Portal data-slot='tooltip-portal'>
       <BaseTooltip.Positioner
@@ -82,40 +76,29 @@ export function TooltipPopup({
         side={side}
         align={align}
         alignOffset={alignOffset}
-        className={styles.positioner()}
+        {...stylex.props(tooltipStyles.positioner)}
       >
         <BaseTooltip.Popup
           data-slot='tooltip-content'
-          className={styles.content({ className })}
+          {...stylex.props(tooltipStyles.content, xstyle)}
           {...props}
         >
           {children}
-          {showArrow && <TooltipArrow variant={variant} />}
+          {showArrow && <TooltipArrow />}
         </BaseTooltip.Popup>
       </BaseTooltip.Positioner>
     </BaseTooltip.Portal>
   )
 }
 
-export interface TooltipArrowProps
-  extends Omit<BaseTooltip.Arrow.Props, 'className'>, TooltipStyles {
-  className?: string
-}
+export interface TooltipArrowProps extends Omit<BaseTooltip.Arrow.Props, 'className'> {}
 
-export function TooltipArrow({ className, variant = 'default', ...props }: TooltipArrowProps) {
-  const styles = tooltipStyles({ variant })
-
+export function TooltipArrow(props: TooltipArrowProps) {
   return (
-    <BaseTooltip.Arrow data-slot='tooltip-arrow' className={styles.arrow({ className })} {...props}>
+    <BaseTooltip.Arrow data-slot='tooltip-arrow' {...stylex.props(tooltipStyles.arrow)} {...props}>
       <svg width='20' height='10' viewBox='0 0 20 10' fill='none'>
-        <path
-          d='M9.66437 2.60207L4.80758 6.97318C4.07308 7.63423 3.11989 8 2.13172 8H0V9H20V8H18.5349C17.5468 8 16.5936 7.63423 15.8591 6.97318L11.0023 2.60207C10.622 2.2598 10.0447 2.25979 9.66437 2.60207Z'
-          className={styles.arrowBackground()}
-        />
-        <path
-          d='M10.3333 3.34539L5.47654 7.71648C4.55842 8.54279 3.36693 9 2.13172 9H0V8H2.13172C3.11989 8 4.07308 7.63423 4.80758 6.97318L9.66437 2.60207C10.0447 2.25979 10.622 2.2598 11.0023 2.60207L15.8591 6.97318C16.5936 7.63423 17.5468 8 18.5349 8H20V9H18.5349C17.2998 9 16.1083 8.54278 15.1901 7.71648L10.3333 3.34539Z'
-          className={styles.arrowStroke()}
-        />
+        <path d='M9.66437 2.60207L4.80758 6.97318C4.07308 7.63423 3.11989 8 2.13172 8H0V9H20V8H18.5349C17.5468 8 16.5936 7.63423 15.8591 6.97318L11.0023 2.60207C10.622 2.2598 10.0447 2.25979 9.66437 2.60207Z' />
+        <path d='M10.3333 3.34539L5.47654 7.71648C4.55842 8.54279 3.36693 9 2.13172 9H0V8H2.13172C3.11989 8 4.07308 7.63423 4.80758 6.97318L9.66437 2.60207C10.0447 2.25979 10.622 2.2598 11.0023 2.60207L15.8591 6.97318C16.5936 7.63423 17.5468 8 18.5349 8H20V9H18.5349C17.2998 9 16.1083 8.54278 15.1901 7.71648L10.3333 3.34539Z' />
       </svg>
     </BaseTooltip.Arrow>
   )

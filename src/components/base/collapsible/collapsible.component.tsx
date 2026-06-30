@@ -13,86 +13,56 @@
 import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
+import { collapsibleExpandable, collapsibleStyles } from './collapsible.stylex'
 
-export const collapsibleStyles = tv({
-  base: 'flex flex-col',
-  slots: {
-    trigger: [
-      'flex cursor-pointer items-center gap-2 select-none',
-      'text-foreground-neutral py-1.5 text-sm transition-colors duration-100',
-      'focus-visible:outline-primary focus-visible:ring-border-primary focus:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2',
-      'w-full text-left leading-relaxed font-medium [&_svg:not([class*=size-])]:size-3.5',
-      '**:data-[slot=expandable-indicator]:transition-all',
-      '**:data-[slot=expandable-indicator]:duration-100',
-      'disabled:cursor-not-allowed disabled:opacity-70'
-    ],
-    panel: [
-      'flex flex-col gap-2',
-      'overflow-hidden transition-all ease-out',
-      'h-(--collapsible-panel-height) [&[hidden]:not([hidden=until-found])]:hidden',
-      'data-ending-style:h-0 data-starting-style:h-0'
-    ],
-    panelContent: ''
-  },
-  variants: {
-    expandableIndicator: {
-      true: {
-        trigger: [
-          'data-expandable:after:bg-chevron-down-dark dark:data-expandable:after:bg-chevron-down data-expandable:after:ml-auto data-expandable:after:size-3.5',
-          'data-expandable:after:shrink-0 data-expandable:after:transition-transform data-expandable:after:duration-100',
-          'data-expandable:data-panel-open:after:rotate-180'
-        ]
-      },
-      false: {}
-    }
-  },
-  defaultVariants: {
-    expandableIndicator: true
-  }
-})
+export type CollapsibleRootProps = React.ComponentProps<typeof BaseCollapsible.Root> & {
+  xstyle?: StyleXStyles
+}
+export type CollapsibleTriggerProps = React.ComponentProps<typeof BaseCollapsible.Trigger> & {
+  expandableIndicator?: boolean
+  xstyle?: StyleXStyles
+}
+export type CollapsiblePanelProps = React.ComponentProps<typeof BaseCollapsible.Panel> & {
+  xstyle?: StyleXStyles
+}
 
-export type CollapsibleRootProps = React.ComponentProps<typeof BaseCollapsible.Root>
-export type CollapsibleTriggerProps = React.ComponentProps<typeof BaseCollapsible.Trigger> &
-  VariantProps<typeof collapsibleStyles>
-export type CollapsiblePanelProps = React.ComponentProps<typeof BaseCollapsible.Panel>
-
-export function Collapsible({ className, ...props }: CollapsibleRootProps) {
-  const styles = collapsibleStyles()
+export function Collapsible({ xstyle, ...props }: CollapsibleRootProps) {
   return (
     <BaseCollapsible.Root
       data-slot='collapsible'
-      className={cx(styles.base(), className)}
+      {...stylex.props(collapsibleStyles.base, xstyle)}
       {...props}
     />
   )
 }
 
 export function CollapsibleTrigger({
-  className,
   expandableIndicator = false,
+  xstyle,
   ...props
 }: CollapsibleTriggerProps) {
-  const styles = collapsibleStyles({ expandableIndicator })
   return (
     <BaseCollapsible.Trigger
       data-slot='collapsible-trigger'
       data-expandable={expandableIndicator ? true : undefined}
-      className={cx(styles.trigger(), className)}
+      {...stylex.props(
+        collapsibleStyles.trigger,
+        expandableIndicator && collapsibleExpandable.true,
+        xstyle
+      )}
       {...props}
     />
   )
 }
 
-export function CollapsiblePanel({ className, children, ...props }: CollapsiblePanelProps) {
-  const styles = collapsibleStyles()
+export function CollapsiblePanel({ children, xstyle, ...props }: CollapsiblePanelProps) {
   return (
     <BaseCollapsible.Panel
       data-slot='collapsible-panel'
-      className={cx(styles.panel(), className)}
+      {...stylex.props(collapsibleStyles.panel, xstyle)}
       {...props}
     >
-      <div data-slot='collapsible-panel-content' className={styles.panelContent()}>
+      <div data-slot='collapsible-panel-content' {...stylex.props(collapsibleStyles.panelContent)}>
         {children}
       </div>
     </BaseCollapsible.Panel>

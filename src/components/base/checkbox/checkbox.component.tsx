@@ -20,30 +20,21 @@ import { CheckboxGroup as BaseCheckboxGroup } from '@base-ui/react/checkbox-grou
 import { useRender } from '@base-ui/react/use-render'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
+import { checkboxStyles } from './checkbox.stylex'
 
-export const checkboxStyles = tv({
-  slots: {
-    root: [
-      'border-border-neutral bg-background-elevation-base shadow-raised flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-xs border',
-      'outline-primary focus:outline-0 focus-visible:outline-2 focus-visible:outline-offset-2',
-      'data-checked:bg-background-primary data-checked:border-border-primary',
-      'hover:border-border-primary transition-colors duration-75',
-      'data-disabled:cursor-not-allowed data-disabled:opacity-50'
-    ],
-    indicator: 'flex data-unchecked:hidden'
-  }
-})
-
-export type CheckboxGroupProps = React.ComponentProps<typeof BaseCheckboxGroup>
+export type CheckboxGroupProps = React.ComponentProps<typeof BaseCheckboxGroup> & {
+  xstyle?: StyleXStyles
+}
 export type CheckboxGroupLabelProps = useRender.ComponentProps<'span'>
-export type CheckboxRootProps = React.ComponentProps<typeof BaseCheckbox.Root>
+export type CheckboxRootProps = React.ComponentProps<typeof BaseCheckbox.Root> & {
+  xstyle?: StyleXStyles
+}
 
-export function CheckboxGroup({ className, ...props }: CheckboxGroupProps) {
+export function CheckboxGroup({ xstyle, ...props }: CheckboxGroupProps) {
   return (
     <BaseCheckboxGroup
       data-slot='checkbox-group'
-      className={cx('flex flex-col gap-2', className)}
+      {...stylex.props(checkboxStyles.group, xstyle)}
       {...props}
     />
   )
@@ -55,18 +46,21 @@ export function CheckboxGroupLabel({ render, ...props }: CheckboxGroupLabelProps
     render,
     props: {
       'data-slot': 'checkbox-group-label',
-      className: cx('text-foreground-neutral text-sm font-medium', props.className),
+      ...stylex.props(checkboxStyles.groupLabel),
       ...props
     }
   })
 }
 
-export function Checkbox({ className, ...props }: CheckboxRootProps) {
-  const styles = checkboxStyles()
+export function Checkbox({ xstyle, ...props }: CheckboxRootProps) {
   return (
-    <BaseCheckbox.Root data-slot='checkbox' className={cx(styles.root(), className)} {...props}>
+    <BaseCheckbox.Root
+      data-slot='checkbox'
+      {...stylex.props(checkboxStyles.root, xstyle)}
+      {...props}
+    >
       <BaseCheckbox.Indicator
-        className={styles.indicator()}
+        {...stylex.props(checkboxStyles.indicator)}
         render={(indicatorProps, state) => (
           <span {...indicatorProps}>
             {state.indeterminate ? (
@@ -78,7 +72,6 @@ export function Checkbox({ className, ...props }: CheckboxRootProps) {
                 strokeWidth='3'
                 strokeLinecap='round'
                 strokeLinejoin='round'
-                className='size-3'
               >
                 <line x1='5' y1='12' x2='19' y2='12' />
               </svg>
@@ -92,7 +85,6 @@ export function Checkbox({ className, ...props }: CheckboxRootProps) {
                 strokeLinecap='round'
                 strokeLinejoin='round'
                 strokeWidth='3'
-                className='text-on-background-primary size-3'
                 viewBox='0 0 24 24'
               >
                 <path d='M20 6 9 17l-5-5' />

@@ -12,36 +12,30 @@
 import { Fieldset as BaseFieldset } from '@base-ui/react/fieldset'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
-import * as React from 'react'
+import { fieldsetStyles } from './fieldset.stylex'
 
-const fieldsetStyles = tv({
-  base: [
-    'flex flex-col gap-2',
-    '*:data-[slot=text]:text-foreground-neutral-faded *:data-[slot=text]:mb-4',
-    '[&_[data-slot="field"]:not([data-layout="inline"])]:not-last:mb-4'
-  ],
-  slots: {
-    legend: 'text-foreground-neutral mb-1.5 text-sm font-semibold'
-  }
-})
+export type FieldsetRootProps = React.ComponentProps<typeof BaseFieldset.Root> & {
+  xstyle?: StyleXStyles
+}
+export type FieldsetLegendProps = React.ComponentProps<typeof BaseFieldset.Legend> & {
+  xstyle?: StyleXStyles
+}
 
-export type FieldsetRootProps = React.ComponentProps<typeof BaseFieldset.Root>
-export type FieldsetLegendProps = React.ComponentProps<typeof BaseFieldset.Legend>
-
-export function Fieldset({ className, ...props }: FieldsetRootProps) {
-  const styles = fieldsetStyles()
+export function Fieldset({ xstyle, ...props }: FieldsetRootProps) {
   return (
-    <BaseFieldset.Root data-slot='fieldset' className={cx(styles.base(), className)} {...props} />
+    <BaseFieldset.Root
+      data-slot='fieldset'
+      {...stylex.props(fieldsetStyles.base, xstyle)}
+      {...props}
+    />
   )
 }
 
-export function FieldsetLegend({ className, ...props }: FieldsetLegendProps) {
-  const styles = fieldsetStyles()
+export function FieldsetLegend({ xstyle, ...props }: FieldsetLegendProps) {
   return (
     <BaseFieldset.Legend
       data-slot='fieldset-legend'
-      className={cx(styles.legend(), className)}
+      {...stylex.props(fieldsetStyles.legend, xstyle)}
       {...props}
     />
   )

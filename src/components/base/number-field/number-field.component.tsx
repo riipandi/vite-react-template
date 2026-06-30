@@ -19,79 +19,37 @@
 import { NumberField as BaseNumberField } from '@base-ui/react/number-field'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
+import { numberFieldStyles, numberFieldVariants } from './number-field.stylex'
 
-const numberFieldStyles = tv({
-  base: [
-    'flex flex-col items-start gap-2',
-    'data-disabled:cursor-not-allowed data-disabled:opacity-70'
-  ],
-  slots: {
-    scrubArea: 'cursor-ew-resize',
-    group: [
-      'flex h-9 rounded',
-      'hover:not-focus-within:not-data-disabled:ring-border-primary',
-      'focus-within:ring-border-primary focus-within:ring-2 focus-within:outline-0',
-      '[&_svg:not([class*=size-])]:size-4',
-      '*:[button]:flex *:[button]:size-9 *:[button]:items-center *:[button]:justify-center',
-      '*:[button]:transition-all *:[button]:duration-100',
-      '*:[button]:text-foreground-neutral *:[button]:cursor-pointer',
-      '*:[button]:disabled:cursor-not-allowed *:[button]:disabled:opacity-70',
-      '*:first:rounded-l *:last:rounded-r'
-    ],
-    decrement: 'bg-transparent',
-    input: [
-      'z-10 w-16 px-2 text-center text-xs outline-none',
-      'text-foreground-neutral placeholder:text-foreground-neutral-faded/80 transition-all',
-      'disabled:pointer-events-none disabled:opacity-70'
-    ],
-    increment: 'bg-transparent'
-  },
-  variants: {
-    variant: {
-      default: {
-        group: [
-          'ring-border-neutral bg-background-elevation-base shadow-raised ring',
-          '*:[button]:hover:not-[[disabled]]:bg-background-neutral-faded'
-        ]
-      },
-      ghost: {
-        group: [
-          'hover:bg-background-neutral-faded bg-transparent',
-          '*:[button]:hover:not-[[disabled]]:bg-background-neutral'
-        ]
-      }
-    }
-  },
-  defaultVariants: {
-    variant: 'default'
-  }
-})
+export type NumberFieldVariant = keyof typeof numberFieldVariants
 
-export type NumberFieldProps = React.ComponentProps<typeof BaseNumberField.Root> &
-  VariantProps<typeof numberFieldStyles>
+export type NumberFieldProps = React.ComponentProps<typeof BaseNumberField.Root> & {
+  xstyle?: StyleXStyles
+}
+export type NumberFieldGroupProps = React.ComponentProps<typeof BaseNumberField.Group> & {
+  variant?: NumberFieldVariant
+  xstyle?: StyleXStyles
+}
 
-export function NumberField({ className, ...props }: NumberFieldProps) {
-  const styles = numberFieldStyles()
+export function NumberField({ xstyle, ...props }: NumberFieldProps) {
   return (
     <BaseNumberField.Root
       data-slot='number-field'
-      className={cx(styles.base(), className)}
+      {...stylex.props(numberFieldStyles.base, xstyle)}
       {...props}
     />
   )
 }
 
 export function NumberFieldScrubArea({
-  className,
   children,
+  xstyle,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.ScrubArea>) {
-  const styles = numberFieldStyles()
+}: React.ComponentProps<typeof BaseNumberField.ScrubArea> & { xstyle?: StyleXStyles }) {
   return (
     <BaseNumberField.ScrubArea
       data-slot='number-field-scrub-area'
-      className={cx(styles.scrubArea(), className)}
+      {...stylex.props(numberFieldStyles.scrubArea, xstyle)}
       {...props}
     >
       {children}
@@ -100,9 +58,9 @@ export function NumberFieldScrubArea({
   )
 }
 
-export function NumberFieldScrubAreaCursor({
-  ...props
-}: React.ComponentProps<typeof BaseNumberField.ScrubAreaCursor>) {
+export function NumberFieldScrubAreaCursor(
+  props: React.ComponentProps<typeof BaseNumberField.ScrubAreaCursor>
+) {
   return (
     <BaseNumberField.ScrubAreaCursor data-slot='number-field-scrub-area-cursor' {...props}>
       <svg
@@ -119,57 +77,50 @@ export function NumberFieldScrubAreaCursor({
   )
 }
 
-export type NumberFieldGroupProps = React.ComponentProps<typeof BaseNumberField.Group> &
-  VariantProps<typeof numberFieldStyles>
-
-export function NumberFieldGroup({ className, variant, ...props }: NumberFieldGroupProps) {
-  const styles = numberFieldStyles({ variant })
+export function NumberFieldGroup({ variant = 'default', xstyle, ...props }: NumberFieldGroupProps) {
   return (
     <BaseNumberField.Group
       data-slot='number-field-group'
-      className={cx(styles.group(), className)}
+      {...stylex.props(numberFieldStyles.group, numberFieldVariants[variant], xstyle)}
       {...props}
     />
   )
 }
 
 export function NumberFieldDecrement({
-  className,
+  xstyle,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.Decrement>) {
-  const styles = numberFieldStyles()
+}: React.ComponentProps<typeof BaseNumberField.Decrement> & { xstyle?: StyleXStyles }) {
   return (
     <BaseNumberField.Decrement
       data-slot='number-field-decrement'
-      className={cx(styles.decrement(), className)}
+      {...stylex.props(numberFieldStyles.decrement, xstyle)}
       {...props}
     />
   )
 }
 
 export function NumberFieldIncrement({
-  className,
+  xstyle,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.Increment>) {
-  const styles = numberFieldStyles()
+}: React.ComponentProps<typeof BaseNumberField.Increment> & { xstyle?: StyleXStyles }) {
   return (
     <BaseNumberField.Increment
       data-slot='number-field-increment'
-      className={cx(styles.increment(), className)}
+      {...stylex.props(numberFieldStyles.increment, xstyle)}
       {...props}
     />
   )
 }
 
 export function NumberFieldInput({
-  className,
+  xstyle,
   ...props
-}: React.ComponentProps<typeof BaseNumberField.Input>) {
-  const styles = numberFieldStyles()
+}: React.ComponentProps<typeof BaseNumberField.Input> & { xstyle?: StyleXStyles }) {
   return (
     <BaseNumberField.Input
       data-slot='number-field-input'
-      className={cx(styles.input(), className)}
+      {...stylex.props(numberFieldStyles.input, xstyle)}
       {...props}
     />
   )

@@ -5,68 +5,50 @@
  *
  * BaseUI Anatomy:
  * <Avatar.Root>
- *   <Avatar.Image src="" />
- *   <Avatar.Fallback>LT</Avatar.Fallback>
+ *   <Avatar.Image />
+ *   <Avatar.Fallback />
  * </Avatar.Root>
  */
 
 import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
-import * as Icon from '@phosphor-icons/react'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
-import * as React from 'react'
+import { avatarStyles, avatarSizes } from './avatar.stylex'
 
-export const avatarStyles = tv({
-  base: 'bg-background-neutral-faded text-foreground-neutral relative flex items-center justify-center rounded-full font-semibold select-none',
-  slots: {
-    image: 'size-full rounded-full',
-    fallback: 'flex size-full items-center justify-center rounded-full',
-    fallbackInitial: 'flex size-full items-center justify-center rounded-full text-lg',
-    indicator: 'absolute flex size-2.5 items-center justify-center rounded-full text-sm'
-  },
-  variants: {
-    size: {
-      sm: 'size-7.5',
-      md: 'size-10.5',
-      lg: 'size-12.5'
-    },
-    position: {
-      top: { indicator: 'top-0 right-0' },
-      bottom: { indicator: 'right-0 bottom-0' }
-    },
-    indicatorSize: {
-      sm: { indicator: 'size-2.5' },
-      md: { indicator: 'size-3' },
-      lg: { indicator: 'size-3.5' }
-    }
-  },
-  defaultVariants: {
-    size: 'md',
-    position: 'bottom',
-    indicatorSize: 'md'
-  }
-})
+export type AvatarVariant = keyof typeof avatarSizes
 
-export type AvatarRootProps = React.ComponentProps<typeof BaseAvatar.Root> &
-  VariantProps<typeof avatarStyles>
-export type AvatarImageProps = React.ComponentProps<typeof BaseAvatar.Image>
+export type AvatarRootProps = React.ComponentProps<typeof BaseAvatar.Root> & {
+  size?: AvatarVariant
+  xstyle?: StyleXStyles
+}
+export type AvatarImageProps = React.ComponentProps<typeof BaseAvatar.Image> & {
+  xstyle?: StyleXStyles
+}
 export type AvatarFallbackProps = React.ComponentProps<typeof BaseAvatar.Fallback> & {
   asInitial?: boolean
+  xstyle?: StyleXStyles
 }
-export type AvatarIndicatorProps = React.ComponentProps<'div'> & VariantProps<typeof avatarStyles>
-
-export function Avatar({ size, className, ...props }: AvatarRootProps) {
-  const styles = avatarStyles({ size })
-  return <BaseAvatar.Root data-slot='avatar' className={cx(styles.base(), className)} {...props} />
+export type AvatarIndicatorProps = React.ComponentProps<'span'> & {
+  position?: 'top' | 'bottom'
+  size?: AvatarVariant
+  xstyle?: StyleXStyles
 }
 
-export function AvatarImage({ className, ...props }: AvatarImageProps) {
-  const styles = avatarStyles()
+export function Avatar({ size, xstyle, ...props }: AvatarRootProps) {
+  return (
+    <BaseAvatar.Root
+      data-slot='avatar'
+      {...stylex.props(avatarStyles.base, size && avatarSizes[size], xstyle)}
+      {...props}
+    />
+  )
+}
+
+export function AvatarImage({ xstyle, ...props }: AvatarImageProps) {
   return (
     <BaseAvatar.Image
       data-slot='avatar-image'
-      className={cx(styles.image(), className)}
+      {...stylex.props(avatarStyles.image, xstyle)}
       {...props}
     />
   )
@@ -75,62 +57,26 @@ export function AvatarImage({ className, ...props }: AvatarImageProps) {
 export function AvatarFallback({
   asInitial = false,
   children,
-  className,
+  xstyle,
   ...props
 }: AvatarFallbackProps) {
-  const styles = avatarStyles()
-
-  if (!children || !asInitial) {
-    return (
-      <BaseAvatar.Fallback
-        data-slot='avatar-fallback'
-        className={cx(styles.fallback(), className)}
-        {...props}
-      >
-        <React.Activity mode={children ? 'visible' : 'hidden'}>{children}</React.Activity>
-        <React.Activity mode={!children ? 'visible' : 'hidden'}>
-          <Icon.UserCircleDashedIcon
-            className='text-foreground-neutral/70 size-3/4'
-            strokeWidth={1.8}
-          />
-        </React.Activity>
-      </BaseAvatar.Fallback>
-    )
-  }
-
-  const initials = typeof children === 'string' ? getInitials(children) : null
-
   return (
     <BaseAvatar.Fallback
       data-slot='avatar-fallback'
-      className={cx(styles.fallbackInitial(), className)}
+      {...stylex.props(asInitial ? avatarStyles.fallbackInitial : avatarStyles.fallback, xstyle)}
       {...props}
     >
-      <React.Activity mode={initials ? 'visible' : 'hidden'}>{initials}</React.Activity>
-      <React.Activity mode={!initials ? 'visible' : 'hidden'}>
-        <Icon.UserCircleIcon
-          weight='bold'
-          className='text-foreground-neutral/70 size-3/4'
-          strokeWidth={1.8}
-        />
-      </React.Activity>
+      {children}
     </BaseAvatar.Fallback>
   )
 }
 
-export function AvatarIndicator({ position, size, className, ...props }: AvatarIndicatorProps) {
-  const styles = avatarStyles({ position, indicatorSize: size })
+export function AvatarIndicator({ size, xstyle, ...props }: AvatarIndicatorProps) {
   return (
-    <div data-slot='avatar-indicator' className={cx(styles.indicator(), className)} {...props} />
+    <span
+      data-slot='avatar-indicator'
+      {...stylex.props(avatarStyles.indicator, size && avatarSizes[size], xstyle)}
+      {...props}
+    />
   )
-}
-
-function getInitials(nameOrValue: string | undefined | null): string {
-  if (!nameOrValue) return ''
-  const words = nameOrValue.trim().split(/\s+/)
-  if (words.length === 0) return ''
-  if (words.length === 1) {
-    return words[0]?.charAt(0)?.toUpperCase() || ''
-  }
-  return ((words[0]?.charAt(0) || '') + (words[1]?.charAt(0) || '')).toUpperCase()
 }

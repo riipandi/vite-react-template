@@ -110,7 +110,7 @@ function DashboardLayout() {
   useEffect(() => {
     if (sidebarOpen) toggleSidebar()
     // ponytail: dep on pathname only, toggleSidebar is a stable store action
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- sidebarOpen read is intentional; adding it re-triggers the effect
+    // oxlint-disable-next-line react-hooks/exhaustive-deps -- sidebarOpen read is intentional; adding it re-triggers the effect
   }, [pathname])
 
   return (

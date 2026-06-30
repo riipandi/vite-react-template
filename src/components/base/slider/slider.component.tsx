@@ -18,88 +18,70 @@
 import { Slider as BaseSlider } from '@base-ui/react/slider'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
+import { sliderStyles, sliderSizes } from './slider.stylex'
 
-const sliderStyles = tv({
-  slots: {
-    control: 'flex touch-none items-center select-none',
-    track: [
-      'bg-border-neutral-faded w-full rounded-full',
-      'data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5',
-      'data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full',
-      'data-disabled:cursor-not-allowed data-disabled:opacity-50'
-    ],
-    indicator: 'bg-foreground-primary rounded-full',
-    thumb: [
-      'bg-background-page shadow-shadow-raised size-4 rounded-full shadow-md',
-      'border-border-primary-faded border data-disabled:cursor-not-allowed',
-      'focus-visible:ring-foreground-primary focus-visible:ring-2 focus-visible:ring-offset-2'
-    ]
-  },
-  variants: {
-    size: {
-      sm: {
-        control: 'py-2',
-        track: 'data-[orientation=horizontal]:h-1',
-        thumb: 'size-3.5'
-      },
-      md: {
-        control: 'py-3',
-        track: 'data-[orientation=horizontal]:h-1.5',
-        thumb: 'size-4'
-      },
-      lg: {
-        control: 'py-4',
-        track: 'data-[orientation=horizontal]:h-2',
-        thumb: 'size-5'
-      }
-    }
-  },
-  defaultVariants: {
-    size: 'md'
-  }
-})
-
-export type SliderStyles = VariantProps<typeof sliderStyles>
+export type SliderSize = keyof typeof sliderSizes
 
 export function Slider({
-  className,
+  xstyle,
   ...props
-}: React.ComponentProps<typeof BaseSlider.Root> & VariantProps<typeof sliderStyles>) {
-  return <BaseSlider.Root className={className} {...props} />
+}: React.ComponentProps<typeof BaseSlider.Root> & { xstyle?: StyleXStyles }) {
+  return (
+    <BaseSlider.Root data-slot='slider' {...stylex.props(sliderStyles.root, xstyle)} {...props} />
+  )
 }
 
 export function SliderControl({
-  className,
   size,
+  xstyle,
   ...props
-}: React.ComponentProps<typeof BaseSlider.Control> & VariantProps<typeof sliderStyles>) {
-  const styles = sliderStyles({ size })
-  return <BaseSlider.Control className={cx(styles.control(), className)} {...props} />
+}: React.ComponentProps<typeof BaseSlider.Control> & { size?: SliderSize; xstyle?: StyleXStyles }) {
+  return (
+    <BaseSlider.Control
+      data-slot='slider-control'
+      {...stylex.props(sliderStyles.control, size && sliderSizes[size], xstyle)}
+      {...props}
+    />
+  )
 }
 
 export function SliderTrack({
-  className,
   size,
+  xstyle,
   ...props
-}: React.ComponentProps<typeof BaseSlider.Track> & VariantProps<typeof sliderStyles>) {
-  const styles = sliderStyles({ size })
-  return <BaseSlider.Track className={cx(styles.track(), className)} {...props} />
+}: React.ComponentProps<typeof BaseSlider.Track> & { size?: SliderSize; xstyle?: StyleXStyles }) {
+  return (
+    <BaseSlider.Track
+      data-slot='slider-track'
+      {...stylex.props(sliderStyles.track, size && sliderSizes[size], xstyle)}
+      {...props}
+    />
+  )
 }
 
 export function SliderIndicator({
-  className,
+  xstyle,
   ...props
-}: React.ComponentProps<typeof BaseSlider.Indicator> & VariantProps<typeof sliderStyles>) {
-  const styles = sliderStyles()
-  return <BaseSlider.Indicator className={cx(styles.indicator(), className)} {...props} />
+}: React.ComponentProps<typeof BaseSlider.Indicator> & { xstyle?: StyleXStyles }) {
+  return (
+    <BaseSlider.Indicator
+      data-slot='slider-indicator'
+      {...stylex.props(sliderStyles.indicator, xstyle)}
+      {...props}
+    />
+  )
 }
 
 export function SliderThumb({
-  className,
   size,
+  xstyle,
   ...props
-}: React.ComponentProps<typeof BaseSlider.Thumb> & VariantProps<typeof sliderStyles>) {
-  const styles = sliderStyles({ size })
-  return <BaseSlider.Thumb className={cx(styles.thumb(), className)} {...props} />
+}: React.ComponentProps<typeof BaseSlider.Thumb> & { size?: SliderSize; xstyle?: StyleXStyles }) {
+  return (
+    <BaseSlider.Thumb
+      data-slot='slider-thumb'
+      {...stylex.props(sliderStyles.thumb, size && sliderSizes[size], xstyle)}
+      {...props}
+    />
+  )
 }

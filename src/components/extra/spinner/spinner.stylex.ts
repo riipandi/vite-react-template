@@ -1,13 +1,12 @@
 import * as stylex from '@stylexjs/stylex'
 // import * as token from '#/styles/tokens.stylex'
 
-export const otpFieldStyles = stylex.create({
-  root: {},
-  input: {},
-  separator: {}
+export const spinnerStyles = stylex.create({
+  base: {}
 })
 
-export const otpFieldSizes = stylex.create({
+export const spinnerSizes = stylex.create({
+  xs: {},
   sm: {},
   md: {},
   lg: {},

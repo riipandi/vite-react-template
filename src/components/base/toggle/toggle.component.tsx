@@ -10,66 +10,31 @@
 import { Toggle as BaseToggle } from '@base-ui/react/toggle'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
+import { toggleModes, toggleSizes, toggleStyles, toggleVariants } from './toggle.stylex'
 
-export const toggleStyles = tv({
-  base: [
-    'inline-flex cursor-pointer items-center justify-center gap-2 ring [&_svg:not([class*=size-])]:size-4',
-    'outline-primary focus:outline-0 focus-visible:outline-2 focus-visible:outline-offset-2',
-    '[&_svg:not([class*=text-])]:text-foreground-neutral text-sm transition-colors duration-100',
-    'hover:not-data-disabled:not-data-pressed:bg-background-neutral-faded/50 data-disabled:cursor-not-allowed data-disabled:opacity-70'
-  ],
-  variants: {
-    variant: {
-      default: 'ring-border-neutral data-pressed:bg-background-neutral-faded shadow',
-      ghost: 'data-pressed:bg-background-neutral-faded ring-transparent'
-    },
-    size: {
-      sm: 'h-8 min-w-8 rounded-sm px-2.5',
-      md: 'h-9 min-w-9 rounded px-3.5',
-      lg: 'h-11 min-w-11 rounded-lg px-4'
-    },
-    mode: {
-      icon: ''
-    }
-  },
-  compoundVariants: [
-    {
-      mode: 'icon',
-      size: 'sm',
-      class: 'aspect-square w-8 p-2'
-    },
-    {
-      mode: 'icon',
-      size: 'md',
-      class: 'aspect-square w-9 p-2'
-    },
-    {
-      mode: 'icon',
-      size: 'lg',
-      class: 'aspect-square w-11 p-3'
-    }
-  ],
-  defaultVariants: {
-    variant: 'default',
-    size: 'md'
-  }
-})
+export type ToggleVariant = keyof typeof toggleVariants
+export type ToggleSize = keyof typeof toggleSizes
+export type ToggleMode = keyof typeof toggleModes
 
-export type ToggleProps = React.ComponentProps<typeof BaseToggle> &
-  VariantProps<typeof toggleStyles>
+export type ToggleProps = React.ComponentProps<typeof BaseToggle> & {
+  variant?: ToggleVariant
+  size?: ToggleSize
+  mode?: ToggleMode
+  xstyle?: StyleXStyles
+}
 
-export function Toggle({ className, children, variant, size, mode, ...props }: ToggleProps) {
-  const styles = toggleStyles({ variant, size, mode })
+export function Toggle({ variant = 'default', size, mode, xstyle, ...props }: ToggleProps) {
   return (
     <BaseToggle
       data-slot='toggle'
-      data-size={size}
-      data-mode={mode}
-      className={cx(styles, className)}
+      {...stylex.props(
+        toggleStyles.base,
+        toggleVariants[variant],
+        size && toggleSizes[size],
+        mode && toggleModes[mode],
+        xstyle
+      )}
       {...props}
-    >
-      {children}
-    </BaseToggle>
+    />
   )
 }

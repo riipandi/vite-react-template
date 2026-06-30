@@ -30,125 +30,69 @@
 import { NavigationMenu as BaseNavigationMenu } from '@base-ui/react/navigation-menu'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
-import { cx } from 'css-variants'
-import * as React from 'react'
+import { navigationMenuStyles, navigationMenuSizes } from './navigation-menu.stylex'
 
-// FIXME: improve styling for compact variant
-export const navigationMenuStyles = tv({
-  slots: {
-    root: 'min-w-max',
-    list: 'border-border-neutral relative flex items-center gap-2 rounded border',
-    trigger: [
-      'text-foreground-neutral inline-flex items-center justify-center gap-2',
-      'rounded-md text-sm font-medium select-none',
-      'leading-none no-underline transition-colors',
-      'hover:bg-background-neutral-faded active:bg-background-neutral-faded data-popup-open:bg-background-neutral-faded',
-      'focus-visible:ring-border-primary focus-visible:ring-2 focus-visible:outline-none',
-      'data-disabled:pointer-events-none data-disabled:opacity-50',
-      'shrink-0 [&_svg:not([class*=size-])]:size-3.5'
-    ],
-    icon: 'transition-transform duration-200 data-popup-open:rotate-180',
-    content: [
-      'w-full transition-[opacity,transform,translate] data-ending-style:opacity-0 data-starting-style:opacity-0',
-      'data-ending-style:data-[activation-direction=left]:translate-x-[50%] data-starting-style:data-[activation-direction=left]:translate-x-[-50%]',
-      'data-ending-style:data-[activation-direction=right]:translate-x-[-50%] data-starting-style:data-[activation-direction=right]:translate-x-[50%] md:w-auto'
-    ],
-    link: [
-      'text-foreground-neutral flex flex-col gap-1',
-      'cursor-pointer rounded-md text-sm no-underline transition-colors select-none',
-      'hover:bg-background-neutral-faded data-hover:bg-background-neutral-faded focus-visible:outline-none',
-      '[&_svg:not([class*=text-])]:text-foreground-neutral [&_svg:not([class*=size-])]:size-4'
-    ],
-    positioner: [
-      'h-(--positioner-height) w-(--positioner-width) max-w-(--available-width) origin-(--transform-origin) duration-200'
-    ],
-    popup: [
-      'bg-background-elevation-overlay ring-border-neutral shadow-overlay rounded-lg ring',
-      'text-foreground-neutral origin-(--transform-origin) overflow-hidden',
-      'transition-[opacity,transform,width,height,scale,translate]',
-      'outline-none data-starting-style:scale-90 data-starting-style:opacity-0',
-      'data-ending-style:scale-90 data-ending-style:opacity-0'
-    ],
-    arrow: [
-      'relative flex transition-[left] data-[side=bottom]:-top-2',
-      'data-[side=left]:-right-3.25 data-[side=left]:rotate-90',
-      'data-[side=right]:-left-3.25 data-[side=right]:-rotate-90',
-      'data-[side=top]:-bottom-2 data-[side=top]:rotate-180'
-    ],
-    viewport: 'relative h-full w-full overflow-hidden'
-  },
-  variants: {
-    size: {
-      default: {
-        list: 'p-1.5',
-        content: 'p-2',
-        trigger: 'h-9 rounded-sm px-3 text-sm',
-        link: 'gap-2 rounded-sm px-3 py-1.5'
-      },
-      compact: {
-        list: 'p-0.5',
-        content: 'p-1',
-        trigger: 'h-8 rounded-xs px-2.5 text-sm',
-        link: 'gap-1 rounded-xs px-1.5 py-1'
-      }
-    }
-  },
-  defaultVariants: {
-    size: 'default'
-  }
-})
+export type NavigationMenuSize = keyof typeof navigationMenuSizes
 
-export type NavigationMenuProps = React.ComponentProps<typeof BaseNavigationMenu.Root> &
-  VariantProps<typeof navigationMenuStyles>
+export type NavigationMenuProps = React.ComponentProps<typeof BaseNavigationMenu.Root> & {
+  size?: NavigationMenuSize
+  xstyle?: StyleXStyles
+}
+export type NavigationMenuListProps = React.ComponentProps<typeof BaseNavigationMenu.List> & {
+  xstyle?: StyleXStyles
+}
+export type NavigationMenuTriggerProps = React.ComponentProps<typeof BaseNavigationMenu.Trigger> & {
+  size?: NavigationMenuSize
+  xstyle?: StyleXStyles
+}
+export type NavigationMenuIconProps = React.ComponentProps<typeof BaseNavigationMenu.Icon> & {
+  xstyle?: StyleXStyles
+}
+export type NavigationMenuContentProps = React.ComponentProps<typeof BaseNavigationMenu.Content> & {
+  xstyle?: StyleXStyles
+}
+export type NavigationMenuLinkProps = React.ComponentProps<typeof BaseNavigationMenu.Link> & {
+  size?: NavigationMenuSize
+  xstyle?: StyleXStyles
+}
 
-export function NavigationMenu({ className, size, children, ...props }: NavigationMenuProps) {
-  const styles = navigationMenuStyles({ size })
+export function NavigationMenu({ size, children, xstyle, ...props }: NavigationMenuProps) {
   return (
     <BaseNavigationMenu.Root
       data-slot='navigation-menu'
-      className={cx(styles.root(), className)}
+      {...stylex.props(navigationMenuStyles.root, size && navigationMenuSizes[size], xstyle)}
       {...props}
     >
       {children}
-      <NavigationMenuViewport size={size} />
+      <NavigationMenuViewport />
     </BaseNavigationMenu.Root>
   )
 }
 
-export type NavigationMenuListProps = React.ComponentProps<typeof BaseNavigationMenu.List>
-
-export function NavigationMenuList({ className, ...props }: NavigationMenuListProps) {
-  const styles = navigationMenuStyles()
+export function NavigationMenuList({ xstyle, ...props }: NavigationMenuListProps) {
   return (
     <BaseNavigationMenu.List
       data-slot='navigation-menu-list'
-      className={cx(styles.list(), className)}
+      {...stylex.props(navigationMenuStyles.list, xstyle)}
       {...props}
     />
   )
 }
 
-export function NavigationMenuItem({
-  ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Item>) {
+export function NavigationMenuItem(props: React.ComponentProps<typeof BaseNavigationMenu.Item>) {
   return <BaseNavigationMenu.Item data-slot='navigation-menu-item' {...props} />
 }
 
-export type NavigationMenuTriggerProps = React.ComponentProps<typeof BaseNavigationMenu.Trigger> &
-  VariantProps<typeof navigationMenuStyles>
-
 export function NavigationMenuTrigger({
-  className,
   size,
   children,
+  xstyle,
   ...props
 }: NavigationMenuTriggerProps) {
-  const styles = navigationMenuStyles({ size })
   return (
     <BaseNavigationMenu.Trigger
       data-slot='navigation-menu-trigger'
-      className={cx(styles.trigger(), className)}
-      data-disabled={props.disabled}
+      {...stylex.props(navigationMenuStyles.trigger, size && navigationMenuSizes[size], xstyle)}
       {...props}
     >
       {children}
@@ -157,14 +101,11 @@ export function NavigationMenuTrigger({
   )
 }
 
-export type NavigationMenuIconProps = React.ComponentProps<typeof BaseNavigationMenu.Icon>
-
-export function NavigationMenuIcon({ className, ...props }: NavigationMenuIconProps) {
-  const styles = navigationMenuStyles()
+export function NavigationMenuIcon({ xstyle, ...props }: NavigationMenuIconProps) {
   return (
     <BaseNavigationMenu.Icon
       data-slot='navigation-menu-icon'
-      className={cx(styles.icon(), className)}
+      {...stylex.props(navigationMenuStyles.icon, xstyle)}
       {...props}
     >
       <svg
@@ -182,39 +123,27 @@ export function NavigationMenuIcon({ className, ...props }: NavigationMenuIconPr
   )
 }
 
-export type NavigationMenuContentProps = React.ComponentProps<typeof BaseNavigationMenu.Content>
-
-export function NavigationMenuContent({ className, ...props }: NavigationMenuContentProps) {
-  const styles = navigationMenuStyles()
+export function NavigationMenuContent({ xstyle, ...props }: NavigationMenuContentProps) {
   return (
     <BaseNavigationMenu.Content
       data-slot='navigation-menu-content'
-      className={cx(styles.content(), className)}
+      {...stylex.props(navigationMenuStyles.content, xstyle)}
       {...props}
     />
   )
 }
 
-export type NavigationMenuLinkProps = React.ComponentProps<typeof BaseNavigationMenu.Link> &
-  VariantProps<typeof navigationMenuStyles>
-
-export function NavigationMenuLink({ className, size, ...props }: NavigationMenuLinkProps) {
-  const styles = navigationMenuStyles({ size })
+export function NavigationMenuLink({ size, xstyle, ...props }: NavigationMenuLinkProps) {
   return (
     <BaseNavigationMenu.Link
       data-slot='navigation-menu-link'
-      className={cx(styles.link(), className)}
+      {...stylex.props(navigationMenuStyles.link, size && navigationMenuSizes[size], xstyle)}
       {...props}
     />
   )
 }
 
-export interface NavigationMenuViewportProps {
-  size?: 'default' | 'compact'
-}
-
-export function NavigationMenuViewport({ size }: NavigationMenuViewportProps) {
-  const styles = navigationMenuStyles({ size })
+export function NavigationMenuViewport() {
   return (
     <BaseNavigationMenu.Portal data-slot='navigation-menu-portal'>
       <BaseNavigationMenu.Backdrop data-slot='navigation-menu-backdrop' />
@@ -223,29 +152,23 @@ export function NavigationMenuViewport({ size }: NavigationMenuViewportProps) {
         align='start'
         collisionPadding={{ top: 5, bottom: 5, left: 20, right: 20 }}
         data-slot='navigation-menu-positioner'
-        className={styles.positioner()}
+        {...stylex.props(navigationMenuStyles.positioner)}
       >
         <BaseNavigationMenu.Popup
           data-slot='navigation-menu-popup'
-          className={cx(styles.popup(), 'h-(--popup-height) w-(--popup-width)')}
+          {...stylex.props(navigationMenuStyles.popup)}
         >
-          <BaseNavigationMenu.Arrow className={styles.arrow()}>
+          <BaseNavigationMenu.Arrow {...stylex.props(navigationMenuStyles.arrow)}>
             <svg width='20' height='10' viewBox='0 0 20 10' fill='none'>
               <title>Popover arrow</title>
-              <path
-                d='M9.66437 2.60207L4.80758 6.97318C4.07308 7.63423 3.11989 8 2.13172 8H0V10H20V8H18.5349C17.5468 8 16.5936 7.63423 15.8591 6.97318L11.0023 2.60207C10.622 2.2598 10.0447 2.25979 9.66437 2.60207Z'
-                className='fill-background-elevation-overlay'
-              />
-              <path
-                d='M8.99542 1.85876C9.75604 1.17425 10.9106 1.17422 11.6713 1.85878L16.5281 6.22989C17.0789 6.72568 17.7938 7.00001 18.5349 7.00001L15.89 7L11.0023 2.60207C10.622 2.2598 10.0447 2.2598 9.66436 2.60207L4.77734 7L2.13171 7.00001C2.87284 7.00001 3.58774 6.72568 4.13861 6.22989L8.99542 1.85876Z'
-                className='fill-popover-border'
-              />
+              <path d='M9.66437 2.60207L4.80758 6.97318C4.07308 7.63423 3.11989 8 2.13172 8H0V10H20V8H18.5349C17.5468 8 16.5936 7.63423 15.8591 6.97318L11.0023 2.60207C10.622 2.2598 10.0447 2.25979 9.66437 2.60207Z' />
+              <path d='M8.99542 1.85876C9.75604 1.17425 10.9106 1.17422 11.6713 1.85878L16.5281 6.22989C17.0789 6.72568 17.7938 7.00001 18.5349 7.00001L15.89 7L11.0023 2.60207C10.622 2.2598 10.0447 2.2598 9.66436 2.60207L4.77734 7L2.13171 7.00001C2.87284 7.00001 3.58774 6.72568 4.13861 6.22989L8.99542 1.85876Z' />
               <path d='M10.3333 3.34539L5.47654 7.71648C4.55842 8.54279 3.36693 9 2.13172 9H0V8H2.13172C3.11989 8 4.07308 7.63423 4.80758 6.97318L9.66437 2.60207C10.0447 2.25979 10.622 2.2598 11.0023 2.60207L15.8591 6.97318C16.5936 7.63423 17.5468 8 18.5349 8H20V9H18.5349C17.2998 9 16.1083 8.54278 15.1901 7.71648L10.3333 3.34539Z' />
             </svg>
           </BaseNavigationMenu.Arrow>
           <BaseNavigationMenu.Viewport
             data-slot='navigation-menu-viewport'
-            className={styles.viewport()}
+            {...stylex.props(navigationMenuStyles.viewport)}
           />
         </BaseNavigationMenu.Popup>
       </BaseNavigationMenu.Positioner>

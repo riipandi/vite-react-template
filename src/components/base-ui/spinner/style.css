@@ -1,0 +1,42 @@
+@layer components {
+  [data-ui='spinner'] {
+    width: 32px;
+    height: 32px;
+
+    &[data-size='xs'] {
+      width: 14px;
+      height: 14px;
+    }
+
+    &[data-size='sm'] {
+      width: 16px;
+      height: 16px;
+    }
+
+    &[data-size='md'] {
+      width: 32px;
+      height: 32px;
+    }
+
+    &[data-size='lg'] {
+      width: 48px;
+      height: 48px;
+    }
+
+    svg {
+      fill: currentColor;
+      width: 100%;
+      height: 100%;
+      animation: rotate 1s linear infinite;
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

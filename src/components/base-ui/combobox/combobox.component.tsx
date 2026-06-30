@@ -1,13 +1,12 @@
-'use client'
-
 import '../shared/select-base.css'
 import './style.css'
 import { Combobox as ComboboxPrimitive } from '@base-ui/react'
 import { Cancel01Icon, UnfoldMoreIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Input, InputWrapper } from '@olyx/react'
 import React from 'react'
 import { Button } from '../button'
+import { Input } from '../input'
+import { InputWrapper } from '../input-group'
 import { Tag, TagDismiss } from '../tag'
 
 const Combobox = ComboboxPrimitive.Root

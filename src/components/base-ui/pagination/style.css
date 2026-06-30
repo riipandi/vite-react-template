@@ -1,0 +1,37 @@
+@layer components {
+  [data-ui='pagination'] {
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    [data-ui='pagination-content'] {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-6);
+
+      [data-slot='pagination-link'] {
+        background-color: transparent;
+
+        &[data-active='true'] {
+          border-color: transparent;
+          color: var(--color-primary);
+          background-color: var(--color-primary-container);
+        }
+      }
+    }
+
+    [data-slot='pagination-next'],
+    [data-slot='pagination-previous'] {
+      border: transparent;
+      background: transparent;
+    }
+
+    /* Rounded Styles */
+    &[data-rounded='true'] [data-ui='button'] {
+      overflow: hidden;
+      border-radius: var(--radius-rounded);
+    }
+  }
+}

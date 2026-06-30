@@ -1,0 +1,19 @@
+@layer components {
+  [data-slot='dialog-portal'] {
+    --dialog-min-width: 500px;
+
+    [data-ui='dialog-content'] {
+      width: var(--dialog-min-width);
+
+      &[data-nested-dialog-open] {
+        &::after {
+          content: '';
+          inset: 0;
+          position: absolute;
+          border-radius: inherit;
+          background-color: rgb(0 0 0 / 0.05);
+        }
+      }
+    }
+  }
+}

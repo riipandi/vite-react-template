@@ -1,11 +1,13 @@
-'use client'
-
 import './style.css'
 import '../shared/select-base.css'
 import { Autocomplete as AutocompletePrimitive } from '@base-ui/react/autocomplete'
 import { Cancel01Icon, UnfoldMoreIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Button, Input, InputIcon, InputWrapper, ScrollArea, Separator } from '@olyx/react'
+import { Button } from '../button'
+import { Input } from '../input'
+import { InputIcon, InputWrapper } from '../input-group'
+import { ScrollArea } from '../scroll-area'
+import { Separator } from '../separator'
 
 const Autocomplete = AutocompletePrimitive.Root
 

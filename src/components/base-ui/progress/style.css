@@ -1,0 +1,35 @@
+@layer components {
+  [data-ui='progress'] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-4);
+    width: 100%;
+
+    [data-ui='progress-value'],
+    [data-ui='progress-label'] {
+      font-size: var(--font-size-sm);
+      color: var(--color-on-background);
+    }
+
+    [data-ui='progress-value'] {
+      grid-column-start: 2;
+      text-align: right;
+    }
+
+    [data-ui='progress-track'] {
+      height: var(--spacing-8);
+      grid-column: 1 / 3;
+      overflow: hidden;
+
+      border: 1px solid var(--color-surface-variant);
+      border-radius: var(--radius-xs);
+      background-color: var(--color-surface-container-high);
+
+      [data-ui='progress-indicator'] {
+        transition: all var(--transition-standard-fast-spatial);
+        background-color: var(--color-primary);
+        border-radius: var(--radius-xs);
+      }
+    }
+  }
+}

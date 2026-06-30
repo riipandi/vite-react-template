@@ -1,0 +1,237 @@
+@layer components {
+  [data-ui='sheet-portal'] {
+    --sheet-min-width: 400px;
+    --sheet-max-width: 500px;
+    --sheet-min-height: 300px;
+    --sheet-max-height: 80vh;
+    --padding-block: var(--spacing-14);
+
+    [data-ui='sheet-backdrop'] {
+      position: fixed;
+      inset: 0;
+      backdrop-filter: blur(4px);
+      background-color: color-mix(in srgb, currentcolor 15%, transparent);
+      z-index: 50;
+      transition: all var(--transition-standard-slow-effects);
+      opacity: 0;
+
+      &[data-open] {
+        opacity: 1;
+      }
+
+      &[data-ending-style] {
+        opacity: 0;
+      }
+    }
+
+    [data-ui='sheet-popup'] {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-8);
+      position: fixed;
+      z-index: 55;
+      padding: var(--padding-block) var(--spacing-24);
+      background-color: var(--color-background);
+      color: var(--color-on-background);
+      transition: all var(--transition-standard-slow-spatial);
+      max-height: 100vh;
+      overflow: auto;
+
+      &:focus-visible {
+        outline: 0;
+      }
+
+      /* Close Button */
+      [data-slot='sheet-close'] {
+        position: absolute;
+        transform: translateY(-50%);
+        top: calc(var(--padding-block) + var(--spacing-8));
+        right: var(--spacing-14);
+        z-index: 10;
+      }
+
+      /* Right Side (Default) */
+      &[data-side='right'] {
+        top: var(--spacing-0);
+        right: var(--spacing-0);
+        bottom: var(--spacing-0);
+        width: var(--sheet-min-width);
+
+        &[data-starting-style] {
+          translate: 100% 0;
+        }
+
+        &[data-ending-style] {
+          translate: 100% 0;
+        }
+
+        @media (min-width: 640px) {
+          max-width: var(--sheet-max-width);
+        }
+
+        @media (max-width: 640px) {
+          width: 100vw;
+        }
+      }
+
+      /* Left Side */
+      &[data-side='left'] {
+        top: var(--spacing-0);
+        left: var(--spacing-0);
+        bottom: var(--spacing-0);
+        width: var(--sheet-min-width);
+
+        &[data-starting-style] {
+          translate: -100% 0;
+        }
+
+        &[data-ending-style] {
+          translate: -100% 0;
+        }
+
+        @media (min-width: 640px) {
+          max-width: var(--sheet-max-width);
+        }
+
+        @media (max-width: 640px) {
+          width: 100vw;
+        }
+      }
+
+      /* Top Side */
+      &[data-side='top'] {
+        top: var(--spacing-0);
+        left: var(--spacing-0);
+        right: var(--spacing-0);
+        min-height: var(--sheet-min-height);
+        max-height: var(--sheet-max-height);
+
+        &[data-starting-style] {
+          translate: 0 -100%;
+        }
+
+        &[data-ending-style] {
+          translate: 0 -100%;
+        }
+      }
+
+      /* Bottom Side */
+      &[data-side='bottom'] {
+        bottom: var(--spacing-0);
+        left: var(--spacing-0);
+        right: var(--spacing-0);
+        min-height: var(--sheet-min-height);
+        max-height: var(--sheet-max-height);
+
+        &[data-starting-style] {
+          translate: 0 100%;
+        }
+
+        &[data-ending-style] {
+          translate: 0 100%;
+        }
+      }
+
+      /* Inset Variant */
+      &[data-variant='inset'] {
+        @media (min-width: 640px) {
+          margin: var(--spacing-16);
+          border-radius: var(--radius-xl-inc);
+          border: 1px solid var(--color-surface-variant);
+
+          &[data-side='right'] {
+            right: var(--spacing-16);
+            top: var(--spacing-16);
+            bottom: var(--spacing-16);
+            width: calc(var(--sheet-min-width) - var(--spacing-32));
+            max-width: calc(var(--sheet-max-width) - var(--spacing-32));
+          }
+
+          &[data-side='left'] {
+            left: var(--spacing-16);
+            top: var(--spacing-16);
+            bottom: var(--spacing-16);
+            width: calc(var(--sheet-min-width) - var(--spacing-32));
+            max-width: calc(var(--sheet-max-width) - var(--spacing-32));
+          }
+
+          &[data-side='top'] {
+            top: var(--spacing-16);
+            left: var(--spacing-16);
+            right: var(--spacing-16);
+          }
+
+          &[data-side='bottom'] {
+            bottom: var(--spacing-16);
+            left: var(--spacing-16);
+            right: var(--spacing-16);
+          }
+        }
+      }
+
+      /* Header */
+      [data-ui='sheet-header'] {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-8);
+        padding-block-start: var(--spacing-4);
+
+        [data-ui='separator'] {
+          width: calc(100% + (var(--spacing-24) * 2));
+          margin-inline: calc(var(--spacing-24) * -1);
+          margin-block-start: var(--padding-block);
+        }
+
+        [data-ui='sheet-title'] {
+          font: var(--font-title-md);
+          padding-right: var(--spacing-32);
+        }
+
+        [data-ui='sheet-description'] {
+          font: var(--font-body-md);
+          color: var(--color-on-surface-variant);
+        }
+      }
+
+      /* Panel */
+      [data-ui='sheet-panel'] {
+        flex: 1;
+        overflow-y: auto;
+        min-height: 0;
+      }
+
+      /* Footer */
+      [data-ui='sheet-footer'] {
+        margin-top: auto;
+
+        [data-ui='sheet-footer-children'] {
+          display: flex;
+          gap: var(--spacing-8);
+          justify-content: flex-end;
+
+          @media (max-width: 640px) {
+            flex-direction: column-reverse;
+          }
+        }
+
+        &[data-variant='default'] {
+          [data-ui='separator'] {
+            width: calc(100% + (var(--spacing-24) * 2));
+            margin-inline: calc(var(--spacing-24) * -1);
+            margin-block-end: var(--padding-block);
+          }
+
+          [data-ui='sheet-footer-children'] {
+            padding-block-start: var(--spacing-4);
+          }
+        }
+
+        &[data-variant='bare'] {
+          [data-ui='sheet-footer-children'] {
+            padding-block-start: var(--spacing-8);
+          }
+        }
+      }
+    }
+  }
+}

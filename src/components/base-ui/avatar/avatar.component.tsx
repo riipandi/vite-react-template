@@ -1,5 +1,3 @@
-'use client'
-
 import './style.css'
 import { Avatar as AvatarPrimitive } from '@base-ui/react/avatar'
 

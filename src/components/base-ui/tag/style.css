@@ -1,0 +1,89 @@
+@layer components {
+  [data-ui='tag'] {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    flex-shrink: 0;
+    height: var(--spacing-24);
+    padding-inline: var(--spacing-8);
+    transition: var(--transition-standard-fast-effects);
+    border: 1px solid;
+    border-radius: calc(var(--radius-sm) - var(--spacing-2));
+    color: var(--color-on-surface-variant);
+    font: var(--font-body-sm);
+    gap: var(--spacing-8);
+    user-select: none;
+    cursor: pointer;
+
+    /* Variant */
+    &[data-variant='stroke'] {
+      border-color: var(--color-surface-variant);
+      background-color: var(--color-background);
+    }
+
+    &[data-variant='lighter'] {
+      border-color: transparent;
+      background-color: var(--color-surface-container-high);
+    }
+
+    &:where(:hover, :has([data-slot='tag-dismiss']:focus-visible):not([aria-disabled='true'])) {
+      &[data-variant='stroke'] {
+        border-color: transparent;
+        background-color: var(--color-surface-container-high);
+      }
+      &[data-variant='lighter'] {
+        border-color: var(--color-surface-variant);
+        background-color: var(--color-background);
+      }
+    }
+
+    /* Icon */
+    & > svg {
+      flex-shrink: 0;
+      margin-inline: calc(var(--spacing-4) * -1);
+      transition: color var(--transition-standard-fast-effects);
+      width: var(--spacing-16);
+      height: var(--spacing-16);
+    }
+
+    /* Image */
+    & > img {
+      flex-shrink: 0;
+      width: var(--spacing-16);
+      height: var(--spacing-16);
+      margin-inline: calc(var(--spacing-4) * -1);
+      transition: color var(--transition-standard-fast-effects);
+      object-fit: fill;
+      clip-path: circle();
+    }
+
+    /* Dismiss Button */
+    [data-slot='tag-dismiss']:is([data-ui='button']) {
+      width: var(--spacing-16);
+      height: var(--spacing-16);
+      margin-inline: calc(var(--spacing-6) * -1) calc(var(--spacing-4) * -1);
+      padding: 0;
+
+      &:hover {
+        background-color: transparent;
+      }
+
+      &:focus-visible {
+        color: var(--color-on-background);
+      }
+    }
+
+    /* Hover */
+    &:hover > i {
+      color: var(--color-on-background);
+    }
+
+    /* Disabled */
+    &[aria-disabled='true'] {
+      border-color: transparent;
+      background-color: var(--color-surface-container);
+      color: color-mix(in srgb, var(--color-on-surface) 38%, transparent);
+      pointer-events: none;
+    }
+  }
+}

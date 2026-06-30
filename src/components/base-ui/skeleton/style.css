@@ -1,0 +1,27 @@
+@layer components {
+  [data-ui='skeleton'] {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-container);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      transform: translateX(-100%);
+      animation: pulse 1s infinite;
+      background: linear-gradient(90deg, transparent, var(--color-background), transparent);
+    }
+
+    &[data-rounded='true'] {
+      border-radius: var(--radius-rounded);
+    }
+  }
+
+  @keyframes pulse {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}

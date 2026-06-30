@@ -1,0 +1,114 @@
+@layer components {
+  [data-ui='scroll-area'] {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+
+    [data-ui='scroll-area-viewport'] {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      outline: none;
+      overflow: hidden;
+
+      &[data-scroll-fade='true'] {
+        &::before,
+        &::after {
+          content: '';
+          display: block;
+          left: 0;
+          width: 100%;
+          position: absolute;
+          pointer-events: none;
+          transition: height var(--transition-standard-default-spatial);
+        }
+
+        &::before {
+          --scroll-area-overflow-y-start: inherit;
+          top: 0;
+          height: min(30px, var(--scroll-area-overflow-y-start));
+          background: linear-gradient(
+            to bottom,
+            color-mix(in srgb, var(--color-background) 80%, transparent),
+            transparent
+          );
+        }
+
+        &::after {
+          --scroll-area-overflow-y-end: inherit;
+          bottom: 0;
+          height: min(30px, var(--scroll-area-overflow-y-end, 30px));
+          background: linear-gradient(
+            to top,
+            color-mix(in srgb, var(--color-background) 80%, transparent),
+            transparent
+          );
+        }
+      }
+    }
+  }
+
+  [data-ui='scroll-area-scrollbar'] {
+    display: flex;
+    position: absolute;
+    border-radius: var(--radius-md);
+    margin: var(--spacing-8);
+    opacity: 0;
+    transition: opacity var(--transition-standard-fast-effects);
+    pointer-events: none;
+    z-index: 10;
+
+    &[data-scrolling] {
+      transition-duration: 0ms;
+    }
+
+    &[data-hovering],
+    &[data-scrolling] {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    &[data-orientation='vertical'] {
+      width: var(--spacing-4);
+      top: 0;
+      bottom: 0;
+      right: 0;
+      flex-direction: column;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: var(--spacing-16);
+        height: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    &[data-orientation='horizontal'] {
+      height: var(--spacing-4);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      flex-direction: row;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: var(--spacing-16);
+        left: 0;
+        right: 0;
+        bottom: calc(var(--spacing-4) * -1);
+      }
+    }
+  }
+
+  [data-ui='scroll-area-thumb'] {
+    width: 100%;
+    border-radius: inherit;
+    background-color: var(--color-surface-variant);
+  }
+}

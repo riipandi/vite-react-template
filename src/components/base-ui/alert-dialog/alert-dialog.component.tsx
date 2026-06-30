@@ -1,5 +1,3 @@
-'use client'
-
 import './style.css'
 import '../shared/dialog-base.css'
 import { AlertDialog as AlertDialogPrimitive } from '@base-ui/react/alert-dialog'

@@ -1,0 +1,31 @@
+@layer components {
+  [data-ui='preview-card-content'] {
+    border: 0.5px solid var(--color-surface-variant);
+    color: var(--color-preview-card);
+    background-color: var(--color-on-preview-card);
+    transform-origin: var(--transform-origin);
+    max-width: 200px;
+    display: grid;
+    place-content: center;
+    transition: var(--transition-expressive-default-effects);
+    padding: var(--spacing-8);
+    border-radius: var(--radius-sm);
+
+    /* Variant */
+    &[data-variant='light'] {
+      --color-preview-card: var(--color-on-background);
+      --color-on-preview-card: var(--color-surface-container-lowest);
+    }
+
+    &[data-variant='dark'] {
+      --color-preview-card: var(--color-background);
+      --color-on-preview-card: var(--color-on-background);
+    }
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      opacity: 0;
+      scale: 0.5;
+    }
+  }
+}

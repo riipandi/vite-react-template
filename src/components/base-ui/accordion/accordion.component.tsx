@@ -1,5 +1,3 @@
-'use client'
-
 import './style.css'
 import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion'
 import { ArrowDown01Icon } from '@hugeicons/core-free-icons'

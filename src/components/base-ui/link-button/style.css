@@ -1,0 +1,85 @@
+@layer components {
+  [data-ui='link-button'] {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    transition: color var(--transition-standard-fast-effects);
+    color: var(--color-link-button);
+    gap: var(--spacing-4);
+
+    &:is(a) {
+      text-decoration: none;
+    }
+
+    &:is(button) {
+      border: none;
+      background-color: transparent;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      transition: opacity var(--transition-standard-fast-effects);
+      background-color: currentcolor;
+      inset-block-end: var(--spacing-0);
+    }
+
+    /* Icon */
+    & > i {
+      flex-shrink: 0;
+      font-size: 20px;
+    }
+
+    /* Underline */
+    &:not([data-underline='true'])::before {
+      opacity: 0;
+    }
+
+    /* Size */
+    &[data-size='md'] {
+      font: var(--font-body-md);
+    }
+
+    &[data-size='sm'] {
+      font: var(--font-body-sm);
+    }
+
+    /* Variant */
+    &[data-variant='gray'] {
+      --color-link-button: var(--color-on-surface-variant);
+    }
+
+    &[data-variant='black'] {
+      --color-link-button: var(--color-on-surface);
+    }
+
+    &[data-variant='primary'] {
+      --color-link-button: var(--color-primary);
+    }
+
+    &[data-variant='error'] {
+      --color-link-button: var(--color-error);
+    }
+
+    /* Disabled */
+    &:disabled,
+    &[aria-disabled='true'] {
+      color: color-mix(in srgb, var(--color-on-surface) 38%, transparent);
+      cursor: auto;
+      pointer-events: none;
+    }
+
+    /* Hover */
+    &:hover:not(:disabled, [aria-disabled='true']) {
+      color: color-mix(in srgb, var(--color-link-button), var(--color-on-background) 30%);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+}

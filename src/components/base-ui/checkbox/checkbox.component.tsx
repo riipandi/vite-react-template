@@ -1,5 +1,3 @@
-'use client'
-
 import './style.css'
 import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'
 

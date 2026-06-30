@@ -3,7 +3,6 @@ import { fn } from 'storybook/test'
 import { Switch } from '#/components/base/switch'
 import { Label } from '#/components/extra/label'
 import { Text } from '#/components/extra/typography'
-import { clx } from '~/app/utils/variant'
 
 const meta = {
   title: 'Base Components/Switch',
@@ -40,14 +39,7 @@ const Row = ({
   className
 }: React.PropsWithChildren<{ label: string; className?: string }>) => (
   <div className='flex items-center gap-2'>
-    <span
-      className={clx(
-        'text-foreground-neutral-faded min-w-8 text-sm font-semibold uppercase',
-        className
-      )}
-    >
-      {label}
-    </span>
+    <span className={className}>{label}</span>
     {children}
   </div>
 )

@@ -8,10 +8,6 @@ const meta = {
   parameters: { layout: 'centered' },
   tags: [], // ['autodocs']
   argTypes: {
-    size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg']
-    },
     defaultValue: {
       control: { type: 'range', min: 0, max: 100, step: 1 }
     },
@@ -46,13 +42,13 @@ const Grid = ({ children }: React.PropsWithChildren) => (
 )
 
 export const Playground: Story = {
-  render: ({ size, defaultValue, disabled }) => (
+  render: ({ defaultValue, disabled }) => (
     <div className='w-64'>
       <Slider defaultValue={defaultValue} disabled={disabled}>
-        <SliderControl size={size}>
-          <SliderTrack size={size}>
+        <SliderControl>
+          <SliderTrack>
             <SliderIndicator />
-            <SliderThumb size={size} aria-label='Value' />
+            <SliderThumb aria-label='Value' />
           </SliderTrack>
         </SliderControl>
       </Slider>
@@ -69,10 +65,10 @@ export const SizeShowcase: Story = {
         <Row key={s} label={s}>
           <div className='w-64'>
             <Slider defaultValue={60}>
-              <SliderControl size={s}>
-                <SliderTrack size={s}>
+              <SliderControl>
+                <SliderTrack>
                   <SliderIndicator />
-                  <SliderThumb size={s} aria-label='Value' />
+                  <SliderThumb aria-label='Value' />
                 </SliderTrack>
               </SliderControl>
             </Slider>

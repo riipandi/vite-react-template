@@ -37,13 +37,13 @@ export const Playground: Story = {
     <Menubar>
       <Menu>
         <MenuTrigger render={<Button color='neutral' variant='ghost' />}>Book</MenuTrigger>
-        <MenuPopup size='default'>
+        <MenuPopup size='compact'>
           <MenuItem>New Book</MenuItem>
           <MenuItem>Open</MenuItem>
           <MenuItem>Save</MenuItem>
           <MenuSubmenu>
             <MenuSubmenuTrigger>Export</MenuSubmenuTrigger>
-            <MenuSubmenuPopup size='default'>
+            <MenuSubmenuPopup size='compact'>
               <MenuItem>PDF</MenuItem>
               <MenuItem>EPUB</MenuItem>
               <MenuItem>MOBI</MenuItem>
@@ -55,7 +55,7 @@ export const Playground: Story = {
       </Menu>
       <Menu>
         <MenuTrigger render={<Button color='neutral' variant='ghost' />}>Edit</MenuTrigger>
-        <MenuPopup size='default'>
+        <MenuPopup size='compact'>
           <MenuItem>Copy Spell</MenuItem>
           <MenuItem>Paste Clue</MenuItem>
           <MenuItem>Delete</MenuItem>
@@ -63,12 +63,12 @@ export const Playground: Story = {
       </Menu>
       <Menu>
         <MenuTrigger render={<Button color='neutral' variant='ghost' />}>View</MenuTrigger>
-        <MenuPopup size='default'>
+        <MenuPopup size='compact'>
           <MenuItem>Zoom In</MenuItem>
           <MenuItem>Zoom Out</MenuItem>
           <MenuSubmenu>
             <MenuSubmenuTrigger>Layout</MenuSubmenuTrigger>
-            <MenuSubmenuPopup size='default'>
+            <MenuSubmenuPopup size='compact'>
               <MenuItem>Single Page</MenuItem>
               <MenuItem>Two Pages</MenuItem>
               <MenuItem>Continuous</MenuItem>

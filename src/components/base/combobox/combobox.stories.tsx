@@ -154,7 +154,7 @@ export const MultipleSelect: Story = {
     return (
       <div className='w-full max-w-xs'>
         <Combobox items={options} multiple>
-          <ComboboxInput placeholder='Select books' className='w-full' ref={anchorRef} />
+          <ComboboxInput placeholder='Select books' />
           <ComboboxPopup anchor={anchorRef}>
             <ComboboxEmpty>No results found</ComboboxEmpty>
             <ComboboxList>

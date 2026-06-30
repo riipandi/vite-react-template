@@ -1,7 +1,6 @@
 import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Input } from '#/components/base/input'
-import { InputGroup, InputGroupAddon } from '#/components/extra/input-group'
 
 const meta = {
   title: 'Base Components/Input',
@@ -79,26 +78,18 @@ export const DateTimePicker: Story = {
 export const DateWithIcon: Story = {
   render: () => (
     <div className='flex flex-col gap-3'>
-      <InputGroup className='w-full'>
-        <Input
-          type='date'
-          placeholder='Select date'
-          className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
-        />
-        <InputGroupAddon>
-          <Icon.Calendar className='text-foreground-neutral-faded mr-2.5 size-4' />
-        </InputGroupAddon>
-      </InputGroup>
-      <InputGroup className='w-full'>
-        <Input
-          type='date'
-          defaultValue='2025-06-15'
-          className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
-        />
-        <InputGroupAddon>
-          <Icon.Calendar className='text-foreground-neutral-faded mr-2.5 size-4' />
-        </InputGroupAddon>
-      </InputGroup>
+      <Input
+        type='date'
+        placeholder='Select date'
+        className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+      />
+      <Icon.Calendar className='text-foreground-neutral-faded mr-2.5 size-4' />
+      <Input
+        type='date'
+        defaultValue='2025-06-15'
+        className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+      />
+      <Icon.Calendar className='text-foreground-neutral-faded mr-2.5 size-4' />
     </div>
   )
 }
@@ -106,27 +97,19 @@ export const DateWithIcon: Story = {
 export const TimeWithIcon: Story = {
   render: () => (
     <div className='flex flex-col gap-3'>
-      <InputGroup className='w-full'>
-        <Input
-          type='time'
-          placeholder='Select time'
-          className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
-        />
-        <InputGroupAddon>
-          <Icon.Clock className='text-foreground-neutral-faded mr-2.5 size-4' />
-        </InputGroupAddon>
-      </InputGroup>
-      <InputGroup className='w-full'>
-        <Input
-          type='time'
-          step='1'
-          defaultValue='14:30:45'
-          className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
-        />
-        <InputGroupAddon>
-          <Icon.Clock className='text-foreground-neutral-faded mr-2.5 size-4' />
-        </InputGroupAddon>
-      </InputGroup>
+      <Input
+        type='time'
+        placeholder='Select time'
+        className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+      />
+      <Icon.Clock className='text-foreground-neutral-faded mr-2.5 size-4' />
+      <Input
+        type='time'
+        step='1'
+        defaultValue='14:30:45'
+        className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+      />
+      <Icon.Clock className='text-foreground-neutral-faded mr-2.5 size-4' />
     </div>
   )
 }

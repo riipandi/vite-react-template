@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Radio, RadioGroup, RadioGroupLabel } from '#/components/base/radio'
+import { Radio, RadioGroup } from '#/components/base/radio'
 import { Item, ItemAction, ItemContent, ItemDescription, ItemTitle } from '#/components/extra/item'
 import { Label } from '#/components/extra/label'
 
@@ -26,7 +26,6 @@ export const Playground: Story = {
   args: { value: null },
   render: () => (
     <RadioGroup defaultValue='da-vinci' aria-labelledby='radio-example'>
-      <RadioGroupLabel id='radio-example'>Select your favorite book</RadioGroupLabel>
       <Label>
         <Radio value='da-vinci' />
         The Da Vinci Code

@@ -1,7 +1,6 @@
 import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Avatar, AvatarFallback, AvatarImage, AvatarIndicator } from '#/components/base/avatar'
-import { clx } from '~/app/utils/variant'
 
 const meta = {
   title: 'Base Components/Avatar',
@@ -30,14 +29,7 @@ const Row = ({
   className
 }: React.PropsWithChildren<{ label: string; className?: string }>) => (
   <div className='flex items-center gap-2'>
-    <span
-      className={clx(
-        'text-foreground-neutral-faded min-w-12 text-sm font-semibold uppercase',
-        className
-      )}
-    >
-      {label}
-    </span>
+    <span className={className}>{label}</span>
     {children}
   </div>
 )

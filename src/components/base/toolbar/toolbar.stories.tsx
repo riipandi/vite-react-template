@@ -52,13 +52,10 @@ export const Playground: Story = {
     <div className='pr-20'>
       <Toolbar>
         <ToolbarGroup aria-label='Indentation'>
-          <ToolbarButton
-            render={<Button color='neutral' variant='ghost' mode='icon' size='md' />}
-            disabled
-          >
+          <ToolbarButton render={<Button color='neutral' variant='ghost' size='md' />} disabled>
             <Icon.TextIndentIcon weight='bold' />
           </ToolbarButton>
-          <ToolbarButton render={<Button color='neutral' variant='ghost' mode='icon' size='md' />}>
+          <ToolbarButton render={<Button color='neutral' variant='ghost' size='md' />}>
             <Icon.TextOutdentIcon weight='bold' />
           </ToolbarButton>
         </ToolbarGroup>
@@ -66,7 +63,7 @@ export const Playground: Story = {
         <ToolbarGroup aria-label='Formatting'>
           <ToolbarButton
             data-slot='toggle'
-            render={<Toggle variant='ghost' mode='icon' size='md' />}
+            render={<Toggle variant='ghost' size='md' />}
             aria-label='Bold'
             value='bold'
           >
@@ -74,7 +71,7 @@ export const Playground: Story = {
           </ToolbarButton>
           <ToolbarButton
             data-slot='toggle'
-            render={<Toggle variant='ghost' mode='icon' size='md' />}
+            render={<Toggle variant='ghost' size='md' />}
             aria-label='Italic'
             value='italic'
           >
@@ -82,7 +79,7 @@ export const Playground: Story = {
           </ToolbarButton>
           <ToolbarButton
             data-slot='toggle'
-            render={<Toggle variant='ghost' mode='icon' size='md' />}
+            render={<Toggle variant='ghost' size='md' />}
             aria-label='Underline'
             value='underline'
           >
@@ -90,7 +87,7 @@ export const Playground: Story = {
           </ToolbarButton>
         </ToolbarGroup>
         <ToolbarSeparator />
-        <ToggleGroup variant='ghost' mode='icon' size='md'>
+        <ToggleGroup variant='ghost' size='md'>
           <ToolbarButton
             data-slot='toggle'
             render={<Toggle />}

@@ -9,7 +9,6 @@ import {
   NavigationMenuTrigger
 } from '#/components/base/navigation-menu'
 import { Heading, Text } from '#/components/extra/typography'
-import { clx } from '~/app/utils/variant'
 
 const meta = {
   title: 'Base Components/NavigationMenu',
@@ -121,14 +120,7 @@ export const Playground: Story = {
           <NavigationMenuLink
             href='https://github.com/riipandi/blueprint-nitrojs'
             render={(props) => (
-              <a
-                {...props}
-                className={clx(
-                  'text-foreground hover:bg-background-neutral-faded active:bg-background-neutral-faded focus-visible:ring-primary inline-flex h-9 shrink-0',
-                  'items-center justify-center gap-1.5 rounded-md px-3 leading-none font-medium no-underline',
-                  'transition-colors select-none focus-visible:ring-2 focus-visible:outline-none [&_svg:not([class*=size-])]:size-4'
-                )}
-              >
+              <a {...props}>
                 <Icon.GithubLogoIcon strokeWidth={2.5} />
                 GitHub
               </a>
@@ -176,14 +168,7 @@ export const Compact: Story = {
           <NavigationMenuLink
             href='https://github.com/riipandi/blueprint-nitrojs'
             render={(props) => (
-              <a
-                {...props}
-                className={clx(
-                  'text-foreground hover:bg-background-neutral-faded active:bg-background-neutral-faded focus-visible:ring-primary inline-flex h-9 shrink-0',
-                  'items-center justify-center gap-1.5 rounded-md px-3 text-sm leading-none font-medium no-underline',
-                  'transition-colors select-none focus-visible:ring-2 focus-visible:outline-none [&_svg:not([class*=size-])]:size-3.5'
-                )}
-              >
+              <a {...props}>
                 <Icon.GithubLogoIcon strokeWidth={2.0} />
                 GitHub
               </a>

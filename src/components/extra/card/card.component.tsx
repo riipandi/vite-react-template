@@ -66,7 +66,11 @@ export function CardTitle({
   xstyle,
   ...props
 }: React.ComponentProps<'h3'> & { xstyle?: StyleXStyles }) {
-  return <h3 data-slot='card-title' {...stylex.props(cardStyles.title, xstyle)} {...props}>{children}</h3>
+  return (
+    <h3 data-slot='card-title' {...stylex.props(cardStyles.title, xstyle)} {...props}>
+      {children}
+    </h3>
+  )
 }
 
 export function CardDescription({

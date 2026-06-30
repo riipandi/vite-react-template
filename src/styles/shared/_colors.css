@@ -1,0 +1,541 @@
+:root,
+[data-custom-theme] {
+  /* ===================================================================
+     ALWAN THEME GENERATOR
+     HCT (brand color) -> Tokens
+
+     Quick Start:
+     1. Set your brand color below (--brand-hue, --brand-saturation)
+     2. All color tokens auto-generate with WCAG AA accessibility (~99.99% | Dettol theory)
+     3. Light/dark themes support
+    =================================================================== */
+
+  /* ────────────────────────────────────────────────────────────────
+     STEP 1: Configure Your Brand Color
+     ──────────────────────────────────────────────────────────────── */
+  --brand-hue: 250;
+  --brand-saturation: 60%;
+
+  /* ────────────────────────────────────────────────────────────────
+     STEP 2: Color Palette Generation
+     ──────────────────────────────────────────────────────────────── */
+  --primary-hue: var(--brand-hue);
+  --primary-sat: var(--brand-saturation);
+  --secondary-hue: calc(var(--brand-hue) + 30);
+  --secondary-sat: 30%;
+  --tertiary-hue: calc(var(--brand-hue) + 60);
+  --tertiary-sat: 60%;
+  --neutral-hue: var(--brand-hue);
+  --neutral-sat: 5%;
+  --neutral-variant-sat: 15%;
+
+  /* ────────────────────────────────────────────────────────────────
+     WCAG Accessibility Guards
+     ──────────────────────────────────────────────────────────────── */
+
+  /* Saturation limits -> Config */
+  --sat-min-primary: 5%;
+  --sat-max-primary: 75%;
+  --sat-min-secondary: 3%;
+  --sat-max-secondary: 70%;
+  --sat-min-tertiary: 5%;
+  --sat-max-tertiary: 75%;
+  --primary-sat-safe: clamp(var(--sat-min-primary), var(--primary-sat), var(--sat-max-primary));
+  --secondary-sat-safe: clamp(
+    var(--sat-min-secondary),
+    var(--secondary-sat),
+    var(--sat-max-secondary)
+  );
+  --tertiary-sat-safe: clamp(var(--sat-min-tertiary), var(--tertiary-sat), var(--sat-max-tertiary));
+
+  /* Dynamic lightness: high saturation = darker color for white text contrast */
+  --lightness-base-max: 50%; /* Base max lightness for low saturation */
+  --lightness-sat-factor-primary: 0.2; /* How much to reduce per 1% saturation */
+  --lightness-sat-factor-secondary: 0.18;
+  --lightness-sat-factor-tertiary: 0.18;
+  --primary-lightness-max: calc(
+    var(--lightness-base-max) - (var(--primary-sat-safe) * var(--lightness-sat-factor-primary))
+  );
+  --secondary-lightness-max: calc(
+    var(--lightness-base-max) - (var(--secondary-sat-safe) * var(--lightness-sat-factor-secondary))
+  );
+  --tertiary-lightness-max: calc(
+    var(--lightness-base-max) - (var(--tertiary-sat-safe) * var(--lightness-sat-factor-tertiary))
+  );
+
+  /* Container saturation */
+  --container-sat-ratio: 0.85; /* 85% of main color saturation */
+  --primary-container-sat: calc(var(--primary-sat-safe) * var(--container-sat-ratio));
+  --secondary-container-sat: calc(var(--secondary-sat-safe) * var(--container-sat-ratio));
+  --tertiary-container-sat: calc(var(--tertiary-sat-safe) * var(--container-sat-ratio));
+
+  /* ────────────────────────────────────────────────────────────────
+     LIGHT THEME TOKENS
+     ──────────────────────────────────────────────────────────────── */
+
+  /* Tone values (lightness percentages) */
+  --tone-main: 40%;
+  --tone-main-min: 20%;
+  --tone-on-main: 100%;
+  --tone-container: 90%;
+  --tone-container-min: 88%;
+  --tone-container-max: 95%;
+  --tone-on-container: 10%;
+  --tone-on-container-min: 5%;
+  --tone-on-container-max: 15%;
+
+  /* PRIMARY */
+  --color-primary: hsl(
+    var(--primary-hue) var(--primary-sat-safe)
+      clamp(var(--tone-main-min), var(--tone-main), var(--primary-lightness-max))
+  );
+  --color-on-primary: hsl(0deg 0% var(--tone-on-main));
+  --color-primary-container: hsl(
+    var(--primary-hue) var(--primary-container-sat)
+      clamp(var(--tone-container-min), var(--tone-container), var(--tone-container-max))
+  );
+  --color-on-primary-container: hsl(
+    var(--primary-hue) var(--primary-sat-safe)
+      clamp(var(--tone-on-container-min), var(--tone-on-container), var(--tone-on-container-max))
+  );
+
+  /* SECONDARY */
+  --color-secondary: hsl(
+    var(--secondary-hue) var(--secondary-sat-safe)
+      clamp(25%, var(--tone-main), var(--secondary-lightness-max))
+  );
+  --color-on-secondary: hsl(0deg 0% var(--tone-on-main));
+  --color-secondary-container: hsl(
+    var(--secondary-hue) var(--secondary-container-sat)
+      clamp(var(--tone-container-min), var(--tone-container), var(--tone-container-max))
+  );
+  --color-on-secondary-container: hsl(
+    var(--secondary-hue) var(--secondary-sat-safe)
+      clamp(var(--tone-on-container-min), var(--tone-on-container), var(--tone-on-container-max))
+  );
+
+  /* TERTIARY */
+  --color-tertiary: hsl(
+    var(--tertiary-hue) var(--tertiary-sat-safe)
+      clamp(25%, var(--tone-main), var(--tertiary-lightness-max))
+  );
+  --color-on-tertiary: hsl(0deg 0% var(--tone-on-main));
+  --color-tertiary-container: hsl(
+    var(--tertiary-hue) var(--tertiary-container-sat)
+      clamp(var(--tone-container-min), var(--tone-container), var(--tone-container-max))
+  );
+  --color-on-tertiary-container: hsl(
+    var(--tertiary-hue) var(--tertiary-sat-safe)
+      clamp(var(--tone-on-container-min), var(--tone-on-container), var(--tone-on-container-max))
+  );
+
+  /* ERROR */
+  --error-sat-min: 60%;
+  --error-sat: 72%;
+  --error-sat-max: 80%;
+  --error-tone: 40%;
+  --error-tone-min: 35%;
+  --error-tone-max: 45%;
+  --error-container-sat-min: 70%;
+  --error-container-sat: 80%;
+  --error-container-sat-max: 90%;
+  --error-container-tone: 93%;
+  --error-container-tone-min: 90%;
+  --error-container-tone-max: 96%;
+  --color-error: hsl(
+    0deg clamp(var(--error-sat-min), var(--error-sat), var(--error-sat-max))
+      clamp(var(--error-tone-min), var(--error-tone), var(--error-tone-max))
+  );
+  --color-on-error: hsl(0deg 0% var(--tone-on-main));
+  --color-error-container: hsl(
+    0deg
+      clamp(
+        var(--error-container-sat-min),
+        var(--error-container-sat),
+        var(--error-container-sat-max)
+      )
+      clamp(
+        var(--error-container-tone-min),
+        var(--error-container-tone),
+        var(--error-container-tone-max)
+      )
+  );
+  --color-on-error-container: hsl(0deg 60% 20%);
+
+  /* SURFACE */
+  --surface-tone: 98%;
+  --surface-on-tone: 10%;
+  --color-background: hsl(var(--neutral-hue) var(--neutral-sat) var(--surface-tone));
+  --color-on-background: hsl(var(--neutral-hue) var(--neutral-sat) var(--surface-on-tone));
+  --color-surface: var(--color-background);
+  --color-on-surface: var(--color-on-background);
+
+  /* SURFACE CONTAINERS  */
+  --surface-container-lowest-tone: 100%;
+  --surface-container-low-tone: 96%;
+  --surface-container-tone: 94%;
+  --surface-container-high-tone: 92%;
+  --surface-container-highest-tone: 90%;
+  --color-surface-container-lowest: hsl(
+    var(--neutral-hue) var(--neutral-sat) var(--surface-container-lowest-tone)
+  );
+  --color-surface-container-low: hsl(
+    var(--neutral-hue) var(--neutral-sat) var(--surface-container-low-tone)
+  );
+  --color-surface-container: hsl(
+    var(--neutral-hue) var(--neutral-sat) var(--surface-container-tone)
+  );
+  --color-surface-container-high: hsl(
+    var(--neutral-hue) var(--neutral-sat) var(--surface-container-high-tone)
+  );
+  --color-surface-container-highest: hsl(
+    var(--neutral-hue) var(--neutral-sat) var(--surface-container-highest-tone)
+  );
+
+  /* SURFACE VARIANT & OUTLINE */
+  --surface-variant-sat-min: 2%;
+  --surface-variant-sat-max: 15%;
+  --surface-variant-tone-min: 85%;
+  --surface-variant-tone: 90%;
+  --surface-variant-tone-max: 92%;
+  --on-surface-variant-sat-min: 5%;
+  --on-surface-variant-sat-max: 20%;
+  --on-surface-variant-tone-min: 25%;
+  --on-surface-variant-tone: 30%;
+  --on-surface-variant-tone-max: 35%;
+  --outline-sat-min: 5%;
+  --outline-sat-max: 15%;
+  --outline-tone-min: 40%;
+  --outline-tone: 50%;
+  --outline-tone-max: 60%;
+  --outline-variant-sat-min: 3%;
+  --outline-variant-sat-max: 10%;
+  --outline-variant-tone-min: 70%;
+  --outline-variant-tone: 80%;
+  --outline-variant-tone-max: 85%;
+  --color-surface-variant: hsl(
+    var(--neutral-hue)
+      clamp(
+        var(--surface-variant-sat-min),
+        var(--neutral-variant-sat),
+        var(--surface-variant-sat-max)
+      )
+      clamp(
+        var(--surface-variant-tone-min),
+        var(--surface-variant-tone),
+        var(--surface-variant-tone-max)
+      )
+  );
+  --color-on-surface-variant: hsl(
+    var(--neutral-hue)
+      clamp(
+        var(--on-surface-variant-sat-min),
+        var(--neutral-variant-sat),
+        var(--on-surface-variant-sat-max)
+      )
+      clamp(
+        var(--on-surface-variant-tone-min),
+        var(--on-surface-variant-tone),
+        var(--on-surface-variant-tone-max)
+      )
+  );
+  --color-outline: hsl(
+    var(--neutral-hue)
+      clamp(var(--outline-sat-min), var(--neutral-variant-sat), var(--outline-sat-max))
+      clamp(var(--outline-tone-min), var(--outline-tone), var(--outline-tone-max))
+  );
+  --color-outline-variant: hsl(
+    var(--neutral-hue)
+      clamp(
+        var(--outline-variant-sat-min),
+        var(--neutral-variant-sat),
+        var(--outline-variant-sat-max)
+      )
+      clamp(
+        var(--outline-variant-tone-min),
+        var(--outline-variant-tone),
+        var(--outline-variant-tone-max)
+      )
+  );
+
+  /* SUCCESS */
+  --color-success: hsl(146deg 82% 24%);
+  --color-on-success: hsl(0deg 0% 100%);
+  --color-success-container: hsl(132deg 83% 79%);
+  --color-on-success-container: hsl(140deg 100% 6%);
+
+  /* INFO */
+  --color-info: hsl(236deg 67% 55%);
+  --color-on-info: hsl(0deg 0% 100%);
+  --color-info-container: hsl(240deg 100% 94%);
+  --color-on-info-container: hsl(238deg 100% 21%);
+
+  /* WARNING */
+  --color-warning: hsl(25deg 100% 31%);
+  --color-on-warning: hsl(0deg 0% 100%);
+  --color-warning-container: hsl(18deg 100% 90%);
+  --color-on-warning-container: hsl(20deg 100% 10%);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════════════════════════════════ */
+[data-theme='dark'],
+[data-theme='dark'] [data-custom-theme] {
+  --sat-dark-ratio-primary: 0.95;
+  --sat-dark-ratio-secondary: 0.9;
+  --sat-dark-ratio-tertiary: 0.9;
+  --sat-dark-min-primary: 5%;
+  --sat-dark-max-primary: 90%;
+  --sat-dark-min-secondary: 3%;
+  --sat-dark-max-secondary: 85%;
+  --sat-dark-min-tertiary: 5%;
+  --sat-dark-max-tertiary: 85%;
+  --primary-sat-dark: clamp(
+    var(--sat-dark-min-primary),
+    calc(var(--primary-sat) * var(--sat-dark-ratio-primary)),
+    var(--sat-dark-max-primary)
+  );
+  --secondary-sat-dark: clamp(
+    var(--sat-dark-min-secondary),
+    calc(var(--secondary-sat) * var(--sat-dark-ratio-secondary)),
+    var(--sat-dark-max-secondary)
+  );
+  --tertiary-sat-dark: clamp(
+    var(--sat-dark-min-tertiary),
+    calc(var(--tertiary-sat) * var(--sat-dark-ratio-tertiary)),
+    var(--sat-dark-max-tertiary)
+  );
+
+  /* Minimum lightness increases with saturation */
+  --lightness-dark-base-min: 60%; /* Base min lightness for dark mode */
+  --lightness-dark-sat-boost: 0.15; /* How much lighter per 1% saturation */
+  --primary-lightness-min: calc(
+    var(--lightness-dark-base-min) + (var(--primary-sat-dark) * var(--lightness-dark-sat-boost))
+  );
+  --secondary-lightness-min: calc(
+    var(--lightness-dark-base-min) + (var(--secondary-sat-dark) * var(--lightness-dark-sat-boost))
+  );
+  --tertiary-lightness-min: calc(
+    var(--lightness-dark-base-min) + (var(--tertiary-sat-dark) * var(--lightness-dark-sat-boost))
+  );
+
+  /* Container saturation */
+  --container-dark-sat-ratio: 0.55; /* 55% of main color saturation */
+  --primary-container-sat-dark: calc(var(--primary-sat-dark) * var(--container-dark-sat-ratio));
+  --secondary-container-sat-dark: calc(var(--secondary-sat-dark) * var(--container-dark-sat-ratio));
+  --tertiary-container-sat-dark: calc(var(--tertiary-sat-dark) * var(--container-dark-sat-ratio));
+
+  /* ────────────────────────────────────────────────────────────────
+     DARK THEME TOKENS
+     ──────────────────────────────────────────────────────────────── */
+
+  /* Dark mode tone values */
+  --tone-dark-main: 80%;
+  --tone-dark-main-max: 88%;
+  --tone-dark-on-main: 20%;
+  --tone-dark-on-main-min: 10%;
+  --tone-dark-on-main-max: 25%;
+  --tone-dark-container: 30%;
+  --tone-dark-container-min: 18%;
+  --tone-dark-container-max: 35%;
+  --tone-dark-on-container: 90%;
+  --tone-dark-on-container-min: 82%;
+  --tone-dark-on-container-max: 95%;
+
+  /* PRIMARY */
+  --color-primary: hsl(
+    var(--primary-hue) var(--primary-sat-dark)
+      clamp(var(--primary-lightness-min), var(--tone-dark-main), var(--tone-dark-main-max))
+  );
+  --color-on-primary: hsl(
+    var(--primary-hue) var(--primary-sat-dark)
+      clamp(var(--tone-dark-on-main-min), var(--tone-dark-on-main), var(--tone-dark-on-main-max))
+  );
+  --color-primary-container: hsl(
+    var(--primary-hue) var(--primary-container-sat-dark)
+      clamp(
+        var(--tone-dark-container-min),
+        var(--tone-dark-container),
+        var(--tone-dark-container-max)
+      )
+  );
+  --color-on-primary-container: hsl(
+    var(--primary-hue) var(--primary-sat-dark)
+      clamp(
+        var(--tone-dark-on-container-min),
+        var(--tone-dark-on-container),
+        var(--tone-dark-on-container-max)
+      )
+  );
+
+  /* SECONDARY */
+  --color-secondary: hsl(
+    var(--secondary-hue) var(--secondary-sat-dark)
+      clamp(var(--secondary-lightness-min), var(--tone-dark-main), var(--tone-dark-main-max))
+  );
+  --color-on-secondary: hsl(
+    var(--secondary-hue) var(--secondary-sat-dark)
+      clamp(var(--tone-dark-on-main-min), var(--tone-dark-on-main), var(--tone-dark-on-main-max))
+  );
+  --color-secondary-container: hsl(
+    var(--secondary-hue) var(--secondary-container-sat-dark)
+      clamp(
+        var(--tone-dark-container-min),
+        var(--tone-dark-container),
+        var(--tone-dark-container-max)
+      )
+  );
+  --color-on-secondary-container: hsl(
+    var(--secondary-hue) var(--secondary-sat-dark)
+      clamp(
+        var(--tone-dark-on-container-min),
+        var(--tone-dark-on-container),
+        var(--tone-dark-on-container-max)
+      )
+  );
+
+  /* TERTIARY */
+  --color-tertiary: hsl(
+    var(--tertiary-hue) var(--tertiary-sat-dark)
+      clamp(var(--tertiary-lightness-min), var(--tone-dark-main), var(--tone-dark-main-max))
+  );
+  --color-on-tertiary: hsl(
+    var(--tertiary-hue) var(--tertiary-sat-dark)
+      clamp(var(--tone-dark-on-main-min), var(--tone-dark-on-main), var(--tone-dark-on-main-max))
+  );
+  --color-tertiary-container: hsl(
+    var(--tertiary-hue) var(--tertiary-container-sat-dark)
+      clamp(
+        var(--tone-dark-container-min),
+        var(--tone-dark-container),
+        var(--tone-dark-container-max)
+      )
+  );
+  --color-on-tertiary-container: hsl(
+    var(--tertiary-hue) var(--tertiary-sat-dark)
+      clamp(
+        var(--tone-dark-on-container-min),
+        var(--tone-dark-on-container),
+        var(--tone-dark-on-container-max)
+      )
+  );
+
+  /* ERROR */
+  --color-error: hsl(6deg 100% 84%);
+  --color-on-error: hsl(359deg 93% 20%);
+  --color-error-container: hsl(356deg 100% 29%);
+  --color-on-error-container: hsl(6deg 100% 84%);
+
+  /* SURFACE */
+  --surface-dark-tone: 6%;
+  --surface-dark-on-tone: 90%;
+  --color-background: hsl(var(--neutral-hue) var(--neutral-sat) var(--surface-dark-tone));
+  --color-on-background: hsl(var(--neutral-hue) var(--neutral-sat) var(--surface-dark-on-tone));
+  --color-surface: var(--color-background);
+  --color-on-surface: var(--color-on-background);
+
+  /* SURFACE CONTAINER */
+  --surface-container-dark-lowest-tone: 4%;
+  --surface-container-dark-low-tone: 10%;
+  --surface-container-dark-tone: 12%;
+  --surface-container-dark-high-tone: 17%;
+  --surface-container-dark-highest-tone: 22%;
+  --color-surface-container-lowest: hsl(
+    var(--neutral-hue) var(--neutral-sat) var(--surface-container-dark-lowest-tone)
+  );
+  --color-surface-container-low: hsl(
+    var(--neutral-hue) var(--neutral-sat) var(--surface-container-dark-low-tone)
+  );
+  --color-surface-container: hsl(
+    var(--neutral-hue) var(--neutral-sat) var(--surface-container-dark-tone)
+  );
+  --color-surface-container-high: hsl(
+    var(--neutral-hue) var(--neutral-sat) var(--surface-container-dark-high-tone)
+  );
+  --color-surface-container-highest: hsl(
+    var(--neutral-hue) var(--neutral-sat) var(--surface-container-dark-highest-tone)
+  );
+
+  /* SURFACE VARIANT & OUTLINE */
+  --surface-variant-dark-sat-min: 3%;
+  --surface-variant-dark-sat-max: 10%;
+  --surface-variant-dark-tone-min: 8%;
+  --surface-variant-dark-tone: 12%;
+  --surface-variant-dark-tone-max: 16%;
+  --on-surface-variant-dark-tone-min: 70%;
+  --on-surface-variant-dark-tone: 80%;
+  --on-surface-variant-dark-tone-max: 88%;
+  --outline-dark-sat-min: 5%;
+  --outline-dark-sat-max: 18%;
+  --outline-dark-tone-min: 48%;
+  --outline-dark-tone: 60%;
+  --outline-dark-tone-max: 68%;
+  --outline-variant-dark-sat-min: 3%;
+  --outline-variant-dark-sat-max: 15%;
+  --outline-variant-dark-tone-min: 25%;
+  --outline-variant-dark-tone: 30%;
+  --outline-variant-dark-tone-max: 38%;
+  --color-surface-variant: hsl(
+    var(--neutral-hue)
+      clamp(
+        var(--surface-variant-dark-sat-min),
+        var(--neutral-variant-sat),
+        var(--surface-variant-dark-sat-max)
+      )
+      clamp(
+        var(--surface-variant-dark-tone-min),
+        var(--surface-variant-dark-tone),
+        var(--surface-variant-dark-tone-max)
+      )
+  );
+  --color-on-surface-variant: hsl(
+    var(--neutral-hue)
+      clamp(
+        var(--surface-variant-dark-sat-min),
+        var(--neutral-variant-sat),
+        var(--surface-variant-dark-sat-max)
+      )
+      clamp(
+        var(--on-surface-variant-dark-tone-min),
+        var(--on-surface-variant-dark-tone),
+        var(--on-surface-variant-dark-tone-max)
+      )
+  );
+  --color-outline: hsl(
+    var(--neutral-hue)
+      clamp(var(--outline-dark-sat-min), var(--neutral-variant-sat), var(--outline-dark-sat-max))
+      clamp(var(--outline-dark-tone-min), var(--outline-dark-tone), var(--outline-dark-tone-max))
+  );
+  --color-outline-variant: hsl(
+    var(--neutral-hue)
+      clamp(
+        var(--outline-variant-dark-sat-min),
+        var(--neutral-variant-sat),
+        var(--outline-variant-dark-sat-max)
+      )
+      clamp(
+        var(--outline-variant-dark-tone-min),
+        var(--outline-variant-dark-tone),
+        var(--outline-variant-dark-tone-max)
+      )
+  );
+
+  /* SUCCESS */
+  --color-success: hsl(134deg 53% 68%);
+  --color-on-success: hsl(145deg 100% 11%);
+  --color-success-container: hsl(148deg 100% 16%);
+  --color-on-success-container: hsl(132deg 83% 79%);
+
+  /* INFO */
+  --color-info: hsl(236deg 100% 87%);
+  --color-on-info: hsl(238deg 100% 33%);
+  --color-info-container: hwb(236deg 14% 24%);
+  --color-on-info-container: #e0e0ff;
+
+  /* WARNING */
+  --color-warning: hsl(20deg 100% 78%);
+  --color-on-warning: hsl(23deg 100% 17%);
+  --color-warning-container: hsl(25deg 100% 24%);
+  --color-on-warning-container: hsl(18deg 100% 90%);
+}

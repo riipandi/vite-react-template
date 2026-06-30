@@ -30,5 +30,16 @@
         "typescript/no-unnecessary-type-constraint": "off",
         "typescript/triple-slash-reference": "allow"
     },
+    "overrides": [
+        {
+            "files": ["**/*.test.ts", "**/*.spec.ts"],
+            "plugins": ["vitest"],
+            "rules": {
+                "no-console": "off",
+                "vitest/no-focused-tests": "error",
+                "vitest/no-disabled-tests": "warn"
+            }
+        }
+    ],
     "ignorePatterns": [".output/**"]
 }

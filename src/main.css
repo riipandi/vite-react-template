@@ -1,3 +1,6 @@
+@import './styles/shared/_colors.css';
+@import './styles/shared/_tokens.css';
+
 /* ─── Fonts ────────────────────────────────────────────────── */
 
 /* mona-sans-latin-wght-normal */

@@ -92,12 +92,7 @@ export const DateTimePicker: Story = {
 export const DateWithIcon: Story = {
   render: () => (
     <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.75rem'])}>
-      <Input
-        type='date'
-        placeholder='Select date'
-        className='[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
-        {...stylex.props(x.flex['1'])}
-      />
+      <Input type='date' placeholder='Select date' {...stylex.props(x.flex['1'])} />
       <Lucide.Calendar
         {...stylex.props(x.color[color.fgNeutralFaded])}
         {...stylex.props(
@@ -107,12 +102,7 @@ export const DateWithIcon: Story = {
           x.height['1rem']
         )}
       />
-      <Input
-        type='date'
-        defaultValue='2025-06-15'
-        className='[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
-        {...stylex.props(x.flex['1'])}
-      />
+      <Input type='date' defaultValue='2025-06-15' {...stylex.props(x.flex['1'])} />
       <Lucide.Calendar
         {...stylex.props(x.color[color.fgNeutralFaded])}
         {...stylex.props(
@@ -129,12 +119,7 @@ export const DateWithIcon: Story = {
 export const TimeWithIcon: Story = {
   render: () => (
     <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.75rem'])}>
-      <Input
-        type='time'
-        placeholder='Select time'
-        className='[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
-        {...stylex.props(x.flex['1'])}
-      />
+      <Input type='time' placeholder='Select time' {...stylex.props(x.flex['1'])} />
       <Lucide.Clock
         {...stylex.props(x.color[color.fgNeutralFaded])}
         {...stylex.props(
@@ -144,13 +129,7 @@ export const TimeWithIcon: Story = {
           x.height['1rem']
         )}
       />
-      <Input
-        type='time'
-        step='1'
-        defaultValue='14:30:45'
-        className='[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
-        {...stylex.props(x.flex['1'])}
-      />
+      <Input type='time' step='1' defaultValue='14:30:45' {...stylex.props(x.flex['1'])} />
       <Lucide.Clock
         {...stylex.props(x.color[color.fgNeutralFaded])}
         {...stylex.props(

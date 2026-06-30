@@ -202,11 +202,7 @@ export const Scrollable: Story = {
               )}
               scrollbar='vertical'
             >
-              <div
-                className='[&_h3]:text-foreground [&_h3]:font-semibold'
-                {...stylex.props(x.gap['1rem'])}
-                {...stylex.props(x.paddingBottom['1.5rem'])}
-              >
+              <div {...stylex.props(x.gap['1rem'])} {...stylex.props(x.paddingBottom['1.5rem'])}>
                 {faqSections.map((faq) => (
                   <div
                     key={faq.title}
@@ -502,10 +498,10 @@ function NestedDrawer({
         <Stack spacing='sm'>
           <Card
             variant='ghost'
-            className={
+            xstyle={
               adventure === 'brown'
-                ? 'border-foreground-primary bg-background-primary-faded'
-                : 'border-border-neutral hover:bg-background-neutral-faded cursor-pointer'
+                ? [x.borderColor[color.fgPrimary], x.backgroundColor[color.bgPrimaryFaded]]
+                : [x.borderColor[color.borderNeutral], x.backgroundColor[color.bgNeutralFaded]]
             }
             onClick={() => setAdventure('brown')}
           >

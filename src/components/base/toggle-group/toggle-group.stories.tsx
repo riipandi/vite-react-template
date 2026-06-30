@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='space-x-6' {...stylex.props(x.display.flex, x.alignItems.center)}>
+    <div {...stylex.props(x.gap['1.5rem'])} {...stylex.props(x.display.flex, x.alignItems.center)}>
       <ToggleGroup multiple mode='icon' size='md' orientation='horizontal'>
         <Toggle value='bold' aria-label='Bold'>
           <Lucide.Bold />
@@ -53,7 +53,7 @@ export const Playground: Story = {
 export const Vertical: Story = {
   args: {},
   render: () => (
-    <div className='space-x-6' {...stylex.props(x.display.flex, x.alignItems.center)}>
+    <div {...stylex.props(x.gap['1.5rem'])} {...stylex.props(x.display.flex, x.alignItems.center)}>
       <ToggleGroup defaultValue={['start']} mode='icon' size='md' orientation='vertical'>
         <Toggle value='left' aria-label='Left'>
           <Lucide.AlignLeft />

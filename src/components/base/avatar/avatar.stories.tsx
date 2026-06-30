@@ -50,7 +50,7 @@ const Grid = ({ children }: React.PropsWithChildren) => (
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='inline-flex space-x-2'>
+    <div {...stylex.props(x.display.inlineFlex, x.gap['0.5rem'])}>
       <Avatar>
         <AvatarImage
           src='https://api.dicebear.com/9.x/avataaars/svg?radius=50&seed=Robert+Langdon'
@@ -82,7 +82,7 @@ export const Playground: Story = {
 export const Indicator: Story = {
   args: {},
   render: () => (
-    <div className='inline-flex space-x-2'>
+    <div {...stylex.props(x.display.inlineFlex, x.gap['0.5rem'])}>
       <Avatar size='md'>
         <AvatarImage
           src='https://api.dicebear.com/9.x/avataaars/svg?radius=50&seed=Albus+Dumbledore'

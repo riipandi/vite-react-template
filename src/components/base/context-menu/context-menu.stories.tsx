@@ -51,7 +51,8 @@ export const Playground: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        className='border-muted text-foreground-neutral-faded border border-dashed'
+        className='border-muted text-foreground-neutral-faded'
+        {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
           x.height['48rem'],
@@ -80,7 +81,8 @@ export const WithItemIcon: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        className='border-muted text-foreground-neutral-faded border border-dashed'
+        className='border-muted text-foreground-neutral-faded'
+        {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
           x.height['48rem'],
@@ -129,7 +131,8 @@ export const NestedSubMenu: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        className='border-muted text-foreground-neutral-faded border border-dashed'
+        className='border-muted text-foreground-neutral-faded'
+        {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
           x.height['48rem'],
@@ -175,7 +178,8 @@ export const AdvanceMenu: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        className='border-muted text-foreground-neutral-faded border border-dashed'
+        className='border-muted text-foreground-neutral-faded'
+        {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
           x.height['48rem'],
@@ -250,7 +254,8 @@ export const CompactMenu: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        className='border-muted text-foreground-neutral-faded border border-dashed'
+        className='border-muted text-foreground-neutral-faded'
+        {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
           x.height['48rem'],

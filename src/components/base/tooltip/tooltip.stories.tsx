@@ -33,7 +33,10 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='inline-flex space-x-4' {...stylex.props(x.alignItems.center)}>
+    <div
+      {...stylex.props(x.display.inlineFlex, x.gap['1rem'])}
+      {...stylex.props(x.alignItems.center)}
+    >
       <Tooltip>
         <TooltipTrigger
           render={
@@ -51,7 +54,10 @@ export const Playground: Story = {
 export const Position: Story = {
   args: {},
   render: () => (
-    <div className='inline-flex space-x-4' {...stylex.props(x.alignItems.center)}>
+    <div
+      {...stylex.props(x.display.inlineFlex, x.gap['1rem'])}
+      {...stylex.props(x.alignItems.center)}
+    >
       <Tooltip>
         <TooltipTrigger
           render={

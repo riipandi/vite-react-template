@@ -43,7 +43,7 @@ export const Playground: Story = {
   render: (args) => (
     <Meter {...args}>
       <div
-        className='col-span-full'
+        {...stylex.props(x.gridColumn['1 / -1'])}
         {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
       >
         <MeterLabel>Storage Used</MeterLabel>
@@ -71,10 +71,14 @@ export const SizeShowcase: Story = {
       {sizes.map((s) => (
         <Meter key={s} value={65} min={0} max={100} size={s}>
           <div
-            className='col-span-full'
+            {...stylex.props(x.gridColumn['1 / -1'])}
             {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
           >
-            <MeterLabel size={s} className='inline-flex' {...stylex.props(x.gap['0.25rem'])}>
+            <MeterLabel
+              size={s}
+              {...stylex.props(x.display.inlineFlex)}
+              {...stylex.props(x.gap['0.25rem'])}
+            >
               <span>Size</span>
               <span {...stylex.props(x.textTransform.uppercase)}>{s}</span>
             </MeterLabel>
@@ -104,7 +108,7 @@ export const VariantShowcase: Story = {
       {colors.map((v) => (
         <Meter key={v} value={v === 'critical' ? 90 : 65} min={0} max={100} color={v}>
           <div
-            className='col-span-full'
+            {...stylex.props(x.gridColumn['1 / -1'])}
             {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
           >
             <MeterLabel>{v.charAt(0).toUpperCase() + v.slice(1)}</MeterLabel>
@@ -129,10 +133,10 @@ export const StorageExample: Story = {
     color: 'primary'
   },
   render: (args) => (
-    <div className='space-y-2' {...stylex.props(x.width['20rem'])}>
+    <div {...stylex.props(x.gap['0.5rem'])} {...stylex.props(x.width['20rem'])}>
       <Meter {...args}>
         <div
-          className='col-span-full'
+          {...stylex.props(x.gridColumn['1 / -1'])}
           {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
         >
           <MeterLabel>Storage</MeterLabel>
@@ -159,10 +163,10 @@ export const BatteryExample: Story = {
     color: 'warning'
   },
   render: (args) => (
-    <div className='space-y-2' {...stylex.props(x.width['20rem'])}>
+    <div {...stylex.props(x.gap['0.5rem'])} {...stylex.props(x.width['20rem'])}>
       <Meter {...args}>
         <div
-          className='col-span-full'
+          {...stylex.props(x.gridColumn['1 / -1'])}
           {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
         >
           <MeterLabel>Battery</MeterLabel>
@@ -191,7 +195,7 @@ export const WithCustomValue: Story = {
   render: (args) => (
     <Meter {...args}>
       <div
-        className='col-span-full'
+        {...stylex.props(x.gridColumn['1 / -1'])}
         {...stylex.props(x.display.flex, x.justifyContent.spaceBetween)}
       >
         <MeterLabel>API Requests</MeterLabel>

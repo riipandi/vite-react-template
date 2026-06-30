@@ -50,7 +50,8 @@ const colors = ['primary', 'neutral', 'positive', 'warning', 'critical'] as cons
 const Row = ({ label, children }: React.PropsWithChildren<{ label: string }>) => (
   <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['1rem'])}>
     <span
-      className='text-foreground-neutral-faded capitalize'
+      className='text-foreground-neutral-faded'
+      {...stylex.props(x.textTransform.capitalize)}
       {...stylex.props(x.width['4rem'], x.fontSize[fontSize.xs], x.fontWeight[fontWeight.semibold])}
     >
       {label}

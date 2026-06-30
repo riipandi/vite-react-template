@@ -101,7 +101,8 @@ export const Playground: Story = {
         </Stack>
 
         <div
-          className='border-border-neutral grid grid-cols-2 border-t'
+          className='border-border-neutral grid grid-cols-2'
+          {...stylex.props(x.borderTopWidth['1px'])}
           {...stylex.props(
             x.marginLeft['0.5rem'],
             x.marginRight['0.5rem'],
@@ -201,11 +202,16 @@ export const Scrollable: Story = {
               scrollbar='vertical'
             >
               <div
-                className='[&_h3]:text-foreground space-y-4 [&_h3]:font-semibold'
+                className='[&_h3]:text-foreground [&_h3]:font-semibold'
+                {...stylex.props(x.gap['1rem'])}
                 {...stylex.props(x.paddingBottom['1.5rem'])}
               >
                 {faqSections.map((faq) => (
-                  <div key={faq.title} className='text-accent-foreground space-y-1'>
+                  <div
+                    key={faq.title}
+                    className='text-accent-foreground'
+                    {...stylex.props(x.gap['0.25rem'])}
+                  >
                     <h3>{faq.title}</h3>
                     <p>{faq.content}</p>
                   </div>
@@ -215,7 +221,8 @@ export const Scrollable: Story = {
           </div>
 
           <div
-            className='border-border-neutral border-t'
+            className='border-border-neutral'
+            {...stylex.props(x.borderTopWidth['1px'])}
             {...stylex.props(
               x.display.flex,
               x.paddingLeft['1.5rem'],

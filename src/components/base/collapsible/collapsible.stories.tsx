@@ -89,7 +89,8 @@ export const InfoCard: Story = {
     const [isOpen, setIsOpen] = React.useState(false)
     return (
       <div
-        className='border-border-neutral w-[500px] border'
+        className='border-border-neutral'
+        {...stylex.props(x.width['500px'], x.borderWidth['1px'])}
         {...stylex.props(x.borderRadius[radius.lg], x.padding['1rem'])}
       >
         <Text {...stylex.props(x.fontSize[fontSize.sm])}>

@@ -94,7 +94,8 @@ export const DateWithIcon: Story = {
       <Input
         type='date'
         placeholder='Select date'
-        className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+        className='[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+        {...stylex.props(x.flex['1'])}
       />
       <Lucide.Calendar
         className='text-foreground-neutral-faded'
@@ -108,7 +109,8 @@ export const DateWithIcon: Story = {
       <Input
         type='date'
         defaultValue='2025-06-15'
-        className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+        className='[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+        {...stylex.props(x.flex['1'])}
       />
       <Lucide.Calendar
         className='text-foreground-neutral-faded'
@@ -129,7 +131,8 @@ export const TimeWithIcon: Story = {
       <Input
         type='time'
         placeholder='Select time'
-        className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+        className='[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+        {...stylex.props(x.flex['1'])}
       />
       <Lucide.Clock
         className='text-foreground-neutral-faded'
@@ -144,7 +147,8 @@ export const TimeWithIcon: Story = {
         type='time'
         step='1'
         defaultValue='14:30:45'
-        className='flex-1 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+        className='[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
+        {...stylex.props(x.flex['1'])}
       />
       <Lucide.Clock
         className='text-foreground-neutral-faded'

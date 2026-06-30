@@ -37,10 +37,11 @@ export const Both: Story = {
   render: () => (
     <ScrollArea
       scrollbar='both'
-      className='border-border-neutral max-w-xl border shadow'
+      className='border-border-neutral max-w-xl shadow'
+      {...stylex.props(x.borderWidth['1px'])}
       {...stylex.props(x.height['80rem'], x.width['100%'], x.borderRadius[radius.md])}
     >
-      <div className='space-y-6' {...stylex.props(x.padding['1rem'])}>
+      <div {...stylex.props(x.gap['1.5rem'])} {...stylex.props(x.padding['1rem'])}>
         <Text>
           The Da Vinci Code begins with the murder of Jacques Saunière, the curator of the Louvre
           Museum in Paris. Robert Langdon, a Harvard professor of symbology, is summoned to the
@@ -86,10 +87,11 @@ export const VerticalOnly: Story = {
   render: () => (
     <ScrollArea
       scrollbar='vertical'
-      className='border-border-neutral max-w-xl border shadow'
+      className='border-border-neutral max-w-xl shadow'
+      {...stylex.props(x.borderWidth['1px'])}
       {...stylex.props(x.height['80rem'], x.width['100%'], x.borderRadius[radius.md])}
     >
-      <div className='space-y-6' {...stylex.props(x.padding['1rem'])}>
+      <div {...stylex.props(x.gap['1.5rem'])} {...stylex.props(x.padding['1rem'])}>
         <Text>
           Harry Potter and the Sorcerer's Stone begins with Harry living in a cupboard under the
           stairs at 4 Privet Drive, treated poorly by his aunt, uncle, and cousin Dudley.
@@ -127,7 +129,8 @@ export const HorizontalOnly: Story = {
   render: () => (
     <ScrollArea
       scrollbar='horizontal'
-      className='border-border-neutral max-w-xl border shadow'
+      className='border-border-neutral max-w-xl shadow'
+      {...stylex.props(x.borderWidth['1px'])}
       {...stylex.props(x.height['32rem'], x.width['100%'], x.borderRadius[radius.md])}
     >
       <div {...stylex.props(x.display.flex, x.gap['1rem'], x.padding['1rem'])}>

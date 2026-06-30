@@ -37,7 +37,8 @@ export const Playground: Story = {
       <Text className='xl:w-8/12' {...stylex.props(x.width['100%'])}>
         The Philosopher's Stone is a legendary{' '}
         <PreviewCardTrigger
-          className='text-primary border-primary border-b'
+          className='text-primary border-primary'
+          {...stylex.props(x.borderBottomWidth['1px'])}
           {...stylex.props(x.cursor.help)}
         >
           alchemical substance
@@ -51,7 +52,7 @@ export const Playground: Story = {
           {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'], x.width['100%'])}
           alt='Preview'
         />
-        <Text className='text-justify text-sm/relaxed'>
+        <Text className='text-sm/relaxed' {...stylex.props(x.textAlign.justify)}>
           In Harry Potter and the Philosopher's Stone, this legendary stone is guarded by Dumbledore
           at Hogwarts. It was created by Nicolas Flampel and is the only known stone to exist. The
           stone plays a crucial role in the first book's plot.

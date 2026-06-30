@@ -222,7 +222,10 @@ function ListItem({ title, children, href, size = 'default' }: ListItemProps) {
             <Heading level={5} size='xs'>
               {title}
             </Heading>
-            <Text className='text-foreground-neutral-faded/80 line-clamp-2 leading-normal'>
+            <Text
+              className='text-foreground-neutral-faded/80 line-clamp-2'
+              {...stylex.props(x.lineHeight.normal)}
+            >
               {children}
             </Text>
           </a>

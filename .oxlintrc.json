@@ -14,7 +14,7 @@
         "import/default": "warn",
         "import/no-absolute-path": "allow",
         "import/no-cycle": "warn",
-        "import/no-unassigned-import": "warn",
+        "import/no-unassigned-import": "off",
         "no-console": "off",
         "no-debugger": "warn",
         "no-empty": ["error", { "allowEmptyCatch": true }],

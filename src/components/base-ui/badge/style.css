@@ -1,0 +1,129 @@
+@layer components {
+  [data-ui='badge'] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--badge-size);
+    border: 1px solid transparent;
+    width: fit-content;
+    padding-inline: var(--spacing-6);
+
+    &[data-shape='rounded'] {
+      border-radius: var(--radius-rounded);
+    }
+
+    &[data-shape='smoothed'] {
+      border-radius: var(--radius-xs);
+    }
+
+    svg {
+      width: var(--icon-size);
+      height: var(--icon-size);
+    }
+
+    /* Dot */
+    &[data-doted] {
+      &::before {
+        content: '';
+        display: block;
+        clip-path: circle();
+        background-color: currentcolor;
+        width: var(--dot-size);
+        height: var(--dot-size);
+      }
+    }
+
+    /* Size */
+    &[data-size='lg'] {
+      --icon-size: 20px;
+      --badge-size: 24px;
+      --dot-size: 8px;
+
+      gap: var(--spacing-8);
+      font: var(--font-label-lg);
+
+      & > [data-ui='badge-dot'] {
+        margin-inline: calc(var(--spacing-8) * -1);
+      }
+    }
+
+    &[data-size='md'] {
+      --icon-size: 16px;
+      --badge-size: 20px;
+      --dot-size: 6px;
+
+      gap: var(--spacing-6);
+      font: var(--font-label-md);
+
+      & > [data-ui='badge-dot'] {
+        margin-inline: calc(var(--spacing-6) * -1);
+      }
+    }
+
+    &[data-size='sm'] {
+      --icon-size: 12px;
+      --badge-size: 16px;
+      --dot-size: 4px;
+
+      font: var(--font-label-sm);
+      gap: var(--spacing-8);
+
+      & > [data-ui='badge-dot'] {
+        margin-inline: calc(var(--spacing-8) * -1);
+      }
+    }
+
+    /* Variant */
+    &[data-variant='primary'] {
+      --color-badge: var(--color-primary-container);
+      --color-on-badge: var(--color-primary);
+      --color-badge-border: var(--color-primary);
+    }
+
+    /* Mode */
+    &[data-mode='filled'] {
+      background-color: var(--color-badge);
+      color: var(--color-on-badge);
+      svg {
+        fill: var(--color-on-badge);
+      }
+    }
+
+    &[data-mode='light'],
+    &[data-mode='lighter'] {
+      background-color: color-mix(
+        in srgb,
+        var(--color-badge) var(--badge-lightness),
+        var(--color-background)
+      );
+      color: color-mix(in srgb, var(--color-badge), var(--color-on-badge));
+      svg {
+        fill: color-mix(in srgb, var(--color-badge), var(--color-on-badge));
+      }
+    }
+
+    &[data-mode='light'] {
+      --badge-lightness: 60%;
+    }
+
+    &[data-mode='lighter'] {
+      --badge-lightness: 40%;
+    }
+
+    &[data-mode='stroke'] {
+      color: var(--color-on-badge);
+      border-color: currentColor;
+      svg {
+        fill: var(--color-on-badge);
+      }
+    }
+
+    /* Disabled */
+    &[aria-disabled='true'] {
+      border-color: var(--color-surface-container-highest);
+      background-color: transparent;
+      color: color-mix(in srgb, var(--color-on-surface) 38%, transparent);
+      pointer-events: none;
+    }
+  }
+}

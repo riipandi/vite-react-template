@@ -1,0 +1,44 @@
+@layer components {
+  [data-ui='collapsible'] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-8);
+    border-radius: var(--radius-sm);
+    font: var(--font-body-md);
+    width: 100%;
+    transition: var(--transition-standard-default-effects);
+
+    [data-slot='collapsible-trigger'] {
+      outline: 0;
+      border: 0;
+      background-color: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-12);
+
+      &:focus-visible {
+        outline: 2px solid var(--color-primary-container);
+      }
+
+      svg {
+        transition: var(--transition-expressive-default-spatial);
+        width: var(--spacing-16);
+        height: var(--spacing-16);
+        color: inherit;
+      }
+    }
+
+    [data-ui='collapsible-panel'] {
+      border-radius: var(--radius-sm);
+      height: var(--collapsible-panel-height);
+      overflow: hidden;
+
+      &[hidden]:not([hidden='until-found']) {
+        display: none;
+      }
+    }
+  }
+}

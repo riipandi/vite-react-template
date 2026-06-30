@@ -1,4 +1,3 @@
-// oxlint-disable import/no-unassigned-import
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
 import { queryClient } from '#/libraries/api-client'

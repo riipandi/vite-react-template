@@ -1,0 +1,7 @@
+@layer components {
+  [data-ui='checkbox-group'] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+  }
+}

@@ -18,6 +18,7 @@ import {
   MenuGroupLabel
 } from '#/components/base/menu'
 import { Hotkey } from '#/components/extra/hotkey'
+import { color } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Menu',
@@ -207,7 +208,7 @@ export const AdvanceMenu: Story = {
           </MenuSubmenu>
           <MenuItem>
             Toggle Sidebar
-            <Hotkey color='neutral' variant='outline' className='ml-auto'>
+            <Hotkey color='neutral' variant='outline' {...stylex.props(x.marginLeft.auto)}>
               ⌘ B
             </Hotkey>
           </MenuItem>
@@ -222,9 +223,9 @@ export const AdvanceMenu: Story = {
           </MenuSubmenu>
         </MenuGroup>
         <MenuSeparator />
-        <MenuItem className='text-danger'>
+        <MenuItem {...stylex.props(x.color[color.fgCritical])}>
           Quit App
-          <Hotkey color='neutral' variant='outline' className='ml-auto'>
+          <Hotkey color='neutral' variant='outline' {...stylex.props(x.marginLeft.auto)}>
             ⌘ Q
           </Hotkey>
         </MenuItem>

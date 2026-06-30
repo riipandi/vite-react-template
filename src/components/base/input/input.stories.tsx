@@ -3,6 +3,7 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import { Input } from '#/components/base/input'
+import { color } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Input',
@@ -98,7 +99,7 @@ export const DateWithIcon: Story = {
         {...stylex.props(x.flex['1'])}
       />
       <Lucide.Calendar
-        className='text-foreground-neutral-faded'
+        {...stylex.props(x.color[color.fgNeutralFaded])}
         {...stylex.props(
           x.marginLeft['0.5rem'],
           x.marginRight['0.5rem'],
@@ -113,7 +114,7 @@ export const DateWithIcon: Story = {
         {...stylex.props(x.flex['1'])}
       />
       <Lucide.Calendar
-        className='text-foreground-neutral-faded'
+        {...stylex.props(x.color[color.fgNeutralFaded])}
         {...stylex.props(
           x.marginLeft['0.5rem'],
           x.marginRight['0.5rem'],
@@ -135,7 +136,7 @@ export const TimeWithIcon: Story = {
         {...stylex.props(x.flex['1'])}
       />
       <Lucide.Clock
-        className='text-foreground-neutral-faded'
+        {...stylex.props(x.color[color.fgNeutralFaded])}
         {...stylex.props(
           x.marginLeft['0.5rem'],
           x.marginRight['0.5rem'],
@@ -151,7 +152,7 @@ export const TimeWithIcon: Story = {
         {...stylex.props(x.flex['1'])}
       />
       <Lucide.Clock
-        className='text-foreground-neutral-faded'
+        {...stylex.props(x.color[color.fgNeutralFaded])}
         {...stylex.props(
           x.marginLeft['0.5rem'],
           x.marginRight['0.5rem'],

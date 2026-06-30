@@ -3,6 +3,7 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage, AvatarIndicator } from '#/components/base/avatar'
+import { color } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Avatar',
@@ -65,10 +66,10 @@ export const Playground: Story = {
         />
         <AvatarFallback asInitial>Harry Potter</AvatarFallback>
       </Avatar>
-      <Avatar className='bg-blue-500 text-white'>
+      <Avatar {...stylex.props(x.backgroundColor['#3b82f6'], x.color['#fff'])}>
         <AvatarFallback asInitial>Hermione Granger</AvatarFallback>
       </Avatar>
-      <Avatar className='bg-orange-500 text-white'>
+      <Avatar {...stylex.props(x.backgroundColor['#f97316'], x.color['#fff'])}>
         <AvatarFallback asInitial>Sophie Neveu</AvatarFallback>
       </Avatar>
       <Avatar>
@@ -91,7 +92,11 @@ export const Indicator: Story = {
         <AvatarFallback>AD</AvatarFallback>
         <AvatarIndicator
           position='bottom'
-          className='outline-background bg-green-500 outline'
+          {...stylex.props(
+            x.outlineColor[color.bgPage],
+            x.backgroundColor['#22c55e'],
+            x.outlineStyle.solid
+          )}
           size='sm'
         />
       </Avatar>
@@ -101,13 +106,21 @@ export const Indicator: Story = {
           alt='Ron Weasley'
         />
         <AvatarFallback>RW</AvatarFallback>
-        <AvatarIndicator position='top' className='bg-red-500 text-white' size='lg'>
+        <AvatarIndicator
+          position='top'
+          {...stylex.props(x.backgroundColor['#ef4444'], x.color['#fff'])}
+          size='lg'
+        >
           3
         </AvatarIndicator>
       </Avatar>
-      <Avatar size='md' className='bg-blue-500 text-white'>
+      <Avatar size='md' {...stylex.props(x.backgroundColor['#3b82f6'], x.color['#fff'])}>
         <AvatarFallback>LV</AvatarFallback>
-        <AvatarIndicator position='bottom' className='bg-green-500 text-white' size='lg'>
+        <AvatarIndicator
+          position='bottom'
+          {...stylex.props(x.backgroundColor['#22c55e'], x.color['#fff'])}
+          size='lg'
+        >
           <Lucide.CheckCircle />
         </AvatarIndicator>
       </Avatar>

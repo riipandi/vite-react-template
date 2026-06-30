@@ -3,7 +3,7 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { OTPField, OTPFieldInput, OTPFieldSeparator } from '#/components/base/otp-field'
-import { fontSize, fontWeight } from '#/styles/tokens.stylex'
+import { fontSize, fontWeight, color } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/OTPField',
@@ -145,10 +145,13 @@ export const Controlled: Story = {
     const [value, setValue] = React.useState('')
     return (
       <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['1rem'])}>
-        <p className='text-foreground-neutral-faded' {...stylex.props(x.fontSize[fontSize.sm])}>
+        <p
+          {...stylex.props(x.color[color.fgNeutralFaded])}
+          {...stylex.props(x.fontSize[fontSize.sm])}
+        >
           Value:{' '}
           <span
-            className='text-foreground-neutral'
+            {...stylex.props(x.color[color.fgNeutral])}
             {...stylex.props(x.fontWeight[fontWeight.medium])}
           >
             {value || '(empty)'}

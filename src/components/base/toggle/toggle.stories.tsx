@@ -41,7 +41,11 @@ export const Playground: Story = {
         size='sm'
       >
         <Lucide.Heart />
-        <span className='sr-only'>Favorite</span>
+        <span
+          {...stylex.props(x.position.absolute, x.width['1px'], x.height['1px'], x.overflow.hidden)}
+        >
+          Favorite
+        </span>
       </Toggle>
 
       <Toggle

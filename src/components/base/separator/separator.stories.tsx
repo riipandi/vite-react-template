@@ -48,7 +48,7 @@ export const Vertical: Story = {
   args: {},
   render: () => (
     <div
-      className='max-w-sm'
+      {...stylex.props(x.maxWidth['384px'])}
       {...stylex.props(x.marginLeft.auto, x.marginRight.auto)}
       {...stylex.props(
         x.display.flex,

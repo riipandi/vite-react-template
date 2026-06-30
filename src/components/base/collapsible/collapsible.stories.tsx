@@ -5,7 +5,7 @@ import * as React from 'react'
 import { Button } from '#/components/base/button'
 import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from '#/components/base/collapsible'
 import { Text } from '#/components/extra/typography'
-import { fontSize, radius } from '#/styles/tokens.stylex'
+import { fontSize, radius, color } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Collapsible',
@@ -48,7 +48,7 @@ export const Playground: Story = {
       <Collapsible {...stylex.props(x.width['100%'])}>
         <CollapsibleTrigger>What is the Illuminati?</CollapsibleTrigger>
         <CollapsiblePanel>
-          <Text className='text-foreground-neutral-faded'>
+          <Text {...stylex.props(x.color[color.fgNeutralFaded])}>
             The Illuminati was a secret society formed in Bavaria in 1776, allegedly seeking to
             oppose religious influence and abuses of state power.
           </Text>
@@ -73,7 +73,7 @@ export const Indicator: Story = {
       <Collapsible {...stylex.props(x.width['100%'])}>
         <CollapsibleTrigger expandableIndicator>What is the Illuminati?</CollapsibleTrigger>
         <CollapsiblePanel>
-          <Text className='text-foreground-neutral-faded'>
+          <Text {...stylex.props(x.color[color.fgNeutralFaded])}>
             The Illuminati was a secret society formed in Bavaria in 1776, allegedly seeking to
             oppose religious influence and abuses of state power.
           </Text>
@@ -89,7 +89,7 @@ export const InfoCard: Story = {
     const [isOpen, setIsOpen] = React.useState(false)
     return (
       <div
-        className='border-border-neutral'
+        {...stylex.props(x.borderColor[color.borderNeutral])}
         {...stylex.props(x.width['500px'], x.borderWidth['1px'])}
         {...stylex.props(x.borderRadius[radius.lg], x.padding['1rem'])}
       >
@@ -102,7 +102,7 @@ export const InfoCard: Story = {
             Pairs beautifully with shadcn/ui. Save time and build your next project faster.
           </CollapsiblePanel>
           <CollapsibleTrigger
-            className='text-end'
+            {...stylex.props(x.textAlign.end)}
             {...stylex.props(
               x.marginLeft['0.5rem'],
               x.marginRight['0.5rem'],

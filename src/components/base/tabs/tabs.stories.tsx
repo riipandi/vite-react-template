@@ -128,7 +128,7 @@ export const Vertical: Story = {
 // value: 'explore',
 // content: (
 // <>
-// Discover <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>fresh ideas</span>, trending
+// Discover <span {...stylex.props(x.color[color.fgNeutral])} {...stylex.props(x.fontWeight[fontWeight.semibold])}>fresh ideas</span>, trending
 // topics, and hidden gems curated just for you. Start exploring and let your curiosity
 // lead the way!
 // </>
@@ -139,7 +139,7 @@ export const Vertical: Story = {
 // value: 'favorites',
 // content: (
 // <>
-// All your <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>favorites</span> are saved
+// All your <span {...stylex.props(x.color[color.fgNeutral])} {...stylex.props(x.fontWeight[fontWeight.semibold])}>favorites</span> are saved
 // here. Revisit articles, collections, and moments you love, any time you want a little
 // inspiration.
 // </>
@@ -150,7 +150,7 @@ export const Vertical: Story = {
 // value: 'surprise',
 // content: (
 // <>
-// <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>Surprise!</span> Here&apos;s something
+// <span {...stylex.props(x.color[color.fgNeutral])} {...stylex.props(x.fontWeight[fontWeight.semibold])}>Surprise!</span> Here&apos;s something
 // unexpected—a fun fact, a quirky tip, or a daily challenge. Come back for a new surprise
 // every day!
 // </>
@@ -197,7 +197,7 @@ export const Vertical: Story = {
 // value: 'explore',
 // content: (
 // <>
-// Discover <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>fresh ideas</span>, trending
+// Discover <span {...stylex.props(x.color[color.fgNeutral])} {...stylex.props(x.fontWeight[fontWeight.semibold])}>fresh ideas</span>, trending
 // topics, and hidden gems curated just for you. Start exploring and let your curiosity
 // lead the way!
 // </>
@@ -208,7 +208,7 @@ export const Vertical: Story = {
 // value: 'favorites',
 // content: (
 // <>
-// All your <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>favorites</span> are saved
+// All your <span {...stylex.props(x.color[color.fgNeutral])} {...stylex.props(x.fontWeight[fontWeight.semibold])}>favorites</span> are saved
 // here. Revisit articles, collections, and moments you love, any time you want a little
 // inspiration.
 // </>
@@ -219,7 +219,7 @@ export const Vertical: Story = {
 // value: 'surprise',
 // content: (
 // <>
-// <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>Surprise!</span> Here&apos;s something
+// <span {...stylex.props(x.color[color.fgNeutral])} {...stylex.props(x.fontWeight[fontWeight.semibold])}>Surprise!</span> Here&apos;s something
 // unexpected—a fun fact, a quirky tip, or a daily challenge. Come back for a new surprise
 // every day!
 // </>
@@ -262,7 +262,7 @@ export const Vertical: Story = {
 // value: 'explore',
 // content: (
 // <>
-// Discover <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>fresh ideas</span>, trending
+// Discover <span {...stylex.props(x.color[color.fgNeutral])} {...stylex.props(x.fontWeight[fontWeight.semibold])}>fresh ideas</span>, trending
 // topics, and hidden gems curated just for you. Start exploring and let your curiosity
 // lead the way!
 // </>
@@ -273,7 +273,7 @@ export const Vertical: Story = {
 // value: 'favorites',
 // content: (
 // <>
-// All your <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>favorites</span> are saved
+// All your <span {...stylex.props(x.color[color.fgNeutral])} {...stylex.props(x.fontWeight[fontWeight.semibold])}>favorites</span> are saved
 // here. Revisit articles, collections, and moments you love, any time you want a little
 // inspiration.
 // </>
@@ -284,7 +284,7 @@ export const Vertical: Story = {
 // value: 'surprise',
 // content: (
 // <>
-// <span className='text-foreground' {...stylex.props(x.fontWeight[fontWeight.semibold])}>Surprise!</span> Here&apos;s something
+// <span {...stylex.props(x.color[color.fgNeutral])} {...stylex.props(x.fontWeight[fontWeight.semibold])}>Surprise!</span> Here&apos;s something
 // unexpected—a fun fact, a quirky tip, or a daily challenge. Come back for a new surprise
 // every day!
 // </>

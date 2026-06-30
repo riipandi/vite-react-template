@@ -3,7 +3,7 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { ScrollArea } from '#/components/base/scroll-area'
 import { Text } from '#/components/extra/typography'
-import { fontWeight, radius } from '#/styles/tokens.stylex'
+import { fontWeight, radius, color, shadow } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/ScrollArea',
@@ -37,7 +37,11 @@ export const Both: Story = {
   render: () => (
     <ScrollArea
       scrollbar='both'
-      className='border-border-neutral max-w-xl shadow'
+      {...stylex.props(
+        x.borderColor[color.borderNeutral],
+        x.maxWidth['576px'],
+        x.boxShadow[shadow.md]
+      )}
       {...stylex.props(x.borderWidth['1px'])}
       {...stylex.props(x.height['80rem'], x.width['100%'], x.borderRadius[radius.md])}
     >
@@ -87,7 +91,11 @@ export const VerticalOnly: Story = {
   render: () => (
     <ScrollArea
       scrollbar='vertical'
-      className='border-border-neutral max-w-xl shadow'
+      {...stylex.props(
+        x.borderColor[color.borderNeutral],
+        x.maxWidth['576px'],
+        x.boxShadow[shadow.md]
+      )}
       {...stylex.props(x.borderWidth['1px'])}
       {...stylex.props(x.height['80rem'], x.width['100%'], x.borderRadius[radius.md])}
     >
@@ -129,7 +137,11 @@ export const HorizontalOnly: Story = {
   render: () => (
     <ScrollArea
       scrollbar='horizontal'
-      className='border-border-neutral max-w-xl shadow'
+      {...stylex.props(
+        x.borderColor[color.borderNeutral],
+        x.maxWidth['576px'],
+        x.boxShadow[shadow.md]
+      )}
       {...stylex.props(x.borderWidth['1px'])}
       {...stylex.props(x.height['32rem'], x.width['100%'], x.borderRadius[radius.md])}
     >

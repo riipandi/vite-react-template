@@ -3,7 +3,7 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Slider, SliderThumb, SliderTrack } from '#/components/base/slider'
 import { SliderControl, SliderIndicator } from '#/components/base/slider'
-import { fontSize, fontWeight } from '#/styles/tokens.stylex'
+import { fontSize, fontWeight, color } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Slider',
@@ -41,7 +41,7 @@ const sizes = ['sm', 'md', 'lg'] as const
 const Row = ({ label, children }: React.PropsWithChildren<{ label: string }>) => (
   <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['1rem'])}>
     <span
-      className='text-foreground-neutral-faded'
+      {...stylex.props(x.color[color.fgNeutralFaded])}
       {...stylex.props(
         x.width['3rem'],
         x.fontSize[fontSize.xs],

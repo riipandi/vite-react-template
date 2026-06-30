@@ -50,7 +50,7 @@ const colors = ['primary', 'neutral', 'positive', 'warning', 'critical'] as cons
 const Row = ({ label, children }: React.PropsWithChildren<{ label: string }>) => (
   <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['1rem'])}>
     <span
-      className='text-foreground-neutral-faded'
+      {...stylex.props(x.color['#666'])}
       {...stylex.props(x.textTransform.capitalize)}
       {...stylex.props(x.width['4rem'], x.fontSize[fontSize.xs], x.fontWeight[fontWeight.semibold])}
     >
@@ -130,7 +130,7 @@ export const Indeterminate: Story = {
       <Progress value={null}>
         <ProgressLabel>Loading...</ProgressLabel>
         <ProgressTrack>
-          <ProgressIndicator className='animate-pulse' />
+          <ProgressIndicator />
         </ProgressTrack>
       </Progress>
     </div>

@@ -17,7 +17,7 @@ import {
   ContextMenuGroupLabel
 } from '#/components/base/context-menu'
 import { Hotkey } from '#/components/extra/hotkey'
-import { radius } from '#/styles/tokens.stylex'
+import { radius, color } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/ContextMenu',
@@ -51,7 +51,7 @@ export const Playground: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        className='border-muted text-foreground-neutral-faded'
+        {...stylex.props(x.borderColor[color.borderNeutralFaded], x.color[color.fgNeutralFaded])}
         {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
@@ -81,7 +81,7 @@ export const WithItemIcon: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        className='border-muted text-foreground-neutral-faded'
+        {...stylex.props(x.borderColor[color.borderNeutralFaded], x.color[color.fgNeutralFaded])}
         {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
@@ -131,7 +131,7 @@ export const NestedSubMenu: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        className='border-muted text-foreground-neutral-faded'
+        {...stylex.props(x.borderColor[color.borderNeutralFaded], x.color[color.fgNeutralFaded])}
         {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
@@ -178,7 +178,7 @@ export const AdvanceMenu: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        className='border-muted text-foreground-neutral-faded'
+        {...stylex.props(x.borderColor[color.borderNeutralFaded], x.color[color.fgNeutralFaded])}
         {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
@@ -221,7 +221,7 @@ export const AdvanceMenu: Story = {
           </ContextMenuSubmenu>
           <ContextMenuItem>
             Toggle Spellbook
-            <Hotkey variant='outline' className='ml-auto'>
+            <Hotkey variant='outline' {...stylex.props(x.marginLeft.auto)}>
               ⌘ B
             </Hotkey>
           </ContextMenuItem>
@@ -238,9 +238,9 @@ export const AdvanceMenu: Story = {
           </ContextMenuSubmenu>
         </ContextMenuGroup>
         <ContextMenuSeparator />
-        <ContextMenuItem className='text-danger'>
+        <ContextMenuItem {...stylex.props(x.color[color.fgCritical])}>
           Use Unforgivable Curse
-          <Hotkey variant='outline' className='ml-auto'>
+          <Hotkey variant='outline' {...stylex.props(x.marginLeft.auto)}>
             ⌘ Q
           </Hotkey>
         </ContextMenuItem>
@@ -254,7 +254,7 @@ export const CompactMenu: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        className='border-muted text-foreground-neutral-faded'
+        {...stylex.props(x.borderColor[color.borderNeutralFaded], x.color[color.fgNeutralFaded])}
         {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,

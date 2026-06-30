@@ -27,7 +27,7 @@ import { Card, CardBody } from '#/components/extra/card'
 import { Label } from '#/components/extra/label'
 import { Stack } from '#/components/extra/stack'
 import { Textarea } from '#/components/extra/textarea'
-import { fontSize, fontWeight, radius } from '#/styles/tokens.stylex'
+import { fontSize, fontWeight, radius, color } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Drawer',
@@ -221,7 +221,7 @@ export const Scrollable: Story = {
           </div>
 
           <div
-            className='border-border-neutral'
+            {...stylex.props(x.borderColor[color.borderNeutral])}
             {...stylex.props(x.borderTopWidth['1px'])}
             {...stylex.props(
               x.display.flex,
@@ -528,7 +528,7 @@ function NestedDrawer({
             <CardBody {...stylex.props(x.padding['1rem'])}>
               <div {...stylex.props(x.fontWeight[fontWeight.medium])}>Dan Brown's Mysteries</div>
               <div
-                className='text-foreground-neutral-faded'
+                {...stylex.props(x.color[color.fgNeutralFaded])}
                 {...stylex.props(x.fontSize[fontSize.sm])}
               >
                 Follow Robert Langdon through ancient secrets
@@ -548,7 +548,7 @@ function NestedDrawer({
             <CardBody {...stylex.props(x.padding['1rem'])}>
               <div {...stylex.props(x.fontWeight[fontWeight.medium])}>Wizarding World</div>
               <div
-                className='text-foreground-neutral-faded'
+                {...stylex.props(x.color[color.fgNeutralFaded])}
                 {...stylex.props(x.fontSize[fontSize.sm])}
               >
                 Explore the magical realm of Hogwarts

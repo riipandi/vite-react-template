@@ -53,7 +53,7 @@ export const Playground: Story = {
         </AlertDialogHeader>
         <AlertDialogBody>
           <AlertDialogDescription>
-            Are you sure you want to destroy this Horcrux? <br className='hidden md:block' />
+            Are you sure you want to destroy this Horcrux? <br />
             This action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogBody>

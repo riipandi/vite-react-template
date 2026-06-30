@@ -48,7 +48,7 @@ export const Playground: Story = {
       <PreviewCardPopup {...stylex.props(x.maxWidth['18rem'])}>
         <img
           src='https://images.unsplash.com/photo-1618944913480-b67ee16d7b77?q=80&w=2670&auto=format&fit=crop'
-          className='h-auto rounded-xs'
+          {...stylex.props(x.height.auto, x.borderRadius['0.125rem'])}
           {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'], x.width['100%'])}
           alt='Preview'
         />

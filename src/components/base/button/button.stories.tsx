@@ -183,14 +183,17 @@ export const IconShowcase: Story = {
   render: () => (
     <Grid>
       {sizes.map((s) => (
-        <Row key={`solid-${s}`} className='min-w-40' label={`Solid / Faded ${s}`}>
+        <Row key={`solid-${s}`} label={`Solid / Faded ${s}`}>
           <>
             {colors.map((c) => (
               <Button key={c} color={c} size={s} asIcon variant='solid'>
                 <Lucide.Play size={16} strokeWidth={2} />
               </Button>
             ))}
-            <Separator orientation='vertical' className='mx-2' />
+            <Separator
+              orientation='vertical'
+              {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}
+            />
             {colors.map((c) => (
               <Button key={c} color={c} size={s} asIcon variant='faded'>
                 <Lucide.Play size={16} strokeWidth={2} />
@@ -200,14 +203,17 @@ export const IconShowcase: Story = {
         </Row>
       ))}
       {sizes.map((s) => (
-        <Row key={`faded-${s}`} className='min-w-40' label={`Outline / Ghost ${s}`}>
+        <Row key={`faded-${s}`} label={`Outline / Ghost ${s}`}>
           <>
             {colors.map((c) => (
               <Button key={c} color={c} size={s} asIcon variant='faded'>
                 <Lucide.Play size={16} strokeWidth={2} />
               </Button>
             ))}
-            <Separator orientation='vertical' className='mx-2' />
+            <Separator
+              orientation='vertical'
+              {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}
+            />
             {colors.map((c) => (
               <Button key={c} color={c} size={s} asIcon variant='ghost'>
                 <Lucide.Play size={16} strokeWidth={2} />
@@ -232,7 +238,6 @@ export const LinkShowcase: Story = {
               key={c}
               variant='ghost'
               nativeButton={false}
-              className='min-w-24 justify-start'
               color={c}
               size={s}
               render={

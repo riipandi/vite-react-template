@@ -1,28 +1,28 @@
 import './style.css'
 import { Menubar as MenubarPrimitive } from '@base-ui/react/menubar'
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuGroupLabel,
-  DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuSubmenu,
-  DropdownMenuSubmenuTrigger,
-  DropdownMenuTrigger
-} from '../dropdown-menu'
+  Menu,
+  MenuCheckboxItem,
+  MenuContent,
+  MenuGroup,
+  MenuGroupLabel,
+  MenuItem,
+  MenuRadioGroup,
+  MenuRadioItem,
+  MenuSeparator,
+  MenuSubmenu,
+  MenuSubmenuTrigger,
+  MenuTrigger
+} from '../menu'
 
 function Menubar({ ...props }: MenubarPrimitive.Props) {
   return <MenubarPrimitive data-ui='menubar' {...props} />
 }
 
-const MenubarMenu = DropdownMenu
+const MenubarMenu = Menu
 
-function MenubarTrigger({ ...props }: React.ComponentProps<typeof DropdownMenuTrigger>) {
-  return <DropdownMenuTrigger data-ui='menubar-trigger' {...props} />
+function MenubarTrigger({ ...props }: React.ComponentProps<typeof MenuTrigger>) {
+  return <MenuTrigger data-ui='menubar-trigger' {...props} />
 }
 
 function MenubarContent({
@@ -31,9 +31,9 @@ function MenubarContent({
   alignOffset = 0,
   sideOffset = 8,
   ...props
-}: React.ComponentProps<typeof DropdownMenuContent>) {
+}: React.ComponentProps<typeof MenuContent>) {
   return (
-    <DropdownMenuContent
+    <MenuContent
       align={align}
       alignOffset={alignOffset}
       sideOffset={sideOffset}
@@ -43,38 +43,38 @@ function MenubarContent({
   )
 }
 
-function MenubarGroup({ ...props }: React.ComponentProps<typeof DropdownMenuGroup>) {
-  return <DropdownMenuGroup {...props} />
+function MenubarGroup({ ...props }: React.ComponentProps<typeof MenuGroup>) {
+  return <MenuGroup {...props} />
 }
 
-function MenubarLabel({ ...props }: React.ComponentProps<typeof DropdownMenuGroupLabel>) {
-  return <DropdownMenuGroupLabel {...props} />
+function MenubarLabel({ ...props }: React.ComponentProps<typeof MenuGroupLabel>) {
+  return <MenuGroupLabel {...props} />
 }
 
-function MenubarItem({ ...props }: React.ComponentProps<typeof DropdownMenuItem>) {
-  return <DropdownMenuItem {...props} />
+function MenubarItem({ ...props }: React.ComponentProps<typeof MenuItem>) {
+  return <MenuItem {...props} />
 }
 
-function MenubarSeparator({ ...props }: React.ComponentProps<typeof DropdownMenuSeparator>) {
-  return <DropdownMenuSeparator {...props} />
+function MenubarSeparator({ ...props }: React.ComponentProps<typeof MenuSeparator>) {
+  return <MenuSeparator {...props} />
 }
 
-const MenubarSub = DropdownMenuSubmenu
+const MenubarSub = MenuSubmenu
 
-function MenubarSubTrigger({ ...props }: React.ComponentProps<typeof DropdownMenuSubmenuTrigger>) {
-  return <DropdownMenuSubmenuTrigger {...props} />
+function MenubarSubTrigger({ ...props }: React.ComponentProps<typeof MenuSubmenuTrigger>) {
+  return <MenuSubmenuTrigger {...props} />
 }
 
-function MenubarCheckboxItem({ ...props }: React.ComponentProps<typeof DropdownMenuCheckboxItem>) {
-  return <DropdownMenuCheckboxItem {...props} />
+function MenubarCheckboxItem({ ...props }: React.ComponentProps<typeof MenuCheckboxItem>) {
+  return <MenuCheckboxItem {...props} />
 }
 
-function MenubarRadioGroup({ ...props }: React.ComponentProps<typeof DropdownMenuRadioGroup>) {
-  return <DropdownMenuRadioGroup {...props} />
+function MenubarRadioGroup({ ...props }: React.ComponentProps<typeof MenuRadioGroup>) {
+  return <MenuRadioGroup {...props} />
 }
 
-function MenubarRadioItem({ ...props }: React.ComponentProps<typeof DropdownMenuRadioItem>) {
-  return <DropdownMenuRadioItem {...props} />
+function MenubarRadioItem({ ...props }: React.ComponentProps<typeof MenuRadioItem>) {
+  return <MenuRadioItem {...props} />
 }
 
 export {

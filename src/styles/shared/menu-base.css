@@ -1,5 +1,5 @@
 @layer utilities {
-  [data-slot='dropdown-menu-trigger'] {
+  [data-slot='menu-trigger'] {
     border: none;
     background: transparent;
     outline: 0;
@@ -9,7 +9,7 @@
     }
   }
 
-  [data-ui='dropdown-menu-content'],
+  [data-ui='menu-content'],
   [data-ui='context-menu-content'] {
     position: relative;
     transition: var(--transition-expressive-default-effects);

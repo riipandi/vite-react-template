@@ -161,13 +161,9 @@ export const Vertical: Story = {
 // return (
 // <div {...stylex.props(x.width["100%"])}>
 // <Tabs defaultValue='explore' {...stylex.props(x.gap["1rem"])}>
-// <TabsList className='bg-background-neutral' {...stylex.props(x.borderRadius['0px'], x.borderBottomWidth['1px'])} {...stylex.props(x.padding["0px"])}>
-// {tabs.map((tab) => (
 // <TabsItem
 // key={tab.value}
 // value={tab.value}
-// className={clx(
-// 'bg-background-neutral h-full rounded-none border-0 border-b-2 border-transparent',
 // 'data-[state=active]:border-primary dark:data-[state=active]:border-primary data-[state=active]:shadow-none'
 // )}
 // >
@@ -229,13 +225,9 @@ export const Vertical: Story = {
 // return (
 // <div {...stylex.props(x.width["100%"])}>
 // <Tabs defaultValue='explore' {...stylex.props(x.gap["1rem"])}>
-// <TabsList className='bg-background-neutral' {...stylex.props(x.borderRadius['0px'], x.borderBottomWidth['1px'])} {...stylex.props(x.justifyContent.flexStart, x.padding["0px"])}>
-// {tabs.map((tab) => (
 // <TabsItem
 // key={tab.value}
 // value={tab.value}
-// className='bg-background-neutral border-b-border dark:data-[state=active]:bg-background-neutral data-[state=active]:border-border-neutral data-[state=active]:border-b-background rounded-t border-transparent data-[state=active]:-mb-0.5 data-[state=active]:shadow-none dark:border-b-0 dark:data-[state=active]:-mb-0.5' {...stylex.props(x.borderRadius['0px'], x.borderWidth['1px'])} {...stylex.props(x.height["100%"])}
-// >
 // {tab.name}
 // </TabsItem>
 // ))}
@@ -295,13 +287,9 @@ export const Vertical: Story = {
 // return (
 // <div {...stylex.props(x.width["100%"])}>
 // <Tabs defaultValue='explore' {...stylex.props(x.flexDirection.row)}>
-// <TabsList className='bg-background-neutral' {...stylex.props(x.borderRadius['0px'])} {...stylex.props(x.height["100%"], x.flexDirection.column, x.padding["0px"])}>
-// {tabs.map((tab) => (
 // <TabsItem
 // key={tab.value}
 // value={tab.value}
-// className='bg-background-neutral data-[state=active]:border-primary dark:data-[state=active]:border-primary border-transparent data-[state=active]:shadow-none' {...stylex.props(x.borderRadius['0px'], x.borderWidth['0px'], x.borderLeftWidth['2px'])} {...stylex.props(x.height["100%"], x.width["100%"], x.justifyContent.flexStart)}
-// >
 // {tab.name}
 // </TabsItem>
 // ))}

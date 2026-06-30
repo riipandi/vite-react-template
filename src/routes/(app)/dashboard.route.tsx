@@ -4,7 +4,7 @@ import * as Lucide from 'lucide-react'
 import { useEffect } from 'react'
 import { isAuthenticated } from '#/guards/auth-store'
 import { useSidebarOpen, toggleSidebar } from '#/stores/app.store'
-import { ui, radius, space } from '#/styles/token.stylex'
+import { radius, space, color } from '#/styles/tokens.stylex'
 import { SideNavbar } from './-sidebar'
 
 export const Route = createFileRoute('/(app)/dashboard')({
@@ -18,7 +18,7 @@ export const Route = createFileRoute('/(app)/dashboard')({
 
 const styles = stylex.create({
   layout: {
-    backgroundColor: ui.bg,
+    backgroundColor: color.bgPage,
     transitionProperty: 'background-color',
     transitionDuration: '200ms',
     height: '100vh',
@@ -40,10 +40,10 @@ const styles = stylex.create({
     height: '3.5rem',
     paddingLeft: space[4],
     paddingRight: space[4],
-    backgroundColor: ui.bg,
+    backgroundColor: color.bgPage,
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: ui.border,
+    borderBottomColor: color.borderNeutral,
     '@media (max-width: 767px)': {
       display: 'flex'
     }
@@ -51,7 +51,7 @@ const styles = stylex.create({
   mobileHeaderTitle: {
     fontSize: '0.875rem',
     fontWeight: 700,
-    color: ui.fg
+    color: color.fgNeutral
   },
   hamburger: {
     display: 'flex',
@@ -62,10 +62,10 @@ const styles = stylex.create({
     borderRadius: radius.md,
     border: 'none',
     backgroundColor: 'transparent',
-    color: ui.fgFaded,
+    color: color.fgNeutralFaded,
     cursor: 'pointer',
     ':hover': {
-      backgroundColor: ui.bgNeutralFaded
+      backgroundColor: color.bgNeutralFaded
     }
   },
   sidebarWrapper: {

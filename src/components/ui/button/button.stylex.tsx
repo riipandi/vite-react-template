@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { ui, fontSize, fontWeight, radius, shadow, space } from '#/styles/token.stylex'
+import { fontSize, fontWeight, radius, shadow, space, color } from '#/styles/tokens.stylex'
 
 export const buttonStyles = stylex.create({
   base: {
@@ -10,7 +10,7 @@ export const buttonStyles = stylex.create({
     borderRadius: radius.md,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: ui.border,
+    borderColor: color.borderNeutral,
     paddingLeft: space[4],
     paddingRight: space[4],
     paddingTop: space[2],
@@ -26,33 +26,33 @@ export const buttonStyles = stylex.create({
       ':focus-visible': 2
     },
     outlineStyle: 'solid',
-    outlineColor: ui.bgPrimary,
+    outlineColor: color.bgPrimary,
     outlineOffset: '2px'
   },
   primary: {
     backgroundColor: {
-      default: ui.bgPrimary,
-      ':hover': ui.bgPrimary,
-      ':active': ui.bgPrimary
+      default: color.bgPrimary,
+      ':hover': color.bgPrimary,
+      ':active': color.bgPrimary
     },
-    color: ui.onPrimary,
+    color: color.onPrimary,
     boxShadow: shadow.sm
   },
   secondary: {
     backgroundColor: {
-      default: ui.bg,
-      ':hover': ui.bgNeutralFaded,
-      ':active': ui.bgNeutralFaded
+      default: color.bgPage,
+      ':hover': color.bgNeutralFaded,
+      ':active': color.bgNeutralFaded
     },
-    color: ui.fg
+    color: color.fgNeutral
   },
   destructive: {
     backgroundColor: {
-      default: ui.bgCritical,
-      ':hover': ui.bgCritical,
-      ':active': ui.bgCritical
+      default: color.bgCritical,
+      ':hover': color.bgCritical,
+      ':active': color.bgCritical
     },
-    color: ui.onPrimary,
+    color: color.onPrimary,
     boxShadow: shadow.sm
   },
   icon: {
@@ -62,24 +62,24 @@ export const buttonStyles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     color: {
-      default: ui.fgFaded,
-      ':hover': ui.fgFaded,
-      ':active': ui.fgFaded
+      default: color.fgNeutralFaded,
+      ':hover': color.fgNeutralFaded,
+      ':active': color.fgNeutralFaded
     },
     backgroundColor: {
       default: 'transparent',
-      ':hover': ui.bgNeutralFaded,
-      ':active': ui.bgNeutralFaded
+      ':hover': color.bgNeutralFaded,
+      ':active': color.bgNeutralFaded
     }
   },
   disabled: {
     backgroundColor: {
-      default: ui.bgNeutralFaded,
-      ':hover': ui.bgNeutralFaded,
-      ':active': ui.bgNeutralFaded
+      default: color.bgNeutralFaded,
+      ':hover': color.bgNeutralFaded,
+      ':active': color.bgNeutralFaded
     },
-    color: ui.fgFaded,
-    borderColor: ui.border,
+    color: color.fgNeutralFaded,
+    borderColor: color.borderNeutral,
     cursor: 'not-allowed'
   },
   iconDisabled: {
@@ -88,6 +88,6 @@ export const buttonStyles = stylex.create({
       ':hover': 'transparent',
       ':active': 'transparent'
     },
-    color: ui.fgDisabled
+    color: color.fgDisabled
   }
 })

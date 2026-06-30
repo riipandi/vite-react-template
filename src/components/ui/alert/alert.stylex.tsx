@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { ui, radius, space, fontSize } from '#/styles/token.stylex'
+import { radius, space, fontSize, color } from '#/styles/tokens.stylex'
 
 export const alertStyles = stylex.create({
   base: {
@@ -18,33 +18,33 @@ export const alertStyles = stylex.create({
     transitionDuration: '200ms'
   },
   info: {
-    borderColor: ui.borderPrimaryFaded,
-    borderLeftColor: ui.bgPrimary,
-    backgroundColor: ui.bgPrimaryFaded,
-    color: ui.fgPrimary
+    borderColor: color.borderPrimaryFaded,
+    borderLeftColor: color.bgPrimary,
+    backgroundColor: color.bgPrimaryFaded,
+    color: color.fgPrimary
   },
   success: {
-    borderColor: ui.borderPositiveFaded,
-    borderLeftColor: ui.fgPositive,
-    backgroundColor: ui.bgPositiveFaded,
-    color: ui.fgPositive
+    borderColor: color.borderPositiveFaded,
+    borderLeftColor: color.fgPositive,
+    backgroundColor: color.bgPositiveFaded,
+    color: color.fgPositive
   },
   destructive: {
-    borderColor: ui.borderCriticalFaded,
-    borderLeftColor: ui.bgCritical,
-    backgroundColor: ui.bgCriticalFaded,
-    color: ui.fgCritical
+    borderColor: color.borderCriticalFaded,
+    borderLeftColor: color.bgCritical,
+    backgroundColor: color.bgCriticalFaded,
+    color: color.fgCritical
   },
   warning: {
-    borderColor: ui.borderWarningFaded,
-    borderLeftColor: ui.fgWarning,
-    backgroundColor: ui.bgWarningFaded,
-    color: ui.fgWarning
+    borderColor: color.borderWarningFaded,
+    borderLeftColor: color.fgWarning,
+    backgroundColor: color.bgWarningFaded,
+    color: color.fgWarning
   },
   subtle: {
-    borderColor: ui.border,
-    borderLeftColor: ui.fgFaded,
-    backgroundColor: ui.bg,
-    color: ui.fgFaded
+    borderColor: color.borderNeutral,
+    borderLeftColor: color.fgNeutralFaded,
+    backgroundColor: color.bgPage,
+    color: color.fgNeutralFaded
   }
 })

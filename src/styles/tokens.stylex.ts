@@ -72,8 +72,13 @@ export const color = stylex.defineVars({
 })
 
 export const shadow = stylex.defineVars({
-  raised: '0px 1px 5px -4px rgba(0, 0, 0, 0.5), 0px 4px 8px 0px rgba(0, 0, 0, 0.05)',
-  overlay: '0px 5px 10px 0px rgba(0, 0, 0, 0.05), 0px 15px 25px 0px rgba(0, 0, 0, 0.07)'
+  raised: '0px 1px 5px -4px rgba(0,0,0,0.5), 0px 4px 8px 0px rgba(0,0,0,0.05)',
+  overlay: '0px 5px 10px 0px rgba(0,0,0,0.05), 0px 15px 25px 0px rgba(0,0,0,0.07)',
+  xs: '0px 1px 2px 0px rgba(0,0,0,0.02), 0px 0px 1px 0px rgba(0,0,0,0.06)',
+  sm: '0px 1px 2px 0px rgba(0,0,0,0.04), 0px 1px 3px 0px rgba(0,0,0,0.08)',
+  md: '0px 2px 4px -1px rgba(0,0,0,0.05), 0px 4px 6px -1px rgba(0,0,0,0.07)',
+  lg: '0px 4px 6px -2px rgba(0,0,0,0.05), 0px 8px 12px -2px rgba(0,0,0,0.06)',
+  xl: '0px 6px 10px -2px rgba(0,0,0,0.05), 0px 12px 20px -2px rgba(0,0,0,0.08)'
 })
 
 export const radius = stylex.defineVars({
@@ -81,7 +86,8 @@ export const radius = stylex.defineVars({
   sm: '0.45rem',
   md: '0.55rem',
   lg: '0.7rem',
-  xl: '0.9rem'
+  xl: '0.9rem',
+  full: '100%'
 })
 
 export const space = stylex.defineVars({
@@ -152,6 +158,6 @@ export const fontWeight = stylex.defineVars({
 })
 
 export const fontFamily = stylex.defineVars({
-  sans: "'DM Sans Variable', system-ui, -apple-system, Roboto, Aptos, Helvetica, sans-serif",
-  mono: "'Roboto Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+  sans: "'Mona Sans Variable', system-ui, -apple-system, Roboto, Aptos, Helvetica, sans-serif",
+  mono: "'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
 })

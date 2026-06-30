@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { ui, fontSize, radius, space } from '#/styles/token.stylex'
+import { fontSize, radius, space, color } from '#/styles/tokens.stylex'
 
 export const fieldStyles = stylex.create({
   root: {
@@ -14,30 +14,30 @@ export const fieldStyles = stylex.create({
     borderRadius: radius.md,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: ui.border,
+    borderColor: color.borderNeutral,
     paddingLeft: space[3],
     paddingRight: space[3],
     paddingTop: space[2],
     paddingBottom: space[2],
     fontSize: fontSize.sm,
-    backgroundColor: ui.bg,
-    color: ui.fg,
+    backgroundColor: color.bgPage,
+    color: color.fgNeutral,
     '::placeholder': {
-      color: ui.fgFaded
+      color: color.fgNeutralFaded
     },
     transitionProperty: 'background-color, border-color, box-shadow',
     transitionDuration: '150ms'
   },
   inputFocused: {
-    borderColor: ui.fgPrimary,
+    borderColor: color.fgPrimary,
     boxShadow: '0 0 0 2px rgb(99 102 241 / 0.2)'
   },
   inputInvalid: {
-    borderColor: ui.fgCritical
+    borderColor: color.fgCritical
   },
   inputDisabled: {
-    borderColor: ui.border,
-    backgroundColor: ui.bg,
-    color: ui.fgDisabled
+    borderColor: color.borderNeutral,
+    backgroundColor: color.bgPage,
+    color: color.fgDisabled
   }
 })

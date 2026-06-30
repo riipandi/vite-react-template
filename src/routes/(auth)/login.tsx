@@ -12,7 +12,7 @@ import { TextField } from '#/components/ui/text-field'
 import { useAuthentication } from '#/guards/auth-provider'
 import { getErrorMessage } from '#/guards/auth-utils'
 import { loginSchema } from '#/schemas/auth.schema'
-import { ui, fontSize, fontWeight, space } from '#/styles/token.stylex'
+import { fontSize, fontWeight, space, color } from '#/styles/tokens.stylex'
 
 const loginStyles = stylex.create({
   cardBody: {
@@ -28,10 +28,10 @@ const loginStyles = stylex.create({
   logoWrapper: {
     padding: space[3],
     borderRadius: '1rem',
-    backgroundColor: ui.bg,
+    backgroundColor: color.bgPage,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: ui.border,
+    borderColor: color.borderNeutral,
     marginBottom: space[1]
   },
   logo: {
@@ -41,12 +41,12 @@ const loginStyles = stylex.create({
   heading: {
     fontSize: fontSize['2xl'],
     fontWeight: fontWeight.bold,
-    color: ui.fg,
+    color: color.fgNeutral,
     textAlign: 'center'
   },
   subtitle: {
     fontSize: fontSize.sm,
-    color: ui.fgFaded,
+    color: color.fgNeutralFaded,
     textAlign: 'center'
   },
   socialButtons: {
@@ -72,12 +72,12 @@ const loginStyles = stylex.create({
   },
   footerText: {
     fontSize: fontSize.sm,
-    color: ui.fgFaded
+    color: color.fgNeutralFaded
   },
   backLink: {
     fontSize: fontSize.sm,
     fontWeight: fontWeight.medium,
-    color: ui.fgPrimary,
+    color: color.fgPrimary,
     textDecoration: 'none',
     ':hover': {
       textDecoration: 'underline'

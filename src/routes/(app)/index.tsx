@@ -7,7 +7,7 @@ import { Button } from '#/components/ui/button'
 import { useAuthentication } from '#/guards/auth-provider'
 import { isAuthenticated } from '#/guards/auth-store'
 import { ThemeSwitcher } from '#/routes/-theme'
-import { ui, fontSize, space } from '#/styles/token.stylex'
+import { fontSize, space, color } from '#/styles/tokens.stylex'
 
 export const Route = createFileRoute('/(app)/')({
   beforeLoad: () => {
@@ -48,7 +48,7 @@ const homeStyles = stylex.create({
   tagline: {
     textAlign: 'center',
     fontSize: fontSize.lg,
-    color: ui.fgFaded,
+    color: color.fgNeutralFaded,
     maxWidth: '36rem',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -95,13 +95,13 @@ const homeStyles = stylex.create({
   footerText: {
     fontSize: fontSize.sm,
     letterSpacing: '0.025em',
-    color: ui.fgFaded
+    color: color.fgNeutralFaded
   },
   footerSubText: {
     marginTop: space[2],
     fontSize: fontSize.sm,
     letterSpacing: '0.025em',
-    color: ui.fgFaded
+    color: color.fgNeutralFaded
   }
 })
 

@@ -28,7 +28,6 @@ import { Label } from '#/components/extra/label'
 import { Stack } from '#/components/extra/stack'
 import { Textarea } from '#/components/extra/textarea'
 import { fontSize, fontWeight, radius, color } from '#/styles/tokens.stylex'
-
 const meta = {
   title: 'Base Components/Drawer',
   component: Drawer,
@@ -51,10 +50,8 @@ const meta = {
     )
   ]
 } satisfies Meta<typeof Drawer>
-
 export default meta
 type Story = StoryObj<typeof meta>
-
 export const Playground: Story = {
   args: {},
   render: () => (
@@ -71,7 +68,6 @@ export const Playground: Story = {
         <DrawerDescription {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}>
           Share your thoughts on your favorite novels.
         </DrawerDescription>
-
         <Stack spacing='lg'>
           {/* Name */}
           <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.5rem'])}>
@@ -99,7 +95,6 @@ export const Playground: Story = {
             </p>
           </div>
         </Stack>
-
         <div
           {...stylex.props(
             x.borderColor[color.borderNeutral],
@@ -121,7 +116,6 @@ export const Playground: Story = {
     </Drawer>
   )
 }
-
 export const Scrollable: Story = {
   args: {},
   render: () => {
@@ -172,7 +166,6 @@ export const Scrollable: Story = {
           "From the Illuminati and Freemasons to the Priory of Sion, Brown's thrillers explore real and fictional secret organizations. These groups often protect ancient knowledge or pursue hidden agendas spanning centuries."
       }
     ]
-
     return (
       <Drawer swipeDirection='right'>
         <DrawerTrigger render={<Button color='neutral' variant='outline' />}>
@@ -191,7 +184,6 @@ export const Scrollable: Story = {
             </DrawerTitle>
             <DrawerDescription>Explore the worlds of Dan Brown and Harry Potter</DrawerDescription>
           </div>
-
           <div
             {...stylex.props(
               x.marginLeft['0.5rem'],
@@ -201,8 +193,13 @@ export const Scrollable: Story = {
             )}
           >
             <ScrollArea
-              className='-me-3 h-[calc(100dvh-12rem)] ps-6 pe-6'
               {...stylex.props(x.fontSize[fontSize.sm])}
+              {...stylex.props(
+                x.marginRight['-0.75rem'],
+                x.height['calc(100dvh - 12rem)'],
+                x.paddingLeft['1.5rem'],
+                x.paddingRight['1.5rem']
+              )}
               scrollbar='vertical'
             >
               <div
@@ -223,7 +220,6 @@ export const Scrollable: Story = {
               </div>
             </ScrollArea>
           </div>
-
           <div
             {...stylex.props(x.borderColor[color.borderNeutral])}
             {...stylex.props(x.borderTopWidth['1px'])}
@@ -242,7 +238,6 @@ export const Scrollable: Story = {
     )
   }
 }
-
 export const SideShowcase: Story = {
   args: {},
   render: () => (
@@ -260,7 +255,6 @@ export const SideShowcase: Story = {
           <DrawerDescription {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}>
             Who is your favorite literary character?
           </DrawerDescription>
-
           <Stack spacing='lg'>
             <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.5rem'])}>
               <Label htmlFor='name-top'>Your Name</Label>
@@ -285,7 +279,6 @@ export const SideShowcase: Story = {
               </p>
             </div>
           </Stack>
-
           <div
             {...stylex.props(
               x.marginLeft['0.5rem'],
@@ -299,7 +292,6 @@ export const SideShowcase: Story = {
           </div>
         </DrawerContent>
       </Drawer>
-
       <Drawer swipeDirection='down'>
         <DrawerTrigger
           render={<Button color='neutral' variant='outline' {...stylex.props(x.width['7rem'])} />}
@@ -313,7 +305,6 @@ export const SideShowcase: Story = {
           <DrawerDescription {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}>
             Recommend your favorite thriller or fantasy novel
           </DrawerDescription>
-
           <Stack spacing='lg'>
             <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.5rem'])}>
               <Label htmlFor='name-bottom'>Your Name</Label>
@@ -338,7 +329,6 @@ export const SideShowcase: Story = {
               </p>
             </div>
           </Stack>
-
           <div
             {...stylex.props(
               x.marginLeft['0.5rem'],
@@ -352,7 +342,6 @@ export const SideShowcase: Story = {
           </div>
         </DrawerContent>
       </Drawer>
-
       <Drawer swipeDirection='right'>
         <DrawerTrigger
           render={<Button color='neutral' variant='outline' {...stylex.props(x.width['7rem'])} />}
@@ -366,7 +355,6 @@ export const SideShowcase: Story = {
           <DrawerDescription {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}>
             Test your knowledge of symbols and codes
           </DrawerDescription>
-
           <Stack spacing='lg'>
             <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.5rem'])}>
               <Label htmlFor='name-right'>Detective Name</Label>
@@ -391,7 +379,6 @@ export const SideShowcase: Story = {
               </p>
             </div>
           </Stack>
-
           <div
             {...stylex.props(
               x.marginLeft['0.5rem'],
@@ -405,7 +392,6 @@ export const SideShowcase: Story = {
           </div>
         </DrawerContent>
       </Drawer>
-
       <Drawer swipeDirection='left'>
         <DrawerTrigger
           render={<Button color='neutral' variant='outline' {...stylex.props(x.width['7rem'])} />}
@@ -419,7 +405,6 @@ export const SideShowcase: Story = {
           <DrawerDescription {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'])}>
             Share your favorite magical spells and charms
           </DrawerDescription>
-
           <Stack spacing='lg'>
             <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.5rem'])}>
               <Label htmlFor='name-left'>Wizard Name</Label>
@@ -444,7 +429,6 @@ export const SideShowcase: Story = {
               </p>
             </div>
           </Stack>
-
           <div
             {...stylex.props(
               x.marginLeft['0.5rem'],
@@ -461,7 +445,6 @@ export const SideShowcase: Story = {
     </div>
   )
 }
-
 export const Nested: Story = {
   args: {},
   render: () => {
@@ -475,7 +458,6 @@ export const Nested: Story = {
     )
   }
 }
-
 function NestedDrawer({
   swipeDirection
 }: {
@@ -484,7 +466,6 @@ function NestedDrawer({
   const [firstOpen, setFirstOpen] = React.useState(false)
   const [secondOpen, setSecondOpen] = React.useState(false)
   const [adventure, setAdventure] = React.useState<'brown' | 'potter'>('brown')
-
   return (
     <Drawer
       swipeDirection={swipeDirection}
@@ -518,7 +499,6 @@ function NestedDrawer({
         >
           Choose your adventure through mysteries and magic.
         </DrawerDescription>
-
         <Stack spacing='sm'>
           <Card
             variant='ghost'
@@ -539,7 +519,6 @@ function NestedDrawer({
               </div>
             </CardBody>
           </Card>
-
           <Card
             variant='ghost'
             className={
@@ -560,7 +539,6 @@ function NestedDrawer({
             </CardBody>
           </Card>
         </Stack>
-
         <div
           {...stylex.props(
             x.marginLeft['0.5rem'],
@@ -571,7 +549,6 @@ function NestedDrawer({
         >
           <DrawerClose render={<Button color='neutral' variant='outline' />}>Close</DrawerClose>
         </div>
-
         <Drawer
           swipeDirection={swipeDirection}
           open={secondOpen}
@@ -614,7 +591,6 @@ function NestedDrawer({
                 ? 'Hidden beneath the Vatican Secret Archives lies the final clue.'
                 : 'Discover which Hogwarts house suits you best.'}
             </DrawerDescription>
-
             <Stack spacing='lg'>
               <Field>
                 <FieldLabel htmlFor='detail-input'>
@@ -625,7 +601,6 @@ function NestedDrawer({
                   defaultValue={adventure === 'brown' ? 'Angels & Demons' : 'Harry Potter'}
                 />
               </Field>
-
               <Field>
                 <FieldLabel htmlFor='notes-input'>
                   {adventure === 'brown' ? 'Notes' : 'Favorite Subject'}
@@ -641,7 +616,6 @@ function NestedDrawer({
                   }
                 />
               </Field>
-
               {adventure === 'potter' && (
                 <Field>
                   <FieldLabel htmlFor='house-select'>Preferred House</FieldLabel>
@@ -661,7 +635,6 @@ function NestedDrawer({
                 </Field>
               )}
             </Stack>
-
             <div
               {...stylex.props(
                 x.marginLeft['0.5rem'],

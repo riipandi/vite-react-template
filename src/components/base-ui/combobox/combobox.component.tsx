@@ -15,7 +15,7 @@ function ComboboxValue(props: ComboboxPrimitive.Value.Props) {
   return <ComboboxPrimitive.Value data-slot='combobox-value' {...props} />
 }
 
-function ComboboxTrigger({ children, ...props }: ComboboxPrimitive.Trigger.Props) {
+function ComboboxTrigger({ ...props }: ComboboxPrimitive.Trigger.Props) {
   return (
     <ComboboxPrimitive.Trigger
       data-slot='combobox-trigger'
@@ -115,16 +115,11 @@ function ComboboxChips(
   return <ComboboxPrimitive.Chips data-ui='combobox-chips' {...props} />
 }
 
-function ComboboxChip({
-  showRemove = true,
-  ...props
-}: ComboboxPrimitive.Chip.Props & {
-  showRemove?: boolean
-}) {
+function ComboboxChip({ ...props }: ComboboxPrimitive.Chip.Props) {
   return (
     <ComboboxPrimitive.Chip
-      render={({ children, ...props }) => (
-        <Tag variant='lighter' {...props}>
+      render={({ children, ...rest }) => (
+        <Tag variant='lighter' {...rest}>
           {children}
           <ComboboxPrimitive.ChipRemove render={<TagDismiss />} />
         </Tag>

@@ -1,3 +1,5 @@
+// oxlint-disable jsx-a11y/anchor-has-content
+
 import './style.css'
 import { ArrowLeft01Icon, ArrowRight01Icon, MoreHorizontalIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'

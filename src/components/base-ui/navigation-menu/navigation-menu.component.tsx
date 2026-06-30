@@ -29,7 +29,7 @@ function NavigationMenuTrigger(props: NavigationMenuPrimitive.Trigger.Props) {
   return <NavigationMenuPrimitive.Trigger data-ui='navigation-menu-trigger' {...props} />
 }
 
-function NavigationMenuContent({ className, ...props }: NavigationMenuPrimitive.Content.Props) {
+function NavigationMenuContent({ ...props }: NavigationMenuPrimitive.Content.Props) {
   return <NavigationMenuPrimitive.Content data-ui='navigation-menu-content' {...props} />
 }
 

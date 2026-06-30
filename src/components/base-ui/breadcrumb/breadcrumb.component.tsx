@@ -34,7 +34,7 @@ function BreadcrumbSeparator({ children, ...props }: React.ComponentProps<'li'>)
   )
 }
 
-function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<'span'>) {
+function BreadcrumbEllipsis({ ...props }: React.ComponentProps<'span'>) {
   return (
     <span data-ui='breadcrumb-ellipsis' role='presentation' aria-hidden='true' {...props}>
       <HugeiconsIcon icon={MoreHorizontalIcon} />

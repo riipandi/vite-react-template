@@ -6,11 +6,11 @@ import { HugeiconsIcon } from '@hugeicons/react'
 
 const Select = SelectPrimitive.Root
 
-function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
+function SelectGroup({ ...props }: SelectPrimitive.Group.Props) {
   return <SelectPrimitive.Group data-ui='select-group' {...props} />
 }
 
-function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
+function SelectValue({ ...props }: SelectPrimitive.Value.Props) {
   return <SelectPrimitive.Value data-ui='select-value' {...props} />
 }
 
@@ -68,15 +68,15 @@ function SelectContent({
   )
 }
 
-function SelectSeparator({ className, ...props }: SelectPrimitive.Separator.Props) {
+function SelectSeparator({ ...props }: SelectPrimitive.Separator.Props) {
   return <SelectPrimitive.Separator data-ui='select-separator' {...props} />
 }
 
-function SelectLabel({ className, ...props }: SelectPrimitive.GroupLabel.Props) {
+function SelectLabel({ ...props }: SelectPrimitive.GroupLabel.Props) {
   return <SelectPrimitive.GroupLabel data-ui='select-label' {...props} />
 }
 
-function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Props) {
+function SelectItem({ children, ...props }: SelectPrimitive.Item.Props) {
   return (
     <SelectPrimitive.Item data-ui='select-item' {...props}>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

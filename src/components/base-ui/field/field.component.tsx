@@ -25,7 +25,7 @@ function FieldError(props: FieldPrimitive.Error.Props) {
   return <FieldPrimitive.Error data-ui='field-error' {...props} />
 }
 
-function FieldGroup({ className, ...props }: React.ComponentProps<'div'>) {
+function FieldGroup({ ...props }: React.ComponentProps<'div'>) {
   return <div data-ui='field-group' {...props} />
 }
 

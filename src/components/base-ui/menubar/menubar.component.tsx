@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger
 } from '../dropdown-menu'
 
-function Menubar({ className, ...props }: MenubarPrimitive.Props) {
+function Menubar({ ...props }: MenubarPrimitive.Props) {
   return <MenubarPrimitive data-ui='menubar' {...props} />
 }
 
@@ -37,6 +37,7 @@ function MenubarContent({
       align={align}
       alignOffset={alignOffset}
       sideOffset={sideOffset}
+      side={side}
       {...props}
     />
   )

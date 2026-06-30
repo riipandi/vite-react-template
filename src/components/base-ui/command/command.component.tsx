@@ -70,7 +70,6 @@ function CommandInput({
   return (
     <div data-ui='command-input-wrapper'>
       <AutocompleteInput
-        autoFocus
         placeholder={placeholder}
         startAddon={<HugeiconsIcon icon={CommandIcon} />}
         {...props}

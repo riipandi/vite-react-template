@@ -15,6 +15,7 @@
         "import/no-absolute-path": "allow",
         "import/no-cycle": "warn",
         "import/no-unassigned-import": "off",
+        "jsx-a11y/prefer-tag-over-role": "off",
         "no-console": "off",
         "no-debugger": "warn",
         "no-empty": ["error", { "allowEmptyCatch": true }],

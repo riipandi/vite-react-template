@@ -4,7 +4,6 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { Button } from '#/components/base/button'
 import { Card } from '#/components/base/card'
-import { Container } from '#/components/base/container'
 import { useAuthentication } from '#/guards/auth-provider'
 import { fontSize, fontWeight, radius, shadow, space, color } from '#/styles/tokens.stylex'
 
@@ -481,6 +480,29 @@ const styles = stylex.create({
   profileActionButton: {
     width: '100%',
     justifyContent: 'center'
+  },
+  containerFluid: {
+    display: 'block',
+    marginLeft: 0,
+    marginRight: 0,
+    width: '100%',
+    maxWidth: 'none',
+    paddingTop: space[6],
+    paddingBottom: space[6],
+    paddingLeft: space[4],
+    paddingRight: space[4],
+    '@media (min-width: 640px)': {
+      paddingTop: space[8],
+      paddingBottom: space[8],
+      paddingLeft: space[6],
+      paddingRight: space[6]
+    },
+    '@media (min-width: 1024px)': {
+      paddingTop: space[10],
+      paddingBottom: space[10],
+      paddingLeft: space[10],
+      paddingRight: space[10]
+    }
   }
 })
 
@@ -540,7 +562,7 @@ function DashboardOverviewComponent() {
   const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
 
   return (
-    <Container fluid>
+    <div {...stylex.props(styles.containerFluid)}>
       {/* Page header */}
       <div {...stylex.props(styles.pageHeader)}>
         <div {...stylex.props(styles.pageHeaderLeft)}>
@@ -686,6 +708,6 @@ function DashboardOverviewComponent() {
           </div>
         </Card>
       </div>
-    </Container>
+    </div>
   )
 }

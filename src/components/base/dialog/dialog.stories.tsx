@@ -1,1 +1,82 @@
-export default {}
+import * as Icon from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Button } from '#/components/base/button'
+import {
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogPopup,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '#/components/base/dialog'
+import { IconBox } from '#/components/extra/icon-box'
+import { Textarea } from '#/components/extra/textarea'
+
+const meta = {
+  title: 'Base Components/Dialog',
+  component: Dialog,
+  parameters: { layout: 'centered' },
+  argTypes: {},
+  tags: [], // ['autodocs']
+  args: {},
+  decorators: [
+    (Story) => (
+      <div className='flex w-full min-w-md items-center justify-center'>
+        <Story />
+      </div>
+    )
+  ]
+} satisfies Meta<typeof Dialog>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Playground: Story = {
+  args: {},
+  render: () => (
+    <Dialog>
+      <DialogTrigger render={<Button>Open Dialog</Button>} />
+      <DialogPopup>
+        <DialogHeader>
+          <DialogTitle>Send Owl</DialogTitle>
+        </DialogHeader>
+        <DialogBody>
+          <DialogDescription>Send your message via owl post to Hogwarts.</DialogDescription>
+          <Textarea placeholder='Enter your message' className='h-28' />
+        </DialogBody>
+        <DialogFooter>
+          <DialogClose>Close</DialogClose>
+          <DialogClose render={<Button size='sm' />}>Send Owl</DialogClose>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  )
+}
+
+export const WithIconHeader: Story = {
+  args: {},
+  render: () => (
+    <Dialog>
+      <DialogTrigger render={<Button>Open Dialog</Button>} />
+      <DialogPopup>
+        <DialogHeader>
+          <IconBox size='sm'>
+            <Icon.ChatIcon weight='bold' />
+          </IconBox>
+          <DialogTitle>Decode the Message</DialogTitle>
+        </DialogHeader>
+        <DialogBody>
+          <DialogDescription>Help Professor Langdon decode this ancient symbol.</DialogDescription>
+          <Textarea placeholder='Enter your translation' />
+        </DialogBody>
+        <DialogFooter>
+          <DialogClose>Close</DialogClose>
+          <DialogClose render={<Button size='sm' />}>Submit Solution</DialogClose>
+        </DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  )
+}

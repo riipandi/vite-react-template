@@ -3,6 +3,7 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from '#/components/base/preview-card'
 import { Text } from '#/components/extra/typography'
+import { color, fontSize } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/PreviewCard',
@@ -34,10 +35,10 @@ export const Playground: Story = {
   args: {},
   render: () => (
     <PreviewCard>
-      <Text className='xl:w-8/12' {...stylex.props(x.width['100%'])}>
+      <Text {...stylex.props(x.width['66.666667%'])} {...stylex.props(x.width['100%'])}>
         The Philosopher's Stone is a legendary{' '}
         <PreviewCardTrigger
-          className='text-primary border-primary'
+          {...stylex.props(x.color[color.fgPrimary], x.borderColor[color.borderPrimary])}
           {...stylex.props(x.borderBottomWidth['1px'])}
           {...stylex.props(x.cursor.help)}
         >
@@ -52,7 +53,10 @@ export const Playground: Story = {
           {...stylex.props(x.marginLeft['0.5rem'], x.marginRight['0.5rem'], x.width['100%'])}
           alt='Preview'
         />
-        <Text className='text-sm/relaxed' {...stylex.props(x.textAlign.justify)}>
+        <Text
+          {...stylex.props(x.fontSize[fontSize.sm], x.lineHeight.relaxed)}
+          {...stylex.props(x.textAlign.justify)}
+        >
           In Harry Potter and the Philosopher's Stone, this legendary stone is guarded by Dumbledore
           at Hogwarts. It was created by Nicolas Flampel and is the only known stone to exist. The
           stone plays a crucial role in the first book's plot.

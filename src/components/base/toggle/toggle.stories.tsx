@@ -34,12 +34,7 @@ export const Playground: Story = {
   args: {},
   render: () => (
     <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
-      <Toggle
-        aria-label='Favorite'
-        className='data-pressed:*:[svg]:fill-red-500 data-pressed:*:[svg]:stroke-red-500'
-        mode='icon'
-        size='sm'
-      >
+      <Toggle aria-label='Favorite' mode='icon' size='sm'>
         <Lucide.Heart />
         <span
           {...stylex.props(x.position.absolute, x.width['1px'], x.height['1px'], x.overflow.hidden)}
@@ -48,30 +43,15 @@ export const Playground: Story = {
         </span>
       </Toggle>
 
-      <Toggle
-        aria-label='Star'
-        className='data-pressed:*:[svg]:fill-yellow-500 data-pressed:*:[svg]:stroke-yellow-500'
-        mode='icon'
-        size='md'
-      >
+      <Toggle aria-label='Star' mode='icon' size='md'>
         <Lucide.Star />
       </Toggle>
 
-      <Toggle
-        aria-label='Bookmark'
-        className='data-pressed:*:[svg]:fill-blue-500 data-pressed:*:[svg]:stroke-blue-500'
-        mode='icon'
-        size='md'
-        variant='ghost'
-      >
+      <Toggle aria-label='Bookmark' mode='icon' size='md' variant='ghost'>
         <Lucide.Bookmark />
       </Toggle>
 
-      <Toggle
-        aria-label='Favorite'
-        className='data-pressed:*:[svg]:fill-red-500 data-pressed:*:[svg]:stroke-red-500'
-        variant='ghost'
-      >
+      <Toggle aria-label='Favorite' variant='ghost'>
         <Lucide.Heart />
         Favorite
       </Toggle>
@@ -83,39 +63,20 @@ export const SizeShowcase: Story = {
   args: {},
   render: () => (
     <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
-      <Toggle
-        aria-label='Bookmark'
-        className='data-pressed:*:[svg]:fill-blue-500 data-pressed:*:[svg]:stroke-blue-500'
-        mode='icon'
-        size='sm'
-      >
+      <Toggle aria-label='Bookmark' mode='icon' size='sm'>
         <Lucide.Bookmark />
       </Toggle>
 
-      <Toggle
-        aria-label='Favorite'
-        className='data-pressed:*:[svg]:fill-red-500 data-pressed:*:[svg]:stroke-red-500'
-        size='sm'
-      >
+      <Toggle aria-label='Favorite' size='sm'>
         <Lucide.Heart />
         Favorite
       </Toggle>
 
-      <Toggle
-        aria-label='Lightning'
-        className='data-pressed:*:[svg]:fill-yellow-500 data-pressed:*:[svg]:stroke-yellow-500'
-        mode='icon'
-        size='md'
-        variant='ghost'
-      >
+      <Toggle aria-label='Lightning' mode='icon' size='md' variant='ghost'>
         <Lucide.Bookmark />
       </Toggle>
 
-      <Toggle
-        aria-label='Favorite'
-        className='data-pressed:*:[svg]:fill-red-500 data-pressed:*:[svg]:stroke-red-500'
-        size='md'
-      >
+      <Toggle aria-label='Favorite' size='md'>
         <Lucide.Heart />
         Favorite
       </Toggle>

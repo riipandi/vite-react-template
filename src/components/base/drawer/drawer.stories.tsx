@@ -92,7 +92,7 @@ export const Playground: Story = {
               rows={4}
             />
             <p
-              className='text-foreground-neutral-faded-foreground'
+              {...stylex.props(x.color[color.fgNeutralFaded])}
               {...stylex.props(x.fontSize[fontSize.sm])}
             >
               Please share your favorite moments from the story
@@ -101,7 +101,11 @@ export const Playground: Story = {
         </Stack>
 
         <div
-          className='border-border-neutral grid grid-cols-2'
+          {...stylex.props(
+            x.borderColor[color.borderNeutral],
+            x.display.grid,
+            x.gridTemplateColumns['1fr 1fr']
+          )}
           {...stylex.props(x.borderTopWidth['1px'])}
           {...stylex.props(
             x.marginLeft['0.5rem'],
@@ -209,7 +213,7 @@ export const Scrollable: Story = {
                 {faqSections.map((faq) => (
                   <div
                     key={faq.title}
-                    className='text-accent-foreground'
+                    {...stylex.props(x.color[color.fgNeutral])}
                     {...stylex.props(x.gap['0.25rem'])}
                   >
                     <h3>{faq.title}</h3>
@@ -274,7 +278,7 @@ export const SideShowcase: Story = {
                 rows={4}
               />
               <p
-                className='text-foreground-neutral-faded-foreground'
+                {...stylex.props(x.color[color.fgNeutralFaded])}
                 {...stylex.props(x.fontSize[fontSize.sm])}
               >
                 Share your favorite quotes and scenes
@@ -327,7 +331,7 @@ export const SideShowcase: Story = {
                 rows={4}
               />
               <p
-                className='text-foreground-neutral-faded-foreground'
+                {...stylex.props(x.color[color.fgNeutralFaded])}
                 {...stylex.props(x.fontSize[fontSize.sm])}
               >
                 Include genre, author, and what readers will love
@@ -380,7 +384,7 @@ export const SideShowcase: Story = {
                 rows={4}
               />
               <p
-                className='text-foreground-neutral-faded-foreground'
+                {...stylex.props(x.color[color.fgNeutralFaded])}
                 {...stylex.props(x.fontSize[fontSize.sm])}
               >
                 Include historical context and evidence
@@ -433,7 +437,7 @@ export const SideShowcase: Story = {
                 rows={4}
               />
               <p
-                className='text-foreground-neutral-faded-foreground'
+                {...stylex.props(x.color[color.fgNeutralFaded])}
                 {...stylex.props(x.fontSize[fontSize.sm])}
               >
                 Include pronunciation and practical uses
@@ -576,7 +580,7 @@ function NestedDrawer({
           }}
         >
           <DrawerTrigger
-            className='text-foreground-primary hover:bg-background-primary-faded focus-visible:outline-border-primary active:bg-background-primary/10 -m-0.5 focus-visible:outline focus-visible:-outline-offset-1'
+            {...stylex.props(x.color[color.fgPrimary], x.backgroundColor[color.bgPrimaryFaded])}
             {...stylex.props(
               x.borderRadius[radius.md],
               x.paddingLeft['0.375rem'],

@@ -29,7 +29,7 @@ const meta = {
   decorators: [
     (Story) => (
       <div
-        className='min-w-md p-20'
+        {...stylex.props(x.minWidth['448px'], x.padding['5rem'])}
         {...stylex.props(
           x.display.flex,
           x.width['100%'],

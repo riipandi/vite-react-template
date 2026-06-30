@@ -70,7 +70,7 @@ export const Playground: Story = {
       <Autocomplete items={items}>
         <AutocompleteInput
           placeholder='Search for books...'
-          className='lg:w-72'
+          {...stylex.props(x.width['18rem'])}
           {...stylex.props(x.width['100%'])}
         />
         <AutocompletePopup>
@@ -102,7 +102,7 @@ export const VariantSubtle: Story = {
       <Autocomplete items={items}>
         <AutocompleteInput
           placeholder='Search for books...'
-          className='lg:w-72'
+          {...stylex.props(x.width['18rem'])}
           {...stylex.props(x.width['100%'])}
           variant='subtle'
         />
@@ -135,7 +135,7 @@ export const VariantGhost: Story = {
       <Autocomplete items={items}>
         <AutocompleteInput
           placeholder='Search for books...'
-          className='lg:w-72'
+          {...stylex.props(x.width['18rem'])}
           {...stylex.props(x.width['100%'])}
           variant='ghost'
         />

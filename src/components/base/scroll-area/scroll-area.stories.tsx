@@ -149,7 +149,7 @@ export const HorizontalOnly: Story = {
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
           <div
             key={num}
-            className='bg-background-neutral-faded/20'
+            {...stylex.props(x.backgroundColor[color.bgNeutralFaded])}
             {...stylex.props(
               x.display.flex,
               x.width['5rem'],

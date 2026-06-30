@@ -28,6 +28,7 @@ import {
   ToolbarLink,
   ToolbarSeparator
 } from '#/components/base/toolbar'
+import { color } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Toolbar',
@@ -155,7 +156,7 @@ export const Playground: Story = {
         </NumberField>
         <ToolbarSeparator />
         <ToolbarLink
-          className='text-foreground-neutral-faded text-nowrap'
+          {...stylex.props(x.color[color.fgNeutralFaded], x.whiteSpace.nowrap)}
           {...stylex.props(x.paddingLeft['0.25rem'], x.paddingRight['0.25rem'])}
         >
           Saved 5 min ago

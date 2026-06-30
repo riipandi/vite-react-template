@@ -41,7 +41,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='min-w-md lg:w-6/12' {...stylex.props(x.width['100%'])}>
+    <div {...stylex.props(x.width['100%'])}>
       <Field>
         <FieldLabel htmlFor='name'>Wizard Name</FieldLabel>
         <Input id='name' placeholder='Enter your wizard name' required />

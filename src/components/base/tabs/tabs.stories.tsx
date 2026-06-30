@@ -36,7 +36,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <Tabs defaultValue='account' className='min-w-sm lg:w-6/12' {...stylex.props(x.width['100%'])}>
+    <Tabs defaultValue='account' {...stylex.props(x.width['100%'])}>
       <TabsList>
         <TabsItem value='account'>Account</TabsItem>
         <TabsItem value='password'>Password</TabsItem>

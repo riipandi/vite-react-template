@@ -38,7 +38,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='xl:w-10/12 2xl:w-8/12'>
+    <div {...stylex.props(x.width['83.333333%'])}>
       <Fieldset>
         <FieldsetLegend>Wizard Information</FieldsetLegend>
         <Text>
@@ -70,7 +70,7 @@ export const Complex: Story = {
   args: {},
   render: () => (
     <div
-      className='max-w-md xl:w-10/12 2xl:w-8/12'
+      {...stylex.props(x.maxWidth['448px'], x.width['83.333333%'])}
       {...stylex.props(
         x.display.flex,
         x.flexDirection.column,

@@ -11,6 +11,7 @@ import {
   NavigationMenuTrigger
 } from '#/components/base/navigation-menu'
 import { Heading, Text } from '#/components/extra/typography'
+import { color } from '#/styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/NavigationMenu',
@@ -109,7 +110,7 @@ export const Playground: Story = {
           <NavigationMenuContent
             render={
               <ul
-                className='grid md:w-125 md:grid-cols-2'
+                {...stylex.props(x.display.grid, x.width['31.25rem'])}
                 {...stylex.props(x.width['25rem'], x.gap['0.125rem'])}
               />
             }
@@ -159,7 +160,7 @@ export const Compact: Story = {
           <NavigationMenuContent
             render={
               <ul
-                className='grid md:w-125 md:grid-cols-2'
+                {...stylex.props(x.display.grid, x.width['31.25rem'])}
                 {...stylex.props(x.width['25rem'], x.gap['0.125rem'])}
               />
             }
@@ -223,7 +224,7 @@ function ListItem({ title, children, href, size = 'default' }: ListItemProps) {
               {title}
             </Heading>
             <Text
-              className='text-foreground-neutral-faded/80 line-clamp-2'
+              {...stylex.props(x.color[color.fgNeutralFaded], x.opacity['0.8'])}
               {...stylex.props(x.lineHeight.normal)}
             >
               {children}

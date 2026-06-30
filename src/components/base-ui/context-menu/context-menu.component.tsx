@@ -1,6 +1,5 @@
 import { ContextMenu as ContextMenuPrimitive } from '@base-ui/react/context-menu'
-import { ArrowDown } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import '../../../styles/shared/menu-base.css'
 
 function ContextMenu(props: ContextMenuPrimitive.Root.Props) {
@@ -60,7 +59,7 @@ function ContextMenuSubmenuTrigger({
   return (
     <ContextMenuPrimitive.SubmenuTrigger data-ui='context-menu-submenu-trigger' {...props}>
       {children}
-      <HugeiconsIcon icon={ArrowDown} />
+      <Lucide.ChevronDown size={16} />
     </ContextMenuPrimitive.SubmenuTrigger>
   )
 }

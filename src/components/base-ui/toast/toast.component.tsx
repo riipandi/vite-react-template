@@ -1,13 +1,6 @@
 import './style.css'
 import { Toast } from '@base-ui/react/toast'
-import {
-  Alert02Icon,
-  AlertCircleIcon,
-  AlertDiamondIcon,
-  Cancel01Icon,
-  Tick02Icon
-} from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import { Spinner } from '../spinner'
 
 type ToastOptions = Partial<Omit<Toast.Root.ToastObject, 'type'>>
@@ -34,13 +27,13 @@ const anchoredToastManager = Toast.createToastManager()
 function getIcon(type: ToastType) {
   switch (type) {
     case 'success':
-      return <HugeiconsIcon icon={Tick02Icon} />
+      return <Lucide.CheckCircle2 size={20} />
     case 'error':
-      return <HugeiconsIcon icon={AlertDiamondIcon} />
+      return <Lucide.CircleX size={20} />
     case 'info':
-      return <HugeiconsIcon icon={AlertCircleIcon} />
+      return <Lucide.CircleAlert size={20} />
     case 'warning':
-      return <HugeiconsIcon icon={Alert02Icon} />
+      return <Lucide.TriangleAlert size={20} />
     case 'loading':
       return <Spinner size='sm' />
     default:
@@ -116,7 +109,7 @@ function StackedToasts({ position }: { position: ToastPosition }) {
                 </div>
 
                 <Toast.Close data-slot='toast-close'>
-                  <HugeiconsIcon icon={Cancel01Icon} />
+                  <Lucide.X size={16} />
                 </Toast.Close>
               </Toast.Content>
             </Toast.Root>

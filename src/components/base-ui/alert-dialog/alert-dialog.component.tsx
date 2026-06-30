@@ -1,8 +1,7 @@
 import './style.css'
 import '../../../styles/shared/dialog-base.css'
 import { AlertDialog as AlertDialogPrimitive } from '@base-ui/react/alert-dialog'
-import { Cancel01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import { Button } from '../button'
 
 function AlertDialog(props: AlertDialogPrimitive.Root.Props) {
@@ -43,7 +42,7 @@ function AlertDialogContent({
             data-slot='dialog-close-icon'
             render={
               <Button variant='neutral' mode='ghost' size='sm' asIcon>
-                <HugeiconsIcon icon={Cancel01Icon} strokeWidth={2} />
+                <Lucide.X size={16} strokeWidth={2} />
               </Button>
             }
           />

@@ -1,6 +1,5 @@
-import { FavouriteIcon, StarIcon } from '@hugeicons/core-free-icons'
 import './style.css'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import type React from 'react'
 
 function RatingReview({
@@ -13,7 +12,7 @@ function RatingReview({
   value?: number
   max?: number
 }) {
-  const icon = variant === 'star' ? StarIcon : FavouriteIcon
+  const Icon = variant === 'star' ? Lucide.Star : Lucide.Heart
   const items = Array.from({ length: max }, (_, i) => i + 1)
 
   return (
@@ -25,7 +24,7 @@ function RatingReview({
       {...props}
     >
       {items.map((num) => (
-        <HugeiconsIcon key={num} icon={icon} data-filled={num <= value} />
+        <Icon key={num} size={16} data-filled={num <= value} />
       ))}
     </div>
   )

@@ -1,7 +1,6 @@
 import './style.css'
 import { Dialog as SheetPrimitive } from '@base-ui/react/dialog'
-import { Cancel01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import { Button } from '../button'
 import { Separator } from '../separator'
 
@@ -26,7 +25,7 @@ function SheetClose({
       data-slot='sheet-close'
       render={
         <Button variant='primary' mode='ghost' size='sm' asIcon>
-          <HugeiconsIcon icon={Cancel01Icon} />
+          <Lucide.X size={16} />
         </Button>
       }
       {...props}

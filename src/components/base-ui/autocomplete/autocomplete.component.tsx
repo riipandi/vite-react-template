@@ -1,8 +1,7 @@
 import './style.css'
 import '../../../styles/shared/select-base.css'
 import { Autocomplete as AutocompletePrimitive } from '@base-ui/react/autocomplete'
-import { Cancel01Icon, UnfoldMoreIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import { Button } from '../button'
 import { Input } from '../input'
 import { InputIcon, InputWrapper } from '../input-group'
@@ -36,7 +35,7 @@ function AutocompleteInput({
           <AutocompletePrimitive.Trigger
             render={
               <Button variant='neutral' mode='ghost' size='sm' asIcon>
-                <HugeiconsIcon icon={UnfoldMoreIcon} />
+                <Lucide.ChevronsUpDown size={16} />
               </Button>
             }
           />
@@ -46,7 +45,7 @@ function AutocompleteInput({
           <AutocompletePrimitive.Clear
             render={
               <Button variant='neutral' mode='ghost' size='sm' asIcon>
-                <HugeiconsIcon icon={Cancel01Icon} />
+                <Lucide.X size={16} />
               </Button>
             }
           />
@@ -131,7 +130,7 @@ function AutocompleteList(props: AutocompletePrimitive.List.Props) {
 function AutocompleteClear(props: AutocompletePrimitive.Clear.Props) {
   return (
     <AutocompletePrimitive.Clear data-ui='autocomplete-clear' {...props}>
-      <HugeiconsIcon icon={Cancel01Icon} />
+      <Lucide.X size={16} />
     </AutocompletePrimitive.Clear>
   )
 }
@@ -147,7 +146,7 @@ function AutocompleteCollection(props: AutocompletePrimitive.Collection.Props) {
 function AutocompleteTrigger(props: AutocompletePrimitive.Trigger.Props) {
   return (
     <AutocompletePrimitive.Trigger data-ui='autocomplete-trigger' {...props}>
-      <HugeiconsIcon icon={UnfoldMoreIcon} />
+      <Lucide.ChevronsUpDown size={16} />
     </AutocompletePrimitive.Trigger>
   )
 }

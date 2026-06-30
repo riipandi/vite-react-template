@@ -1,7 +1,6 @@
 import './style.css'
 import { Drawer as DrawerPrimitive } from '@base-ui/react/drawer'
-import { Cancel01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import { Button } from '../button'
 import { Separator } from '../separator'
 
@@ -64,7 +63,7 @@ function DrawerClose({ ...props }: DrawerPrimitive.Close.Props) {
       data-slot='drawer-close'
       render={
         <Button variant='primary' mode='ghost' size='md' asIcon>
-          <HugeiconsIcon icon={Cancel01Icon} />
+          <Lucide.X size={16} />
         </Button>
       }
       {...props}

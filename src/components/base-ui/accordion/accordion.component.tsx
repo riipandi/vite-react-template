@@ -1,7 +1,6 @@
 import './style.css'
 import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion'
-import { ArrowDown01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 
 function Accordion({ ...props }: AccordionPrimitive.Root.Props) {
   return <AccordionPrimitive.Root data-ui='accordion' {...props} />
@@ -16,7 +15,7 @@ function AccordionTrigger({ children, ...props }: AccordionPrimitive.Trigger.Pro
     <AccordionPrimitive.Header data-ui='accordion-header'>
       <AccordionPrimitive.Trigger data-ui='accordion-trigger' {...props}>
         {children}
-        <HugeiconsIcon icon={ArrowDown01Icon} />
+        <Lucide.ChevronDown size={16} />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   )

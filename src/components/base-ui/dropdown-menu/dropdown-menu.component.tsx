@@ -1,6 +1,5 @@
 import { Menu as MenuPrimitive } from '@base-ui/react/menu'
-import { ArrowDown } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import '../../../styles/shared/menu-base.css'
 
 function DropdownMenu(props: MenuPrimitive.Root.Props) {
@@ -57,7 +56,7 @@ function DropdownMenuSubmenuTrigger({ children, ...props }: MenuPrimitive.Submen
   return (
     <MenuPrimitive.SubmenuTrigger data-ui='dropdown-menu-submenu-trigger' {...props}>
       {children}
-      <HugeiconsIcon icon={ArrowDown} />
+      <Lucide.ChevronDown size={16} />
     </MenuPrimitive.SubmenuTrigger>
   )
 }

@@ -1,7 +1,6 @@
 import './style.css'
 import { Dialog as CommandDialogPrimitive } from '@base-ui/react/dialog'
-import { CommandIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import type * as React from 'react'
 import {
   Autocomplete,
@@ -71,7 +70,7 @@ function CommandInput({
     <div data-ui='command-input-wrapper'>
       <AutocompleteInput
         placeholder={placeholder}
-        startAddon={<HugeiconsIcon icon={CommandIcon} />}
+        startAddon={<Lucide.Command size={16} />}
         {...props}
       />
     </div>

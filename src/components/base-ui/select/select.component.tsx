@@ -1,8 +1,7 @@
 import './style.css'
 import '../../../styles/shared/select-base.css'
 import { Select as SelectPrimitive } from '@base-ui/react/select'
-import { ArrowDown01Icon, ArrowUp01Icon, UnfoldMoreIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 
 const Select = SelectPrimitive.Root
 
@@ -25,7 +24,7 @@ function SelectTrigger({
     <SelectPrimitive.Trigger data-ui='select-trigger' data-size={size} {...props}>
       {children}
       <SelectPrimitive.Icon data-ui='icon'>
-        <HugeiconsIcon icon={UnfoldMoreIcon} />
+        <Lucide.ChevronsUpDown size={16} />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   )
@@ -56,11 +55,11 @@ function SelectContent({
       >
         <SelectPrimitive.Popup data-ui='select-content' {...props}>
           <SelectPrimitive.ScrollUpArrow data-ui='scroll-arrow'>
-            <HugeiconsIcon icon={ArrowUp01Icon} />
+            <Lucide.ChevronUp size={16} />
           </SelectPrimitive.ScrollUpArrow>
           <SelectPrimitive.List>{children}</SelectPrimitive.List>
           <SelectPrimitive.ScrollDownArrow data-ui='scroll-arrow'>
-            <HugeiconsIcon icon={ArrowDown01Icon} />
+            <Lucide.ChevronDown size={16} />
           </SelectPrimitive.ScrollDownArrow>
         </SelectPrimitive.Popup>
       </SelectPrimitive.Positioner>

@@ -1,5 +1,4 @@
-import { Cancel01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import { createContext, useContext } from 'react'
 import './style.css'
 import { Button } from '../button'
@@ -34,7 +33,7 @@ function TagDismiss(props: React.ComponentProps<'button' | typeof Button>) {
       disabled={disabled}
       {...props}
     >
-      <HugeiconsIcon icon={Cancel01Icon} />
+      <Lucide.X size={16} />
     </Button>
   )
 }

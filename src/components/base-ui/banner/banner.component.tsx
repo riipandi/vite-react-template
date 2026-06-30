@@ -1,6 +1,5 @@
 import './style.css'
-import { Cancel01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import { Button } from '../button'
 
 function Banner({
@@ -25,7 +24,7 @@ function BannerIcon({ ...props }: React.ComponentProps<'div'>) {
 function BannerClose({ ...props }: React.ComponentProps<'button'>) {
   return (
     <Button data-slot='banner-close' variant='neutral' mode='ghost' size='sm' asIcon {...props}>
-      <HugeiconsIcon icon={Cancel01Icon} />
+      <Lucide.X size={16} />
     </Button>
   )
 }

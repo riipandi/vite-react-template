@@ -1,8 +1,7 @@
 import '../../../styles/shared/select-base.css'
 import './style.css'
 import { Combobox as ComboboxPrimitive } from '@base-ui/react'
-import { Cancel01Icon, UnfoldMoreIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import React from 'react'
 import { Button } from '../button'
 import { Input } from '../input'
@@ -21,7 +20,7 @@ function ComboboxTrigger({ ...props }: ComboboxPrimitive.Trigger.Props) {
       data-slot='combobox-trigger'
       render={
         <Button variant='neutral' mode='ghost' size='sm' asIcon>
-          <HugeiconsIcon icon={UnfoldMoreIcon} />
+          <Lucide.ChevronsUpDown size={16} />
         </Button>
       }
       {...props}
@@ -35,7 +34,7 @@ function ComboboxClear(props: ComboboxPrimitive.Clear.Props) {
       data-slot='combobox-clear'
       render={
         <Button variant='neutral' mode='ghost' size='sm' asIcon>
-          <HugeiconsIcon icon={Cancel01Icon} />
+          <Lucide.X size={16} />
         </Button>
       }
       {...props}

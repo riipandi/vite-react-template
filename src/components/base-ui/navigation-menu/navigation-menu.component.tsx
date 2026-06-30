@@ -1,7 +1,6 @@
 import './style.css'
 import { NavigationMenu as NavigationMenuPrimitive } from '@base-ui/react/navigation-menu'
-import { ArrowDown01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 
 function NavigationMenu({ children, ...props }: NavigationMenuPrimitive.Root.Props) {
   return (
@@ -67,7 +66,7 @@ function NavigationMenuIndicator(
 ) {
   return (
     <NavigationMenuPrimitive.Icon data-ui='navigation-menu-indicator' {...props}>
-      <HugeiconsIcon icon={ArrowDown01Icon} />
+      <Lucide.ChevronDown size={16} />
     </NavigationMenuPrimitive.Icon>
   )
 }

@@ -1,7 +1,6 @@
 import './style.css'
 import { Popover as PopoverPrimitive } from '@base-ui/react/popover'
-import { Cancel01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import { Button } from '../button'
 
 const PopoverCreateHandle = PopoverPrimitive.createHandle
@@ -49,7 +48,7 @@ function PopoverClose({ ...props }: PopoverPrimitive.Close.Props) {
       data-slot='popover-close'
       render={
         <Button variant='neutral' mode='ghost' size='sm' asIcon>
-          <HugeiconsIcon icon={Cancel01Icon} strokeWidth={2} />
+          <Lucide.X size={16} strokeWidth={2} />
         </Button>
       }
       {...props}

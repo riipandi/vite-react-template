@@ -1,7 +1,6 @@
 import './style.css'
 import { NumberField as NumberFieldPrimitive } from '@base-ui/react/number-field'
-import { Resize02Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 
 function NumberField(props: NumberFieldPrimitive.Root.Props) {
   return <NumberFieldPrimitive.Root data-ui='number-field' {...props} />
@@ -12,7 +11,7 @@ function NumberFieldScrubArea({ children, ...props }: NumberFieldPrimitive.Scrub
     <NumberFieldPrimitive.ScrubArea data-ui='number-field-scrub-area' {...props}>
       {children}
       <NumberFieldPrimitive.ScrubAreaCursor>
-        <HugeiconsIcon icon={Resize02Icon} />
+        <Lucide.GripHorizontal size={16} />
       </NumberFieldPrimitive.ScrubAreaCursor>
     </NumberFieldPrimitive.ScrubArea>
   )

@@ -1,8 +1,7 @@
 // oxlint-disable jsx-a11y/anchor-has-content
 
 import './style.css'
-import { ArrowLeft01Icon, ArrowRight01Icon, MoreHorizontalIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import * as Lucide from 'lucide-react'
 import { Button } from '../button'
 
 function Pagination({
@@ -56,7 +55,7 @@ function PaginationPrevious({ children, ...props }: React.ComponentProps<typeof 
       asIcon={!children}
       {...props}
     >
-      <HugeiconsIcon icon={ArrowLeft01Icon} />
+      <Lucide.ChevronLeft size={16} />
       {children}
     </PaginationLink>
   )
@@ -71,7 +70,7 @@ function PaginationNext({ children, ...props }: React.ComponentProps<typeof Pagi
       {...props}
     >
       {children}
-      <HugeiconsIcon icon={ArrowRight01Icon} />
+      <Lucide.ChevronRight size={16} />
     </PaginationLink>
   )
 }
@@ -87,7 +86,7 @@ function PaginationEllipsis({ ...props }: React.ComponentProps<'span'>) {
       data-slot='pagination-ellipsis'
       render={
         <span aria-hidden {...props}>
-          <HugeiconsIcon icon={MoreHorizontalIcon} />
+          <Lucide.MoreHorizontal size={16} />
         </span>
       }
     />

@@ -42,5 +42,17 @@
             }
         }
     ],
-    "ignorePatterns": [".output/**"]
+    "ignorePatterns": [
+        ".output",
+        ".tanstack",
+        ".wrangler",
+        "**/*.md",
+        "**/*.mdx",
+        "**/*.go",
+        "**/*.yml",
+        "**/*.yaml",
+        "**/*.toml",
+        "/public/**",
+        "/temp/**"
+    ]
 }

@@ -1,3 +1,4 @@
+import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
@@ -125,7 +126,7 @@ function DashboardLayout() {
           <Lucide.Menu size={20} />
         </button>
         <span {...stylex.props(styles.mobileHeaderTitle)}>Dashboard</span>
-        <div style={{ width: '2.25rem' }} />
+        <div {...stylex.props(x.width['2.25rem'])} />
       </div>
 
       {/* Body row: sidebar + content */}

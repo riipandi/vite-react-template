@@ -3,7 +3,6 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Link, createFileRoute, redirect } from '@tanstack/react-router'
 import { Button } from '#/components/base/button'
-import { Alert } from '#/components/extra/alert'
 import { useAuthentication } from '#/guards/auth-provider'
 import { isAuthenticated } from '#/guards/auth-store'
 import { ThemeSwitcher } from '#/routes/-theme'
@@ -102,6 +101,21 @@ const homeStyles = stylex.create({
     fontSize: fontSize.sm,
     letterSpacing: '0.025em',
     color: color.fgNeutralFaded
+  },
+  alert: {
+    fontSize: fontSize.sm,
+    padding: space[3],
+    borderRadius: '0.55rem',
+    width: '100%',
+    boxSizing: 'border-box'
+  },
+  alertLogin: {
+    backgroundColor: color.bgPrimaryFaded,
+    color: color.fgPrimary
+  },
+  alertLogout: {
+    backgroundColor: color.bgWarningFaded,
+    color: color.fgWarning
   }
 })
 
@@ -145,7 +159,7 @@ function HomeComponent() {
         </div>
         <div {...stylex.props(homeStyles.actions)}>
           <Link to='/dashboard'>
-            <Button variant='primary' mode='filled'>
+            <Button color='primary' variant='solid'>
               User Dashboard
             </Button>
           </Link>
@@ -154,15 +168,20 @@ function HomeComponent() {
             target='_blank'
             rel='noreferrer'
           >
-            <Button variant='neutral' mode='filled'>
+            <Button color='neutral' variant='solid'>
               Get Source Code
             </Button>
           </a>
         </div>
         <div>
-          <Alert variant='filled' status={loggedIn ? 'information' : 'warning'}>
+          <div
+            {...stylex.props(
+              homeStyles.alert,
+              loggedIn ? homeStyles.alertLogin : homeStyles.alertLogout
+            )}
+          >
             {loggedIn ? `Welcome back ${user?.email} 👋` : 'You are not logged in!'}
-          </Alert>
+          </div>
         </div>
       </div>
       <footer {...stylex.props(homeStyles.footer)}>

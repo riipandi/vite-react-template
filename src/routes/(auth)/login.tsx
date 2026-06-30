@@ -4,18 +4,23 @@ import { createFileRoute, Link, useSearch } from '@tanstack/react-router'
 import { useState } from 'react'
 import { z } from 'zod'
 import { Button } from '#/components/base/button'
-import { Field, FieldLabel, FieldError } from '#/components/base/field'
-import { Input } from '#/components/base/input'
-import { Separator } from '#/components/base/separator'
-import { Alert } from '#/components/extra/alert'
-import { Card } from '#/components/extra/card'
 import { GitHubButton, GoogleButton } from '#/components/social-button'
 import { useAuthentication } from '#/guards/auth-provider'
 import { getErrorMessage } from '#/guards/auth-utils'
 import { loginSchema } from '#/schemas/auth.schema'
-import { fontSize, fontWeight, space, color } from '#/styles/tokens.stylex'
+import { fontSize, fontWeight, radius, space, color } from '#/styles/tokens.stylex'
 
-const loginStyles = stylex.create({
+const styles = stylex.create({
+  card: {
+    borderRadius: radius.xl,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: color.borderNeutral,
+    backgroundColor: color.bgElevationBase,
+    overflow: 'hidden',
+    transitionProperty: 'background-color, border-color, box-shadow',
+    transitionDuration: '200ms'
+  },
   cardBody: {
     padding: space[8]
   },
@@ -55,9 +60,68 @@ const loginStyles = stylex.create({
     flexDirection: 'column',
     gap: space[3]
   },
+  separator: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: space[4],
+    marginTop: space[6],
+    marginBottom: space[6]
+  },
+  separatorLine: {
+    flex: 1,
+    height: '1px',
+    backgroundColor: color.borderNeutralFaded
+  },
+  separatorText: {
+    fontSize: fontSize.sm,
+    color: color.fgNeutralFaded,
+    whiteSpace: 'nowrap'
+  },
   formGrid: {
     display: 'grid',
     rowGap: space[4]
+  },
+  field: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: space['1.5']
+  },
+  label: {
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.medium,
+    color: color.fgNeutral
+  },
+  input: {
+    display: 'flex',
+    width: '100%',
+    height: '2.5rem',
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: { default: color.borderNeutral, ':focus': color.borderPrimary },
+    backgroundColor: color.bgPage,
+    paddingLeft: space[3],
+    paddingRight: space[3],
+    paddingTop: space[2],
+    paddingBottom: space[2],
+    fontSize: fontSize.sm,
+    color: color.fgNeutral,
+    outline: 'none',
+    transitionProperty: 'border-color, box-shadow',
+    transitionDuration: '150ms',
+    fontFamily: 'inherit',
+    boxSizing: 'border-box',
+    '::placeholder': { color: color.fgNeutralFaded },
+    ':focus': { boxShadow: `0 0 0 2px ${color.borderPrimaryFaded}` },
+    ':disabled': { opacity: 0.5, cursor: 'not-allowed' }
+  },
+  inputError: {
+    borderColor: color.borderCritical
+  },
+  fieldError: {
+    fontSize: fontSize.xs,
+    color: color.fgCritical,
+    marginTop: space['0.5']
   },
   submitWrapper: {
     marginTop: space[7],
@@ -80,15 +144,33 @@ const loginStyles = stylex.create({
     fontWeight: fontWeight.medium,
     color: color.fgPrimary,
     textDecoration: 'none',
-    ':hover': {
-      textDecoration: 'underline'
-    }
+    ':hover': { textDecoration: 'underline' }
   },
   loggedOutMessage: {
     fontWeight: fontWeight.semibold
   },
-  alertSpacing: {
+  alert: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: space[2],
+    borderRadius: radius.lg,
+    paddingLeft: space[4],
+    paddingRight: space[4],
+    paddingTop: space[3],
+    paddingBottom: space[3],
+    fontSize: fontSize.sm,
+    fontWeight: fontWeight.medium,
+    width: '100%',
+    boxSizing: 'border-box',
     marginBottom: space[4]
+  },
+  alertError: {
+    backgroundColor: color.bgCriticalFaded,
+    color: color.fgCritical
+  },
+  alertSuccess: {
+    backgroundColor: color.bgPositiveFaded,
+    color: color.fgPositive
   }
 })
 
@@ -128,7 +210,6 @@ function RouteComponent() {
   const { loggedOut } = useSearch({ from: Route.id })
   const [failed, setFailed] = useState<string | null>(null)
 
-  // Clear the "goodbye" message as soon as the user interacts with the form.
   const clearAlerts = () => setFailed(null)
 
   const form = useForm({
@@ -152,41 +233,39 @@ function RouteComponent() {
   return (
     <>
       {failed && (
-        <div id='login-alert-error' {...stylex.props(loginStyles.alertSpacing)}>
-          <Alert variant='filled' status='error'>
-            {failed}
-          </Alert>
+        <div id='login-alert-error' {...stylex.props(styles.alert, styles.alertError)}>
+          {failed}
         </div>
       )}
       {loggedOut && !failed && (
-        <div id='login-alert-goodbye' {...stylex.props(loginStyles.alertSpacing)}>
-          <Alert variant='filled' status='success'>
-            <span {...stylex.props(loginStyles.loggedOutMessage)}>Goodbye!</span> Your session has
-            been terminated.
-          </Alert>
+        <div id='login-alert-goodbye' {...stylex.props(styles.alert, styles.alertSuccess)}>
+          <span {...stylex.props(styles.loggedOutMessage)}>Goodbye!</span> Your session has been
+          terminated.
         </div>
       )}
 
-      <Card id='login-card'>
-        <div {...stylex.props(loginStyles.cardBody)}>
-          <div {...stylex.props(loginStyles.header)}>
-            <div {...stylex.props(loginStyles.logoWrapper)}>
-              <div {...stylex.props(loginStyles.logo)}>
+      <div id='login-card' {...stylex.props(styles.card)}>
+        <div {...stylex.props(styles.cardBody)}>
+          <div {...stylex.props(styles.header)}>
+            <div {...stylex.props(styles.logoWrapper)}>
+              <div {...stylex.props(styles.logo)}>
                 <ViteLogo />
               </div>
             </div>
-            <h1 {...stylex.props(loginStyles.heading)}>Sign in to your account</h1>
-            <p {...stylex.props(loginStyles.subtitle)}>
-              Welcome back! Please enter your credentials.
-            </p>
+            <h1 {...stylex.props(styles.heading)}>Sign in to your account</h1>
+            <p {...stylex.props(styles.subtitle)}>Welcome back! Please enter your credentials.</p>
           </div>
 
-          <div {...stylex.props(loginStyles.socialButtons)}>
+          <div {...stylex.props(styles.socialButtons)}>
             <GoogleButton />
             <GitHubButton />
           </div>
 
-          <Separator variant='content'>or continue with</Separator>
+          <div {...stylex.props(styles.separator)}>
+            <span {...stylex.props(styles.separatorLine)} />
+            <span {...stylex.props(styles.separatorText)}>or continue with</span>
+            <span {...stylex.props(styles.separatorLine)} />
+          </div>
 
           <form
             id='login-form'
@@ -197,54 +276,64 @@ function RouteComponent() {
               form.handleSubmit()
             }}
           >
-            <div {...stylex.props(loginStyles.formGrid)}>
+            <div {...stylex.props(styles.formGrid)}>
               <form.Field
                 name='username'
-                children={(field) => (
-                  <Field name='username' invalid={!!field.state.meta.errors?.[0]?.message}>
-                    <FieldLabel>Username</FieldLabel>
-                    <Input
-                      value={field.state.value}
-                      onValueChange={(value: string) => {
-                        clearAlerts()
-                        field.handleChange(value)
-                      }}
-                      onBlur={field.handleBlur}
-                    />
-                    {field.state.meta.errors?.[0]?.message && (
-                      <FieldError>{field.state.meta.errors?.[0]?.message}</FieldError>
-                    )}
-                  </Field>
-                )}
+                children={(field) => {
+                  const error = field.state.meta.errors?.[0]?.message
+                  return (
+                    <div id='field-username' {...stylex.props(styles.field)}>
+                      <label {...stylex.props(styles.label)} htmlFor='username'>
+                        Username
+                      </label>
+                      <input
+                        id='username'
+                        value={field.state.value}
+                        onChange={(e) => {
+                          clearAlerts()
+                          field.handleChange(e.target.value)
+                        }}
+                        onBlur={field.handleBlur}
+                        {...stylex.props(styles.input, error ? styles.inputError : null)}
+                      />
+                      {error && <span {...stylex.props(styles.fieldError)}>{error}</span>}
+                    </div>
+                  )
+                }}
               />
 
               <form.Field
                 name='password'
-                children={(field) => (
-                  <Field name='password' invalid={!!field.state.meta.errors?.[0]?.message}>
-                    <FieldLabel>Password</FieldLabel>
-                    <Input
-                      type='password'
-                      value={field.state.value}
-                      onValueChange={(value: string) => {
-                        clearAlerts()
-                        field.handleChange(value)
-                      }}
-                      onBlur={field.handleBlur}
-                    />
-                    {field.state.meta.errors?.[0]?.message && (
-                      <FieldError>{field.state.meta.errors?.[0]?.message}</FieldError>
-                    )}
-                  </Field>
-                )}
+                children={(field) => {
+                  const error = field.state.meta.errors?.[0]?.message
+                  return (
+                    <div id='field-password' {...stylex.props(styles.field)}>
+                      <label {...stylex.props(styles.label)} htmlFor='password'>
+                        Password
+                      </label>
+                      <input
+                        id='password'
+                        type='password'
+                        value={field.state.value}
+                        onChange={(e) => {
+                          clearAlerts()
+                          field.handleChange(e.target.value)
+                        }}
+                        onBlur={field.handleBlur}
+                        {...stylex.props(styles.input, error ? styles.inputError : null)}
+                      />
+                      {error && <span {...stylex.props(styles.fieldError)}>{error}</span>}
+                    </div>
+                  )
+                }}
               />
             </div>
 
-            <div {...stylex.props(loginStyles.submitWrapper)}>
+            <div {...stylex.props(styles.submitWrapper)}>
               <form.Subscribe
                 selector={(state) => [state.canSubmit, state.isSubmitting]}
                 children={([canSubmit, isSubmitting]) => (
-                  <Button type='submit' variant='primary' disabled={!canSubmit}>
+                  <Button type='submit' color='primary' variant='solid' disabled={!canSubmit}>
                     {isSubmitting ? 'Signing in...' : 'Sign in'}
                   </Button>
                 )}
@@ -252,14 +341,14 @@ function RouteComponent() {
             </div>
           </form>
 
-          <div {...stylex.props(loginStyles.footer)}>
-            <span {...stylex.props(loginStyles.footerText)}>Back to</span>
-            <Link to='/' {...stylex.props(loginStyles.backLink)}>
+          <div {...stylex.props(styles.footer)}>
+            <span {...stylex.props(styles.footerText)}>Back to</span>
+            <Link to='/' {...stylex.props(styles.backLink)}>
               homepage
             </Link>
           </div>
         </div>
-      </Card>
+      </div>
     </>
   )
 }

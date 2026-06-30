@@ -5,7 +5,8 @@
     border: 1px solid var(--color-surface-variant);
     background-color: var(--color-surface);
     box-shadow: var(--shadow-1);
-    transition: background-color var(--transition-expressive-fast-effects),
+    transition:
+      background-color var(--transition-expressive-fast-effects),
       border-color var(--transition-expressive-fast-effects),
       box-shadow var(--transition-expressive-fast-effects);
 

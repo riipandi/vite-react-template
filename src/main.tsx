@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { queryClient } from '#/libraries/api-client'
 import type { BreadcrumbValue } from '#/routes/__root'
 import { routeTree } from './routes.gen'
-import './styles/common/globals.css'
+import './styles/core/globals.css'
 
 // Create the application router instance.
 const appRoutes = createRouter({

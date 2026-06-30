@@ -3,7 +3,7 @@ import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { Button } from '#/components/base/button'
-import { Card } from '#/components/base/card'
+import { Card } from '#/components/extra/card'
 import { useAuthentication } from '#/guards/auth-provider'
 import { fontSize, fontWeight, radius, shadow, space, color } from '#/styles/tokens.stylex'
 

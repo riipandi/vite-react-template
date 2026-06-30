@@ -9,10 +9,10 @@ import {
   TableRow,
   TableCell,
   TableCaption
-} from '#/components/base/table'
+} from '#/components/extra/table'
 
 const meta = {
-  title: 'Component/Table',
+  title: 'Extended/Table',
   component: Table,
   parameters: { layout: 'centered' },
   argTypes: {},

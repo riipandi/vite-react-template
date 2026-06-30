@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { fn } from 'storybook/test'
-import { LinkButton } from '#/components/base/link-button'
+import { LinkButton } from '#/components/extra/link-button'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/LinkButton',
+  title: 'Extended/LinkButton',
   component: LinkButton,
   parameters: { layout: 'centered' },
   argTypes: {

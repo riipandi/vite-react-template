@@ -3,11 +3,11 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { fn } from 'storybook/test'
-import { RatingBar, RatingBarItem } from '#/components/base/rating-bar'
+import { RatingBar, RatingBarItem } from '#/components/extra/rating-bar'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/RatingBar',
+  title: 'Extended/RatingBar',
   component: RatingBar,
   parameters: { layout: 'centered' },
   argTypes: {

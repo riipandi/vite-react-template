@@ -1,6 +1,6 @@
 import './style.css'
 import * as Lucide from 'lucide-react'
-import { Button } from '../button'
+import { Button } from '../../base/button'
 
 interface Props {
   variant: 'filled' | 'light' | 'lighter' | 'stroke'

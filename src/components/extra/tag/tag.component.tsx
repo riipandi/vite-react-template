@@ -1,7 +1,7 @@
 import * as Lucide from 'lucide-react'
 import { createContext, useContext } from 'react'
+import { Button } from '../../base/button'
 import './style.css'
-import { Button } from '../button'
 
 const TagContext = createContext<{ disabled?: boolean }>({})
 

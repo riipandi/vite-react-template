@@ -1,5 +1,5 @@
 import './style.css'
-import { RadioGroup, RadioGroupItem } from '../radio'
+import { RadioGroup, RadioGroupItem } from '../../base/radio'
 
 function RatingBar({
   size = 'md',

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Card } from '#/components/base/card'
+import { Card } from '#/components/extra/card'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/Card',
+  title: 'Extended/Card',
   component: Card,
   parameters: { layout: 'centered' },
   argTypes: {

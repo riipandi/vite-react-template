@@ -12,7 +12,7 @@ import {
   AutocompleteItem,
   AutocompleteList,
   AutocompleteSeparator
-} from '../autocomplete'
+} from '../../base/autocomplete'
 
 const CommandDialog = CommandDialogPrimitive.Root
 

@@ -3,10 +3,10 @@ import './style.css'
 import { Combobox as ComboboxPrimitive } from '@base-ui/react'
 import * as Lucide from 'lucide-react'
 import React from 'react'
+import { InputWrapper } from '../../extra/input-group'
+import { Tag, TagDismiss } from '../../extra/tag'
 import { Button } from '../button'
 import { Input } from '../input'
-import { InputWrapper } from '../input-group'
-import { Tag, TagDismiss } from '../tag'
 
 const Combobox = ComboboxPrimitive.Root
 

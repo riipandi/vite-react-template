@@ -1,7 +1,7 @@
 import './style.css'
 import { Toast } from '@base-ui/react/toast'
 import * as Lucide from 'lucide-react'
-import { Spinner } from '../spinner'
+import { Spinner } from '../../extra/spinner'
 
 type ToastOptions = Partial<Omit<Toast.Root.ToastObject, 'type'>>
 

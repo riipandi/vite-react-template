@@ -4,11 +4,11 @@ import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import * as React from 'react'
 import { Button } from '#/components/base/button'
-import { ButtonGroup, ButtonGroupSeparator } from '#/components/base/button-group'
+import { ButtonGroup, ButtonGroupSeparator } from '#/components/extra/button-group'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/ButtonGroup',
+  title: 'Extended/ButtonGroup',
   component: ButtonGroup,
   parameters: { layout: 'centered' },
   argTypes: {

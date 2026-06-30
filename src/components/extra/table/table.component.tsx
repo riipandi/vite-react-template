@@ -1,4 +1,4 @@
-import { ScrollArea } from '../scroll-area'
+import { ScrollArea } from '../../base/scroll-area'
 import './style.css'
 
 function Table(props: React.ComponentProps<'table'>) {

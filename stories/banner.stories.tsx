@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { Banner, BannerContent, BannerIcon, BannerClose } from '#/components/base/banner'
+import { Banner, BannerContent, BannerIcon, BannerClose } from '#/components/extra/banner'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/Banner',
+  title: 'Extended/Banner',
   component: Banner,
   parameters: { layout: 'centered' },
   argTypes: {

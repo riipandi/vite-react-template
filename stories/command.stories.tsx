@@ -16,11 +16,11 @@ import {
   CommandSeparator,
   CommandShortcut,
   CommandFooter
-} from '#/components/base/command'
+} from '#/components/extra/command'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/Command',
+  title: 'Extended/Command',
   component: Command,
   parameters: { layout: 'centered' },
   argTypes: {},

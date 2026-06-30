@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import * as stylex from '@stylexjs/stylex'
-import { Spinner } from '#/components/base/spinner'
+import { Spinner } from '#/components/extra/spinner'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/Spinner',
+  title: 'Extended/Spinner',
   component: Spinner,
   parameters: { layout: 'centered' },
   argTypes: {

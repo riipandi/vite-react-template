@@ -3,11 +3,11 @@ import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import * as React from 'react'
 import { Input } from '#/components/base/input'
-import { InputWrapper, InputIcon, InputAffix } from '#/components/base/input-group'
+import { InputWrapper, InputIcon, InputAffix } from '#/components/extra/input-group'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/InputGroup',
+  title: 'Extended/InputGroup',
   component: InputWrapper,
   parameters: { layout: 'centered' },
   argTypes: {},

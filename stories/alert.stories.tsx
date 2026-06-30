@@ -9,11 +9,11 @@ import {
   AlertDescription,
   AlertIcon,
   AlertClose
-} from '#/components/base/alert'
+} from '#/components/extra/alert'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/Alert',
+  title: 'Extended/Alert',
   component: Alert,
   parameters: { layout: 'centered' },
   argTypes: {

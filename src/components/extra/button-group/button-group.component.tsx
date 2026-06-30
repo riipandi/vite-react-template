@@ -1,4 +1,4 @@
-import { Separator } from '../separator'
+import { Separator } from '../../base/separator'
 import './style.css'
 
 function ButtonGroup({

@@ -1,28 +1,32 @@
-import './style.css'
 import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion'
+import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
+import { accordionStyles } from './accordion.stylex'
 
 function Accordion({ ...props }: AccordionPrimitive.Root.Props) {
-  return <AccordionPrimitive.Root data-ui='accordion' {...props} />
+  return <AccordionPrimitive.Root {...stylex.props(accordionStyles.root)} {...props} />
 }
 
 function AccordionItem({ ...props }: AccordionPrimitive.Item.Props) {
-  return <AccordionPrimitive.Item data-ui='accordion-item' {...props} />
+  return <AccordionPrimitive.Item {...stylex.props(accordionStyles.item)} {...props} />
 }
 
 function AccordionTrigger({ children, ...props }: AccordionPrimitive.Trigger.Props) {
   return (
-    <AccordionPrimitive.Header data-ui='accordion-header'>
-      <AccordionPrimitive.Trigger data-ui='accordion-trigger' {...props}>
+    <AccordionPrimitive.Header>
+      <AccordionPrimitive.Trigger
+        {...stylex.props(accordionStyles.trigger, stylex.defaultMarker())}
+        {...props}
+      >
         {children}
-        <Lucide.ChevronDown size={16} />
+        <Lucide.ChevronDown {...stylex.props(accordionStyles.chevron)} size={16} />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   )
 }
 
 function AccordionContent({ ...props }: AccordionPrimitive.Panel.Props) {
-  return <AccordionPrimitive.Panel data-ui='accordion-content' {...props} />
+  return <AccordionPrimitive.Panel {...stylex.props(accordionStyles.content)} {...props} />
 }
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }

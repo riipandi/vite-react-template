@@ -8,11 +8,11 @@ import {
   PaginationPrevious,
   PaginationNext,
   PaginationEllipsis
-} from '#/components/base/pagination'
+} from '#/components/extra/pagination'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/Pagination',
+  title: 'Extended/Pagination',
   component: Pagination,
   parameters: { layout: 'centered' },
   argTypes: {

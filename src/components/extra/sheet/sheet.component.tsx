@@ -1,8 +1,8 @@
 import './style.css'
 import { Dialog as SheetPrimitive } from '@base-ui/react/dialog'
 import * as Lucide from 'lucide-react'
-import { Button } from '../button'
-import { Separator } from '../separator'
+import { Button } from '../../base/button'
+import { Separator } from '../../base/separator'
 
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-ui='sheet' {...props} />

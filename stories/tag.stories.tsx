@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { fn } from 'storybook/test'
-import { Tag, TagDismiss } from '#/components/base/tag'
+import { Tag, TagDismiss } from '#/components/extra/tag'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/Tag',
+  title: 'Extended/Tag',
   component: Tag,
   parameters: { layout: 'centered' },
   argTypes: {

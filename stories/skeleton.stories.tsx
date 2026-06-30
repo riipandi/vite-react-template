@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import * as stylex from '@stylexjs/stylex'
-import { Skeleton } from '#/components/base/skeleton'
+import { Skeleton } from '#/components/extra/skeleton'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/Skeleton',
+  title: 'Extended/Skeleton',
   component: Skeleton,
   parameters: { layout: 'centered' },
   argTypes: {

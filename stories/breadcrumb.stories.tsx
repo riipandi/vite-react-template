@@ -8,10 +8,10 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
   BreadcrumbEllipsis
-} from '#/components/base/breadcrumb'
+} from '#/components/extra/breadcrumb'
 
 const meta = {
-  title: 'Component/Breadcrumb',
+  title: 'Extended/Breadcrumb',
   component: Breadcrumb,
   parameters: { layout: 'centered' },
   argTypes: {},

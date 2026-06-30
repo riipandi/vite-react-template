@@ -13,11 +13,11 @@ import {
   SheetDescription,
   SheetClose,
   SheetPanel
-} from '#/components/base/sheet'
+} from '#/components/extra/sheet'
 import { space } from '#/styles/tokens.stylex'
 
 const meta = {
-  title: 'Component/Sheet',
+  title: 'Extended/Sheet',
   component: Sheet,
   parameters: { layout: 'centered' },
   argTypes: {},

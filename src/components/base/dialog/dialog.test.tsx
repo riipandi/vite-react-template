@@ -1,3 +1,14 @@
-// import { describe, it, expect, vi } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+import { Dialog, DialogTrigger } from './dialog.component'
 
-export default {}
+describe('Dialog', () => {
+  it('renders trigger', () => {
+    render(
+      <Dialog>
+        <DialogTrigger>Open dialog</DialogTrigger>
+      </Dialog>
+    )
+    expect(screen.getByText('Open dialog')).toBeDefined()
+  })
+})

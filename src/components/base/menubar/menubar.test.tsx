@@ -1,3 +1,10 @@
-// import { describe, it, expect, vi } from 'vitest'
+import { render } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+import { Menubar } from './menubar.component'
 
-export default {}
+describe('Menubar', () => {
+  it('renders correctly', () => {
+    const { container } = render(<Menubar />)
+    expect(container.querySelector('[data-slot="menubar"]')).toBeDefined()
+  })
+})

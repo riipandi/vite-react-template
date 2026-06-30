@@ -1,3 +1,10 @@
-// import { describe, it, expect, vi } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+import { ScrollArea } from './scroll-area.component'
 
-export default {}
+describe('ScrollArea', () => {
+  it('renders content', () => {
+    render(<ScrollArea>Content</ScrollArea>)
+    expect(screen.getByText('Content')).toBeDefined()
+  })
+})

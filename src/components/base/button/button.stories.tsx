@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import * as React from 'react'
 import { fn } from 'storybook/test'
 import { color, fontSize, fontWeight } from '#/styles/tokens.stylex'
+import { Separator } from '../separator'
 import { Button } from './button.component'
-// import { Separator } from '#/components/base/separator'
-// import * as Lucide from 'lucide-react'
 
 const colors = ['primary', 'neutral', 'positive', 'warning', 'critical'] as const
 const variants = ['solid', 'faded', 'outline', 'ghost'] as const
@@ -173,79 +173,79 @@ export const DisabledShowcase: Story = {
   )
 }
 
-// export const IconShowcase: Story = {
-//   name: 'Icon Mode',
-//   parameters: { controls: { disable: true } },
-//   render: () => (
-//     <Grid>
-//       {sizes.map((s) => (
-//         <Row key={`solid-${s}`} className='min-w-40' label={`Solid / Faded ${s}`}>
-//           <>
-//             {colors.map((c) => (
-//               <Button key={c} color={c} size={s} asIcon variant='solid'>
-//                 <Lucide.Play size={16} strokeWidth={2} />
-//               </Button>
-//             ))}
-//             <Separator orientation='vertical' className='mx-2' />
-//             {colors.map((c) => (
-//               <Button key={c} color={c} size={s} asIcon variant='faded'>
-//                 <Lucide.Play size={16} strokeWidth={2} />
-//               </Button>
-//             ))}
-//           </>
-//         </Row>
-//       ))}
-//       {sizes.map((s) => (
-//         <Row key={`faded-${s}`} className='min-w-40' label={`Outline / Ghost ${s}`}>
-//           <>
-//             {colors.map((c) => (
-//               <Button key={c} color={c} size={s} asIcon variant='faded'>
-//                 <Lucide.Play size={16} strokeWidth={2} />
-//               </Button>
-//             ))}
-//             <Separator orientation='vertical' className='mx-2' />
-//             {colors.map((c) => (
-//               <Button key={c} color={c} size={s} asIcon variant='ghost'>
-//                 <Lucide.Play size={16} strokeWidth={2} />
-//               </Button>
-//             ))}
-//           </>
-//         </Row>
-//       ))}
-//     </Grid>
-//   )
-// }
+export const IconShowcase: Story = {
+  name: 'Icon Mode',
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <Grid>
+      {sizes.map((s) => (
+        <Row key={`solid-${s}`} className='min-w-40' label={`Solid / Faded ${s}`}>
+          <>
+            {colors.map((c) => (
+              <Button key={c} color={c} size={s} asIcon variant='solid'>
+                <Lucide.Play size={16} strokeWidth={2} />
+              </Button>
+            ))}
+            <Separator orientation='vertical' className='mx-2' />
+            {colors.map((c) => (
+              <Button key={c} color={c} size={s} asIcon variant='faded'>
+                <Lucide.Play size={16} strokeWidth={2} />
+              </Button>
+            ))}
+          </>
+        </Row>
+      ))}
+      {sizes.map((s) => (
+        <Row key={`faded-${s}`} className='min-w-40' label={`Outline / Ghost ${s}`}>
+          <>
+            {colors.map((c) => (
+              <Button key={c} color={c} size={s} asIcon variant='faded'>
+                <Lucide.Play size={16} strokeWidth={2} />
+              </Button>
+            ))}
+            <Separator orientation='vertical' className='mx-2' />
+            {colors.map((c) => (
+              <Button key={c} color={c} size={s} asIcon variant='ghost'>
+                <Lucide.Play size={16} strokeWidth={2} />
+              </Button>
+            ))}
+          </>
+        </Row>
+      ))}
+    </Grid>
+  )
+}
 
-// export const LinkShowcase: Story = {
-//   name: 'Link Mode',
-//   parameters: { controls: { disable: true } },
-//   render: () => (
-//     <Grid>
-//       {sizes.map((s) => (
-//         <Row key={s} label={s}>
-//           {colors.map((c) => (
-//             <Button
-//               key={c}
-//               variant='ghost'
-//               nativeButton={false}
-//               className='min-w-24 justify-start'
-//               color={c}
-//               size={s}
-//               render={
-//                 // oxlint-disable-next-line jsx-a11y/anchor-has-content jsx-a11y/control-has-associated-label
-//                 <a
-//                   href='https://base-ui.com/react/overview/quick-start'
-//                   rel='noopener noreferrer'
-//                   target='_blank'
-//                 />
-//               }
-//             >
-//               {c}
-//               <Lucide.ArrowUpRight size={14} strokeWidth={2} />
-//             </Button>
-//           ))}
-//         </Row>
-//       ))}
-//     </Grid>
-//   )
-// }
+export const LinkShowcase: Story = {
+  name: 'Link Mode',
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <Grid>
+      {sizes.map((s) => (
+        <Row key={s} label={s}>
+          {colors.map((c) => (
+            <Button
+              key={c}
+              variant='ghost'
+              nativeButton={false}
+              className='min-w-24 justify-start'
+              color={c}
+              size={s}
+              render={
+                // oxlint-disable-next-line jsx-a11y/anchor-has-content jsx-a11y/control-has-associated-label
+                <a
+                  href='https://base-ui.com/react/overview/quick-start'
+                  rel='noopener noreferrer'
+                  target='_blank'
+                />
+              }
+            >
+              {c}
+              <Lucide.ArrowUpRight size={14} strokeWidth={2} />
+            </Button>
+          ))}
+        </Row>
+      ))}
+    </Grid>
+  )
+}

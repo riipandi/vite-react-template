@@ -1,3 +1,14 @@
-// import { describe, it, expect, vi } from 'vitest'
+import { render } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+import { Meter, MeterLabel } from './meter.component'
 
-export default {}
+describe('Meter', () => {
+  it('renders label', () => {
+    const { container } = render(
+      <Meter value={50}>
+        <MeterLabel>Progress</MeterLabel>
+      </Meter>
+    )
+    expect(container.querySelector('[data-slot="meter"]')).toBeDefined()
+  })
+})

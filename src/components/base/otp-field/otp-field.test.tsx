@@ -1,3 +1,14 @@
-// import { describe, it, expect, vi } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+import { OTPField, OTPFieldInput } from './otp-field.component'
 
-export default {}
+describe('OTPField', () => {
+  it('renders inputs', () => {
+    render(
+      <OTPField>
+        <OTPFieldInput />
+      </OTPField>
+    )
+    expect(screen.getAllByRole('textbox').length).toBeGreaterThan(0)
+  })
+})

@@ -1,3 +1,10 @@
-// import { describe, it, expect, vi } from 'vitest'
+import { render } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+import { Switch } from './switch.component'
 
-export default {}
+describe('Switch', () => {
+  it('renders correctly', () => {
+    const { container } = render(<Switch />)
+    expect(container.querySelector('[data-slot="switch"]')).toBeDefined()
+  })
+})

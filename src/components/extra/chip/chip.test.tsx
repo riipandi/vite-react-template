@@ -1,3 +1,10 @@
-// import { describe, it, expect, vi } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+import { Chip } from './chip.component'
 
-export default {}
+describe('Chip', () => {
+  it('renders label', () => {
+    render(<Chip>React</Chip>)
+    expect(screen.getByText('React')).toBeDefined()
+  })
+})

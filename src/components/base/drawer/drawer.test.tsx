@@ -1,3 +1,14 @@
-// import { describe, it, expect, vi } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+import { Drawer, DrawerTrigger } from './drawer.component'
 
-export default {}
+describe('Drawer', () => {
+  it('renders trigger', () => {
+    render(
+      <Drawer>
+        <DrawerTrigger>Open drawer</DrawerTrigger>
+      </Drawer>
+    )
+    expect(screen.getByText('Open drawer')).toBeDefined()
+  })
+})

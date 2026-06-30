@@ -1,3 +1,8 @@
-// import { describe, it, expect, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
+import { toastManager } from './toast.component'
 
-export default {}
+describe('Toast', () => {
+  it('creates a toast manager', () => {
+    expect(toastManager).toBeDefined()
+  })
+})

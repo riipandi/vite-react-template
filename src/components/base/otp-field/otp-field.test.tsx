@@ -5,7 +5,7 @@ import { OTPField, OTPFieldInput } from './otp-field.component'
 describe('OTPField', () => {
   it('renders inputs', () => {
     render(
-      <OTPField>
+      <OTPField length={4}>
         <OTPFieldInput />
       </OTPField>
     )

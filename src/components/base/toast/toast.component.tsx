@@ -34,11 +34,7 @@
  * </Toast.Provider>
  */
 
-import './style.css'
 import { Toast } from '@base-ui/react/toast'
-// import type { StyleXStyles } from '@stylexjs/stylex'
-// import * as stylex from '@stylexjs/stylex'
-// import { cx } from 'css-variants'
 import * as Lucide from 'lucide-react'
 import { Spinner } from '../../extra/spinner'
 

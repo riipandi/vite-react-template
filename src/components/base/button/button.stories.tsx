@@ -46,8 +46,12 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const Row = ({ label, children }: React.PropsWithChildren<{ label: string }>) => (
-  <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
+const Row = ({
+  label,
+  children,
+  ...rest
+}: React.PropsWithChildren<{ label: string; className?: string }>) => (
+  <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])} {...rest}>
     <span
       {...stylex.props(
         x.color[color.fgNeutralFaded],

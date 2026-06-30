@@ -2,8 +2,8 @@ import ViteLogo from '/images/vite.svg'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Link, createFileRoute, redirect } from '@tanstack/react-router'
-import { Alert } from '#/components/ui/alert'
-import { Button } from '#/components/ui/button'
+import { Alert } from '#/components/base/alert'
+import { Button } from '#/components/base/button'
 import { useAuthentication } from '#/guards/auth-provider'
 import { isAuthenticated } from '#/guards/auth-store'
 import { ThemeSwitcher } from '#/routes/-theme'
@@ -145,18 +145,22 @@ function HomeComponent() {
         </div>
         <div {...stylex.props(homeStyles.actions)}>
           <Link to='/dashboard'>
-            <Button variant='primary'>User Dashboard</Button>
+            <Button variant='primary' mode='filled'>
+              User Dashboard
+            </Button>
           </Link>
           <a
             href='https://github.com/riipandi/vite-react-template'
             target='_blank'
             rel='noreferrer'
           >
-            <Button variant='secondary'>Get Source Code</Button>
+            <Button variant='neutral' mode='filled'>
+              Get Source Code
+            </Button>
           </a>
         </div>
         <div>
-          <Alert variant={loggedIn ? 'info' : 'warning'}>
+          <Alert variant='filled' status={loggedIn ? 'information' : 'warning'}>
             {loggedIn ? `Welcome back ${user?.email} 👋` : 'You are not logged in!'}
           </Alert>
         </div>

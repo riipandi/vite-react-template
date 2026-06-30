@@ -1,0 +1,16 @@
+@layer components {
+  [data-ui='card'] {
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-surface-variant);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-1);
+    transition: background-color var(--transition-expressive-fast-effects),
+      border-color var(--transition-expressive-fast-effects),
+      box-shadow var(--transition-expressive-fast-effects);
+
+    &[data-fluid='true'] {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+@layer components {
+  [data-ui='container'] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding: var(--spacing-24) var(--spacing-16);
+
+    @media (width >= 640px) {
+      padding: var(--spacing-32) var(--spacing-24);
+    }
+
+    @media (width >= 1024px) {
+      padding: var(--spacing-40) var(--spacing-32);
+    }
+
+    &[data-fluid='true'] {
+      margin-left: 0;
+      margin-right: 0;
+      max-width: none;
+
+      @media (width >= 640px) {
+        padding: var(--spacing-32) var(--spacing-24);
+      }
+
+      @media (width >= 1024px) {
+        padding: var(--spacing-40) var(--spacing-40);
+      }
+    }
+  }
+}

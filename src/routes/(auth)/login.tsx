@@ -3,12 +3,13 @@ import { useForm } from '@tanstack/react-form'
 import { createFileRoute, Link, useSearch } from '@tanstack/react-router'
 import { useState } from 'react'
 import { z } from 'zod'
+import { Alert } from '#/components/base/alert'
+import { Button } from '#/components/base/button'
+import { Card } from '#/components/base/card'
+import { Field, FieldLabel, FieldError } from '#/components/base/field'
+import { Input } from '#/components/base/input'
+import { Separator } from '#/components/base/separator'
 import { GitHubButton, GoogleButton } from '#/components/social-button'
-import { Alert } from '#/components/ui/alert'
-import { Button } from '#/components/ui/button'
-import { Card } from '#/components/ui/card'
-import { HorizontalDivider } from '#/components/ui/divider'
-import { TextField } from '#/components/ui/text-field'
 import { useAuthentication } from '#/guards/auth-provider'
 import { getErrorMessage } from '#/guards/auth-utils'
 import { loginSchema } from '#/schemas/auth.schema'
@@ -152,12 +153,14 @@ function RouteComponent() {
     <>
       {failed && (
         <div id='login-alert-error' {...stylex.props(loginStyles.alertSpacing)}>
-          <Alert variant='destructive'>{failed}</Alert>
+          <Alert variant='filled' status='error'>
+            {failed}
+          </Alert>
         </div>
       )}
       {loggedOut && !failed && (
         <div id='login-alert-goodbye' {...stylex.props(loginStyles.alertSpacing)}>
-          <Alert variant='success'>
+          <Alert variant='filled' status='success'>
             <span {...stylex.props(loginStyles.loggedOutMessage)}>Goodbye!</span> Your session has
             been terminated.
           </Alert>
@@ -183,7 +186,7 @@ function RouteComponent() {
             <GitHubButton />
           </div>
 
-          <HorizontalDivider label='or continue with' />
+          <Separator variant='content'>or continue with</Separator>
 
           <form
             id='login-form'
@@ -198,33 +201,41 @@ function RouteComponent() {
               <form.Field
                 name='username'
                 children={(field) => (
-                  <TextField
-                    label='Username'
-                    value={field.state.value}
-                    onChange={(value: string) => {
-                      clearAlerts()
-                      field.handleChange(value)
-                    }}
-                    onBlur={field.handleBlur}
-                    errorMessage={field.state.meta.errors?.[0]?.message}
-                  />
+                  <Field name='username' invalid={!!field.state.meta.errors?.[0]?.message}>
+                    <FieldLabel>Username</FieldLabel>
+                    <Input
+                      value={field.state.value}
+                      onValueChange={(value: string) => {
+                        clearAlerts()
+                        field.handleChange(value)
+                      }}
+                      onBlur={field.handleBlur}
+                    />
+                    {field.state.meta.errors?.[0]?.message && (
+                      <FieldError>{field.state.meta.errors?.[0]?.message}</FieldError>
+                    )}
+                  </Field>
                 )}
               />
 
               <form.Field
                 name='password'
                 children={(field) => (
-                  <TextField
-                    label='Password'
-                    type='password'
-                    value={field.state.value}
-                    onChange={(value: string) => {
-                      clearAlerts()
-                      field.handleChange(value)
-                    }}
-                    onBlur={field.handleBlur}
-                    errorMessage={field.state.meta.errors?.[0]?.message}
-                  />
+                  <Field name='password' invalid={!!field.state.meta.errors?.[0]?.message}>
+                    <FieldLabel>Password</FieldLabel>
+                    <Input
+                      type='password'
+                      value={field.state.value}
+                      onValueChange={(value: string) => {
+                        clearAlerts()
+                        field.handleChange(value)
+                      }}
+                      onBlur={field.handleBlur}
+                    />
+                    {field.state.meta.errors?.[0]?.message && (
+                      <FieldError>{field.state.meta.errors?.[0]?.message}</FieldError>
+                    )}
+                  </Field>
                 )}
               />
             </div>

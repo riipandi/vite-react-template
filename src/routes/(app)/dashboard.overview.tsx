@@ -2,9 +2,9 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
-import { Button } from '#/components/ui/button'
-import { Card } from '#/components/ui/card'
-import { Container } from '#/components/ui/container'
+import { Button } from '#/components/base/button'
+import { Card } from '#/components/base/card'
+import { Container } from '#/components/base/container'
 import { useAuthentication } from '#/guards/auth-provider'
 import { fontSize, fontWeight, radius, shadow, space, color } from '#/styles/tokens.stylex'
 
@@ -555,11 +555,11 @@ function DashboardOverviewComponent() {
         </div>
 
         <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
-          <Button variant='secondary'>
+          <Button variant='neutral' mode='filled'>
             <Lucide.Download size={15} />
             Export
           </Button>
-          <Button variant='primary'>
+          <Button variant='primary' mode='filled'>
             <Lucide.Plus size={15} />
             New Project
           </Button>
@@ -610,7 +610,9 @@ function DashboardOverviewComponent() {
           <div {...stylex.props(styles.activityCard)}>
             <div {...stylex.props(styles.activityHeader)}>
               <p {...stylex.props(styles.sectionTitle)}>Recent Activity</p>
-              <Button variant='secondary'>View all</Button>
+              <Button variant='neutral' mode='filled'>
+                View all
+              </Button>
             </div>
 
             <div {...stylex.props(styles.activityList)}>
@@ -662,12 +664,21 @@ function DashboardOverviewComponent() {
 
             <div {...stylex.props(styles.profileActions)}>
               <Link to='/' {...stylex.props(styles.profileActionLink)}>
-                <Button variant='secondary' style={styles.profileActionButton}>
+                <Button
+                  variant='neutral'
+                  mode='filled'
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
                   <Lucide.Home size={14} />
                   Back to Homepage
                 </Button>
               </Link>
-              <Button variant='destructive' onClick={logout} style={styles.profileActionButton}>
+              <Button
+                variant='error'
+                mode='filled'
+                onClick={logout}
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
                 <Lucide.LogOut size={14} />
                 Sign Out
               </Button>

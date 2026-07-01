@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { Button } from '#/components/base/button'
-import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from '#/components/base/collapsible'
 import { Text } from '#/components/extra/typography'
 import { fontSize, radius, color } from '#/styles/tokens.stylex'
+import { Button } from '../button'
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from './collapsible.component'
 
 const meta = {
   title: 'Base Components/Collapsible',

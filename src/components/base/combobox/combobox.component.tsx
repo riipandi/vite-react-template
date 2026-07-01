@@ -82,7 +82,10 @@ export function ComboboxValue({
   placeholder = 'Select an option',
   xstyle,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Value> & { placeholder?: string; xstyle?: StyleXStyles }) {
+}: React.ComponentProps<typeof BaseCombobox.Value> & {
+  placeholder?: string
+  xstyle?: StyleXStyles
+}) {
   return (
     <BaseCombobox.Value data-slot='combobox-value' {...stylex.props(xstyle)} {...props}>
       {(value: string | { value: string; label: string; icon?: React.ReactNode } | null) => (
@@ -114,7 +117,6 @@ function ComboboxRenderValue({
 
   return <span {...stylex.props(comboboxStyles.renderValueLabel)}>{value}</span>
 }
-
 
 export function ComboboxInput({
   placeholder,

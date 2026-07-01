@@ -15,7 +15,7 @@ import {
   ComboboxGroup,
   ComboboxGroupLabel,
   ComboboxCollection
-} from '#/components/base/combobox'
+} from './combobox.component'
 
 const meta = {
   title: 'Base Components/Combobox',

@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { Checkbox, CheckboxGroup, CheckboxGroupLabel } from '#/components/base/checkbox'
 import { Label } from '#/components/extra/label'
+import { Checkbox, CheckboxGroup, CheckboxGroupLabel } from './checkbox.component'
 
 const meta = {
   title: 'Base Components/Checkbox',

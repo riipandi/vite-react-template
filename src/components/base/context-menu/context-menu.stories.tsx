@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
+import { radius, color } from '#/styles/tokens.stylex'
+import { Hotkey } from '../../extra/hotkey'
 import {
   ContextMenu,
   ContextMenuPopup,
@@ -15,9 +17,7 @@ import {
   ContextMenuRadioItem,
   ContextMenuRadioGroup,
   ContextMenuGroupLabel
-} from '#/components/base/context-menu'
-import { Hotkey } from '#/components/extra/hotkey'
-import { radius, color } from '#/styles/tokens.stylex'
+} from './context-menu.component'
 
 const meta = {
   title: 'Base Components/ContextMenu',

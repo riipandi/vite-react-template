@@ -1,1 +1,369 @@
-export default {}
+import * as Icon from '@phosphor-icons/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
+import { Button } from '#/components/base/button'
+import { Separator } from '#/components/base/separator'
+import { IconBox } from '../icon-box'
+import { Stack } from '../stack'
+import {
+  Item,
+  ItemAction,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemMeta,
+  ItemTitle
+} from './item.component'
+
+const meta = {
+  title: 'Extra Components/Item',
+  component: Item,
+  parameters: { layout: 'centered' },
+  argTypes: {},
+  tags: [], // ['autodocs']
+  args: {},
+  decorators: [
+    (Story) => (
+      <div className='flex w-full min-w-md items-center justify-center'>
+        <Story />
+      </div>
+    )
+  ]
+} satisfies Meta<typeof Item>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Playground: Story = {
+  args: {},
+  render: () => (
+    <div className='flex w-full min-w-md flex-col gap-4'>
+      <Item>
+        <ItemMedia>
+          <img
+            src='https://api.dicebear.com/9.x/avataaars/svg?radius=50&seed=Harry+Potter'
+            alt='Avatar'
+            className='size-11 rounded'
+          />
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Harry Potter</ItemTitle>
+          <ItemDescription>The Boy Who Lived</ItemDescription>
+        </ItemContent>
+        <ItemAction>
+          <Button size='sm'>Add Friend</Button>
+        </ItemAction>
+      </Item>
+      <Item variant='ghost'>
+        <ItemMedia>
+          <IconBox>
+            <Icon.BookIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>The Da Vinci Code</ItemTitle>
+          <ItemDescription>Dan Brown's bestseller novel</ItemDescription>
+        </ItemContent>
+        <ItemAction>
+          <Button size='sm' variant='outline'>
+            Read
+          </Button>
+        </ItemAction>
+      </Item>
+    </div>
+  )
+}
+
+export const VariantShowcase: Story = {
+  args: {},
+  render: () => (
+    <div className='flex w-full flex-col gap-4'>
+      <Item>
+        <ItemMedia>
+          <IconBox>
+            <Icon.CodeBlockIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Regular</ItemTitle>
+          <ItemDescription>Just a simple item with an icon.</ItemDescription>
+        </ItemContent>
+      </Item>
+      <Item variant='primary'>
+        <ItemMedia>
+          <IconBox variant='primary'>
+            <Icon.GearIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Setting</ItemTitle>
+          <ItemDescription>You can change the settings of the app.</ItemDescription>
+        </ItemContent>
+      </Item>
+      <Item variant='info'>
+        <ItemMedia>
+          <IconBox variant='info'>
+            <Icon.InfoIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Information</ItemTitle>
+          <ItemDescription>This item is good.</ItemDescription>
+        </ItemContent>
+      </Item>
+      <Item variant='success'>
+        <ItemMedia>
+          <IconBox variant='success'>
+            <Icon.CheckCircleIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Success</ItemTitle>
+          <ItemDescription>This item is working as expected.</ItemDescription>
+        </ItemContent>
+      </Item>
+      <Item variant='warning'>
+        <ItemMedia>
+          <IconBox variant='warning'>
+            <Icon.WarningIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Warning</ItemTitle>
+          <ItemDescription>This item is not working as expected.</ItemDescription>
+        </ItemContent>
+      </Item>
+      <Item variant='danger'>
+        <ItemMedia>
+          <IconBox variant='danger'>
+            <Icon.TrashIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Danger</ItemTitle>
+          <ItemDescription>This item is dangerous.</ItemDescription>
+        </ItemContent>
+      </Item>
+    </div>
+  )
+}
+
+export const OutlineVariants: Story = {
+  args: {},
+  render: () => (
+    <div className='flex w-full flex-col gap-4'>
+      <Item variant='primary'>
+        <ItemMedia>
+          <IconBox>
+            <Icon.GearIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Regular</ItemTitle>
+          <ItemDescription>Just a simple item with an icon.</ItemDescription>
+        </ItemContent>
+      </Item>
+      <Item variant='primary-outline'>
+        <ItemMedia>
+          <IconBox variant='primary'>
+            <Icon.GearIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Setting</ItemTitle>
+          <ItemDescription>You can change the settings of the app.</ItemDescription>
+        </ItemContent>
+      </Item>
+      <Item variant='info-outline'>
+        <ItemMedia>
+          <IconBox variant='info'>
+            <Icon.InfoIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Information</ItemTitle>
+          <ItemDescription>This item is good.</ItemDescription>
+        </ItemContent>
+      </Item>
+      <Item variant='success-outline'>
+        <ItemMedia>
+          <IconBox variant='success'>
+            <Icon.CheckCircleIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Success</ItemTitle>
+          <ItemDescription>This item is working as expected.</ItemDescription>
+        </ItemContent>
+      </Item>
+      <Item variant='warning-outline'>
+        <ItemMedia>
+          <IconBox variant='warning'>
+            <Icon.WarningIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Warning</ItemTitle>
+          <ItemDescription>This item is not working as expected.</ItemDescription>
+        </ItemContent>
+      </Item>
+      <Item variant='danger-outline'>
+        <ItemMedia>
+          <IconBox variant='danger'>
+            <Icon.TrashIcon weight='bold' />
+          </IconBox>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Danger</ItemTitle>
+          <ItemDescription>This item is dangerous.</ItemDescription>
+        </ItemContent>
+      </Item>
+    </div>
+  )
+}
+
+export const WithItemMeta: Story = {
+  args: {},
+  render: () => (
+    <div className='flex w-full flex-col gap-4'>
+      <Item>
+        <ItemMedia>
+          <Avatar>
+            <AvatarImage
+              src='https://api.dicebear.com/9.x/avataaars/svg?radius=50&seed=Robert+Langdon'
+              alt='Avatar'
+            />
+            <AvatarFallback>RL</AvatarFallback>
+          </Avatar>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Robert Langdon</ItemTitle>
+          <ItemMeta className='mb-2.5'>5 minutes ago</ItemMeta>
+          <ItemDescription>The ancient symbol has been deciphered!</ItemDescription>
+          <div className='-mx-2 mt-2.5'>
+            <Button size='xs' variant='ghost' pill>
+              Reply
+            </Button>
+          </div>
+        </ItemContent>
+        <ItemAction>
+          <Button mode='icon' size='xs' variant='ghost' pill>
+            <Icon.HeartIcon weight='bold' />
+          </Button>
+        </ItemAction>
+      </Item>
+    </div>
+  )
+}
+
+export const ItemStack: Story = {
+  args: {},
+  render: () => (
+    <Stack className='w-full'>
+      <Item variant='ghost'>
+        <ItemMedia>
+          <Avatar>
+            <AvatarImage
+              src='https://api.dicebear.com/9.x/avataaars/svg?radius=50&seed=Harry+Potter'
+              alt='Avatar'
+            />
+            <AvatarFallback>HP</AvatarFallback>
+          </Avatar>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Harry Potter</ItemTitle>
+          <ItemDescription>harry@hogwarts.edu</ItemDescription>
+        </ItemContent>
+        <ItemAction>
+          <Button variant='outline' size='xs'>
+            Follow
+          </Button>
+        </ItemAction>
+      </Item>
+      <Separator />
+      <Item variant='ghost'>
+        <ItemMedia>
+          <Avatar>
+            <AvatarImage
+              src='https://api.dicebear.com/9.x/avataaars/svg?radius=50&seed=Robert+Langdon'
+              alt='Avatar'
+            />
+            <AvatarFallback>RL</AvatarFallback>
+          </Avatar>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Robert Langdon</ItemTitle>
+          <ItemDescription>langdon@example.edu</ItemDescription>
+        </ItemContent>
+        <ItemAction>
+          <Button variant='outline' size='xs'>
+            Follow
+          </Button>
+        </ItemAction>
+      </Item>
+      <Separator />
+      <Item variant='ghost'>
+        <ItemMedia>
+          <Avatar>
+            <AvatarImage
+              src='https://api.dicebear.com/9.x/avataaars/svg?radius=50&seed=Hermione+Granger'
+              alt='Avatar'
+            />
+            <AvatarFallback>HG</AvatarFallback>
+          </Avatar>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Hermione Granger</ItemTitle>
+          <ItemDescription>hermione@hogwarts.edu</ItemDescription>
+        </ItemContent>
+        <ItemAction>
+          <Button variant='outline' size='xs'>
+            Follow
+          </Button>
+        </ItemAction>
+      </Item>
+      <Separator />
+      <Item variant='ghost'>
+        <ItemMedia>
+          <Avatar>
+            <AvatarImage
+              src='https://api.dicebear.com/9.x/avataaars/svg?radius=50&seed=Sophie+Neveu'
+              alt='Avatar'
+            />
+            <AvatarFallback>SN</AvatarFallback>
+          </Avatar>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Sophie Neveu</ItemTitle>
+          <ItemDescription>sophie@dgpj.fr</ItemDescription>
+        </ItemContent>
+        <ItemAction>
+          <Button variant='outline' size='xs'>
+            Follow
+          </Button>
+        </ItemAction>
+      </Item>
+      <Separator />
+      <Item variant='ghost'>
+        <ItemMedia>
+          <Avatar>
+            <AvatarImage
+              src='https://api.dicebear.com/9.x/avataaars/svg?radius=50&seed=Ron+Weasley'
+              alt='Avatar'
+            />
+            <AvatarFallback>RW</AvatarFallback>
+          </Avatar>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Ron Weasley</ItemTitle>
+          <ItemDescription>ron@hogwarts.edu</ItemDescription>
+        </ItemContent>
+        <ItemAction>
+          <Button variant='outline' size='xs'>
+            Follow
+          </Button>
+        </ItemAction>
+      </Item>
+    </Stack>
+  )
+}

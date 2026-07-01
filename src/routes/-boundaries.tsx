@@ -36,6 +36,9 @@ const styles = stylex.create({
       marginTop: spaceVar[8]
     }
   },
+  errorDetail: {
+    fontSize: fontSizeVar.sm
+  },
   actionWrapper: {
     marginTop: spaceVar[8],
     display: 'flex',
@@ -162,7 +165,7 @@ export function GlobalError({ error, reset }: ErrorComponentProps) {
         <h1 {...stylex.props(styles.title)}>Oops!</h1>
         <div {...stylex.props(styles.message)}>
           <p {...stylex.props(x.lineHeight['2rem'])}>Something went wrong.</p>
-          <p {...stylex.props(x.lineHeight['2rem'], x.fontSize.sm)}>
+          <p {...stylex.props(x.lineHeight['2rem'], styles.errorDetail)}>
             {error?.message ?? 'An unexpected error occurred.'}
           </p>
         </div>

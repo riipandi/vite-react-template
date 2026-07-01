@@ -13,13 +13,7 @@ import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
 import { cx } from 'css-variants'
 import { buttonColors, buttonSizes, buttonStyles, buttonVariants } from './button.stylex'
-
-/**
- * Types derived from StyleX object.
- */
-export type ButtonVariant = keyof typeof buttonVariants
-export type ButtonColor = keyof typeof buttonColors
-export type ButtonSize = keyof typeof buttonSizes
+import type { ButtonVariant, ButtonColor, ButtonSize } from './button.stylex'
 
 export interface ButtonProps extends BaseButtonProps {
   color?: ButtonColor
@@ -39,25 +33,32 @@ export function Button({
   asIcon = false,
   pill = false,
   block = false,
+  disabled = false,
   className,
   xstyle,
   ...props
 }: ButtonProps) {
+  const sx = stylex.props(
+    buttonStyles.base,
+    buttonSizes[size],
+    buttonColors[color],
+    buttonVariants[variant],
+    asIcon && buttonStyles.asIcon,
+    pill && buttonStyles.pill,
+    block && buttonStyles.block,
+    disabled && buttonStyles.disabled,
+    xstyle
+  )
+
   return (
     <BaseButton
       data-slot='button'
+      disabled={disabled}
       focusableWhenDisabled
-      className={(state) => cx(typeof className === 'function' ? className(state) : className)}
-      {...stylex.props(
-        buttonStyles.base,
-        buttonSizes[size],
-        buttonColors[color],
-        buttonVariants[variant],
-        asIcon && buttonStyles.asIcon,
-        pill && buttonStyles.pill,
-        block && buttonStyles.block,
-        xstyle
-      )}
+      className={(state) =>
+        cx(sx.className, typeof className === 'function' ? className(state) : className)
+      }
+      {...sx}
       {...props}
     />
   )

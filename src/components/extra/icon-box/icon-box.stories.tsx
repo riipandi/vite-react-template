@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import { IconBox } from './icon-box.component'
 
@@ -11,7 +13,15 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.minWidth['448px'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -24,7 +34,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center gap-3'>
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
       <IconBox>
         <Lucide.Settings />
       </IconBox>
@@ -41,7 +51,7 @@ export const Playground: Story = {
 export const VariantShowcase: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center gap-3'>
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
       <IconBox>
         <Lucide.Play />
       </IconBox>
@@ -70,7 +80,7 @@ export const VariantShowcase: Story = {
 export const CircleVariants: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center gap-3'>
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
       <IconBox circle>
         <Lucide.Play />
       </IconBox>
@@ -99,7 +109,7 @@ export const CircleVariants: Story = {
 export const SizeShowcase: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center gap-3'>
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
       <IconBox size='sm'>
         <Lucide.Play />
       </IconBox>

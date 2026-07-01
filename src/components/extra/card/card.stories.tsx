@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
@@ -31,7 +33,15 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.minWidth['448px'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -44,7 +54,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <Card className='w-full min-w-sm xl:w-10/12 2xl:w-8/12'>
+    <Card {...stylex.props(x.width['100%'], x.minWidth['384px'])}>
       <CardHeader>
         <CardTitle>User Settings</CardTitle>
       </CardHeader>
@@ -63,7 +73,7 @@ export const Playground: Story = {
             <Input type='password' placeholder='Enter your password' />
           </Field>
         </Fieldset>
-        <Button color='primary' variant='solid' block className='mt-6'>
+        <Button color='primary' variant='solid' block {...stylex.props(x.marginTop['1.5rem'])}>
           Save Changes
         </Button>
       </CardBody>
@@ -74,7 +84,7 @@ export const Playground: Story = {
 export const WithDescription: Story = {
   args: {},
   render: () => (
-    <Card className='w-full'>
+    <Card {...stylex.props(x.width['100%'])}>
       <CardHeader>
         <CardTitle>Card Title</CardTitle>
         <CardDescription>
@@ -94,7 +104,7 @@ export const WithDescription: Story = {
 export const WithAction: Story = {
   args: {},
   render: () => (
-    <Card className='w-full'>
+    <Card {...stylex.props(x.width['100%'])}>
       <CardHeader>
         <CardTitle>User Profile</CardTitle>
         <CardDescription>Your personal information and settings.</CardDescription>
@@ -117,7 +127,7 @@ export const WithAction: Story = {
 export const WithItem: Story = {
   args: {},
   render: () => (
-    <Card className='w-full'>
+    <Card {...stylex.props(x.width['100%'])}>
       <CardHeader>
         <CardTitle>Wizarding Team</CardTitle>
         <CardDescription>Members can access this secret workspace.</CardDescription>
@@ -238,13 +248,13 @@ export const LoginForm: Story = {
   args: {},
   render: () => {
     return (
-      <Card className='w-full max-w-sm'>
+      <Card {...stylex.props(x.width['100%'], x.maxWidth['384px'])}>
         <CardHeader align='center'>
           <CardTitle>Sign in to your account</CardTitle>
           <CardDescription>Login with your Google or GitHub account</CardDescription>
         </CardHeader>
-        <CardBody className='flex flex-col gap-5'>
-          <div className='flex flex-col gap-3'>
+        <CardBody {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['1.25rem'])}>
+          <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.75rem'])}>
             <Button color='neutral' variant='outline' block>
               <svg
                 width='19'
@@ -305,7 +315,10 @@ export const LoginForm: Story = {
               Login with GitHub
             </Button>
           </div>
-          <Separator contentSide='center' className='my-2'>
+          <Separator
+            contentSide='center'
+            {...stylex.props(x.marginTop['0.5rem'], x.marginBottom['0.5rem'])}
+          >
             Or continue with email
           </Separator>
           <Field>
@@ -313,9 +326,9 @@ export const LoginForm: Story = {
             <Input id='email' type='email' placeholder='Enter your email' />
           </Field>
           <Field>
-            <div className='flex items-center'>
+            <div {...stylex.props(x.display.flex, x.alignItems.center)}>
               <FieldLabel htmlFor='password'>Password</FieldLabel>
-              <Link href='#' variant='muted' className='ml-auto'>
+              <Link href='#' variant='muted' {...stylex.props(x.marginLeft.auto)}>
                 Forgot password?
               </Link>
             </div>
@@ -330,7 +343,7 @@ export const LoginForm: Story = {
           <Button block color='primary' variant='solid'>
             Sign In
           </Button>
-          <Text className='text-center'>
+          <Text {...stylex.props(x.textAlign.center)}>
             Don't have an account?{' '}
             <Link href='#' variant='primary'>
               Sign up

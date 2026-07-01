@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Avatar, AvatarFallback, AvatarImage } from '../../base/avatar'
 import { Separator } from '../../base/separator'
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '../item'
@@ -13,7 +15,15 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.minWidth['448px'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -26,7 +36,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <Stack className='w-full min-w-md xl:w-6/12'>
+    <Stack {...stylex.props(x.width['100%'], x.minWidth['448px'])}>
       <Item variant='ghost'>
         <ItemMedia>
           <Avatar>
@@ -81,7 +91,15 @@ export const Playground: Story = {
 export const DirectionRow: Story = {
   args: {},
   render: () => (
-    <Stack direction='row' className='w-full min-w-md items-center justify-center xl:w-6/12'>
+    <Stack
+      direction='row'
+      {...stylex.props(
+        x.width['100%'],
+        x.minWidth['448px'],
+        x.alignItems.center,
+        x.justifyContent.center
+      )}
+    >
       <Item direction='column'>
         <ItemMedia>
           <Avatar>

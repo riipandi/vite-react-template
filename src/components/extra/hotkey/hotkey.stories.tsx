@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
+import { color, fontSize, radius } from '../../../styles/tokens.stylex'
 import { Hotkey, HotkeyGroup } from './hotkey.component'
 
 const meta = {
@@ -11,7 +14,15 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.minWidth['448px'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -29,7 +40,7 @@ export const Playground: Story = {
 export const VariantShowcase: Story = {
   args: {},
   render: () => (
-    <div className='flex items-center space-x-3'>
+    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
       <Hotkey>Alt + F4</Hotkey>
       <Hotkey variant='outline'>Ctrl + V</Hotkey>
       <Hotkey variant='ghost'>Ctrl + C</Hotkey>
@@ -82,7 +93,7 @@ export const Escape: Story = {
 export const WithIcon: Story = {
   render: () => (
     <Hotkey>
-      <Lucide.Command className='size-3' />K
+      <Lucide.Command {...stylex.props(x.width['0.75rem'], x.height['0.75rem'])} />K
     </Hotkey>
   )
 }
@@ -90,7 +101,7 @@ export const WithIcon: Story = {
 export const ArrowKey: Story = {
   render: () => (
     <Hotkey>
-      <Lucide.ArrowUp className='size-3' />
+      <Lucide.ArrowUp {...stylex.props(x.width['0.75rem'], x.height['0.75rem'])} />
     </Hotkey>
   )
 }
@@ -221,25 +232,25 @@ export const ArrowNavigation: Story = {
 // Showcase
 export const AllModifiers: Story = {
   render: () => (
-    <div className='flex flex-col gap-4'>
-      <div className='flex items-center gap-2'>
-        <span className='w-20 text-sm'>Command:</span>
+    <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['1rem'])}>
+      <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
+        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSize.sm])}>Command:</span>
         <Hotkey>⌘</Hotkey>
       </div>
-      <div className='flex items-center gap-2'>
-        <span className='w-20 text-sm'>Control:</span>
+      <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
+        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSize.sm])}>Control:</span>
         <Hotkey>Ctrl</Hotkey>
       </div>
-      <div className='flex items-center gap-2'>
-        <span className='w-20 text-sm'>Shift:</span>
+      <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
+        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSize.sm])}>Shift:</span>
         <Hotkey>⇧</Hotkey>
       </div>
-      <div className='flex items-center gap-2'>
-        <span className='w-20 text-sm'>Option:</span>
+      <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
+        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSize.sm])}>Option:</span>
         <Hotkey>⌥</Hotkey>
       </div>
-      <div className='flex items-center gap-2'>
-        <span className='w-20 text-sm'>Alt:</span>
+      <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
+        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSize.sm])}>Alt:</span>
         <Hotkey>Alt</Hotkey>
       </div>
     </div>
@@ -248,45 +259,87 @@ export const AllModifiers: Story = {
 
 export const CommonShortcuts: Story = {
   render: () => (
-    <div className='flex flex-col gap-3'>
-      <div className='flex items-center justify-between gap-8'>
-        <span className='text-sm'>Copy</span>
+    <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.75rem'])}>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.gap['2rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Copy</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>C</Hotkey>
         </HotkeyGroup>
       </div>
-      <div className='flex items-center justify-between gap-8'>
-        <span className='text-sm'>Paste</span>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.gap['2rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Paste</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>V</Hotkey>
         </HotkeyGroup>
       </div>
-      <div className='flex items-center justify-between gap-8'>
-        <span className='text-sm'>Save</span>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.gap['2rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Save</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>S</Hotkey>
         </HotkeyGroup>
       </div>
-      <div className='flex items-center justify-between gap-8'>
-        <span className='text-sm'>Undo</span>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.gap['2rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Undo</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>Z</Hotkey>
         </HotkeyGroup>
       </div>
-      <div className='flex items-center justify-between gap-8'>
-        <span className='text-sm'>Redo</span>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.gap['2rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Redo</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>⇧</Hotkey>
           <Hotkey>Z</Hotkey>
         </HotkeyGroup>
       </div>
-      <div className='flex items-center justify-between gap-8'>
-        <span className='text-sm'>Find</span>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.gap['2rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Find</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>F</Hotkey>
@@ -298,21 +351,42 @@ export const CommonShortcuts: Story = {
 
 export const NavigationKeys: Story = {
   render: () => (
-    <div className='flex flex-col gap-3'>
-      <div className='flex items-center justify-between gap-8'>
-        <span className='text-sm'>Move Up</span>
+    <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.75rem'])}>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.gap['2rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Move Up</span>
         <Hotkey>
           <Lucide.ArrowUp />
         </Hotkey>
       </div>
-      <div className='flex items-center justify-between gap-8'>
-        <span className='text-sm'>Move Down</span>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.gap['2rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Move Down</span>
         <Hotkey>
           <Lucide.ArrowDown />
         </Hotkey>
       </div>
-      <div className='flex items-center justify-between gap-8'>
-        <span className='text-sm'>Page Up</span>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.gap['2rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Page Up</span>
         <HotkeyGroup>
           <Hotkey>⇧</Hotkey>
           <Hotkey>
@@ -320,8 +394,15 @@ export const NavigationKeys: Story = {
           </Hotkey>
         </HotkeyGroup>
       </div>
-      <div className='flex items-center justify-between gap-8'>
-        <span className='text-sm'>Page Down</span>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.gap['2rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Page Down</span>
         <HotkeyGroup>
           <Hotkey>⇧</Hotkey>
           <Hotkey>
@@ -336,9 +417,26 @@ export const NavigationKeys: Story = {
 // Real World Examples
 export const SearchShortcut: Story = {
   render: () => (
-    <div className='bg-background-neutral border-border-neutral flex w-full max-w-sm items-center gap-2 rounded-lg border p-4'>
-      <Lucide.Search className='text-foreground-neutral-faded-foreground size-4' />
-      <span className='text-foreground-neutral-faded-foreground flex-1 text-sm'>Search...</span>
+    <div
+      {...stylex.props(
+        x.backgroundColor[color.bgNeutral],
+        x.borderColor[color.borderNeutral],
+        x.display.flex,
+        x.width['100%'],
+        x.maxWidth['384px'],
+        x.alignItems.center,
+        x.gap['0.5rem'],
+        x.borderRadius[radius.lg],
+        x.borderWidth['1px'],
+        x.padding['1rem']
+      )}
+    >
+      <Lucide.Search
+        {...stylex.props(x.color[color.fgNeutralFaded], x.width['1rem'], x.height['1rem'])}
+      />
+      <span {...stylex.props(x.color[color.fgNeutralFaded], x.flex['1'], x.fontSize[fontSize.sm])}>
+        Search...
+      </span>
       <HotkeyGroup>
         <Hotkey>⌘</Hotkey>
         <Hotkey>K</Hotkey>
@@ -349,31 +447,95 @@ export const SearchShortcut: Story = {
 
 export const MenuItems: Story = {
   render: () => (
-    <div className='bg-background-neutral border-border-neutral w-64 rounded-lg border p-2'>
-      <div className='hover:bg-background-neutral-faded flex cursor-pointer items-center justify-between rounded-md px-2 py-1.5'>
-        <span className='text-sm'>New File</span>
+    <div
+      {...stylex.props(
+        x.backgroundColor[color.bgNeutral],
+        x.borderColor[color.borderNeutral],
+        x.width['16rem'],
+        x.borderRadius[radius.lg],
+        x.borderWidth['1px'],
+        x.padding['0.5rem']
+      )}
+    >
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.cursor.pointer,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.borderRadius[radius.md],
+          x.paddingLeft['0.5rem'],
+          x.paddingRight['0.5rem'],
+          x.paddingTop['0.375rem'],
+          x.paddingBottom['0.375rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>New File</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>N</Hotkey>
         </HotkeyGroup>
       </div>
-      <div className='hover:bg-background-neutral-faded flex cursor-pointer items-center justify-between rounded-md px-2 py-1.5'>
-        <span className='text-sm'>Open File</span>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.cursor.pointer,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.borderRadius[radius.md],
+          x.paddingLeft['0.5rem'],
+          x.paddingRight['0.5rem'],
+          x.paddingTop['0.375rem'],
+          x.paddingBottom['0.375rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Open File</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>O</Hotkey>
         </HotkeyGroup>
       </div>
-      <div className='hover:bg-background-neutral-faded flex cursor-pointer items-center justify-between rounded-md px-2 py-1.5'>
-        <span className='text-sm'>Save</span>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.cursor.pointer,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.borderRadius[radius.md],
+          x.paddingLeft['0.5rem'],
+          x.paddingRight['0.5rem'],
+          x.paddingTop['0.375rem'],
+          x.paddingBottom['0.375rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Save</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>S</Hotkey>
         </HotkeyGroup>
       </div>
-      <div className='bg-border my-1.5 h-px' />
-      <div className='hover:bg-background-neutral-faded flex cursor-pointer items-center justify-between rounded-md px-2 py-1.5'>
-        <span className='text-sm'>Close Window</span>
+      <div
+        {...stylex.props(
+          x.backgroundColor[color.borderNeutral],
+          x.marginTop['0.375rem'],
+          x.marginBottom['0.375rem'],
+          x.height['1px']
+        )}
+      />
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.cursor.pointer,
+          x.alignItems.center,
+          x.justifyContent.spaceBetween,
+          x.borderRadius[radius.md],
+          x.paddingLeft['0.5rem'],
+          x.paddingRight['0.5rem'],
+          x.paddingTop['0.375rem'],
+          x.paddingBottom['0.375rem']
+        )}
+      >
+        <span {...stylex.props(x.fontSize[fontSize.sm])}>Close Window</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>W</Hotkey>

@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Blockquote, BlockquoteAuthor } from '../blockquote'
 import { Link, LinkIcon } from '../link'
 import { Code, Heading, Lead, Strong, Text } from './typography.component'
@@ -12,7 +14,15 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.minWidth['448px'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -25,7 +35,7 @@ type Story = StoryObj<typeof meta>
 export const PageHeading: Story = {
   args: {},
   render: () => (
-    <div className='flex flex-col gap-4'>
+    <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['1rem'])}>
       <Heading level={1} size='xl'>
         The Da Vinci Code
       </Heading>
@@ -48,7 +58,14 @@ export const PageHeading: Story = {
 export const Paragraph: Story = {
   args: {},
   render: () => (
-    <div className='flex max-w-xl flex-col gap-2'>
+    <div
+      {...stylex.props(
+        x.display.flex,
+        x.maxWidth['576px'],
+        x.flexDirection.column,
+        x.gap['0.5rem']
+      )}
+    >
       <Text>
         Professor Robert Langdon awakens in a hospital bed in Florence, Italy, with no recollection
         of how he got there.
@@ -77,7 +94,9 @@ export const Paragraph: Story = {
 export const LeadParagraph: Story = {
   args: {},
   render: () => (
-    <div className='flex max-w-xl flex-col gap-4'>
+    <div
+      {...stylex.props(x.display.flex, x.maxWidth['576px'], x.flexDirection.column, x.gap['1rem'])}
+    >
       <Lead>
         A Harvard professor must decipher codes hidden in works of art to stop an ancient secret
         society from destroying the Vatican.
@@ -94,7 +113,14 @@ export const LeadParagraph: Story = {
 export const ExampleArticle: Story = {
   args: {},
   render: () => (
-    <div className='flex max-w-5xl flex-col gap-6'>
+    <div
+      {...stylex.props(
+        x.display.flex,
+        x.maxWidth['64rem'],
+        x.flexDirection.column,
+        x.gap['1.5rem']
+      )}
+    >
       <Heading level={1} size='xl'>
         Literary Giants: Dan Brown & J.K. Rowling
       </Heading>

@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
+import { radius } from '../../../styles/tokens.stylex'
 import { Avatar, AvatarFallback, AvatarImage } from '../../base/avatar'
 import { Button } from '../../base/button'
 import { Separator } from '../../base/separator'
@@ -24,7 +27,15 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.minWidth['448px'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -37,13 +48,21 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='flex w-full min-w-md flex-col gap-4'>
+    <div
+      {...stylex.props(
+        x.display.flex,
+        x.width['100%'],
+        x.minWidth['448px'],
+        x.flexDirection.column,
+        x.gap['1rem']
+      )}
+    >
       <Item>
         <ItemMedia>
           <img
             src='https://api.dicebear.com/9.x/avataaars/svg?radius=50&seed=Harry+Potter'
             alt='Avatar'
-            className='size-11 rounded'
+            {...stylex.props(x.width['2.75rem'], x.height['2.75rem'], x.borderRadius[radius.md])}
           />
         </ItemMedia>
         <ItemContent>
@@ -77,7 +96,7 @@ export const Playground: Story = {
 export const VariantShowcase: Story = {
   args: {},
   render: () => (
-    <div className='flex w-full flex-col gap-4'>
+    <div {...stylex.props(x.display.flex, x.width['100%'], x.flexDirection.column, x.gap['1rem'])}>
       <Item>
         <ItemMedia>
           <IconBox>
@@ -151,7 +170,7 @@ export const VariantShowcase: Story = {
 export const OutlineVariants: Story = {
   args: {},
   render: () => (
-    <div className='flex w-full flex-col gap-4'>
+    <div {...stylex.props(x.display.flex, x.width['100%'], x.flexDirection.column, x.gap['1rem'])}>
       <Item variant='primary'>
         <ItemMedia>
           <IconBox>
@@ -225,7 +244,7 @@ export const OutlineVariants: Story = {
 export const WithItemMeta: Story = {
   args: {},
   render: () => (
-    <div className='flex w-full flex-col gap-4'>
+    <div {...stylex.props(x.display.flex, x.width['100%'], x.flexDirection.column, x.gap['1rem'])}>
       <Item>
         <ItemMedia>
           <Avatar>
@@ -238,9 +257,15 @@ export const WithItemMeta: Story = {
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Robert Langdon</ItemTitle>
-          <ItemMeta className='mb-2.5'>5 minutes ago</ItemMeta>
+          <ItemMeta {...stylex.props(x.marginBottom['0.625rem'])}>5 minutes ago</ItemMeta>
           <ItemDescription>The ancient symbol has been deciphered!</ItemDescription>
-          <div className='-mx-2 mt-2.5'>
+          <div
+            {...stylex.props(
+              x.marginLeft['-0.5rem'],
+              x.marginRight['-0.5rem'],
+              x.marginTop['0.625rem']
+            )}
+          >
             <Button size='xs' variant='ghost' pill>
               Reply
             </Button>
@@ -259,7 +284,7 @@ export const WithItemMeta: Story = {
 export const ItemStack: Story = {
   args: {},
   render: () => (
-    <Stack className='w-full'>
+    <Stack {...stylex.props(x.width['100%'])}>
       <Item variant='ghost'>
         <ItemMedia>
           <Avatar>

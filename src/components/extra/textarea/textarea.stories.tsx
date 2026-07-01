@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import x from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { Textarea } from './textarea.component'
 
 const meta = {
@@ -10,7 +12,15 @@ const meta = {
   args: {},
   decorators: [
     (Story) => (
-      <div className='flex w-full min-w-md items-center justify-center'>
+      <div
+        {...stylex.props(
+          x.display.flex,
+          x.width['100%'],
+          x.minWidth['448px'],
+          x.alignItems.center,
+          x.justifyContent.center
+        )}
+      >
         <Story />
       </div>
     )
@@ -23,7 +33,9 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {},
   render: () => (
-    <div className='flex w-full flex-col gap-6'>
+    <div
+      {...stylex.props(x.display.flex, x.width['100%'], x.flexDirection.column, x.gap['1.5rem'])}
+    >
       <Textarea variant='default' placeholder='Textarea variant default' />
       <Textarea variant='subtle' placeholder='Textarea variant subtle' />
     </div>

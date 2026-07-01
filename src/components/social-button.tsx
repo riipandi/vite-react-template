@@ -1,6 +1,13 @@
 import * as stylex from '@stylexjs/stylex'
 import type { FC, ReactNode } from 'react'
-import { fontSize, fontWeight, radius, shadow, space, color } from '#/styles/tokens.stylex'
+import {
+  fontSizeVar,
+  fontWeightVar,
+  radiusVar,
+  shadowVar,
+  spaceVar,
+  colorVar
+} from '#/styles/tokens.stylex'
 
 interface SocialButtonProps {
   icon: ReactNode
@@ -14,31 +21,31 @@ const socialStyles = stylex.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: space[3],
-    borderRadius: radius.lg,
+    gap: spaceVar[3],
+    borderRadius: radiusVar.lg,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: color.borderNeutral,
-    backgroundColor: color.bgPage,
-    paddingLeft: space[4],
-    paddingRight: space[4],
+    borderColor: colorVar.borderNeutral,
+    backgroundColor: colorVar.bgPage,
+    paddingLeft: spaceVar[4],
+    paddingRight: spaceVar[4],
     paddingTop: '0.625rem',
     paddingBottom: '0.625rem',
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
-    color: color.fgNeutral,
-    boxShadow: shadow.sm,
+    fontSize: fontSizeVar.sm,
+    fontWeight: fontWeightVar.medium,
+    color: colorVar.fgNeutral,
+    boxShadow: shadowVar.sm,
     transitionProperty: 'background-color, border-color, box-shadow, color',
     transitionDuration: '150ms',
     cursor: 'pointer',
     ':hover': {
-      backgroundColor: color.bgNeutralFaded,
-      borderColor: color.borderNeutralFaded
+      backgroundColor: colorVar.bgNeutralFaded,
+      borderColor: colorVar.borderNeutralFaded
     },
     ':focus-visible': {
       outlineWidth: 2,
       outlineStyle: 'solid',
-      outlineColor: color.fgPrimary,
+      outlineColor: colorVar.fgPrimary,
       outlineOffset: 2
     }
   }

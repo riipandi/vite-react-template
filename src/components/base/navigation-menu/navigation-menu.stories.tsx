@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
+import { colorVar } from '#/styles/tokens.stylex'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,7 +11,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger
 } from '.'
-import { color } from '../../../styles/tokens.stylex'
 import { Heading, Text } from '../../extra/typography'
 
 const meta = {
@@ -224,7 +224,7 @@ function ListItem({ title, children, href, size = 'default' }: ListItemProps) {
               {title}
             </Heading>
             <Text
-              {...stylex.props(x.color[color.fgNeutralFaded], x.opacity['0.8'])}
+              {...stylex.props(x.color[colorVar.fgNeutralFaded], x.opacity['0.8'])}
               {...stylex.props(x.lineHeight.normal)}
             >
               {children}

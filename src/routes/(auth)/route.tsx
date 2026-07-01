@@ -3,7 +3,7 @@ import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import { isAuthenticated } from '#/guards/auth-store'
 import { ThemeSwitcher } from '#/routes/-theme'
-import { space } from '#/styles/tokens.stylex'
+import { spaceVar } from '#/styles/tokens.stylex'
 
 export const Route = createFileRoute('/(auth)')({
   beforeLoad: () => {
@@ -21,11 +21,11 @@ const styles = stylex.create({
   },
   header: {
     position: 'absolute',
-    top: space[4],
-    right: space[4],
+    top: spaceVar[4],
+    right: spaceVar[4],
     display: 'flex',
     alignItems: 'center',
-    gap: space[2]
+    gap: spaceVar[2]
   }
 })
 

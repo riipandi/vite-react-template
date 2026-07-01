@@ -6,7 +6,7 @@ import { Button } from '#/components/base/button'
 import { useAuthentication } from '#/guards/auth-provider'
 import { isAuthenticated } from '#/guards/auth-store'
 import { ThemeSwitcher } from '#/routes/-theme'
-import { fontSize, space, color } from '#/styles/tokens.stylex'
+import { fontSizeVar, spaceVar, colorVar } from '#/styles/tokens.stylex'
 
 export const Route = createFileRoute('/(app)/')({
   beforeLoad: () => {
@@ -23,41 +23,41 @@ const homeStyles = stylex.create({
     display: 'flex',
     width: '100%',
     justifyContent: 'flex-end',
-    padding: space[4]
+    padding: spaceVar[4]
   },
   content: {
     marginLeft: 'auto',
     marginRight: 'auto',
     display: 'flex',
     flexDirection: 'column',
-    gap: space[8],
+    gap: spaceVar[8],
     paddingLeft: {
-      default: space[4],
-      '@media (min-width: 640px)': space[6],
-      '@media (min-width: 1024px)': space[8]
+      default: spaceVar[4],
+      '@media (min-width: 640px)': spaceVar[6],
+      '@media (min-width: 1024px)': spaceVar[8]
     },
     paddingRight: {
-      default: space[4],
-      '@media (min-width: 640px)': space[6],
-      '@media (min-width: 1024px)': space[8]
+      default: spaceVar[4],
+      '@media (min-width: 640px)': spaceVar[6],
+      '@media (min-width: 1024px)': spaceVar[8]
     },
     paddingTop: '2.5rem',
     paddingBottom: '2.5rem'
   },
   tagline: {
     textAlign: 'center',
-    fontSize: fontSize.lg,
-    color: color.fgNeutralFaded,
+    fontSize: fontSizeVar.lg,
+    color: colorVar.fgNeutralFaded,
     maxWidth: '36rem',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: {
       default: 0,
-      '@media (min-width: 640px)': space[8]
+      '@media (min-width: 640px)': spaceVar[8]
     }
   },
   actions: {
-    marginTop: space[4],
+    marginTop: spaceVar[4],
     display: 'flex',
     flexDirection: {
       default: 'column',
@@ -66,14 +66,14 @@ const homeStyles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: {
-      default: space[2],
-      '@media (min-width: 640px)': space[3]
+      default: spaceVar[2],
+      '@media (min-width: 640px)': spaceVar[3]
     }
   },
   footer: {
     marginTop: 'auto',
-    paddingTop: space[5],
-    paddingBottom: space[5],
+    paddingTop: spaceVar[5],
+    paddingBottom: spaceVar[5],
     textAlign: 'center'
   },
   footerInner: {
@@ -81,41 +81,41 @@ const homeStyles = stylex.create({
     marginRight: 'auto',
     maxWidth: '80rem',
     paddingLeft: {
-      default: space[4],
-      '@media (min-width: 640px)': space[6],
-      '@media (min-width: 1024px)': space[8]
+      default: spaceVar[4],
+      '@media (min-width: 640px)': spaceVar[6],
+      '@media (min-width: 1024px)': spaceVar[8]
     },
     paddingRight: {
-      default: space[4],
-      '@media (min-width: 640px)': space[6],
-      '@media (min-width: 1024px)': space[8]
+      default: spaceVar[4],
+      '@media (min-width: 640px)': spaceVar[6],
+      '@media (min-width: 1024px)': spaceVar[8]
     }
   },
   footerText: {
-    fontSize: fontSize.sm,
+    fontSize: fontSizeVar.sm,
     letterSpacing: '0.025em',
-    color: color.fgNeutralFaded
+    color: colorVar.fgNeutralFaded
   },
   footerSubText: {
-    marginTop: space[2],
-    fontSize: fontSize.sm,
+    marginTop: spaceVar[2],
+    fontSize: fontSizeVar.sm,
     letterSpacing: '0.025em',
-    color: color.fgNeutralFaded
+    color: colorVar.fgNeutralFaded
   },
   alert: {
-    fontSize: fontSize.sm,
-    padding: space[3],
+    fontSize: fontSizeVar.sm,
+    padding: spaceVar[3],
     borderRadius: '0.55rem',
     width: '100%',
     boxSizing: 'border-box'
   },
   alertLogin: {
-    backgroundColor: color.bgPrimaryFaded,
-    color: color.fgPrimary
+    backgroundColor: colorVar.bgPrimaryFaded,
+    color: colorVar.fgPrimary
   },
   alertLogout: {
-    backgroundColor: color.bgWarningFaded,
-    color: color.fgWarning
+    backgroundColor: colorVar.bgWarningFaded,
+    color: colorVar.fgWarning
   }
 })
 

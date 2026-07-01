@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { color } from '../../../styles/tokens.stylex'
+import { colorVar } from '#/styles/tokens.stylex'
 import { Avatar, AvatarFallback, AvatarImage, AvatarIndicator } from './avatar.component'
 
 const meta = {
@@ -93,7 +93,7 @@ export const Indicator: Story = {
         <AvatarIndicator
           position='bottom'
           {...stylex.props(
-            x.outlineColor[color.bgPage],
+            x.outlineColor[colorVar.bgPage],
             x.backgroundColor['#22c55e'],
             x.outlineStyle.solid
           )}

@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
+import { fontSizeVar, fontWeightVar, colorVar } from '#/styles/tokens.stylex'
 import { OTPField, OTPFieldInput, OTPFieldSeparator } from '.'
-import { fontSize, fontWeight, color } from '../../../styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/OTPField',
@@ -146,13 +146,13 @@ export const Controlled: Story = {
     return (
       <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['1rem'])}>
         <p
-          {...stylex.props(x.color[color.fgNeutralFaded])}
-          {...stylex.props(x.fontSize[fontSize.sm])}
+          {...stylex.props(x.color[colorVar.fgNeutralFaded])}
+          {...stylex.props(x.fontSize[fontSizeVar.sm])}
         >
           Value:{' '}
           <span
-            {...stylex.props(x.color[color.fgNeutral])}
-            {...stylex.props(x.fontWeight[fontWeight.medium])}
+            {...stylex.props(x.color[colorVar.fgNeutral])}
+            {...stylex.props(x.fontWeight[fontWeightVar.medium])}
           >
             {value || '(empty)'}
           </span>

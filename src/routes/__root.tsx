@@ -5,7 +5,7 @@ import { Outlet, createRootRouteWithContext, useMatches } from '@tanstack/react-
 import { Fragment, useEffect } from 'react'
 import { AuthProvider } from '#/guards/auth-provider'
 import { ThemeProvider } from '#/routes/-theme'
-import { color } from '#/styles/tokens.stylex'
+import { colorVar } from '#/styles/tokens.stylex'
 import { GlobalNotFound, GlobalError } from './-boundaries'
 import DevTools from './-devtools'
 
@@ -26,8 +26,8 @@ export const Route = createRootRouteWithContext<GlobalContext>()({
 
 const styles = stylex.create({
   base: {
-    backgroundColor: color.bgPage,
-    color: color.fgNeutral,
+    backgroundColor: colorVar.bgPage,
+    color: colorVar.fgNeutral,
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',

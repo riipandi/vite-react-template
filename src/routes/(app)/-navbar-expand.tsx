@@ -2,7 +2,14 @@ import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { ThemeSwitcher } from '#/routes/-theme'
-import { fontSize, fontWeight, radius, shadow, space, color } from '#/styles/tokens.stylex'
+import {
+  fontSizeVar,
+  fontWeightVar,
+  radiusVar,
+  shadowVar,
+  spaceVar,
+  colorVar
+} from '#/styles/tokens.stylex'
 
 // ── Nav data ──────────────────────────────────────────────────────────────────
 
@@ -30,9 +37,9 @@ const sidebarStyles = stylex.create({
     overflow: 'hidden',
     borderRightWidth: 1,
     borderRightStyle: 'solid',
-    borderRightColor: color.borderNeutral,
-    backgroundColor: color.bgPage,
-    boxShadow: shadow.sm,
+    borderRightColor: colorVar.borderNeutral,
+    backgroundColor: colorVar.bgPage,
+    boxShadow: shadowVar.sm,
     transitionProperty: 'background-color, box-shadow, border-color',
     transitionDuration: '200ms',
     flexShrink: 0
@@ -40,70 +47,70 @@ const sidebarStyles = stylex.create({
 
   // Logo area
   logoSection: {
-    paddingLeft: space[4],
-    paddingRight: space[4],
-    paddingTop: space[4],
-    paddingBottom: space[4],
+    paddingLeft: spaceVar[4],
+    paddingRight: spaceVar[4],
+    paddingTop: spaceVar[4],
+    paddingBottom: spaceVar[4],
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: color.bgNeutralFaded
+    borderBottomColor: colorVar.bgNeutralFaded
   },
   logoLink: {
     display: 'inline-flex',
     alignItems: 'center',
-    gap: space[2],
+    gap: spaceVar[2],
     textDecoration: 'none',
-    borderRadius: radius.md,
-    paddingTop: space[1],
-    paddingBottom: space[1]
+    borderRadius: radiusVar.md,
+    paddingTop: spaceVar[1],
+    paddingBottom: spaceVar[1]
   },
   logoIconWrap: {
     width: '2rem',
     height: '2rem',
-    borderRadius: radius.lg,
+    borderRadius: radiusVar.lg,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: `linear-gradient(135deg, ${color.bgPrimary}, ${color.bgPrimary})`,
+    background: `linear-gradient(135deg, ${colorVar.bgPrimary}, ${colorVar.bgPrimary})`,
     flexShrink: 0
   },
   logoSvg: {
     height: '1.125rem',
     width: '1.125rem',
-    fill: color.onPrimary,
-    color: color.onPrimary
+    fill: colorVar.onPrimary,
+    color: colorVar.onPrimary
   },
   logoText: {
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.bold,
-    color: color.fgNeutral,
+    fontSize: fontSizeVar.sm,
+    fontWeight: fontWeightVar.bold,
+    color: colorVar.fgNeutral,
     letterSpacing: '-0.01em'
   },
   logoVersion: {
-    fontSize: fontSize.xs,
-    color: color.fgNeutralFaded,
+    fontSize: fontSizeVar.xs,
+    color: colorVar.fgNeutralFaded,
     letterSpacing: '0'
   },
 
   // Nav sections
   navContent: {
     flex: 1,
-    paddingTop: space[3],
-    paddingBottom: space[3],
-    paddingLeft: space[3],
-    paddingRight: space[3],
+    paddingTop: spaceVar[3],
+    paddingBottom: spaceVar[3],
+    paddingLeft: spaceVar[3],
+    paddingRight: spaceVar[3],
     display: 'flex',
     flexDirection: 'column',
-    gap: space[1],
+    gap: spaceVar[1],
     overflowY: 'auto'
   },
   sectionLabel: {
-    paddingLeft: space[3],
-    paddingTop: space[3],
-    paddingBottom: space[1],
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.semibold,
-    color: color.fgNeutralFaded,
+    paddingLeft: spaceVar[3],
+    paddingTop: spaceVar[3],
+    paddingBottom: spaceVar[1],
+    fontSize: fontSizeVar.xs,
+    fontWeight: fontWeightVar.semibold,
+    color: colorVar.fgNeutralFaded,
     letterSpacing: '0.07em',
     textTransform: 'uppercase',
     userSelect: 'none'
@@ -115,33 +122,33 @@ const sidebarStyles = stylex.create({
     height: '2.5rem',
     width: '100%',
     alignItems: 'center',
-    gap: space[3],
-    borderRadius: radius.lg,
-    paddingLeft: space[3],
-    paddingRight: space[3],
+    gap: spaceVar[3],
+    borderRadius: radiusVar.lg,
+    paddingLeft: spaceVar[3],
+    paddingRight: spaceVar[3],
     textDecoration: 'none',
     color: {
-      default: color.fgNeutralFaded,
-      ':hover': color.fgNeutral
+      default: colorVar.fgNeutralFaded,
+      ':hover': colorVar.fgNeutral
     },
     position: 'relative',
     transitionProperty: 'background-color, color',
     transitionDuration: '150ms',
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
+    fontSize: fontSizeVar.sm,
+    fontWeight: fontWeightVar.medium,
     backgroundColor: {
       default: 'transparent',
-      ':hover': color.bgNeutralFaded
+      ':hover': colorVar.bgNeutralFaded
     }
   },
   navItemActive: {
     backgroundColor: {
-      default: color.bgPrimaryFaded,
-      ':hover': color.bgPrimaryFaded
+      default: colorVar.bgPrimaryFaded,
+      ':hover': colorVar.bgPrimaryFaded
     },
     color: {
-      default: color.fgPrimary,
-      ':hover': color.fgPrimary
+      default: colorVar.fgPrimary,
+      ':hover': colorVar.fgPrimary
     }
   },
   activeAccent: {
@@ -151,7 +158,7 @@ const sidebarStyles = stylex.create({
     bottom: '0.375rem',
     width: '3px',
     borderRadius: '9999px',
-    backgroundColor: color.bgPrimary
+    backgroundColor: colorVar.bgPrimary
   },
   navIcon: {
     height: '1rem',
@@ -161,26 +168,26 @@ const sidebarStyles = stylex.create({
   },
   navLabel: {
     flex: 1,
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium
+    fontSize: fontSizeVar.sm,
+    fontWeight: fontWeightVar.medium
   },
   badge: {
     width: '0.5rem',
     height: '0.5rem',
     borderRadius: '9999px',
-    backgroundColor: color.bgCritical,
+    backgroundColor: colorVar.bgCritical,
     flexShrink: 0
   },
 
   // Bottom area: account link + theme switcher
   bottomSection: {
-    paddingLeft: space[3],
-    paddingRight: space[3],
-    paddingTop: space[2],
-    paddingBottom: space[2],
+    paddingLeft: spaceVar[3],
+    paddingRight: spaceVar[3],
+    paddingTop: spaceVar[2],
+    paddingBottom: spaceVar[2],
     borderTopWidth: 1,
     borderTopStyle: 'solid',
-    borderTopColor: color.borderNeutral
+    borderTopColor: colorVar.borderNeutral
   },
   bottomRow: {
     display: 'flex',
@@ -188,7 +195,7 @@ const sidebarStyles = stylex.create({
     justifyContent: 'space-between'
   },
   accountLink: {
-    gap: space[2],
+    gap: spaceVar[2],
     borderWidth: 0,
     cursor: 'pointer',
     fontFamily: 'inherit'

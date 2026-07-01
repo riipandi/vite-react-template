@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { fontSizeVar, fontWeightVar, colorVar } from '#/styles/tokens.stylex'
 import { Slider, SliderThumb, SliderTrack } from '.'
 import { SliderControl, SliderIndicator } from '.'
-import { fontSize, fontWeight, color } from '../../../styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Slider',
@@ -41,11 +41,11 @@ const sizes = ['sm', 'md', 'lg'] as const
 const Row = ({ label, children }: React.PropsWithChildren<{ label: string }>) => (
   <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['1rem'])}>
     <span
-      {...stylex.props(x.color[color.fgNeutralFaded])}
+      {...stylex.props(x.color[colorVar.fgNeutralFaded])}
       {...stylex.props(
         x.width['3rem'],
-        x.fontSize[fontSize.xs],
-        x.fontWeight[fontWeight.semibold],
+        x.fontSize[fontSizeVar.xs],
+        x.fontWeight[fontWeightVar.semibold],
         x.textTransform.uppercase
       )}
     >

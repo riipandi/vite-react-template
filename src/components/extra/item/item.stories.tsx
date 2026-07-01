@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { radius } from '../../../styles/tokens.stylex'
+import { radiusVar } from '#/styles/tokens.stylex'
 import { Avatar, AvatarFallback, AvatarImage } from '../../base/avatar'
 import { Button } from '../../base/button'
 import { Separator } from '../../base/separator'
@@ -62,7 +62,7 @@ export const Playground: Story = {
           <img
             src='https://api.dicebear.com/9.x/avataaars/svg?radius=50&seed=Harry+Potter'
             alt='Avatar'
-            {...stylex.props(x.width['2.75rem'], x.height['2.75rem'], x.borderRadius[radius.md])}
+            {...stylex.props(x.width['2.75rem'], x.height['2.75rem'], x.borderRadius[radiusVar.md])}
           />
         </ItemMedia>
         <ItemContent>

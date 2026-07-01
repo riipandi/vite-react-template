@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { colorVar, fontSizeVar } from '#/styles/tokens.stylex'
 import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from '.'
-import { color, fontSize } from '../../../styles/tokens.stylex'
 import { Text } from '../../extra/typography'
 
 const meta = {
@@ -38,7 +38,7 @@ export const Playground: Story = {
       <Text {...stylex.props(x.width['66.666667%'])} {...stylex.props(x.width['100%'])}>
         The Philosopher's Stone is a legendary{' '}
         <PreviewCardTrigger
-          {...stylex.props(x.color[color.fgPrimary], x.borderColor[color.borderPrimary])}
+          {...stylex.props(x.color[colorVar.fgPrimary], x.borderColor[colorVar.borderPrimary])}
           {...stylex.props(x.borderBottomWidth['1px'])}
           {...stylex.props(x.cursor.help)}
         >
@@ -54,7 +54,7 @@ export const Playground: Story = {
           alt='Preview'
         />
         <Text
-          {...stylex.props(x.fontSize[fontSize.sm], x.lineHeight.relaxed)}
+          {...stylex.props(x.fontSize[fontSizeVar.sm], x.lineHeight.relaxed)}
           {...stylex.props(x.textAlign.justify)}
         >
           In Harry Potter and the Philosopher's Stone, this legendary stone is guarded by Dumbledore

@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, useRouterState } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import { color } from '#/styles/tokens.stylex'
+import { colorVar } from '#/styles/tokens.stylex'
 
 const spinKeyframes = stylex.keyframes({
   '0%': { transform: 'rotate(0deg)' },
@@ -15,7 +15,7 @@ const styles = stylex.create({
     width: '0.75rem',
     borderRadius: '9999px',
     borderWidth: '2px',
-    borderColor: color.bgPrimary,
+    borderColor: colorVar.bgPrimary,
     borderTopColor: 'transparent',
     animationName: spinKeyframes,
     animationDuration: '1s',
@@ -30,7 +30,7 @@ const styles = stylex.create({
     alignItems: 'center',
     gap: '0.5rem',
     borderRadius: '0.375rem',
-    backgroundColor: color.bgPage,
+    backgroundColor: colorVar.bgPage,
     padding: '0.75rem 1rem',
     fontSize: '0.875rem',
     boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)'

@@ -8,169 +8,169 @@ import { GitHubButton, GoogleButton } from '#/components/social-button'
 import { useAuthentication } from '#/guards/auth-provider'
 import { getErrorMessage } from '#/guards/auth-utils'
 import { loginSchema } from '#/schemas/auth.schema'
-import { fontSize, fontWeight, radius, space, color } from '#/styles/tokens.stylex'
+import { fontSizeVar, fontWeightVar, radiusVar, spaceVar, colorVar } from '#/styles/tokens.stylex'
 
 const styles = stylex.create({
   card: {
-    borderRadius: radius.xl,
+    borderRadius: radiusVar.xl,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: color.borderNeutral,
-    backgroundColor: color.bgElevationBase,
+    borderColor: colorVar.borderNeutral,
+    backgroundColor: colorVar.bgElevationBase,
     overflow: 'hidden',
     transitionProperty: 'background-color, border-color, box-shadow',
     transitionDuration: '200ms'
   },
   cardBody: {
-    padding: space[8]
+    padding: spaceVar[8]
   },
   header: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: space[2],
-    marginBottom: space[6]
+    gap: spaceVar[2],
+    marginBottom: spaceVar[6]
   },
   logoWrapper: {
-    padding: space[3],
+    padding: spaceVar[3],
     borderRadius: '1rem',
-    backgroundColor: color.bgPage,
+    backgroundColor: colorVar.bgPage,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: color.borderNeutral,
-    marginBottom: space[1]
+    borderColor: colorVar.borderNeutral,
+    marginBottom: spaceVar[1]
   },
   logo: {
     height: '2.5rem',
     width: '2.5rem'
   },
   heading: {
-    fontSize: fontSize['2xl'],
-    fontWeight: fontWeight.bold,
-    color: color.fgNeutral,
+    fontSize: fontSizeVar['2xl'],
+    fontWeight: fontWeightVar.bold,
+    color: colorVar.fgNeutral,
     textAlign: 'center'
   },
   subtitle: {
-    fontSize: fontSize.sm,
-    color: color.fgNeutralFaded,
+    fontSize: fontSizeVar.sm,
+    color: colorVar.fgNeutralFaded,
     textAlign: 'center'
   },
   socialButtons: {
     display: 'flex',
     flexDirection: 'column',
-    gap: space[3]
+    gap: spaceVar[3]
   },
   separator: {
     display: 'flex',
     alignItems: 'center',
-    gap: space[4],
-    marginTop: space[6],
-    marginBottom: space[6]
+    gap: spaceVar[4],
+    marginTop: spaceVar[6],
+    marginBottom: spaceVar[6]
   },
   separatorLine: {
     flex: 1,
     height: '1px',
-    backgroundColor: color.borderNeutralFaded
+    backgroundColor: colorVar.borderNeutralFaded
   },
   separatorText: {
-    fontSize: fontSize.sm,
-    color: color.fgNeutralFaded,
+    fontSize: fontSizeVar.sm,
+    color: colorVar.fgNeutralFaded,
     whiteSpace: 'nowrap'
   },
   formGrid: {
     display: 'grid',
-    rowGap: space[4]
+    rowGap: spaceVar[4]
   },
   field: {
     display: 'flex',
     flexDirection: 'column',
-    gap: space['1.5']
+    gap: spaceVar['1.5']
   },
   label: {
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
-    color: color.fgNeutral
+    fontSize: fontSizeVar.sm,
+    fontWeight: fontWeightVar.medium,
+    color: colorVar.fgNeutral
   },
   input: {
     display: 'flex',
     width: '100%',
     height: '2.5rem',
-    borderRadius: radius.lg,
+    borderRadius: radiusVar.lg,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: { default: color.borderNeutral, ':focus': color.borderPrimary },
-    backgroundColor: color.bgPage,
-    paddingLeft: space[3],
-    paddingRight: space[3],
-    paddingTop: space[2],
-    paddingBottom: space[2],
-    fontSize: fontSize.sm,
-    color: color.fgNeutral,
+    borderColor: { default: colorVar.borderNeutral, ':focus': colorVar.borderPrimary },
+    backgroundColor: colorVar.bgPage,
+    paddingLeft: spaceVar[3],
+    paddingRight: spaceVar[3],
+    paddingTop: spaceVar[2],
+    paddingBottom: spaceVar[2],
+    fontSize: fontSizeVar.sm,
+    color: colorVar.fgNeutral,
     outline: 'none',
     transitionProperty: 'border-color, box-shadow',
     transitionDuration: '150ms',
     fontFamily: 'inherit',
     boxSizing: 'border-box',
-    '::placeholder': { color: color.fgNeutralFaded },
-    ':focus': { boxShadow: `0 0 0 2px ${color.borderPrimaryFaded}` },
+    '::placeholder': { color: colorVar.fgNeutralFaded },
+    ':focus': { boxShadow: `0 0 0 2px ${colorVar.borderPrimaryFaded}` },
     ':disabled': { opacity: 0.5, cursor: 'not-allowed' }
   },
   inputError: {
-    borderColor: color.borderCritical
+    borderColor: colorVar.borderCritical
   },
   fieldError: {
-    fontSize: fontSize.xs,
-    color: color.fgCritical,
-    marginTop: space['0.5']
+    fontSize: fontSizeVar.xs,
+    color: colorVar.fgCritical,
+    marginTop: spaceVar['0.5']
   },
   submitWrapper: {
-    marginTop: space[7],
+    marginTop: spaceVar[7],
     display: 'grid',
     width: '100%'
   },
   footer: {
-    marginTop: space[6],
+    marginTop: spaceVar[6],
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: space[1]
+    gap: spaceVar[1]
   },
   footerText: {
-    fontSize: fontSize.sm,
-    color: color.fgNeutralFaded
+    fontSize: fontSizeVar.sm,
+    color: colorVar.fgNeutralFaded
   },
   backLink: {
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
-    color: color.fgPrimary,
+    fontSize: fontSizeVar.sm,
+    fontWeight: fontWeightVar.medium,
+    color: colorVar.fgPrimary,
     textDecoration: 'none',
     ':hover': { textDecoration: 'underline' }
   },
   loggedOutMessage: {
-    fontWeight: fontWeight.semibold
+    fontWeight: fontWeightVar.semibold
   },
   alert: {
     display: 'flex',
     alignItems: 'center',
-    gap: space[2],
-    borderRadius: radius.lg,
-    paddingLeft: space[4],
-    paddingRight: space[4],
-    paddingTop: space[3],
-    paddingBottom: space[3],
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
+    gap: spaceVar[2],
+    borderRadius: radiusVar.lg,
+    paddingLeft: spaceVar[4],
+    paddingRight: spaceVar[4],
+    paddingTop: spaceVar[3],
+    paddingBottom: spaceVar[3],
+    fontSize: fontSizeVar.sm,
+    fontWeight: fontWeightVar.medium,
     width: '100%',
     boxSizing: 'border-box',
-    marginBottom: space[4]
+    marginBottom: spaceVar[4]
   },
   alertError: {
-    backgroundColor: color.bgCriticalFaded,
-    color: color.fgCritical
+    backgroundColor: colorVar.bgCriticalFaded,
+    color: colorVar.fgCritical
   },
   alertSuccess: {
-    backgroundColor: color.bgPositiveFaded,
-    color: color.fgPositive
+    backgroundColor: colorVar.bgPositiveFaded,
+    color: colorVar.fgPositive
   }
 })
 

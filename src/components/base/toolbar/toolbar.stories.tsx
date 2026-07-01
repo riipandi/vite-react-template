@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
+import { colorVar } from '#/styles/tokens.stylex'
 import {
   Toolbar,
   ToolbarButton,
@@ -10,7 +11,6 @@ import {
   ToolbarLink,
   ToolbarSeparator
 } from '.'
-import { color } from '../../../styles/tokens.stylex'
 import { Button } from '../button'
 import {
   NumberField,
@@ -149,7 +149,7 @@ export const Playground: Story = {
         </NumberField>
         <ToolbarSeparator />
         <ToolbarLink
-          {...stylex.props(x.color[color.fgNeutralFaded], x.whiteSpace.nowrap)}
+          {...stylex.props(x.color[colorVar.fgNeutralFaded], x.whiteSpace.nowrap)}
           {...stylex.props(x.paddingLeft['0.25rem'], x.paddingRight['0.25rem'])}
         >
           Saved 5 min ago

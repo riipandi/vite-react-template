@@ -5,7 +5,7 @@ import * as Lucide from 'lucide-react'
 import { useEffect } from 'react'
 import { isAuthenticated } from '#/guards/auth-store'
 import { useSidebarOpen, toggleSidebar } from '#/stores/app.store'
-import { radius, space, color } from '#/styles/tokens.stylex'
+import { radiusVar, spaceVar, colorVar } from '#/styles/tokens.stylex'
 import { SideNavbar } from './-sidebar'
 
 export const Route = createFileRoute('/(app)/dashboard')({
@@ -19,7 +19,7 @@ export const Route = createFileRoute('/(app)/dashboard')({
 
 const styles = stylex.create({
   layout: {
-    backgroundColor: color.bgPage,
+    backgroundColor: colorVar.bgPage,
     transitionProperty: 'background-color',
     transitionDuration: '200ms',
     height: '100vh',
@@ -39,12 +39,12 @@ const styles = stylex.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     height: '3.5rem',
-    paddingLeft: space[4],
-    paddingRight: space[4],
-    backgroundColor: color.bgPage,
+    paddingLeft: spaceVar[4],
+    paddingRight: spaceVar[4],
+    backgroundColor: colorVar.bgPage,
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: color.borderNeutral,
+    borderBottomColor: colorVar.borderNeutral,
     '@media (max-width: 767px)': {
       display: 'flex'
     }
@@ -52,7 +52,7 @@ const styles = stylex.create({
   mobileHeaderTitle: {
     fontSize: '0.875rem',
     fontWeight: 700,
-    color: color.fgNeutral
+    color: colorVar.fgNeutral
   },
   hamburger: {
     display: 'flex',
@@ -60,13 +60,13 @@ const styles = stylex.create({
     justifyContent: 'center',
     width: '2.25rem',
     height: '2.25rem',
-    borderRadius: radius.md,
+    borderRadius: radiusVar.md,
     border: 'none',
     backgroundColor: 'transparent',
-    color: color.fgNeutralFaded,
+    color: colorVar.fgNeutralFaded,
     cursor: 'pointer',
     ':hover': {
-      backgroundColor: color.bgNeutralFaded
+      backgroundColor: colorVar.bgNeutralFaded
     }
   },
   sidebarWrapper: {

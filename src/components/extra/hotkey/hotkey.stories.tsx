@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { color, fontSize, radius } from '../../../styles/tokens.stylex'
+import { colorVar, fontSizeVar, radiusVar } from '#/styles/tokens.stylex'
 import { Hotkey, HotkeyGroup } from './hotkey.component'
 
 const meta = {
@@ -234,23 +234,23 @@ export const AllModifiers: Story = {
   render: () => (
     <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['1rem'])}>
       <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
-        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSize.sm])}>Command:</span>
+        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSizeVar.sm])}>Command:</span>
         <Hotkey>⌘</Hotkey>
       </div>
       <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
-        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSize.sm])}>Control:</span>
+        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSizeVar.sm])}>Control:</span>
         <Hotkey>Ctrl</Hotkey>
       </div>
       <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
-        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSize.sm])}>Shift:</span>
+        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSizeVar.sm])}>Shift:</span>
         <Hotkey>⇧</Hotkey>
       </div>
       <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
-        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSize.sm])}>Option:</span>
+        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSizeVar.sm])}>Option:</span>
         <Hotkey>⌥</Hotkey>
       </div>
       <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])}>
-        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSize.sm])}>Alt:</span>
+        <span {...stylex.props(x.width['5rem'], x.fontSize[fontSizeVar.sm])}>Alt:</span>
         <Hotkey>Alt</Hotkey>
       </div>
     </div>
@@ -268,7 +268,7 @@ export const CommonShortcuts: Story = {
           x.gap['2rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Copy</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Copy</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>C</Hotkey>
@@ -282,7 +282,7 @@ export const CommonShortcuts: Story = {
           x.gap['2rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Paste</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Paste</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>V</Hotkey>
@@ -296,7 +296,7 @@ export const CommonShortcuts: Story = {
           x.gap['2rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Save</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Save</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>S</Hotkey>
@@ -310,7 +310,7 @@ export const CommonShortcuts: Story = {
           x.gap['2rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Undo</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Undo</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>Z</Hotkey>
@@ -324,7 +324,7 @@ export const CommonShortcuts: Story = {
           x.gap['2rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Redo</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Redo</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>⇧</Hotkey>
@@ -339,7 +339,7 @@ export const CommonShortcuts: Story = {
           x.gap['2rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Find</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Find</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>F</Hotkey>
@@ -360,7 +360,7 @@ export const NavigationKeys: Story = {
           x.gap['2rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Move Up</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Move Up</span>
         <Hotkey>
           <Lucide.ArrowUp />
         </Hotkey>
@@ -373,7 +373,7 @@ export const NavigationKeys: Story = {
           x.gap['2rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Move Down</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Move Down</span>
         <Hotkey>
           <Lucide.ArrowDown />
         </Hotkey>
@@ -386,7 +386,7 @@ export const NavigationKeys: Story = {
           x.gap['2rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Page Up</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Page Up</span>
         <HotkeyGroup>
           <Hotkey>⇧</Hotkey>
           <Hotkey>
@@ -402,7 +402,7 @@ export const NavigationKeys: Story = {
           x.gap['2rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Page Down</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Page Down</span>
         <HotkeyGroup>
           <Hotkey>⇧</Hotkey>
           <Hotkey>
@@ -419,22 +419,24 @@ export const SearchShortcut: Story = {
   render: () => (
     <div
       {...stylex.props(
-        x.backgroundColor[color.bgNeutral],
-        x.borderColor[color.borderNeutral],
+        x.backgroundColor[colorVar.bgNeutral],
+        x.borderColor[colorVar.borderNeutral],
         x.display.flex,
         x.width['100%'],
         x.maxWidth['384px'],
         x.alignItems.center,
         x.gap['0.5rem'],
-        x.borderRadius[radius.lg],
+        x.borderRadius[radiusVar.lg],
         x.borderWidth['1px'],
         x.padding['1rem']
       )}
     >
       <Lucide.Search
-        {...stylex.props(x.color[color.fgNeutralFaded], x.width['1rem'], x.height['1rem'])}
+        {...stylex.props(x.color[colorVar.fgNeutralFaded], x.width['1rem'], x.height['1rem'])}
       />
-      <span {...stylex.props(x.color[color.fgNeutralFaded], x.flex['1'], x.fontSize[fontSize.sm])}>
+      <span
+        {...stylex.props(x.color[colorVar.fgNeutralFaded], x.flex['1'], x.fontSize[fontSizeVar.sm])}
+      >
         Search...
       </span>
       <HotkeyGroup>
@@ -449,10 +451,10 @@ export const MenuItems: Story = {
   render: () => (
     <div
       {...stylex.props(
-        x.backgroundColor[color.bgNeutral],
-        x.borderColor[color.borderNeutral],
+        x.backgroundColor[colorVar.bgNeutral],
+        x.borderColor[colorVar.borderNeutral],
         x.width['16rem'],
-        x.borderRadius[radius.lg],
+        x.borderRadius[radiusVar.lg],
         x.borderWidth['1px'],
         x.padding['0.5rem']
       )}
@@ -463,14 +465,14 @@ export const MenuItems: Story = {
           x.cursor.pointer,
           x.alignItems.center,
           x.justifyContent.spaceBetween,
-          x.borderRadius[radius.md],
+          x.borderRadius[radiusVar.md],
           x.paddingLeft['0.5rem'],
           x.paddingRight['0.5rem'],
           x.paddingTop['0.375rem'],
           x.paddingBottom['0.375rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>New File</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>New File</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>N</Hotkey>
@@ -482,14 +484,14 @@ export const MenuItems: Story = {
           x.cursor.pointer,
           x.alignItems.center,
           x.justifyContent.spaceBetween,
-          x.borderRadius[radius.md],
+          x.borderRadius[radiusVar.md],
           x.paddingLeft['0.5rem'],
           x.paddingRight['0.5rem'],
           x.paddingTop['0.375rem'],
           x.paddingBottom['0.375rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Open File</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Open File</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>O</Hotkey>
@@ -501,14 +503,14 @@ export const MenuItems: Story = {
           x.cursor.pointer,
           x.alignItems.center,
           x.justifyContent.spaceBetween,
-          x.borderRadius[radius.md],
+          x.borderRadius[radiusVar.md],
           x.paddingLeft['0.5rem'],
           x.paddingRight['0.5rem'],
           x.paddingTop['0.375rem'],
           x.paddingBottom['0.375rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Save</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Save</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>S</Hotkey>
@@ -516,7 +518,7 @@ export const MenuItems: Story = {
       </div>
       <div
         {...stylex.props(
-          x.backgroundColor[color.borderNeutral],
+          x.backgroundColor[colorVar.borderNeutral],
           x.marginTop['0.375rem'],
           x.marginBottom['0.375rem'],
           x.height['1px']
@@ -528,14 +530,14 @@ export const MenuItems: Story = {
           x.cursor.pointer,
           x.alignItems.center,
           x.justifyContent.spaceBetween,
-          x.borderRadius[radius.md],
+          x.borderRadius[radiusVar.md],
           x.paddingLeft['0.5rem'],
           x.paddingRight['0.5rem'],
           x.paddingTop['0.375rem'],
           x.paddingBottom['0.375rem']
         )}
       >
-        <span {...stylex.props(x.fontSize[fontSize.sm])}>Close Window</span>
+        <span {...stylex.props(x.fontSize[fontSizeVar.sm])}>Close Window</span>
         <HotkeyGroup>
           <Hotkey>⌘</Hotkey>
           <Hotkey>W</Hotkey>

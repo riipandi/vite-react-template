@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { fontWeightVar, radiusVar, colorVar, shadowVar } from '#/styles/tokens.stylex'
 import { ScrollArea } from '.'
-import { fontWeight, radius, color, shadow } from '../../../styles/tokens.stylex'
 import { Text } from '../../extra/typography'
 
 const meta = {
@@ -38,12 +38,12 @@ export const Both: Story = {
     <ScrollArea
       scrollbar='both'
       {...stylex.props(
-        x.borderColor[color.borderNeutral],
+        x.borderColor[colorVar.borderNeutral],
         x.maxWidth['576px'],
-        x.boxShadow[shadow.md]
+        x.boxShadow[shadowVar.md]
       )}
       {...stylex.props(x.borderWidth['1px'])}
-      {...stylex.props(x.height['80rem'], x.width['100%'], x.borderRadius[radius.md])}
+      {...stylex.props(x.height['80rem'], x.width['100%'], x.borderRadius[radiusVar.md])}
     >
       <div {...stylex.props(x.gap['1.5rem'])} {...stylex.props(x.padding['1rem'])}>
         <Text>
@@ -92,12 +92,12 @@ export const VerticalOnly: Story = {
     <ScrollArea
       scrollbar='vertical'
       {...stylex.props(
-        x.borderColor[color.borderNeutral],
+        x.borderColor[colorVar.borderNeutral],
         x.maxWidth['576px'],
-        x.boxShadow[shadow.md]
+        x.boxShadow[shadowVar.md]
       )}
       {...stylex.props(x.borderWidth['1px'])}
-      {...stylex.props(x.height['80rem'], x.width['100%'], x.borderRadius[radius.md])}
+      {...stylex.props(x.height['80rem'], x.width['100%'], x.borderRadius[radiusVar.md])}
     >
       <div {...stylex.props(x.gap['1.5rem'])} {...stylex.props(x.padding['1rem'])}>
         <Text>
@@ -138,18 +138,18 @@ export const HorizontalOnly: Story = {
     <ScrollArea
       scrollbar='horizontal'
       {...stylex.props(
-        x.borderColor[color.borderNeutral],
+        x.borderColor[colorVar.borderNeutral],
         x.maxWidth['576px'],
-        x.boxShadow[shadow.md]
+        x.boxShadow[shadowVar.md]
       )}
       {...stylex.props(x.borderWidth['1px'])}
-      {...stylex.props(x.height['32rem'], x.width['100%'], x.borderRadius[radius.md])}
+      {...stylex.props(x.height['32rem'], x.width['100%'], x.borderRadius[radiusVar.md])}
     >
       <div {...stylex.props(x.display.flex, x.gap['1rem'], x.padding['1rem'])}>
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
           <div
             key={num}
-            {...stylex.props(x.backgroundColor[color.bgNeutralFaded])}
+            {...stylex.props(x.backgroundColor[colorVar.bgNeutralFaded])}
             {...stylex.props(
               x.display.flex,
               x.width['5rem'],
@@ -157,8 +157,8 @@ export const HorizontalOnly: Story = {
               x.flexShrink['0'],
               x.alignItems.center,
               x.justifyContent.center,
-              x.borderRadius[radius.md],
-              x.fontWeight[fontWeight.semibold]
+              x.borderRadius[radiusVar.md],
+              x.fontWeight[fontWeightVar.semibold]
             )}
           >
             {num}

@@ -3,6 +3,7 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import * as React from 'react'
+import { fontSizeVar, fontWeightVar, radiusVar, colorVar } from '#/styles/tokens.stylex'
 import {
   Drawer,
   DrawerTrigger,
@@ -11,7 +12,6 @@ import {
   DrawerTitle,
   DrawerDescription
 } from '.'
-import { fontSize, fontWeight, radius, color } from '../../../styles/tokens.stylex'
 import { Card, CardBody } from '../../extra/card'
 import { Label } from '../../extra/label'
 import { Stack } from '../../extra/stack'
@@ -81,8 +81,8 @@ export const Playground: Story = {
               rows={4}
             />
             <p
-              {...stylex.props(x.color[color.fgNeutralFaded])}
-              {...stylex.props(x.fontSize[fontSize.sm])}
+              {...stylex.props(x.color[colorVar.fgNeutralFaded])}
+              {...stylex.props(x.fontSize[fontSizeVar.sm])}
             >
               Please share your favorite moments from the story
             </p>
@@ -90,7 +90,7 @@ export const Playground: Story = {
         </Stack>
         <div
           {...stylex.props(
-            x.borderColor[color.borderNeutral],
+            x.borderColor[colorVar.borderNeutral],
             x.display.grid,
             x.gridTemplateColumns['1fr 1fr']
           )}
@@ -186,7 +186,7 @@ export const Scrollable: Story = {
             )}
           >
             <ScrollArea
-              {...stylex.props(x.fontSize[fontSize.sm])}
+              {...stylex.props(x.fontSize[fontSizeVar.sm])}
               {...stylex.props(
                 x.marginRight['-0.75rem'],
                 x.height['calc(100dvh - 12rem)'],
@@ -199,7 +199,7 @@ export const Scrollable: Story = {
                 {faqSections.map((faq) => (
                   <div
                     key={faq.title}
-                    {...stylex.props(x.color[color.fgNeutral])}
+                    {...stylex.props(x.color[colorVar.fgNeutral])}
                     {...stylex.props(x.gap['0.25rem'])}
                   >
                     <h3>{faq.title}</h3>
@@ -210,7 +210,7 @@ export const Scrollable: Story = {
             </ScrollArea>
           </div>
           <div
-            {...stylex.props(x.borderColor[color.borderNeutral])}
+            {...stylex.props(x.borderColor[colorVar.borderNeutral])}
             {...stylex.props(x.borderTopWidth['1px'])}
             {...stylex.props(
               x.display.flex,
@@ -261,8 +261,8 @@ export const SideShowcase: Story = {
                 rows={4}
               />
               <p
-                {...stylex.props(x.color[color.fgNeutralFaded])}
-                {...stylex.props(x.fontSize[fontSize.sm])}
+                {...stylex.props(x.color[colorVar.fgNeutralFaded])}
+                {...stylex.props(x.fontSize[fontSizeVar.sm])}
               >
                 Share your favorite quotes and scenes
               </p>
@@ -311,8 +311,8 @@ export const SideShowcase: Story = {
                 rows={4}
               />
               <p
-                {...stylex.props(x.color[color.fgNeutralFaded])}
-                {...stylex.props(x.fontSize[fontSize.sm])}
+                {...stylex.props(x.color[colorVar.fgNeutralFaded])}
+                {...stylex.props(x.fontSize[fontSizeVar.sm])}
               >
                 Include genre, author, and what readers will love
               </p>
@@ -361,8 +361,8 @@ export const SideShowcase: Story = {
                 rows={4}
               />
               <p
-                {...stylex.props(x.color[color.fgNeutralFaded])}
-                {...stylex.props(x.fontSize[fontSize.sm])}
+                {...stylex.props(x.color[colorVar.fgNeutralFaded])}
+                {...stylex.props(x.fontSize[fontSizeVar.sm])}
               >
                 Include historical context and evidence
               </p>
@@ -411,8 +411,8 @@ export const SideShowcase: Story = {
                 rows={4}
               />
               <p
-                {...stylex.props(x.color[color.fgNeutralFaded])}
-                {...stylex.props(x.fontSize[fontSize.sm])}
+                {...stylex.props(x.color[colorVar.fgNeutralFaded])}
+                {...stylex.props(x.fontSize[fontSizeVar.sm])}
               >
                 Include pronunciation and practical uses
               </p>
@@ -474,7 +474,7 @@ function NestedDrawer({
           {...stylex.props(
             x.marginLeft['0.5rem'],
             x.marginRight['0.5rem'],
-            x.fontSize[fontSize.lg]
+            x.fontSize[fontSizeVar.lg]
           )}
         >
           Literary Quests
@@ -483,7 +483,7 @@ function NestedDrawer({
           {...stylex.props(
             x.marginLeft['0.5rem'],
             x.marginRight['0.5rem'],
-            x.fontSize[fontSize.md]
+            x.fontSize[fontSizeVar.md]
           )}
         >
           Choose your adventure through mysteries and magic.
@@ -493,16 +493,19 @@ function NestedDrawer({
             variant='ghost'
             xstyle={
               adventure === 'brown'
-                ? [x.borderColor[color.fgPrimary], x.backgroundColor[color.bgPrimaryFaded]]
-                : [x.borderColor[color.borderNeutral], x.backgroundColor[color.bgNeutralFaded]]
+                ? [x.borderColor[colorVar.fgPrimary], x.backgroundColor[colorVar.bgPrimaryFaded]]
+                : [
+                    x.borderColor[colorVar.borderNeutral],
+                    x.backgroundColor[colorVar.bgNeutralFaded]
+                  ]
             }
             onClick={() => setAdventure('brown')}
           >
             <CardBody {...stylex.props(x.padding['1rem'])}>
-              <div {...stylex.props(x.fontWeight[fontWeight.medium])}>Dan Brown's Mysteries</div>
+              <div {...stylex.props(x.fontWeight[fontWeightVar.medium])}>Dan Brown's Mysteries</div>
               <div
-                {...stylex.props(x.color[color.fgNeutralFaded])}
-                {...stylex.props(x.fontSize[fontSize.sm])}
+                {...stylex.props(x.color[colorVar.fgNeutralFaded])}
+                {...stylex.props(x.fontSize[fontSizeVar.sm])}
               >
                 Follow Robert Langdon through ancient secrets
               </div>
@@ -518,10 +521,10 @@ function NestedDrawer({
             onClick={() => setAdventure('potter')}
           >
             <CardBody {...stylex.props(x.padding['1rem'])}>
-              <div {...stylex.props(x.fontWeight[fontWeight.medium])}>Wizarding World</div>
+              <div {...stylex.props(x.fontWeight[fontWeightVar.medium])}>Wizarding World</div>
               <div
-                {...stylex.props(x.color[color.fgNeutralFaded])}
-                {...stylex.props(x.fontSize[fontSize.sm])}
+                {...stylex.props(x.color[colorVar.fgNeutralFaded])}
+                {...stylex.props(x.fontSize[fontSizeVar.sm])}
               >
                 Explore the magical realm of Hogwarts
               </div>
@@ -546,15 +549,18 @@ function NestedDrawer({
           }}
         >
           <DrawerTrigger
-            {...stylex.props(x.color[color.fgPrimary], x.backgroundColor[color.bgPrimaryFaded])}
             {...stylex.props(
-              x.borderRadius[radius.md],
+              x.color[colorVar.fgPrimary],
+              x.backgroundColor[colorVar.bgPrimaryFaded]
+            )}
+            {...stylex.props(
+              x.borderRadius[radiusVar.md],
               x.paddingLeft['0.375rem'],
               x.paddingRight['0.375rem'],
               x.paddingTop['0.5rem'],
               x.paddingBottom['0.5rem'],
-              x.fontSize[fontSize.md],
-              x.fontWeight[fontWeight.medium]
+              x.fontSize[fontSizeVar.md],
+              x.fontWeight[fontWeightVar.medium]
             )}
           >
             {adventure === 'brown' ? 'Continue to Vatican Archives' : 'Continue to Hogwarts Houses'}
@@ -564,7 +570,7 @@ function NestedDrawer({
               {...stylex.props(
                 x.marginLeft['0.5rem'],
                 x.marginRight['0.5rem'],
-                x.fontSize[fontSize.lg]
+                x.fontSize[fontSizeVar.lg]
               )}
             >
               {adventure === 'brown' ? 'Vatican Secret Archives' : 'Hogwarts House Selection'}
@@ -573,7 +579,7 @@ function NestedDrawer({
               {...stylex.props(
                 x.marginLeft['0.5rem'],
                 x.marginRight['0.5rem'],
-                x.fontSize[fontSize.md]
+                x.fontSize[fontSizeVar.md]
               )}
             >
               {adventure === 'brown'

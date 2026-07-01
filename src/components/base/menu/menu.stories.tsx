@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
+import { colorVar } from '#/styles/tokens.stylex'
 import {
   Menu,
   MenuPopup,
@@ -16,7 +17,6 @@ import {
   MenuRadioGroup,
   MenuGroupLabel
 } from '.'
-import { color } from '../../../styles/tokens.stylex'
 import { Hotkey } from '../../extra/hotkey'
 import { Button } from '../button'
 
@@ -223,7 +223,7 @@ export const AdvanceMenu: Story = {
           </MenuSubmenu>
         </MenuGroup>
         <MenuSeparator />
-        <MenuItem {...stylex.props(x.color[color.fgCritical])}>
+        <MenuItem {...stylex.props(x.color[colorVar.fgCritical])}>
           Quit App
           <Hotkey color='neutral' variant='outline' {...stylex.props(x.marginLeft.auto)}>
             ⌘ Q

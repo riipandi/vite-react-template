@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { fontSizeVar, colorVar } from '#/styles/tokens.stylex'
 import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from '.'
-import { fontSize, color } from '../../../styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Meter',
@@ -147,8 +147,8 @@ export const StorageExample: Story = {
         </MeterTrack>
       </Meter>
       <p
-        {...stylex.props(x.color[color.fgNeutralFaded])}
-        {...stylex.props(x.fontSize[fontSize.xs])}
+        {...stylex.props(x.color[colorVar.fgNeutralFaded])}
+        {...stylex.props(x.fontSize[fontSizeVar.xs])}
       >
         75 GB of 100 GB used
       </p>
@@ -179,7 +179,10 @@ export const BatteryExample: Story = {
           <MeterIndicator color='warning' />
         </MeterTrack>
       </Meter>
-      <p {...stylex.props(x.color[color.fgCritical])} {...stylex.props(x.fontSize[fontSize.xs])}>
+      <p
+        {...stylex.props(x.color[colorVar.fgCritical])}
+        {...stylex.props(x.fontSize[fontSizeVar.xs])}
+      >
         Low battery warning
       </p>
     </div>
@@ -203,8 +206,8 @@ export const WithCustomValue: Story = {
       >
         <MeterLabel>API Requests</MeterLabel>
         <span
-          {...stylex.props(x.color[color.fgNeutralFaded])}
-          {...stylex.props(x.fontSize[fontSize.sm])}
+          {...stylex.props(x.color[colorVar.fgNeutralFaded])}
+          {...stylex.props(x.fontSize[fontSizeVar.sm])}
         >
           1,450 / 2,000
         </span>

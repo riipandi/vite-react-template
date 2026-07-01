@@ -13,7 +13,7 @@ import * as stylex from '@stylexjs/stylex'
 
 const DARK = '[data-theme=dark]'
 
-export const color = stylex.defineVars({
+export const colorVar = stylex.defineVars({
   /* Both light mode and dark mode */
   black: 'oklch(0 0 0)',
   white: 'oklch(1 0 0)',
@@ -71,7 +71,7 @@ export const color = stylex.defineVars({
   borderDisabled: { default: 'oklch(0.913 0.011 265.75)', [DARK]: 'oklch(0.285 0.019 265.75)' }
 })
 
-export const shadow = stylex.defineVars({
+export const shadowVar = stylex.defineVars({
   raised: '0px 1px 5px -4px rgba(0,0,0,0.5), 0px 4px 8px 0px rgba(0,0,0,0.05)',
   overlay: '0px 5px 10px 0px rgba(0,0,0,0.05), 0px 15px 25px 0px rgba(0,0,0,0.07)',
   xs: '0px 1px 2px 0px rgba(0,0,0,0.02), 0px 0px 1px 0px rgba(0,0,0,0.06)',
@@ -81,7 +81,7 @@ export const shadow = stylex.defineVars({
   xl: '0px 6px 10px -2px rgba(0,0,0,0.05), 0px 12px 20px -2px rgba(0,0,0,0.08)'
 })
 
-export const radius = stylex.defineVars({
+export const radiusVar = stylex.defineVars({
   xs: '0.375rem',
   sm: '0.45rem',
   md: '0.55rem',
@@ -90,7 +90,7 @@ export const radius = stylex.defineVars({
   full: '9999px'
 })
 
-export const space = stylex.defineVars({
+export const spaceVar = stylex.defineVars({
   none: '0px',
   px: '1px',
   '0': '0px',
@@ -129,7 +129,7 @@ export const space = stylex.defineVars({
   '96': '24rem'
 })
 
-export const fontSize = stylex.defineVars({
+export const fontSizeVar = stylex.defineVars({
   xs: '0.75rem',
   sm: '0.875rem',
   md: '1rem',
@@ -145,7 +145,7 @@ export const fontSize = stylex.defineVars({
   '9xl': '6.5rem'
 })
 
-export const fontWeight = stylex.defineVars({
+export const fontWeightVar = stylex.defineVars({
   thin: '100',
   extralight: '200',
   light: '300',
@@ -157,7 +157,7 @@ export const fontWeight = stylex.defineVars({
   black: '900'
 })
 
-export const fontFamily = stylex.defineVars({
+export const fontFamilyVar = stylex.defineVars({
   sans: "'Mona Sans Variable', system-ui, -apple-system, Roboto, Aptos, Helvetica, sans-serif",
   mono: "'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
 })

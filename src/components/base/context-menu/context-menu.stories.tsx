@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { radius, color } from '../../../styles/tokens.stylex'
+import { radiusVar, colorVar } from '#/styles/tokens.stylex'
 import { Hotkey } from '../../extra/hotkey'
 import {
   ContextMenu,
@@ -51,7 +51,10 @@ export const Playground: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        {...stylex.props(x.borderColor[color.borderNeutralFaded], x.color[color.fgNeutralFaded])}
+        {...stylex.props(
+          x.borderColor[colorVar.borderNeutralFaded],
+          x.color[colorVar.fgNeutralFaded]
+        )}
         {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
@@ -59,7 +62,7 @@ export const Playground: Story = {
           x.width['100%'],
           x.alignItems.center,
           x.justifyContent.center,
-          x.borderRadius[radius.md],
+          x.borderRadius[radiusVar.md],
           x.userSelect.none
         )}
       >
@@ -81,7 +84,10 @@ export const WithItemIcon: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        {...stylex.props(x.borderColor[color.borderNeutralFaded], x.color[color.fgNeutralFaded])}
+        {...stylex.props(
+          x.borderColor[colorVar.borderNeutralFaded],
+          x.color[colorVar.fgNeutralFaded]
+        )}
         {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
@@ -89,7 +95,7 @@ export const WithItemIcon: Story = {
           x.width['100%'],
           x.alignItems.center,
           x.justifyContent.center,
-          x.borderRadius[radius.md],
+          x.borderRadius[radiusVar.md],
           x.userSelect.none
         )}
       >
@@ -131,7 +137,10 @@ export const NestedSubMenu: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        {...stylex.props(x.borderColor[color.borderNeutralFaded], x.color[color.fgNeutralFaded])}
+        {...stylex.props(
+          x.borderColor[colorVar.borderNeutralFaded],
+          x.color[colorVar.fgNeutralFaded]
+        )}
         {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
@@ -139,7 +148,7 @@ export const NestedSubMenu: Story = {
           x.width['100%'],
           x.alignItems.center,
           x.justifyContent.center,
-          x.borderRadius[radius.md],
+          x.borderRadius[radiusVar.md],
           x.userSelect.none
         )}
       >
@@ -178,7 +187,10 @@ export const AdvanceMenu: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        {...stylex.props(x.borderColor[color.borderNeutralFaded], x.color[color.fgNeutralFaded])}
+        {...stylex.props(
+          x.borderColor[colorVar.borderNeutralFaded],
+          x.color[colorVar.fgNeutralFaded]
+        )}
         {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
@@ -186,7 +198,7 @@ export const AdvanceMenu: Story = {
           x.width['100%'],
           x.alignItems.center,
           x.justifyContent.center,
-          x.borderRadius[radius.md],
+          x.borderRadius[radiusVar.md],
           x.userSelect.none
         )}
       >
@@ -238,7 +250,7 @@ export const AdvanceMenu: Story = {
           </ContextMenuSubmenu>
         </ContextMenuGroup>
         <ContextMenuSeparator />
-        <ContextMenuItem {...stylex.props(x.color[color.fgCritical])}>
+        <ContextMenuItem {...stylex.props(x.color[colorVar.fgCritical])}>
           Use Unforgivable Curse
           <Hotkey variant='outline' {...stylex.props(x.marginLeft.auto)}>
             ⌘ Q
@@ -254,7 +266,10 @@ export const CompactMenu: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger
-        {...stylex.props(x.borderColor[color.borderNeutralFaded], x.color[color.fgNeutralFaded])}
+        {...stylex.props(
+          x.borderColor[colorVar.borderNeutralFaded],
+          x.color[colorVar.fgNeutralFaded]
+        )}
         {...stylex.props(x.borderWidth['1px'], x.borderStyle.dashed)}
         {...stylex.props(
           x.display.flex,
@@ -262,7 +277,7 @@ export const CompactMenu: Story = {
           x.width['100%'],
           x.alignItems.center,
           x.justifyContent.center,
-          x.borderRadius[radius.md],
+          x.borderRadius[radiusVar.md],
           x.userSelect.none
         )}
       >

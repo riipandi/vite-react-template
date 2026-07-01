@@ -1,43 +1,43 @@
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Link, type ErrorComponentProps } from '@tanstack/react-router'
-import { fontSize, fontWeight, radius, space, color } from '#/styles/tokens.stylex'
+import { fontSizeVar, fontWeightVar, radiusVar, spaceVar, colorVar } from '#/styles/tokens.stylex'
 
 const styles = stylex.create({
   content: {
-    paddingLeft: space[4],
-    paddingRight: space[4],
+    paddingLeft: spaceVar[4],
+    paddingRight: spaceVar[4],
     paddingTop: '2.5rem',
     paddingBottom: '2.5rem',
     textAlign: 'center',
     '@media (min-width: 640px)': {
-      paddingLeft: space[6],
-      paddingRight: space[6]
+      paddingLeft: spaceVar[6],
+      paddingRight: spaceVar[6]
     },
     '@media (min-width: 1024px)': {
-      paddingLeft: space[8],
-      paddingRight: space[8]
+      paddingLeft: spaceVar[8],
+      paddingRight: spaceVar[8]
     }
   },
   title: {
     display: 'block',
-    fontSize: fontSize['7xl'],
-    fontWeight: fontWeight.bold,
-    color: color.fgNeutral,
+    fontSize: fontSizeVar['7xl'],
+    fontWeight: fontWeightVar.bold,
+    color: colorVar.fgNeutral,
     '@media (min-width: 640px)': {
-      fontSize: fontSize['8xl']
+      fontSize: fontSizeVar['8xl']
     }
   },
   message: {
-    marginTop: space[6],
-    fontSize: fontSize.lg,
-    color: color.fgNeutralFaded,
+    marginTop: spaceVar[6],
+    fontSize: fontSizeVar.lg,
+    color: colorVar.fgNeutralFaded,
     '@media (min-width: 640px)': {
-      marginTop: space[8]
+      marginTop: spaceVar[8]
     }
   },
   actionWrapper: {
-    marginTop: space[8],
+    marginTop: spaceVar[8],
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -46,15 +46,15 @@ const styles = stylex.create({
   backLink: {
     display: 'inline-flex',
     alignItems: 'center',
-    gap: space[2],
-    borderRadius: radius.md,
-    paddingLeft: space[3],
-    paddingRight: space[3],
-    paddingTop: space[2],
-    paddingBottom: space[2],
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.semibold,
-    color: color.fgPrimary,
+    gap: spaceVar[2],
+    borderRadius: radiusVar.md,
+    paddingLeft: spaceVar[3],
+    paddingRight: spaceVar[3],
+    paddingTop: spaceVar[2],
+    paddingBottom: spaceVar[2],
+    fontSize: fontSizeVar.sm,
+    fontWeight: fontWeightVar.semibold,
+    color: colorVar.fgPrimary,
     textDecoration: 'none',
     transitionProperty: 'all',
     transitionDuration: '150ms',
@@ -64,34 +64,34 @@ const styles = stylex.create({
     ':focus-visible': {
       outlineWidth: 1,
       outlineStyle: 'solid',
-      outlineColor: color.fgPrimary,
+      outlineColor: colorVar.fgPrimary,
       outlineOffset: 2
     }
   },
   footer: {
     marginTop: 'auto',
-    paddingTop: space[5],
-    paddingBottom: space[5],
+    paddingTop: spaceVar[5],
+    paddingBottom: spaceVar[5],
     textAlign: 'center'
   },
   footerInner: {
     marginLeft: 'auto',
     marginRight: 'auto',
     maxWidth: '80rem',
-    paddingLeft: space[4],
-    paddingRight: space[4],
+    paddingLeft: spaceVar[4],
+    paddingRight: spaceVar[4],
     '@media (min-width: 640px)': {
-      paddingLeft: space[6],
-      paddingRight: space[6]
+      paddingLeft: spaceVar[6],
+      paddingRight: spaceVar[6]
     },
     '@media (min-width: 1024px)': {
-      paddingLeft: space[8],
-      paddingRight: space[8]
+      paddingLeft: spaceVar[8],
+      paddingRight: spaceVar[8]
     }
   },
   footerText: {
-    fontSize: fontSize.sm,
-    color: color.fgNeutralFaded
+    fontSize: fontSizeVar.sm,
+    color: colorVar.fgNeutralFaded
   }
 })
 

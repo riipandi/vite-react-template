@@ -4,7 +4,7 @@ import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import * as React from 'react'
 import { fn } from 'storybook/test'
-import { color, fontSize, fontWeight } from '../../../styles/tokens.stylex'
+import { colorVar, fontSizeVar, fontWeightVar } from '#/styles/tokens.stylex'
 import { Separator } from '../separator'
 import { Button } from './button.component'
 
@@ -54,9 +54,9 @@ const Row = ({
   <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.5rem'])} {...rest}>
     <span
       {...stylex.props(
-        x.color[color.fgNeutralFaded],
-        x.fontSize[fontSize.sm],
-        x.fontWeight[fontWeight.semibold],
+        x.color[colorVar.fgNeutralFaded],
+        x.fontSize[fontSizeVar.sm],
+        x.fontWeight[fontWeightVar.semibold],
         x.minWidth['5rem'],
         x.textTransform.uppercase
       )}

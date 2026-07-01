@@ -1,7 +1,7 @@
 import { ThemeProvider as LonikThemer, useTheme } from '@lonik/themer'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { radius, space, color } from '#/styles/tokens.stylex'
+import { radiusVar, spaceVar, colorVar } from '#/styles/tokens.stylex'
 
 export function ThemeProvider(props: React.PropsWithChildren) {
   return (
@@ -35,10 +35,10 @@ const styles = stylex.create({
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: radius.lg,
-    padding: space[2],
-    color: { default: color.fgNeutralFaded, ':hover': color.fgNeutral },
-    backgroundColor: { default: 'transparent', ':hover': color.bgNeutralFaded },
+    borderRadius: radiusVar.lg,
+    padding: spaceVar[2],
+    color: { default: colorVar.fgNeutralFaded, ':hover': colorVar.fgNeutral },
+    backgroundColor: { default: 'transparent', ':hover': colorVar.bgNeutralFaded },
     borderWidth: 0,
     cursor: 'pointer',
     transitionProperty: 'background-color, color',

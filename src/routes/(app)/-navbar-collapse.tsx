@@ -2,7 +2,7 @@ import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { ThemeSwitcher } from '#/routes/-theme'
-import { radius, shadow, space, color } from '#/styles/tokens.stylex'
+import { radiusVar, shadowVar, spaceVar, colorVar } from '#/styles/tokens.stylex'
 
 // ── Nav data ──────────────────────────────────────────────────────────────────
 
@@ -31,41 +31,41 @@ const collapseStyles = stylex.create({
     overflow: 'hidden',
     borderRightWidth: 1,
     borderRightStyle: 'solid',
-    borderRightColor: color.borderNeutral,
-    backgroundColor: color.bgPage,
-    boxShadow: shadow.sm,
+    borderRightColor: colorVar.borderNeutral,
+    backgroundColor: colorVar.bgPage,
+    boxShadow: shadowVar.sm,
     transitionProperty: 'background-color, box-shadow, border-color',
     transitionDuration: '200ms',
     flexShrink: 0,
-    paddingTop: space[3],
-    paddingBottom: space[3]
+    paddingTop: spaceVar[3],
+    paddingBottom: spaceVar[3]
   },
 
   // Logo
   logoLink: {
     width: '2.25rem',
     height: '2.25rem',
-    borderRadius: radius.lg,
+    borderRadius: radiusVar.lg,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: space[4],
-    background: `linear-gradient(135deg, ${color.bgPrimary}, ${color.bgPrimary})`,
+    marginBottom: spaceVar[4],
+    background: `linear-gradient(135deg, ${colorVar.bgPrimary}, ${colorVar.bgPrimary})`,
     flexShrink: 0
   },
   logoSvg: {
     height: '1.125rem',
     width: '1.125rem',
-    fill: color.onPrimary,
-    color: color.onPrimary
+    fill: colorVar.onPrimary,
+    color: colorVar.onPrimary
   },
 
   // Divider
   divider: {
     width: '2rem',
     height: '1px',
-    backgroundColor: color.bgNeutralFaded,
-    marginBottom: space[2]
+    backgroundColor: colorVar.bgNeutralFaded,
+    marginBottom: spaceVar[2]
   },
 
   // Nav
@@ -74,10 +74,10 @@ const collapseStyles = stylex.create({
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
-    paddingLeft: space[2],
-    paddingRight: space[2],
-    gap: space[1],
-    marginBottom: space[3]
+    paddingLeft: spaceVar[2],
+    paddingRight: spaceVar[2],
+    gap: spaceVar[1],
+    marginBottom: spaceVar[3]
   },
   navLink: {
     display: 'flex',
@@ -85,23 +85,23 @@ const collapseStyles = stylex.create({
     width: '2.375rem',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: radius.lg,
-    color: color.fgNeutralFaded,
+    borderRadius: radiusVar.lg,
+    color: colorVar.fgNeutralFaded,
     textDecoration: 'none',
     position: 'relative',
     transitionProperty: 'background-color, color',
     transitionDuration: '150ms',
     ':hover': {
-      backgroundColor: color.bgNeutralFaded,
-      color: color.fgNeutral
+      backgroundColor: colorVar.bgNeutralFaded,
+      color: colorVar.fgNeutral
     }
   },
   navLinkActive: {
-    backgroundColor: color.bgPrimaryFaded,
-    color: color.fgPrimary,
+    backgroundColor: colorVar.bgPrimaryFaded,
+    color: colorVar.fgPrimary,
     ':hover': {
-      backgroundColor: color.bgPrimaryFaded,
-      color: color.fgPrimary
+      backgroundColor: colorVar.bgPrimaryFaded,
+      color: colorVar.fgPrimary
     }
   },
   activeAccent: {
@@ -111,7 +111,7 @@ const collapseStyles = stylex.create({
     bottom: '0.375rem',
     width: '3px',
     borderRadius: '9999px',
-    backgroundColor: color.bgPrimary
+    backgroundColor: colorVar.bgPrimary
   },
   navIcon: {
     height: '1rem',
@@ -125,7 +125,7 @@ const collapseStyles = stylex.create({
     height: '0.4rem',
     width: '0.4rem',
     borderRadius: '9999px',
-    backgroundColor: color.bgCritical
+    backgroundColor: colorVar.bgCritical
   },
 
   // Bottom
@@ -134,14 +134,14 @@ const collapseStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: space[2],
-    paddingTop: space[3],
+    gap: spaceVar[2],
+    paddingTop: spaceVar[3],
     borderTopWidth: 1,
     borderTopStyle: 'solid',
-    borderTopColor: color.bgNeutralFaded,
+    borderTopColor: colorVar.bgNeutralFaded,
     width: '100%',
-    paddingLeft: space[2],
-    paddingRight: space[2]
+    paddingLeft: spaceVar[2],
+    paddingRight: spaceVar[2]
   },
   userLink: {
     display: 'flex',
@@ -149,14 +149,14 @@ const collapseStyles = stylex.create({
     width: '2.375rem',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: radius.lg,
-    color: color.fgNeutralFaded,
+    borderRadius: radiusVar.lg,
+    color: colorVar.fgNeutralFaded,
     textDecoration: 'none',
     transitionProperty: 'background-color, color',
     transitionDuration: '150ms',
     ':hover': {
-      backgroundColor: color.bgNeutralFaded,
-      color: color.fgNeutral
+      backgroundColor: colorVar.bgNeutralFaded,
+      color: colorVar.fgNeutral
     }
   },
   userIcon: {

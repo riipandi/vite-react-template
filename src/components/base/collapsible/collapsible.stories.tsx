@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { fontSize, radius, color } from '../../../styles/tokens.stylex'
+import { fontSizeVar, radiusVar, colorVar } from '#/styles/tokens.stylex'
 import { Text } from '../../extra/typography'
 import { Button } from '../button'
 import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from './collapsible.component'
@@ -48,7 +48,7 @@ export const Playground: Story = {
       <Collapsible {...stylex.props(x.width['100%'])}>
         <CollapsibleTrigger>What is the Illuminati?</CollapsibleTrigger>
         <CollapsiblePanel>
-          <Text {...stylex.props(x.color[color.fgNeutralFaded])}>
+          <Text {...stylex.props(x.color[colorVar.fgNeutralFaded])}>
             The Illuminati was a secret society formed in Bavaria in 1776, allegedly seeking to
             oppose religious influence and abuses of state power.
           </Text>
@@ -73,7 +73,7 @@ export const Indicator: Story = {
       <Collapsible {...stylex.props(x.width['100%'])}>
         <CollapsibleTrigger expandableIndicator>What is the Illuminati?</CollapsibleTrigger>
         <CollapsiblePanel>
-          <Text {...stylex.props(x.color[color.fgNeutralFaded])}>
+          <Text {...stylex.props(x.color[colorVar.fgNeutralFaded])}>
             The Illuminati was a secret society formed in Bavaria in 1776, allegedly seeking to
             oppose religious influence and abuses of state power.
           </Text>
@@ -89,16 +89,16 @@ export const InfoCard: Story = {
     const [isOpen, setIsOpen] = React.useState(false)
     return (
       <div
-        {...stylex.props(x.borderColor[color.borderNeutral])}
+        {...stylex.props(x.borderColor[colorVar.borderNeutral])}
         {...stylex.props(x.width['500px'], x.borderWidth['1px'])}
-        {...stylex.props(x.borderRadius[radius.lg], x.padding['1rem'])}
+        {...stylex.props(x.borderRadius[radiusVar.lg], x.padding['1rem'])}
       >
-        <Text {...stylex.props(x.fontSize[fontSize.sm])}>
+        <Text {...stylex.props(x.fontSize[fontSizeVar.sm])}>
           ReUI is a open-source collection of UI components and animated effects built with React,
           Typescript, Tailwind CSS, and Motion.
         </Text>
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-          <CollapsiblePanel {...stylex.props(x.fontSize[fontSize.sm])}>
+          <CollapsiblePanel {...stylex.props(x.fontSize[fontSizeVar.sm])}>
             Pairs beautifully with shadcn/ui. Save time and build your next project faster.
           </CollapsiblePanel>
           <CollapsibleTrigger
@@ -110,7 +110,7 @@ export const InfoCard: Story = {
               x.justifyContent.flexEnd,
               x.paddingTop['0px'],
               x.paddingBottom['0px'],
-              x.fontSize[fontSize.xs]
+              x.fontSize[fontSizeVar.xs]
             )}
             render={<Button size='xs' color='neutral' variant='outline' />}
           >

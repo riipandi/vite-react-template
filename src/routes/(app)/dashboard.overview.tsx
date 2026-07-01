@@ -4,7 +4,14 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { Button } from '#/components/base/button'
 import { useAuthentication } from '#/guards/auth-provider'
-import { fontSize, fontWeight, radius, shadow, space, color } from '#/styles/tokens.stylex'
+import {
+  fontSizeVar,
+  fontWeightVar,
+  radiusVar,
+  shadowVar,
+  spaceVar,
+  colorVar
+} from '#/styles/tokens.stylex'
 
 export const Route = createFileRoute('/(app)/dashboard/overview')({
   component: DashboardOverviewComponent
@@ -100,53 +107,57 @@ const styles = stylex.create({
     marginRight: 0,
     width: '100%',
     maxWidth: 'none',
-    paddingTop: space[6],
-    paddingBottom: space[6],
-    paddingLeft: space[4],
-    paddingRight: space[4],
+    paddingTop: spaceVar[6],
+    paddingBottom: spaceVar[6],
+    paddingLeft: spaceVar[4],
+    paddingRight: spaceVar[4],
     '@media (min-width: 640px)': {
-      paddingTop: space[8],
-      paddingBottom: space[8],
-      paddingLeft: space[6],
-      paddingRight: space[6]
+      paddingTop: spaceVar[8],
+      paddingBottom: spaceVar[8],
+      paddingLeft: spaceVar[6],
+      paddingRight: spaceVar[6]
     },
     '@media (min-width: 1024px)': {
-      paddingTop: space[10],
-      paddingBottom: space[10],
-      paddingLeft: space[10],
-      paddingRight: space[10]
+      paddingTop: spaceVar[10],
+      paddingBottom: spaceVar[10],
+      paddingLeft: spaceVar[10],
+      paddingRight: spaceVar[10]
     }
   },
   pageHeader: {
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    marginBottom: space[10],
-    gap: space[4]
+    marginBottom: spaceVar[10],
+    gap: spaceVar[4]
   },
-  headerLeft: { display: 'flex', flexDirection: 'column', gap: space[1] },
+  headerLeft: { display: 'flex', flexDirection: 'column', gap: spaceVar[1] },
   pageLabel: {
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.semibold,
+    fontSize: fontSizeVar.xs,
+    fontWeight: fontWeightVar.semibold,
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
-    color: color.fgPrimary
+    color: colorVar.fgPrimary
   },
   pageTitle: {
-    fontSize: fontSize['2xl'],
-    fontWeight: fontWeight.bold,
-    color: color.fgNeutral,
+    fontSize: fontSizeVar['2xl'],
+    fontWeight: fontWeightVar.bold,
+    color: colorVar.fgNeutral,
     lineHeight: '1.2'
   },
-  pageSubtitle: { fontSize: fontSize.sm, color: color.fgNeutralFaded, marginTop: space[1] },
+  pageSubtitle: {
+    fontSize: fontSizeVar.sm,
+    color: colorVar.fgNeutralFaded,
+    marginTop: spaceVar[1]
+  },
 
   // Card
   card: {
-    borderRadius: radius.xl,
+    borderRadius: radiusVar.xl,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: color.borderNeutral,
-    backgroundColor: color.bgElevationBase,
+    borderColor: colorVar.borderNeutral,
+    backgroundColor: colorVar.bgElevationBase,
     overflow: 'hidden',
     transitionProperty: 'background-color, border-color, box-shadow',
     transitionDuration: '200ms'
@@ -156,86 +167,90 @@ const styles = stylex.create({
   statsGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(1, 1fr)',
-    gap: space[5],
-    marginBottom: space[8],
+    gap: spaceVar[5],
+    marginBottom: spaceVar[8],
     '@media (min-width: 640px)': { gridTemplateColumns: 'repeat(2, 1fr)' },
     '@media (min-width: 1024px)': { gridTemplateColumns: 'repeat(4, 1fr)' }
   },
-  statBody: { padding: space[5] },
+  statBody: { padding: spaceVar[5] },
   statTop: {
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    marginBottom: space[3]
+    marginBottom: spaceVar[3]
   },
   statIcon: {
     width: '2.25rem',
     height: '2.25rem',
-    borderRadius: radius.lg,
+    borderRadius: radiusVar.lg,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0
   },
-  iconPrimary: { backgroundColor: color.bgPrimaryFaded, color: color.fgPrimary },
-  iconGreen: { backgroundColor: color.bgPositiveFaded, color: color.fgPositive },
-  iconOrange: { backgroundColor: color.bgWarningFaded, color: color.fgWarning },
-  iconDestructive: { backgroundColor: color.bgCriticalFaded, color: color.fgCritical },
+  iconPrimary: { backgroundColor: colorVar.bgPrimaryFaded, color: colorVar.fgPrimary },
+  iconGreen: { backgroundColor: colorVar.bgPositiveFaded, color: colorVar.fgPositive },
+  iconOrange: { backgroundColor: colorVar.bgWarningFaded, color: colorVar.fgWarning },
+  iconDestructive: { backgroundColor: colorVar.bgCriticalFaded, color: colorVar.fgCritical },
   statValue: {
-    fontSize: fontSize['2xl'],
-    fontWeight: fontWeight.bold,
-    color: color.fgNeutral,
+    fontSize: fontSizeVar['2xl'],
+    fontWeight: fontWeightVar.bold,
+    color: colorVar.fgNeutral,
     lineHeight: '1',
-    marginBottom: space[1]
+    marginBottom: spaceVar[1]
   },
   statLabel: {
-    fontSize: fontSize.xs,
-    color: color.fgNeutralFaded,
-    fontWeight: fontWeight.medium,
+    fontSize: fontSizeVar.xs,
+    color: colorVar.fgNeutralFaded,
+    fontWeight: fontWeightVar.medium,
     textTransform: 'uppercase',
     letterSpacing: '0.04em'
   },
   changePositive: {
     display: 'inline-flex',
     alignItems: 'center',
-    gap: space[1],
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.semibold,
-    color: color.fgPositive,
-    marginTop: space[2]
+    gap: spaceVar[1],
+    fontSize: fontSizeVar.xs,
+    fontWeight: fontWeightVar.semibold,
+    color: colorVar.fgPositive,
+    marginTop: spaceVar[2]
   },
   changeNegative: {
     display: 'inline-flex',
     alignItems: 'center',
-    gap: space[1],
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.semibold,
-    color: color.fgCritical,
-    marginTop: space[2]
+    gap: spaceVar[1],
+    fontSize: fontSizeVar.xs,
+    fontWeight: fontWeightVar.semibold,
+    color: colorVar.fgCritical,
+    marginTop: spaceVar[2]
   },
 
   // Chart
-  chartCard: { padding: space[6], marginBottom: space[10] },
+  chartCard: { padding: spaceVar[6], marginBottom: spaceVar[10] },
   chartHeader: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: space[5]
+    marginBottom: spaceVar[5]
   },
-  sectionTitle: { fontSize: fontSize.md, fontWeight: fontWeight.semibold, color: color.fgNeutral },
+  sectionTitle: {
+    fontSize: fontSizeVar.md,
+    fontWeight: fontWeightVar.semibold,
+    color: colorVar.fgNeutral
+  },
   chartContainer: {
     display: 'flex',
     alignItems: 'flex-end',
-    gap: space[2],
+    gap: spaceVar[2],
     height: '8rem',
-    paddingTop: space[1]
+    paddingTop: spaceVar[1]
   },
   chartBar: {
     flex: 1,
-    borderRadius: radius.md,
-    minHeight: space[2],
+    borderRadius: radiusVar.md,
+    minHeight: spaceVar[2],
     position: 'relative',
-    backgroundColor: color.bgPrimary,
+    backgroundColor: colorVar.bgPrimary,
     transitionProperty: 'height, background-color',
     transitionDuration: '200ms'
   },
@@ -244,9 +259,9 @@ const styles = stylex.create({
     top: '-1.25rem',
     left: '50%',
     transform: 'translateX(-50%)',
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.semibold,
-    color: color.fgNeutralFaded,
+    fontSize: fontSizeVar.xs,
+    fontWeight: fontWeightVar.semibold,
+    color: colorVar.fgNeutralFaded,
     whiteSpace: 'nowrap'
   },
   chartBarLabel: {
@@ -254,30 +269,30 @@ const styles = stylex.create({
     bottom: '-1.25rem',
     left: '50%',
     transform: 'translateX(-50%)',
-    fontSize: fontSize.xs,
-    color: color.fgNeutralFaded,
+    fontSize: fontSizeVar.xs,
+    color: colorVar.fgNeutralFaded,
     whiteSpace: 'nowrap'
   },
 
   // Bottom grid
   bottomGrid: {
     display: 'grid',
-    gap: space[8],
+    gap: spaceVar[8],
     gridTemplateColumns: '1fr',
-    marginTop: space[10],
+    marginTop: spaceVar[10],
     '@media (min-width: 1024px)': { gridTemplateColumns: '1fr 22rem' }
   },
 
   // Activity
-  activityCard: { padding: space[7] },
+  activityCard: { padding: spaceVar[7] },
   activityHeader: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: space[5]
+    marginBottom: spaceVar[5]
   },
-  activityList: { display: 'flex', flexDirection: 'column', gap: space[4] },
-  activityItem: { display: 'flex', alignItems: 'flex-start', gap: space[3] },
+  activityList: { display: 'flex', flexDirection: 'column', gap: spaceVar[4] },
+  activityItem: { display: 'flex', alignItems: 'flex-start', gap: spaceVar[3] },
   activityAvatar: {
     width: '2.25rem',
     height: '2.25rem',
@@ -285,71 +300,79 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: color.bgPrimaryFaded,
-    color: color.fgPrimary,
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.bold,
+    backgroundColor: colorVar.bgPrimaryFaded,
+    color: colorVar.fgPrimary,
+    fontSize: fontSizeVar.xs,
+    fontWeight: fontWeightVar.bold,
     flexShrink: 0,
     letterSpacing: '-0.025em'
   },
   activityContent: {
     display: 'flex',
     flexDirection: 'column',
-    gap: space['0.5'],
+    gap: spaceVar['0.5'],
     minWidth: 0,
     flex: 1
   },
-  activityUser: { fontSize: fontSize.sm, fontWeight: fontWeight.semibold, color: color.fgNeutral },
-  activityAction: { fontSize: fontSize.sm, color: color.fgNeutralFaded },
-  activityTime: { fontSize: fontSize.xs, color: color.fgNeutralFaded, marginTop: space['0.5'] },
+  activityUser: {
+    fontSize: fontSizeVar.sm,
+    fontWeight: fontWeightVar.semibold,
+    color: colorVar.fgNeutral
+  },
+  activityAction: { fontSize: fontSizeVar.sm, color: colorVar.fgNeutralFaded },
+  activityTime: {
+    fontSize: fontSizeVar.xs,
+    color: colorVar.fgNeutralFaded,
+    marginTop: spaceVar['0.5']
+  },
   activityDivider: {
     height: '1px',
-    backgroundColor: color.bgNeutralFaded,
-    marginTop: space[4],
-    marginBottom: space['0']
+    backgroundColor: colorVar.bgNeutralFaded,
+    marginTop: spaceVar[4],
+    marginBottom: spaceVar['0']
   },
 
   // Profile
-  profileCard: { padding: space[7] },
+  profileCard: { padding: spaceVar[7] },
   profileHeader: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: space[3],
-    paddingBottom: space[5],
+    gap: spaceVar[3],
+    paddingBottom: spaceVar[5],
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: color.bgNeutralFaded,
-    marginBottom: space[5]
+    borderBottomColor: colorVar.bgNeutralFaded,
+    marginBottom: spaceVar[5]
   },
   profileAvatar: {
     width: '4rem',
     height: '4rem',
-    borderRadius: radius.full,
+    borderRadius: radiusVar.full,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     background: 'linear-gradient(135deg, oklch(0.6 0.18 17.58), oklch(0.4 0.18 17.58))',
-    color: color.onPrimary,
-    fontSize: fontSize.xl,
-    fontWeight: fontWeight.bold,
-    boxShadow: shadow.md
+    color: colorVar.onPrimary,
+    fontSize: fontSizeVar.xl,
+    fontWeight: fontWeightVar.bold,
+    boxShadow: shadowVar.md
   },
   profileInfo: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: space['0.5']
+    gap: spaceVar['0.5']
   },
   profileName: {
-    fontSize: fontSize.md,
-    fontWeight: fontWeight.semibold,
-    color: color.fgNeutral,
+    fontSize: fontSizeVar.md,
+    fontWeight: fontWeightVar.semibold,
+    color: colorVar.fgNeutral,
     textAlign: 'center'
   },
   profileEmail: {
-    fontSize: fontSize.sm,
-    color: color.fgNeutralFaded,
+    fontSize: fontSizeVar.sm,
+    color: colorVar.fgNeutralFaded,
     textAlign: 'center',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -359,34 +382,42 @@ const styles = stylex.create({
   profileBadge: {
     display: 'inline-flex',
     alignItems: 'center',
-    paddingLeft: space[3],
-    paddingRight: space[3],
-    paddingTop: space[1],
-    paddingBottom: space[1],
-    borderRadius: radius.full,
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.semibold,
-    backgroundColor: color.bgPrimaryFaded,
-    color: color.fgPrimary
+    paddingLeft: spaceVar[3],
+    paddingRight: spaceVar[3],
+    paddingTop: spaceVar[1],
+    paddingBottom: spaceVar[1],
+    borderRadius: radiusVar.full,
+    fontSize: fontSizeVar.xs,
+    fontWeight: fontWeightVar.semibold,
+    backgroundColor: colorVar.bgPrimaryFaded,
+    color: colorVar.fgPrimary
   },
   profileStats: {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: space[2],
-    marginBottom: space[5]
+    gap: spaceVar[2],
+    marginBottom: spaceVar[5]
   },
   profileStat: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: space['0.5'],
-    padding: space[3],
-    borderRadius: radius.lg,
-    backgroundColor: color.bgPage
+    gap: spaceVar['0.5'],
+    padding: spaceVar[3],
+    borderRadius: radiusVar.lg,
+    backgroundColor: colorVar.bgPage
   },
-  profileStatValue: { fontSize: fontSize.md, fontWeight: fontWeight.bold, color: color.fgNeutral },
-  profileStatLabel: { fontSize: fontSize.xs, color: color.fgNeutralFaded, textAlign: 'center' },
-  profileActions: { display: 'flex', flexDirection: 'column', gap: space[2] },
+  profileStatValue: {
+    fontSize: fontSizeVar.md,
+    fontWeight: fontWeightVar.bold,
+    color: colorVar.fgNeutral
+  },
+  profileStatLabel: {
+    fontSize: fontSizeVar.xs,
+    color: colorVar.fgNeutralFaded,
+    textAlign: 'center'
+  },
+  profileActions: { display: 'flex', flexDirection: 'column', gap: spaceVar[2] },
   profileActionLink: { display: 'block', width: '100%' },
   headerActions: { display: 'flex', alignItems: 'center', gap: '0.75rem' }
 })

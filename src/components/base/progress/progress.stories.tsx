@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
+import { fontSizeVar, fontWeightVar } from '#/styles/tokens.stylex'
 import { Progress, ProgressIndicator, ProgressLabel } from '.'
 import { ProgressTrack, ProgressValue } from '.'
-import { fontSize, fontWeight } from '../../../styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Progress',
@@ -52,7 +52,11 @@ const Row = ({ label, children }: React.PropsWithChildren<{ label: string }>) =>
     <span
       {...stylex.props(x.color['#666'])}
       {...stylex.props(x.textTransform.capitalize)}
-      {...stylex.props(x.width['4rem'], x.fontSize[fontSize.xs], x.fontWeight[fontWeight.semibold])}
+      {...stylex.props(
+        x.width['4rem'],
+        x.fontSize[fontSizeVar.xs],
+        x.fontWeight[fontWeightVar.semibold]
+      )}
     >
       {label}
     </span>

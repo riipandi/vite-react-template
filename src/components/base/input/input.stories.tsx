@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
+import { colorVar } from '#/styles/tokens.stylex'
 import { Input } from '.'
-import { color } from '../../../styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Input',
@@ -94,7 +94,7 @@ export const DateWithIcon: Story = {
     <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.75rem'])}>
       <Input type='date' placeholder='Select date' {...stylex.props(x.flex['1'])} />
       <Lucide.Calendar
-        {...stylex.props(x.color[color.fgNeutralFaded])}
+        {...stylex.props(x.color[colorVar.fgNeutralFaded])}
         {...stylex.props(
           x.marginLeft['0.5rem'],
           x.marginRight['0.5rem'],
@@ -104,7 +104,7 @@ export const DateWithIcon: Story = {
       />
       <Input type='date' defaultValue='2025-06-15' {...stylex.props(x.flex['1'])} />
       <Lucide.Calendar
-        {...stylex.props(x.color[color.fgNeutralFaded])}
+        {...stylex.props(x.color[colorVar.fgNeutralFaded])}
         {...stylex.props(
           x.marginLeft['0.5rem'],
           x.marginRight['0.5rem'],
@@ -121,7 +121,7 @@ export const TimeWithIcon: Story = {
     <div {...stylex.props(x.display.flex, x.flexDirection.column, x.gap['0.75rem'])}>
       <Input type='time' placeholder='Select time' {...stylex.props(x.flex['1'])} />
       <Lucide.Clock
-        {...stylex.props(x.color[color.fgNeutralFaded])}
+        {...stylex.props(x.color[colorVar.fgNeutralFaded])}
         {...stylex.props(
           x.marginLeft['0.5rem'],
           x.marginRight['0.5rem'],
@@ -131,7 +131,7 @@ export const TimeWithIcon: Story = {
       />
       <Input type='time' step='1' defaultValue='14:30:45' {...stylex.props(x.flex['1'])} />
       <Lucide.Clock
-        {...stylex.props(x.color[color.fgNeutralFaded])}
+        {...stylex.props(x.color[colorVar.fgNeutralFaded])}
         {...stylex.props(
           x.marginLeft['0.5rem'],
           x.marginRight['0.5rem'],

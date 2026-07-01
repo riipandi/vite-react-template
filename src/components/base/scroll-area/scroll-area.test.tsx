@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest'
 import { ScrollArea } from './scroll-area.component'
 
 describe('ScrollArea', () => {
-  it('renders content', () => {
+  it('renders content', async () => {
     render(<ScrollArea>Content</ScrollArea>)
-    expect(screen.getByText('Content')).toBeDefined()
+    expect(await screen.findByText('Content')).toBeDefined()
   })
 })

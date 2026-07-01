@@ -7,8 +7,11 @@ describe('OTPField', () => {
     render(
       <OTPField length={4}>
         <OTPFieldInput />
+        <OTPFieldInput />
+        <OTPFieldInput />
+        <OTPFieldInput />
       </OTPField>
     )
-    expect(screen.getAllByRole('textbox').length).toBeGreaterThan(0)
+    expect(screen.getAllByRole('textbox')).toHaveLength(4)
   })
 })

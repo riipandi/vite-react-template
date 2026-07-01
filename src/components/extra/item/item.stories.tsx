@@ -1,8 +1,8 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
-import { Button } from '#/components/base/button'
-import { Separator } from '#/components/base/separator'
+import * as Lucide from 'lucide-react'
+import { Avatar, AvatarFallback, AvatarImage } from '../../base/avatar'
+import { Button } from '../../base/button'
+import { Separator } from '../../base/separator'
 import { IconBox } from '../icon-box'
 import { Stack } from '../stack'
 import {
@@ -57,7 +57,7 @@ export const Playground: Story = {
       <Item variant='ghost'>
         <ItemMedia>
           <IconBox>
-            <Icon.BookIcon weight='bold' />
+            <Lucide.Book />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -81,7 +81,7 @@ export const VariantShowcase: Story = {
       <Item>
         <ItemMedia>
           <IconBox>
-            <Icon.CodeBlockIcon weight='bold' />
+            <Lucide.Code />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -92,7 +92,7 @@ export const VariantShowcase: Story = {
       <Item variant='primary'>
         <ItemMedia>
           <IconBox variant='primary'>
-            <Icon.GearIcon weight='bold' />
+            <Lucide.Settings />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -103,7 +103,7 @@ export const VariantShowcase: Story = {
       <Item variant='info'>
         <ItemMedia>
           <IconBox variant='info'>
-            <Icon.InfoIcon weight='bold' />
+            <Lucide.Info />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -114,7 +114,7 @@ export const VariantShowcase: Story = {
       <Item variant='success'>
         <ItemMedia>
           <IconBox variant='success'>
-            <Icon.CheckCircleIcon weight='bold' />
+            <Lucide.CheckCircle />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -125,7 +125,7 @@ export const VariantShowcase: Story = {
       <Item variant='warning'>
         <ItemMedia>
           <IconBox variant='warning'>
-            <Icon.WarningIcon weight='bold' />
+            <Lucide.TriangleAlert />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -136,7 +136,7 @@ export const VariantShowcase: Story = {
       <Item variant='danger'>
         <ItemMedia>
           <IconBox variant='danger'>
-            <Icon.TrashIcon weight='bold' />
+            <Lucide.Trash />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -155,7 +155,7 @@ export const OutlineVariants: Story = {
       <Item variant='primary'>
         <ItemMedia>
           <IconBox>
-            <Icon.GearIcon weight='bold' />
+            <Lucide.Settings />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -166,7 +166,7 @@ export const OutlineVariants: Story = {
       <Item variant='primary-outline'>
         <ItemMedia>
           <IconBox variant='primary'>
-            <Icon.GearIcon weight='bold' />
+            <Lucide.Settings />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -177,7 +177,7 @@ export const OutlineVariants: Story = {
       <Item variant='info-outline'>
         <ItemMedia>
           <IconBox variant='info'>
-            <Icon.InfoIcon weight='bold' />
+            <Lucide.Info />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -188,7 +188,7 @@ export const OutlineVariants: Story = {
       <Item variant='success-outline'>
         <ItemMedia>
           <IconBox variant='success'>
-            <Icon.CheckCircleIcon weight='bold' />
+            <Lucide.CheckCircle />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -199,7 +199,7 @@ export const OutlineVariants: Story = {
       <Item variant='warning-outline'>
         <ItemMedia>
           <IconBox variant='warning'>
-            <Icon.WarningIcon weight='bold' />
+            <Lucide.TriangleAlert />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -210,7 +210,7 @@ export const OutlineVariants: Story = {
       <Item variant='danger-outline'>
         <ItemMedia>
           <IconBox variant='danger'>
-            <Icon.TrashIcon weight='bold' />
+            <Lucide.Trash />
           </IconBox>
         </ItemMedia>
         <ItemContent>
@@ -247,8 +247,8 @@ export const WithItemMeta: Story = {
           </div>
         </ItemContent>
         <ItemAction>
-          <Button mode='icon' size='xs' variant='ghost' pill>
-            <Icon.HeartIcon weight='bold' />
+          <Button size='xs' variant='ghost' pill>
+            <Lucide.Heart />
           </Button>
         </ItemAction>
       </Item>

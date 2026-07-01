@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
-import { Separator } from '#/components/base/separator'
+import { Avatar, AvatarFallback, AvatarImage } from '../../base/avatar'
+import { Separator } from '../../base/separator'
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '../item'
 import { Stack } from './stack.component'
 

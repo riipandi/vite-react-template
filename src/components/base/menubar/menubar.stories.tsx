@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Button } from '#/components/base/button'
+import { Menubar } from '.'
+import { Button } from '../button'
 import {
   Menu,
   MenuItem,
@@ -11,8 +12,7 @@ import {
   MenuSubmenuTrigger,
   MenuSubmenuPopup,
   MenuTrigger
-} from '#/components/base/menu'
-import { Menubar } from '#/components/base/menubar'
+} from '../menu'
 
 const meta = {
   title: 'Base Components/Menubar',

@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Checkbox, CheckboxGroup } from '#/components/base/checkbox'
-import { Field, FieldDescription, FieldError, FieldLabel, FieldItem } from '#/components/base/field'
-import { Fieldset, FieldsetLegend } from '#/components/base/fieldset'
-import { Input } from '#/components/base/input'
-import { Radio, RadioGroup } from '#/components/base/radio'
-import { Separator } from '#/components/base/separator'
-import { Text } from '#/components/extra/typography'
+import { Fieldset, FieldsetLegend } from '.'
+import { Text } from '../../extra/typography'
+import { Checkbox, CheckboxGroup } from '../checkbox'
+import { Field, FieldDescription, FieldError, FieldLabel, FieldItem } from '../field'
+import { Input } from '../input'
+import { Radio, RadioGroup } from '../radio'
+import { Separator } from '../separator'
 
 const meta = {
   title: 'Base Components/Fieldset',

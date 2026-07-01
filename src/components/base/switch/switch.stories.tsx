@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { fn } from 'storybook/test'
-import { Switch } from '#/components/base/switch'
-import { Label } from '#/components/extra/label'
-import { Text } from '#/components/extra/typography'
+import { Switch } from '.'
+import { Label } from '../../extra/label'
+import { Text } from '../../extra/typography'
 
 const meta = {
   title: 'Base Components/Switch',

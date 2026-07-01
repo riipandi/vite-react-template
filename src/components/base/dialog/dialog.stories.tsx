@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { Button } from '#/components/base/button'
 import {
   Dialog,
   DialogBody,
@@ -13,9 +12,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger
-} from '#/components/base/dialog'
-import { IconBox } from '#/components/extra/icon-box'
-import { Textarea } from '#/components/extra/textarea'
+} from '.'
+import { IconBox } from '../../extra/icon-box'
+import { Textarea } from '../../extra/textarea'
+import { Button } from '../button'
 
 const meta = {
   title: 'Base Components/Dialog',

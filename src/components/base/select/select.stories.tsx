@@ -11,7 +11,7 @@ import {
   SelectValue,
   SelectGroup,
   SelectGroupLabel
-} from '#/components/base/select'
+} from '.'
 
 const meta = {
   title: 'Base Components/Select',

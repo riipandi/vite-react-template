@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Radio, RadioGroup } from '#/components/base/radio'
-import { Item, ItemAction, ItemContent, ItemDescription, ItemTitle } from '#/components/extra/item'
-import { Label } from '#/components/extra/label'
+import { Radio, RadioGroup } from '.'
+import { Item, ItemAction, ItemContent, ItemDescription, ItemTitle } from '../../extra/item'
+import { Label } from '../../extra/label'
 
 const meta = {
   title: 'Base Components/Radio',

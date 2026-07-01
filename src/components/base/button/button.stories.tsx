@@ -4,7 +4,7 @@ import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import * as React from 'react'
 import { fn } from 'storybook/test'
-import { color, fontSize, fontWeight } from '#/styles/tokens.stylex'
+import { color, fontSize, fontWeight } from '../../../styles/tokens.stylex'
 import { Separator } from '../separator'
 import { Button } from './button.component'
 

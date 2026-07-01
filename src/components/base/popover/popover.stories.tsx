@@ -2,14 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { Button } from '#/components/base/button'
-import {
-  Popover,
-  PopoverPopup,
-  PopoverDescription,
-  PopoverTitle,
-  PopoverTrigger
-} from '#/components/base/popover'
+import { Popover, PopoverPopup, PopoverDescription, PopoverTitle, PopoverTrigger } from '.'
+import { Button } from '../button'
 
 const meta = {
   title: 'Base Components/Popover',

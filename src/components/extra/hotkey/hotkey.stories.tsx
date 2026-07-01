@@ -1,5 +1,5 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import * as Lucide from 'lucide-react'
 import { Hotkey, HotkeyGroup } from './hotkey.component'
 
 const meta = {
@@ -82,7 +82,7 @@ export const Escape: Story = {
 export const WithIcon: Story = {
   render: () => (
     <Hotkey>
-      <Icon.Command className='size-3' />K
+      <Lucide.Command className='size-3' />K
     </Hotkey>
   )
 }
@@ -90,7 +90,7 @@ export const WithIcon: Story = {
 export const ArrowKey: Story = {
   render: () => (
     <Hotkey>
-      <Icon.ArrowUp className='size-3' />
+      <Lucide.ArrowUp className='size-3' />
     </Hotkey>
   )
 }
@@ -203,16 +203,16 @@ export const ArrowNavigation: Story = {
   render: () => (
     <HotkeyGroup>
       <Hotkey>
-        <Icon.ArrowUp />
+        <Lucide.ArrowUp />
       </Hotkey>
       <Hotkey>
-        <Icon.ArrowDown />
+        <Lucide.ArrowDown />
       </Hotkey>
       <Hotkey>
-        <Icon.ArrowLeft />
+        <Lucide.ArrowLeft />
       </Hotkey>
       <Hotkey>
-        <Icon.ArrowRight />
+        <Lucide.ArrowRight />
       </Hotkey>
     </HotkeyGroup>
   )
@@ -302,13 +302,13 @@ export const NavigationKeys: Story = {
       <div className='flex items-center justify-between gap-8'>
         <span className='text-sm'>Move Up</span>
         <Hotkey>
-          <Icon.ArrowUp />
+          <Lucide.ArrowUp />
         </Hotkey>
       </div>
       <div className='flex items-center justify-between gap-8'>
         <span className='text-sm'>Move Down</span>
         <Hotkey>
-          <Icon.ArrowDown />
+          <Lucide.ArrowDown />
         </Hotkey>
       </div>
       <div className='flex items-center justify-between gap-8'>
@@ -316,7 +316,7 @@ export const NavigationKeys: Story = {
         <HotkeyGroup>
           <Hotkey>⇧</Hotkey>
           <Hotkey>
-            <Icon.ArrowUp />
+            <Lucide.ArrowUp />
           </Hotkey>
         </HotkeyGroup>
       </div>
@@ -325,7 +325,7 @@ export const NavigationKeys: Story = {
         <HotkeyGroup>
           <Hotkey>⇧</Hotkey>
           <Hotkey>
-            <Icon.ArrowDown />
+            <Lucide.ArrowDown />
           </Hotkey>
         </HotkeyGroup>
       </div>
@@ -337,10 +337,7 @@ export const NavigationKeys: Story = {
 export const SearchShortcut: Story = {
   render: () => (
     <div className='bg-background-neutral border-border-neutral flex w-full max-w-sm items-center gap-2 rounded-lg border p-4'>
-      <Icon.MagnifyingGlassIcon
-        weight='bold'
-        className='text-foreground-neutral-faded-foreground size-4'
-      />
+      <Lucide.Search className='text-foreground-neutral-faded-foreground size-4' />
       <span className='text-foreground-neutral-faded-foreground flex-1 text-sm'>Search...</span>
       <HotkeyGroup>
         <Hotkey>⌘</Hotkey>

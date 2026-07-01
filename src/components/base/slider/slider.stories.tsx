@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Slider, SliderThumb, SliderTrack } from '#/components/base/slider'
-import { SliderControl, SliderIndicator } from '#/components/base/slider'
-import { fontSize, fontWeight, color } from '#/styles/tokens.stylex'
+import { Slider, SliderThumb, SliderTrack } from '.'
+import { SliderControl, SliderIndicator } from '.'
+import { fontSize, fontWeight, color } from '../../../styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Slider',

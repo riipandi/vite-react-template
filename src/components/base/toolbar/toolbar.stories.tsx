@@ -2,24 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { Button } from '#/components/base/button'
-import {
-  NumberField,
-  NumberFieldDecrement,
-  NumberFieldGroup,
-  NumberFieldIncrement,
-  NumberFieldInput
-} from '#/components/base/number-field'
-import {
-  Select,
-  SelectItem,
-  SelectList,
-  SelectPopup,
-  SelectTrigger,
-  SelectValue
-} from '#/components/base/select'
-import { Toggle } from '#/components/base/toggle'
-import { ToggleGroup } from '#/components/base/toggle-group'
 import {
   Toolbar,
   ToolbarButton,
@@ -27,8 +9,19 @@ import {
   ToolbarInput,
   ToolbarLink,
   ToolbarSeparator
-} from '#/components/base/toolbar'
-import { color } from '#/styles/tokens.stylex'
+} from '.'
+import { color } from '../../../styles/tokens.stylex'
+import { Button } from '../button'
+import {
+  NumberField,
+  NumberFieldDecrement,
+  NumberFieldGroup,
+  NumberFieldIncrement,
+  NumberFieldInput
+} from '../number-field'
+import { Select, SelectItem, SelectList, SelectPopup, SelectTrigger, SelectValue } from '../select'
+import { Toggle } from '../toggle'
+import { ToggleGroup } from '../toggle-group'
 
 const meta = {
   title: 'Base Components/Toolbar',

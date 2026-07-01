@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { Field, FieldLabel } from '#/components/base/field'
 import {
   NumberField,
   NumberFieldDecrement,
@@ -10,7 +9,8 @@ import {
   NumberFieldIncrement,
   NumberFieldInput,
   NumberFieldScrubArea
-} from '#/components/base/number-field'
+} from '.'
+import { Field, FieldLabel } from '../field'
 
 const meta = {
   title: 'Base Components/NumberField',

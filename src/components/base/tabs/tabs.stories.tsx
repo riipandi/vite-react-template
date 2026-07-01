@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Field, FieldLabel } from '#/components/base/field'
-import { Fieldset, FieldsetLegend } from '#/components/base/fieldset'
-import { Input } from '#/components/base/input'
-import { Tabs, TabsItem, TabsList, TabsPanel } from '#/components/base/tabs'
-import { Text } from '#/components/extra/typography'
+import { Tabs, TabsItem, TabsList, TabsPanel } from '.'
+import { Text } from '../../extra/typography'
+import { Field, FieldLabel } from '../field'
+import { Fieldset, FieldsetLegend } from '../fieldset'
+import { Input } from '../input'
 
 const meta = {
   title: 'Base Components/Tabs',

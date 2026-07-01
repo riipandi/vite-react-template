@@ -3,7 +3,6 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import * as React from 'react'
-import { Button } from '#/components/base/button'
 import {
   Drawer,
   DrawerTrigger,
@@ -11,23 +10,17 @@ import {
   DrawerClose,
   DrawerTitle,
   DrawerDescription
-} from '#/components/base/drawer'
-import { Field, FieldLabel } from '#/components/base/field'
-import { Input } from '#/components/base/input'
-import { ScrollArea } from '#/components/base/scroll-area'
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectPopup,
-  SelectList,
-  SelectItem
-} from '#/components/base/select'
-import { Card, CardBody } from '#/components/extra/card'
-import { Label } from '#/components/extra/label'
-import { Stack } from '#/components/extra/stack'
-import { Textarea } from '#/components/extra/textarea'
-import { fontSize, fontWeight, radius, color } from '#/styles/tokens.stylex'
+} from '.'
+import { fontSize, fontWeight, radius, color } from '../../../styles/tokens.stylex'
+import { Card, CardBody } from '../../extra/card'
+import { Label } from '../../extra/label'
+import { Stack } from '../../extra/stack'
+import { Textarea } from '../../extra/textarea'
+import { Button } from '../button'
+import { Field, FieldLabel } from '../field'
+import { Input } from '../input'
+import { ScrollArea } from '../scroll-area'
+import { Select, SelectTrigger, SelectValue, SelectPopup, SelectList, SelectItem } from '../select'
 const meta = {
   title: 'Base Components/Drawer',
   component: Drawer,

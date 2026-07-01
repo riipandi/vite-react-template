@@ -9,9 +9,9 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger
-} from '#/components/base/navigation-menu'
-import { Heading, Text } from '#/components/extra/typography'
-import { color } from '#/styles/tokens.stylex'
+} from '.'
+import { color } from '../../../styles/tokens.stylex'
+import { Heading, Text } from '../../extra/typography'
 
 const meta = {
   title: 'Base Components/NavigationMenu',

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Separator } from '#/components/base/separator'
-import { Text } from '#/components/extra/typography'
+import { Separator } from '.'
+import { Text } from '../../extra/typography'
 
 const meta = {
   title: 'Base Components/Separator',

@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { Progress, ProgressIndicator, ProgressLabel } from '#/components/base/progress'
-import { ProgressTrack, ProgressValue } from '#/components/base/progress'
-import { fontSize, fontWeight } from '#/styles/tokens.stylex'
+import { Progress, ProgressIndicator, ProgressLabel } from '.'
+import { ProgressTrack, ProgressValue } from '.'
+import { fontSize, fontWeight } from '../../../styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Progress',

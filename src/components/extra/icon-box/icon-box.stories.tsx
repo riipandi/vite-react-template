@@ -1,5 +1,5 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import * as Lucide from 'lucide-react'
 import { IconBox } from './icon-box.component'
 
 const meta = {
@@ -26,13 +26,13 @@ export const Playground: Story = {
   render: () => (
     <div className='flex items-center gap-3'>
       <IconBox>
-        <Icon.GearIcon weight='bold' />
+        <Lucide.Settings />
       </IconBox>
       <IconBox variant='info'>
-        <Icon.InfoIcon weight='bold' />
+        <Lucide.Info />
       </IconBox>
       <IconBox variant='danger'>
-        <Icon.TrashIcon weight='bold' />
+        <Lucide.Trash />
       </IconBox>
     </div>
   )
@@ -43,25 +43,25 @@ export const VariantShowcase: Story = {
   render: () => (
     <div className='flex items-center gap-3'>
       <IconBox>
-        <Icon.PlayIcon weight='bold' />
+        <Lucide.Play />
       </IconBox>
       <IconBox variant='primary'>
-        <Icon.GearIcon weight='bold' />
+        <Lucide.Settings />
       </IconBox>
       <IconBox variant='secondary'>
-        <Icon.GearIcon weight='bold' />
+        <Lucide.Settings />
       </IconBox>
       <IconBox variant='info'>
-        <Icon.InfoIcon weight='bold' />
+        <Lucide.Info />
       </IconBox>
       <IconBox variant='success'>
-        <Icon.CheckCircleIcon weight='bold' />
+        <Lucide.CheckCircle />
       </IconBox>
       <IconBox variant='warning'>
-        <Icon.WarningIcon weight='bold' />
+        <Lucide.TriangleAlert />
       </IconBox>
       <IconBox variant='danger'>
-        <Icon.TrashIcon weight='bold' />
+        <Lucide.Trash />
       </IconBox>
     </div>
   )
@@ -72,25 +72,25 @@ export const CircleVariants: Story = {
   render: () => (
     <div className='flex items-center gap-3'>
       <IconBox circle>
-        <Icon.PlayIcon weight='bold' />
+        <Lucide.Play />
       </IconBox>
       <IconBox variant='primary' circle>
-        <Icon.GearIcon weight='bold' />
+        <Lucide.Settings />
       </IconBox>
       <IconBox variant='secondary' circle>
-        <Icon.GearIcon weight='bold' />
+        <Lucide.Settings />
       </IconBox>
       <IconBox variant='info' circle>
-        <Icon.InfoIcon weight='bold' />
+        <Lucide.Info />
       </IconBox>
       <IconBox variant='success' circle>
-        <Icon.CheckCircleIcon weight='bold' />
+        <Lucide.CheckCircle />
       </IconBox>
       <IconBox variant='warning' circle>
-        <Icon.WarningIcon weight='bold' />
+        <Lucide.TriangleAlert />
       </IconBox>
       <IconBox variant='danger' circle>
-        <Icon.TrashIcon weight='bold' />
+        <Lucide.Trash />
       </IconBox>
     </div>
   )
@@ -101,13 +101,13 @@ export const SizeShowcase: Story = {
   render: () => (
     <div className='flex items-center gap-3'>
       <IconBox size='sm'>
-        <Icon.PlayIcon weight='bold' />
+        <Lucide.Play />
       </IconBox>
       <IconBox size='md'>
-        <Icon.PlayIcon weight='bold' />
+        <Lucide.Play />
       </IconBox>
       <IconBox size='lg'>
-        <Icon.PlayIcon weight='bold' />
+        <Lucide.Play />
       </IconBox>
     </div>
   )

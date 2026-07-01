@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from '#/components/base/preview-card'
-import { Text } from '#/components/extra/typography'
-import { color, fontSize } from '#/styles/tokens.stylex'
+import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from '.'
+import { color, fontSize } from '../../../styles/tokens.stylex'
+import { Text } from '../../extra/typography'
 
 const meta = {
   title: 'Base Components/PreviewCard',

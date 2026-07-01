@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Button } from '#/components/base/button'
-import { Field, FieldError, FieldLabel } from '#/components/base/field'
-import { Fieldset, FieldsetLegend } from '#/components/base/fieldset'
-import { Form } from '#/components/base/form'
-import { Input } from '#/components/base/input'
-import { Text } from '#/components/extra/typography'
+import { Form } from '.'
+import { Text } from '../../extra/typography'
+import { Button } from '../button'
+import { Field, FieldError, FieldLabel } from '../field'
+import { Fieldset, FieldsetLegend } from '../fieldset'
+import { Input } from '../input'
 
 const meta = {
   title: 'Base Components/Form',

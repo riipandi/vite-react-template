@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { Input } from '#/components/base/input'
-import { color } from '#/styles/tokens.stylex'
+import { Input } from '.'
+import { color } from '../../../styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Input',

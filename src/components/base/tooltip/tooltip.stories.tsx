@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Button } from '#/components/base/button'
-import { Tooltip, TooltipPopup, TooltipTrigger } from '#/components/base/tooltip'
+import { Tooltip, TooltipPopup, TooltipTrigger } from '.'
+import { Button } from '../button'
 
 const meta = {
   title: 'Base Components/Tooltip',

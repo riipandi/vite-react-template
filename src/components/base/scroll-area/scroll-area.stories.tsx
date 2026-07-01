@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { ScrollArea } from '#/components/base/scroll-area'
-import { Text } from '#/components/extra/typography'
-import { fontWeight, radius, color, shadow } from '#/styles/tokens.stylex'
+import { ScrollArea } from '.'
+import { fontWeight, radius, color, shadow } from '../../../styles/tokens.stylex'
+import { Text } from '../../extra/typography'
 
 const meta = {
   title: 'Base Components/ScrollArea',

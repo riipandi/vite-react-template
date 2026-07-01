@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from '#/components/base/meter'
-import { fontSize, color } from '#/styles/tokens.stylex'
+import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from '.'
+import { fontSize, color } from '../../../styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/Meter',

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Spinner } from '#/components/extra/spinner'
+import { Spinner } from '.'
 
 const meta = {
   title: 'Extra Components/Spinner',

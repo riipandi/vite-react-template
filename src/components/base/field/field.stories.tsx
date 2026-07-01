@@ -1,16 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Field, FieldDescription, FieldError, FieldLabel } from '#/components/base/field'
-import { Input } from '#/components/base/input'
-import {
-  Select,
-  SelectPopup,
-  SelectItem,
-  SelectList,
-  SelectTrigger,
-  SelectValue
-} from '#/components/base/select'
+import { Field, FieldDescription, FieldError, FieldLabel } from '.'
+import { Input } from '../input'
+import { Select, SelectPopup, SelectItem, SelectList, SelectTrigger, SelectValue } from '../select'
 
 const meta = {
   title: 'Base Components/Field',

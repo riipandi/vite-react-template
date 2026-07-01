@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { OTPField, OTPFieldInput, OTPFieldSeparator } from '#/components/base/otp-field'
-import { fontSize, fontWeight, color } from '#/styles/tokens.stylex'
+import { OTPField, OTPFieldInput, OTPFieldSeparator } from '.'
+import { fontSize, fontWeight, color } from '../../../styles/tokens.stylex'
 
 const meta = {
   title: 'Base Components/OTPField',

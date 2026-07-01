@@ -1,6 +1,5 @@
-import * as Icon from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import * as React from 'react'
+import * as Lucide from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Field, FieldLabel } from '#/components/base/field'
@@ -100,8 +99,8 @@ export const WithAction: Story = {
         <CardTitle>User Profile</CardTitle>
         <CardDescription>Your personal information and settings.</CardDescription>
         <CardHeaderAction>
-          <Button color='neutral' variant='outline' mode='icon' size='sm'>
-            <Icon.SlidersHorizontalIcon weight='bold' />
+          <Button color='neutral' variant='outline' size='sm'>
+            <Lucide.SlidersHorizontal />
           </Button>
         </CardHeaderAction>
       </CardHeader>
@@ -238,8 +237,6 @@ export const WithItem: Story = {
 export const LoginForm: Story = {
   args: {},
   render: () => {
-    const [pending, setPending] = React.useState(false)
-
     return (
       <Card className='w-full max-w-sm'>
         <CardHeader align='center'>
@@ -330,16 +327,7 @@ export const LoginForm: Story = {
               <Text>Turn on notifications</Text>
             </Label>
           </Field>
-          <Button
-            block
-            color='primary'
-            variant='solid'
-            progress={pending}
-            onClick={() => {
-              setPending(true)
-              setTimeout(() => setPending(false), 2000)
-            }}
-          >
+          <Button block color='primary' variant='solid'>
             Sign In
           </Button>
           <Text className='text-center'>

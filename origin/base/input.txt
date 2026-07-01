@@ -1,0 +1,38 @@
+/**
+ * An input component that can be used in forms.
+ *
+ * @see: https://base-ui.com/react/components/input
+ *
+ * BaseUI Anatomy:
+ * <Input />
+ */
+
+import { Input as BaseInput } from '@base-ui/react/input'
+import * as React from 'react'
+import { clx, tv, type VariantProps } from '~/app/utils/variant'
+
+export const inputStyles = tv({
+  base: [
+    'text-foreground-neutral placeholder:text-foreground-neutral-faded/80 shadow-raised h-9 w-full rounded-sm px-3 text-sm transition-[color,box-shadow]',
+    'ring-border-neutral hover:not-data-disabled:not-focus:ring-border-primary focus:ring-border-primary ring focus:ring-2 focus:outline-0',
+    '[&[type="file"]]:text-foreground-neutral-faded file:-ml-1.5 data-disabled:cursor-not-allowed data-disabled:opacity-70 [&[type="file"]]:py-1.5',
+    'file:text-on-background-neutral file:ring-border-neutral hover:file:bg-background-neutral-faded file:mr-3 file:h-6 file:bg-transparent',
+    'file:rounded-xs file:px-1.5 file:text-xs file:font-medium file:ring file:transition-all file:duration-150'
+  ],
+  variants: {
+    variant: {
+      default: 'bg-background-elevation-base',
+      subtle: 'bg-background-elevation-base/60'
+    }
+  },
+  defaultVariants: {
+    variant: 'default'
+  }
+})
+
+export type InputProps = React.ComponentProps<typeof BaseInput> & VariantProps<typeof inputStyles>
+
+export function Input({ className, variant, ...props }: InputProps) {
+  const styles = inputStyles({ variant })
+  return <BaseInput data-slot='input' className={clx(styles, className)} {...props} />
+}

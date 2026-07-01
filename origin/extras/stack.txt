@@ -1,0 +1,41 @@
+/**
+ * A flexible container for arranging child elements with configurable spacing and direction.
+ *
+ * Anatomy:
+ * <Stack>
+ *   {children}
+ * </Stack>
+ */
+
+import { clx, tv, type VariantProps } from '~/app/utils/variant'
+
+export const stackStyles = tv({
+  base: 'flex flex-col flex-wrap gap-2 *:data-[slot=separator]:-my-2',
+  variants: {
+    direction: {
+      row: 'flex-row',
+      column: 'flex-col'
+    },
+    spacing: {
+      none: 'gap-0',
+      sm: 'gap-1.5',
+      md: 'gap-3',
+      lg: 'gap-4.5'
+    }
+  },
+  defaultVariants: {
+    direction: 'column',
+    spacing: 'md'
+  }
+})
+
+export type StackProps = React.ComponentProps<'div'> & VariantProps<typeof stackStyles>
+
+export function Stack({ direction, spacing, children, className, ...props }: StackProps) {
+  const styles = stackStyles({ direction, spacing })
+  return (
+    <div data-slot='stack' className={clx(styles, className)} {...props}>
+      {children}
+    </div>
+  )
+}

@@ -1,0 +1,132 @@
+/**
+ * A styled link component with variant styles and optional icon.
+ *
+ * Anatomy:
+ * <Link>
+ *   <LinkIcon />
+ * </Link>
+ */
+
+import { mergeProps, useRender } from '@base-ui/react'
+import * as Icon from '@phosphor-icons/react'
+import * as React from 'react'
+import { clx, tv, type VariantProps } from '~/app/utils/variant'
+
+export const linkStyles = tv({
+  base: [
+    'font-normal underline-offset-4 transition-all outline-none disabled:pointer-events-none disabled:opacity-50',
+    'focus-visible:ring-border-primary focus-visible:rounded-sm focus-visible:ring-2 focus-visible:outline-0'
+  ],
+  slots: {
+    icon: 'ms-2 inline-flex shrink-0 align-middle'
+  },
+  variants: {
+    variant: {
+      default: {
+        base: 'text-foreground-neutral hover:text-foreground-primary'
+      },
+      muted: {
+        base: 'text-foreground-neutral-faded hover:text-foreground-neutral'
+      },
+      primary: {
+        base: 'text-foreground-primary hover:text-foreground-primary/80'
+      },
+      secondary: {
+        base: 'text-foreground-neutral hover:text-foreground-neutral/80'
+      },
+      danger: {
+        base: 'text-foreground-critical hover:text-foreground-critical/80'
+      }
+    },
+    size: {
+      sm: {
+        base: 'text-xs',
+        icon: '[&_svg:not([class*=size-])]:size-3'
+      },
+      md: {
+        base: 'text-sm',
+        icon: '[&_svg:not([class*=size-])]:size-4'
+      },
+      lg: {
+        base: 'text-base',
+        icon: '[&_svg:not([class*=size-])]:size-5'
+      }
+    },
+    underline: {
+      none: {
+        base: ''
+      },
+      hover: {
+        base: 'hover:underline'
+      },
+      always: {
+        base: 'underline'
+      }
+    }
+  },
+  defaultVariants: {
+    variant: 'default',
+    size: 'md',
+    underline: 'hover'
+  }
+})
+
+type LinkStyles = VariantProps<typeof linkStyles>
+
+interface LinkProps extends useRender.ComponentProps<'a'>, LinkStyles {
+  render?: useRender.ComponentProps<'a'>['render']
+}
+
+export function Link(props: LinkProps) {
+  const { render, className, children, variant, underline, size, href = '#', ...otherProps } = props
+
+  const slots = React.useMemo(
+    () => linkStyles({ variant, underline, size }),
+    [variant, underline, size]
+  )
+
+  // If render is provided and it's a React element, render it directly
+  if (render && React.isValidElement(render)) {
+    return React.cloneElement(render, {
+      className: slots.base({ className }),
+      children,
+      ...otherProps
+    } as any)
+  }
+
+  return useRender({
+    render,
+    defaultTagName: 'a',
+    props: mergeProps(
+      {
+        'data-slot': 'link',
+        href,
+        className: slots.base({ className }),
+        children
+      },
+      otherProps
+    )
+  })
+}
+
+export interface LinkIconProps extends useRender.ComponentProps<'span'> {
+  render?: useRender.ComponentProps<'span'>['render']
+}
+
+export function LinkIcon(props: LinkIconProps) {
+  const { render, className, children, ...otherProps } = props
+
+  return useRender({
+    render,
+    defaultTagName: 'span',
+    props: mergeProps(
+      {
+        'data-slot': 'link-icon',
+        'aria-hidden': 'true',
+        className: clx('ms-2 -mt-0.5 inline-flex shrink-0 align-middle', className),
+        children: children || <Icon.ArrowSquareOutIcon weight='bold' className='size-4' />
+      },
+      otherProps
+    )
+  })
+}

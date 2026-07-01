@@ -1,0 +1,104 @@
+/**
+ * An easily stylable checkbox component.
+ *
+ * @see: https://base-ui.com/react/components/checkbox
+ * @see: https://base-ui.com/react/components/checkbox-group
+ *
+ * BaseUI Anatomy for Checkbox:
+ * <Checkbox.Root>
+ *   <Checkbox.Indicator />
+ * </Checkbox.Root>
+ *
+ * BaseUI Anatomy for Checkbox Group:
+ * <CheckboxGroup>
+ *   <Checkbox.Root />
+ * </CheckboxGroup>
+ */
+
+import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox'
+import { CheckboxGroup as BaseCheckboxGroup } from '@base-ui/react/checkbox-group'
+import { useRender } from '@base-ui/react/use-render'
+import { clx, tv } from '~/app/utils/variant'
+
+export const checkboxStyles = tv({
+  slots: {
+    root: [
+      'border-border-neutral bg-background-elevation-base shadow-raised flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-xs border',
+      'outline-primary focus:outline-0 focus-visible:outline-2 focus-visible:outline-offset-2',
+      'data-checked:bg-background-primary data-checked:border-border-primary',
+      'hover:border-border-primary transition-colors duration-75',
+      'data-disabled:cursor-not-allowed data-disabled:opacity-50'
+    ],
+    indicator: 'flex data-unchecked:hidden'
+  }
+})
+
+export type CheckboxGroupProps = React.ComponentProps<typeof BaseCheckboxGroup>
+export type CheckboxGroupLabelProps = useRender.ComponentProps<'span'>
+export type CheckboxRootProps = React.ComponentProps<typeof BaseCheckbox.Root>
+
+export function CheckboxGroup({ className, ...props }: CheckboxGroupProps) {
+  return (
+    <BaseCheckboxGroup
+      data-slot='checkbox-group'
+      className={clx('flex flex-col gap-2', className)}
+      {...props}
+    />
+  )
+}
+
+export function CheckboxGroupLabel({ render, ...props }: CheckboxGroupLabelProps) {
+  return useRender({
+    defaultTagName: 'span',
+    render,
+    props: {
+      'data-slot': 'checkbox-group-label',
+      className: clx('text-foreground-neutral text-sm font-medium', props.className),
+      ...props
+    }
+  })
+}
+
+export function Checkbox({ className, ...props }: CheckboxRootProps) {
+  const styles = checkboxStyles()
+  return (
+    <BaseCheckbox.Root data-slot='checkbox' className={clx(styles.root(), className)} {...props}>
+      <BaseCheckbox.Indicator
+        className={styles.indicator()}
+        render={(indicatorProps, state) => (
+          <span {...indicatorProps}>
+            {state.indeterminate ? (
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='3'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                className='size-3'
+              >
+                <line x1='5' y1='12' x2='19' y2='12' />
+              </svg>
+            ) : (
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                fill='none'
+                stroke='currentColor'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='3'
+                className='text-on-background-primary size-3'
+                viewBox='0 0 24 24'
+              >
+                <path d='M20 6 9 17l-5-5'></path>
+              </svg>
+            )}
+          </span>
+        )}
+      />
+    </BaseCheckbox.Root>
+  )
+}

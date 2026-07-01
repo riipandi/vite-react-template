@@ -1,0 +1,174 @@
+/**
+ * A numeric input element with increment and decrement buttons, and a scrub area.
+ *
+ * @see: https://base-ui.com/react/components/number-field
+ *
+ * BaseUI Anatomy:
+ * <NumberField.Root>
+ *   <NumberField.ScrubArea>
+ *     <NumberField.ScrubAreaCursor />
+ *   </NumberField.ScrubArea>
+ *   <NumberField.Group>
+ *     <NumberField.Decrement />
+ *     <NumberField.Input />
+ *     <NumberField.Increment />
+ *   </NumberField.Group>
+ * </NumberField.Root>
+ */
+
+import { NumberField as BaseNumberField } from '@base-ui/react/number-field'
+import { clx, tv, type VariantProps } from '~/app/utils/variant'
+
+const numberFieldStyles = tv({
+  base: [
+    'flex flex-col items-start gap-2',
+    'data-disabled:cursor-not-allowed data-disabled:opacity-70'
+  ],
+  slots: {
+    scrubArea: 'cursor-ew-resize',
+    group: [
+      'flex h-9 rounded',
+      'hover:not-focus-within:not-data-disabled:ring-border-primary',
+      'focus-within:ring-border-primary focus-within:ring-2 focus-within:outline-0',
+      '[&_svg:not([class*=size-])]:size-4',
+      '*:[button]:flex *:[button]:size-9 *:[button]:items-center *:[button]:justify-center',
+      '*:[button]:transition-all *:[button]:duration-100',
+      '*:[button]:text-foreground-neutral *:[button]:cursor-pointer',
+      '*:[button]:disabled:cursor-not-allowed *:[button]:disabled:opacity-70',
+      '*:first:rounded-l *:last:rounded-r'
+    ],
+    decrement: 'bg-transparent',
+    input: [
+      'z-10 w-16 px-2 text-center text-xs outline-none',
+      'text-foreground-neutral placeholder:text-foreground-neutral-faded/80 transition-all',
+      'disabled:pointer-events-none disabled:opacity-70'
+    ],
+    increment: 'bg-transparent'
+  },
+  variants: {
+    variant: {
+      default: {
+        group: [
+          'ring-border-neutral bg-background-elevation-base shadow-raised ring',
+          '*:[button]:hover:not-[[disabled]]:bg-background-neutral-faded'
+        ]
+      },
+      ghost: {
+        group: [
+          'hover:bg-background-neutral-faded bg-transparent',
+          '*:[button]:hover:not-[[disabled]]:bg-background-neutral'
+        ]
+      }
+    }
+  },
+  defaultVariants: {
+    variant: 'default'
+  }
+})
+
+export type NumberFieldProps = React.ComponentProps<typeof BaseNumberField.Root> &
+  VariantProps<typeof numberFieldStyles>
+
+export function NumberField({ className, ...props }: NumberFieldProps) {
+  const styles = numberFieldStyles()
+  return (
+    <BaseNumberField.Root
+      data-slot='number-field'
+      className={clx(styles.base(), className)}
+      {...props}
+    />
+  )
+}
+
+export function NumberFieldScrubArea({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof BaseNumberField.ScrubArea>) {
+  const styles = numberFieldStyles()
+  return (
+    <BaseNumberField.ScrubArea
+      data-slot='number-field-scrub-area'
+      className={clx(styles.scrubArea(), className)}
+      {...props}
+    >
+      {children}
+      <NumberFieldScrubAreaCursor />
+    </BaseNumberField.ScrubArea>
+  )
+}
+
+export function NumberFieldScrubAreaCursor({
+  ...props
+}: React.ComponentProps<typeof BaseNumberField.ScrubAreaCursor>) {
+  return (
+    <BaseNumberField.ScrubAreaCursor data-slot='number-field-scrub-area-cursor' {...props}>
+      <svg
+        width='26'
+        height='14'
+        viewBox='0 0 24 14'
+        fill='black'
+        stroke='white'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        <path d='M19.5 5.5L6.49737 5.51844V2L1 6.9999L6.5 12L6.49737 8.5L19.5 8.5V12L25 6.9999L19.5 2V5.5Z' />
+      </svg>
+    </BaseNumberField.ScrubAreaCursor>
+  )
+}
+
+export type NumberFieldGroupProps = React.ComponentProps<typeof BaseNumberField.Group> &
+  VariantProps<typeof numberFieldStyles>
+
+export function NumberFieldGroup({ className, variant, ...props }: NumberFieldGroupProps) {
+  const styles = numberFieldStyles({ variant })
+  return (
+    <BaseNumberField.Group
+      data-slot='number-field-group'
+      className={clx(styles.group(), className)}
+      {...props}
+    />
+  )
+}
+
+export function NumberFieldDecrement({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseNumberField.Decrement>) {
+  const styles = numberFieldStyles()
+  return (
+    <BaseNumberField.Decrement
+      data-slot='number-field-decrement'
+      className={clx(styles.decrement(), className)}
+      {...props}
+    />
+  )
+}
+
+export function NumberFieldIncrement({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseNumberField.Increment>) {
+  const styles = numberFieldStyles()
+  return (
+    <BaseNumberField.Increment
+      data-slot='number-field-increment'
+      className={clx(styles.increment(), className)}
+      {...props}
+    />
+  )
+}
+
+export function NumberFieldInput({
+  className,
+  ...props
+}: React.ComponentProps<typeof BaseNumberField.Input>) {
+  const styles = numberFieldStyles()
+  return (
+    <BaseNumberField.Input
+      data-slot='number-field-input'
+      className={clx(styles.input(), className)}
+      {...props}
+    />
+  )
+}

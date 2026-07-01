@@ -1,0 +1,23 @@
+/**
+ * A form label component for associating text with form controls.
+ *
+ * Anatomy:
+ * <Label />
+ */
+
+import { clx, tv } from '~/app/utils/variant'
+
+export const labelStyles = tv({
+  base: [
+    'text-foreground-neutral flex items-center gap-2 text-sm',
+    'cursor-pointer has-[>[disabled],>[data-disabled]]:cursor-not-allowed',
+    '[&_p[data-slot=text]]:not-first:mt-0'
+  ]
+})
+
+export type LabelProps = React.ComponentProps<'label'>
+
+export function Label({ className, ...props }: LabelProps) {
+  const styles = labelStyles()
+  return <label data-slot='label' className={clx(styles, className)} {...props} />
+}

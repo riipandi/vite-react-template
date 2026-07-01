@@ -1,0 +1,105 @@
+/**
+ * A container component for grouping related content and actions.
+ *
+ * Anatomy:
+ * <Card>
+ *   <CardHeader>
+ *     <CardTitle />
+ *     <CardDescription />
+ *   </CardHeader>
+ *   <CardBody />
+ *   <CardFooter />
+ * </Card>
+ */
+
+import * as React from 'react'
+import { tv, type VariantProps } from '~/app/utils/variant'
+
+export const cardStyles = tv({
+  base: 'text-foreground-neutral',
+  slots: {
+    header: [
+      'grid grid-cols-[1fr_auto] gap-x-2 gap-y-2 px-6 py-4',
+      'has-[svg]:grid-cols-[auto_1fr_auto]',
+      'has-data-[slot=iconbox]:*:data-[slot=card-description]:col-start-2',
+      '**:[svg,[data-slot=iconbox]]:row-span-2',
+      '*:data-[slot=iconbox]:row-span-2',
+      '*:data-[slot=card-description]:row-start-2',
+      'not-[:has([data-slot=iconbox])]:items-center',
+      '*:[[data-slot=card-title]:not(:has(+[data-slot=card-description]))]:row-span-2'
+    ],
+    headerAction: 'col-start-3 row-span-2 row-start-1 ml-auto flex items-center gap-2',
+    title: 'text-lg leading-tight font-semibold',
+    description: 'text-foreground-neutral-faded text-sm',
+    body: [
+      'p-6 **:data-[slot=item]:px-5 *:data-[slot=stack]:-m-5',
+      '*:data-[slot=table-container]:-m-5 **:data-[slot=table-head]:border-t-0',
+      'not-[:has(caption)]:[&_tbody>tr:last-child>td:first-child]:rounded-bl-lg',
+      'not-[:has(caption)]:[&_tbody>tr:last-child>td:last-child]:rounded-br-lg'
+    ],
+    footer: [
+      'flex items-center gap-2',
+      'bg-background-elevation-raised border-border-neutral-faded rounded-b-md border-t px-6 py-4'
+    ]
+  },
+  variants: {
+    variant: {
+      default: {
+        base: 'ring-border-neutral shadow-raised bg-background-elevation-base rounded-md ring',
+        header: 'border-border-neutral-faded border-b'
+      },
+      ghost: {
+        header: 'border-none'
+      }
+    },
+    align: {
+      default: {},
+      center: { header: 'justify-center text-center' },
+      right: { header: 'justify-end' }
+    }
+  },
+  defaultVariants: {
+    variant: 'default',
+    align: 'default'
+  }
+})
+
+export type CardProps = React.ComponentProps<'div'> & VariantProps<typeof cardStyles>
+export type CardHeaderProps = React.ComponentProps<'header'> & VariantProps<typeof cardStyles>
+
+export function Card({ className, variant, ...props }: CardProps) {
+  const styles = cardStyles({ variant })
+  return <div data-slot='card' className={styles.base({ className })} {...props} />
+}
+
+export function CardHeader({ align, className, ...props }: CardHeaderProps) {
+  const styles = cardStyles({ align })
+  return <header data-slot='card-header' className={styles.header({ className })} {...props} />
+}
+
+export function CardHeaderAction({ className, ...props }: React.ComponentProps<'div'>) {
+  const styles = cardStyles()
+  return (
+    <div data-slot='card-header-action' className={styles.headerAction({ className })} {...props} />
+  )
+}
+
+export function CardTitle({ className, ...props }: React.ComponentProps<'h3'>) {
+  const styles = cardStyles()
+  return <h3 data-slot='card-title' className={styles.title({ className })} {...props} />
+}
+
+export function CardDescription({ className, ...props }: React.ComponentProps<'p'>) {
+  const styles = cardStyles()
+  return <p data-slot='card-description' className={styles.description({ className })} {...props} />
+}
+
+export function CardBody({ className, ...props }: React.ComponentProps<'div'>) {
+  const styles = cardStyles()
+  return <div data-slot='card-body' className={styles.body({ className })} {...props} />
+}
+
+export function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
+  const styles = cardStyles()
+  return <div data-slot='card-footer' className={styles.footer({ className })} {...props} />
+}

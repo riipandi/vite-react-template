@@ -1,0 +1,38 @@
+import * as React from 'react'
+import { tv, type VariantProps } from '~/app/utils/variant'
+
+export const hotkeyStyles = tv({
+  base: [
+    'text-foreground-neutral-faded pointer-events-none inline-flex h-5 w-fit min-w-5',
+    'items-center justify-center gap-1 rounded-xs px-1 font-sans text-xs font-medium select-none',
+    'in-data-[slot=tooltip-content]:bg-background-page/20 in-data-[slot=tooltip-content]:text-foreground-neutral-faded',
+    'dark:in-data-[slot=tooltip-content]:bg-background-page/10 [&_svg:not([class*="size-"])]:size-3'
+  ],
+  slots: {
+    group: 'inline-flex items-center gap-1'
+  },
+  variants: {
+    variant: {
+      default: 'bg-background-neutral shadow-xs inset-shadow-2xs inset-shadow-white/15',
+      outline: 'ring-border-neutral ring',
+      ghost: 'ring-0'
+    }
+  },
+  defaultVariants: {
+    variant: 'default'
+  }
+})
+
+export type HotkeyVariantProps = VariantProps<typeof hotkeyStyles>
+
+interface HotkeyProps extends React.ComponentProps<'kbd'>, HotkeyVariantProps {}
+
+export function Hotkey({ variant, className, ...props }: HotkeyProps) {
+  const { base } = hotkeyStyles({ variant })
+  return <kbd data-slot='kbd' className={base({ className })} {...props} />
+}
+
+export function HotkeyGroup({ className, ...props }: React.ComponentProps<'div'>) {
+  const { group } = hotkeyStyles()
+  return <kbd data-slot='kbd-group' className={group({ className })} {...props} />
+}

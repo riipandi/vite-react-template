@@ -1,0 +1,499 @@
+/**
+ * Toast component built on BaseUI React with configurable positioning.
+ * Supports both stacked (notifications) and anchored (tooltips) toasts.
+ *
+ * @see: https://base-ui.com/react/components/toast
+ *
+ * BaseUI Anatomy:
+ * <Toast.Provider>
+ *   <Toast.Portal>
+ *     <Toast.Viewport>
+ *       // Stacked toasts
+ *       <Toast.Root>
+ *         <Toast.Content>
+ *           <Toast.Title />
+ *           <Toast.Description />
+ *           <Toast.Action />
+ *           <Toast.Close />
+ *         </Toast.Content>
+ *       </Toast.Root>
+ *       // Anchored toasts
+ *       <Toast.Positioner>
+ *         <Toast.Root>
+ *           <Toast.Arrow />
+ *           <Toast.Content>
+ *             <Toast.Title />
+ *             <Toast.Description />
+ *             <Toast.Action />
+ *             <Toast.Close />
+ *           </Toast.Content>
+ *         </Toast.Root>
+ *       </Toast.Positioner>
+ *     </Toast.Viewport>
+ *   </Toast.Portal>
+ * </Toast.Provider>
+ */
+
+import { Toast as BaseToast, type ToastObject } from '@base-ui/react/toast'
+import * as Icon from '@phosphor-icons/react'
+import * as React from 'react'
+import { clx, tv } from '~/app/utils/variant'
+import { buttonStyles } from './button'
+
+export type ToastPosition =
+  | 'top-left'
+  | 'top-center'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'bottom-right'
+export type ToastTimeout = number
+
+type ToastSwipeDirection = 'up' | 'down' | 'left' | 'right'
+
+const toastManagers = {
+  'top-left': BaseToast.createToastManager(),
+  'top-center': BaseToast.createToastManager(),
+  'top-right': BaseToast.createToastManager(),
+  'bottom-left': BaseToast.createToastManager(),
+  'bottom-center': BaseToast.createToastManager(),
+  'bottom-right': BaseToast.createToastManager()
+}
+const anchoredToastManager = BaseToast.createToastManager()
+
+const ToastConfigContext = React.createContext<{
+  position: ToastPosition
+  showCloseButton: boolean
+}>({
+  position: 'bottom-right',
+  showCloseButton: false
+})
+
+export const toastStyles = tv({
+  slots: {
+    viewport: 'fixed z-50 flex',
+    viewportPosition: '',
+    root: [
+      '[--gap:0.75rem] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))]',
+      '[--height:var(--toast-frontmost-height,var(--toast-height))]',
+      // Default offset for bottom positions (stack upward with negative index)
+      '[--offset-y:calc(var(--toast-offset-y)*-1+calc(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))]',
+      // Top positions: stack downward with positive index
+      'data-[position^=top]:[--offset-y:calc(var(--toast-offset-y)+calc(var(--toast-index)*var(--gap))+var(--toast-swipe-movement-y))]',
+      'absolute z-[calc(1000-var(--toast-index))] m-0 w-[calc(100%-2rem)] sm:w-sm',
+      'h-auto min-h-fit',
+      'border-border-neutral bg-background-page rounded-md border p-1 shadow-lg select-none',
+      'after:absolute after:h-[calc(var(--gap)+1px)] after:w-full after:content-[""]',
+      // Default transform for bottom positions (stack upward)
+      'transform-[translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)-(var(--toast-index)*var(--peek))-(var(--shrink)*var(--height))))_scale(var(--scale))]',
+      // Top positions: stack downward (positive index multiplication)
+      'data-[position^=top]:transform-[translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)+(var(--toast-index)*var(--peek))+(var(--shrink)*var(--height))))_scale(var(--scale))]',
+      'data-expanded:transform-[translateX(var(--toast-swipe-movement-x))_translateY(var(--offset-y))]',
+      'data-[position^=top]:data-expanded:transform-[translateX(var(--toast-swipe-movement-x))_translateY(var(--offset-y))]',
+      // Starting styles
+      'data-starting-style:opacity-0',
+      // Bottom positions start from below
+      'data-[position^=bottom]:data-starting-style:transform-[translateY(100%)]',
+      // Top positions start from above
+      'data-[position^=top]:data-starting-style:transform-[translateY(-100%)]',
+      'data-behind:opacity-0',
+      'data-ending-style:opacity-0',
+      'data-limited:opacity-0',
+      '[transition:transform_0.3s_ease-out,opacity_0.2s,height_0.15s]',
+      // Ending styles - bottom positions exit downward
+      '&[data-ending-style]:not([data-limited]):not([data-swipe-direction]):data-[position^=bottom]:[transform:translateY(150%)]',
+      // Ending styles - top positions exit upward
+      '&[data-ending-style]:not([data-limited]):not([data-swipe-direction]):data-[position^=top]:[transform:translateY(-150%)]',
+      // Swipe directions for bottom positions
+      '&[data-swipe-direction=down]:data-[ending-style]:data-[position^=bottom]:[transform:translateY(calc(var(--toast-swipe-movement-y)+150%))]',
+      '&[data-swipe-direction=up]:data-[ending-style]:data-[position^=bottom]:[transform:translateY(calc(var(--toast-swipe-movement-y)-150%))]',
+      // Swipe directions for top positions
+      '&[data-swipe-direction=down]:data-[ending-style]:data-[position^=top]:[transform:translateY(calc(var(--toast-swipe-movement-y)+150%))]',
+      '&[data-swipe-direction=up]:data-[ending-style]:data-[position^=top]:[transform:translateY(calc(var(--toast-swipe-movement-y)-150%))]',
+      // Horizontal swipe works for all positions
+      '&[data-swipe-direction=left]:data-[ending-style]:[transform:translateX(calc(var(--toast-swipe-movement-x)-150%))_translateY(var(--offset-y))]',
+      '&[data-swipe-direction=right]:data-[ending-style]:[transform:translateX(calc(var(--toast-swipe-movement-x)+150%))_translateY(var(--offset-y))]'
+    ],
+    rootPosition: '',
+    anchoredViewport: 'outline-0',
+    anchoredPositioner: 'z-[calc(1000-var(--toast-index))]',
+    anchoredRoot: [
+      'group flex w-max origin-(--transform-origin) flex-col px-2 outline-none',
+      'bg-background-page border-border-neutral rounded border shadow transition-[transform,scale,opacity]',
+      'data-ending-style:scale-90 data-ending-style:opacity-0',
+      'data-starting-style:scale-90 data-starting-style:opacity-0'
+    ],
+    content: [
+      'overflow-hidden transition-opacity duration-250',
+      'data-behind:pointer-events-none data-behind:opacity-0',
+      'data-expanded:pointer-events-auto data-expanded:opacity-100',
+      'relative flex items-start gap-2 p-2.5'
+    ],
+    anchoredContent: 'flex gap-2 p-2 [&_svg]:-ml-1.5',
+    bodyWithClose: 'pr-8',
+    body: 'flex min-w-0 flex-1 flex-col gap-3',
+    textContainer: 'flex min-w-0 flex-1 flex-col gap-0.5',
+    icon: 'shrink-0 *:[svg]:h-5 *:[svg]:w-4',
+    iconWrapper: 'p-0.5',
+    title: 'text-foreground-neutral text-sm/snug font-medium',
+    description: 'text-foreground-neutral-faded text-sm/normal',
+    action: 'shrink-0 self-start',
+    closeButton: [
+      'text-foreground-neutral-faded hover:bg-background-neutral-faded hover:text-foreground-neutral absolute top-1.5 right-1.5 flex size-7 shrink-0',
+      'items-center justify-center rounded-xs border-none bg-transparent transition-opacity [&_svg]:size-4'
+    ],
+    arrow: 'fill-background-page text-border-neutral',
+    slotViewport: 'data-[slot=toast-viewport]',
+    slotToast: 'data-[slot=toast]',
+    slotContent: 'data-[slot=toast-content]',
+    slotBody: 'data-[slot=toast-body]',
+    slotTextContainer: 'data-[slot=toast-text-container]',
+    slotTitle: 'data-[slot=toast-title]',
+    slotDescription: 'data-[slot=toast-description]',
+    slotAction: 'data-[slot=toast-action]',
+    slotClose: 'data-[slot=toast-close]',
+    slotIcon: 'data-[slot=toast-icon]'
+  },
+  variants: {
+    position: {
+      'top-left': {
+        // flex-col-reverse: first toast stays at top, new ones added below
+        viewportPosition: 'inset-s-3 top-3 flex-col-reverse',
+        rootPosition: 'top-0 left-0 origin-top after:inset-s-0 after:top-full'
+      },
+      'top-center': {
+        viewportPosition: 'inset-s-1/2 top-3 -translate-x-1/2 flex-col-reverse',
+        rootPosition:
+          'top-0 left-1/2 origin-top -translate-x-1/2 after:inset-s-0 after:top-full after:translate-x-1/2'
+      },
+      'top-right': {
+        viewportPosition: 'inset-e-3 top-3 flex-col-reverse',
+        rootPosition: 'top-0 right-0 origin-top after:inset-s-0 after:top-full'
+      },
+      'bottom-left': {
+        // flex-col: first toast stays at bottom, new ones added above
+        viewportPosition: 'inset-s-3 bottom-3 flex-col',
+        rootPosition: 'bottom-0 left-0 origin-bottom after:inset-s-0 after:top-full'
+      },
+      'bottom-center': {
+        viewportPosition: 'inset-s-1/2 bottom-3 -translate-x-1/2 flex-col',
+        rootPosition:
+          'bottom-0 left-1/2 origin-bottom -translate-x-1/2 after:inset-s-0 after:top-full after:translate-x-1/2'
+      },
+      'bottom-right': {
+        viewportPosition: 'inset-e-3 bottom-3 flex-col',
+        rootPosition: 'right-0 bottom-0 origin-bottom after:inset-s-0 after:top-full'
+      }
+    },
+    type: {
+      success: {
+        iconWrapper: '*:[svg]:fill-foreground-positive/20 *:[svg]:stroke-foreground-positive'
+      },
+      info: {
+        iconWrapper: '*:[svg]:fill-foreground-primary/20 *:[svg]:stroke-foreground-primary'
+      },
+      warning: {
+        iconWrapper: '*:[svg]:fill-foreground-warning/20 *:[svg]:stroke-foreground-warning'
+      },
+      error: {
+        iconWrapper: '*:[svg]:fill-foreground-critical/20 *:[svg]:stroke-foreground-critical'
+      }
+    }
+  },
+  defaultVariants: {
+    position: 'bottom-right'
+  }
+})
+
+export interface ToastProps extends Omit<
+  React.ComponentProps<typeof BaseToast.Provider>,
+  'toastManager'
+> {
+  position?: ToastPosition
+  timeout?: ToastTimeout
+  limit?: number
+  showCloseButton?: boolean
+}
+
+export function Toast({
+  timeout = 3000,
+  limit = 5,
+  showCloseButton = false,
+  ...props
+}: ToastProps) {
+  return (
+    <>
+      {Object.entries(toastManagers).map(([pos, manager]) => (
+        <BaseToast.Provider
+          key={pos}
+          toastManager={manager}
+          timeout={timeout}
+          limit={limit}
+          {...props}
+        >
+          <ToastConfigContext.Provider value={{ position: pos as ToastPosition, showCloseButton }}>
+            <StackedToasts />
+          </ToastConfigContext.Provider>
+        </BaseToast.Provider>
+      ))}
+      <BaseToast.Provider toastManager={anchoredToastManager}>
+        <AnchoredToasts />
+      </BaseToast.Provider>
+    </>
+  )
+}
+
+function getDefaultSwipeDirection(position: ToastPosition): ToastSwipeDirection {
+  switch (position) {
+    case 'top-center':
+      return 'up'
+    case 'top-right':
+      return 'right'
+    case 'top-left':
+      return 'left'
+    case 'bottom-center':
+      return 'down'
+    case 'bottom-left':
+      return 'left'
+    case 'bottom-right':
+    default:
+      return 'right'
+  }
+}
+
+function StackedToasts() {
+  const { toasts } = BaseToast.useToastManager()
+  const { position: globalPosition, showCloseButton } = React.useContext(ToastConfigContext)
+  const styles = toastStyles()
+
+  const toastsByPosition = toasts.reduce(
+    (groups, toast) => {
+      const toastPosition = (toast.data?.position || globalPosition) as ToastPosition
+      if (!groups[toastPosition]) {
+        groups[toastPosition] = []
+      }
+      groups[toastPosition].push(toast)
+      return groups
+    },
+    {} as Record<ToastPosition, typeof toasts>
+  )
+
+  return (
+    <>
+      {Object.entries(toastsByPosition).map(([toastPosition, positionToasts]) => {
+        const swipeDirection = getDefaultSwipeDirection(toastPosition as ToastPosition)
+        const positionStyles = toastStyles({ position: toastPosition as ToastPosition })
+
+        return (
+          <BaseToast.Portal key={toastPosition}>
+            <BaseToast.Viewport
+              className={clx(
+                styles.viewport(),
+                positionStyles.viewportPosition(),
+                styles.slotViewport()
+              )}
+              data-position={toastPosition}
+            >
+              {positionToasts.map((toast, index) => {
+                const shouldShowClose = toast.data?.close || showCloseButton
+
+                return (
+                  <BaseToast.Root
+                    key={toast.id}
+                    toast={toast}
+                    swipeDirection={swipeDirection}
+                    data-position={toastPosition}
+                    className={clx(
+                      styles.root(),
+                      styles.rootPosition(),
+                      positionStyles.rootPosition(),
+                      styles.slotToast()
+                    )}
+                    style={{ '--toast-index': index.toString() } as React.CSSProperties}
+                  >
+                    <ToastContent toast={toast} showCloseButton={shouldShowClose} />
+                  </BaseToast.Root>
+                )
+              })}
+            </BaseToast.Viewport>
+          </BaseToast.Portal>
+        )
+      })}
+    </>
+  )
+}
+
+function AnchoredToasts() {
+  const { toasts } = BaseToast.useToastManager()
+  const styles = toastStyles()
+
+  return (
+    <BaseToast.Portal>
+      <BaseToast.Viewport className={styles.anchoredViewport()}>
+        {toasts.map((toast) => (
+          <BaseToast.Positioner
+            key={toast.id}
+            toast={toast}
+            className={styles.anchoredPositioner()}
+          >
+            <BaseToast.Root toast={toast} className={styles.anchoredRoot()}>
+              <BaseToast.Arrow className={styles.arrow()} />
+              <ToastContent toast={toast} isAnchored />
+            </BaseToast.Root>
+          </BaseToast.Positioner>
+        ))}
+      </BaseToast.Viewport>
+    </BaseToast.Portal>
+  )
+}
+
+interface ToastContentProps {
+  toast: ToastObject<object>
+  showCloseButton?: boolean
+  isAnchored?: boolean
+}
+
+function ToastContent({ toast, showCloseButton = false, isAnchored = false }: ToastContentProps) {
+  const styles = toastStyles()
+
+  return (
+    <BaseToast.Content
+      className={clx(
+        isAnchored ? styles.anchoredContent() : styles.content(),
+        styles.slotContent()
+      )}
+    >
+      {toast.type && (
+        <ToastIcon type={toast.type as 'success' | 'info' | 'warning' | 'error'}>
+          {icons[toast.type]}
+        </ToastIcon>
+      )}
+      <div
+        className={clx(
+          styles.body(),
+          showCloseButton && !isAnchored && styles.bodyWithClose(),
+          styles.slotBody()
+        )}
+      >
+        <div className={clx(styles.textContainer(), styles.slotTextContainer())}>
+          <BaseToast.Title className={clx(styles.title(), styles.slotTitle())} />
+          <BaseToast.Description className={clx(styles.description(), styles.slotDescription())} />
+        </div>
+        <BaseToast.Action
+          {...toast.actionProps}
+          data-disabled={toast.actionProps?.disabled ? true : undefined}
+          className={clx(
+            styles.action(),
+            buttonStyles({ variant: 'outline', size: 'xs' }),
+            toast.actionProps?.className,
+            styles.slotAction()
+          )}
+        />
+      </div>
+      {showCloseButton && (
+        <BaseToast.Close
+          aria-label='Close'
+          className={clx(styles.closeButton(), styles.slotClose())}
+        >
+          <Icon.XIcon weight='bold' />
+        </BaseToast.Close>
+      )}
+    </BaseToast.Content>
+  )
+}
+
+function ToastIcon({
+  type,
+  children
+}: {
+  type?: 'success' | 'info' | 'warning' | 'error'
+  children: React.ReactNode
+}) {
+  const styles = toastStyles({ type })
+  return (
+    <div className={clx(styles.icon(), styles.iconWrapper(), styles.slotIcon())}>{children}</div>
+  )
+}
+
+const icons: Record<string, React.ReactNode> = {
+  loading: <Icon.SpinnerIcon weight='bold' className='animate-spin' />,
+  success: <Icon.CheckCircleIcon weight='bold' />,
+  info: <Icon.InfoIcon weight='bold' />,
+  warning: <Icon.WarningIcon weight='bold' />,
+  error: <Icon.XCircleIcon weight='bold' />
+}
+
+export { toastManagers, anchoredToastManager as anchoredToast }
+
+// Default toast manager for backward compatibility
+export const toast = toastManagers['bottom-right']
+
+export interface ToastAddOptions extends Omit<
+  Parameters<(typeof toastManagers)['bottom-right']['add']>[0],
+  'id' | 'animation' | 'height' | 'limited'
+> {
+  position?: ToastPosition
+}
+
+export interface ToastUpdateOptions extends Omit<
+  Parameters<(typeof toastManagers)['bottom-right']['update']>[1],
+  'id' | 'animation'
+> {
+  position?: ToastPosition
+}
+
+export interface ToastCloseOptions {
+  position?: ToastPosition
+}
+
+export interface ToastPromiseOptions {
+  position?: ToastPosition
+  loading: ToastAddOptions | string
+  success: (value: unknown) => ToastAddOptions | string
+  error: (error: unknown) => ToastAddOptions | string
+}
+
+function getToastPosition(position?: ToastPosition, data?: object): ToastPosition {
+  if (position) return position
+  if (data && typeof data === 'object' && 'position' in data) {
+    return data.position as ToastPosition
+  }
+  return 'bottom-right'
+}
+
+// Typesafe helper function to add toast with automatic position detection
+export function addToast(options: ToastAddOptions): string {
+  const { data, ...restOptions } = options
+  const position = getToastPosition(options.position, data)
+
+  return toastManagers[position].add({ ...restOptions, data })
+}
+
+// Typesafe helper function to update toast
+export function updateToast(id: string, options: ToastUpdateOptions): void {
+  const { data, ...restOptions } = options
+  const position = getToastPosition(options.position, data)
+
+  toastManagers[position].update(id, { ...restOptions, data })
+}
+
+// Typesafe helper function to close toast
+export function closeToast(id: string, options?: ToastCloseOptions): void {
+  const position = options?.position || 'bottom-right'
+  toastManagers[position].close(id)
+}
+
+// Typesafe helper function to dismiss toast (alias for closeToast)
+export function dismissToast(id: string, options?: ToastCloseOptions): void {
+  closeToast(id, options)
+}
+
+// Typesafe helper for toast promises
+export function toastPromise(
+  promise: Promise<unknown>,
+  options: ToastPromiseOptions
+): Promise<unknown> {
+  const position = options.position || 'bottom-right'
+
+  return toastManagers[position].promise(promise, options)
+}

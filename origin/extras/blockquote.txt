@@ -1,0 +1,115 @@
+/**
+ * The block quotation element.
+ *
+ * Anatomy:
+ * <Blockquote>
+ *   <BlockquoteAuthor />
+ * </Blockquote>
+ */
+
+import { mergeProps, useRender } from '@base-ui/react'
+import { tv, type VariantProps } from '~/app/utils/variant'
+
+export const blockquoteStyles = tv({
+  base: [
+    'relative rounded-lg border-l-4 py-4 pr-4 pl-6 ring transition-colors duration-200',
+    'text-foreground-neutral font-sans text-sm leading-relaxed italic before:absolute before:left-1.5',
+    "before:text-foreground-neutral/30 before:top-3 before:font-serif before:text-4xl before:content-['\"']"
+  ],
+  slots: {
+    author: [
+      'text-foreground-neutral-faded mt-3 flex items-center justify-end text-sm font-medium not-italic',
+      'before:bg-border-neutral before:mr-2 before:h-px before:w-6 before:content-[""]'
+    ]
+  },
+  variants: {
+    variant: {
+      default: {
+        base: 'border-l-border-primary bg-background-primary-faded ring-border-neutral/50 before:text-foreground-primary/30',
+        author: 'text-foreground-neutral-faded before:bg-border-neutral'
+      },
+      muted: {
+        base: 'border-l-foreground-neutral-faded bg-background-neutral-faded/50 ring-foreground-neutral-faded/20 before:text-foreground-neutral-faded/30',
+        author: 'text-foreground-neutral-faded before:bg-foreground-neutral-faded/50'
+      },
+      primary: {
+        base: 'border-l-border-primary bg-background-primary/7 ring-border-primary/30 before:text-foreground-primary/30',
+        author: 'text-foreground-primary before:bg-foreground-primary/50'
+      },
+      danger: {
+        base: 'border-l-border-critical bg-background-critical/7 ring-border-critical/30 before:text-foreground-critical/30',
+        author: 'text-foreground-critical before:bg-foreground-critical/50'
+      },
+      success: {
+        base: 'border-l-border-positive bg-background-positive/7 ring-border-positive/30 before:text-foreground-positive/30',
+        author: 'text-foreground-positive before:bg-foreground-positive/50'
+      },
+      warning: {
+        base: 'border-l-border-warning bg-background-warning/7 ring-border-warning/30 before:text-foreground-warning/30',
+        author: 'text-foreground-warning before:bg-foreground-warning/50'
+      }
+    },
+    size: {
+      sm: {
+        base: 'py-2.5 pl-4 text-xs before:top-2 before:left-1 before:text-2xl',
+        author: 'text-xs before:w-4'
+      },
+      md: {
+        base: 'py-4 pl-5 text-sm before:top-3 before:left-1.5 before:text-3xl',
+        author: 'text-xs before:w-6'
+      },
+      lg: {
+        base: 'py-5 pl-6 text-base before:top-3 before:left-1.5 before:text-4xl',
+        author: 'text-sm before:w-8'
+      }
+    }
+  },
+  defaultVariants: {
+    variant: 'default',
+    size: 'md'
+  }
+})
+
+export type BlockquoteStyles = VariantProps<typeof blockquoteStyles>
+
+export interface BlockquoteProps extends useRender.ComponentProps<'blockquote'>, BlockquoteStyles {
+  render?: useRender.ComponentProps<'blockquote'>['render']
+}
+
+export function Blockquote(props: BlockquoteProps) {
+  const { render, className, variant, size, ...otherProps } = props
+  const styles = blockquoteStyles({ variant, size })
+
+  return useRender({
+    render,
+    defaultTagName: 'blockquote',
+    props: mergeProps(
+      {
+        'data-slot': 'blockquote',
+        className: styles.base({ className })
+      },
+      otherProps
+    )
+  })
+}
+
+export interface BlockquoteAuthorProps extends useRender.ComponentProps<'cite'> {
+  render?: useRender.ComponentProps<'cite'>['render']
+}
+
+export function BlockquoteAuthor(props: BlockquoteAuthorProps) {
+  const { render, className, ...otherProps } = props
+  const styles = blockquoteStyles()
+
+  return useRender({
+    render,
+    defaultTagName: 'cite',
+    props: mergeProps(
+      {
+        'data-slot': 'blockquote-author',
+        className: styles.author({ className })
+      },
+      otherProps
+    )
+  })
+}

@@ -1,0 +1,324 @@
+/**
+ * A button component that can be rendered as another HTML tag while remaining keyboard accessible.
+ *
+ * @see: https://base-ui.com/react/components/button
+ *
+ * BaseUI Anatomy:
+ * <Button />
+ */
+
+import { Button as BaseButton } from '@base-ui/react/button'
+import type { ButtonState, ButtonProps as BaseButtonProps } from '@base-ui/react/button'
+import { clx, tv, type VariantProps } from '~/app/utils/variant'
+
+export const buttonStyles = tv({
+  base: [
+    'relative cursor-pointer text-sm font-medium select-none',
+    'inline-flex items-center justify-center gap-2 transition-colors',
+    'after:absolute after:inset-0 after:bg-white/15 after:opacity-0 hover:not-data-disabled:after:opacity-100',
+    'after:transition-opacity active:not-data-disabled:after:opacity-100 data-popup-open:after:opacity-100',
+    'focus:outline-0 focus-visible:outline-2 focus-visible:outline-offset-2',
+    'before:bg-spinner before:-mr-6 before:size-4 before:scale-20 before:opacity-0 before:transition-[opacity,scale,margin-right]',
+    '[&>svg]:opacity-100 [&>svg]:transition-[opacity,scale,margin-right] [&>svg:not([class*=text-])]:text-current',
+    'data-disabled:cursor-not-allowed data-disabled:opacity-70'
+  ],
+  variants: {
+    color: {
+      primary: 'outline-border-primary',
+      neutral: 'outline-border-neutral',
+      positive: 'outline-border-positive',
+      warning: 'outline-border-warning',
+      critical: 'outline-border-critical'
+    },
+    variant: {
+      solid: 'shadow inset-shadow-2xs inset-shadow-white/15 after:rounded',
+      faded: 'shadow inset-shadow-2xs inset-shadow-white/15 after:rounded',
+      outline: 'after:content-none',
+      ghost: 'after:content-none'
+    },
+    size: {
+      xs: 'h-6.5 gap-1 rounded-sm px-2 text-xs before:-mr-5 after:rounded-sm [&>svg:not([class*=size-])]:size-3.5',
+      sm: 'h-8 rounded-sm px-2.5 text-sm after:rounded-sm [&>svg:not([class*=size-])]:size-4',
+      md: 'h-9 rounded-sm px-3 text-sm [&>svg:not([class*=size-])]:size-4',
+      lg: 'h-11 rounded-md px-4 text-base after:rounded-md [&>svg:not([class*=size-])]:size-4',
+      xl: 'h-12 rounded-md px-5 text-base [&>svg:not([class*=size-])]:size-5'
+    },
+    mode: {
+      icon: '',
+      link: ''
+    },
+    pill: {
+      true: 'rounded-full after:rounded-full'
+    },
+    block: {
+      true: 'w-full'
+    },
+    progress: {
+      true: [
+        'pointer-events-none cursor-progress opacity-70 [&>svg]:-mr-7 [&>svg]:scale-0 [&>svg]:opacity-0',
+        'before:bg-spinner before:mr-0 before:size-4.5 before:scale-100 before:animate-spin before:opacity-100'
+      ]
+    }
+  },
+  compoundVariants: [
+    // ── solid ──
+    {
+      color: 'primary',
+      variant: 'solid',
+      class: [
+        'bg-background-primary text-on-background-primary hover:not-data-disabled:bg-background-primary/90',
+        'active:not-data-disabled:bg-background-primary/80 data-popup-open:bg-background-primary/80'
+      ]
+    },
+    {
+      color: 'neutral',
+      variant: 'solid',
+      class: [
+        'bg-background-neutral text-on-background-neutral hover:not-data-disabled:bg-background-neutral/90',
+        'active:not-data-disabled:bg-background-neutral/80 data-popup-open:bg-background-neutral/80'
+      ]
+    },
+    {
+      color: 'positive',
+      variant: 'solid',
+      class: [
+        'bg-background-positive text-on-background-positive hover:not-data-disabled:bg-background-positive/90',
+        'active:not-data-disabled:bg-background-positive/80 data-popup-open:bg-background-positive/80'
+      ]
+    },
+    {
+      color: 'warning',
+      variant: 'solid',
+      class: [
+        'bg-background-warning text-on-background-warning hover:not-data-disabled:bg-background-warning/90',
+        'active:not-data-disabled:bg-background-warning/80 data-popup-open:bg-background-warning/80'
+      ]
+    },
+    {
+      color: 'critical',
+      variant: 'solid',
+      class: [
+        'bg-background-critical text-on-background-critical hover:not-data-disabled:bg-background-critical/90',
+        'active:not-data-disabled:bg-background-critical/80 data-popup-open:bg-background-critical/80'
+      ]
+    },
+
+    // ── faded ──
+    {
+      color: 'primary',
+      variant: 'faded',
+      class: [
+        'bg-background-primary-faded text-foreground-primary hover:not-data-disabled:bg-background-primary-faded/80',
+        'active:not-data-disabled:bg-background-primary-faded/60 data-popup-open:bg-background-primary-faded/60'
+      ]
+    },
+    {
+      color: 'neutral',
+      variant: 'faded',
+      class: [
+        'bg-background-neutral-faded text-foreground-neutral hover:not-data-disabled:bg-background-neutral-faded/80',
+        'active:not-data-disabled:bg-background-neutral-faded/60 data-popup-open:bg-background-neutral-faded/60'
+      ]
+    },
+    {
+      color: 'positive',
+      variant: 'faded',
+      class: [
+        'bg-background-positive-faded text-foreground-positive hover:not-data-disabled:bg-background-positive-faded/80',
+        'active:not-data-disabled:bg-background-positive-faded/60 data-popup-open:bg-background-positive-faded/60'
+      ]
+    },
+    {
+      color: 'warning',
+      variant: 'faded',
+      class: [
+        'bg-background-warning-faded text-foreground-warning hover:not-data-disabled:bg-background-warning-faded/80',
+        'active:not-data-disabled:bg-background-warning-faded/60 data-popup-open:bg-background-warning-faded/60'
+      ]
+    },
+    {
+      color: 'critical',
+      variant: 'faded',
+      class: [
+        'bg-background-critical-faded text-foreground-critical hover:not-data-disabled:bg-background-critical-faded/80',
+        'active:not-data-disabled:bg-background-critical-faded/60 data-popup-open:bg-background-critical-faded/60'
+      ]
+    },
+
+    // ── outline ──
+    {
+      color: 'primary',
+      variant: 'outline',
+      class: [
+        'border-border-primary text-foreground-primary hover:not-data-disabled:bg-background-primary-faded',
+        'active:not-data-disabled:bg-background-primary-faded/70 data-popup-open:bg-background-primary-faded/70 border bg-transparent'
+      ]
+    },
+    {
+      color: 'neutral',
+      variant: 'outline',
+      class: [
+        'border-border-neutral text-foreground-neutral hover:not-data-disabled:bg-background-neutral-faded',
+        'active:not-data-disabled:bg-background-neutral-faded/70 data-popup-open:bg-background-neutral-faded/70 border bg-transparent'
+      ]
+    },
+    {
+      color: 'positive',
+      variant: 'outline',
+      class: [
+        'border-border-positive text-foreground-positive hover:not-data-disabled:bg-background-positive-faded',
+        'active:not-data-disabled:bg-background-positive-faded/70 data-popup-open:bg-background-positive-faded/70 border bg-transparent'
+      ]
+    },
+    {
+      color: 'warning',
+      variant: 'outline',
+      class: [
+        'border-border-warning text-foreground-warning hover:not-data-disabled:bg-background-warning-faded',
+        'active:not-data-disabled:bg-background-warning-faded/70 data-popup-open:bg-background-warning-faded/70 border bg-transparent'
+      ]
+    },
+    {
+      color: 'critical',
+      variant: 'outline',
+      class: [
+        'border-border-critical text-foreground-critical hover:not-data-disabled:bg-background-critical-faded',
+        'active:not-data-disabled:bg-background-critical-faded/70 data-popup-open:bg-background-critical-faded/70 border bg-transparent'
+      ]
+    },
+
+    // ── ghost ──
+    {
+      color: 'primary',
+      variant: 'ghost',
+      class: [
+        'text-foreground-primary hover:not-data-disabled:bg-background-primary-faded',
+        'active:not-data-disabled:bg-background-primary-faded/70 data-popup-open:bg-background-primary-faded/70 bg-transparent'
+      ]
+    },
+    {
+      color: 'neutral',
+      variant: 'ghost',
+      class: [
+        'text-foreground-neutral hover:not-data-disabled:bg-background-neutral-faded',
+        'active:not-data-disabled:bg-background-neutral-faded/70 data-popup-open:bg-background-neutral-faded/70 bg-transparent'
+      ]
+    },
+    {
+      color: 'positive',
+      variant: 'ghost',
+      class: [
+        'text-foreground-positive hover:not-data-disabled:bg-background-positive-faded',
+        'active:not-data-disabled:bg-background-positive-faded/70 data-popup-open:bg-background-positive-faded/70 bg-transparent'
+      ]
+    },
+    {
+      color: 'warning',
+      variant: 'ghost',
+      class: [
+        'text-foreground-warning hover:not-data-disabled:bg-background-warning-faded',
+        'active:not-data-disabled:bg-background-warning-faded/70 data-popup-open:bg-background-warning-faded/70 bg-transparent'
+      ]
+    },
+    {
+      color: 'critical',
+      variant: 'ghost',
+      class: [
+        'text-foreground-critical hover:not-data-disabled:bg-background-critical-faded',
+        'active:not-data-disabled:bg-background-critical-faded/70 data-popup-open:bg-background-critical-faded/70 bg-transparent'
+      ]
+    },
+
+    // ── link ──
+    {
+      color: 'primary',
+      mode: 'link',
+      class: [
+        'text-foreground-primary bg-transparent underline-offset-2 shadow-none hover:not-data-disabled:bg-transparent',
+        'hover:not-data-disabled:underline active:not-data-disabled:opacity-80 data-popup-open:opacity-80'
+      ]
+    },
+    {
+      color: 'neutral',
+      mode: 'link',
+      class: [
+        'text-foreground-neutral bg-transparent underline-offset-2 shadow-none hover:not-data-disabled:bg-transparent',
+        'hover:not-data-disabled:underline active:not-data-disabled:opacity-80 data-popup-open:opacity-80'
+      ]
+    },
+    {
+      color: 'positive',
+      mode: 'link',
+      class: [
+        'text-foreground-positive bg-transparent underline-offset-2 shadow-none hover:not-data-disabled:bg-transparent',
+        'hover:not-data-disabled:underline active:not-data-disabled:opacity-80 data-popup-open:opacity-80'
+      ]
+    },
+    {
+      color: 'warning',
+      mode: 'link',
+      class: [
+        'text-foreground-warning bg-transparent underline-offset-2 shadow-none hover:not-data-disabled:bg-transparent',
+        'hover:not-data-disabled:underline active:not-data-disabled:opacity-80 data-popup-open:opacity-80'
+      ]
+    },
+    {
+      color: 'critical',
+      mode: 'link',
+      class: [
+        'text-foreground-critical bg-transparent underline-offset-2 shadow-none hover:not-data-disabled:bg-transparent',
+        'hover:not-data-disabled:underline active:not-data-disabled:opacity-80 data-popup-open:opacity-80'
+      ]
+    },
+    { mode: 'icon', size: 'xs', class: 'aspect-square w-6.5 p-1.5' },
+    { mode: 'icon', size: 'sm', class: 'aspect-square w-8 p-2' },
+    { mode: 'icon', size: 'md', class: 'aspect-square w-9 p-2' },
+    { mode: 'icon', size: 'lg', class: 'aspect-square w-11 p-3' },
+    { mode: 'icon', size: 'xl', class: 'aspect-square w-12 p-3.5' },
+    { mode: 'link', size: 'xs', class: 'h-auto gap-1 rounded-none px-0 after:content-none' },
+    { mode: 'link', size: 'sm', class: 'h-auto gap-1.5 rounded-none px-0 after:content-none' },
+    { mode: 'link', size: 'md', class: 'h-auto gap-1.5 rounded-none px-0 after:content-none' },
+    { mode: 'link', size: 'lg', class: 'h-auto gap-1.5 rounded-none px-0 after:content-none' },
+    { mode: 'link', size: 'xl', class: 'h-auto gap-1.5 rounded-none px-0 after:content-none' },
+    { color: 'neutral', progress: true, class: 'before:bg-spinner-dark' },
+    { size: 'xs', progress: true, class: 'before:size-3.5 [&>svg]:-mr-5' },
+    { size: 'sm', progress: true, class: 'before:size-4' }
+  ],
+  defaultVariants: {
+    color: 'primary',
+    variant: 'solid',
+    size: 'md'
+  }
+})
+
+export type ButtonStyles = VariantProps<typeof buttonStyles>
+
+export interface ButtonProps extends BaseButtonProps, ButtonStyles {
+  className?: string | ((state: ButtonState) => string | undefined)
+}
+
+export function Button({
+  color,
+  variant,
+  size,
+  mode,
+  pill,
+  progress,
+  block,
+  className,
+  ...props
+}: ButtonProps) {
+  const styles = buttonStyles({ color, variant, size, mode, pill, progress, block })
+  return (
+    <BaseButton
+      data-slot='button'
+      data-size={size}
+      data-mode={mode}
+      className={(state) =>
+        clx(styles, typeof className === 'function' ? className(state) : className)
+      }
+      focusableWhenDisabled
+      {...props}
+    />
+  )
+}

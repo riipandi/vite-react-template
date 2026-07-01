@@ -9,7 +9,7 @@ const meta = {
   component: StackedToastProvider,
   parameters: { layout: 'centered' },
   argTypes: {},
-  tags: [],
+  tags: [], // ['autodocs']
   args: {},
   decorators: [
     (Story) => (
@@ -84,7 +84,8 @@ export const Anchored: Story = {
     <Button
       color='primary'
       onClick={(e) =>
-        anchoredToast.default('This toast is anchored to the button', {
+        anchoredToast.default({
+          description: 'This toast is anchored to the button',
           positionerProps: { anchor: e.currentTarget, sideOffset: 8 }
         })
       }

@@ -80,16 +80,41 @@ export function ComboboxTrigger({
 
 export function ComboboxValue({
   placeholder = 'Select an option',
+  xstyle,
   ...props
-}: React.ComponentProps<typeof BaseCombobox.Value> & { placeholder?: string }) {
+}: React.ComponentProps<typeof BaseCombobox.Value> & { placeholder?: string; xstyle?: StyleXStyles }) {
   return (
-    <BaseCombobox.Value data-slot='combobox-value' {...props}>
-      {(value: string | null) => (
-        <span {...stylex.props(comboboxStyles.renderValuePlaceholder)}>{value || placeholder}</span>
+    <BaseCombobox.Value data-slot='combobox-value' {...stylex.props(xstyle)} {...props}>
+      {(value: string | { value: string; label: string; icon?: React.ReactNode } | null) => (
+        <ComboboxRenderValue value={value} placeholder={placeholder} />
       )}
     </BaseCombobox.Value>
   )
 }
+
+function ComboboxRenderValue({
+  value,
+  placeholder
+}: {
+  value: string | { value: string; label: string; icon?: React.ReactNode } | null
+  placeholder: string
+}) {
+  if (!value) {
+    return <span {...stylex.props(comboboxStyles.renderValuePlaceholder)}>{placeholder}</span>
+  }
+
+  if (typeof value === 'object') {
+    return (
+      <div {...stylex.props(comboboxStyles.renderValueWrapper)}>
+        {value.icon}
+        <span {...stylex.props(comboboxStyles.renderValueLabel)}>{value.label}</span>
+      </div>
+    )
+  }
+
+  return <span {...stylex.props(comboboxStyles.renderValueLabel)}>{value}</span>
+}
+
 
 export function ComboboxInput({
   placeholder,

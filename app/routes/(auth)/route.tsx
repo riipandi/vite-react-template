@@ -5,15 +5,6 @@ import { ThemeSwitcher } from '#/components/theme'
 import { isAuthenticated } from '#/libraries/auth.store'
 import { spaceVar } from '#/styles/core/tokens.stylex'
 
-export const Route = createFileRoute('/(auth)')({
-  beforeLoad: () => {
-    if (isAuthenticated()) {
-      throw redirect({ to: '/dashboard/overview' })
-    }
-  },
-  component: RouteComponent
-})
-
 const styles = stylex.create({
   wrapper: {
     width: '100%',
@@ -27,6 +18,15 @@ const styles = stylex.create({
     alignItems: 'center',
     gap: spaceVar[2]
   }
+})
+
+export const Route = createFileRoute('/(auth)')({
+  beforeLoad: () => {
+    if (isAuthenticated()) {
+      throw redirect({ to: '/dashboard/overview' })
+    }
+  },
+  component: RouteComponent
 })
 
 function RouteComponent() {

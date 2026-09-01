@@ -9,12 +9,15 @@ import { radiusVar, spaceVar, colorVar } from '#/styles/core/tokens.stylex'
 import { SideNavbar } from './-sidebar'
 
 export const Route = createFileRoute('/(app)/dashboard')({
+  component: DashboardLayout,
   beforeLoad: () => {
     if (!isAuthenticated()) {
       throw redirect({ to: '/login' })
     }
   },
-  component: DashboardLayout
+  staticData: {
+    pageTitle: 'Dashboard'
+  }
 })
 
 const styles = stylex.create({
@@ -109,7 +112,6 @@ function DashboardLayout() {
   // Close sidebar on route change (mobile)
   useEffect(() => {
     if (sidebarOpen) toggleSidebar()
-    // ponytail: dep on pathname only, toggleSidebar is a stable store action
     // oxlint-disable-next-line react-hooks/exhaustive-deps -- sidebarOpen read is intentional; adding it re-triggers the effect
   }, [pathname])
 

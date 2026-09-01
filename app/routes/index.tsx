@@ -6,17 +6,19 @@ import { Button } from '#/components/base/button'
 import { ThemeSwitcher } from '#/components/theme'
 import { isAuthenticated } from '#/libraries/auth.store'
 import { useAuthentication } from '#/libraries/guard/auth-provider'
-import { homeStyles } from '#/styles/pages/home.stylex';
+import { homeStyles } from '#/styles/pages/home.stylex'
 
 export const Route = createFileRoute('/')({
+  component: HomeComponent,
   beforeLoad: () => {
     if (isAuthenticated()) {
       throw redirect({ to: '/dashboard/overview' })
     }
   },
-  component: HomeComponent
+  staticData: {
+    pageTitle: 'Home'
+  }
 })
-
 
 function HomeComponent() {
   const { user, loggedIn } = useAuthentication()

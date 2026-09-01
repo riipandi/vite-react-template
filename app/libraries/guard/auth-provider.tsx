@@ -1,10 +1,10 @@
 import { useNavigate } from '@tanstack/react-router'
 import { createContext, useContext, useEffect } from 'react'
 import { authStore, setAuthTokens, setAuthUser, setAuthLoading } from '#/libraries/auth.store'
-import { clearAuth,  } from '#/libraries/auth.store'
+import { clearAuth } from '#/libraries/auth.store'
 import { login, me, tryRefresh } from '#/libraries/guard/auth-api'
+import { useAuth } from '#/libraries/guard/auth-hooks'
 import type { User } from '#/schemas/user.schema'
-import { useAuth } from '#/libraries/guard/auth-hooks';
 
 interface AuthContext {
   user: User | null

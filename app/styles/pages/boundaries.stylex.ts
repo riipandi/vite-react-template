@@ -4,7 +4,7 @@ import {
   fontWeightVar,
   radiusVar,
   spaceVar,
-  colorVar,
+  colorVar
 } from '#/styles/core/tokens.stylex'
 
 export const styles = stylex.create({

@@ -1,5 +1,5 @@
-import { colors, radius } from '#/styles/core/tokens.stylex'
 import * as stylex from '@stylexjs/stylex'
+import { colors, radius } from '#/styles/core/tokens.stylex'
 
 export const buttonStyles = stylex.create({
   base: {

@@ -1,6 +1,6 @@
 import x from '@stylexjs/atoms'
-import { Link, type ErrorComponentProps } from '@tanstack/react-router'
 import * as stylex from '@stylexjs/stylex'
+import { Link, type ErrorComponentProps } from '@tanstack/react-router'
 import { styles } from '#/styles/pages/boundaries.stylex'
 
 export function GlobalNotFound() {

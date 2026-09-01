@@ -2,7 +2,7 @@ import { useRender } from '@base-ui/react'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import * as stylex from '@stylexjs/stylex'
 import { customClassName } from '#/styles/core/utils.stylex'
-import { buttonStyles } from './button.stylex';
+import { buttonStyles } from './button.stylex'
 
 type ButtonVariant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
 type ButtonSize = 'default' | 'sm' | 'lg' | 'icon' | 'icon-sm' | 'icon-lg'

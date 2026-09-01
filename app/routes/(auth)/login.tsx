@@ -5,245 +5,20 @@ import { useState } from 'react'
 import { z } from 'zod'
 import { Button } from '#/components/base/button'
 import { GitHubIcon, GoogleIcon } from '#/components/icons'
+import { ViteIcon } from '#/components/icons'
 import { useAuthentication } from '#/libraries/guard/auth-provider'
 import { getErrorMessage } from '#/libraries/guard/auth-utils'
 import { loginSchema } from '#/schemas/auth.schema'
-import {
-  fontSizeVar,
-  fontWeightVar,
-  radiusVar,
-  spaceVar,
-  colorVar
-} from '#/styles/core/tokens.stylex'
-
-const socialStyles = stylex.create({
-  socialButton: {
-    display: 'inline-flex',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: spaceVar[3],
-    borderRadius: radiusVar.lg,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: colorVar.borderNeutral,
-    backgroundColor: colorVar.bgPage,
-    paddingLeft: spaceVar[4],
-    paddingRight: spaceVar[4],
-    paddingTop: '0.625rem',
-    paddingBottom: '0.625rem',
-    fontSize: fontSizeVar.sm,
-    fontWeight: fontWeightVar.medium,
-    color: colorVar.fgNeutral,
-    transitionProperty: 'background-color, border-color, box-shadow, color',
-    transitionDuration: '150ms',
-    cursor: 'pointer',
-    ':hover': {
-      backgroundColor: colorVar.bgNeutralFaded,
-      borderColor: colorVar.borderNeutralFaded
-    },
-    ':focus-visible': {
-      outlineWidth: 2,
-      outlineStyle: 'solid',
-      outlineColor: colorVar.fgPrimary,
-      outlineOffset: 2
-    }
-  }
-})
-
-const styles = stylex.create({
-  card: {
-    borderRadius: radiusVar.xl,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: colorVar.borderNeutral,
-    backgroundColor: colorVar.bgElevationBase,
-    overflow: 'hidden',
-    transitionProperty: 'background-color, border-color, box-shadow',
-    transitionDuration: '200ms'
-  },
-  cardBody: {
-    padding: spaceVar[8]
-  },
-  header: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: spaceVar[2],
-    marginBottom: spaceVar[6]
-  },
-  logoWrapper: {
-    padding: spaceVar[3],
-    borderRadius: '1rem',
-    backgroundColor: colorVar.bgPage,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: colorVar.borderNeutral,
-    marginBottom: spaceVar[1]
-  },
-  logo: {
-    height: '2.5rem',
-    width: '2.5rem'
-  },
-  heading: {
-    fontSize: fontSizeVar['2xl'],
-    fontWeight: fontWeightVar.bold,
-    color: colorVar.fgNeutral,
-    textAlign: 'center'
-  },
-  subtitle: {
-    fontSize: fontSizeVar.sm,
-    color: colorVar.fgNeutralFaded,
-    textAlign: 'center'
-  },
-  socialButtons: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: spaceVar[3]
-  },
-  separator: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: spaceVar[4],
-    marginTop: spaceVar[6],
-    marginBottom: spaceVar[6]
-  },
-  separatorLine: {
-    flex: 1,
-    height: '1px',
-    backgroundColor: colorVar.borderNeutralFaded
-  },
-  separatorText: {
-    fontSize: fontSizeVar.sm,
-    color: colorVar.fgNeutralFaded,
-    whiteSpace: 'nowrap'
-  },
-  formGrid: {
-    display: 'grid',
-    rowGap: spaceVar[4]
-  },
-  field: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: spaceVar['1.5']
-  },
-  label: {
-    fontSize: fontSizeVar.sm,
-    fontWeight: fontWeightVar.medium,
-    color: colorVar.fgNeutral
-  },
-  input: {
-    display: 'flex',
-    width: '100%',
-    height: '2.5rem',
-    borderRadius: radiusVar.lg,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: { default: colorVar.borderNeutral, ':focus': colorVar.borderPrimary },
-    backgroundColor: colorVar.bgPage,
-    paddingLeft: spaceVar[3],
-    paddingRight: spaceVar[3],
-    paddingTop: spaceVar[2],
-    paddingBottom: spaceVar[2],
-    fontSize: fontSizeVar.sm,
-    color: colorVar.fgNeutral,
-    outline: 'none',
-    transitionProperty: 'border-color, box-shadow',
-    transitionDuration: '150ms',
-    fontFamily: 'inherit',
-    boxSizing: 'border-box',
-    '::placeholder': { color: colorVar.fgNeutralFaded },
-    ':focus': { boxShadow: `0 0 0 2px ${colorVar.borderPrimaryFaded}` },
-    ':disabled': { opacity: 0.5, cursor: 'not-allowed' }
-  },
-  inputError: {
-    borderColor: colorVar.borderCritical
-  },
-  fieldError: {
-    fontSize: fontSizeVar.xs,
-    color: colorVar.fgCritical,
-    marginTop: spaceVar['0.5']
-  },
-  submitWrapper: {
-    marginTop: spaceVar[7],
-    display: 'grid',
-    width: '100%'
-  },
-  footer: {
-    marginTop: spaceVar[6],
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: spaceVar[1]
-  },
-  footerText: {
-    fontSize: fontSizeVar.sm,
-    color: colorVar.fgNeutralFaded
-  },
-  backLink: {
-    fontSize: fontSizeVar.sm,
-    fontWeight: fontWeightVar.medium,
-    color: colorVar.fgPrimary,
-    textDecoration: 'none',
-    ':hover': { textDecoration: 'underline' }
-  },
-  loggedOutMessage: {
-    fontWeight: fontWeightVar.semibold
-  },
-  alert: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: spaceVar[2],
-    borderRadius: radiusVar.lg,
-    paddingLeft: spaceVar[4],
-    paddingRight: spaceVar[4],
-    paddingTop: spaceVar[3],
-    paddingBottom: spaceVar[3],
-    fontSize: fontSizeVar.sm,
-    fontWeight: fontWeightVar.medium,
-    width: '100%',
-    boxSizing: 'border-box',
-    marginBottom: spaceVar[4]
-  },
-  alertError: {
-    backgroundColor: colorVar.bgCriticalFaded,
-    color: colorVar.fgCritical
-  },
-  alertSuccess: {
-    backgroundColor: colorVar.bgPositiveFaded,
-    color: colorVar.fgPositive
-  }
-})
-
-const ViteLogo = () => (
-  <svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMidYMid meet' viewBox='0 0 256 257'>
-    <defs>
-      <linearGradient id='vite-logo-a' x1='-.828%' x2='57.636%' y1='7.652%' y2='78.411%'>
-        <stop offset='0%' stopColor='#41D1FF' />
-        <stop offset='100%' stopColor='#BD34FE' />
-      </linearGradient>
-      <linearGradient id='vite-logo-b' x1='43.376%' x2='50.316%' y1='2.242%' y2='89.03%'>
-        <stop offset='0%' stopColor='#FFEA83' />
-        <stop offset='8.333%' stopColor='#FFDD35' />
-        <stop offset='100%' stopColor='#FFA800' />
-      </linearGradient>
-    </defs>
-    <path
-      fill='url(#vite-logo-a)'
-      d='M255.153 37.938L134.897 252.976c-2.483 4.44-8.862 4.466-11.382.048L.875 37.958c-2.746-4.814 1.371-10.646 6.827-9.67l120.385 21.517a6.537 6.537 0 0 0 2.322-.004l117.867-21.483c5.438-.991 9.574 4.796 6.877 9.62Z'
-    />
-    <path
-      fill='url(#vite-logo-b)'
-      d='M185.432.063L96.44 17.501a3.268 3.268 0 0 0-2.634 3.014l-5.474 92.456a3.268 3.268 0 0 0 3.997 3.378l24.777-5.718c2.318-.535 4.413 1.507 3.936 3.838l-7.361 36.047c-.495 2.426 1.782 4.5 4.151 3.78l15.304-4.649c2.372-.72 4.652 1.36 4.15 3.788l-11.698 56.621c-.732 3.542 3.979 5.473 5.943 2.437l1.313-2.028l72.516-144.72c1.215-2.423-.88-5.186-3.54-4.672l-25.505 4.922c-2.396.462-4.435-1.77-3.759-4.114l16.646-57.705c.677-2.35-1.37-4.583-3.769-4.113Z'
-    />
-  </svg>
-)
+import { socialStyles, styles } from '#/styles/pages/login.stylex'
 
 export const Route = createFileRoute('/(auth)/login')({
   component: RouteComponent,
   validateSearch: z.object({
     loggedOut: z.coerce.boolean().optional()
-  })
+  }),
+  staticData: {
+    pageTitle: 'Sign In'
+  }
 })
 
 function RouteComponent() {
@@ -290,7 +65,7 @@ function RouteComponent() {
           <div {...stylex.props(styles.header)}>
             <div {...stylex.props(styles.logoWrapper)}>
               <div {...stylex.props(styles.logo)}>
-                <ViteLogo />
+                <ViteIcon size={36} />
               </div>
             </div>
             <h1 {...stylex.props(styles.heading)}>Sign in to your account</h1>
@@ -380,7 +155,7 @@ function RouteComponent() {
               <form.Subscribe
                 selector={(state) => [state.canSubmit, state.isSubmitting]}
                 children={([canSubmit, isSubmitting]) => (
-                  <Button type='submit' color='primary' variant='solid' disabled={!canSubmit}>
+                  <Button type='submit' color='primary' variant='default' disabled={!canSubmit}>
                     {isSubmitting ? 'Signing in...' : 'Sign in'}
                   </Button>
                 )}

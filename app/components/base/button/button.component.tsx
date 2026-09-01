@@ -14,14 +14,15 @@ export interface ButtonProps extends Omit<React.ComponentProps<'button'>, 'class
 }
 
 const Button = ({
-  className,
-  style,
   variant = 'default',
   size = 'default',
+  className,
+  style,
   render,
   ...props
-}: ButtonProps) =>
-  useRender({
+}: ButtonProps) => {
+  const defaultRender = <button type={props.type ?? 'button'} />
+  return useRender({
     props: {
       ...stylex.props(
         buttonStyles.base,
@@ -36,7 +37,8 @@ const Button = ({
       'data-variant': variant,
       ...props
     },
-    render: render ?? <button type='button' />
+    render: render ?? defaultRender
   })
+}
 
 export { Button }

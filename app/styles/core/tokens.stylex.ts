@@ -75,8 +75,8 @@ export const colorVar = stylex.defineVars({
   bgPageFaded: 'oklch(0.983 0.003 265.75)',
   bgNeutral: 'oklch(0.913 0.011 265.75)',
   bgNeutralFaded: 'oklch(0.965 0.003 265.75)',
-  bgPrimary: 'oklch(0.5858 0.222 17.58)',
-  bgPrimaryFaded: 'oklch(0.953 0.019 17.58)',
+  bgPrimary: 'oklch(0.55 0.2 250)',
+  bgPrimaryFaded: 'oklch(0.94 0.02 250)',
   bgCritical: 'oklch(0.637 0.237 25.331)',
   bgCriticalFaded: 'oklch(0.959 0.017 25.331)',
   bgWarning: 'oklch(0.819 0.128 70.08)',
@@ -92,7 +92,7 @@ export const colorVar = stylex.defineVars({
   /* Foreground */
   fgNeutral: 'oklch(0.1435 0.0398 265.75)',
   fgNeutralFaded: 'oklch(0.51 0.041 265.75)',
-  fgPrimary: 'oklch(0.5 0.222 17.58)',
+  fgPrimary: 'oklch(0.5 0.2 250)',
   fgCritical: 'oklch(0.533 0.194 25.331)',
   fgWarning: 'oklch(0.509 0.102 70.08)',
   fgPositive: 'oklch(0.496 0.117 150)',
@@ -100,12 +100,12 @@ export const colorVar = stylex.defineVars({
   onBgNeutral: 'oklch(0 0 0)',
 
   /* Brand — inherits primary by default; themeable separately in Reshaped */
-  bgBrand: 'oklch(0.5858 0.222 17.58)',
+  bgBrand: 'oklch(0.55 0.2 250)',
   onBrand: 'oklch(0.9842 0.0034 247.86)',
 
   /* Highlighted hover surfaces (Reshaped data-highlighted / :hover recipe) */
   bgNeutralHighlightedFaded: 'oklch(0.965 0.003 265.75)',
-  bgPrimaryHighlightedFaded: 'oklch(0.953 0.019 17.58)',
+  bgPrimaryHighlightedFaded: 'oklch(0.94 0.02 250)',
 
   /* Inverted tooltip surface */
   bgTooltip: 'oklch(0.141 0.005 285.823)',
@@ -115,8 +115,8 @@ export const colorVar = stylex.defineVars({
   /* Border */
   borderNeutral: 'oklch(0 0 0 / 0.12)',
   borderNeutralFaded: 'oklch(0 0 0 / 0.08)',
-  borderPrimary: 'oklch(0.546 0.196 17.58)',
-  borderPrimaryFaded: 'oklch(0.932 0.029 17.58)',
+  borderPrimary: 'oklch(0.5 0.18 250)',
+  borderPrimaryFaded: 'oklch(0.92 0.03 250)',
   borderCritical: 'oklch(0.523 0.19 25.331)',
   borderCriticalFaded: 'oklch(0.908 0.028 25.331)',
   borderWarning: 'oklch(0.748 0.15 70.08)',
@@ -151,8 +151,8 @@ export const darkTheme = stylex.createTheme(colorVar, {
   bgPageFaded: 'oklch(0.17 0.02 17.58)',
   bgNeutral: 'oklch(0.22 0.02 265.75)',
   bgNeutralFaded: 'oklch(0.25 0.02 265.75)',
-  bgPrimary: 'oklch(0.5858 0.222 17.58)',
-  bgPrimaryFaded: 'oklch(0.251 0.052 17.58)',
+  bgPrimary: 'oklch(0.55 0.2 250)',
+  bgPrimaryFaded: 'oklch(0.25 0.05 250)',
   bgCritical: 'oklch(0.555 0.204 25.331)',
   bgCriticalFaded: 'oklch(0.282 0.048 25.331)',
   bgWarning: 'oklch(0.838 0.169 70.08)',
@@ -167,18 +167,18 @@ export const darkTheme = stylex.createTheme(colorVar, {
 
   fgNeutral: 'oklch(0.95 0.01 265.75)',
   fgNeutralFaded: 'oklch(0.7 0.02 265.75)',
-  fgPrimary: 'oklch(0.714 0.143 17.58)',
+  fgPrimary: 'oklch(0.7 0.15 250)',
   fgCritical: 'oklch(0.693 0.169 25.331)',
   fgWarning: 'oklch(0.672 0.135 70.08)',
   fgPositive: 'oklch(0.654 0.154 150)',
   fgDisabled: 'oklch(0.406 0.028 265.75)',
   onBgNeutral: 'oklch(0.95 0.01 265.75)',
 
-  bgBrand: 'oklch(0.5858 0.222 17.58)',
+  bgBrand: 'oklch(0.55 0.2 250)',
   onBrand: 'oklch(0.9842 0.0034 247.86)',
 
   bgNeutralHighlightedFaded: 'oklch(0.25 0.02 265.75)',
-  bgPrimaryHighlightedFaded: 'oklch(0.251 0.052 17.58)',
+  bgPrimaryHighlightedFaded: 'oklch(0.25 0.05 250)',
 
   bgTooltip: 'oklch(0.84 0.005 286.286)',
   fgTooltip: 'oklch(0 0 0)',
@@ -186,8 +186,8 @@ export const darkTheme = stylex.createTheme(colorVar, {
 
   borderNeutral: 'oklch(1 0 0 / 0.12)',
   borderNeutralFaded: 'oklch(1 0 0 / 0.06)',
-  borderPrimary: 'oklch(0.714 0.143 17.58)',
-  borderPrimaryFaded: 'oklch(0.346 0.074 17.58)',
+  borderPrimary: 'oklch(0.7 0.15 250)',
+  borderPrimaryFaded: 'oklch(0.35 0.07 250)',
   borderCritical: 'oklch(0.693 0.172 25.331)',
   borderCriticalFaded: 'oklch(0.357 0.065 25.331)',
   borderWarning: 'oklch(0.672 0.136 70.08)',

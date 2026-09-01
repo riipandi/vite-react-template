@@ -3,7 +3,12 @@ import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { useEffect } from 'react'
-import { useSidebarOpen, toggleSidebar } from '#/libraries/app.store'
+import {
+  useSidebarOpen,
+  toggleSidebar,
+  useSidebarCollapsed,
+  toggleSidebarCollapsed
+} from '#/libraries/app.store'
 import { isAuthenticated } from '#/libraries/auth.store'
 import { radiusVar, spaceVar, colorVar } from '#/styles/core/tokens.stylex'
 import { SideNavbar } from './-sidebar'
@@ -107,6 +112,7 @@ const styles = stylex.create({
 
 function DashboardLayout() {
   const sidebarOpen = useSidebarOpen()
+  const collapsed = useSidebarCollapsed()
   const pathname = useRouterState({ select: (s) => s.location.pathname })
 
   // Close sidebar on route change (mobile)
@@ -134,7 +140,7 @@ function DashboardLayout() {
       {/* Body row: sidebar + content */}
       <div {...stylex.props(styles.body)}>
         <div {...stylex.props(styles.sidebarWrapper, sidebarOpen && styles.sidebarOpen)}>
-          <SideNavbar collapsed={false} />
+          <SideNavbar collapsed={collapsed} onToggleCollapse={toggleSidebarCollapsed} />
         </div>
 
         {sidebarOpen && (

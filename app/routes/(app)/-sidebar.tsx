@@ -1,16 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
+import { useState } from 'react'
 import { ThemeSwitcher } from '#/components/theme'
 import { useAuthentication } from '#/libraries/guard/auth-provider'
-import {
-  fontSizeVar,
-  fontWeightVar,
-  radiusVar,
-  shadowVar,
-  spaceVar,
-  colorVar
-} from '#/styles/core/tokens.stylex'
+import { sidebarStyles } from '#/styles/element/sidebar.stylex'
 
 // ── Nav data ──────────────────────────────────────────────────────────────────
 
@@ -34,257 +28,12 @@ const secondaryItems: NavItem[] = [
   { icon: Lucide.Mail, label: 'Messages', href: '#', badge: true }
 ]
 
-// ── Styles ────────────────────────────────────────────────────────────────────
-
-const styles = stylex.create({
-  container: {
-    display: 'flex',
-    height: '100%',
-    flexDirection: 'column',
-    overflow: 'hidden',
-    borderRightWidth: 1,
-    borderRightStyle: 'solid',
-    borderRightColor: colorVar.borderNeutral,
-    backgroundColor: colorVar.bgPage,
-    boxShadow: shadowVar.sm,
-    transitionProperty: 'background-color, box-shadow, border-color, width',
-    transitionDuration: '200ms',
-    flexShrink: 0
-  },
-  containerExpanded: { width: '15rem', alignItems: 'stretch' },
-  containerCollapsed: {
-    width: '3.75rem',
-    alignItems: 'center',
-    paddingTop: spaceVar[3],
-    paddingBottom: spaceVar[3]
-  },
-
-  // Logo
-  logoSection: {
-    paddingLeft: spaceVar[4],
-    paddingRight: spaceVar[4],
-    paddingTop: spaceVar[4],
-    paddingBottom: spaceVar[4],
-    borderBottomWidth: 1,
-    borderBottomStyle: 'solid',
-    borderBottomColor: colorVar.bgNeutralFaded,
-    width: '100%'
-  },
-  logoSectionCollapsed: {
-    borderBottomWidth: 0,
-    paddingTop: 0,
-    paddingBottom: 0,
-    marginBottom: spaceVar[4],
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  logoLink: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: spaceVar[2],
-    textDecoration: 'none',
-    borderRadius: radiusVar.md,
-    paddingTop: spaceVar[1],
-    paddingBottom: spaceVar[1]
-  },
-  logoLinkCollapsed: {
-    width: '2.25rem',
-    height: '2.25rem',
-    justifyContent: 'center',
-    paddingTop: 0,
-    paddingBottom: 0
-  },
-  logoIconWrap: {
-    width: '2rem',
-    height: '2rem',
-    borderRadius: radiusVar.lg,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: `linear-gradient(135deg, ${colorVar.bgPrimary}, ${colorVar.bgPrimary})`,
-    flexShrink: 0
-  },
-  logoSvg: {
-    height: '1.125rem',
-    width: '1.125rem',
-    fill: colorVar.onPrimary,
-    color: colorVar.onPrimary
-  },
-  logoText: {
-    fontSize: fontSizeVar.sm,
-    fontWeight: fontWeightVar.bold,
-    color: colorVar.fgNeutral,
-    letterSpacing: '-0.01em'
-  },
-  logoVersion: {
-    fontSize: fontSizeVar.xs,
-    color: colorVar.fgNeutralFaded,
-    letterSpacing: '0'
-  },
-
-  // Nav content
-  navContent: {
-    flex: 1,
-    paddingTop: spaceVar[3],
-    paddingBottom: spaceVar[3],
-    paddingLeft: spaceVar[3],
-    paddingRight: spaceVar[3],
-    display: 'flex',
-    flexDirection: 'column',
-    gap: spaceVar[1],
-    overflowY: 'auto',
-    width: '100%'
-  },
-  navContentCollapsed: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    alignItems: 'center',
-    gap: spaceVar[1],
-    flex: '0 0 auto'
-  },
-  sectionLabel: {
-    paddingLeft: spaceVar[3],
-    paddingTop: spaceVar[3],
-    paddingBottom: spaceVar[1],
-    fontSize: fontSizeVar.xs,
-    fontWeight: fontWeightVar.semibold,
-    color: colorVar.fgNeutralFaded,
-    letterSpacing: '0.07em',
-    textTransform: 'uppercase',
-    userSelect: 'none'
-  },
-  divider: {
-    width: '2rem',
-    height: '1px',
-    backgroundColor: colorVar.bgNeutralFaded,
-    marginTop: spaceVar[1],
-    marginBottom: spaceVar[2],
-    flexShrink: 0
-  },
-
-  // Nav item
-  navItem: {
-    display: 'flex',
-    height: '2.5rem',
-    width: '100%',
-    alignItems: 'center',
-    gap: spaceVar[3],
-    borderRadius: radiusVar.lg,
-    paddingLeft: spaceVar[3],
-    paddingRight: spaceVar[3],
-    textDecoration: 'none',
-    color: {
-      default: colorVar.fgNeutralFaded,
-      ':hover': colorVar.fgNeutral
-    },
-    position: 'relative',
-    transitionProperty: 'background-color, color',
-    transitionDuration: '150ms',
-    fontSize: fontSizeVar.sm,
-    fontWeight: fontWeightVar.medium,
-    backgroundColor: {
-      default: 'transparent',
-      ':hover': colorVar.bgNeutralFaded
-    }
-  },
-  navItemCollapsed: {
-    height: '2.375rem',
-    width: '2.375rem',
-    justifyContent: 'center',
-    paddingLeft: 0,
-    paddingRight: 0
-  },
-  navItemActive: {
-    backgroundColor: {
-      default: colorVar.bgPrimaryFaded,
-      ':hover': colorVar.bgPrimaryFaded
-    },
-    color: {
-      default: colorVar.fgPrimary,
-      ':hover': colorVar.fgPrimary
-    }
-  },
-  activeAccent: {
-    position: 'absolute',
-    left: 0,
-    top: '0.375rem',
-    bottom: '0.375rem',
-    width: '3px',
-    borderRadius: '9999px',
-    backgroundColor: colorVar.bgPrimary
-  },
-  activeAccentCollapsed: { left: '0.125rem' },
-  navIcon: {
-    height: '1rem',
-    width: '1rem',
-    stroke: 'currentColor',
-    flexShrink: 0
-  },
-  navLabel: {
-    flex: 1,
-    fontSize: fontSizeVar.sm,
-    fontWeight: fontWeightVar.medium,
-    whiteSpace: 'nowrap'
-  },
-  badge: {
-    width: '0.5rem',
-    height: '0.5rem',
-    borderRadius: '9999px',
-    backgroundColor: colorVar.bgCritical,
-    flexShrink: 0
-  },
-  badgeCollapsed: {
-    position: 'absolute',
-    top: '0.375rem',
-    right: '0.375rem',
-    height: '0.4rem',
-    width: '0.4rem',
-    borderRadius: '9999px',
-    backgroundColor: colorVar.bgCritical
-  },
-
-  // Bottom: sign out + theme switcher
-  bottomSection: {
-    paddingLeft: spaceVar[3],
-    paddingRight: spaceVar[3],
-    paddingTop: spaceVar[2],
-    paddingBottom: spaceVar[2],
-    borderTopWidth: 1,
-    borderTopStyle: 'solid',
-    borderTopColor: colorVar.borderNeutral,
-    width: '100%'
-  },
-  bottomSectionCollapsed: {
-    marginTop: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: spaceVar[2],
-    paddingTop: spaceVar[3],
-    width: '100%',
-    paddingLeft: spaceVar[2],
-    paddingRight: spaceVar[2],
-    borderTopWidth: 0
-  },
-  bottomRow: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  signOutButton: {
-    gap: spaceVar[2],
-    borderWidth: 0,
-    cursor: 'pointer',
-    fontFamily: 'inherit'
-  }
-})
-
 // ── Logo mark ─────────────────────────────────────────────────────────────────
 
 function LogoMark() {
   return (
     <svg
-      {...stylex.props(styles.logoSvg)}
+      {...stylex.props(sidebarStyles.logoSvg)}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 20 20'
       fill='currentColor'
@@ -298,11 +47,14 @@ function LogoMark() {
 
 interface SideNavbarProps {
   collapsed?: boolean
+  /** Toggle desktop collapse/expand. When omitted the trigger is hidden. */
+  onToggleCollapse?: () => void
 }
 
-export function SideNavbar({ collapsed = false }: SideNavbarProps) {
+export function SideNavbar({ collapsed = false, onToggleCollapse }: SideNavbarProps) {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
   const { logout } = useAuthentication()
+  const [headerHover, setHeaderHover] = useState(false)
 
   const isActive = (href: string) =>
     href !== '#' && (pathname === href || pathname.startsWith(href))
@@ -317,20 +69,18 @@ export function SideNavbar({ collapsed = false }: SideNavbarProps) {
           to={item.href}
           aria-label={item.label}
           {...stylex.props(
-            styles.navItem,
-            collapsed && styles.navItemCollapsed,
-            itemActive && styles.navItemActive
+            sidebarStyles.navItem,
+            collapsed && sidebarStyles.navItemCollapsed,
+            itemActive && sidebarStyles.navItemActive
           )}
         >
-          {itemActive && (
-            <span
-              {...stylex.props(styles.activeAccent, collapsed && styles.activeAccentCollapsed)}
-            />
-          )}
-          <Icon {...stylex.props(styles.navIcon)} />
-          {!collapsed && <span {...stylex.props(styles.navLabel)}>{item.label}</span>}
+          <Icon {...stylex.props(sidebarStyles.navIcon)} />
+          {!collapsed && <span {...stylex.props(sidebarStyles.navLabel)}>{item.label}</span>}
           {item.badge && (
-            <span {...stylex.props(collapsed ? styles.badgeCollapsed : styles.badge)} aria-hidden />
+            <span
+              {...stylex.props(collapsed ? sidebarStyles.badgeCollapsed : sidebarStyles.badge)}
+              aria-hidden
+            />
           )}
         </Link>
       )
@@ -340,56 +90,105 @@ export function SideNavbar({ collapsed = false }: SideNavbarProps) {
     <nav
       aria-label='Sidebar'
       {...stylex.props(
-        styles.container,
-        collapsed ? styles.containerCollapsed : styles.containerExpanded
+        sidebarStyles.container,
+        collapsed ? sidebarStyles.containerCollapsed : sidebarStyles.containerExpanded
       )}
     >
-      {/* Logo */}
-      <div {...stylex.props(styles.logoSection, collapsed && styles.logoSectionCollapsed)}>
-        <Link
-          to='/'
-          aria-label='Home'
-          {...stylex.props(styles.logoLink, collapsed && styles.logoLinkCollapsed)}
-        >
-          <div {...stylex.props(styles.logoIconWrap)}>
-            <LogoMark />
-          </div>
-          {!collapsed && (
-            <div>
-              <div {...stylex.props(styles.logoText)}>ReactiVite</div>
-              <div {...stylex.props(styles.logoVersion)}>{import.meta.env.PUBLIC_APP_VERSION}</div>
-            </div>
+      {/* Header zone: logo + hover-reveal collapse trigger */}
+      <div
+        onMouseEnter={() => setHeaderHover(true)}
+        onMouseLeave={() => setHeaderHover(false)}
+        {...stylex.props(sidebarStyles.headerZone, collapsed && sidebarStyles.headerZoneCollapsed)}
+      >
+        <div
+          {...stylex.props(
+            sidebarStyles.logoSection,
+            collapsed && sidebarStyles.logoSectionCollapsed
           )}
-        </Link>
+        >
+          <Link
+            to='/'
+            aria-label='Home'
+            {...stylex.props(
+              sidebarStyles.logoLink,
+              collapsed && sidebarStyles.logoLinkCollapsed,
+              collapsed && headerHover && sidebarStyles.logoFade
+            )}
+          >
+            <div {...stylex.props(sidebarStyles.logoIconWrap)}>
+              <LogoMark />
+            </div>
+            {!collapsed && (
+              <div>
+                <div {...stylex.props(sidebarStyles.logoText)}>ReactiVite</div>
+                <div {...stylex.props(sidebarStyles.logoVersion)}>
+                  {import.meta.env.PUBLIC_APP_VERSION}
+                </div>
+              </div>
+            )}
+          </Link>
+        </div>
+
+        {onToggleCollapse && (
+          <button
+            type='button'
+            onClick={onToggleCollapse}
+            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            {...stylex.props(
+              sidebarStyles.collapseTrigger,
+              (!collapsed || headerHover) && sidebarStyles.collapseTriggerVisible,
+              collapsed && sidebarStyles.collapseTriggerCollapsed
+            )}
+          >
+            {collapsed ? <Lucide.PanelLeftOpen size={16} /> : <Lucide.PanelLeftClose size={16} />}
+          </button>
+        )}
       </div>
 
       {/* Main nav */}
-      <div {...stylex.props(styles.navContent, collapsed && styles.navContentCollapsed)}>
-        {!collapsed && <p {...stylex.props(styles.sectionLabel)}>Main</p>}
+      <div
+        {...stylex.props(sidebarStyles.navContent, collapsed && sidebarStyles.navContentCollapsed)}
+      >
+        {!collapsed && <p {...stylex.props(sidebarStyles.sectionLabel)}>Main</p>}
         {renderNavItems(navItems)}
-        {collapsed && <div {...stylex.props(styles.divider)} />}
-        {!collapsed && <p {...stylex.props(styles.sectionLabel)}>Workspace</p>}
+        {collapsed && <div {...stylex.props(sidebarStyles.divider)} />}
+        {!collapsed && <p {...stylex.props(sidebarStyles.sectionLabel)}>Workspace</p>}
         {renderNavItems(secondaryItems)}
       </div>
 
       {/* Bottom: sign out + theme switcher */}
-      <div {...stylex.props(styles.bottomSection, collapsed && styles.bottomSectionCollapsed)}>
-        <div {...stylex.props(styles.bottomRow)}>
+      <div
+        {...stylex.props(
+          sidebarStyles.bottomSection,
+          collapsed && sidebarStyles.bottomSectionCollapsed
+        )}
+      >
+        <div
+          {...stylex.props(sidebarStyles.bottomRow, collapsed && sidebarStyles.bottomRowCollapsed)}
+        >
           <button
             type='button'
             onClick={logout}
             aria-label='Sign Out'
             title={collapsed ? 'Sign Out' : undefined}
             {...stylex.props(
-              styles.navItem,
-              collapsed && styles.navItemCollapsed,
-              styles.signOutButton
+              sidebarStyles.navItem,
+              collapsed && sidebarStyles.navItemCollapsed,
+              sidebarStyles.signOutButton,
+              !collapsed && sidebarStyles.signOutButtonExpanded
             )}
           >
-            <Lucide.LogOut {...stylex.props(styles.navIcon)} />
-            {!collapsed && <span {...stylex.props(styles.navLabel)}>Sign Out</span>}
+            <Lucide.LogOut {...stylex.props(sidebarStyles.navIcon)} />
+            {!collapsed && <span {...stylex.props(sidebarStyles.navLabel)}>Sign Out</span>}
           </button>
-          <ThemeSwitcher />
+          <div
+            {...stylex.props(
+              sidebarStyles.switcherBox,
+              collapsed && sidebarStyles.switcherBoxCollapsed
+            )}
+          >
+            <ThemeSwitcher />
+          </div>
         </div>
       </div>
     </nav>

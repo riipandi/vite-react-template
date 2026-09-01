@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="TanStack React + Base UI starter application" />
     <meta name="robots" content="noindex, nofollow, noarchive" />
+    <!--
+      Declare the reset layer first so it ranks BELOW the StyleX priority
+      layers (priority1..6) injected later by the bundler. Without this,
+      unlayered/earlier reset rules would override every StyleX button style
+      (padding, colors, hover backgrounds).
+    -->
+    <style>
+      @layer reset;
+    </style>
 
     <!-- Theme Color -->
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#5a58f2" />

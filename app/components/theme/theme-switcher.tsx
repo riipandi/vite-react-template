@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { radiusVar, spaceVar, colorVar } from '#/styles/core/tokens.stylex'
+import { radiusVar, colorVar } from '#/styles/core/tokens.stylex'
 import { useTheme } from './theme'
 
 const cycle: Record<string, string> = { light: 'dark', dark: 'system', system: 'light' }
@@ -19,8 +19,9 @@ const styles = stylex.create({
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '2.25rem',
+    height: '2.25rem',
     borderRadius: radiusVar.lg,
-    padding: spaceVar[2],
     color: { default: colorVar.fgNeutralFaded, ':hover': colorVar.fgNeutral },
     backgroundColor: { default: 'transparent', ':hover': colorVar.bgNeutralFaded },
     borderWidth: 0,

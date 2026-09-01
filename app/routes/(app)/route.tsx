@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
-import { RouterSpinner } from './-router-spinner'
+import { RouterSpinner } from './-spinner'
 
 export const Route = createFileRoute('/(app)')({
   component: RouteComponent

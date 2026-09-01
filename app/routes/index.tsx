@@ -60,18 +60,14 @@ function HomeComponent() {
         </div>
         <div {...stylex.props(homeStyles.actions)}>
           <Link to='/dashboard'>
-            <Button color='primary' variant='default'>
-              User Dashboard
-            </Button>
+            <Button variant='default'>User Dashboard</Button>
           </Link>
           <a
             href='https://github.com/riipandi/vite-react-template'
             target='_blank'
             rel='noreferrer'
           >
-            <Button color='neutral' variant='default'>
-              Get Source Code
-            </Button>
+            <Button variant='default'>Get Source Code</Button>
           </a>
         </div>
         <div>

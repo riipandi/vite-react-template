@@ -5,11 +5,12 @@ import { customClassName } from '#/styles/core/utils.stylex'
 import { buttonSizeStyles, buttonStyles, buttonVariantStyles } from './button.stylex'
 import type { ButtonSize, ButtonVariant } from './button.stylex'
 
-export interface ButtonProps extends Omit<React.ComponentProps<'button'>, 'className'> {
+export interface ButtonProps extends Omit<React.ComponentProps<'button'>, 'className' | 'style'> {
   variant?: ButtonVariant
   size?: ButtonSize
   className?: string
   render?: useRender.RenderProp
+  style?: StyleXStyles
 }
 
 const Button = ({
@@ -28,7 +29,7 @@ const Button = ({
         buttonVariantStyles[variant],
         buttonSizeStyles[size],
         customClassName(className),
-        style as StyleXStyles
+        style
       ),
       'data-size': size,
       'data-slot': 'button',

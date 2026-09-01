@@ -464,10 +464,10 @@ function DashboardOverviewComponent() {
           </p>
         </div>
         <div {...stylex.props(styles.headerActions)}>
-          <Button color='neutral' variant='default'>
+          <Button variant='default'>
             <Lucide.Download size={15} /> Export
           </Button>
-          <Button color='primary' variant='default'>
+          <Button variant='default'>
             <Lucide.Plus size={15} /> New Project
           </Button>
         </div>
@@ -537,9 +537,7 @@ function DashboardOverviewComponent() {
           <div {...stylex.props(styles.activityCard)}>
             <div {...stylex.props(styles.activityHeader)}>
               <p {...stylex.props(styles.sectionTitle)}>Recent Activity</p>
-              <Button color='neutral' variant='default'>
-                View all
-              </Button>
+              <Button variant='default'>View all</Button>
             </div>
             <div {...stylex.props(styles.activityList)}>
               {activity.map((item, idx) => (
@@ -588,7 +586,6 @@ function DashboardOverviewComponent() {
             <div {...stylex.props(styles.profileActions)}>
               <Link to='/' {...stylex.props(styles.profileActionLink)}>
                 <Button
-                  color='neutral'
                   variant='default'
                   {...stylex.props(atoms.width['100%'], atoms.justifyContent.center)}
                 >
@@ -596,8 +593,7 @@ function DashboardOverviewComponent() {
                 </Button>
               </Link>
               <Button
-                color='critical'
-                variant='default'
+                variant='destructive'
                 onClick={logout}
                 {...stylex.props(atoms.width['100%'], atoms.justifyContent.center)}
               >

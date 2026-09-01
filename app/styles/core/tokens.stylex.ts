@@ -16,142 +16,70 @@ import * as stylex from '@stylexjs/stylex'
 const DARK = '@media (prefers-color-scheme: dark)'
 
 export const colorVar = stylex.defineVars({
-  /* Both light mode and dark mode */
-  black: 'oklch(0 0 0)',
-  white: 'oklch(1 0 0)',
-  transparent: 'transparent',
+  black: { default: 'oklch(0 0 0)', [DARK]: 'oklch(0 0 0)' },
+  white: { default: 'oklch(1 0 0)', [DARK]: 'oklch(1 0 0)' },
+  transparent: { default: 'transparent', [DARK]: 'transparent' },
 
-  onPrimary: 'oklch(0.9842 0.0034 247.86)',
-  onBgPrimary: 'oklch(0.9842 0.0034 247.86)',
-  onBgCritical: 'oklch(1 0 0)',
-  onBgWarning: 'oklch(1 0 0)',
-  onBgPositive: 'oklch(1 0 0)',
+  onPrimary: { default: 'oklch(0.9842 0.0034 247.86)', [DARK]: 'oklch(0.9842 0.0034 247.86)' },
+  onBgPrimary: { default: 'oklch(0.9842 0.0034 247.86)', [DARK]: 'oklch(0.9842 0.0034 247.86)' },
+  onBgCritical: { default: 'oklch(1 0 0)', [DARK]: 'oklch(1 0 0)' },
+  onBgWarning: { default: 'oklch(1 0 0)', [DARK]: 'oklch(1 0 0)' },
+  onBgPositive: { default: 'oklch(1 0 0)', [DARK]: 'oklch(1 0 0)' },
 
-  /* Background (light defaults; overridden by darkTheme below) */
-  bgPage: 'oklch(1 0 0)',
-  bgPageFaded: 'oklch(0.983 0.003 265.75)',
-  bgNeutral: 'oklch(0.913 0.011 265.75)',
-  bgNeutralFaded: 'oklch(0.965 0.003 265.75)',
-  bgPrimary: 'oklch(0.55 0.2 250)',
-  bgPrimaryFaded: 'oklch(0.94 0.02 250)',
-  bgCritical: 'oklch(0.637 0.237 25.331)',
-  bgCriticalFaded: 'oklch(0.959 0.017 25.331)',
-  bgWarning: 'oklch(0.819 0.128 70.08)',
-  bgWarningFaded: 'oklch(0.984 0.023 70.08)',
-  bgPositive: 'oklch(0.553 0.13 150)',
-  bgPositiveFaded: 'oklch(0.98 0.02 150)',
-  bgDisabled: 'oklch(0.949 0.006 265.75)',
-  bgDisabledFaded: 'oklch(0.973 0.004 265.75)',
-  bgElevationBase: 'oklch(1 0 0)',
-  bgElevationRaised: 'oklch(1 0 0)',
-  bgElevationOverlay: 'oklch(1 0 0)',
+  bgPage: { default: 'oklch(1 0 0)', [DARK]: 'oklch(0.15 0.02 17.58)' },
+  bgPageFaded: { default: 'oklch(0.983 0.003 265.75)', [DARK]: 'oklch(0.17 0.02 17.58)' },
+  bgNeutral: { default: 'oklch(0.913 0.011 265.75)', [DARK]: 'oklch(0.22 0.02 265.75)' },
+  bgNeutralFaded: { default: 'oklch(0.965 0.003 265.75)', [DARK]: 'oklch(0.25 0.02 265.75)' },
+  bgPrimary: { default: 'oklch(0.55 0.2 250)', [DARK]: 'oklch(0.55 0.2 250)' },
+  bgPrimaryFaded: { default: 'oklch(0.94 0.02 250)', [DARK]: 'oklch(0.25 0.05 250)' },
+  bgCritical: { default: 'oklch(0.637 0.237 25.331)', [DARK]: 'oklch(0.555 0.204 25.331)' },
+  bgCriticalFaded: { default: 'oklch(0.959 0.017 25.331)', [DARK]: 'oklch(0.282 0.048 25.331)' },
+  bgWarning: { default: 'oklch(0.819 0.128 70.08)', [DARK]: 'oklch(0.838 0.169 70.08)' },
+  bgWarningFaded: { default: 'oklch(0.984 0.023 70.08)', [DARK]: 'oklch(0.276 0.016 70.08)' },
+  bgPositive: { default: 'oklch(0.553 0.13 150)', [DARK]: 'oklch(0.507 0.114 150)' },
+  bgPositiveFaded: { default: 'oklch(0.98 0.02 150)', [DARK]: 'oklch(0.272 0.02 150)' },
+  bgDisabled: { default: 'oklch(0.949 0.006 265.75)', [DARK]: 'oklch(0.18 0.015 265.75)' },
+  bgDisabledFaded: { default: 'oklch(0.973 0.004 265.75)', [DARK]: 'oklch(0.15 0.015 265.75)' },
+  bgElevationBase: { default: 'oklch(1 0 0)', [DARK]: 'oklch(0.18 0.02 17.58)' },
+  bgElevationRaised: { default: 'oklch(1 0 0)', [DARK]: 'oklch(0.2 0.02 17.58)' },
+  bgElevationOverlay: { default: 'oklch(1 0 0)', [DARK]: 'oklch(0.22 0.02 17.58)' },
 
-  /* Foreground */
-  fgNeutral: 'oklch(0.1435 0.0398 265.75)',
-  fgNeutralFaded: 'oklch(0.51 0.041 265.75)',
-  fgPrimary: 'oklch(0.5 0.2 250)',
-  fgCritical: 'oklch(0.533 0.194 25.331)',
-  fgWarning: 'oklch(0.509 0.102 70.08)',
-  fgPositive: 'oklch(0.496 0.117 150)',
-  fgDisabled: 'oklch(0.845 0.02 265.75)',
-  onBgNeutral: 'oklch(0 0 0)',
+  fgNeutral: { default: 'oklch(0.1435 0.0398 265.75)', [DARK]: 'oklch(0.95 0.01 265.75)' },
+  fgNeutralFaded: { default: 'oklch(0.51 0.041 265.75)', [DARK]: 'oklch(0.7 0.02 265.75)' },
+  fgPrimary: { default: 'oklch(0.5 0.2 250)', [DARK]: 'oklch(0.7 0.15 250)' },
+  fgCritical: { default: 'oklch(0.533 0.194 25.331)', [DARK]: 'oklch(0.693 0.169 25.331)' },
+  fgWarning: { default: 'oklch(0.509 0.102 70.08)', [DARK]: 'oklch(0.672 0.135 70.08)' },
+  fgPositive: { default: 'oklch(0.496 0.117 150)', [DARK]: 'oklch(0.654 0.154 150)' },
+  fgDisabled: { default: 'oklch(0.845 0.02 265.75)', [DARK]: 'oklch(0.406 0.028 265.75)' },
+  onBgNeutral: { default: 'oklch(0 0 0)', [DARK]: 'oklch(0.95 0.01 265.75)' },
 
-  /* Brand — inherits primary by default; themeable separately in Reshaped */
-  bgBrand: 'oklch(0.55 0.2 250)',
-  onBrand: 'oklch(0.9842 0.0034 247.86)',
+  bgBrand: { default: 'oklch(0.55 0.2 250)', [DARK]: 'oklch(0.55 0.2 250)' },
+  onBrand: { default: 'oklch(0.9842 0.0034 247.86)', [DARK]: 'oklch(0.9842 0.0034 247.86)' },
 
-  /* Highlighted hover surfaces (Reshaped data-highlighted / :hover recipe) */
-  bgNeutralHighlightedFaded: 'oklch(0.965 0.003 265.75)',
-  bgPrimaryHighlightedFaded: 'oklch(0.94 0.02 250)',
+  bgNeutralHighlightedFaded: {
+    default: 'oklch(0.965 0.003 265.75)',
+    [DARK]: 'oklch(0.25 0.02 265.75)'
+  },
+  bgPrimaryHighlightedFaded: { default: 'oklch(0.94 0.02 250)', [DARK]: 'oklch(0.25 0.05 250)' },
 
-  /* Inverted tooltip surface */
-  bgTooltip: 'oklch(0.141 0.005 285.823)',
-  fgTooltip: 'oklch(1 0 0)',
-  borderTooltip: 'transparent',
+  bgTooltip: { default: 'oklch(0.141 0.005 285.823)', [DARK]: 'oklch(0.84 0.005 286.286)' },
+  fgTooltip: { default: 'oklch(1 0 0)', [DARK]: 'oklch(0 0 0)' },
+  borderTooltip: { default: 'transparent', [DARK]: 'oklch(1 0 0 / 0.12)' },
 
-  /* Border */
-  borderNeutral: 'oklch(0 0 0 / 0.12)',
-  borderNeutralFaded: 'oklch(0 0 0 / 0.08)',
-  borderPrimary: 'oklch(0.5 0.18 250)',
-  borderPrimaryFaded: 'oklch(0.92 0.03 250)',
-  borderCritical: 'oklch(0.523 0.19 25.331)',
-  borderCriticalFaded: 'oklch(0.908 0.028 25.331)',
-  borderWarning: 'oklch(0.748 0.15 70.08)',
-  borderWarningFaded: 'oklch(0.913 0.041 70.08)',
-  borderPositive: 'oklch(0.475 0.112 150)',
-  borderPositiveFaded: 'oklch(0.921 0.037 150)',
-  borderDisabled: 'oklch(0.913 0.011 265.75)'
-})
-
-/**
- * Dark-mode theme for colorVar.
- *
- * Applied as a class on <html> (see the theme provider / theme script) so the
- * dark token values override the :root light defaults for the whole subtree.
- * This is the canonical StyleX theming pattern and avoids the broken
- * `[data-theme=dark] :root` descendant selector that attribute-based
- * defineVars conditions generate (an attribute on :root can never match a
- * `:root` descendant).
- */
-export const darkTheme = stylex.createTheme(colorVar, {
-  black: 'oklch(0 0 0)',
-  white: 'oklch(1 0 0)',
-  transparent: 'transparent',
-
-  onPrimary: 'oklch(0.9842 0.0034 247.86)',
-  onBgPrimary: 'oklch(0.9842 0.0034 247.86)',
-  onBgCritical: 'oklch(1 0 0)',
-  onBgWarning: 'oklch(1 0 0)',
-  onBgPositive: 'oklch(1 0 0)',
-
-  bgPage: 'oklch(0.15 0.02 17.58)',
-  bgPageFaded: 'oklch(0.17 0.02 17.58)',
-  bgNeutral: 'oklch(0.22 0.02 265.75)',
-  bgNeutralFaded: 'oklch(0.25 0.02 265.75)',
-  bgPrimary: 'oklch(0.55 0.2 250)',
-  bgPrimaryFaded: 'oklch(0.25 0.05 250)',
-  bgCritical: 'oklch(0.555 0.204 25.331)',
-  bgCriticalFaded: 'oklch(0.282 0.048 25.331)',
-  bgWarning: 'oklch(0.838 0.169 70.08)',
-  bgWarningFaded: 'oklch(0.276 0.016 70.08)',
-  bgPositive: 'oklch(0.507 0.114 150)',
-  bgPositiveFaded: 'oklch(0.272 0.02 150)',
-  bgDisabled: 'oklch(0.18 0.015 265.75)',
-  bgDisabledFaded: 'oklch(0.15 0.015 265.75)',
-  bgElevationBase: 'oklch(0.18 0.02 17.58)',
-  bgElevationRaised: 'oklch(0.2 0.02 17.58)',
-  bgElevationOverlay: 'oklch(0.22 0.02 17.58)',
-
-  fgNeutral: 'oklch(0.95 0.01 265.75)',
-  fgNeutralFaded: 'oklch(0.7 0.02 265.75)',
-  fgPrimary: 'oklch(0.7 0.15 250)',
-  fgCritical: 'oklch(0.693 0.169 25.331)',
-  fgWarning: 'oklch(0.672 0.135 70.08)',
-  fgPositive: 'oklch(0.654 0.154 150)',
-  fgDisabled: 'oklch(0.406 0.028 265.75)',
-  onBgNeutral: 'oklch(0.95 0.01 265.75)',
-
-  bgBrand: 'oklch(0.55 0.2 250)',
-  onBrand: 'oklch(0.9842 0.0034 247.86)',
-
-  bgNeutralHighlightedFaded: 'oklch(0.25 0.02 265.75)',
-  bgPrimaryHighlightedFaded: 'oklch(0.25 0.05 250)',
-
-  bgTooltip: 'oklch(0.84 0.005 286.286)',
-  fgTooltip: 'oklch(0 0 0)',
-  borderTooltip: 'oklch(1 0 0 / 0.12)',
-
-  borderNeutral: 'oklch(1 0 0 / 0.12)',
-  borderNeutralFaded: 'oklch(1 0 0 / 0.06)',
-  borderPrimary: 'oklch(0.7 0.15 250)',
-  borderPrimaryFaded: 'oklch(0.35 0.07 250)',
-  borderCritical: 'oklch(0.693 0.172 25.331)',
-  borderCriticalFaded: 'oklch(0.357 0.065 25.331)',
-  borderWarning: 'oklch(0.672 0.136 70.08)',
-  borderWarningFaded: 'oklch(0.358 0.047 70.08)',
-  borderPositive: 'oklch(0.656 0.148 150)',
-  borderPositiveFaded: 'oklch(0.357 0.049 150)',
-  borderDisabled: 'oklch(0.285 0.019 265.75)'
+  borderNeutral: { default: 'oklch(0 0 0 / 0.12)', [DARK]: 'oklch(1 0 0 / 0.12)' },
+  borderNeutralFaded: { default: 'oklch(0 0 0 / 0.08)', [DARK]: 'oklch(1 0 0 / 0.06)' },
+  borderPrimary: { default: 'oklch(0.5 0.18 250)', [DARK]: 'oklch(0.7 0.15 250)' },
+  borderPrimaryFaded: { default: 'oklch(0.92 0.03 250)', [DARK]: 'oklch(0.35 0.07 250)' },
+  borderCritical: { default: 'oklch(0.523 0.19 25.331)', [DARK]: 'oklch(0.693 0.172 25.331)' },
+  borderCriticalFaded: {
+    default: 'oklch(0.908 0.028 25.331)',
+    [DARK]: 'oklch(0.357 0.065 25.331)'
+  },
+  borderWarning: { default: 'oklch(0.748 0.15 70.08)', [DARK]: 'oklch(0.672 0.136 70.08)' },
+  borderWarningFaded: { default: 'oklch(0.913 0.041 70.08)', [DARK]: 'oklch(0.358 0.047 70.08)' },
+  borderPositive: { default: 'oklch(0.475 0.112 150)', [DARK]: 'oklch(0.656 0.148 150)' },
+  borderPositiveFaded: { default: 'oklch(0.921 0.037 150)', [DARK]: 'oklch(0.357 0.049 150)' },
+  borderDisabled: { default: 'oklch(0.913 0.011 265.75)', [DARK]: 'oklch(0.285 0.019 265.75)' }
 })
 
 /** Modal/drawer scrim overlays — Reshaped static black with alpha (non-themable). */

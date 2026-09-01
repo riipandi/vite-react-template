@@ -33,7 +33,12 @@ const config: StorybookConfig = {
     return mergeConfig(viteConfig, {
       ...(isVitest
         ? {
-            plugins: [stylex({ useCSSLayers: true, aliases: { '#/*': resolve('./app/*') } })],
+            plugins: [
+              stylex({
+                useCSSLayers: true,
+                aliases: { '#/*': resolve('./app/*') }
+              })
+            ],
             resolve: { tsconfigPaths: true }
           }
         : {}),

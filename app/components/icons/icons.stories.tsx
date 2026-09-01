@@ -3,7 +3,6 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import { colorVar, fontSizeVar, fontWeightVar } from '#/styles/core/tokens.stylex'
-// import { IconBox } from '../extra/icon-box/icon-box.component'
 import { FacebookIcon, GitHubIcon, GoogleIcon, InstagramIcon } from './index'
 import { LinkedInIcon, TelegramIcon, WhatsAppIcon, XIcon } from './index'
 
@@ -44,18 +43,10 @@ type Story = StoryObj
 function PlaygroundComponent({ size = 24, color }: { size?: number; color?: string }) {
   return (
     <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['1rem'])}>
-      <IconBox>
-        <GitHubIcon size={size} color={color} />
-      </IconBox>
-      <IconBox>
-        <XIcon size={size} color={color} />
-      </IconBox>
-      <IconBox variant='info'>
-        <GoogleIcon size={size} />
-      </IconBox>
-      <IconBox variant='success'>
-        <WhatsAppIcon size={size} />
-      </IconBox>
+      <GitHubIcon size={size} color={color} />
+      <XIcon size={size} color={color} />
+      <GoogleIcon size={size} />
+      <WhatsAppIcon size={size} />
     </div>
   )
 }
@@ -91,9 +82,7 @@ export const Gallery: Story = {
             x.gap['0.5rem']
           )}
         >
-          <IconBox>
-            <Icon size={20} />
-          </IconBox>
+          <Icon size={20} />
           <span {...stylex.props(x.fontSize[fontSizeVar.xs], x.color[colorVar.fgNeutralFaded])}>
             {name}
           </span>

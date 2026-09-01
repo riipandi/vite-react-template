@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react-vite'
 import { GlobalDecorator, STORYBOOK_THEME_GLOBAL } from './decorator'
-import '../app/styles/globalsx.css'
+import '../app/assets/globals.css'
 
 const preview: Preview = {
   parameters: {

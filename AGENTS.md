@@ -92,6 +92,7 @@ When building custom components without a Base UI equivalent:
 - **Add a Base UI component**: create in `app/components/base/` with StyleX styles following the Reshaped-inspired pattern (see `button.stylex.ts` for reference).
 - **Update dependencies**: `pnpm update-deps` (ncu) and review `.ncurc.json` policy first; keep `packageManager` field in sync.
 - **Cut a release**: bump version in `package.json` and update `CHANGELOG.md` (keep both licenses in `LICENSE-APACHE` / `LICENSE-MIT` untouched).
+- **Run validation in one shot**: `pnpm format && pnpm check && pnpm lint && pnpm typecheck`.
 
 ## Gotchas / Anti-patterns
 

@@ -22,6 +22,8 @@ import { separatorStyles as s } from './separator.stylex'
 type SeparatorColor = keyof typeof s.colorStyles
 type SeparatorContentPosition = keyof typeof s.contentPosition
 
+type SeparatorInset = keyof typeof s.inset
+
 export type SeparatorProps = React.ComponentProps<typeof BaseSeparator> & {
   /** Change component to render vertically */
   vertical?: boolean
@@ -31,6 +33,8 @@ export type SeparatorProps = React.ComponentProps<typeof BaseSeparator> & {
   color?: SeparatorColor
   /** Position for rendering children */
   contentPosition?: SeparatorContentPosition
+  /** Inset the divider from the container bounds */
+  inset?: SeparatorInset
   /** StyleX styles to apply */
   xstyle?: StyleXStyles
 }
@@ -44,6 +48,7 @@ export function Separator({
   blank: isBlank = false,
   color = 'neutral-faded',
   contentPosition: position = 'center',
+  inset,
   className,
   style,
   children,
@@ -55,6 +60,7 @@ export function Separator({
     s.colorStyles[color],
     position && s.contentPosition[position],
     isBlank && (vertical ? s.blank.vertical : s.blank.root),
+    inset && (vertical ? s.insetVertical[inset] : s.inset[inset]),
     xstyle
   )
 

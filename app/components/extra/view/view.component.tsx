@@ -26,14 +26,19 @@ type Align = keyof typeof s.align
 type Justify = keyof typeof s.justify
 type Wrap = keyof typeof s.wrap
 type PaddingToken = keyof typeof s.padding
+type PaddingSide = keyof typeof s.paddingTop
 type BgColor = keyof typeof s.backgroundColor
 type BorderToken = keyof typeof s.border
+type BorderSide = keyof typeof s.borderTop
+type BorderColorToken = keyof typeof s.borderColor
 type BorderRadiusToken = keyof typeof s.borderRadius
 type Overflow = keyof typeof s.overflow
 type ShadowToken = keyof typeof s.shadow
 type TextAlignValue = keyof typeof s.textAlign
 type PositionValue = keyof typeof s.position
+type InsetValue = keyof typeof s.inset
 type ZIndexToken = keyof typeof s.zIndex
+type BleedToken = keyof typeof s.bleed
 
 type TagName = keyof React.JSX.IntrinsicElements
 
@@ -57,10 +62,36 @@ export type ViewProps = React.ComponentProps<'div'> & {
   wrap?: Wrap
   /** Padding for all sides */
   padding?: PaddingToken
+  /** Padding top */
+  paddingTop?: PaddingSide
+  /** Padding bottom */
+  paddingBottom?: PaddingSide
+  /** Padding inline start */
+  paddingStart?: PaddingSide
+  /** Padding inline end */
+  paddingEnd?: PaddingSide
+  /** Padding inline */
+  paddingInline?: PaddingSide
+  /** Padding block */
+  paddingBlock?: PaddingSide
   /** Background color */
   backgroundColor?: BgColor
-  /** Add border */
+  /** Add border to all sides */
   border?: BorderToken
+  /** Add border to top */
+  borderTop?: BorderSide
+  /** Add border to bottom */
+  borderBottom?: BorderSide
+  /** Add border to inline start */
+  borderStart?: BorderSide
+  /** Add border to inline end */
+  borderEnd?: BorderSide
+  /** Add border to inline direction */
+  borderInline?: BorderSide
+  /** Add border to block direction */
+  borderBlock?: BorderSide
+  /** Border color */
+  borderColor?: BorderColorToken
   /** Border radius */
   borderRadius?: BorderRadiusToken
   /** Overflow style */
@@ -71,8 +102,30 @@ export type ViewProps = React.ComponentProps<'div'> & {
   textAlign?: TextAlignValue
   /** Position style */
   position?: PositionValue
+  /** Inset (all sides) */
+  inset?: InsetValue
+  /** Inset top */
+  insetTop?: InsetValue
+  /** Inset bottom */
+  insetBottom?: InsetValue
+  /** Inset inline start */
+  insetStart?: InsetValue
+  /** Inset inline end */
+  insetEnd?: InsetValue
+  /** Inset inline */
+  insetInline?: InsetValue
+  /** Inset block */
+  insetBlock?: InsetValue
   /** z-index style */
   zIndex?: ZIndexToken
+  /** Add transition for properties */
+  animated?: boolean
+  /** Render a divider between each child */
+  divided?: boolean
+  /** Direction for divided children */
+  dividedDirection?: Direction
+  /** Apply negative margin and remove side borders */
+  bleed?: BleedToken
   /** Render as a different element */
   as?: TagName
   /** Render prop for polymorphism */
@@ -94,14 +147,38 @@ export function View({
   justify,
   wrap,
   padding,
+  paddingTop: pt,
+  paddingBottom: pb,
+  paddingStart: ps,
+  paddingEnd: pe,
+  paddingInline: pi,
+  paddingBlock: pbDir,
   backgroundColor,
   border,
+  borderTop,
+  borderBottom,
+  borderStart,
+  borderEnd,
+  borderInline,
+  borderBlock,
+  borderColor,
   borderRadius,
   overflow,
   shadow,
   textAlign,
   position,
+  inset,
+  insetTop,
+  insetBottom,
+  insetStart,
+  insetEnd,
+  insetInline,
+  insetBlock,
   zIndex,
+  animated,
+  divided,
+  dividedDirection,
+  bleed,
   xstyle,
   className,
   style,
@@ -117,14 +194,40 @@ export function View({
     justify && s.justify[justify],
     wrap && s.wrap[wrap],
     padding && s.padding[padding],
+    pt && s.paddingTop[pt],
+    pb && s.paddingBottom[pb],
+    ps && s.paddingStart[ps],
+    pe && s.paddingEnd[pe],
+    pi && s.paddingInline[pi],
+    pbDir && s.paddingBlock[pbDir],
     backgroundColor && s.backgroundColor[backgroundColor],
     border && s.border[border],
+    borderTop && s.borderTop[borderTop],
+    borderBottom && s.borderBottom[borderBottom],
+    borderStart && s.borderStart[borderStart],
+    borderEnd && s.borderEnd[borderEnd],
+    borderInline && s.borderInline[borderInline],
+    borderBlock && s.borderBlock[borderBlock],
+    borderColor && s.borderColor[borderColor],
     borderRadius && s.borderRadius[borderRadius],
     overflow && s.overflow[overflow],
     shadow && s.shadow[shadow],
     textAlign && s.textAlign[textAlign],
     position && s.position[position],
+    inset && s.inset[inset],
+    insetTop && s.insetTop[insetTop],
+    insetBottom && s.insetBottom[insetBottom],
+    insetStart && s.insetStart[insetStart],
+    insetEnd && s.insetEnd[insetEnd],
+    insetInline && s.insetInline[insetInline],
+    insetBlock && s.insetBlock[insetBlock],
     zIndex && s.zIndex[zIndex],
+    animated && s.animated.root,
+    divided &&
+      (dividedDirection === 'row' || dividedDirection?.startsWith('row')
+        ? s.divided.row
+        : s.divided.root),
+    bleed && s.bleed[bleed],
     xstyle
   )
 

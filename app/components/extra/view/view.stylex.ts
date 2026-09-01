@@ -90,6 +90,88 @@ const padding = stylex.create({
 })
 
 // ---------------------------------------------------------------------------
+// Individual padding
+// ---------------------------------------------------------------------------
+
+const paddingTop = stylex.create({
+  '0': { paddingTop: 0 },
+  '1': { paddingTop: unit.x1 },
+  '2': { paddingTop: unit.x2 },
+  '3': { paddingTop: unit.x3 },
+  '4': { paddingTop: unit.x4 },
+  '6': { paddingTop: unit.x6 },
+  '8': { paddingTop: unit.x8 },
+  '10': { paddingTop: unit.x10 },
+  '12': { paddingTop: unit.x12 },
+  '16': { paddingTop: unit.x16 }
+})
+
+const paddingBottom = stylex.create({
+  '0': { paddingBottom: 0 },
+  '1': { paddingBottom: unit.x1 },
+  '2': { paddingBottom: unit.x2 },
+  '3': { paddingBottom: unit.x3 },
+  '4': { paddingBottom: unit.x4 },
+  '6': { paddingBottom: unit.x6 },
+  '8': { paddingBottom: unit.x8 },
+  '10': { paddingBottom: unit.x10 },
+  '12': { paddingBottom: unit.x12 },
+  '16': { paddingBottom: unit.x16 }
+})
+
+const paddingStart = stylex.create({
+  '0': { paddingInlineStart: 0 },
+  '1': { paddingInlineStart: unit.x1 },
+  '2': { paddingInlineStart: unit.x2 },
+  '3': { paddingInlineStart: unit.x3 },
+  '4': { paddingInlineStart: unit.x4 },
+  '6': { paddingInlineStart: unit.x6 },
+  '8': { paddingInlineStart: unit.x8 },
+  '10': { paddingInlineStart: unit.x10 },
+  '12': { paddingInlineStart: unit.x12 },
+  '16': { paddingInlineStart: unit.x16 }
+})
+
+const paddingEnd = stylex.create({
+  '0': { paddingInlineEnd: 0 },
+  '1': { paddingInlineEnd: unit.x1 },
+  '2': { paddingInlineEnd: unit.x2 },
+  '3': { paddingInlineEnd: unit.x3 },
+  '4': { paddingInlineEnd: unit.x4 },
+  '6': { paddingInlineEnd: unit.x6 },
+  '8': { paddingInlineEnd: unit.x8 },
+  '10': { paddingInlineEnd: unit.x10 },
+  '12': { paddingInlineEnd: unit.x12 },
+  '16': { paddingInlineEnd: unit.x16 }
+})
+
+const paddingInline = stylex.create({
+  '0': { paddingInline: 0 },
+  '1': { paddingInline: unit.x1 },
+  '2': { paddingInline: unit.x2 },
+  '3': { paddingInline: unit.x3 },
+  '4': { paddingInline: unit.x4 },
+  '6': { paddingInline: unit.x6 },
+  '8': { paddingInline: unit.x8 },
+  '10': { paddingInline: unit.x10 },
+  '12': { paddingInline: unit.x12 },
+  '16': { paddingInline: unit.x16 }
+})
+
+const paddingBlock = stylex.create({
+  '0': { paddingBlock: 0 },
+  '1': { paddingBlock: unit.x1 },
+  '2': { paddingBlock: unit.x2 },
+  '3': { paddingBlock: unit.x3 },
+  '4': { paddingBlock: unit.x4 },
+  '6': { paddingBlock: unit.x6 },
+  '8': { paddingBlock: unit.x8 },
+  '10': { paddingBlock: unit.x10 },
+  '12': { paddingBlock: unit.x12 },
+  '16': { paddingBlock: unit.x16 }
+})
+
+// ---------------------------------------------------------------------------
 // Background color
 // ---------------------------------------------------------------------------
 
@@ -129,6 +211,101 @@ const border = stylex.create({
     borderStyle: 'solid',
     borderColor: colors.borderNeutral
   }
+})
+
+// ---------------------------------------------------------------------------
+// Individual border
+// ---------------------------------------------------------------------------
+
+const borderTop = stylex.create({
+  faded: {
+    borderTopWidth: 1,
+    borderTopStyle: 'solid',
+    borderTopColor: colors.borderNeutralFaded
+  },
+  strong: {
+    borderTopWidth: 1,
+    borderTopStyle: 'solid',
+    borderTopColor: colors.borderNeutral
+  }
+})
+
+const borderBottom = stylex.create({
+  faded: {
+    borderBottomWidth: 1,
+    borderBottomStyle: 'solid',
+    borderBottomColor: colors.borderNeutralFaded
+  },
+  strong: {
+    borderBottomWidth: 1,
+    borderBottomStyle: 'solid',
+    borderBottomColor: colors.borderNeutral
+  }
+})
+
+const borderStart = stylex.create({
+  faded: {
+    borderInlineStartWidth: 1,
+    borderInlineStartStyle: 'solid',
+    borderInlineStartColor: colors.borderNeutralFaded
+  },
+  strong: {
+    borderInlineStartWidth: 1,
+    borderInlineStartStyle: 'solid',
+    borderInlineStartColor: colors.borderNeutral
+  }
+})
+
+const borderEnd = stylex.create({
+  faded: {
+    borderInlineEndWidth: 1,
+    borderInlineEndStyle: 'solid',
+    borderInlineEndColor: colors.borderNeutralFaded
+  },
+  strong: {
+    borderInlineEndWidth: 1,
+    borderInlineEndStyle: 'solid',
+    borderInlineEndColor: colors.borderNeutral
+  }
+})
+
+const borderInline = stylex.create({
+  faded: {
+    borderInlineWidth: 1,
+    borderInlineStyle: 'solid',
+    borderInlineColor: colors.borderNeutralFaded
+  },
+  strong: {
+    borderInlineWidth: 1,
+    borderInlineStyle: 'solid',
+    borderInlineColor: colors.borderNeutral
+  }
+})
+
+const borderBlock = stylex.create({
+  faded: {
+    borderBlockWidth: 1,
+    borderBlockStyle: 'solid',
+    borderBlockColor: colors.borderNeutralFaded
+  },
+  strong: {
+    borderBlockWidth: 1,
+    borderBlockStyle: 'solid',
+    borderBlockColor: colors.borderNeutral
+  }
+})
+
+// ---------------------------------------------------------------------------
+// Border color
+// ---------------------------------------------------------------------------
+
+const borderColor = stylex.create({
+  faded: { borderColor: colors.borderNeutralFaded },
+  strong: { borderColor: colors.borderNeutral },
+  critical: { borderColor: colors.borderCritical },
+  positive: { borderColor: colors.borderPositive },
+  primary: { borderColor: colors.borderPrimary },
+  warning: { borderColor: colors.borderWarning }
 })
 
 // ---------------------------------------------------------------------------
@@ -189,6 +366,98 @@ const position = stylex.create({
 })
 
 // ---------------------------------------------------------------------------
+// Inset
+// ---------------------------------------------------------------------------
+
+const inset = stylex.create({
+  '0': { inset: 0 },
+  auto: { inset: 'auto' }
+})
+
+const insetTop = stylex.create({
+  '0': { top: 0 },
+  auto: { top: 'auto' }
+})
+
+const insetBottom = stylex.create({
+  '0': { bottom: 0 },
+  auto: { bottom: 'auto' }
+})
+
+const insetStart = stylex.create({
+  '0': { insetInlineStart: 0 },
+  auto: { insetInlineStart: 'auto' }
+})
+
+const insetEnd = stylex.create({
+  '0': { insetInlineEnd: 0 },
+  auto: { insetInlineEnd: 'auto' }
+})
+
+const insetInline = stylex.create({
+  '0': { insetInline: 0 },
+  auto: { insetInline: 'auto' }
+})
+
+const insetBlock = stylex.create({
+  '0': { insetBlock: 0 },
+  auto: { insetBlock: 'auto' }
+})
+
+// ---------------------------------------------------------------------------
+// Animated
+// ---------------------------------------------------------------------------
+
+const animated = stylex.create({
+  root: {
+    transitionProperty: 'color, background-color, border-color, box-shadow, opacity',
+    transitionDuration: '150ms',
+    transitionTimingFunction: 'ease-in-out'
+  }
+})
+
+// ---------------------------------------------------------------------------
+// Divided (adds border between children)
+// ---------------------------------------------------------------------------
+
+const divided = stylex.create({
+  root: {
+    '& > * + *': {
+      borderBlockStartWidth: 1,
+      borderBlockStartStyle: 'solid',
+      borderBlockStartColor: colors.borderNeutralFaded
+    }
+  },
+  row: {
+    '& > * + *': {
+      borderBlockStartWidth: 0,
+      borderInlineStartWidth: 1,
+      borderInlineStartStyle: 'solid',
+      borderInlineStartColor: colors.borderNeutralFaded
+    }
+  }
+})
+
+// ---------------------------------------------------------------------------
+// Bleed (negative margin with border)
+// ---------------------------------------------------------------------------
+
+const bleed = stylex.create({
+  '2': {
+    marginInline: `-${unit.x2}`,
+    borderInlineWidth: 1,
+    borderInlineStyle: 'solid',
+    borderInlineColor: colors.borderNeutralFaded
+  },
+  '4': {
+    marginInline: `-${unit.x4}`,
+    borderInlineWidth: 1,
+    borderInlineStyle: 'solid',
+    borderInlineColor: colors.borderNeutralFaded
+  }
+})
+
+// ---------------------------------------------------------------------------
 // Z-index
 // ---------------------------------------------------------------------------
 
@@ -209,12 +478,35 @@ export const viewStyles = {
   justify,
   wrap,
   padding,
+  paddingTop,
+  paddingBottom,
+  paddingStart,
+  paddingEnd,
+  paddingInline,
+  paddingBlock,
   backgroundColor: bgColor,
   border,
+  borderTop,
+  borderBottom,
+  borderStart,
+  borderEnd,
+  borderInline,
+  borderBlock,
+  borderColor,
   borderRadius,
   overflow,
   shadow: shadowStyles,
   textAlign,
   position,
-  zIndex: zIndexStyle
+  inset,
+  insetTop,
+  insetBottom,
+  insetStart,
+  insetEnd,
+  insetInline,
+  insetBlock,
+  zIndex: zIndexStyle,
+  animated,
+  divided,
+  bleed
 } as const

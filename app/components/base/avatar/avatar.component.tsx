@@ -41,6 +41,10 @@ export type AvatarProps = Omit<React.ComponentProps<typeof BaseAvatar.Root>, 'ch
   size?: AvatarSize
   /** Additional attributes for the image element */
   imageAttributes?: React.ComponentProps<typeof BaseAvatar.Image>
+  /** Render prop for the image element, useful for integrating with third party image components */
+  renderImage?: (
+    props: React.ComponentProps<typeof BaseAvatar.Image> & { src: string; alt: string }
+  ) => React.ReactNode
   /** Delay before showing fallback (ms) */
   fallbackDelay?: number
   /** StyleX styles to apply */
@@ -74,6 +78,7 @@ export function Avatar({
   color = 'neutral',
   size = 'large',
   imageAttributes,
+  renderImage,
   fallbackDelay,
   xstyle,
   ...props
@@ -112,14 +117,25 @@ export function Avatar({
   return (
     <BaseAvatar.Root data-slot='avatar' className={className} style={style} {...restProps}>
       {src ? (
-        <BaseAvatar.Image
-          data-slot='avatar-image'
-          src={src}
-          alt={alt || ''}
-          className={imgClassNameFinal}
-          style={imgStyleFinal}
-          {...imgRest}
-        />
+        renderImage ? (
+          renderImage({
+            ...imgAttrs,
+            src,
+            alt: alt || '',
+            className: imgClassNameFinal,
+            style: imgStyleFinal,
+            ...imgRest
+          })
+        ) : (
+          <BaseAvatar.Image
+            data-slot='avatar-image'
+            src={src}
+            alt={alt || ''}
+            className={imgClassNameFinal}
+            style={imgStyleFinal}
+            {...imgRest}
+          />
+        )
       ) : (
         <BaseAvatar.Fallback
           data-slot='avatar-fallback'

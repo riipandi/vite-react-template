@@ -61,6 +61,16 @@ Run `pnpm exec playwright install chromium` once if storybook tests fail with a 
   - Length properties are in pixels by default.
 - Components: functional components, co-located stories + tests for anything visual or reusable.
 - Base UI components: use `@base-ui/react` headless primitives, apply StyleX via `stylex.props()` spread.
+
+### Reshaped Adoption Guidelines
+
+When adopting or porting Reshaped components:
+
+- **Focus on styling first.** The primary goal is to adopt Reshaped's visual design system (colors, spacing, typography, variants) — not to replicate Reshaped's API 1:1.
+- **Align with Base UI behavior.** When porting props, follow Base UI's patterns and best practices. Use `useRender` for polymorphism instead of Reshaped's `as` prop. Use Base UI's `mergeProps` for prop merging.
+- **Base UI is composable.** Prefer composing Base UI primitives over building monolithic components. For example, use `Avatar.Root` + `Avatar.Image` + `Avatar.Fallback` instead of hiding the structure.
+- **Notice incompatibilities.** If Reshaped's API conflicts with Base UI's patterns (e.g. responsive props vs fixed tokens, different prop naming), flag the incompatibility and confirm with the user before proceeding.
+- **Simplify when needed.** Reshaped uses responsive props (`G.Responsive`) with viewport breakpoints. This template uses fixed design tokens. Simplify responsive props to token-based alternatives unless the user explicitly requests responsive behavior.
 - Don't hand-format or hand-sort imports — `pnpm format` (oxfmt) sorts them. JSON files use 4-space indent, TS/JS 2-space, no semicolons, single quotes.
 - Follow `tsc -b --noEmit` + `pnpm test` as the minimum validation before finishing; hooks/CI enforce more.
 - Auth uses the DummyJSON API via `ofetch` (see `app/libraries/`); `PUBLIC_API_URL` and `PUBLIC_SITE_URL` come from env — client env vars must use the `VITE_` or `PUBLIC_` prefix.

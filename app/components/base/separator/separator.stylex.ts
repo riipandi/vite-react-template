@@ -97,6 +97,58 @@ const blank = stylex.create({
 })
 
 // ---------------------------------------------------------------------------
+// Inset (inset from container bounds)
+// ---------------------------------------------------------------------------
+
+const inset = stylex.create({
+  '0': {
+    paddingInline: 0
+  },
+  '1': {
+    paddingInline: unit.x1
+  },
+  '2': {
+    paddingInline: unit.x2
+  },
+  '3': {
+    paddingInline: unit.x3
+  },
+  '4': {
+    paddingInline: unit.x4
+  },
+  '6': {
+    paddingInline: unit.x6
+  },
+  '8': {
+    paddingInline: unit.x8
+  }
+})
+
+const insetVertical = stylex.create({
+  '0': {
+    paddingBlock: 0
+  },
+  '1': {
+    paddingBlock: unit.x1
+  },
+  '2': {
+    paddingBlock: unit.x2
+  },
+  '3': {
+    paddingBlock: unit.x3
+  },
+  '4': {
+    paddingBlock: unit.x4
+  },
+  '6': {
+    paddingBlock: unit.x6
+  },
+  '8': {
+    paddingBlock: unit.x8
+  }
+})
+
+// ---------------------------------------------------------------------------
 // Exports
 // ---------------------------------------------------------------------------
 
@@ -104,5 +156,7 @@ export const separatorStyles = {
   colorStyles,
   orientation,
   contentPosition,
-  blank
+  blank,
+  inset,
+  insetVertical
 } as const

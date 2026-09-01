@@ -1,4 +1,6 @@
 @import './fontface.css';
+@import './reset.css';
+@import './theme.css';
 
 *,
 *::before,

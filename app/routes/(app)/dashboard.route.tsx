@@ -5,7 +5,7 @@ import * as Lucide from 'lucide-react'
 import { useEffect } from 'react'
 import { useSidebarOpen, toggleSidebar } from '#/libraries/app.store'
 import { isAuthenticated } from '#/libraries/auth.store'
-import { radiusVar, spaceVar, colorVar } from '#/styles/tokens.stylex.ts.txt'
+import { radiusVar, spaceVar, colorVar } from '#/styles/core/tokens.stylex'
 import { SideNavbar } from './-sidebar'
 
 export const Route = createFileRoute('/(app)/dashboard')({

@@ -3,14 +3,16 @@ import { devtools } from '@tanstack/devtools-vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'node:path'
-import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
 
 const isTestOrCI = process.env.CI || process.env.VITEST
 
 export default defineConfig({
   plugins: [
-    stylex({ useCSSLayers: true, aliases: { '#/*': resolve('./app/*') } }),
+    stylex({
+      useCSSLayers: true,
+      aliases: { '#/*': resolve('./app/*') }
+    }),
     !isTestOrCI && devtools(),
     !isTestOrCI &&
       tanstackRouter({
@@ -19,8 +21,7 @@ export default defineConfig({
         autoCodeSplitting: true,
         target: 'react'
       }),
-    react(),
-    !isTestOrCI && visualizer({ emitFile: true })
+    react()
   ],
   envPrefix: ['VITE_', 'PUBLIC_'],
   define: { 'import.meta.env.PUBLIC_APP_VERSION': `"${process.env.npm_package_version}"` },

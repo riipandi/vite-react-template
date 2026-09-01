@@ -14,7 +14,7 @@ import {
   radiusVar,
   spaceVar,
   colorVar
-} from '#/styles/tokens.stylex.ts.txt'
+} from '#/styles/core/tokens.stylex'
 
 const socialStyles = stylex.create({
   socialButton: {

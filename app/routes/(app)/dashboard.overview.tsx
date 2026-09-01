@@ -11,7 +11,7 @@ import {
   shadowVar,
   spaceVar,
   colorVar
-} from '#/styles/tokens.stylex.ts.txt'
+} from '#/styles/core/tokens.stylex'
 
 export const Route = createFileRoute('/(app)/dashboard/overview')({
   component: DashboardOverviewComponent

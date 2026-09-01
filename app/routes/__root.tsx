@@ -3,7 +3,7 @@ import type { AnyRouteMatch } from '@tanstack/react-router'
 import { Outlet, createRootRouteWithContext, useMatches } from '@tanstack/react-router'
 import { Fragment } from 'react'
 import { ThemeProvider } from '#/components/theme'
-import { AuthProvider } from '#/libraries/guards/auth-provider'
+import { AuthProvider } from '#/libraries/guard/auth-provider'
 import { GlobalNotFound, GlobalError } from './-boundaries'
 import DevTools from './-devtools'
 

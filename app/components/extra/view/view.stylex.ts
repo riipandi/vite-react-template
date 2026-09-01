@@ -421,20 +421,20 @@ const animated = stylex.create({
 // ---------------------------------------------------------------------------
 
 const divided = stylex.create({
+  root: {},
+  row: {}
+})
+
+const dividedChild = stylex.create({
   root: {
-    '& > * + *': {
-      borderBlockStartWidth: 1,
-      borderBlockStartStyle: 'solid',
-      borderBlockStartColor: colors.borderNeutralFaded
-    }
+    borderBlockStartWidth: 1,
+    borderBlockStartStyle: 'solid',
+    borderBlockStartColor: colors.borderNeutralFaded
   },
   row: {
-    '& > * + *': {
-      borderBlockStartWidth: 0,
-      borderInlineStartWidth: 1,
-      borderInlineStartStyle: 'solid',
-      borderInlineStartColor: colors.borderNeutralFaded
-    }
+    borderInlineStartWidth: 1,
+    borderInlineStartStyle: 'solid',
+    borderInlineStartColor: colors.borderNeutralFaded
   }
 })
 
@@ -508,5 +508,6 @@ export const viewStyles = {
   zIndex: zIndexStyle,
   animated,
   divided,
+  dividedChild,
   bleed
 } as const

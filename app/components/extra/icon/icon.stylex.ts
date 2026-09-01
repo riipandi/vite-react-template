@@ -15,13 +15,7 @@ const base = stylex.create({
     aspectRatio: '1 / 1',
     transitionProperty: 'color',
     transitionDuration: duration.fast,
-    transitionTimingFunction: easing.standard,
-    '& svg': {
-      display: 'block',
-      minWidth: '100%',
-      height: '100%',
-      width: 'auto'
-    }
+    transitionTimingFunction: easing.standard
   }
 })
 
@@ -73,6 +67,15 @@ const colorStyles = stylex.create({
   disabled: { color: colors.foregroundDisabled }
 })
 
+const svgBase = stylex.create({
+  root: {
+    display: 'block',
+    minWidth: '100%',
+    height: '100%',
+    width: 'auto'
+  }
+})
+
 // ---------------------------------------------------------------------------
 // Exports
 // ---------------------------------------------------------------------------
@@ -81,5 +84,6 @@ export const iconStyles = {
   base,
   sizes,
   autoWidth,
-  colorStyles
+  colorStyles,
+  svgBase
 } as const

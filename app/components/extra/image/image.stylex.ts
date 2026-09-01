@@ -8,12 +8,15 @@ import { radius } from '#/styles/core/size.stylex'
 
 const root = stylex.create({
   root: {
-    position: 'relative',
-    '& img': {
-      height: '100%',
-      width: '100%',
-      borderRadius: 'inherit'
-    }
+    position: 'relative'
+  }
+})
+
+const imgBase = stylex.create({
+  root: {
+    height: '100%',
+    width: '100%',
+    borderRadius: 'inherit'
   }
 })
 
@@ -52,7 +55,7 @@ const borderRadius = stylex.create({
 
 const outline = stylex.create({
   root: {
-    '&::after': {
+    '::after': {
       content: '',
       position: 'absolute',
       inset: 0,
@@ -86,6 +89,7 @@ const fallback = stylex.create({
 export const imageStyles = {
   root,
   image,
+  imgBase,
   borderRadius,
   outline,
   fallback

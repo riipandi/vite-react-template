@@ -1,4 +1,6 @@
-import type { StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import atoms from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { IconAdd, IconCheck, IconArrowRight, IconDelete, IconSubtract } from 'obra-icons-react'
 import { expect, fn, userEvent } from 'storybook/test'
 import { Example } from '#/components/storyblock'
@@ -7,8 +9,15 @@ import { Button, ButtonGroup } from './button.component'
 export default {
   title: 'Base Components/Button',
   component: Button,
-  parameters: { layout: 'fullscreen' }
-}
+  parameters: { layout: 'fullscreen' },
+  decorators: [
+    (Story) => (
+      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+        <Story />
+      </div>
+    )
+  ]
+} satisfies Meta<typeof Button>
 
 // ---------------------------------------------------------------------------
 // Playground

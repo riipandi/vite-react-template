@@ -86,6 +86,8 @@ export function Icon({
       ? svg
       : React.createElement(svg as React.ComponentType)
 
+  const svgSx = stylex.props(s.svgBase.root)
+
   const defaultProps = {
     'data-slot': 'icon',
     className: [sx.className, className].filter(Boolean).join(' ') || undefined,
@@ -94,7 +96,15 @@ export function Icon({
       <>
         {React.isValidElement(icon)
           ? React.cloneElement(icon as React.ReactElement<React.SVGProps<SVGSVGElement>>, {
-              focusable: false
+              focusable: false,
+              className:
+                [svgSx.className, (icon.props as Record<string, unknown>).className]
+                  .filter(Boolean)
+                  .join(' ') || undefined,
+              style: {
+                ...svgSx.style,
+                ...((icon.props as Record<string, unknown>).style as React.CSSProperties)
+              }
             })
           : icon}
       </>

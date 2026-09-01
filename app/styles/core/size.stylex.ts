@@ -24,7 +24,7 @@ export const radius = stylex.defineVars({
   small: '4px',
   medium: '6px',
   large: '10px',
-  circular: '50%',
+  circular: '999px',
   none: '0px'
 })
 

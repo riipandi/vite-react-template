@@ -14,6 +14,7 @@ import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
 import type { StyleXStyles } from '@stylexjs/stylex'
+import React from 'react'
 import { viewStyles as s } from './view.stylex'
 
 // ---------------------------------------------------------------------------
@@ -187,6 +188,9 @@ export function View({
 }: ViewProps) {
   const defaultTagName = as || 'div'
 
+  const isDividedRow =
+    divided && (dividedDirection === 'row' || dividedDirection?.startsWith('row'))
+
   const sx = stylex.props(
     direction && s.direction[direction],
     gap && s.gap[gap],
@@ -223,19 +227,34 @@ export function View({
     insetBlock && s.insetBlock[insetBlock],
     zIndex && s.zIndex[zIndex],
     animated && s.animated.root,
-    divided &&
-      (dividedDirection === 'row' || dividedDirection?.startsWith('row')
-        ? s.divided.row
-        : s.divided.root),
+    divided && s.divided[isDividedRow ? 'row' : 'root'],
     bleed && s.bleed[bleed],
     xstyle
   )
+
+  // Apply divided styles to children after the first
+  const processedChildren = divided
+    ? React.Children.toArray(children).map((child, index) => {
+        if (index === 0 || !React.isValidElement(child)) return child
+        const dividedSx = stylex.props(isDividedRow ? s.dividedChild.row : s.dividedChild.root)
+        return React.cloneElement(child as React.ReactElement<Record<string, unknown>>, {
+          className:
+            [dividedSx.className, (child.props as Record<string, unknown>).className]
+              .filter(Boolean)
+              .join(' ') || undefined,
+          style: {
+            ...dividedSx.style,
+            ...((child.props as Record<string, unknown>).style as React.CSSProperties)
+          }
+        })
+      })
+    : children
 
   const defaultProps = {
     'data-slot': 'view',
     className: [sx.className, className].filter(Boolean).join(' ') || undefined,
     style: { ...sx.style, ...style },
-    children
+    children: processedChildren
   }
 
   return useRender<Record<string, unknown>, HTMLElement>({

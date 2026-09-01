@@ -12,6 +12,7 @@
 import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
 import * as stylex from '@stylexjs/stylex'
 import type { StyleXStyles } from '@stylexjs/stylex'
+import React from 'react'
 import { avatarStyles as s } from './avatar.stylex'
 
 // ---------------------------------------------------------------------------
@@ -157,7 +158,8 @@ export function Avatar({
           {icon ? (
             <span data-slot='avatar-icon'>
               {(() => {
-                const iconSx = stylex.props(s.icon.root, s.icon[size])
+                const iconSx = stylex.props(s.icon.root)
+                const iconSvgSx = stylex.props(s.iconSvg[size])
                 const {
                   className: iconClassName,
                   style: iconStyle,
@@ -174,7 +176,19 @@ export function Avatar({
                     style={iconStyle}
                     {...iconRest}
                   >
-                    {icon}
+                    {React.isValidElement(icon)
+                      ? React.cloneElement(icon as React.ReactElement<Record<string, unknown>>, {
+                          className:
+                            [iconSvgSx.className, (icon.props as Record<string, unknown>).className]
+                              .filter(Boolean)
+                              .join(' ') || undefined,
+                          style: {
+                            ...iconSvgSx.style,
+                            ...((icon.props as Record<string, unknown>)
+                              .style as React.CSSProperties)
+                          }
+                        })
+                      : icon}
                   </span>
                 )
               })()}

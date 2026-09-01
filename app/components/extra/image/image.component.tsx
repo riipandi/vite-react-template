@@ -106,6 +106,8 @@ export function Image({
     xstyle
   )
 
+  const imgBaseSx = stylex.props(s.imgBase.root)
+
   const imageSx = stylex.props(s.image.root, displayMode && s.image[`display-mode-${displayMode}`])
 
   const isFallback = (status === 'error' || !src) && !!fallback
@@ -175,6 +177,7 @@ export function Image({
     onError: handleError,
     className:
       [
+        imgBaseSx.className,
         hasOutline
           ? imageSx.className
           : [imageSx.className, rootSx.className].filter(Boolean).join(' '),
@@ -182,7 +185,7 @@ export function Image({
       ]
         .filter(Boolean)
         .join(' ') || undefined,
-    style: resolvedStyle
+    style: { ...resolvedStyle, ...imgBaseSx.style }
   }
 
   const imageNode = renderImage ? (

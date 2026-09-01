@@ -15,6 +15,7 @@
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
+import React from 'react'
 import { badgeStyles as s } from './badge.stylex'
 
 // ---------------------------------------------------------------------------
@@ -122,7 +123,21 @@ export function Badge({
     <>
       {icon && (
         <span data-slot='badge-icon' {...stylex.props(s.icon[size])}>
-          {icon}
+          {(() => {
+            const iconSvgSx = stylex.props(s.iconSvg[size])
+            return React.isValidElement(icon)
+              ? React.cloneElement(icon as React.ReactElement<Record<string, unknown>>, {
+                  className:
+                    [iconSvgSx.className, (icon.props as Record<string, unknown>).className]
+                      .filter(Boolean)
+                      .join(' ') || undefined,
+                  style: {
+                    ...iconSvgSx.style,
+                    ...((icon.props as Record<string, unknown>).style as React.CSSProperties)
+                  }
+                })
+              : icon
+          })()}
         </span>
       )}
       {hasText && (
@@ -132,7 +147,21 @@ export function Badge({
       )}
       {endIcon && (
         <span data-slot='badge-end-icon' {...stylex.props(s.icon[size])}>
-          {endIcon}
+          {(() => {
+            const iconSvgSx = stylex.props(s.iconSvg[size])
+            return React.isValidElement(endIcon)
+              ? React.cloneElement(endIcon as React.ReactElement<Record<string, unknown>>, {
+                  className:
+                    [iconSvgSx.className, (endIcon.props as Record<string, unknown>).className]
+                      .filter(Boolean)
+                      .join(' ') || undefined,
+                  style: {
+                    ...iconSvgSx.style,
+                    ...((endIcon.props as Record<string, unknown>).style as React.CSSProperties)
+                  }
+                })
+              : endIcon
+          })()}
         </span>
       )}
       {onDismiss && (

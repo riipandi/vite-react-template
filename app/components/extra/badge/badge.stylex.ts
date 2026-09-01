@@ -202,23 +202,26 @@ const content = stylex.create({
 
 const icon = stylex.create({
   small: {
-    '&:first-child': { marginInlineStart: `-${unit['x0.5']}` },
-    '&:last-child': { marginInlineEnd: `-${unit['x0.5']}` },
-    '&:only-child': { marginInline: `-${unit.x1}` },
-    '& svg': { width: '0.75rem', height: '0.75rem' }
+    ':first-child': { marginInlineStart: `-${unit['x0.5']}` },
+    ':last-child': { marginInlineEnd: `-${unit['x0.5']}` },
+    ':only-child': { marginInline: `-${unit.x1}` }
   },
   medium: {
-    '&:first-child': { marginInlineStart: `-${unit['x0.5']}` },
-    '&:last-child': { marginInlineEnd: `-${unit['x0.5']}` },
-    '&:only-child': { marginInline: `-${unit.x1}` },
-    '& svg': { width: '0.875rem', height: '0.875rem' }
+    ':first-child': { marginInlineStart: `-${unit['x0.5']}` },
+    ':last-child': { marginInlineEnd: `-${unit['x0.5']}` },
+    ':only-child': { marginInline: `-${unit.x1}` }
   },
   large: {
-    '&:first-child': { marginInlineStart: `-${unit['x0.5']}` },
-    '&:last-child': { marginInlineEnd: `-${unit['x0.5']}` },
-    '&:only-child': { marginInline: `-${unit.x1}` },
-    '& svg': { width: '1rem', height: '1rem' }
+    ':first-child': { marginInlineStart: `-${unit['x0.5']}` },
+    ':last-child': { marginInlineEnd: `-${unit['x0.5']}` },
+    ':only-child': { marginInline: `-${unit.x1}` }
   }
+})
+
+const iconSvg = stylex.create({
+  small: { width: '0.75rem', height: '0.75rem' },
+  medium: { width: '0.875rem', height: '0.875rem' },
+  large: { width: '1rem', height: '1rem' }
 })
 
 // ---------------------------------------------------------------------------
@@ -234,8 +237,8 @@ const dismiss = stylex.create({
     transitionProperty: 'opacity',
     transitionDuration: duration.fast,
     transitionTimingFunction: easing.standard,
-    '&:last-child': { marginInlineEnd: `-${unit['x0.5']}` },
-    '&:hover': { opacity: 0.8 }
+    ':last-child': { marginInlineEnd: `-${unit['x0.5']}` },
+    ':hover': { opacity: 0.8 }
   },
   small: {
     width: '0.875rem',
@@ -282,6 +285,7 @@ export const badgeStyles = {
   hidden,
   content,
   icon,
+  iconSvg,
   dismiss,
   container
 } as const

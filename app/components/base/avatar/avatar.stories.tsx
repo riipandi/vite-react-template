@@ -1,4 +1,6 @@
-import type { StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import atoms from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { IconUser } from 'obra-icons-react'
 import { expect } from 'storybook/test'
 import { Example } from '#/components/storyblock'
@@ -10,8 +12,15 @@ const imgUrl =
 export default {
   title: 'Base Components/Avatar',
   component: Avatar,
-  parameters: { layout: 'fullscreen' }
-}
+  parameters: { layout: 'fullscreen' },
+  decorators: [
+    (Story) => (
+      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+        <Story />
+      </div>
+    )
+  ]
+} satisfies Meta<typeof Avatar>
 
 // ---------------------------------------------------------------------------
 // src, alt

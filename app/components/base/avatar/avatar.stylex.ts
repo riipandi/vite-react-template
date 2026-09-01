@@ -167,19 +167,14 @@ const icon = stylex.create({
     width: '100%',
     height: '100%',
     borderRadius: 'inherit'
-  },
-  small: {
-    '& svg': { width: '0.875rem', height: '0.875rem' }
-  },
-  medium: {
-    '& svg': { width: '1rem', height: '1rem' }
-  },
-  large: {
-    '& svg': { width: '1.25rem', height: '1.25rem' }
-  },
-  xlarge: {
-    '& svg': { width: '1.5rem', height: '1.5rem' }
   }
+})
+
+const iconSvg = stylex.create({
+  small: { width: '0.875rem', height: '0.875rem' },
+  medium: { width: '1rem', height: '1rem' },
+  large: { width: '1.25rem', height: '1.25rem' },
+  xlarge: { width: '1.5rem', height: '1.5rem' }
 })
 
 // ---------------------------------------------------------------------------
@@ -195,5 +190,6 @@ export const avatarStyles = {
   sizes: avatarSizes,
   image,
   fallback,
-  icon
+  icon,
+  iconSvg
 } as const

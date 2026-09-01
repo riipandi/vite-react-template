@@ -3,7 +3,7 @@ import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { Button } from '#/components/base/button'
-import { useAuthentication } from '#/guards/auth-provider'
+import { useAuthentication } from '#/libraries/guard/auth-provider'
 import {
   fontSizeVar,
   fontWeightVar,
@@ -11,7 +11,7 @@ import {
   shadowVar,
   spaceVar,
   colorVar
-} from '#/styles/tokens.stylex'
+} from '#/styles/tokens.stylex.ts.txt'
 
 export const Route = createFileRoute('/(app)/dashboard/overview')({
   component: DashboardOverviewComponent

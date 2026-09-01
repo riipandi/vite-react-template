@@ -2,8 +2,8 @@ import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import { ThemeSwitcher } from '#/components/theme'
-import { isAuthenticated } from '#/guards/auth-store'
-import { spaceVar } from '#/styles/tokens.stylex'
+import { isAuthenticated } from '#/libraries/auth.store'
+import { spaceVar } from '#/styles/tokens.stylex.ts.txt'
 
 export const Route = createFileRoute('/(auth)')({
   beforeLoad: () => {

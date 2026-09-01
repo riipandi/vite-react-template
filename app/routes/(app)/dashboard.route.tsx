@@ -3,9 +3,9 @@ import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { useEffect } from 'react'
-import { isAuthenticated } from '#/guards/auth-store'
-import { useSidebarOpen, toggleSidebar } from '#/stores/app.store'
-import { radiusVar, spaceVar, colorVar } from '#/styles/tokens.stylex'
+import { useSidebarOpen, toggleSidebar } from '#/libraries/app.store'
+import { isAuthenticated } from '#/libraries/auth.store'
+import { radiusVar, spaceVar, colorVar } from '#/styles/tokens.stylex.ts.txt'
 import { SideNavbar } from './-sidebar'
 
 export const Route = createFileRoute('/(app)/dashboard')({

@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { radiusVar, spaceVar, colorVar } from '#/styles/tokens.stylex'
+import { radiusVar, spaceVar, colorVar } from '#/styles/tokens.stylex.ts.txt'
 import { useTheme } from './theme'
 
 const cycle: Record<string, string> = { light: 'dark', dark: 'system', system: 'light' }

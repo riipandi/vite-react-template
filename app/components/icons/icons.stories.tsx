@@ -2,18 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
-import { colorVar, fontSizeVar, fontWeightVar } from '#/styles/tokens.stylex'
-import { IconBox } from '../extra/icon-box/icon-box.component'
-import {
-  FacebookIcon,
-  GitHubIcon,
-  GoogleIcon,
-  InstagramIcon,
-  LinkedInIcon,
-  TelegramIcon,
-  WhatsAppIcon,
-  XIcon
-} from './index'
+import { colorVar, fontSizeVar, fontWeightVar } from '#/styles/tokens.stylex.ts.txt'
+// import { IconBox } from '../extra/icon-box/icon-box.component'
+import { FacebookIcon, GitHubIcon, GoogleIcon, InstagramIcon } from './index'
+import { LinkedInIcon, TelegramIcon, WhatsAppIcon, XIcon } from './index'
 
 const icons = [
   { name: 'GitHub', component: GitHubIcon },

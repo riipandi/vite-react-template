@@ -5,6 +5,7 @@
 .pnp.js
 .DS_Store
 .DS_Store?
+.sentryclirc
 /coverage
 /[Tt]emp/
 /[Tt]mp/
@@ -69,9 +70,6 @@ compose.env*
 /playwright-report/
 /blob-report/
 .playwright/
-
-# Sentry Config File
-.sentryclirc
 
 # Storybook
 *storybook.log

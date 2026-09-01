@@ -1,7 +1,13 @@
 import x from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Link, type ErrorComponentProps } from '@tanstack/react-router'
-import { fontSizeVar, fontWeightVar, radiusVar, spaceVar, colorVar } from '#/styles/tokens.stylex'
+import {
+  fontSizeVar,
+  fontWeightVar,
+  radiusVar,
+  spaceVar,
+  colorVar
+} from '#/styles/tokens.stylex.ts.txt'
 
 const styles = stylex.create({
   content: {

@@ -5,6 +5,7 @@ allowBuilds:
   lefthook: true
 
 minimumReleaseAge: 1440
+
 minimumReleaseAgeExclude:
   - '@oxfmt/binding-android-arm-eabi'
   - '@oxfmt/binding-android-arm64'
@@ -44,6 +45,7 @@ minimumReleaseAgeExclude:
   - '@oxlint/binding-win32-arm64-msvc'
   - '@oxlint/binding-win32-ia32-msvc'
   - '@oxlint/binding-win32-x64-msvc'
-  - knip@6.17.2
+  - knip
+  - lucide-react
   - oxfmt
   - oxlint

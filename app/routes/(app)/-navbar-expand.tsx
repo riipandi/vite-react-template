@@ -9,7 +9,7 @@ import {
   shadowVar,
   spaceVar,
   colorVar
-} from '#/styles/tokens.stylex'
+} from '#/styles/tokens.stylex.ts.txt'
 
 // ── Nav data ──────────────────────────────────────────────────────────────────
 

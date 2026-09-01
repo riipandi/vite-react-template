@@ -5,10 +5,16 @@ import { useState } from 'react'
 import { z } from 'zod'
 import { Button } from '#/components/base/button'
 import { GitHubIcon, GoogleIcon } from '#/components/icons'
-import { useAuthentication } from '#/guards/auth-provider'
-import { getErrorMessage } from '#/guards/auth-utils'
+import { useAuthentication } from '#/libraries/guard/auth-provider'
+import { getErrorMessage } from '#/libraries/guard/auth-utils'
 import { loginSchema } from '#/schemas/auth.schema'
-import { fontSizeVar, fontWeightVar, radiusVar, spaceVar, colorVar } from '#/styles/tokens.stylex'
+import {
+  fontSizeVar,
+  fontWeightVar,
+  radiusVar,
+  spaceVar,
+  colorVar
+} from '#/styles/tokens.stylex.ts.txt'
 
 const socialStyles = stylex.create({
   socialButton: {

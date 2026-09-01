@@ -4,9 +4,9 @@ import * as stylex from '@stylexjs/stylex'
 import { Link, createFileRoute, redirect } from '@tanstack/react-router'
 import { Button } from '#/components/base/button'
 import { ThemeSwitcher } from '#/components/theme'
-import { useAuthentication } from '#/guards/auth-provider'
-import { isAuthenticated } from '#/guards/auth-store'
-import { fontSizeVar, spaceVar, colorVar } from '#/styles/tokens.stylex'
+import { isAuthenticated } from '#/libraries/auth.store'
+import { useAuthentication } from '#/libraries/guard/auth-provider'
+import { fontSizeVar, spaceVar, colorVar } from '#/styles/tokens.stylex.ts.txt'
 
 export const Route = createFileRoute('/')({
   beforeLoad: () => {

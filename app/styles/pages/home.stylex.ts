@@ -91,6 +91,7 @@ export const homeStyles = stylex.create({
     padding: spaceVar[3],
     borderRadius: '0.55rem',
     width: '100%',
+    textAlign: 'center',
     boxSizing: 'border-box'
   },
   alertLogin: {

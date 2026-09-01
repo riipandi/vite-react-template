@@ -35,7 +35,7 @@ function HomeComponent() {
         atoms.flexDirection.column
       )}
     >
-      <header {...stylex.props(homeStyles.header)} aria-hidden>
+      <header {...stylex.props(homeStyles.header)}>
         <ThemeSwitcher />
       </header>
       <div {...stylex.props(homeStyles.content)}>
@@ -55,7 +55,7 @@ function HomeComponent() {
             This is an example starter template React with Vite.
           </p>
           <p {...stylex.props(atoms.lineHeight['2rem'])}>
-            Vite + React + Typescript + StyleX + TanStack Form + TanStack Router + Vitest
+            Vite + React + Typescript + StyleX + TanStack + Vitest
           </p>
         </div>
         <div {...stylex.props(homeStyles.actions)}>

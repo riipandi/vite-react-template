@@ -40,7 +40,7 @@ export const sidebarStyles = stylex.create({
   // Logo
   headerZone: {
     width: '100%',
-    position: 'relative',
+    position: 'relative'
   },
   headerZoneCollapsed: {
     display: 'flex',

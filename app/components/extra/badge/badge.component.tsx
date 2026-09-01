@@ -59,6 +59,10 @@ export type BadgeProps = React.ComponentProps<'span'> & {
   onDismiss?: () => void
   /** Aria label for the dismiss button */
   dismissAriaLabel?: string
+  /** Click handler (makes badge actionable) */
+  onClick?: (e: React.MouseEvent) => void
+  /** URL to link to (makes badge a link) */
+  href?: string
   /** Render prop for polymorphism */
   render?: BadgeRenderProp
   /** StyleX styles to apply */
@@ -93,6 +97,8 @@ export function Badge({
   hidden: isHidden = false,
   onDismiss,
   dismissAriaLabel,
+  onClick,
+  href,
   xstyle,
   className,
   style,
@@ -164,6 +170,8 @@ export function Badge({
     'data-slot': 'badge',
     className: [sx.className, className].filter(Boolean).join(' ') || undefined,
     style: { ...sx.style, ...style },
+    onClick,
+    href,
     children: badgeContent
   }
 

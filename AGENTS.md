@@ -67,6 +67,7 @@ Run `pnpm exec playwright install chromium` once if storybook tests fail with a 
 When adopting or porting Reshaped components:
 
 - **Focus on styling first.** The primary goal is to adopt Reshaped's visual design system (colors, spacing, typography, variants) — not to replicate Reshaped's API 1:1.
+- **Maintain parity with Reshaped.** Before finalizing a component, compare all props and styles against Reshaped's source (`*.types.ts` and `*.tsx`). Flag any missing props and implement them unless they conflict with Base UI patterns.
 - **Align with Base UI behavior.** When porting props, follow Base UI's patterns and best practices. Use `useRender` for polymorphism instead of Reshaped's `as` prop. Use Base UI's `mergeProps` for prop merging.
 - **Base UI is composable.** Prefer composing Base UI primitives over building monolithic components. For example, use `Avatar.Root` + `Avatar.Image` + `Avatar.Fallback` instead of hiding the structure.
 - **Notice incompatibilities.** If Reshaped's API conflicts with Base UI's patterns (e.g. responsive props vs fixed tokens, different prop naming), flag the incompatibility and confirm with the user before proceeding.

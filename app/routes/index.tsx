@@ -9,10 +9,10 @@ import { useAuthentication } from '#/libraries/guard/auth-provider'
 import { homeStyles } from '#/styles/pages/home.stylex'
 
 export const Route = createFileRoute('/')({
-  component: HomeComponent,
+  component: RouteComponent,
   beforeLoad: () => {
     if (isAuthenticated()) {
-      throw redirect({ to: '/dashboard/overview' })
+      throw redirect({ to: '/overview' })
     }
   },
   staticData: {
@@ -20,7 +20,7 @@ export const Route = createFileRoute('/')({
   }
 })
 
-function HomeComponent() {
+function RouteComponent() {
   const { user, loggedIn } = useAuthentication()
 
   return (
@@ -59,7 +59,7 @@ function HomeComponent() {
           </p>
         </div>
         <div {...stylex.props(homeStyles.actions)}>
-          <Link to='/dashboard'>
+          <Link to='/overview'>
             <Button variant='default'>User Dashboard</Button>
           </Link>
           <a

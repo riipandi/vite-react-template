@@ -1,10 +1,11 @@
 # AGENTS.md
 
-Starter template for a React 19 + Vite + TypeScript SPA using TanStack Router (file-based routing), TanStack Query/Form/Store, and StyleX. You are helping maintain this template for its author.
+Starter template for a React 19 + Vite + TypeScript SPA using TanStack Router, TanStack Query/Form/Store, and StyleX.
+You are helping maintain this template for its author.
 
 ## Tech Stack & Tooling
 
-- Package manager: **pnpm** (version pinned via `packageManager` in `package.json`). Never use npm/yarn.
+- Package manager: **pnpm** (`packageManager` pins `pnpm@11.25.0`). Never use npm/yarn.
 - React 19, TypeScript 7 (strict, `tsc -b`), Vite 8, Vitest 4, Storybook 10.
 - Styling: StyleX (`@stylexjs/stylex` + unplugin, `useCSSLayers: true`).
 - Lint/format: **Oxc toolchain only** — `oxlint` + `oxfmt`. There is no ESLint or Prettier config; do not add one.

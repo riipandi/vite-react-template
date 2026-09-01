@@ -1,34 +1,31 @@
 import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
+import type { LinkProps } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { useState } from 'react'
 import { ThemeSwitcher } from '#/components/theme'
 import { useAuthentication } from '#/libraries/guard/auth-provider'
 import { sidebarStyles } from '#/styles/element/sidebar.stylex'
 
-// ── Nav data ──────────────────────────────────────────────────────────────────
-
 interface NavItem {
   icon: Lucide.LucideIcon
+  href: LinkProps['to'] | undefined
   label: string
-  href: string
   badge?: boolean
 }
 
 const navItems: NavItem[] = [
-  { icon: Lucide.LayoutDashboard, label: 'Overview', href: '/dashboard/overview' },
-  { icon: Lucide.Search, label: 'Search', href: '#' },
-  { icon: Lucide.BarChart3, label: 'Analytics', href: '#' },
-  { icon: Lucide.FileText, label: 'Docs', href: '#' }
+  { icon: Lucide.LayoutDashboard, label: 'Overview', href: '/overview' },
+  { icon: Lucide.Search, label: 'Search', href: undefined },
+  { icon: Lucide.BarChart3, label: 'Analytics', href: undefined },
+  { icon: Lucide.FileText, label: 'Docs', href: undefined }
 ]
 
 const secondaryItems: NavItem[] = [
-  { icon: Lucide.ShoppingCart, label: 'Products', href: '#' },
-  { icon: Lucide.Settings, label: 'Settings', href: '#' },
-  { icon: Lucide.Mail, label: 'Messages', href: '#', badge: true }
+  { icon: Lucide.ShoppingCart, label: 'Products', href: undefined },
+  { icon: Lucide.Settings, label: 'Settings', href: '/settings' },
+  { icon: Lucide.Mail, label: 'Messages', href: undefined, badge: true }
 ]
-
-// ── Logo mark ─────────────────────────────────────────────────────────────────
 
 function LogoMark() {
   return (
@@ -43,8 +40,6 @@ function LogoMark() {
   )
 }
 
-// ── Component ──────────────────────────────────────────────────────────────────
-
 interface SideNavbarProps {
   collapsed?: boolean
   /** Toggle desktop collapse/expand. When omitted the trigger is hidden. */
@@ -56,8 +51,8 @@ export function SideNavbar({ collapsed = false, onToggleCollapse }: SideNavbarPr
   const { logout } = useAuthentication()
   const [headerHover, setHeaderHover] = useState(false)
 
-  const isActive = (href: string) =>
-    href !== '#' && (pathname === href || pathname.startsWith(href))
+  const isActive = (href: LinkProps['to']) =>
+    href !== undefined && (pathname === href || pathname.startsWith(href))
 
   const renderNavItems = (items: NavItem[]) =>
     items.map((item) => {

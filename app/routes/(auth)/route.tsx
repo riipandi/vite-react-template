@@ -3,30 +3,15 @@ import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import { ThemeSwitcher } from '#/components/theme'
 import { isAuthenticated } from '#/libraries/auth.store'
-import { spaceVar } from '#/styles/core/tokens.stylex'
-
-const styles = stylex.create({
-  wrapper: {
-    width: '100%',
-    maxWidth: '28rem'
-  },
-  header: {
-    position: 'absolute',
-    top: spaceVar[4],
-    right: spaceVar[4],
-    display: 'flex',
-    alignItems: 'center',
-    gap: spaceVar[2]
-  }
-})
+import { styles } from '#/styles/element/auth-layout.stylex'
 
 export const Route = createFileRoute('/(auth)')({
+  component: RouteComponent,
   beforeLoad: () => {
     if (isAuthenticated()) {
-      throw redirect({ to: '/dashboard/overview' })
+      throw redirect({ to: '/overview' })
     }
-  },
-  component: RouteComponent
+  }
 })
 
 function RouteComponent() {

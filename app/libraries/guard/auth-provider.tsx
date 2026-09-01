@@ -71,7 +71,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     const { accessToken, refreshToken, ...profile } = await login(credentials)
     setAuthTokens(accessToken, refreshToken)
     setAuthUser(profile)
-    navigate({ to: '/dashboard/overview' })
+    navigate({ to: '/overview' })
   }
 
   const handleLogout = () => {

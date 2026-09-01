@@ -123,8 +123,9 @@ export function Image({
   }
 
   React.useEffect(() => {
+    // oxlint-disable-next-line react/set-state-in-effect
     setStatus('loading')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [src])
 
   // Build inline styles from resolved mixin

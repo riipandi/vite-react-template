@@ -2,7 +2,7 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
   useSidebarOpen,
   toggleSidebar,
@@ -114,6 +114,14 @@ function DashboardLayout() {
   const sidebarOpen = useSidebarOpen()
   const collapsed = useSidebarCollapsed()
   const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const handler = (event: MediaQueryListEvent) => setIsMobile(event.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   // Close sidebar on route change (mobile)
   useEffect(() => {
@@ -140,7 +148,10 @@ function DashboardLayout() {
       {/* Body row: sidebar + content */}
       <div {...stylex.props(styles.body)}>
         <div {...stylex.props(styles.sidebarWrapper, sidebarOpen && styles.sidebarOpen)}>
-          <SideNavbar collapsed={collapsed} onToggleCollapse={toggleSidebarCollapsed} />
+          <SideNavbar
+            collapsed={!isMobile && collapsed}
+            onToggleCollapse={!isMobile ? toggleSidebarCollapsed : undefined}
+          />
         </div>
 
         {sidebarOpen && (

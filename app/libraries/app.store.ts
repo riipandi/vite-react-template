@@ -7,9 +7,27 @@ export interface AppState {
   sidebarCollapsed: boolean
 }
 
+// ── Internal localStorage helpers ──────────────────────────────────────────
+
+const SIDEBAR_STORAGE_KEY = 'app.sidebarCollapsed'
+
+function getStoredSidebarCollapsed(): boolean {
+  if (typeof window === 'undefined') return false
+  const stored = window.localStorage.getItem(SIDEBAR_STORAGE_KEY)
+  return stored === 'true'
+}
+
+function persistSidebarCollapsed(collapsed: boolean) {
+  if (typeof window === 'undefined') return
+  window.localStorage.setItem(SIDEBAR_STORAGE_KEY, String(collapsed))
+}
+
+// ── Store ──────────────────────────────────────────────────────────────────
+
+/** Hydrate from localStorage so the collapsed state survives page reloads. */
 export const appStore = createStore<AppState>({
   sidebarOpen: false,
-  sidebarCollapsed: false
+  sidebarCollapsed: getStoredSidebarCollapsed()
 })
 
 export const toggleSidebar = () => {
@@ -17,7 +35,11 @@ export const toggleSidebar = () => {
 }
 
 export const toggleSidebarCollapsed = () => {
-  appStore.setState((prev) => ({ ...prev, sidebarCollapsed: !prev.sidebarCollapsed }))
+  appStore.setState((prev) => {
+    const next = !prev.sidebarCollapsed
+    persistSidebarCollapsed(next)
+    return { ...prev, sidebarCollapsed: next }
+  })
 }
 
 export function useSidebarOpen() {

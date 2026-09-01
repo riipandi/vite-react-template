@@ -13,6 +13,7 @@ export default function DevTools({ queryClient }: { queryClient: QueryClient }) 
       openHotkey: ['Shift', 'D'],
       hideUntilHover: true,
       requireUrlFlag: false,
+      triggerHidden: true,
       urlFlag: 'devtools',
       theme: 'dark'
     },

@@ -17,12 +17,24 @@ export const sidebarStyles = stylex.create({
     transitionDuration: '200ms',
     flexShrink: 0
   },
-  containerExpanded: { width: '15rem', alignItems: 'stretch' },
+  containerExpanded: {
+    width: '15rem',
+    alignItems: 'stretch',
+    '@media (max-width: 767px)': {
+      width: '18rem'
+    }
+  },
   containerCollapsed: {
     width: '3.75rem',
     alignItems: 'center',
     paddingTop: spaceVar[3],
-    paddingBottom: spaceVar[3]
+    paddingBottom: spaceVar[3],
+    '@media (max-width: 767px)': {
+      width: '18rem',
+      alignItems: 'stretch',
+      paddingTop: 0,
+      paddingBottom: 0
+    }
   },
 
   // Logo

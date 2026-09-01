@@ -9,12 +9,6 @@
   command = "pnpm run build"
 
 [[redirects]]
-from = "/dashboard"
-to = "/overview"
-status = 200
-force = true
-
-[[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200

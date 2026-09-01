@@ -1,4 +1,4 @@
-import x from '@stylexjs/atoms'
+import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import { ThemeSwitcher } from '#/components/theme'
@@ -34,11 +34,11 @@ function RouteComponent() {
     <main
       id='auth-layout'
       {...stylex.props(
-        x.minHeight['100vh'],
-        x.display.flex,
-        x.alignItems.center,
-        x.justifyContent.center,
-        x.padding['1rem']
+        atoms.minHeight['100vh'],
+        atoms.display.flex,
+        atoms.alignItems.center,
+        atoms.justifyContent.center,
+        atoms.padding['1rem']
       )}
     >
       <header id='auth-header' {...stylex.props(styles.header)}>

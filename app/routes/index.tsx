@@ -1,5 +1,5 @@
 import ViteLogo from '/images/vite.svg'
-import x from '@stylexjs/atoms'
+import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Link, createFileRoute, redirect } from '@tanstack/react-router'
 import { Button } from '#/components/base/button'
@@ -26,13 +26,13 @@ function HomeComponent() {
   return (
     <div
       {...stylex.props(
-        x.marginLeft.auto,
-        x.marginRight.auto,
-        x.display.flex,
-        x.height['100%'],
-        x.minHeight['100vh'],
-        x.width['100%'],
-        x.flexDirection.column
+        atoms.marginLeft.auto,
+        atoms.marginRight.auto,
+        atoms.display.flex,
+        atoms.height['100%'],
+        atoms.minHeight['100vh'],
+        atoms.width['100%'],
+        atoms.flexDirection.column
       )}
     >
       <header {...stylex.props(homeStyles.header)} aria-hidden>
@@ -41,20 +41,20 @@ function HomeComponent() {
       <div {...stylex.props(homeStyles.content)}>
         <div
           {...stylex.props(
-            x.marginLeft.auto,
-            x.marginRight.auto,
-            x.display.flex,
-            x.alignItems.center,
-            x.justifyContent.center
+            atoms.marginLeft.auto,
+            atoms.marginRight.auto,
+            atoms.display.flex,
+            atoms.alignItems.center,
+            atoms.justifyContent.center
           )}
         >
-          <img src={ViteLogo} alt='Vite logo' {...stylex.props(x.height['7rem'])} />
+          <img src={ViteLogo} alt='Vite logo' {...stylex.props(atoms.height['7rem'])} />
         </div>
         <div {...stylex.props(homeStyles.tagline)}>
-          <p {...stylex.props(x.lineHeight['2rem'], x.marginBottom['0.5rem'])}>
+          <p {...stylex.props(atoms.lineHeight['2rem'], atoms.marginBottom['0.5rem'])}>
             This is an example starter template React with Vite.
           </p>
-          <p {...stylex.props(x.lineHeight['2rem'])}>
+          <p {...stylex.props(atoms.lineHeight['2rem'])}>
             Vite + React + Typescript + StyleX + TanStack Form + TanStack Router + Vitest
           </p>
         </div>

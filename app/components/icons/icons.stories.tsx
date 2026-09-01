@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import x from '@stylexjs/atoms'
+import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as Lucide from 'lucide-react'
 import { colorVar, fontSizeVar, fontWeightVar } from '#/styles/core/tokens.stylex'
@@ -25,10 +25,10 @@ const meta = {
     (Story) => (
       <div
         {...stylex.props(
-          x.display.flex,
-          x.alignItems.center,
-          x.justifyContent.center,
-          x.minWidth['448px']
+          atoms.display.flex,
+          atoms.alignItems.center,
+          atoms.justifyContent.center,
+          atoms.minWidth['448px']
         )}
       >
         <Story />
@@ -42,7 +42,7 @@ type Story = StoryObj
 
 function PlaygroundComponent({ size = 24, color }: { size?: number; color?: string }) {
   return (
-    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['1rem'])}>
+    <div {...stylex.props(atoms.display.flex, atoms.alignItems.center, atoms.gap['1rem'])}>
       <GitHubIcon size={size} color={color} />
       <XIcon size={size} color={color} />
       <GoogleIcon size={size} />
@@ -65,25 +65,27 @@ export const Gallery: Story = {
   render: () => (
     <div
       {...stylex.props(
-        x.display.flex,
-        x.flexWrap.wrap,
-        x.justifyContent.center,
-        x.alignItems.center,
-        x.gap['1.5rem']
+        atoms.display.flex,
+        atoms.flexWrap.wrap,
+        atoms.justifyContent.center,
+        atoms.alignItems.center,
+        atoms.gap['1.5rem']
       )}
     >
       {icons.map(({ name, component: Icon }) => (
         <div
           key={name}
           {...stylex.props(
-            x.display.flex,
-            x.flexDirection.column,
-            x.alignItems.center,
-            x.gap['0.5rem']
+            atoms.display.flex,
+            atoms.flexDirection.column,
+            atoms.alignItems.center,
+            atoms.gap['0.5rem']
           )}
         >
           <Icon size={20} />
-          <span {...stylex.props(x.fontSize[fontSizeVar.xs], x.color[colorVar.fgNeutralFaded])}>
+          <span
+            {...stylex.props(atoms.fontSize[fontSizeVar.xs], atoms.color[colorVar.fgNeutralFaded])}
+          >
             {name}
           </span>
         </div>
@@ -99,20 +101,23 @@ export const Sizes: Story = {
   render: () => (
     <div
       {...stylex.props(
-        x.display.flex,
-        x.flexDirection.column,
-        x.gap['1.5rem'],
-        x.minWidth['320px']
+        atoms.display.flex,
+        atoms.flexDirection.column,
+        atoms.gap['1.5rem'],
+        atoms.minWidth['320px']
       )}
     >
       {icons.slice(0, 4).map(({ name, component: Icon }) => (
-        <div key={name} {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
+        <div
+          key={name}
+          {...stylex.props(atoms.display.flex, atoms.alignItems.center, atoms.gap['0.75rem'])}
+        >
           <span
             {...stylex.props(
-              x.minWidth['4rem'],
-              x.fontSize[fontSizeVar.xs],
-              x.fontWeight[fontWeightVar.semibold],
-              x.color[colorVar.fgNeutralFaded]
+              atoms.minWidth['4rem'],
+              atoms.fontSize[fontSizeVar.xs],
+              atoms.fontWeight[fontWeightVar.semibold],
+              atoms.color[colorVar.fgNeutralFaded]
             )}
           >
             {name}
@@ -133,11 +138,11 @@ export const Raw: Story = {
   render: () => (
     <div
       {...stylex.props(
-        x.display.flex,
-        x.flexWrap.wrap,
-        x.alignItems.center,
-        x.justifyContent.center,
-        x.gap['1rem']
+        atoms.display.flex,
+        atoms.flexWrap.wrap,
+        atoms.alignItems.center,
+        atoms.justifyContent.center,
+        atoms.gap['1rem']
       )}
     >
       {icons.map(({ name, component: Icon }) => (
@@ -150,7 +155,7 @@ export const Raw: Story = {
 export const InContext: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
-    <div {...stylex.props(x.display.flex, x.alignItems.center, x.gap['0.75rem'])}>
+    <div {...stylex.props(atoms.display.flex, atoms.alignItems.center, atoms.gap['0.75rem'])}>
       <GitHubIcon size={16} color={colorVar.fgNeutralFaded} />
       <GoogleIcon size={16} color={colorVar.fgNeutralFaded} />
       <FacebookIcon size={16} color={colorVar.fgNeutralFaded} />

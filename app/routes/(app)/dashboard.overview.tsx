@@ -1,4 +1,4 @@
-import x from '@stylexjs/atoms'
+import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
@@ -590,7 +590,7 @@ function DashboardOverviewComponent() {
                 <Button
                   color='neutral'
                   variant='default'
-                  {...stylex.props(x.width['100%'], x.justifyContent.center)}
+                  {...stylex.props(atoms.width['100%'], atoms.justifyContent.center)}
                 >
                   <Lucide.Home size={14} /> Back to Homepage
                 </Button>
@@ -599,7 +599,7 @@ function DashboardOverviewComponent() {
                 color='critical'
                 variant='default'
                 onClick={logout}
-                {...stylex.props(x.width['100%'], x.justifyContent.center)}
+                {...stylex.props(atoms.width['100%'], atoms.justifyContent.center)}
               >
                 <Lucide.LogOut size={14} /> Sign Out
               </Button>

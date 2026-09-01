@@ -1,4 +1,4 @@
-import x from '@stylexjs/atoms'
+import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Link, type ErrorComponentProps } from '@tanstack/react-router'
 import { styles } from '#/styles/pages/boundaries.stylex'
@@ -7,26 +7,28 @@ export function GlobalNotFound() {
   return (
     <div
       {...stylex.props(
-        x.marginLeft.auto,
-        x.marginRight.auto,
-        x.display.flex,
-        x.height['100%'],
-        x.minHeight['100vh'],
-        x.width['100%'],
-        x.flexDirection.column
+        atoms.marginLeft.auto,
+        atoms.marginRight.auto,
+        atoms.display.flex,
+        atoms.height['100%'],
+        atoms.minHeight['100vh'],
+        atoms.width['100%'],
+        atoms.flexDirection.column
       )}
     >
-      <header {...stylex.props(x.marginBottom.auto, x.width['100%'])} aria-hidden />
+      <header {...stylex.props(atoms.marginBottom.auto, atoms.width['100%'])} aria-hidden />
       <div {...stylex.props(styles.content)}>
         <h1 {...stylex.props(styles.title)}>404</h1>
         <div {...stylex.props(styles.message)}>
-          <p {...stylex.props(x.lineHeight['2rem'])}>Oops, something went wrong.</p>
-          <p {...stylex.props(x.lineHeight['2rem'])}>Sorry, we couldn&rsquo;t find your page.</p>
+          <p {...stylex.props(atoms.lineHeight['2rem'])}>Oops, something went wrong.</p>
+          <p {...stylex.props(atoms.lineHeight['2rem'])}>
+            Sorry, we couldn&rsquo;t find your page.
+          </p>
         </div>
         <div {...stylex.props(styles.actionWrapper)}>
           <Link to='/' {...stylex.props(styles.backLink)}>
             <svg
-              {...stylex.props(x.height['1rem'], x.width['1rem'])}
+              {...stylex.props(atoms.height['1rem'], atoms.width['1rem'])}
               viewBox='0 0 16 16'
               fill='none'
             >
@@ -56,28 +58,28 @@ export function GlobalError({ error, reset }: ErrorComponentProps) {
   return (
     <div
       {...stylex.props(
-        x.marginLeft.auto,
-        x.marginRight.auto,
-        x.display.flex,
-        x.height['100%'],
-        x.minHeight['100vh'],
-        x.width['100%'],
-        x.flexDirection.column
+        atoms.marginLeft.auto,
+        atoms.marginRight.auto,
+        atoms.display.flex,
+        atoms.height['100%'],
+        atoms.minHeight['100vh'],
+        atoms.width['100%'],
+        atoms.flexDirection.column
       )}
     >
-      <header {...stylex.props(x.marginBottom.auto, x.width['100%'])} aria-hidden />
+      <header {...stylex.props(atoms.marginBottom.auto, atoms.width['100%'])} aria-hidden />
       <div {...stylex.props(styles.content)}>
         <h1 {...stylex.props(styles.title)}>Oops!</h1>
         <div {...stylex.props(styles.message)}>
-          <p {...stylex.props(x.lineHeight['2rem'])}>Something went wrong.</p>
-          <p {...stylex.props(x.lineHeight['2rem'], styles.errorDetail)}>
+          <p {...stylex.props(atoms.lineHeight['2rem'])}>Something went wrong.</p>
+          <p {...stylex.props(atoms.lineHeight['2rem'], styles.errorDetail)}>
             {error?.message ?? 'An unexpected error occurred.'}
           </p>
         </div>
         <div {...stylex.props(styles.actionWrapper)}>
           <button type='button' onClick={reset} {...stylex.props(styles.backLink)}>
             <svg
-              {...stylex.props(x.height['1rem'], x.width['1rem'])}
+              {...stylex.props(atoms.height['1rem'], atoms.width['1rem'])}
               viewBox='0 0 16 16'
               fill='none'
             >

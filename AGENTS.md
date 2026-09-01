@@ -5,7 +5,7 @@ Starter template for a React 19 + Vite + TypeScript SPA using TanStack Router (f
 ## Tech Stack & Tooling
 
 - Package manager: **pnpm** (version pinned via `packageManager` in `package.json`). Never use npm/yarn.
-- React 19, TypeScript (strict, `tsc -b`), Vite 8, Vitest 4, Storybook 10.
+- React 19, TypeScript 7 (strict, `tsc -b`), Vite 8, Vitest 4, Storybook 10.
 - Styling: StyleX (`@stylexjs/stylex` + unplugin, `useCSSLayers: true`).
 - Lint/format: **Oxc toolchain only** — `oxlint` + `oxfmt`. There is no ESLint or Prettier config; do not add one.
 - Git hooks: Lefthook (`lefthook.yml`), runs format/lint/typecheck/unit tests on pre-commit.
@@ -22,7 +22,7 @@ Starter template for a React 19 + Vite + TypeScript SPA using TanStack Router (f
 | Coverage (thresholds 80/70/75/80) | `pnpm test:coverage` |
 | Lint with autofix | `pnpm lint` |
 | Format with autofix | `pnpm format` |
-| Format check (CI) | `pnpm check` |
+| Format check | `pnpm check` |
 | Typecheck | `pnpm typecheck` |
 | Force pre-commit hooks | `pnpm pre-commit` |
 | Outdated-dep report | `pnpm knip` |
@@ -31,7 +31,7 @@ Run `pnpm exec playwright install chromium` once if storybook tests fail with a 
 
 ## Architecture
 
-- `app/routes/` — file-based routes (TanStack Router). Route groups: `(app)` (auth-guarded app), `(auth)` (login etc). `__root.tsx` is the root route; `-boundaries.tsx` holds error/not-found boundaries.
+- `app/routes/` — file-based routes (TanStack Router). Route groups: `(app)` (auth-guarded app), `(auth)` (login etc). `__root.tsx` is the root route; `-boundaries.tsx` holds error/not-found boundaries; `-devtools.tsx` mounts TanStack devtools panels (Query/Router).
 - `app/routes.gen.ts` — **generated** route tree. Never edit by hand; `pnpm build` regenerates it (or `pnpm exec tsr generate`).
 - `app/components/` — shared UI components, each with co-located `*.stories.tsx` and `*.test.tsx`.
 - `app/hooks/`, `app/libraries/`, `app/schemas/`, `app/styles/`, `app/assets/` — hooks, utility libs, zod schemas, StyleX global styles, static assets.

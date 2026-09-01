@@ -2,6 +2,7 @@ import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import * as Lucide from 'lucide-react'
 import { ThemeSwitcher } from '#/components/theme'
+import { useAuthentication } from '#/libraries/guard/auth-provider'
 import {
   fontSizeVar,
   fontWeightVar,
@@ -206,6 +207,7 @@ const sidebarStyles = stylex.create({
 
 export function NavBarExpand() {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const { logout } = useAuthentication()
 
   const isActiveRoute = (href: string) =>
     href !== '#' && (pathname === href || pathname.startsWith(href))
@@ -273,9 +275,13 @@ export function NavBarExpand() {
       {/* Bottom: account + theme */}
       <div {...stylex.props(sidebarStyles.bottomSection)}>
         <div {...stylex.props(sidebarStyles.bottomRow)}>
-          <button type='button' {...stylex.props(sidebarStyles.navItem, sidebarStyles.accountLink)}>
-            <Lucide.User {...stylex.props(sidebarStyles.navIcon)} />
-            <span {...stylex.props(sidebarStyles.navLabel)}>My Account</span>
+          <button
+            type='button'
+            onClick={logout}
+            {...stylex.props(sidebarStyles.navItem, sidebarStyles.accountLink)}
+          >
+            <Lucide.LogOut {...stylex.props(sidebarStyles.navIcon)} />
+            <span {...stylex.props(sidebarStyles.navLabel)}>Sign Out</span>
           </button>
           <ThemeSwitcher />
         </div>

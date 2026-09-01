@@ -1,0 +1,23 @@
+import type { SVGProps } from 'react'
+
+interface XIconProps extends SVGProps<SVGSVGElement> {
+  size?: number
+}
+
+export function XIcon({ size = 24, ...props }: XIconProps) {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      xmlSpace='preserve'
+      width={size}
+      height={size}
+      viewBox='0 0 512 512'
+      fill='currentColor'
+      role='img'
+      aria-label='X'
+      {...props}
+    >
+      <path d='M304.7 216.8 495.2 0h-45.1L284.6 188.2 152.6 0H.2l199.7 284.7L.2 512h45.1L220 313.2 359.4 512h152.3M61.6 33.3h69.3l319.1 447h-69.3' />
+    </svg>
+  )
+}

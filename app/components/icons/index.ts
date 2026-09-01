@@ -1,0 +1,8 @@
+export { FacebookIcon } from './facebook'
+export { GitHubIcon } from './github'
+export { GoogleIcon } from './google'
+export { InstagramIcon } from './instagram'
+export { LinkedInIcon } from './linkedin'
+export { TelegramIcon } from './telegram'
+export { WhatsAppIcon } from './whatsapp'
+export { XIcon } from './x'

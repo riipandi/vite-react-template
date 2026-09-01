@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colorVar, colors, radiusVar, spaceVar } from '#/styles/core/tokens.stylex'
+import { colorVar, radiusVar, spaceVar } from '#/styles/core/tokens.stylex'
 import { fontSizeVar, fontWeightVar } from '#/styles/core/tokens.stylex'
 
 export const sidebarStyles = stylex.create({
@@ -97,14 +97,14 @@ export const sidebarStyles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: colors.primary,
+    background: colorVar.bgBrand,
     flexShrink: 0
   },
   logoSvg: {
     height: '1.65rem',
     width: '1.65rem',
-    fill: colors.primaryForeground,
-    color: colors.primaryForeground
+    fill: colorVar.onBrand,
+    color: colorVar.onBrand
   },
   logoText: {
     fontSize: fontSizeVar.sm,

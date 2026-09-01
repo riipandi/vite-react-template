@@ -1,6 +1,5 @@
 @import './reset.css' layer(reset);
 @import './fontface.css';
-@import './theme.css';
 
 *,
 *::before,

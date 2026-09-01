@@ -4,7 +4,7 @@
  * @see: https://base-ui.com/react/components/button
  * @see: https://github.com/reshaped-ui/reshaped
  *
- * BaseUI Anatomy:
+ * Anatomy:
  * <Button />
  */
 

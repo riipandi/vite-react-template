@@ -71,6 +71,14 @@ When adopting or porting Reshaped components:
 - **Base UI is composable.** Prefer composing Base UI primitives over building monolithic components. For example, use `Avatar.Root` + `Avatar.Image` + `Avatar.Fallback` instead of hiding the structure.
 - **Notice incompatibilities.** If Reshaped's API conflicts with Base UI's patterns (e.g. responsive props vs fixed tokens, different prop naming), flag the incompatibility and confirm with the user before proceeding.
 - **Simplify when needed.** Reshaped uses responsive props (`G.Responsive`) with viewport breakpoints. This template uses fixed design tokens. Simplify responsive props to token-based alternatives unless the user explicitly requests responsive behavior.
+
+### Base UI Utilities
+
+When building custom components without a Base UI equivalent:
+
+- **Use `useRender` from `@base-ui/react/use-render`** for polymorphism (the `render` prop pattern). This replaces the `as` prop pattern used by Reshaped. Pass `defaultTagName` for the default element, `render` for override, and `props` for merged attributes.
+- **Use `mergeProps` from `@base-ui/react/merge-props`** when combining internal and external props. It safely merges event handlers, `className` strings, and `style` properties. Always pass props left-to-right (internal first, external second) so external props override internal ones.
+- **Use `useRender.ComponentProps`** for the component's public props type and `useRender.ElementProps` for internal element props type.
 - Don't hand-format or hand-sort imports — `pnpm format` (oxfmt) sorts them. JSON files use 4-space indent, TS/JS 2-space, no semicolons, single quotes.
 - Follow `tsc -b --noEmit` + `pnpm test` as the minimum validation before finishing; hooks/CI enforce more.
 - Auth uses the DummyJSON API via `ofetch` (see `app/libraries/`); `PUBLIC_API_URL` and `PUBLIC_SITE_URL` come from env — client env vars must use the `VITE_` or `PUBLIC_` prefix.

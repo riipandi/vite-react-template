@@ -2,7 +2,7 @@ import * as stylex from '@stylexjs/stylex'
 
 const DARK = '@media (prefers-color-scheme: dark)'
 
-const colorLightVar = stylex.defineVars({
+export const colorLightVar = stylex.defineVars({
   backgroundCriticalFaded: 'oklch(0.98 0.02 20.28)',
   backgroundCriticalHighlightedFaded: 'oklch(0.59 0.205 20.28 / 0.06)',
   backgroundCriticalHighlighted: 'oklch(0.531 0.205 20.28)',
@@ -51,7 +51,7 @@ const colorLightVar = stylex.defineVars({
   onBackgroundNeutral: 'oklch(0 0 0)'
 })
 
-const colorDarkVar = stylex.defineVars({
+export const colorDarkVar = stylex.defineVars({
   backgroundCriticalFaded: 'oklch(0.24 0.0167 20.28)',
   backgroundCriticalHighlightedFaded: 'oklch(0.5842 0.164 20.28 / 0.08)',
   backgroundCriticalHighlighted: 'oklch(0.6258 0.164 20.28)',

@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import type { StyleXStyles } from '@stylexjs/stylex'
-import { colorVar, radiusVar } from '#/styles/core/tokens.stylex'
+import { colors } from '#/styles/core/color.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export type ButtonVariant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
 export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon' | 'icon-sm' | 'icon-lg'
@@ -8,7 +9,7 @@ export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon' | 'icon-sm' | 'icon-lg
 export const buttonStyles = stylex.create({
   base: {
     alignItems: 'center',
-    borderRadius: radiusVar.md,
+    borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: 0,
     cursor: { ':disabled': 'not-allowed', default: 'pointer' },
@@ -28,71 +29,71 @@ export const buttonStyles = stylex.create({
   default: {
     backgroundColor: {
       ':hover': 'oklch(0.45 0.22 250)',
-      default: colorVar.bgPrimary
+      default: colors.backgroundPrimary
     },
     boxShadow: {
       ':hover': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
       default: '0 1px 2px 0 rgb(0 0 0 / 0.05)'
     },
-    color: colorVar.onPrimary,
+    color: colors.onBackgroundPrimary,
     transform: { ':active': 'scale(0.98)', default: 'none' }
   },
   destructive: {
     backgroundColor: {
       ':hover': 'oklch(0.55 0.25 25)',
-      default: colorVar.bgCritical
+      default: colors.backgroundCritical
     },
     boxShadow: {
       ':hover': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
       default: '0 1px 2px 0 rgb(0 0 0 / 0.05)'
     },
-    color: colorVar.onBgCritical,
+    color: colors.onBackgroundCritical,
     transform: { ':active': 'scale(0.98)', default: 'none' }
   },
   focusable: {
     boxShadow: {
-      ':focus-visible': `0 0 0 3px ${colorVar.borderPrimaryFaded}`,
+      ':focus-visible': `0 0 0 3px ${colors.borderPrimaryFaded}`,
       default: null
     }
   },
   ghost: {
-    backgroundColor: { ':hover': colorVar.bgNeutralFaded, default: 'transparent' },
-    color: { ':hover': colorVar.fgNeutral, default: colorVar.fgNeutral },
+    backgroundColor: { ':hover': colors.backgroundNeutralFaded, default: 'transparent' },
+    color: { ':hover': colors.foregroundNeutral, default: colors.foregroundNeutral },
     transform: { ':active': 'scale(0.98)', default: 'none' }
   },
   link: {
     backgroundColor: 'transparent',
-    color: colorVar.fgPrimary,
+    color: colors.foregroundPrimary,
     textDecorationLine: { ':hover': 'underline', default: 'none' },
     textUnderlineOffset: '4px'
   },
   outline: {
     backgroundColor: {
-      ':hover': colorVar.bgNeutralFaded,
+      ':hover': colors.backgroundNeutralFaded,
       default: 'transparent'
     },
     borderColor: {
-      ':hover': colorVar.borderPrimary,
-      default: colorVar.borderNeutral
+      ':hover': colors.borderPrimary,
+      default: colors.borderNeutral
     },
     borderWidth: '1px',
     boxShadow: {
       ':hover': '0 2px 4px -1px rgb(0 0 0 / 0.1)',
       default: '0 1px 2px 0 rgb(0 0 0 / 0.05)'
     },
-    color: { ':hover': colorVar.fgPrimary, default: colorVar.fgNeutral },
+    color: { ':hover': colors.foregroundPrimary, default: colors.foregroundNeutral },
     transform: { ':active': 'scale(0.98)', default: 'none' }
   },
   secondary: {
     backgroundColor: {
       ':hover': 'oklch(0.85 0.02 265)',
-      default: colorVar.bgNeutral
+      default: colors.backgroundNeutral
     },
     boxShadow: {
       ':hover': '0 2px 4px -1px rgb(0 0 0 / 0.1)',
       default: '0 1px 2px 0 rgb(0 0 0 / 0.05)'
     },
-    color: colorVar.fgNeutral,
+    color: colors.foregroundNeutral,
     transform: { ':active': 'scale(0.98)', default: 'none' }
   },
   sizeDefault: { height: '2.25rem', paddingInline: '1rem' },

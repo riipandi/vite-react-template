@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { IconCircleSubtract, IconCircleAdd } from 'obra-icons-react'
-import { colorVar, fontSizeVar, fontWeightVar } from '#/styles/core/tokens.stylex'
+import { colors } from '#/styles/core/color.stylex'
+import { fontSize, fontWeightVar } from '#/styles/core/font.stylex'
 import { FacebookIcon, GitHubIcon, GoogleIcon, InstagramIcon } from './index'
 import { LinkedInIcon, TelegramIcon, WhatsAppIcon, XIcon } from './index'
 
@@ -84,7 +85,10 @@ export const Gallery: Story = {
         >
           <Icon size={20} />
           <span
-            {...stylex.props(atoms.fontSize[fontSizeVar.xs], atoms.color[colorVar.fgNeutralFaded])}
+            {...stylex.props(
+              atoms.fontSize[fontSize.caption1],
+              atoms.color[colors.foregroundNeutralFaded]
+            )}
           >
             {name}
           </span>
@@ -115,9 +119,9 @@ export const Sizes: Story = {
           <span
             {...stylex.props(
               atoms.minWidth['4rem'],
-              atoms.fontSize[fontSizeVar.xs],
+              atoms.fontSize[fontSize.caption1],
               atoms.fontWeight[fontWeightVar.semibold],
-              atoms.color[colorVar.fgNeutralFaded]
+              atoms.color[colors.foregroundNeutralFaded]
             )}
           >
             {name}
@@ -156,14 +160,14 @@ export const InContext: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <div {...stylex.props(atoms.display.flex, atoms.alignItems.center, atoms.gap['0.75rem'])}>
-      <GitHubIcon size={16} color={colorVar.fgNeutralFaded} />
-      <GoogleIcon size={16} color={colorVar.fgNeutralFaded} />
-      <FacebookIcon size={16} color={colorVar.fgNeutralFaded} />
-      <XIcon size={16} color={colorVar.fgNeutralFaded} />
-      <InstagramIcon size={16} color={colorVar.fgNeutralFaded} />
-      <LinkedInIcon size={16} color={colorVar.fgNeutralFaded} />
-      <TelegramIcon size={16} color={colorVar.fgNeutralFaded} />
-      <WhatsAppIcon size={16} color={colorVar.fgNeutralFaded} />
+      <GitHubIcon size={16} color={colors.foregroundNeutralFaded} />
+      <GoogleIcon size={16} color={colors.foregroundNeutralFaded} />
+      <FacebookIcon size={16} color={colors.foregroundNeutralFaded} />
+      <XIcon size={16} color={colors.foregroundNeutralFaded} />
+      <InstagramIcon size={16} color={colors.foregroundNeutralFaded} />
+      <LinkedInIcon size={16} color={colors.foregroundNeutralFaded} />
+      <TelegramIcon size={16} color={colors.foregroundNeutralFaded} />
+      <WhatsAppIcon size={16} color={colors.foregroundNeutralFaded} />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { IconComputerMonitor, IconMoon, IconSun } from 'obra-icons-react'
-import { radiusVar, colorVar } from '#/styles/core/tokens.stylex'
+import { colors } from '#/styles/core/color.stylex'
+import { radius } from '#/styles/core/size.stylex'
 import { useTheme } from './theme'
 
 const cycle: Record<string, string> = { light: 'dark', dark: 'system', system: 'light' }
@@ -21,9 +22,9 @@ const styles = stylex.create({
     justifyContent: 'center',
     width: '2.25rem',
     height: '2.25rem',
-    borderRadius: radiusVar.lg,
-    color: { default: colorVar.fgNeutralFaded, ':hover': colorVar.fgNeutral },
-    backgroundColor: { default: 'transparent', ':hover': colorVar.bgNeutralFaded },
+    borderRadius: radius.large,
+    color: { default: colors.foregroundNeutralFaded, ':hover': colors.foregroundNeutral },
+    backgroundColor: { default: 'transparent', ':hover': colors.backgroundNeutralFaded },
     borderWidth: 0,
     cursor: 'pointer',
     transitionProperty: 'background-color, color',

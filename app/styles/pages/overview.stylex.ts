@@ -1,5 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { fontSizeVar, fontWeightVar, spaceVar, colorVar } from '#/styles/core/tokens.stylex'
+import { colors } from '#/styles/core/color.stylex'
+import { fontSize, fontWeightVar } from '#/styles/core/font.stylex'
+import { unit } from '#/styles/core/size.stylex'
 
 export const styles = stylex.create({
   container: {
@@ -8,47 +10,47 @@ export const styles = stylex.create({
     marginRight: 0,
     width: '100%',
     maxWidth: 'none',
-    paddingTop: spaceVar[6],
-    paddingBottom: spaceVar[6],
-    paddingLeft: spaceVar[4],
-    paddingRight: spaceVar[4],
+    paddingTop: unit.x6,
+    paddingBottom: unit.x6,
+    paddingLeft: unit.x4,
+    paddingRight: unit.x4,
     '@media (min-width: 640px)': {
-      paddingTop: spaceVar[8],
-      paddingBottom: spaceVar[8],
-      paddingLeft: spaceVar[6],
-      paddingRight: spaceVar[6]
+      paddingTop: unit.x8,
+      paddingBottom: unit.x8,
+      paddingLeft: unit.x6,
+      paddingRight: unit.x6
     },
     '@media (min-width: 1024px)': {
-      paddingTop: spaceVar[10],
-      paddingBottom: spaceVar[10],
-      paddingLeft: spaceVar[10],
-      paddingRight: spaceVar[10]
+      paddingTop: unit.x10,
+      paddingBottom: unit.x10,
+      paddingLeft: unit.x10,
+      paddingRight: unit.x10
     }
   },
   pageHeader: {
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    marginBottom: spaceVar[10],
-    gap: spaceVar[4]
+    marginBottom: unit.x10,
+    gap: unit.x4
   },
-  headerLeft: { display: 'flex', flexDirection: 'column', gap: spaceVar[1] },
+  headerLeft: { display: 'flex', flexDirection: 'column', gap: unit.x1 },
   pageLabel: {
-    fontSize: fontSizeVar.xs,
+    fontSize: fontSize.caption1,
     fontWeight: fontWeightVar.semibold,
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
-    color: colorVar.fgPrimary
+    color: colors.foregroundPrimary
   },
   pageTitle: {
-    fontSize: fontSizeVar['2xl'],
+    fontSize: fontSize.featured4,
     fontWeight: fontWeightVar.bold,
-    color: colorVar.fgNeutral,
+    color: colors.foregroundNeutral,
     lineHeight: '1.2'
   },
   pageSubtitle: {
-    fontSize: fontSizeVar.sm,
-    color: colorVar.fgNeutralFaded,
-    marginTop: spaceVar[1]
+    fontSize: fontSize.body2,
+    color: colors.foregroundNeutralFaded,
+    marginTop: unit.x1
   }
 })

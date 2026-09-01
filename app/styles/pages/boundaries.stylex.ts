@@ -1,45 +1,46 @@
 import * as stylex from '@stylexjs/stylex'
-import { radiusVar, spaceVar, colorVar } from '#/styles/core/tokens.stylex'
-import { fontSizeVar, fontWeightVar } from '#/styles/core/tokens.stylex'
+import { colors } from '#/styles/core/color.stylex'
+import { fontSize, fontWeightVar } from '#/styles/core/font.stylex'
+import { radius, unit } from '#/styles/core/size.stylex'
 
 export const styles = stylex.create({
   content: {
-    paddingLeft: spaceVar[4],
-    paddingRight: spaceVar[4],
+    paddingLeft: unit.x4,
+    paddingRight: unit.x4,
     paddingTop: '2.5rem',
     paddingBottom: '2.5rem',
     textAlign: 'center',
     '@media (min-width: 640px)': {
-      paddingLeft: spaceVar[6],
-      paddingRight: spaceVar[6]
+      paddingLeft: unit.x6,
+      paddingRight: unit.x6
     },
     '@media (min-width: 1024px)': {
-      paddingLeft: spaceVar[8],
-      paddingRight: spaceVar[8]
+      paddingLeft: unit.x8,
+      paddingRight: unit.x8
     }
   },
   title: {
     display: 'block',
-    fontSize: fontSizeVar['7xl'],
+    fontSize: fontSize.headline1,
     fontWeight: fontWeightVar.bold,
-    color: colorVar.fgNeutral,
+    color: colors.foregroundNeutral,
     '@media (min-width: 640px)': {
-      fontSize: fontSizeVar['8xl']
+      fontSize: fontSize.headline2
     }
   },
   message: {
-    marginTop: spaceVar[6],
-    fontSize: fontSizeVar.lg,
-    color: colorVar.fgNeutralFaded,
+    marginTop: unit.x6,
+    fontSize: fontSize.body1,
+    color: colors.foregroundNeutralFaded,
     '@media (min-width: 640px)': {
-      marginTop: spaceVar[8]
+      marginTop: unit.x8
     }
   },
   errorDetail: {
-    fontSize: fontSizeVar.sm
+    fontSize: fontSize.body2
   },
   actionWrapper: {
-    marginTop: spaceVar[8],
+    marginTop: unit.x8,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -48,15 +49,15 @@ export const styles = stylex.create({
   backLink: {
     display: 'inline-flex',
     alignItems: 'center',
-    gap: spaceVar[2],
-    borderRadius: radiusVar.md,
-    paddingLeft: spaceVar[3],
-    paddingRight: spaceVar[3],
-    paddingTop: spaceVar[2],
-    paddingBottom: spaceVar[2],
-    fontSize: fontSizeVar.sm,
+    gap: unit.x2,
+    borderRadius: radius.medium,
+    paddingLeft: unit.x3,
+    paddingRight: unit.x3,
+    paddingTop: unit.x2,
+    paddingBottom: unit.x2,
+    fontSize: fontSize.body2,
     fontWeight: fontWeightVar.semibold,
-    color: colorVar.fgPrimary,
+    color: colors.foregroundPrimary,
     textDecoration: 'none',
     transitionProperty: 'all',
     transitionDuration: '150ms',
@@ -66,33 +67,33 @@ export const styles = stylex.create({
     ':focus-visible': {
       outlineWidth: 1,
       outlineStyle: 'solid',
-      outlineColor: colorVar.fgPrimary,
+      outlineColor: colors.foregroundPrimary,
       outlineOffset: 2
     }
   },
   footer: {
     marginTop: 'auto',
-    paddingTop: spaceVar[5],
-    paddingBottom: spaceVar[5],
+    paddingTop: unit.x5,
+    paddingBottom: unit.x5,
     textAlign: 'center'
   },
   footerInner: {
     marginLeft: 'auto',
     marginRight: 'auto',
     maxWidth: '80rem',
-    paddingLeft: spaceVar[4],
-    paddingRight: spaceVar[4],
+    paddingLeft: unit.x4,
+    paddingRight: unit.x4,
     '@media (min-width: 640px)': {
-      paddingLeft: spaceVar[6],
-      paddingRight: spaceVar[6]
+      paddingLeft: unit.x6,
+      paddingRight: unit.x6
     },
     '@media (min-width: 1024px)': {
-      paddingLeft: spaceVar[8],
-      paddingRight: spaceVar[8]
+      paddingLeft: unit.x8,
+      paddingRight: unit.x8
     }
   },
   footerText: {
-    fontSize: fontSizeVar.sm,
-    color: colorVar.fgNeutralFaded
+    fontSize: fontSize.body2,
+    color: colors.foregroundNeutralFaded
   }
 })

@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { spaceVar } from '#/styles/core/tokens.stylex'
+import { unit } from '#/styles/core/size.stylex'
 
 export const styles = stylex.create({
   wrapper: {
@@ -8,10 +8,10 @@ export const styles = stylex.create({
   },
   header: {
     position: 'absolute',
-    top: spaceVar[4],
-    right: spaceVar[4],
+    top: unit.x4,
+    right: unit.x4,
     display: 'flex',
     alignItems: 'center',
-    gap: spaceVar[2]
+    gap: unit.x2
   }
 })

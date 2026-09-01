@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
-import { radiusVar, spaceVar, colorVar } from '#/styles/core/tokens.stylex'
+import { colors } from '#/styles/core/color.stylex'
+import { radius, unit } from '#/styles/core/size.stylex'
 
 export const styles = stylex.create({
   layout: {
-    backgroundColor: colorVar.bgPage,
+    backgroundColor: colors.backgroundPage,
     transitionProperty: 'background-color',
     transitionDuration: '200ms',
     height: '100vh',
@@ -23,12 +24,12 @@ export const styles = stylex.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     height: '3.5rem',
-    paddingLeft: spaceVar[4],
-    paddingRight: spaceVar[4],
-    backgroundColor: colorVar.bgPage,
+    paddingLeft: unit.x4,
+    paddingRight: unit.x4,
+    backgroundColor: colors.backgroundPage,
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: colorVar.borderNeutral,
+    borderBottomColor: colors.borderNeutral,
     '@media (max-width: 767px)': {
       display: 'flex'
     }
@@ -36,7 +37,7 @@ export const styles = stylex.create({
   mobileHeaderTitle: {
     fontSize: '0.875rem',
     fontWeight: 700,
-    color: colorVar.fgNeutral
+    color: colors.foregroundNeutral
   },
   hamburger: {
     display: 'flex',
@@ -44,13 +45,13 @@ export const styles = stylex.create({
     justifyContent: 'center',
     width: '2.25rem',
     height: '2.25rem',
-    borderRadius: radiusVar.md,
+    borderRadius: radius.medium,
     border: 'none',
     backgroundColor: 'transparent',
-    color: colorVar.fgNeutralFaded,
+    color: colors.foregroundNeutralFaded,
     cursor: 'pointer',
     ':hover': {
-      backgroundColor: colorVar.bgNeutralFaded
+      backgroundColor: colors.backgroundNeutralFaded
     }
   },
   sidebarWrapper: {

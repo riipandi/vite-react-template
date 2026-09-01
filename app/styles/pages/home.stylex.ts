@@ -1,5 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { fontSizeVar, spaceVar, colorVar } from '#/styles/core/tokens.stylex'
+import { colors } from '#/styles/core/color.stylex'
+import { fontSize } from '#/styles/core/font.stylex'
+import { unit } from '#/styles/core/size.stylex'
 
 export const homeStyles = stylex.create({
   header: {
@@ -7,41 +9,41 @@ export const homeStyles = stylex.create({
     display: 'flex',
     width: '100%',
     justifyContent: 'flex-end',
-    padding: spaceVar[4]
+    padding: unit.x4
   },
   content: {
     marginLeft: 'auto',
     marginRight: 'auto',
     display: 'flex',
     flexDirection: 'column',
-    gap: spaceVar[8],
+    gap: unit.x8,
     paddingLeft: {
-      default: spaceVar[4],
-      '@media (min-width: 640px)': spaceVar[6],
-      '@media (min-width: 1024px)': spaceVar[8]
+      default: unit.x4,
+      '@media (min-width: 640px)': unit.x6,
+      '@media (min-width: 1024px)': unit.x8
     },
     paddingRight: {
-      default: spaceVar[4],
-      '@media (min-width: 640px)': spaceVar[6],
-      '@media (min-width: 1024px)': spaceVar[8]
+      default: unit.x4,
+      '@media (min-width: 640px)': unit.x6,
+      '@media (min-width: 1024px)': unit.x8
     },
     paddingTop: '2.5rem',
     paddingBottom: '2.5rem'
   },
   tagline: {
     textAlign: 'center',
-    fontSize: fontSizeVar.lg,
-    color: colorVar.fgNeutralFaded,
+    fontSize: fontSize.body1,
+    color: colors.foregroundNeutralFaded,
     maxWidth: '36rem',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: {
       default: 0,
-      '@media (min-width: 640px)': spaceVar[8]
+      '@media (min-width: 640px)': unit.x8
     }
   },
   actions: {
-    marginTop: spaceVar[4],
+    marginTop: unit.x4,
     display: 'flex',
     flexDirection: {
       default: 'column',
@@ -50,14 +52,14 @@ export const homeStyles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: {
-      default: spaceVar[2],
-      '@media (min-width: 640px)': spaceVar[3]
+      default: unit.x2,
+      '@media (min-width: 640px)': unit.x3
     }
   },
   footer: {
     marginTop: 'auto',
-    paddingTop: spaceVar[5],
-    paddingBottom: spaceVar[5],
+    paddingTop: unit.x5,
+    paddingBottom: unit.x5,
     textAlign: 'center'
   },
   footerInner: {
@@ -65,41 +67,41 @@ export const homeStyles = stylex.create({
     marginRight: 'auto',
     maxWidth: '80rem',
     paddingLeft: {
-      default: spaceVar[4],
-      '@media (min-width: 640px)': spaceVar[6],
-      '@media (min-width: 1024px)': spaceVar[8]
+      default: unit.x4,
+      '@media (min-width: 640px)': unit.x6,
+      '@media (min-width: 1024px)': unit.x8
     },
     paddingRight: {
-      default: spaceVar[4],
-      '@media (min-width: 640px)': spaceVar[6],
-      '@media (min-width: 1024px)': spaceVar[8]
+      default: unit.x4,
+      '@media (min-width: 640px)': unit.x6,
+      '@media (min-width: 1024px)': unit.x8
     }
   },
   footerText: {
-    fontSize: fontSizeVar.sm,
+    fontSize: fontSize.body2,
     letterSpacing: '0.025em',
-    color: colorVar.fgNeutralFaded
+    color: colors.foregroundNeutralFaded
   },
   footerSubText: {
-    marginTop: spaceVar[2],
-    fontSize: fontSizeVar.sm,
+    marginTop: unit.x2,
+    fontSize: fontSize.body2,
     letterSpacing: '0.025em',
-    color: colorVar.fgNeutralFaded
+    color: colors.foregroundNeutralFaded
   },
   alert: {
-    fontSize: fontSizeVar.sm,
-    padding: spaceVar[3],
+    fontSize: fontSize.body2,
+    padding: unit.x3,
     borderRadius: '0.55rem',
     width: '100%',
     textAlign: 'center',
     boxSizing: 'border-box'
   },
   alertLogin: {
-    backgroundColor: colorVar.bgPrimaryFaded,
-    color: colorVar.fgPrimary
+    backgroundColor: colors.backgroundPrimaryFaded,
+    color: colors.foregroundPrimary
   },
   alertLogout: {
-    backgroundColor: colorVar.bgWarningFaded,
-    color: colorVar.fgWarning
+    backgroundColor: colors.backgroundWarningFaded,
+    color: colors.foregroundWarning
   }
 })

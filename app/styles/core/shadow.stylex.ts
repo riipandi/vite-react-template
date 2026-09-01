@@ -2,7 +2,7 @@ import * as stylex from '@stylexjs/stylex'
 
 const DARK = '@media (prefers-color-scheme: dark)'
 
-const shadowLightVar = stylex.defineVars({
+export const shadowLightVar = stylex.defineVars({
   outline: '0px 1px 2px -0.5px rgba(0, 0, 0, 0.06), 0px 2px 3px -1px rgba(0, 0, 0, 0.06)',
   'outline-intense': '0px 1px 2px -0.5px rgba(0, 0, 0, 0.12), 0px 2px 3px -1px rgba(0, 0, 0, 0.12)',
   raised: '0px 8px 12px -4px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.1)',
@@ -13,7 +13,7 @@ const shadowLightVar = stylex.defineVars({
     '0px 16px 24px -4px rgba(0, 0, 0, 0.12), 0px 8px 12px -4px rgba(0, 0, 0, 0.12), 0px 4px 6px -2px rgba(0, 0, 0, 0.12)'
 })
 
-const shadowDarkVar = stylex.defineVars({
+export const shadowDarkVar = stylex.defineVars({
   outline:
     '0px -1px 2px -0.5px rgba(255, 255, 255, 0.06), 0px -1px 3px -1px rgba(255, 255, 255, 0.05)',
   'outline-intense':

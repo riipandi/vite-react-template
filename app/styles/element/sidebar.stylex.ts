@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { colorVar, radiusVar, spaceVar } from '#/styles/core/tokens.stylex'
-import { fontSizeVar, fontWeightVar } from '#/styles/core/tokens.stylex'
+import { colors } from '#/styles/core/color.stylex'
+import { fontSize, fontWeightVar } from '#/styles/core/font.stylex'
+import { radius, unit } from '#/styles/core/size.stylex'
 
 export const sidebarStyles = stylex.create({
   container: {
@@ -11,8 +12,8 @@ export const sidebarStyles = stylex.create({
     position: 'relative',
     borderRightWidth: 1,
     borderRightStyle: 'solid',
-    borderRightColor: colorVar.borderNeutralFaded,
-    backgroundColor: colorVar.bgPage,
+    borderRightColor: colors.borderNeutralFaded,
+    backgroundColor: colors.backgroundPage,
     transitionProperty: 'background-color, border-color, width',
     transitionDuration: '200ms',
     flexShrink: 0
@@ -27,8 +28,8 @@ export const sidebarStyles = stylex.create({
   containerCollapsed: {
     width: '3.75rem',
     alignItems: 'center',
-    paddingTop: spaceVar[3],
-    paddingBottom: spaceVar[2],
+    paddingTop: unit.x3,
+    paddingBottom: unit.x2,
     '@media (max-width: 767px)': {
       width: '18rem',
       alignItems: 'stretch',
@@ -46,16 +47,16 @@ export const sidebarStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    paddingBottom: spaceVar[3]
+    paddingBottom: unit.x3
   },
   logoSection: {
-    paddingLeft: spaceVar[4],
-    paddingRight: spaceVar[4],
-    paddingTop: spaceVar[2],
-    paddingBottom: spaceVar[2],
+    paddingLeft: unit.x4,
+    paddingRight: unit.x4,
+    paddingTop: unit.x2,
+    paddingBottom: unit.x2,
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: colorVar.bgNeutralFaded,
+    borderBottomColor: colors.backgroundNeutralFaded,
     width: '100%'
   },
   logoSectionCollapsed: {
@@ -68,18 +69,18 @@ export const sidebarStyles = stylex.create({
   logoLink: {
     display: 'inline-flex',
     alignItems: 'center',
-    gap: spaceVar[2],
+    gap: unit.x2,
     textDecoration: 'none',
-    borderRadius: radiusVar.md,
-    paddingTop: spaceVar[1],
-    paddingBottom: spaceVar[1],
+    borderRadius: radius.medium,
+    paddingTop: unit.x1,
+    paddingBottom: unit.x1,
     outline: 'none',
     transitionProperty: 'opacity',
     transitionDuration: '150ms',
     ':focus-visible': {
       outlineWidth: 2,
       outlineStyle: 'solid',
-      outlineColor: colorVar.fgPrimary,
+      outlineColor: colors.foregroundPrimary,
       outlineOffset: 2
     }
   },
@@ -93,57 +94,57 @@ export const sidebarStyles = stylex.create({
   logoIconWrap: {
     width: '1.85rem',
     height: '1.85rem',
-    borderRadius: radiusVar.lg,
+    borderRadius: radius.large,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: colorVar.bgBrand,
+    background: colors.backgroundPrimary,
     flexShrink: 0
   },
   logoSvg: {
     height: '1.65rem',
     width: '1.65rem',
-    fill: colorVar.onBrand,
-    color: colorVar.onBrand
+    fill: colors.onBrand,
+    color: colors.onBrand
   },
   logoText: {
-    fontSize: fontSizeVar.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeightVar.bold,
-    color: colorVar.fgNeutral,
+    color: colors.foregroundNeutral,
     letterSpacing: '-0.01em'
   },
   logoVersion: {
-    fontSize: fontSizeVar.xs,
-    color: colorVar.fgNeutralFaded
+    fontSize: fontSize.caption1,
+    color: colors.foregroundNeutralFaded
   },
 
   // Nav content
   navContent: {
     flex: 1,
-    paddingTop: spaceVar[2],
-    paddingBottom: spaceVar[2],
-    paddingLeft: spaceVar[3],
-    paddingRight: spaceVar[3],
+    paddingTop: unit.x2,
+    paddingBottom: unit.x2,
+    paddingLeft: unit.x3,
+    paddingRight: unit.x3,
     display: 'flex',
     flexDirection: 'column',
-    gap: spaceVar[1],
+    gap: unit.x1,
     overflowY: 'auto',
     width: '100%'
   },
   navContentCollapsed: {
-    paddingTop: spaceVar[2],
-    paddingBottom: spaceVar[2],
+    paddingTop: unit.x2,
+    paddingBottom: unit.x2,
     alignItems: 'center',
-    gap: spaceVar[1],
+    gap: unit.x1,
     flex: '0 0 auto'
   },
   sectionLabel: {
-    paddingLeft: spaceVar[2],
-    paddingTop: spaceVar[4],
-    paddingBottom: spaceVar[1],
-    fontSize: fontSizeVar.xs,
+    paddingLeft: unit.x2,
+    paddingTop: unit.x4,
+    paddingBottom: unit.x1,
+    fontSize: fontSize.caption1,
     fontWeight: fontWeightVar.semibold,
-    color: colorVar.fgNeutralFaded,
+    color: colors.foregroundNeutralFaded,
     letterSpacing: '0.07em',
     textTransform: 'uppercase',
     userSelect: 'none'
@@ -151,9 +152,9 @@ export const sidebarStyles = stylex.create({
   divider: {
     width: '1.75rem',
     height: '1px',
-    backgroundColor: colorVar.bgNeutralFaded,
-    marginTop: spaceVar['0.5'],
-    marginBottom: spaceVar[1],
+    backgroundColor: colors.backgroundNeutralFaded,
+    marginTop: unit['x1.5'],
+    marginBottom: unit.x1,
     flexShrink: 0
   },
 
@@ -163,29 +164,29 @@ export const sidebarStyles = stylex.create({
     height: '2.25rem',
     width: '100%',
     alignItems: 'center',
-    gap: spaceVar[2],
-    borderRadius: radiusVar.lg,
-    paddingLeft: spaceVar[3],
-    paddingRight: spaceVar[3],
+    gap: unit.x2,
+    borderRadius: radius.large,
+    paddingLeft: unit.x3,
+    paddingRight: unit.x3,
     textDecoration: 'none',
     color: {
-      default: colorVar.fgNeutralFaded,
-      ':hover': colorVar.fgNeutral
+      default: colors.foregroundNeutralFaded,
+      ':hover': colors.foregroundNeutral
     },
     position: 'relative',
     transitionProperty: 'background-color, color',
     transitionDuration: '150ms',
-    fontSize: fontSizeVar.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeightVar.medium,
     backgroundColor: {
       default: 'transparent',
-      ':hover': colorVar.bgNeutralFaded
+      ':hover': colors.backgroundNeutralFaded
     },
     outline: 'none',
     ':focus-visible': {
       outlineWidth: 2,
       outlineStyle: 'solid',
-      outlineColor: colorVar.fgPrimary,
+      outlineColor: colors.foregroundPrimary,
       outlineOffset: 2
     }
   },
@@ -198,15 +199,15 @@ export const sidebarStyles = stylex.create({
   },
   navItemActive: {
     backgroundColor: {
-      default: colorVar.bgPrimaryFaded,
-      ':hover': colorVar.bgPrimaryFaded
+      default: colors.backgroundPrimaryFaded,
+      ':hover': colors.backgroundPrimaryFaded
     },
     boxShadow: {
-      default: `inset 3px 0 0 ${colorVar.bgPrimary}`
+      default: `inset 3px 0 0 ${colors.backgroundPrimary}`
     },
     color: {
-      default: colorVar.fgPrimary,
-      ':hover': colorVar.fgPrimary
+      default: colors.foregroundPrimary,
+      ':hover': colors.foregroundPrimary
     }
   },
   navIcon: {
@@ -217,7 +218,7 @@ export const sidebarStyles = stylex.create({
   },
   navLabel: {
     flex: 1,
-    fontSize: fontSizeVar.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeightVar.medium,
     whiteSpace: 'nowrap'
   },
@@ -225,7 +226,7 @@ export const sidebarStyles = stylex.create({
     width: '0.375rem',
     height: '0.375rem',
     borderRadius: '9999px',
-    backgroundColor: colorVar.bgCritical,
+    backgroundColor: colors.backgroundCritical,
     flexShrink: 0
   },
   badgeCollapsed: {
@@ -235,18 +236,18 @@ export const sidebarStyles = stylex.create({
     height: '0.35rem',
     width: '0.35rem',
     borderRadius: '9999px',
-    backgroundColor: colorVar.bgCritical
+    backgroundColor: colors.backgroundCritical
   },
 
   // Bottom: sign out + theme switcher
   bottomSection: {
-    paddingLeft: spaceVar[3],
-    paddingRight: spaceVar[2],
-    paddingTop: spaceVar[2],
-    paddingBottom: spaceVar[2],
+    paddingLeft: unit.x3,
+    paddingRight: unit.x2,
+    paddingTop: unit.x2,
+    paddingBottom: unit.x2,
     borderTopWidth: 1,
     borderTopStyle: 'solid',
-    borderTopColor: colorVar.borderNeutralFaded,
+    borderTopColor: colors.borderNeutralFaded,
     width: '100%'
   },
   switcherBox: {
@@ -254,9 +255,9 @@ export const sidebarStyles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingLeft: spaceVar[1],
-    paddingRight: spaceVar[1],
-    borderRadius: radiusVar.lg
+    paddingLeft: unit.x1,
+    paddingRight: unit.x1,
+    borderRadius: radius.large
   },
 
   // Collapse/expand trigger (desktop only)
@@ -271,17 +272,17 @@ export const sidebarStyles = stylex.create({
     justifyContent: 'center',
     width: '1.75rem',
     height: '1.75rem',
-    borderRadius: radiusVar.md,
+    borderRadius: radius.medium,
     borderWidth: 0,
-    color: colorVar.fgNeutralFaded,
+    color: colors.foregroundNeutralFaded,
     cursor: 'pointer',
     opacity: 0,
     pointerEvents: 'none',
     transitionProperty: 'background-color, color, opacity',
     transitionDuration: '150ms',
     ':hover': {
-      color: colorVar.fgNeutral,
-      backgroundColor: colorVar.bgNeutralFaded
+      color: colors.foregroundNeutral,
+      backgroundColor: colors.backgroundNeutralFaded
     },
     ':focus-visible': {
       opacity: 1,
@@ -300,7 +301,7 @@ export const sidebarStyles = stylex.create({
     transform: 'none',
     width: '2.25rem',
     height: '2.25rem',
-    borderRadius: radiusVar.lg
+    borderRadius: radius.large
   },
   logoFade: {
     opacity: 0
@@ -310,40 +311,40 @@ export const sidebarStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: spaceVar[2],
-    paddingTop: spaceVar[3],
-    paddingBottom: spaceVar[0]
+    gap: unit.x2,
+    paddingTop: unit.x3,
+    paddingBottom: unit['x0.5']
   },
   bottomRow: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: spaceVar[2]
+    gap: unit.x2
   },
   bottomRowCollapsed: {
     flexDirection: 'column',
     alignItems: 'center',
-    gap: spaceVar[1]
+    gap: unit.x1
   },
   switcherBoxCollapsed: {
     height: '2.5rem'
   },
   signOutButton: {
-    gap: spaceVar[2],
+    gap: unit.x2,
     borderWidth: 0,
     cursor: 'pointer',
     fontFamily: 'inherit',
     flexShrink: 0,
     color: {
-      default: colorVar.fgNeutralFaded,
-      ':hover': colorVar.fgCritical
+      default: colors.foregroundNeutralFaded,
+      ':hover': colors.foregroundCritical
     },
     backgroundColor: {
       default: 'transparent',
-      ':hover': colorVar.bgCriticalFaded
+      ':hover': colors.backgroundCriticalFaded
     },
     boxShadow: {
-      ':hover': `inset 0 0 0 1px ${colorVar.borderCriticalFaded}`
+      ':hover': `inset 0 0 0 1px ${colors.borderCriticalFaded}`
     }
   },
   signOutButtonExpanded: {

@@ -28,7 +28,7 @@ export const sidebarStyles = stylex.create({
     width: '3.75rem',
     alignItems: 'center',
     paddingTop: spaceVar[3],
-    paddingBottom: spaceVar[3],
+    paddingBottom: spaceVar[2],
     '@media (max-width: 767px)': {
       width: '18rem',
       alignItems: 'stretch',
@@ -40,7 +40,7 @@ export const sidebarStyles = stylex.create({
   // Logo
   headerZone: {
     width: '100%',
-    position: 'relative'
+    position: 'relative',
   },
   headerZoneCollapsed: {
     display: 'flex',
@@ -49,10 +49,10 @@ export const sidebarStyles = stylex.create({
     paddingBottom: spaceVar[3]
   },
   logoSection: {
-    paddingLeft: spaceVar[3],
-    paddingRight: spaceVar[3],
-    paddingTop: spaceVar[3],
-    paddingBottom: spaceVar[3],
+    paddingLeft: spaceVar[4],
+    paddingRight: spaceVar[4],
+    paddingTop: spaceVar[2],
+    paddingBottom: spaceVar[2],
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
     borderBottomColor: colorVar.bgNeutralFaded,
@@ -91,8 +91,8 @@ export const sidebarStyles = stylex.create({
     paddingBottom: 0
   },
   logoIconWrap: {
-    width: '1.75rem',
-    height: '1.75rem',
+    width: '1.85rem',
+    height: '1.85rem',
     borderRadius: radiusVar.lg,
     display: 'flex',
     alignItems: 'center',
@@ -101,8 +101,8 @@ export const sidebarStyles = stylex.create({
     flexShrink: 0
   },
   logoSvg: {
-    height: '1.25rem',
-    width: '1.25rem',
+    height: '1.65rem',
+    width: '1.65rem',
     fill: colors.primaryForeground,
     color: colors.primaryForeground
   },
@@ -110,20 +110,18 @@ export const sidebarStyles = stylex.create({
     fontSize: fontSizeVar.sm,
     fontWeight: fontWeightVar.bold,
     color: colorVar.fgNeutral,
-    letterSpacing: '-0.01em',
-    lineHeight: 1
+    letterSpacing: '-0.01em'
   },
   logoVersion: {
     fontSize: fontSizeVar.xs,
-    color: colorVar.fgNeutralFaded,
-    marginTop: spaceVar[1]
+    color: colorVar.fgNeutralFaded
   },
 
   // Nav content
   navContent: {
     flex: 1,
-    paddingTop: spaceVar[3],
-    paddingBottom: spaceVar[3],
+    paddingTop: spaceVar[2],
+    paddingBottom: spaceVar[2],
     paddingLeft: spaceVar[3],
     paddingRight: spaceVar[3],
     display: 'flex',
@@ -133,15 +131,15 @@ export const sidebarStyles = stylex.create({
     width: '100%'
   },
   navContentCollapsed: {
-    paddingTop: 0,
-    paddingBottom: 0,
+    paddingTop: spaceVar[2],
+    paddingBottom: spaceVar[2],
     alignItems: 'center',
     gap: spaceVar[1],
     flex: '0 0 auto'
   },
   sectionLabel: {
-    paddingLeft: spaceVar[3],
-    paddingTop: spaceVar[2],
+    paddingLeft: spaceVar[2],
+    paddingTop: spaceVar[4],
     paddingBottom: spaceVar[1],
     fontSize: fontSizeVar.xs,
     fontWeight: fontWeightVar.semibold,
@@ -151,21 +149,21 @@ export const sidebarStyles = stylex.create({
     userSelect: 'none'
   },
   divider: {
-    width: '2rem',
+    width: '1.75rem',
     height: '1px',
     backgroundColor: colorVar.bgNeutralFaded,
-    marginTop: spaceVar[1],
-    marginBottom: spaceVar[2],
+    marginTop: spaceVar['0.5'],
+    marginBottom: spaceVar[1],
     flexShrink: 0
   },
 
   // Nav item
   navItem: {
     display: 'flex',
-    height: '2.5rem',
+    height: '2.25rem',
     width: '100%',
     alignItems: 'center',
-    gap: spaceVar[3],
+    gap: spaceVar[2],
     borderRadius: radiusVar.lg,
     paddingLeft: spaceVar[3],
     paddingRight: spaceVar[3],
@@ -192,8 +190,8 @@ export const sidebarStyles = stylex.create({
     }
   },
   navItemCollapsed: {
-    height: '2.5rem',
-    width: '2.5rem',
+    height: '2.25rem',
+    width: '2.25rem',
     justifyContent: 'center',
     paddingLeft: 0,
     paddingRight: 0
@@ -224,8 +222,8 @@ export const sidebarStyles = stylex.create({
     whiteSpace: 'nowrap'
   },
   badge: {
-    width: '0.5rem',
-    height: '0.5rem',
+    width: '0.375rem',
+    height: '0.375rem',
     borderRadius: '9999px',
     backgroundColor: colorVar.bgCritical,
     flexShrink: 0
@@ -234,8 +232,8 @@ export const sidebarStyles = stylex.create({
     position: 'absolute',
     top: '0.375rem',
     right: '0.375rem',
-    height: '0.4rem',
-    width: '0.4rem',
+    height: '0.35rem',
+    width: '0.35rem',
     borderRadius: '9999px',
     backgroundColor: colorVar.bgCritical
   },
@@ -252,7 +250,7 @@ export const sidebarStyles = stylex.create({
     width: '100%'
   },
   switcherBox: {
-    height: '2.5rem',
+    height: '2.25rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -325,7 +323,7 @@ export const sidebarStyles = stylex.create({
   bottomRowCollapsed: {
     flexDirection: 'column',
     alignItems: 'center',
-    gap: spaceVar[2]
+    gap: spaceVar[1]
   },
   switcherBoxCollapsed: {
     height: '2.5rem'

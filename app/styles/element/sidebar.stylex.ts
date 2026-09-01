@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colorVar, radiusVar, spaceVar } from '#/styles/core/tokens.stylex'
+import { colorVar, colors, radiusVar, spaceVar } from '#/styles/core/tokens.stylex'
 import { fontSizeVar, fontWeightVar } from '#/styles/core/tokens.stylex'
 
 export const sidebarStyles = stylex.create({
@@ -84,38 +84,39 @@ export const sidebarStyles = stylex.create({
     }
   },
   logoLinkCollapsed: {
-    width: '2.25rem',
-    height: '2.25rem',
+    width: '2rem',
+    height: '2rem',
     justifyContent: 'center',
     paddingTop: 0,
     paddingBottom: 0
   },
   logoIconWrap: {
-    width: '2rem',
-    height: '2rem',
+    width: '1.75rem',
+    height: '1.75rem',
     borderRadius: radiusVar.lg,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: `linear-gradient(135deg, ${colorVar.bgPrimary}, ${colorVar.bgBrand})`,
+    background: colors.primary,
     flexShrink: 0
   },
   logoSvg: {
-    height: '1.125rem',
-    width: '1.125rem',
-    fill: colorVar.onBrand,
-    color: colorVar.onBrand
+    height: '1.25rem',
+    width: '1.25rem',
+    fill: colors.primaryForeground,
+    color: colors.primaryForeground
   },
   logoText: {
     fontSize: fontSizeVar.sm,
     fontWeight: fontWeightVar.bold,
     color: colorVar.fgNeutral,
-    letterSpacing: '-0.01em'
+    letterSpacing: '-0.01em',
+    lineHeight: 1
   },
   logoVersion: {
     fontSize: fontSizeVar.xs,
     color: colorVar.fgNeutralFaded,
-    marginTop: spaceVar['0.5']
+    marginTop: spaceVar[1]
   },
 
   // Nav content

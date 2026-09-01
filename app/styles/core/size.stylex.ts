@@ -33,9 +33,3 @@ export const zIndex = stylex.defineVars({
   absolute: 100,
   fixed: 200
 })
-
-export const viewport = stylex.defineVars({
-  medium: 660,
-  large: 900,
-  xlarge: 1280
-})

@@ -1,5 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
+import type { StyleXStyles } from '@stylexjs/stylex'
 import { colors, radius } from '#/styles/core/tokens.stylex'
+
+export type ButtonVariant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
+export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon' | 'icon-sm' | 'icon-lg'
 
 export const buttonStyles = stylex.create({
   base: {
@@ -92,3 +96,21 @@ export const buttonStyles = stylex.create({
     paddingInline: '0.75rem'
   }
 })
+
+export const buttonVariantStyles: Record<ButtonVariant, StyleXStyles> = {
+  default: buttonStyles.default,
+  destructive: buttonStyles.destructive,
+  ghost: buttonStyles.ghost,
+  link: buttonStyles.link,
+  outline: buttonStyles.outline,
+  secondary: buttonStyles.secondary
+}
+
+export const buttonSizeStyles: Record<ButtonSize, StyleXStyles> = {
+  default: buttonStyles.sizeDefault,
+  icon: buttonStyles.sizeIcon,
+  'icon-lg': buttonStyles.sizeIconLg,
+  'icon-sm': buttonStyles.sizeIconSm,
+  lg: buttonStyles.sizeLg,
+  sm: buttonStyles.sizeSm
+}

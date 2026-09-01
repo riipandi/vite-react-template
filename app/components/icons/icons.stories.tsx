@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import * as Lucide from 'lucide-react'
+import { IconCircleSubtract, IconCircleAdd } from 'obra-icons-react'
 import { colorVar, fontSizeVar, fontWeightVar } from '#/styles/core/tokens.stylex'
 import { FacebookIcon, GitHubIcon, GoogleIcon, InstagramIcon } from './index'
 import { LinkedInIcon, TelegramIcon, WhatsAppIcon, XIcon } from './index'
@@ -122,11 +122,11 @@ export const Sizes: Story = {
           >
             {name}
           </span>
-          <Lucide.Minus />
+          <IconCircleSubtract {...stylex.props(atoms.margin['0 1rem'])} />
           {sizeSteps.map((s) => (
             <Icon key={s} size={s} />
           ))}
-          <Lucide.Plus />
+          <IconCircleAdd {...stylex.props(atoms.margin['0 1rem'])} />
         </div>
       ))}
     </div>

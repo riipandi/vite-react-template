@@ -34,7 +34,7 @@
         "@tanstack/react-router": "^1.170.32",
         "@tanstack/react-store": "^0.11.1",
         "css-variants": "^2.3.5",
-        "lucide-react": "^1.38.0",
+        "obra-icons-react": "^1.24.0",
         "ofetch": "^1.5.1",
         "react": "^19.2.8",
         "react-dom": "^19.2.8",

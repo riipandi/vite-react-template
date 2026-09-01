@@ -1,30 +1,41 @@
 import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import type { LinkProps } from '@tanstack/react-router'
-import * as Lucide from 'lucide-react'
+import {
+  IconBarChart,
+  IconMasonry,
+  IconDocument,
+  IconLogOut,
+  IconMessage,
+  IconSearch,
+  IconSettings,
+  IconShoppingCart,
+  IconSidebar,
+  IconSidebarFillLeft
+} from 'obra-icons-react'
 import { useState } from 'react'
 import { ThemeSwitcher } from '#/components/theme'
 import { useAuthentication } from '#/libraries/guard/auth-provider'
 import { sidebarStyles } from '#/styles/element/sidebar.stylex'
 
 interface NavItem {
-  icon: Lucide.LucideIcon
+  icon: React.ComponentType<{ className?: string; size?: number; strokeWidth?: number }>
   href: LinkProps['to'] | undefined
   label: string
   badge?: boolean
 }
 
 const navItems: NavItem[] = [
-  { icon: Lucide.LayoutDashboard, label: 'Overview', href: '/overview' },
-  { icon: Lucide.Search, label: 'Search', href: undefined },
-  { icon: Lucide.BarChart3, label: 'Analytics', href: undefined },
-  { icon: Lucide.FileText, label: 'Docs', href: undefined }
+  { icon: IconMasonry, label: 'Overview', href: '/overview' },
+  { icon: IconSearch, label: 'Search', href: undefined },
+  { icon: IconBarChart, label: 'Analytics', href: undefined },
+  { icon: IconDocument, label: 'Docs', href: undefined }
 ]
 
 const secondaryItems: NavItem[] = [
-  { icon: Lucide.ShoppingCart, label: 'Products', href: undefined },
-  { icon: Lucide.Settings, label: 'Settings', href: '/settings' },
-  { icon: Lucide.Mail, label: 'Messages', href: undefined, badge: true }
+  { icon: IconShoppingCart, label: 'Products', href: undefined },
+  { icon: IconSettings, label: 'Settings', href: '/settings' },
+  { icon: IconMessage, label: 'Messages', href: undefined, badge: true }
 ]
 
 function LogoMark() {
@@ -135,7 +146,7 @@ export function SideNavbar({ collapsed = false, onToggleCollapse }: SideNavbarPr
               collapsed && sidebarStyles.collapseTriggerCollapsed
             )}
           >
-            {collapsed ? <Lucide.PanelLeftOpen size={16} /> : <Lucide.PanelLeftClose size={16} />}
+            {collapsed ? <IconSidebar size={16} /> : <IconSidebarFillLeft size={16} />}
           </button>
         )}
       </div>
@@ -173,7 +184,7 @@ export function SideNavbar({ collapsed = false, onToggleCollapse }: SideNavbarPr
               !collapsed && sidebarStyles.signOutButtonExpanded
             )}
           >
-            <Lucide.LogOut {...stylex.props(sidebarStyles.navIcon)} />
+            <IconLogOut {...stylex.props(sidebarStyles.navIcon)} />
             {!collapsed && <span {...stylex.props(sidebarStyles.navLabel)}>Sign Out</span>}
           </button>
           <div

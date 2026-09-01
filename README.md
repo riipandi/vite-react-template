@@ -28,10 +28,10 @@ with [ofetch](https://github.com/unjs/ofetch), easily replaceable with your own 
 ## The Complete Stack
 
 - [x] [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling.
-- [x] [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
-- [x] [StyleX](https://stylexjs.com/) - The styling system for ambitious user interfaces.
-- [x] [Lucide Icons](https://lucide.dev/) - Beautiful & consistent icons made by the community.
-- [x] [Typescript](https://www.typescriptlang.org/) - Strongly typed programming language.
+- [x] [React](https://reactjs.org) - A JavaScript library for building user interfaces.
+- [x] [StyleX](https://stylexjs.com) - The styling system for ambitious user interfaces.
+- [x] [Obra Icons](https://icons.obra.studio) - A simple, consistent set of icons, perfect for user interfaces.
+- [x] [Typescript](https://www.typescriptlang.org) - Strongly typed programming language.
 - [x] [TanStack Router](https://tanstack.com/router) - Type-safe routing for React.
 - [x] [TanStack Form](https://tanstack.com/form) - Headless, type-safe form state management.
 - [x] [TanStack Query](https://tanstack.com/query) - Powerful asynchronous state management.
@@ -74,7 +74,7 @@ deployments so that pushing to master will deploy to production! 🚀
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/riipandi/vite-react-template&project-name=vite-react-template&repo-name=my-vite-react-app&env=PUBLIC_SITE_URL)
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/riipandi/vite-react-template)
 
-#### Cloudflare Deployment
+### Cloudflare Deployment
 
 You need to add `NODE_VERSION` with value `18.17.1` or `20.9.0` on the environment variables setting.
 Visit [Cloudflare pages docs](https://developers.cloudflare.com/pages/platform/build-configuration/)
@@ -95,7 +95,7 @@ to get TypeScript set up for your editor and install an editor plugin (like the
 [VSCode Oxc plugin](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode)) to get
 auto-formatting on saving and get a really great in-editor experience with type checking and auto-complete.
 
-## Thanks to...
+## Thanks to
 
 In general, I'd like to thank every single one who open-sources their
 source code for their effort to contribute something to the open-source

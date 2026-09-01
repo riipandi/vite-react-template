@@ -32,9 +32,9 @@ importers:
       css-variants:
         specifier: ^2.3.5
         version: 2.3.5
-      lucide-react:
-        specifier: ^1.38.0
-        version: 1.38.0(react@19.2.8)
+      obra-icons-react:
+        specifier: ^1.24.0
+        version: 1.24.0(react@19.2.8)
       ofetch:
         specifier: ^1.5.1
         version: 1.5.1
@@ -2827,11 +2827,6 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  lucide-react@1.38.0:
-    resolution: {integrity: sha512-xZCyBd/wiVUDactoCc+42TjL0aB7EBOXsuX+tjz+W/sGzw2KhHpL1NOH3FIaVUcpimvUBpIYfz34Ofj9S5JEzQ==}
-    peerDependencies:
-      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
@@ -3004,6 +2999,11 @@ packages:
     resolution: {integrity: sha512-u6Odx/JDpDXNqXp5pPsVN0RhuWkNrBe4Sz26J7yWJcEadopKhQgcB+bFq2PK35iJY6vc6h1PbnXmnwfiOFQl/w==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0, npm: '>=10.0.0'}
     hasBin: true
+
+  obra-icons-react@1.24.0:
+    resolution: {integrity: sha512-kxdjmglRQOanKDCbBzBd14+cAUrBTSgA3spt9YNHPnT8OWjfTWx9i0DqvZzTO6v8QQM69crSJynjCk2MW52TTA==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
 
   obug@2.1.3:
     resolution: {integrity: sha512-9miFgM2OFba7hB+pRgvtV84pYTBaoTHohvmIgiRt6dRIzbwEOIaNaP+dIlGs2fNFoB0SeISs0Jz5WFVRid6Xyg==}
@@ -5745,10 +5745,6 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  lucide-react@1.38.0(react@19.2.8):
-    dependencies:
-      react: 19.2.8
-
   lz-string@1.5.0: {}
 
   magic-string@0.30.21:
@@ -6081,6 +6077,10 @@ snapshots:
   node-releases@2.0.48: {}
 
   npm-check-updates@23.1.0: {}
+
+  obra-icons-react@1.24.0(react@19.2.8):
+    dependencies:
+      react: 19.2.8
 
   obug@2.1.3: {}
 

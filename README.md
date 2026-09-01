@@ -1,4 +1,4 @@
-<p align="center"><img src="./src/assets/images/vite.svg" width="500" height="120" alt="Project Logo"></p>
+<p align="center"><img src="./public/images/vite.svg" width="500" height="120" alt="Project Logo"></p>
 <p align="center">
     <a href="https://github.com/riipandi/vite-react-template/pulse">
         <img src="https://img.shields.io/badge/Contributions-welcome-blue.svg?style=flat-square" alt="Contribution welcome">
@@ -16,7 +16,8 @@
 
 ## Introduction
 
-A starter project for [React](https://reactjs.org/) with [Vite](https://vitejs.dev/), [Tailwind CSS](https://tailwindcss.com),
+A starter project for [React](https://reactjs.org/) with [Vite](https://vitejs.dev/), [StyleX](https://stylexjs.com),
+and [Typescript](https://www.typescriptlang.org/). This starter kit is already pre-configured
 and [Typescript](https://www.typescriptlang.org/). This starter kit is already pre-configured
 with [absolute import](https://jsdev.org/env/nodejs/absolute-path-imports/), [TanStack Router](https://tanstack.com/router),
 [TanStack Form](https://tanstack.com/form), [TanStack Query](https://tanstack.com/query),
@@ -27,10 +28,10 @@ with [ofetch](https://github.com/unjs/ofetch), easily replaceable with your own 
 ## The Complete Stack
 
 - [x] [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling.
-- [x] [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
-- [x] [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs.
-- [x] [Lucide Icons](https://lucide.dev/) - Beautiful & consistent icons made by the community.
-- [x] [Typescript](https://www.typescriptlang.org/) - Strongly typed programming language.
+- [x] [React](https://reactjs.org) - A JavaScript library for building user interfaces.
+- [x] [StyleX](https://stylexjs.com) - The styling system for ambitious user interfaces.
+- [x] [Obra Icons](https://icons.obra.studio) - A simple, consistent set of icons, perfect for user interfaces.
+- [x] [Typescript](https://www.typescriptlang.org) - Strongly typed programming language.
 - [x] [TanStack Router](https://tanstack.com/router) - Type-safe routing for React.
 - [x] [TanStack Form](https://tanstack.com/form) - Headless, type-safe form state management.
 - [x] [TanStack Query](https://tanstack.com/query) - Powerful asynchronous state management.
@@ -54,7 +55,7 @@ npx tiged riipandi/vite-react-template myapp-name
 ### Up and Running
 
 | NPM               | Yarn           | PNPM           | Description              |
-| ----------------- | -------------- | -------------- | ------------------------ |
+|-------------------|----------------|----------------|--------------------------|
 | `npm install`     | `yarn`         | `pnpm install` | install the dependencies |
 | `npm run dev`     | `yarn dev`     | `pnpm dev`     | serve with hot reload    |
 | `npm run build`   | `yarn build`   | `pnpm build`   | build for production     |
@@ -70,10 +71,10 @@ You'll want to fork this repository and deploy your own Next.js website. Once yo
 image generator that sparks joy, you can setup [automatic GitHub](https://vercel.com/github)
 deployments so that pushing to master will deploy to production! 🚀
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/riipandi/vite-react-template&project-name=vite-react-template&repo-name=my-vite-react-app&env=VITE_PUBLIC_SITE_URL)
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/riipandi/vite-react-template&project-name=vite-react-template&repo-name=my-vite-react-app&env=PUBLIC_SITE_URL)
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/riipandi/vite-react-template)
 
-#### Cloudflare Deployment
+### Cloudflare Deployment
 
 You need to add `NODE_VERSION` with value `18.17.1` or `20.9.0` on the environment variables setting.
 Visit [Cloudflare pages docs](https://developers.cloudflare.com/pages/platform/build-configuration/)
@@ -82,7 +83,7 @@ for more information.
 For the preview branch:
 
 ```env
-VITE_PUBLIC_SITE_URL=${CF_PAGES_URL}
+PUBLIC_SITE_URL=${CF_PAGES_URL}
 ```
 
 ## Development
@@ -94,7 +95,7 @@ to get TypeScript set up for your editor and install an editor plugin (like the
 [VSCode Oxc plugin](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode)) to get
 auto-formatting on saving and get a really great in-editor experience with type checking and auto-complete.
 
-## Thanks to...
+## Thanks to
 
 In general, I'd like to thank every single one who open-sources their
 source code for their effort to contribute something to the open-source

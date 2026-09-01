@@ -1,0 +1,14 @@
+{
+    "languages": {
+        "TSX": {
+            "inlay_hints": {
+                "show_parameter_hints": false
+            }
+        },
+        "TypeScript": {
+            "inlay_hints": {
+                "show_parameter_hints": true
+            }
+        }
+    }
+}

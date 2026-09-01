@@ -1,31 +1,64 @@
 {
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["typescript", "react", "unicorn", "import", "jsx-a11y", "vitest", "eslint"],
-  "env": {
-    "browser": true,
-    "builtin": true,
-    "vitest": true
-  },
-  "categories": {
-    "correctness": "error",
-    "suspicious": "error"
-  },
-  "rules": {
-    "no-console": "off",
-    "no-debugger": "off",
-    "typescript/no-explicit-any": "off",
-    "react/jsx-key": "error",
-    "react/no-array-index-key": "error",
-    "react/self-closing-comp": ["error", { "html": true, "component": true }],
-    "react/react-in-jsx-scope": "off",
-    "react/no-children-prop": "off",
-    "import/default": "off",
-    "import/no-cycle": "off",
-    "no-unused-vars": ["error", { "args": "after-used" }],
-    "import/no-unassigned-import": "off",
-    "sort-imports": "off",
-    "typescript/consistent-type-definitions": ["error", "interface"],
-    "typescript/no-unnecessary-type-constraint": "off",
-    "no-empty": ["error", { "allowEmptyCatch": true }]
-  }
+    "$schema": "https://unpkg.com/oxlint@1.70/configuration_schema.json",
+    "plugins": ["typescript", "react", "unicorn", "import", "jsx-a11y", "vitest", "eslint", "oxc"],
+    "env": {
+        "browser": true,
+        "builtin": true,
+        "vitest": true
+    },
+    "categories": {
+        "correctness": "error",
+        "suspicious": "error"
+    },
+    "rules": {
+        "import/default": "warn",
+        "import/no-absolute-path": "allow",
+        "import/no-cycle": "warn",
+        "import/no-unassigned-import": "off",
+        "no-console": "off",
+        "no-debugger": "warn",
+        "no-empty": ["error", { "allowEmptyCatch": true }],
+        "no-unused-vars": ["error", { "args": "after-used" }],
+        "react/jsx-key": "error",
+        "react/no-array-index-key": "error",
+        "react/no-children-prop": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/self-closing-comp": ["error", { "html": true, "component": true }],
+        "sort-imports": "off",
+        "typescript/consistent-type-definitions": ["error", "interface"],
+        "typescript/no-explicit-any": "error",
+        "typescript/no-unnecessary-type-constraint": "off",
+        "typescript/triple-slash-reference": "allow"
+    },
+    "overrides": [
+        {
+            "files": ["./app/components/**/*.tsx"],
+            "rules": {
+                "jsx-a11y/control-has-associated-label": "off",
+                "jsx-a11y/prefer-tag-over-role": "off"
+            }
+        },
+        {
+            "files": ["**/*.test.ts", "**/*.spec.ts"],
+            "plugins": ["vitest"],
+            "rules": {
+                "no-console": "off",
+                "vitest/no-focused-tests": "error",
+                "vitest/no-disabled-tests": "warn"
+            }
+        }
+    ],
+    "ignorePatterns": [
+        ".output",
+        ".tanstack",
+        ".wrangler",
+        "**/*.md",
+        "**/*.mdx",
+        "**/*.go",
+        "**/*.yml",
+        "**/*.yaml",
+        "**/*.toml",
+        "/public/**",
+        "/temp/**"
+    ]
 }

@@ -1,9 +1,20 @@
 [build.environment]
-  NODE_VERSION = "24.16.0"
-  NPM_VERSION = "11.13.0"
-  PNPM_VERSION = "11.8.0"
+  NODE_VERSION = "24.20.0"
+  NPM_VERSION = "11.19.0"
+  PNPM_VERSION = "11.25.0"
   TZ = "Asia/Jakarta"
 
 [build]
   publish = "dist"
   command = "pnpm run build"
+
+[[redirects]]
+from = "/dashboard"
+to = "/overview"
+status = 200
+force = true
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200

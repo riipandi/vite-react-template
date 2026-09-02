@@ -1,4 +1,6 @@
-import type { StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import atoms from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import React from 'react'
 import { expect } from 'storybook/test'
 import { Example, Placeholder } from '#/components/storyblock'
@@ -8,8 +10,15 @@ import { View } from './view.component'
 export default {
   title: 'Extra Components/View',
   component: View,
-  parameters: { layout: 'fullscreen' }
-}
+  parameters: { layout: 'fullscreen' },
+  decorators: [
+    (Story) => (
+      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+        <Story />
+      </div>
+    )
+  ]
+} satisfies Meta<typeof View>
 
 // ---------------------------------------------------------------------------
 // padding

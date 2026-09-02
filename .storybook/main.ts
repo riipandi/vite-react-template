@@ -34,21 +34,27 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen'
   },
   async viteFinal(viteConfig) {
+    // Root vite.config.ts already provides StyleX + tsconfigPaths.
+    // Only add StyleX when NOT already present (e.g. addon-vitest runner).
+    const hasPlugin = (name: string) =>
+      viteConfig.plugins?.some((p) =>
+        Array.isArray(p)
+          ? p.some((x: Record<string, unknown>) => x?.name === name)
+          : (p as Record<string, unknown>)?.name === name
+      )
+
     return mergeConfig(viteConfig, {
-      plugins: [
-        stylex({
-          useCSSLayers: true,
-          aliases: { '#/*': resolve('./app/*') }
-        })
-      ],
-      resolve: { tsconfigPaths: true },
-      build: {
-        chunkSizeWarningLimit: 1024 * 2,
-        rolldownOptions: {
-          checks: { pluginTimings: false },
-          output: { codeSplitting: true }
-        }
-      }
+      ...(!hasPlugin('stylex')
+        ? {
+            plugins: [
+              stylex({
+                useCSSLayers: true,
+                aliases: { '#/*': resolve('./app/*') }
+              })
+            ]
+          }
+        : {}),
+      build: { chunkSizeWarningLimit: 1024 * 4 }
     })
   }
 }

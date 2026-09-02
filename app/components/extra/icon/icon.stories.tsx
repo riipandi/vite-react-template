@@ -1,4 +1,6 @@
-import type { StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import atoms from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { IconUser, IconSettings, IconFavorite, IconArrowRight, IconAdd } from 'obra-icons-react'
 import { expect } from 'storybook/test'
 import { Example } from '#/components/storyblock'
@@ -7,8 +9,15 @@ import { Icon } from './icon.component'
 export default {
   title: 'Extra Components/Icon',
   component: Icon,
-  parameters: { layout: 'fullscreen' }
-}
+  parameters: { layout: 'fullscreen' },
+  decorators: [
+    (Story) => (
+      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+        <Story />
+      </div>
+    )
+  ]
+} satisfies Meta<typeof Icon>
 
 // ---------------------------------------------------------------------------
 // size

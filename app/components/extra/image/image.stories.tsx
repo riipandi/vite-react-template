@@ -1,4 +1,6 @@
-import type { StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import atoms from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { expect, fn, type Mock, waitFor } from 'storybook/test'
 import { Example } from '#/components/storyblock'
 import { Image } from './image.component'
@@ -9,8 +11,15 @@ const imgUrl =
 export default {
   title: 'Extra Components/Image',
   component: Image,
-  parameters: { layout: 'fullscreen' }
-}
+  parameters: { layout: 'fullscreen' },
+  decorators: [
+    (Story) => (
+      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+        <Story />
+      </div>
+    )
+  ]
+} satisfies Meta<typeof Image>
 
 // ---------------------------------------------------------------------------
 // src, alt

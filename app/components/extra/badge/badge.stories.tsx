@@ -1,4 +1,6 @@
-import type { StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import atoms from '@stylexjs/atoms'
+import * as stylex from '@stylexjs/stylex'
 import { IconCheck, IconAdd, IconFavorite } from 'obra-icons-react'
 import React from 'react'
 import { expect, fn, userEvent } from 'storybook/test'
@@ -8,8 +10,15 @@ import { Badge, BadgeContainer } from './badge.component'
 export default {
   title: 'Extra Components/Badge',
   component: Badge,
-  parameters: { layout: 'fullscreen' }
-}
+  parameters: { layout: 'fullscreen' },
+  decorators: [
+    (Story) => (
+      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+        <Story />
+      </div>
+    )
+  ]
+} satisfies Meta<typeof Badge>
 
 // ---------------------------------------------------------------------------
 // variant, color

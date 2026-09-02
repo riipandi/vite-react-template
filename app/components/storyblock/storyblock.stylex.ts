@@ -11,7 +11,7 @@ const example = stylex.create({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    gap: unit.x2,
+    gap: unit['x0.5'],
     padding: unit.x4,
     backgroundColor: colors.backgroundPage,
     borderRadius: radius.medium,
@@ -65,7 +65,7 @@ const placeholder = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.backgroundNeutral,
+    backgroundColor: colors.backgroundNeutralFaded,
     color: colors.foregroundNeutralFaded,
     fontFamily: fontFamilyVar.body,
     fontWeight: fontWeightVar.regular,

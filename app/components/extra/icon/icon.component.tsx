@@ -18,7 +18,7 @@
  */
 
 import { mergeProps } from '@base-ui/react/merge-props'
-import { useRender } from '@base-ui/react/use-render'
+import { useRender, type UseRenderRenderProp } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
 import React from 'react'
 import { iconStyles as s } from './icon.stylex'
@@ -29,13 +29,6 @@ import { iconStyles as s } from './icon.stylex'
 
 type IconSize = keyof typeof s.sizes
 type IconColor = keyof typeof s.colorStyles
-
-type IconRenderProp =
-  | React.ReactElement
-  | ((
-      props: React.HTMLAttributes<HTMLElement>,
-      state: Record<string, unknown>
-    ) => React.ReactElement)
 
 type TagName = keyof React.JSX.IntrinsicElements
 
@@ -49,7 +42,7 @@ export type IconProps = Omit<React.ComponentProps<'span'>, 'style'> & {
   /** Use the natural width of the SVG instead of square bounding box */
   autoWidth?: boolean
   /** Render prop for polymorphism */
-  render?: IconRenderProp
+  render?: UseRenderRenderProp
   /** StyleX styles to apply */
   style?: stylex.StyleXStyles
 }

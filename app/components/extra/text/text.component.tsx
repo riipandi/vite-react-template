@@ -12,7 +12,7 @@
  */
 
 import { mergeProps } from '@base-ui/react/merge-props'
-import { useRender } from '@base-ui/react/use-render'
+import { useRender, type UseRenderRenderProp } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
 import { textStyles as s } from './text.stylex'
 
@@ -38,13 +38,6 @@ const tagMap: Partial<Record<TextVariant, keyof React.JSX.IntrinsicElements>> = 
 
 type TagName = keyof React.JSX.IntrinsicElements
 
-type TextRenderProp =
-  | React.ReactElement
-  | ((
-      props: React.HTMLAttributes<HTMLElement>,
-      state: Record<string, unknown>
-    ) => React.ReactElement)
-
 export type TextProps = React.ComponentProps<'div'> & {
   /** Text render variant */
   variant?: TextVariant
@@ -65,7 +58,7 @@ export type TextProps = React.ComponentProps<'div'> & {
   /** Render as numeric value to preserve character width */
   numeric?: boolean
   /** Render prop for polymorphism */
-  render?: TextRenderProp
+  render?: UseRenderRenderProp
 }
 
 // ---------------------------------------------------------------------------

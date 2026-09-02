@@ -11,7 +11,7 @@
  */
 
 import { mergeProps } from '@base-ui/react/merge-props'
-import { useRender } from '@base-ui/react/use-render'
+import { useRender, type UseRenderRenderProp } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import React from 'react'
@@ -42,13 +42,6 @@ type ZIndexToken = keyof typeof s.zIndex
 type BleedToken = keyof typeof s.bleed
 
 type TagName = keyof React.JSX.IntrinsicElements
-
-type ViewRenderProp =
-  | React.ReactElement
-  | ((
-      props: React.HTMLAttributes<HTMLElement>,
-      state: Record<string, unknown>
-    ) => React.ReactElement)
 
 export type ViewProps = Omit<React.ComponentProps<'div'>, 'style'> & {
   /** Flex direction for the content */
@@ -130,7 +123,7 @@ export type ViewProps = Omit<React.ComponentProps<'div'>, 'style'> & {
   /** Render as a different element */
   as?: TagName
   /** Render prop for polymorphism */
-  render?: ViewRenderProp
+  render?: UseRenderRenderProp
   /** StyleX styles to apply */
   style?: StyleXStyles
 }

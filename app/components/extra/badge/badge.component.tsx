@@ -13,7 +13,7 @@
  */
 
 import { mergeProps } from '@base-ui/react/merge-props'
-import { useRender } from '@base-ui/react/use-render'
+import { useRender, type UseRenderRenderProp } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
 import React from 'react'
 import { badgeStyles as s } from './badge.stylex'
@@ -27,13 +27,6 @@ type BadgeVariant = keyof typeof s.variants
 type BadgeColor = keyof typeof s.colorsSolid
 
 type BadgeContainerPosition = 'top-end' | 'bottom-end'
-
-type BadgeRenderProp =
-  | React.ReactElement
-  | ((
-      props: React.HTMLAttributes<HTMLElement>,
-      state: Record<string, unknown>
-    ) => React.ReactElement)
 
 type TagName = keyof React.JSX.IntrinsicElements
 
@@ -65,7 +58,7 @@ export type BadgeProps = Omit<React.ComponentProps<'span'>, 'style'> & {
   /** URL to link to (makes badge a link) */
   href?: string
   /** Render prop for polymorphism */
-  render?: BadgeRenderProp
+  render?: UseRenderRenderProp
   /** StyleX styles to apply */
   style?: stylex.StyleXStyles
 }
@@ -76,7 +69,7 @@ export type BadgeContainerProps = Omit<React.ComponentProps<'div'>, 'style'> & {
   /** Move the badge closer to center to overlap with the child component */
   overlap?: boolean
   /** Render prop for polymorphism */
-  render?: BadgeRenderProp
+  render?: UseRenderRenderProp
   /** StyleX styles to apply */
   style?: stylex.StyleXStyles
 }

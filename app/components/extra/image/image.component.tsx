@@ -34,7 +34,7 @@ type ImageRenderProp =
       state: Record<string, unknown>
     ) => React.ReactElement)
 
-export type ImageProps = React.ComponentProps<'img'> & {
+export type ImageProps = Omit<React.ComponentProps<'img'>, 'style'> & {
   /** Image URL */
   src?: string
   /** Image alt text */
@@ -68,7 +68,7 @@ export type ImageProps = React.ComponentProps<'img'> & {
   /** Render prop for polymorphism */
   render?: ImageRenderProp
   /** StyleX styles to apply */
-  xstyle?: stylex.StyleXStyles
+  style?: stylex.StyleXStyles
 }
 
 // ---------------------------------------------------------------------------
@@ -90,7 +90,7 @@ export function Image({
   onError,
   imageAttributes: passedImageAttributes,
   renderImage,
-  xstyle,
+  style,
   className,
   ...otherProps
 }: ImageProps) {
@@ -103,7 +103,7 @@ export function Image({
     hasOutline && s.root.root,
     borderRadius && s.borderRadius[borderRadius],
     hasOutline && s.outline.root,
-    xstyle
+    style
   )
 
   const imgBaseSx = stylex.props(s.imgBase.root)

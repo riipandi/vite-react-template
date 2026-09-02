@@ -125,19 +125,19 @@ export const Align: StoryObj = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <Example title='Start'>
-        <View direction='row' align='start' gap='2' style={{ minHeight: '100px' }}>
+        <View direction='row' align='start' gap='2'>
           <Placeholder h={30}>Small</Placeholder>
           <Placeholder h={60}>Large</Placeholder>
         </View>
       </Example>
       <Example title='Center'>
-        <View direction='row' align='center' gap='2' style={{ minHeight: '100px' }}>
+        <View direction='row' align='center' gap='2'>
           <Placeholder h={30}>Small</Placeholder>
           <Placeholder h={60}>Large</Placeholder>
         </View>
       </Example>
       <Example title='End'>
-        <View direction='row' align='end' gap='2' style={{ minHeight: '100px' }}>
+        <View direction='row' align='end' gap='2'>
           <Placeholder h={30}>Small</Placeholder>
           <Placeholder h={60}>Large</Placeholder>
         </View>
@@ -308,18 +308,22 @@ export const Overflow: StoryObj = {
   render: () => (
     <Example title='Overflow'>
       <Example.Item title={['Hidden']}>
-        <View style={{ width: '150px', height: '50px' }} overflow='hidden'>
-          <Text variant='body-1'>
-            This is a very long text that should be hidden when it overflows the container.
-          </Text>
-        </View>
+        <div style={{ width: '150px', height: '50px' }}>
+          <View overflow='hidden'>
+            <Text variant='body-1'>
+              This is a very long text that should be hidden when it overflows the container.
+            </Text>
+          </View>
+        </div>
       </Example.Item>
       <Example.Item title={['Scroll']}>
-        <View style={{ width: '150px', height: '50px' }} overflow='scroll'>
-          <Text variant='body-1'>
-            This is a very long text that should be scrollable when it overflows the container.
-          </Text>
-        </View>
+        <div style={{ width: '150px', height: '50px' }}>
+          <View overflow='scroll'>
+            <Text variant='body-1'>
+              This is a very long text that should be scrollable when it overflows the container.
+            </Text>
+          </View>
+        </div>
       </Example.Item>
     </Example>
   )
@@ -334,11 +338,13 @@ export const Position: StoryObj = {
   render: () => (
     <Example title='Position'>
       <Example.Item title={['Relative']}>
-        <View position='relative' style={{ height: '100px' }}>
-          <View position='absolute' inset='0' backgroundColor='neutral-faded' padding='2'>
-            Absolute overlay
+        <div style={{ height: '100px' }}>
+          <View position='relative'>
+            <View position='absolute' inset='0' backgroundColor='neutral-faded' padding='2'>
+              Absolute overlay
+            </View>
           </View>
-        </View>
+        </div>
       </Example.Item>
     </Example>
   )

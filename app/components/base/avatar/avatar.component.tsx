@@ -23,7 +23,10 @@ type AvatarSize = keyof typeof s.sizes
 type AvatarVariant = keyof typeof s.variants
 type AvatarColor = keyof typeof s.colorsSolid
 
-export type AvatarProps = Omit<React.ComponentProps<typeof BaseAvatar.Root>, 'children'> & {
+export type AvatarProps = Omit<
+  React.ComponentProps<typeof BaseAvatar.Root>,
+  'children' | 'style'
+> & {
   /** Image URL */
   src?: string
   /** Image alt text */
@@ -49,7 +52,7 @@ export type AvatarProps = Omit<React.ComponentProps<typeof BaseAvatar.Root>, 'ch
   /** Delay before showing fallback (ms) */
   fallbackDelay?: number
   /** StyleX styles to apply */
-  xstyle?: StyleXStyles
+  style?: StyleXStyles
 }
 
 // ---------------------------------------------------------------------------
@@ -60,7 +63,7 @@ function applyStylexProps(
   sx: ReturnType<typeof stylex.props>,
   props: Record<string, unknown>
 ): Record<string, unknown> {
-  const { xstyle: _, ...rest } = props
+  const { style: _, ...rest } = props
   void _
   return { ...rest, ...sx }
 }
@@ -81,7 +84,7 @@ export function Avatar({
   imageAttributes,
   renderImage,
   fallbackDelay,
-  xstyle,
+  style,
   ...props
 }: AvatarProps) {
   // Base styles
@@ -91,10 +94,14 @@ export function Avatar({
     s.variants[variant],
     variant === 'solid' ? s.colorsSolid[color] : s.colorsFaded[color],
     s.sizes[size],
-    xstyle
+    style
   )
 
-  const { className, style, ...restProps } = applyStylexProps(sx, props) as {
+  const {
+    className,
+    style: computedStyle,
+    ...restProps
+  } = applyStylexProps(sx, props) as {
     className?: string
     style?: React.CSSProperties
     [key: string]: unknown
@@ -116,7 +123,7 @@ export function Avatar({
   const imgStyleFinal = { ...imgStyle, ...imgSx.style }
 
   return (
-    <BaseAvatar.Root data-slot='avatar' className={className} style={style} {...restProps}>
+    <BaseAvatar.Root data-slot='avatar' className={className} style={computedStyle} {...restProps}>
       {src ? (
         renderImage ? (
           renderImage({

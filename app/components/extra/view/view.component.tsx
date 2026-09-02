@@ -50,7 +50,7 @@ type ViewRenderProp =
       state: Record<string, unknown>
     ) => React.ReactElement)
 
-export type ViewProps = React.ComponentProps<'div'> & {
+export type ViewProps = Omit<React.ComponentProps<'div'>, 'style'> & {
   /** Flex direction for the content */
   direction?: Direction
   /** Gap between children */
@@ -132,7 +132,7 @@ export type ViewProps = React.ComponentProps<'div'> & {
   /** Render prop for polymorphism */
   render?: ViewRenderProp
   /** StyleX styles to apply */
-  xstyle?: StyleXStyles
+  style?: StyleXStyles
 }
 
 // ---------------------------------------------------------------------------
@@ -180,9 +180,8 @@ export function View({
   divided,
   dividedDirection,
   bleed,
-  xstyle,
-  className,
   style,
+  className,
   children,
   ...otherProps
 }: ViewProps) {
@@ -229,7 +228,7 @@ export function View({
     animated && s.animated.root,
     divided && s.divided[isDividedRow ? 'row' : 'root'],
     bleed && s.bleed[bleed],
-    xstyle
+    style
   )
 
   // Apply divided styles to children after the first
@@ -253,7 +252,7 @@ export function View({
   const defaultProps = {
     'data-slot': 'view',
     className: [sx.className, className].filter(Boolean).join(' ') || undefined,
-    style: { ...sx.style, ...style },
+    style: sx.style,
     children: processedChildren
   }
 

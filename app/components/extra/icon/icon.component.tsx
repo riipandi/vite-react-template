@@ -39,7 +39,7 @@ type IconRenderProp =
 
 type TagName = keyof React.JSX.IntrinsicElements
 
-export type IconProps = React.ComponentProps<'span'> & {
+export type IconProps = Omit<React.ComponentProps<'span'>, 'style'> & {
   /** Icon SVG component or element */
   svg: React.ReactElement | React.ComponentType | null
   /** Icon size (height value, width follows aspect-ratio) */
@@ -51,7 +51,7 @@ export type IconProps = React.ComponentProps<'span'> & {
   /** Render prop for polymorphism */
   render?: IconRenderProp
   /** StyleX styles to apply */
-  xstyle?: stylex.StyleXStyles
+  style?: stylex.StyleXStyles
 }
 
 // ---------------------------------------------------------------------------
@@ -64,9 +64,8 @@ export function Icon({
   size = '1em',
   color,
   autoWidth: isAutoWidth = false,
-  xstyle,
-  className,
   style,
+  className,
   ...otherProps
 }: IconProps) {
   // Resolve mixin-like styles (adapted from Reshaped's resolveMixin)
@@ -77,7 +76,7 @@ export function Icon({
     resolvedStyles.size && s.sizes[resolvedStyles.size],
     isAutoWidth && s.autoWidth.root,
     color && s.colorStyles[color],
-    xstyle
+    style
   )
 
   // Render SVG component
@@ -91,7 +90,7 @@ export function Icon({
   const defaultProps = {
     'data-slot': 'icon',
     className: [sx.className, className].filter(Boolean).join(' ') || undefined,
-    style: { ...sx.style, ...style },
+    style: sx.style,
     children: icon ? (
       <>
         {React.isValidElement(icon)

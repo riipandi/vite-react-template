@@ -37,7 +37,7 @@ type BadgeRenderProp =
 
 type TagName = keyof React.JSX.IntrinsicElements
 
-export type BadgeProps = React.ComponentProps<'span'> & {
+export type BadgeProps = Omit<React.ComponentProps<'span'>, 'style'> & {
   /** Node for inserting text or other content */
   children?: React.ReactNode
   /** Icon element for the start position */
@@ -67,10 +67,10 @@ export type BadgeProps = React.ComponentProps<'span'> & {
   /** Render prop for polymorphism */
   render?: BadgeRenderProp
   /** StyleX styles to apply */
-  xstyle?: stylex.StyleXStyles
+  style?: stylex.StyleXStyles
 }
 
-export type BadgeContainerProps = React.ComponentProps<'div'> & {
+export type BadgeContainerProps = Omit<React.ComponentProps<'div'>, 'style'> & {
   /** Position of the container relative to the parent element */
   position?: BadgeContainerPosition
   /** Move the badge closer to center to overlap with the child component */
@@ -78,7 +78,7 @@ export type BadgeContainerProps = React.ComponentProps<'div'> & {
   /** Render prop for polymorphism */
   render?: BadgeRenderProp
   /** StyleX styles to apply */
-  xstyle?: stylex.StyleXStyles
+  style?: stylex.StyleXStyles
 }
 
 // ---------------------------------------------------------------------------
@@ -100,9 +100,8 @@ export function Badge({
   dismissAriaLabel,
   onClick,
   href,
-  xstyle,
-  className,
   style,
+  className,
   ...otherProps
 }: BadgeProps) {
   const hasText = children !== undefined && children !== null
@@ -116,7 +115,7 @@ export function Badge({
     isRounded && s.rounded.root,
     isHighlighted && s.highlighted.root,
     isHidden && s.hidden.root,
-    xstyle
+    style
   )
 
   const badgeContent = (
@@ -221,9 +220,8 @@ export function BadgeContainer({
   render,
   position = 'top-end',
   overlap = false,
-  xstyle,
-  className,
   style,
+  className,
   children,
   ...otherProps
 }: BadgeContainerProps) {
@@ -231,7 +229,7 @@ export function BadgeContainer({
     s.container.root,
     s.container[position],
     overlap && s.container.overlap,
-    xstyle
+    style
   )
 
   const defaultProps = {

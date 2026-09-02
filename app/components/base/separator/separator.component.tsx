@@ -24,7 +24,7 @@ type SeparatorContentPosition = keyof typeof s.contentPosition
 
 type SeparatorInset = keyof typeof s.inset
 
-export type SeparatorProps = React.ComponentProps<typeof BaseSeparator> & {
+export type SeparatorProps = Omit<React.ComponentProps<typeof BaseSeparator>, 'style'> & {
   /** Change component to render vertically */
   vertical?: boolean
   /** Change component to take no space, useful for borders in Tabs */
@@ -36,7 +36,7 @@ export type SeparatorProps = React.ComponentProps<typeof BaseSeparator> & {
   /** Inset the divider from the container bounds */
   inset?: SeparatorInset
   /** StyleX styles to apply */
-  xstyle?: StyleXStyles
+  style?: StyleXStyles
 }
 
 // ---------------------------------------------------------------------------
@@ -50,9 +50,8 @@ export function Separator({
   contentPosition: position = 'center',
   inset,
   className,
-  style,
   children,
-  xstyle,
+  style,
   ...props
 }: SeparatorProps) {
   const sx = stylex.props(
@@ -61,18 +60,17 @@ export function Separator({
     position && s.contentPosition[position],
     isBlank && (vertical ? s.blank.vertical : s.blank.root),
     inset && (vertical ? s.insetVertical[inset] : s.inset[inset]),
-    xstyle
+    style
   )
 
   const mergedClassName = [sx.className, className].filter(Boolean).join(' ') || undefined
-  const mergedStyle = { ...sx.style, ...style }
 
   return (
     <BaseSeparator
       data-slot='separator'
       orientation={vertical ? 'vertical' : 'horizontal'}
       className={mergedClassName}
-      style={mergedStyle}
+      style={sx.style}
       {...props}
     >
       {children}

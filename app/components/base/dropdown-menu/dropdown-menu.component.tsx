@@ -202,6 +202,7 @@ export function DropdownMenuSubContent({
 }: DropdownMenuContentProps) {
   return (
     <DropdownMenuContent
+      side='right'
       sideOffset={sideOffset}
       alignOffset={alignOffset}
       {...props}

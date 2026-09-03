@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const progressStyles = stylex.create({
   root: {
@@ -15,7 +16,7 @@ export const progressStyles = stylex.create({
   track: {
     alignItems: 'center',
     backgroundColor: colors.muted,
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     display: 'flex',
     height: space.s1,
     overflowX: 'hidden',

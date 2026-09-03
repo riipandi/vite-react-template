@@ -1,13 +1,14 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const buttonStyles = stylex.create({
   root: {
     alignItems: 'center',
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     borderStyle: 'none',
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',

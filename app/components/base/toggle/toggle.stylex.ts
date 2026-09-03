@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const toggleStyles = stylex.create({
   root: {
@@ -12,7 +13,7 @@ export const toggleStyles = stylex.create({
       ':hover:not(:disabled)': colors.muted,
       '[data-pressed]': colors.muted
     },
-    borderRadius: radius.lg,
+    borderRadius: radius.large,
     borderStyle: 'none',
     color: {
       default: colors.foreground,

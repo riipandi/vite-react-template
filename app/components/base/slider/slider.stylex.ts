@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const sliderHaloShadow = `0 0 0 ${stroke.halo} color-mix(in srgb, ${colors.ring} 50%, transparent)`
 
@@ -20,7 +21,7 @@ export const sliderStyles = stylex.create({
   },
   track: {
     backgroundColor: colors.muted,
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     flexGrow: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -33,7 +34,7 @@ export const sliderStyles = stylex.create({
   thumb: {
     backgroundColor: colors.background,
     borderColor: colors.ring,
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     boxShadow: {

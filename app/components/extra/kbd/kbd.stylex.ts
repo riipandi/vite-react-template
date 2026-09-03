@@ -1,13 +1,14 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const kbdStyles = stylex.create({
   root: {
     alignItems: 'center',
     backgroundColor: colors.muted,
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     color: colors.mutedForeground,
     display: 'inline-flex',
     fontFamily: fontFamily.body,

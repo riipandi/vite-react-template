@@ -1,12 +1,13 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const commandStyles = stylex.create({
   root: {
     backgroundColor: colors.popover,
-    borderRadius: radius.xl,
+    borderRadius: radius.xlarge,
     color: colors.popoverForeground,
     display: 'flex',
     flexDirection: 'column',
@@ -17,7 +18,7 @@ export const commandStyles = stylex.create({
     width: '100%'
   },
   dialogContent: {
-    borderRadius: radius.xl,
+    borderRadius: radius.xlarge,
     gap: 0,
     overflow: 'hidden',
     padding: 0,
@@ -37,7 +38,7 @@ export const commandStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: `color-mix(in srgb, ${colors.input} 30%, transparent)`,
     borderColor: `color-mix(in srgb, ${colors.input} 30%, transparent)`,
-    borderRadius: radius.lg,
+    borderRadius: radius.large,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     display: 'flex',
@@ -91,7 +92,7 @@ export const commandStyles = stylex.create({
       default: 'transparent',
       '[data-highlighted]': colors.muted
     },
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     color: {
       default: null,
       '[data-highlighted]': colors.foreground,

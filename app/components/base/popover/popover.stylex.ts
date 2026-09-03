@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
 import { z, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const popoverStyles = stylex.create({
   positioner: {
@@ -30,7 +31,7 @@ export const popoverStyles = stylex.create({
       '[data-side="bottom"]': `calc(-1 * ${space.s2})`
     },
     backgroundColor: colors.popover,
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     color: colors.popoverForeground,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,

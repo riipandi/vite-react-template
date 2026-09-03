@@ -1,13 +1,14 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const emptyStyles = stylex.create({
   root: {
     alignItems: 'center',
     borderColor: colors.border,
-    borderRadius: radius.xl,
+    borderRadius: radius.xlarge,
     borderStyle: 'dashed',
     borderWidth: stroke.border,
     display: 'flex',
@@ -62,7 +63,7 @@ export const emptyMediaVariants = stylex.create({
   default: {},
   icon: {
     backgroundColor: colors.muted,
-    borderRadius: radius.lg,
+    borderRadius: radius.large,
     color: colors.foreground,
     height: space.s8,
     width: space.s8

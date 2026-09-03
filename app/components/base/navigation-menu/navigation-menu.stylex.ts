@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
 import { z, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const navigationMenuStyles = stylex.create({
   root: {
@@ -41,7 +42,7 @@ export const navigationMenuStyles = stylex.create({
       ':hover': colors.muted,
       '[data-popup-open]': `color-mix(in srgb, ${colors.muted} 50%, transparent)`
     },
-    borderRadius: radius.lg,
+    borderRadius: radius.large,
     borderStyle: 'none',
     color: colors.foreground,
     cursor: 'pointer',
@@ -81,7 +82,7 @@ export const navigationMenuStyles = stylex.create({
       ':hover': colors.muted,
       '[data-active]': `color-mix(in srgb, ${colors.muted} 50%, transparent)`
     },
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     color: colors.foreground,
     display: 'flex',
     fontSize: fontSize.body2,
@@ -112,7 +113,7 @@ export const navigationMenuStyles = stylex.create({
   },
   popup: {
     backgroundColor: colors.popover,
-    borderRadius: radius.lg,
+    borderRadius: radius.large,
     color: colors.popoverForeground,
     height: 'var(--popup-height)',
     opacity: {

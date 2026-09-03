@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, z } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const contextMenuStyles = stylex.create({
   trigger: {
@@ -33,7 +34,7 @@ export const contextMenuStyles = stylex.create({
       '[data-side="bottom"]': `calc(-1 * ${space.s2})`
     },
     backgroundColor: colors.popover,
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     color: colors.popoverForeground,
     fontFamily: fontFamily.body,
     maxHeight: 'var(--available-height)',
@@ -71,7 +72,7 @@ export const contextMenuStyles = stylex.create({
       default: 'transparent',
       '[data-highlighted]': colors.accent
     },
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     color: {
       default: null,
       '[data-highlighted]': colors.accentForeground,

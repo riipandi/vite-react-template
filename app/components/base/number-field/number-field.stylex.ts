@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const numberFieldStyles = stylex.create({
   root: {
@@ -12,7 +13,7 @@ export const numberFieldStyles = stylex.create({
     alignItems: 'stretch',
     backgroundColor: colors.background,
     borderColor: { default: colors.input, ':focus-within': colors.ring },
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     display: 'flex',
@@ -60,17 +61,17 @@ export const numberFieldStyles = stylex.create({
     width: space.s9
   },
   decrement: {
-    borderBottomLeftRadius: `calc(${radius.md} - ${stroke.border})`,
+    borderBottomLeftRadius: `calc(${radius.medium} - ${stroke.border})`,
     borderRightColor: colors.border,
     borderRightStyle: 'solid',
     borderRightWidth: stroke.border,
-    borderTopLeftRadius: `calc(${radius.md} - ${stroke.border})`
+    borderTopLeftRadius: `calc(${radius.medium} - ${stroke.border})`
   },
   increment: {
-    borderBottomRightRadius: `calc(${radius.md} - ${stroke.border})`,
+    borderBottomRightRadius: `calc(${radius.medium} - ${stroke.border})`,
     borderLeftColor: colors.border,
     borderLeftStyle: 'solid',
     borderLeftWidth: stroke.border,
-    borderTopRightRadius: `calc(${radius.md} - ${stroke.border})`
+    borderTopRightRadius: `calc(${radius.medium} - ${stroke.border})`
   }
 })

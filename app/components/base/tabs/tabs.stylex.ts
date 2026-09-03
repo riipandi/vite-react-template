@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const tabsStyles = stylex.create({
   root: {
@@ -17,7 +18,7 @@ export const tabsStyles = stylex.create({
   list: {
     alignItems: { default: 'center', '[data-orientation="vertical"]': 'stretch' },
     backgroundColor: colors.muted,
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     display: 'inline-flex',
     flexDirection: { default: 'row', '[data-orientation="vertical"]': 'column' },
     gap: space.s1,
@@ -40,7 +41,7 @@ export const tabsStyles = stylex.create({
       default: 'transparent',
       '[data-active]': colors.background
     },
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     borderStyle: 'none',
     color: { default: colors.mutedForeground, '[data-active]': colors.foreground },
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },

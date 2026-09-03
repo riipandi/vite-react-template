@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
 import { z, stroke, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const drawerStyles = stylex.create({
   overlay: {
@@ -74,7 +75,7 @@ export const drawerStyles = stylex.create({
     position: 'relative',
     '::after': {
       backgroundColor: colors.muted,
-      borderRadius: radius.full,
+      borderRadius: radius.circular,
       content: '""',
       display: 'block',
       flexShrink: 0
@@ -125,8 +126,8 @@ export const drawerDirections = stylex.create({
       '[data-ending-style]': `translate3d(0, calc(100% + ${space.s05}), 0)`
     },
     borderTopColor: colors.border,
-    borderTopLeftRadius: radius.xl,
-    borderTopRightRadius: radius.xl,
+    borderTopLeftRadius: radius.xlarge,
+    borderTopRightRadius: radius.xlarge,
     borderTopStyle: 'solid',
     borderTopWidth: stroke.border,
     bottom: 0,
@@ -143,8 +144,8 @@ export const drawerDirections = stylex.create({
       '[data-ending-style]': `translate3d(0, calc(-100% - ${space.s05}), 0)`
     },
     borderBottomColor: colors.border,
-    borderBottomLeftRadius: radius.xl,
-    borderBottomRightRadius: radius.xl,
+    borderBottomLeftRadius: radius.xlarge,
+    borderBottomRightRadius: radius.xlarge,
     borderBottomStyle: 'solid',
     borderBottomWidth: stroke.border,
     left: 0,
@@ -161,10 +162,10 @@ export const drawerDirections = stylex.create({
       '[data-ending-style]': `translate3d(calc(-100% - ${space.s05}), 0, 0)`
     },
     borderRightColor: colors.border,
-    borderBottomRightRadius: radius.xl,
+    borderBottomRightRadius: radius.xlarge,
     borderRightStyle: 'solid',
     borderRightWidth: stroke.border,
-    borderTopRightRadius: radius.xl,
+    borderTopRightRadius: radius.xlarge,
     bottom: 0,
     flexDirection: 'row',
     left: 0,
@@ -181,10 +182,10 @@ export const drawerDirections = stylex.create({
       '[data-ending-style]': `translate3d(calc(100% + ${space.s05}), 0, 0)`
     },
     borderLeftColor: colors.border,
-    borderBottomLeftRadius: radius.xl,
+    borderBottomLeftRadius: radius.xlarge,
     borderLeftStyle: 'solid',
     borderLeftWidth: stroke.border,
-    borderTopLeftRadius: radius.xl,
+    borderTopLeftRadius: radius.xlarge,
     bottom: 0,
     flexDirection: 'row',
     maxWidth: container.lg,

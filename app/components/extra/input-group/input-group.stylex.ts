@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const inputGroupStyles = stylex.create({
   root: {
@@ -13,7 +14,7 @@ export const inputGroupStyles = stylex.create({
     },
     backgroundColor: colors.background,
     borderColor: { default: colors.input, ':focus-within': colors.ring },
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     display: 'flex',
@@ -91,13 +92,13 @@ export const inputGroupAddonAligns = stylex.create({
 
 export const inputGroupButtonSizes = stylex.create({
   xs: {
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     gap: space.s1,
     height: space.s6,
     paddingInline: space.s15
   },
   iconXs: {
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     height: space.s6,
     paddingInline: 0,
     width: space.s6

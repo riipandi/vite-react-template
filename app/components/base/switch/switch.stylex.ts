@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const switchStyles = stylex.create({
   root: {
@@ -10,7 +11,7 @@ export const switchStyles = stylex.create({
       '[data-checked]': colors.primary,
       '[data-invalid]': colors.destructive
     },
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     borderStyle: 'none',
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
@@ -32,7 +33,7 @@ export const switchStyles = stylex.create({
   },
   thumb: {
     backgroundColor: colors.background,
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     transitionDuration: duration.fast,
     transitionProperty: {
       default: 'transform',

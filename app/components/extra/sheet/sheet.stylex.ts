@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
 import { z, stroke, container } from '#/lib/constants.stylex'
-import { colors, shadow, radius } from '#/lib/tokens.stylex'
+import { colors, shadow } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const sheetStyles = stylex.create({
   overlay: {
@@ -50,7 +51,7 @@ export const sheetStyles = stylex.create({
       default: 'transparent',
       ':hover': colors.accent
     },
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     borderStyle: 'none',
     color: {
       default: colors.mutedForeground,

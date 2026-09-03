@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
 import { z, stroke, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const selectStyles = stylex.create({
   label: {
@@ -22,7 +23,7 @@ export const selectStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: colors.background,
     borderColor: { default: colors.input, '[data-invalid]': colors.destructive },
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     color: colors.foreground,
@@ -52,7 +53,7 @@ export const selectStyles = stylex.create({
   },
   popup: {
     backgroundColor: colors.popover,
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     color: colors.popoverForeground,
     fontFamily: fontFamily.body,
     lineHeight: fontLineHeight.body2,
@@ -129,7 +130,7 @@ export const selectStyles = stylex.create({
       default: 'transparent',
       '[data-highlighted]': colors.accent
     },
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     color: {
       default: null,
       '[data-highlighted]': colors.accentForeground,

@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, z, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const tooltipStyles = stylex.create({
   positioner: {
@@ -29,7 +30,7 @@ export const tooltipStyles = stylex.create({
       '[data-side="bottom"]': `calc(-1 * ${space.s2})`
     },
     backgroundColor: colors.foreground,
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     color: colors.background,
     fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,

@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { radius } from '#/lib/tokens.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const toggleGroupStyles = stylex.create({
   root: {
@@ -28,17 +28,17 @@ export const toggleGroupOrientations = stylex.create({
 
 export const toggleGroupJoinedItems = stylex.create({
   horizontal: {
-    borderBottomLeftRadius: { default: 0, ':first-child': radius.lg },
-    borderBottomRightRadius: { default: 0, ':last-child': radius.lg },
-    borderTopLeftRadius: { default: 0, ':first-child': radius.lg },
-    borderTopRightRadius: { default: 0, ':last-child': radius.lg },
+    borderBottomLeftRadius: { default: 0, ':first-child': radius.large },
+    borderBottomRightRadius: { default: 0, ':last-child': radius.large },
+    borderTopLeftRadius: { default: 0, ':first-child': radius.large },
+    borderTopRightRadius: { default: 0, ':last-child': radius.large },
     paddingInline: space.s2
   },
   vertical: {
-    borderBottomLeftRadius: { default: 0, ':last-child': radius.lg },
-    borderBottomRightRadius: { default: 0, ':last-child': radius.lg },
-    borderTopLeftRadius: { default: 0, ':first-child': radius.lg },
-    borderTopRightRadius: { default: 0, ':first-child': radius.lg },
+    borderBottomLeftRadius: { default: 0, ':last-child': radius.large },
+    borderBottomRightRadius: { default: 0, ':last-child': radius.large },
+    borderTopLeftRadius: { default: 0, ':first-child': radius.large },
+    borderTopRightRadius: { default: 0, ':first-child': radius.large },
     paddingInline: space.s2
   }
 })

@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const otpFieldStyles = stylex.create({
   root: {
@@ -20,12 +21,12 @@ export const otpFieldStyles = stylex.create({
   // focused slot draws a full ring above its neighbors.
   slot: {
     backgroundColor: colors.background,
-    borderBottomLeftRadius: { default: 0, ':first-child': radius.lg },
-    borderBottomRightRadius: { default: 0, ':last-child': radius.lg },
+    borderBottomLeftRadius: { default: 0, ':first-child': radius.large },
+    borderBottomRightRadius: { default: 0, ':last-child': radius.large },
     borderColor: { default: colors.input, ':focus': colors.ring },
     borderStyle: 'solid',
-    borderTopLeftRadius: { default: 0, ':first-child': radius.lg },
-    borderTopRightRadius: { default: 0, ':last-child': radius.lg },
+    borderTopLeftRadius: { default: 0, ':first-child': radius.large },
+    borderTopRightRadius: { default: 0, ':last-child': radius.large },
     borderWidth: stroke.border,
     boxShadow: {
       default: 'none',

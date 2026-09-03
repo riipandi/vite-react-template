@@ -1,13 +1,14 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const avatarStyles = stylex.create({
   root: {
     alignItems: 'center',
     backgroundColor: colors.muted,
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     display: 'inline-flex',
     // Fixed-size chrome: never let a flex row squeeze the avatar.
     flexShrink: 0,
@@ -20,14 +21,14 @@ export const avatarStyles = stylex.create({
     verticalAlign: 'middle'
   },
   image: {
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     height: '100%',
     objectFit: 'cover',
     width: '100%'
   },
   fallback: {
     alignItems: 'center',
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     color: colors.mutedForeground,
     display: 'flex',
     fontSize: fontSize.body2,
@@ -40,7 +41,7 @@ export const avatarStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: colors.primary,
     borderColor: colors.background,
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     borderStyle: 'solid',
     borderWidth: stroke.focus,
     color: colors.primaryForeground,
@@ -57,7 +58,7 @@ export const avatarStyles = stylex.create({
     display: 'flex'
   },
   groupItem: {
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     display: 'inline-flex'
   },
   groupItemOverlap: {
@@ -69,7 +70,7 @@ export const avatarStyles = stylex.create({
   groupCount: {
     alignItems: 'center',
     backgroundColor: colors.muted,
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     color: colors.mutedForeground,
     display: 'flex',
     fontFamily: fontFamily.body,

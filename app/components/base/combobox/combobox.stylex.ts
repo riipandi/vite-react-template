@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, z } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const comboboxStyles = stylex.create({
   inputWrap: {
@@ -13,7 +14,7 @@ export const comboboxStyles = stylex.create({
   input: {
     backgroundColor: colors.background,
     borderColor: { default: colors.input, ':focus-visible': colors.ring },
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     color: colors.foreground,
@@ -67,7 +68,7 @@ export const comboboxStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: colors.background,
     borderColor: colors.input,
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     color: colors.foreground,
@@ -98,7 +99,7 @@ export const comboboxStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: colors.background,
     borderColor: { default: colors.input, ':focus-within': colors.ring },
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     display: 'flex',
@@ -119,7 +120,7 @@ export const comboboxStyles = stylex.create({
   chip: {
     alignItems: 'center',
     backgroundColor: colors.secondary,
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     color: colors.secondaryForeground,
     display: 'inline-flex',
     fontSize: fontSize.caption1,
@@ -133,7 +134,7 @@ export const comboboxStyles = stylex.create({
   chipRemove: {
     alignItems: 'center',
     backgroundColor: 'transparent',
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     borderStyle: 'none',
     color: 'inherit',
     cursor: 'pointer',
@@ -185,7 +186,7 @@ export const comboboxStyles = stylex.create({
       '[data-side="bottom"]': `calc(-1 * ${space.s2})`
     },
     backgroundColor: colors.popover,
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     color: colors.popoverForeground,
     display: 'flex',
     flexDirection: 'column',
@@ -225,7 +226,7 @@ export const comboboxStyles = stylex.create({
       default: 'transparent',
       '[data-highlighted]': colors.accent
     },
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     color: {
       default: null,
       '[data-highlighted]': colors.accentForeground,

@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const scrollAreaStyles = stylex.create({
   root: {
@@ -39,7 +40,7 @@ export const scrollAreaStyles = stylex.create({
   },
   thumb: {
     backgroundColor: colors.border,
-    borderRadius: radius.full,
+    borderRadius: radius.circular,
     flex: 1,
     position: 'relative'
   }

@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const itemStyles = stylex.create({
   group: {
@@ -13,7 +14,7 @@ export const itemStyles = stylex.create({
   },
   root: {
     alignItems: 'center',
-    borderRadius: radius.lg,
+    borderRadius: radius.large,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     display: 'flex',
@@ -110,7 +111,7 @@ export const itemMediaVariants = stylex.create({
     color: colors.foreground
   },
   image: {
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     height: space.s10,
     overflow: 'hidden',
     width: space.s10

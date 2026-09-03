@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
 import { z, stroke, container } from '#/lib/constants.stylex'
-import { colors, radius, shadow } from '#/lib/tokens.stylex'
+import { colors, shadow } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const toastStyles = stylex.create({
   viewport: {
@@ -22,7 +23,7 @@ export const toastStyles = stylex.create({
     // Error toasts get a destructive accent; other types render neutrally
     // (matches sonner's default look — no per-type colors without opt-in).
     borderColor: { default: colors.border, '[data-type="error"]': colors.destructive },
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     bottom: 0,
@@ -106,7 +107,7 @@ export const toastStyles = stylex.create({
       ':hover': colors.accent
     },
     borderColor: colors.border,
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     color: colors.foreground,
@@ -127,7 +128,7 @@ export const toastStyles = stylex.create({
       default: 'transparent',
       ':hover': colors.accent
     },
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     borderStyle: 'none',
     color: colors.mutedForeground,
     cursor: 'pointer',

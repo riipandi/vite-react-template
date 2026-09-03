@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, z } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const alertDialogStyles = stylex.create({
   overlay: {
@@ -22,7 +23,7 @@ export const alertDialogStyles = stylex.create({
   },
   content: {
     backgroundColor: colors.popover,
-    borderRadius: radius.xl,
+    borderRadius: radius.xlarge,
     color: colors.popoverForeground,
     display: 'flex',
     flexDirection: 'column',
@@ -67,7 +68,7 @@ export const alertDialogStyles = stylex.create({
   media: {
     alignItems: 'center',
     backgroundColor: colors.muted,
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     display: 'inline-flex',
     height: space.s10,
     justifyContent: 'center',
@@ -76,8 +77,8 @@ export const alertDialogStyles = stylex.create({
   },
   footer: {
     backgroundColor: `color-mix(in srgb, ${colors.muted} 50%, transparent)`,
-    borderBottomLeftRadius: radius.xl,
-    borderBottomRightRadius: radius.xl,
+    borderBottomLeftRadius: radius.xlarge,
+    borderBottomRightRadius: radius.xlarge,
     borderTopColor: colors.border,
     borderTopStyle: 'solid',
     borderTopWidth: stroke.border,

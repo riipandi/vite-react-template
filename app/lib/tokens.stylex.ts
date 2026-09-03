@@ -31,14 +31,6 @@ export const colors = stylex.defineVars({
   overlay: 'oklch(0% 0 0deg / 50%)'
 })
 
-export const radius = stylex.defineVars({
-  sm: '0.375rem',
-  md: '0.5rem',
-  lg: '0.625rem',
-  xl: '0.75rem',
-  full: '9999px'
-})
-
 // Shadows stay hex-alpha: the CLI parses shadow shorthands separately
 // and mangles oklch() inside them.
 export const shadow = stylex.defineVars({

@@ -30,7 +30,7 @@ export const radius = stylex.defineVars({
   none: '0px'
 })
 
-export const zIndex = stylex.defineVars({
+export const zIndex = stylex.defineConsts({
   relative: 10,
   absolute: 100,
   fixed: 200

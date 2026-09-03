@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const checkboxStyles = stylex.create({
   root: {
@@ -18,7 +19,7 @@ export const checkboxStyles = stylex.create({
       '[data-indeterminate]': colors.primary,
       '[data-invalid]': colors.destructive
     },
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },

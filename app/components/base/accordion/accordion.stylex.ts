@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const accordionStyles = stylex.create({
   root: {
@@ -23,7 +24,7 @@ export const accordionStyles = stylex.create({
   trigger: {
     alignItems: 'flex-start',
     backgroundColor: 'transparent',
-    borderRadius: radius.lg,
+    borderRadius: radius.large,
     borderStyle: 'none',
     color: colors.foreground,
     cursor: 'pointer',

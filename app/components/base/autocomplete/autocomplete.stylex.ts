@@ -1,15 +1,16 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, z } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const autocompleteStyles = stylex.create({
   input: {
     backgroundColor: colors.background,
     borderColor: { default: colors.input, ':focus-visible': colors.ring },
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     color: colors.foreground,
@@ -52,7 +53,7 @@ export const autocompleteStyles = stylex.create({
       '[data-side="bottom"]': `calc(-1 * ${space.s2})`
     },
     backgroundColor: colors.popover,
-    borderRadius: radius.md,
+    borderRadius: radius.medium,
     color: colors.popoverForeground,
     display: 'flex',
     flexDirection: 'column',
@@ -92,7 +93,7 @@ export const autocompleteStyles = stylex.create({
       default: 'transparent',
       '[data-highlighted]': colors.accent
     },
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     color: {
       default: null,
       '[data-highlighted]': colors.accentForeground,

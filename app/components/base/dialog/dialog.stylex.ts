@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, z } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { radius } from '#/styles/core/size.stylex'
 
 export const dialogStyles = stylex.create({
   overlay: {
@@ -22,7 +23,7 @@ export const dialogStyles = stylex.create({
   },
   content: {
     backgroundColor: colors.popover,
-    borderRadius: radius.lg,
+    borderRadius: radius.large,
     color: colors.popoverForeground,
     display: 'flex',
     flexDirection: 'column',
@@ -58,7 +59,7 @@ export const dialogStyles = stylex.create({
       default: 'transparent',
       ':hover': colors.accent
     },
-    borderRadius: radius.sm,
+    borderRadius: radius.small,
     borderStyle: 'none',
     color: {
       default: colors.mutedForeground,

@@ -1,5 +1,2 @@
 export * from './radio.component'
 export * from './radio.stylex'
-export * from './radio-group.component'
-export * from './radio-group.context'
-export * from './radio-group.stylex'

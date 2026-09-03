@@ -60,14 +60,14 @@ function RouteComponent() {
         </div>
         <div {...stylex.props(homeStyles.actions)}>
           <Link to='/overview'>
-            <Button variant='solid'>User Dashboard</Button>
+            <Button variant='primary'>User Dashboard</Button>
           </Link>
           <a
             href='https://github.com/riipandi/vite-react-template'
             target='_blank'
             rel='noreferrer'
           >
-            <Button variant='solid'>Get Source Code</Button>
+            <Button variant='primary'>Get Source Code</Button>
           </a>
         </div>
         <div>

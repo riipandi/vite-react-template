@@ -1,5 +1,2 @@
 export * from './checkbox.component'
 export * from './checkbox.stylex'
-export * from './checkbox-group.component'
-export * from './checkbox-group.context'
-export * from './checkbox-group.stylex'

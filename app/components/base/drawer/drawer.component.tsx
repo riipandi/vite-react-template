@@ -1,3 +1,26 @@
+/**
+ * A panel that slides in from the edge of the screen.
+ *
+ * @see: https://base-ui.com/react/components/drawer
+ *
+ * Anatomy:
+ * <Drawer.Root>
+ *   <Drawer.Trigger />
+ *   <Drawer.Portal>
+ *     <Drawer.Backdrop />
+ *     <Drawer.Viewport>
+ *       <Drawer.Popup>
+ *         <Drawer.Content>
+ *           <Drawer.Title />
+ *           <Drawer.Description />
+ *           <Drawer.Close />
+ *         </Drawer.Content>
+ *       </Drawer.Popup>
+ *     </Drawer.Viewport>
+ *   </Drawer.Portal>
+ * </Drawer.Root>
+ */
+
 import { Drawer as BaseDrawer } from '@base-ui/react/drawer'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'

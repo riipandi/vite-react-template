@@ -1,3 +1,24 @@
+/**
+ * A popup that opens on top of the entire page.
+ *
+ * @see: https://base-ui.com/react/components/dialog
+ *
+ * BaseUI Anatomy:
+ * <Dialog.Root>
+ *   <Dialog.Trigger />
+ *   <Dialog.Portal>
+ *     <Dialog.Backdrop />
+ *     <Dialog.Viewport>
+ *       <Dialog.Popup>
+ *         <Dialog.Title />
+ *         <Dialog.Description />
+ *         <Dialog.Close />
+ *       </Dialog.Popup>
+ *     </Dialog.Viewport>
+ *   </Dialog.Portal>
+ * </Dialog.Root>
+ */
+
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'

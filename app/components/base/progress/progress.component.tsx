@@ -1,8 +1,22 @@
+/**
+ * Displays the status of a task that takes a long time.
+ *
+ * @see: https://base-ui.com/react/components/progress
+ *
+ * BaseUI Anatomy:
+ * <Progress.Root>
+ *   <Progress.Label />
+ *   <Progress.Track>
+ *     <Progress.Indicator />
+ *   </Progress.Track>
+ *   <Progress.Value />
+ * </Progress.Root>
+ */
+
 import { Progress as BaseProgress } from '@base-ui/react/progress'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { space, fontSize, lineHeight, fontWeight, duration, easing } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { progressStyles as s } from './progress.stylex'
 
 interface StyleXStyleProps {
   style?: stylex.StyleXStyles
@@ -15,7 +29,7 @@ export function Progress({
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseProgress.Root>, 'className' | 'style'> &
   StyleXStyleProps) {
   return (
-    <BaseProgress.Root {...props} {...stylex.props(styles.root, style)}>
+    <BaseProgress.Root {...props} {...stylex.props(s.root, style)}>
       {children}
       <ProgressTrack>
         <ProgressIndicator />
@@ -29,7 +43,7 @@ export function ProgressTrack({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseProgress.Track>, 'className' | 'style'> &
   StyleXStyleProps) {
-  return <BaseProgress.Track {...props} {...stylex.props(styles.track, style)} />
+  return <BaseProgress.Track {...props} {...stylex.props(s.track, style)} />
 }
 
 export function ProgressIndicator({
@@ -37,7 +51,7 @@ export function ProgressIndicator({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseProgress.Indicator>, 'className' | 'style'> &
   StyleXStyleProps) {
-  return <BaseProgress.Indicator {...props} {...stylex.props(styles.indicator, style)} />
+  return <BaseProgress.Indicator {...props} {...stylex.props(s.indicator, style)} />
 }
 
 export function ProgressLabel({
@@ -45,7 +59,7 @@ export function ProgressLabel({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseProgress.Label>, 'className' | 'style'> &
   StyleXStyleProps) {
-  return <BaseProgress.Label {...props} {...stylex.props(styles.label, style)} />
+  return <BaseProgress.Label {...props} {...stylex.props(s.label, style)} />
 }
 
 export function ProgressValue({
@@ -53,44 +67,5 @@ export function ProgressValue({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseProgress.Value>, 'className' | 'style'> &
   StyleXStyleProps) {
-  return <BaseProgress.Value {...props} {...stylex.props(styles.value, style)} />
+  return <BaseProgress.Value {...props} {...stylex.props(s.value, style)} />
 }
-
-const styles = stylex.create({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    fontFamily: font.sans,
-    gap: space.s3,
-    width: '100%'
-  },
-  track: {
-    alignItems: 'center',
-    backgroundColor: colors.muted,
-    borderRadius: radius.full,
-    display: 'flex',
-    height: space.s1,
-    overflowX: 'hidden',
-    position: 'relative',
-    width: '100%'
-  },
-  indicator: {
-    backgroundColor: colors.primary,
-    height: '100%',
-    transitionDuration: duration.fast,
-    transitionProperty: 'width',
-    transitionTimingFunction: easing.out
-  },
-  label: {
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
-    lineHeight: lineHeight.control
-  },
-  value: {
-    color: colors.mutedForeground,
-    fontSize: fontSize.sm,
-    fontVariantNumeric: 'tabular-nums',
-    lineHeight: lineHeight.control,
-    marginLeft: 'auto'
-  }
-})

@@ -1,10 +1,32 @@
+/**
+ * A component that provides labeling and validation for form controls.
+ *
+ * @see: https://base-ui.com/react/components/field
+ * @see: https://base-ui.com/react/components/fieldset
+ *
+ * Field Anatomy:
+ * <Field.Root>
+ *   <Field.Label />
+ *   <Field.Control />
+ *   <Field.Description />
+ *   <Field.Item />
+ *   <Field.Error />
+ *   <Field.Validity />
+ * </Field.Root>
+ *
+ * Fieldset Anatomy:
+ * <Fieldset.Root>
+ *   <Fieldset.Legend />
+ * </Fieldset.Root>
+ */
+
 import { Field as BaseField } from '@base-ui/react/field'
 import { Fieldset as BaseFieldset } from '@base-ui/react/fieldset'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { Separator } from '#/components/base/separator'
-import { space, fontSize, lineHeight, fontWeight } from '#/lib/constants.stylex'
-import { colors, font } from '#/lib/tokens.stylex'
+import { fieldStyles as styles, fieldOrientations as orientations } from './field.stylex'
+import { fieldLegendVariants as legendVariants } from './field.stylex'
 
 interface StyleProp {
   style?: stylex.StyleXStyles
@@ -142,122 +164,3 @@ export function FieldError({ children, errors, style, ...props }: FieldErrorProp
     />
   )
 }
-
-const styles = stylex.create({
-  set: {
-    borderStyle: 'none',
-    display: 'flex',
-    flexDirection: 'column',
-    fontFamily: font.sans,
-    gap: space.s4,
-    margin: 0,
-    minWidth: 0,
-    padding: 0
-  },
-  legend: {
-    fontWeight: fontWeight.medium,
-    marginBottom: space.s15,
-    padding: 0
-  },
-  group: {
-    display: 'flex',
-    flexDirection: 'column',
-    fontFamily: font.sans,
-    gap: space.s5,
-    width: '100%'
-  },
-  field: {
-    display: 'flex',
-    fontFamily: font.sans,
-    gap: space.s2,
-    width: '100%'
-  },
-  content: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    gap: space.s05,
-    lineHeight: lineHeight.snug
-  },
-  labelBase: {
-    alignItems: 'center',
-    display: 'flex',
-    fontFamily: font.sans,
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
-    gap: space.s2,
-    userSelect: 'none'
-  },
-  label: {
-    color: { default: null, '[data-invalid]': colors.destructive },
-    lineHeight: lineHeight.snug,
-    width: 'fit-content'
-  },
-  title: {
-    alignItems: 'center',
-    display: 'flex',
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
-    gap: space.s2,
-    lineHeight: lineHeight.snug,
-    width: 'fit-content'
-  },
-  description: {
-    color: colors.mutedForeground,
-    fontSize: fontSize.sm,
-    lineHeight: lineHeight.normal,
-    margin: 0,
-    textAlign: 'left'
-  },
-  separator: {
-    fontSize: fontSize.sm,
-    height: space.s5,
-    marginBlock: `calc(-1 * ${space.s2})`,
-    position: 'relative'
-  },
-  separatorLine: {
-    inset: 0,
-    position: 'absolute',
-    top: '50%'
-  },
-  separatorContent: {
-    backgroundColor: colors.background,
-    color: colors.mutedForeground,
-    display: 'block',
-    marginInline: 'auto',
-    paddingInline: space.s2,
-    position: 'relative',
-    width: 'fit-content'
-  },
-  error: {
-    color: colors.destructive,
-    fontSize: fontSize.sm
-  },
-  errorList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: space.s1,
-    listStyle: 'disc',
-    margin: 0,
-    paddingLeft: space.s4
-  }
-})
-
-const legendVariants = stylex.create({
-  legend: {
-    fontSize: fontSize.base
-  },
-  label: {
-    fontSize: fontSize.sm
-  }
-})
-
-const orientations = stylex.create({
-  vertical: {
-    flexDirection: 'column'
-  },
-  horizontal: {
-    alignItems: 'center',
-    flexDirection: 'row'
-  }
-})

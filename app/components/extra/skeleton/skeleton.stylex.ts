@@ -1,3 +1,19 @@
 import * as stylex from '@stylexjs/stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
 
-export const skeletonStyles = stylex.create({})
+export const skeletonPulse = stylex.keyframes({
+  '0%': { opacity: 1 },
+  '50%': { opacity: 0.5 },
+  '100%': { opacity: 1 }
+})
+
+export const skeletonStyles = stylex.create({
+  root: {
+    animationDuration: '2s',
+    animationIterationCount: 'infinite',
+    animationName: skeletonPulse,
+    animationTimingFunction: 'cubic-bezier(0.4, 0, 0.6, 1)',
+    backgroundColor: colors.muted,
+    borderRadius: radius.md
+  }
+})

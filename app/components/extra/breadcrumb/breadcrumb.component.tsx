@@ -1,7 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { space, fontSize, duration } from '#/lib/constants.stylex'
-import { colors, font } from '#/lib/tokens.stylex'
+import { breadcrumbStyles as s } from './breadcrumb.stylex'
 
 interface StyleXStyleProps {
   style?: stylex.StyleXStyles
@@ -18,21 +17,21 @@ export function BreadcrumbList({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'ol'>, 'className' | 'style'> & StyleXStyleProps) {
-  return <ol {...props} {...stylex.props(styles.list, style)} />
+  return <ol {...props} {...stylex.props(s.list, style)} />
 }
 
 export function BreadcrumbItem({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'li'>, 'className' | 'style'> & StyleXStyleProps) {
-  return <li {...props} {...stylex.props(styles.item, style)} />
+  return <li {...props} {...stylex.props(s.item, style)} />
 }
 
 export function BreadcrumbLink({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'a'>, 'className' | 'style'> & StyleXStyleProps) {
-  return <a {...props} {...stylex.props(styles.link, style)} />
+  return <a {...props} {...stylex.props(s.link, style)} />
 }
 
 export function BreadcrumbPage({
@@ -45,7 +44,7 @@ export function BreadcrumbPage({
       aria-disabled='true'
       aria-current='page'
       {...props}
-      {...stylex.props(styles.page, style)}
+      {...stylex.props(s.page, style)}
     />
   )
 }
@@ -56,7 +55,7 @@ export function BreadcrumbSeparator({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'li'>, 'className' | 'style'> & StyleXStyleProps) {
   return (
-    <li role='presentation' aria-hidden {...props} {...stylex.props(styles.separator, style)}>
+    <li role='presentation' aria-hidden {...props} {...stylex.props(s.separator, style)}>
       {children ?? (
         <svg
           width='14'
@@ -81,65 +80,13 @@ export function BreadcrumbEllipsis({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'span'>, 'className' | 'style'> & StyleXStyleProps) {
   return (
-    <span role='presentation' aria-hidden {...props} {...stylex.props(styles.ellipsis, style)}>
+    <span role='presentation' aria-hidden {...props} {...stylex.props(s.ellipsis, style)}>
       <svg width='16' height='16' viewBox={`0 0 16 16`} fill='currentColor' aria-hidden>
         <circle cx='3' cy='8' r='1.25' />
         <circle cx='8' cy='8' r='1.25' />
         <circle cx='13' cy='8' r='1.25' />
       </svg>
-      <span {...stylex.props(styles.srOnly)}>More</span>
+      <span {...stylex.props(s.srOnly)}>More</span>
     </span>
   )
 }
-
-const styles = stylex.create({
-  list: {
-    alignItems: 'center',
-    color: colors.mutedForeground,
-    display: 'flex',
-    flexWrap: 'wrap',
-    fontFamily: font.sans,
-    fontSize: fontSize.sm,
-    gap: space.s15,
-    listStyle: 'none',
-    margin: 0,
-    overflowWrap: 'break-word',
-    padding: 0
-  },
-  item: {
-    alignItems: 'center',
-    display: 'inline-flex',
-    gap: space.s1
-  },
-  link: {
-    color: {
-      default: 'inherit',
-      ':hover': colors.foreground
-    },
-    textDecoration: 'none',
-    transitionDuration: duration.fast,
-    transitionProperty: 'color'
-  },
-  page: {
-    color: colors.foreground
-  },
-  separator: {
-    alignItems: 'center',
-    display: 'flex'
-  },
-  ellipsis: {
-    alignItems: 'center',
-    display: 'flex',
-    height: space.s5,
-    justifyContent: 'center',
-    width: space.s5
-  },
-  srOnly: {
-    clip: 'rect(0 0 0 0)',
-    height: '1px',
-    overflow: 'hidden',
-    position: 'absolute',
-    whiteSpace: 'nowrap',
-    width: '1px'
-  }
-})

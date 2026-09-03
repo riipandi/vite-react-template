@@ -1,14 +1,21 @@
+/**
+ * A group of toggle buttons.
+ *
+ * @see: https://base-ui.com/react/components/toggle-group
+ *
+ * BaseUI Anatomy:
+ * <ToggleGroup.Root />
+ */
+
 import { ToggleGroup as BaseToggleGroup } from '@base-ui/react/toggle-group'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import {
-  Toggle,
-  type ToggleSize,
-  type ToggleVariant,
-  type ToggleProps
-} from '#/components/base/toggle'
-import { space, stroke } from '#/lib/constants.stylex'
-import { radius } from '#/lib/tokens.stylex'
+import { Toggle } from '#/components/base/toggle'
+import type { ToggleSize, ToggleVariant, ToggleProps } from '#/components/base/toggle'
+import { toggleGroupStyles as styles } from './toggle-group.stylex'
+import { toggleGroupOrientations as orientations } from './toggle-group.stylex'
+import { toggleGroupJoinedItems as joinedItems } from './toggle-group.stylex'
+import { toggleGroupJoinedOutline as joinedOutline } from './toggle-group.stylex'
 
 interface ToggleGroupContextValue {
   variant: ToggleVariant
@@ -75,55 +82,3 @@ export function ToggleGroupItem({ style, ...props }: ToggleProps) {
     />
   )
 }
-
-const styles = stylex.create({
-  root: {
-    display: 'flex',
-    width: 'fit-content'
-  },
-  gap: {
-    gap: space.s2
-  },
-  item: {
-    flexShrink: 0
-  }
-})
-
-const orientations = stylex.create({
-  horizontal: {
-    alignItems: 'center',
-    flexDirection: 'row'
-  },
-  vertical: {
-    alignItems: 'stretch',
-    flexDirection: 'column'
-  }
-})
-
-const joinedItems = stylex.create({
-  horizontal: {
-    borderBottomLeftRadius: { default: 0, ':first-child': radius.lg },
-    borderBottomRightRadius: { default: 0, ':last-child': radius.lg },
-    borderTopLeftRadius: { default: 0, ':first-child': radius.lg },
-    borderTopRightRadius: { default: 0, ':last-child': radius.lg },
-    paddingInline: space.s2
-  },
-  vertical: {
-    borderBottomLeftRadius: { default: 0, ':last-child': radius.lg },
-    borderBottomRightRadius: { default: 0, ':last-child': radius.lg },
-    borderTopLeftRadius: { default: 0, ':first-child': radius.lg },
-    borderTopRightRadius: { default: 0, ':first-child': radius.lg },
-    paddingInline: space.s2
-  }
-})
-
-// Joined outline items share edges — drop the leading border on every item
-// but the first so adjacent borders don't double up.
-const joinedOutline = stylex.create({
-  horizontal: {
-    borderLeftWidth: { default: 0, ':first-child': stroke.border }
-  },
-  vertical: {
-    borderTopWidth: { default: 0, ':first-child': stroke.border }
-  }
-})

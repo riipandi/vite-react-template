@@ -1,3 +1,30 @@
+/**
+ * An input that suggests options as you type.
+ *
+ * @see: https://base-ui.com/react/components/combobox
+ *
+ * BaseUI Anatomy:
+ * <Combobox.Root>
+ *   <Combobox.Trigger>
+ *     <Combobox.Value />
+ *   </Combobox.Trigger>
+ *   <Combobox.Portal>
+ *     <Combobox.Backdrop />
+ *     <Combobox.Positioner>
+ *       <Combobox.Popup>
+ *         <Combobox.Arrow />
+ *         <Combobox.List>
+ *           <Combobox.Item />
+ *           <Combobox.Group>
+ *             <Combobox.GroupLabel />
+ *           </Combobox.Group>
+ *         </Combobox.List>
+ *       </Combobox.Popup>
+ *     </Combobox.Positioner>
+ *   </Combobox.Portal>
+ * </Combobox.Root>
+ */
+
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'

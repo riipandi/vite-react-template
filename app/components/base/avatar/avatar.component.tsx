@@ -1,3 +1,15 @@
+/**
+ * An easily stylable avatar component.
+ *
+ * @see: https://base-ui.com/react/components/avatar
+ *
+ * BaseUI Anatomy:
+ * <Avatar.Root>
+ *   <Avatar.Image />
+ *   <Avatar.Fallback />
+ * </Avatar.Root>
+ */
+
 import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'

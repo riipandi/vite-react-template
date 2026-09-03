@@ -1,8 +1,25 @@
+/**
+ * A numeric input element with increment and decrement buttons, and a scrub area.
+ *
+ * @see: https://base-ui.com/react/components/number-field
+ *
+ * BaseUI Anatomy:
+ * <NumberField.Root>
+ *   <NumberField.ScrubArea>
+ *     <NumberField.ScrubAreaCursor />
+ *   </NumberField.ScrubArea>
+ *   <NumberField.Group>
+ *     <NumberField.Decrement />
+ *     <NumberField.Input />
+ *     <NumberField.Increment />
+ *   </NumberField.Group>
+ * </NumberField.Root>
+ */
+
 import { NumberField as BaseNumberField } from '@base-ui/react/number-field'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { space, fontSize, duration, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { numberFieldStyles as s } from './number-field.stylex'
 
 interface StyleProp {
   style?: stylex.StyleXStyles
@@ -16,7 +33,7 @@ export function NumberField({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseNumberField.Root>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseNumberField.Root {...props} {...stylex.props(styles.root, style)} />
+  return <BaseNumberField.Root {...props} {...stylex.props(s.root, style)} />
 }
 
 export function NumberFieldGroup({
@@ -26,7 +43,7 @@ export function NumberFieldGroup({
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseNumberField.Group>, 'className' | 'style'> &
   StyleProp) {
   return (
-    <BaseNumberField.Group {...props} {...stylex.props(styles.group, style)}>
+    <BaseNumberField.Group {...props} {...stylex.props(s.group, style)}>
       {children ?? (
         <>
           <NumberFieldDecrement />
@@ -43,7 +60,7 @@ export function NumberFieldInput({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseNumberField.Input>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseNumberField.Input {...props} {...stylex.props(styles.input, style)} />
+  return <BaseNumberField.Input {...props} {...stylex.props(s.input, style)} />
 }
 
 export function NumberFieldDecrement({
@@ -53,7 +70,7 @@ export function NumberFieldDecrement({
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseNumberField.Decrement>, 'className' | 'style'> &
   StyleProp) {
   return (
-    <BaseNumberField.Decrement {...props} {...stylex.props(styles.button, styles.decrement, style)}>
+    <BaseNumberField.Decrement {...props} {...stylex.props(s.button, s.decrement, style)}>
       {children ?? (
         <svg
           width='16'
@@ -79,7 +96,7 @@ export function NumberFieldIncrement({
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseNumberField.Increment>, 'className' | 'style'> &
   StyleProp) {
   return (
-    <BaseNumberField.Increment {...props} {...stylex.props(styles.button, styles.increment, style)}>
+    <BaseNumberField.Increment {...props} {...stylex.props(s.button, s.increment, style)}>
       {children ?? (
         <svg
           width='16'
@@ -97,74 +114,3 @@ export function NumberFieldIncrement({
     </BaseNumberField.Increment>
   )
 }
-
-const styles = stylex.create({
-  root: {
-    fontFamily: font.sans
-  },
-  group: {
-    alignItems: 'stretch',
-    backgroundColor: colors.background,
-    borderColor: { default: colors.input, ':focus-within': colors.ring },
-    borderRadius: radius.md,
-    borderStyle: 'solid',
-    borderWidth: stroke.border,
-    display: 'flex',
-    height: space.s9,
-    outline: {
-      default: 'none',
-      ':focus-within': `${stroke.focus} solid ${colors.ring}`
-    },
-    outlineOffset: `calc(-1 * ${stroke.border})`,
-    transitionDuration: duration.fast,
-    transitionProperty: 'border-color, outline-color',
-    width: 'fit-content'
-  },
-  input: {
-    backgroundColor: 'transparent',
-    borderStyle: 'none',
-    color: colors.foreground,
-    fontFamily: font.sans,
-    fontSize: fontSize.sm,
-    fontVariantNumeric: 'tabular-nums',
-    outline: 'none',
-    padding: 0,
-    textAlign: 'center',
-    width: space.s16
-  },
-  button: {
-    alignItems: 'center',
-    backgroundColor: {
-      default: 'transparent',
-      ':hover:not(:disabled)': colors.muted
-    },
-    borderStyle: 'none',
-    color: {
-      default: colors.mutedForeground,
-      ':hover:not(:disabled)': colors.foreground
-    },
-    cursor: { default: 'pointer', ':disabled': 'not-allowed' },
-    display: 'flex',
-    justifyContent: 'center',
-    opacity: { default: 1, ':disabled': 0.5 },
-    outline: 'none',
-    padding: 0,
-    transitionDuration: duration.fast,
-    transitionProperty: 'background-color, color',
-    width: space.s9
-  },
-  decrement: {
-    borderBottomLeftRadius: `calc(${radius.md} - ${stroke.border})`,
-    borderRightColor: colors.border,
-    borderRightStyle: 'solid',
-    borderRightWidth: stroke.border,
-    borderTopLeftRadius: `calc(${radius.md} - ${stroke.border})`
-  },
-  increment: {
-    borderBottomRightRadius: `calc(${radius.md} - ${stroke.border})`,
-    borderLeftColor: colors.border,
-    borderLeftStyle: 'solid',
-    borderLeftWidth: stroke.border,
-    borderTopRightRadius: `calc(${radius.md} - ${stroke.border})`
-  }
-})

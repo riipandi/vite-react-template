@@ -1,3 +1,12 @@
+/**
+ * A menu bar component.
+ *
+ * @see: https://base-ui.com/react/components/menubar
+ *
+ * BaseUI Anatomy:
+ * <Menubar.Root />
+ */
+
 import { Menubar as BaseMenubar } from '@base-ui/react/menubar'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
@@ -19,8 +28,7 @@ import {
   DropdownMenuTrigger,
   type DropdownMenuContentProps
 } from '#/components/base/dropdown-menu'
-import { space, fontSize, fontWeight, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { menubarStyles as s } from './menubar.stylex'
 
 export interface MenubarProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BaseMenubar>,
@@ -30,7 +38,7 @@ export interface MenubarProps extends Omit<
 }
 
 export function Menubar({ style, ...props }: MenubarProps) {
-  return <BaseMenubar {...props} {...stylex.props(styles.root, style)} />
+  return <BaseMenubar {...props} {...stylex.props(s.root, style)} />
 }
 
 export const MenubarMenu = DropdownMenu
@@ -53,7 +61,7 @@ export function MenubarTrigger({
 }: Omit<React.ComponentPropsWithoutRef<typeof DropdownMenuTrigger>, 'className' | 'style'> & {
   style?: stylex.StyleXStyles
 }) {
-  return <DropdownMenuTrigger {...props} {...stylex.props(styles.trigger, style)} />
+  return <DropdownMenuTrigger {...props} {...stylex.props(s.trigger, style)} />
 }
 
 export function MenubarContent({
@@ -69,46 +77,7 @@ export function MenubarContent({
       alignOffset={alignOffset}
       sideOffset={sideOffset}
       {...props}
-      style={[styles.content, style]}
+      style={[s.content, style]}
     />
   )
 }
-
-const styles = stylex.create({
-  root: {
-    alignItems: 'center',
-    borderColor: colors.border,
-    borderRadius: radius.lg,
-    borderStyle: 'solid',
-    borderWidth: stroke.border,
-    display: 'flex',
-    fontFamily: font.sans,
-    gap: space.s05,
-    height: space.s8,
-    paddingInline: space.s05
-  },
-  trigger: {
-    alignItems: 'center',
-    backgroundColor: {
-      default: 'transparent',
-      ':hover': colors.muted,
-      '[data-popup-open]': colors.muted
-    },
-    borderRadius: radius.sm,
-    borderStyle: 'none',
-    color: colors.foreground,
-    cursor: 'default',
-    display: 'flex',
-    fontFamily: font.sans,
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
-    outline: 'none',
-    paddingBlock: space.s05,
-    paddingInline: space.s15,
-    userSelect: 'none'
-  },
-  // Menubar popups size to their content, not the trigger.
-  content: {
-    width: 'max-content'
-  }
-})

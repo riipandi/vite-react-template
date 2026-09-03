@@ -1,8 +1,17 @@
+/**
+ * A simple element used for visual separation of content.
+ *
+ * @see: https://base-ui.com/react/components/separator
+ *
+ * BaseUI Anatomy:
+ * <Separator />
+ */
+
 import { Separator as BaseSeparator } from '@base-ui/react/separator'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { stroke } from '#/lib/constants.stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { separatorStyles as styles } from './separator.stylex'
+import { separatorOrientations as orientations } from './separator.stylex'
 
 export interface SeparatorProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BaseSeparator>,
@@ -20,21 +29,3 @@ export function Separator({ orientation = 'horizontal', style, ...props }: Separ
     />
   )
 }
-
-const styles = stylex.create({
-  root: {
-    backgroundColor: colors.border,
-    flexShrink: 0
-  }
-})
-
-const orientations = stylex.create({
-  horizontal: {
-    height: stroke.border,
-    width: '100%'
-  },
-  vertical: {
-    alignSelf: 'stretch',
-    width: stroke.border
-  }
-})

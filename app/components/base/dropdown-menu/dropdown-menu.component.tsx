@@ -1,18 +1,40 @@
+/**
+ * Displays a menu of options or commands.
+ *
+ * @see: https://base-ui.com/react/components/menu
+ *
+ * BaseUI Anatomy:
+ * <Menu.Root>
+ *   <Menu.Trigger />
+ *   <Menu.Portal>
+ *     <Menu.Backdrop />
+ *     <Menu.Positioner>
+ *       <Menu.Popup>
+ *         <Menu.Arrow />
+ *         <Menu.Item />
+ *         <Menu.Separator />
+ *         <Menu.Group>
+ *           <Menu.GroupLabel />
+ *         </Menu.Group>
+ *         <Menu.RadioGroup>
+ *           <Menu.RadioItem />
+ *         </Menu.RadioGroup>
+ *         <Menu.CheckboxItem />
+ *         <Menu.SubmenuRoot>
+ *           <Menu.SubmenuTrigger />
+ *         </Menu.SubmenuRoot>
+ *       </Menu.Popup>
+ *     </Menu.Positioner>
+ *   </Menu.Portal>
+ * </Menu.Root>
+ */
+
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import {
-  space,
-  fontSize,
-  fontWeight,
-  z,
-  duration,
-  easing,
-  stroke,
-  container
-} from '#/lib/constants.stylex'
 import { ring } from '#/lib/stylex-utils'
-import { colors, font, radius, shadow } from '#/lib/tokens.stylex'
+import { shadow } from '#/lib/tokens.stylex'
+import { dropdownMenuStyles as s } from './dropdown-menu.stylex'
 
 interface StyleProp {
   style?: stylex.StyleXStyles
@@ -49,12 +71,9 @@ export function DropdownMenuContent({
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
-        {...stylex.props(styles.positioner)}
+        {...stylex.props(s.positioner)}
       >
-        <BaseMenu.Popup
-          {...props}
-          {...stylex.props(styles.popup, ring({ shadow: shadow.md }), style)}
-        />
+        <BaseMenu.Popup {...props} {...stylex.props(s.popup, ring({ shadow: shadow.md }), style)} />
       </BaseMenu.Positioner>
     </BaseMenu.Portal>
   )
@@ -81,9 +100,9 @@ export function DropdownMenuItem({
     <BaseMenu.Item
       {...props}
       {...stylex.props(
-        styles.item,
-        inset && styles.itemInset,
-        variant === 'destructive' && styles.itemDestructive,
+        s.item,
+        inset && s.itemInset,
+        variant === 'destructive' && s.itemDestructive,
         style
       )}
     />
@@ -115,8 +134,8 @@ export function DropdownMenuCheckboxItem({
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.CheckboxItem>, 'className' | 'style'> &
   StyleProp) {
   return (
-    <BaseMenu.CheckboxItem {...props} {...stylex.props(styles.item, styles.indicatorItem, style)}>
-      <span {...stylex.props(styles.indicator)}>
+    <BaseMenu.CheckboxItem {...props} {...stylex.props(s.item, s.indicatorItem, style)}>
+      <span {...stylex.props(s.indicator)}>
         <BaseMenu.CheckboxItemIndicator>
           <IndicatorCheck />
         </BaseMenu.CheckboxItemIndicator>
@@ -133,8 +152,8 @@ export function DropdownMenuRadioItem({
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.RadioItem>, 'className' | 'style'> &
   StyleProp) {
   return (
-    <BaseMenu.RadioItem {...props} {...stylex.props(styles.item, styles.indicatorItem, style)}>
-      <span {...stylex.props(styles.indicator)}>
+    <BaseMenu.RadioItem {...props} {...stylex.props(s.item, s.indicatorItem, style)}>
+      <span {...stylex.props(s.indicator)}>
         <BaseMenu.RadioItemIndicator>
           <IndicatorCheck />
         </BaseMenu.RadioItemIndicator>
@@ -154,7 +173,7 @@ export function DropdownMenuSubTrigger({
   return (
     <BaseMenu.SubmenuTrigger
       {...props}
-      {...stylex.props(styles.item, styles.subTrigger, inset && styles.itemInset, style)}
+      {...stylex.props(s.item, s.subTrigger, inset && s.itemInset, style)}
     >
       {children}
       <svg
@@ -167,7 +186,7 @@ export function DropdownMenuSubTrigger({
         strokeLinecap='round'
         strokeLinejoin='round'
         aria-hidden
-        {...stylex.props(styles.subTriggerChevron)}
+        {...stylex.props(s.subTriggerChevron)}
       >
         <path d={`m6 3 5 5-5 5`} />
       </svg>
@@ -186,7 +205,7 @@ export function DropdownMenuSubContent({
       sideOffset={sideOffset}
       alignOffset={alignOffset}
       {...props}
-      style={[styles.subPopup, style]}
+      style={[s.subPopup, style]}
     />
   )
 }
@@ -195,7 +214,7 @@ export function DropdownMenuShortcut({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'span'>, 'className' | 'style'> & StyleProp) {
-  return <span {...props} {...stylex.props(styles.shortcut, style)} />
+  return <span {...props} {...stylex.props(s.shortcut, style)} />
 }
 
 export function DropdownMenuSeparator({
@@ -203,7 +222,7 @@ export function DropdownMenuSeparator({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Separator>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseMenu.Separator {...props} {...stylex.props(styles.separator, style)} />
+  return <BaseMenu.Separator {...props} {...stylex.props(s.separator, style)} />
 }
 
 export function DropdownMenuLabel({
@@ -212,161 +231,5 @@ export function DropdownMenuLabel({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.GroupLabel>, 'className' | 'style'> &
   StyleProp & { inset?: boolean }) {
-  return (
-    <BaseMenu.GroupLabel
-      {...props}
-      {...stylex.props(styles.label, inset && styles.itemInset, style)}
-    />
-  )
+  return <BaseMenu.GroupLabel {...props} {...stylex.props(s.label, inset && s.itemInset, style)} />
 }
-
-const styles = stylex.create({
-  positioner: {
-    outline: 'none',
-    zIndex: z.popup
-  },
-  // Closed pose (Base UI's [data-starting-style]/[data-ending-style] frames):
-  // faded, slightly shrunk, nudged toward the anchor. [data-side] sets the
-  // nudge direction; the transition animates entry and exit through it.
-  popup: {
-    // No `default` for conditional custom properties: StyleX emits the
-    // default rule unlayered (beating the layered [data-*] rules); the
-    // var() fallback covers the unset case instead.
-    '--popup-shift-x': {
-      default: null,
-      '[data-side="left"]': space.s2,
-      '[data-side="right"]': `calc(-1 * ${space.s2})`,
-      '[data-side="inline-start"]': space.s2,
-      '[data-side="inline-end"]': `calc(-1 * ${space.s2})`
-    },
-    '--popup-shift-y': {
-      default: null,
-      '[data-side="top"]': space.s2,
-      '[data-side="bottom"]': `calc(-1 * ${space.s2})`
-    },
-    backgroundColor: colors.popover,
-    borderRadius: radius.md,
-    color: colors.popoverForeground,
-    fontFamily: font.sans,
-    maxHeight: 'var(--available-height)',
-    minWidth: container.xs,
-    opacity: {
-      default: 1,
-      '[data-starting-style]': 0,
-      '[data-ending-style]': 0
-    },
-    outline: 'none',
-    overflowX: 'hidden',
-    overflowY: 'auto',
-    paddingBlock: space.s1,
-    transform: {
-      default: 'scale(1)',
-      '[data-starting-style]':
-        'translate(var(--popup-shift-x, 0px), var(--popup-shift-y, 0px)) scale(0.97)',
-      '[data-ending-style]':
-        'translate(var(--popup-shift-x, 0px), var(--popup-shift-y, 0px)) scale(0.97)'
-    },
-    transformOrigin: 'var(--transform-origin)',
-    transitionDuration: duration.fast,
-    transitionProperty: {
-      default: 'opacity, transform',
-      '@media (prefers-reduced-motion: reduce)': 'opacity'
-    },
-    transitionTimingFunction: easing.out,
-    width: 'var(--anchor-width)'
-  },
-  // Submenus anchor to their trigger item — the anchor width is the item, not
-  // the menu, so size to content instead.
-  subPopup: {
-    minWidth: container.xs,
-    width: 'max-content'
-  },
-  item: {
-    alignItems: 'center',
-    backgroundColor: {
-      default: 'transparent',
-      '[data-highlighted]': colors.accent
-    },
-    borderRadius: radius.sm,
-    color: {
-      default: null,
-      '[data-highlighted]': colors.accentForeground,
-      '[data-disabled]': colors.mutedForeground
-    },
-    cursor: 'default',
-    display: 'flex',
-    fontSize: fontSize.sm,
-    gap: space.s2,
-    marginInline: space.s1,
-    opacity: { default: 1, '[data-disabled]': 0.5 },
-    outline: 'none',
-    paddingBlock: space.s15,
-    paddingInline: space.s2,
-    userSelect: 'none'
-  },
-  // Submenu triggers also light up while their submenu is open.
-  subTrigger: {
-    backgroundColor: {
-      default: 'transparent',
-      '[data-highlighted]': colors.accent,
-      '[data-popup-open]': colors.accent
-    },
-    color: {
-      default: null,
-      '[data-highlighted]': colors.accentForeground,
-      '[data-popup-open]': colors.accentForeground,
-      '[data-disabled]': colors.mutedForeground
-    }
-  },
-  itemInset: {
-    paddingLeft: space.s7
-  },
-  // Reserve room for the trailing check indicator (absolute, right-aligned).
-  indicatorItem: {
-    paddingRight: space.s8,
-    position: 'relative'
-  },
-  indicator: {
-    alignItems: 'center',
-    display: 'flex',
-    height: space.s4,
-    justifyContent: 'center',
-    pointerEvents: 'none',
-    position: 'absolute',
-    right: space.s2,
-    width: space.s4
-  },
-  itemDestructive: {
-    backgroundColor: {
-      default: 'transparent',
-      '[data-highlighted]': `color-mix(in srgb, ${colors.destructive} 10%, transparent)`
-    },
-    color: {
-      default: colors.destructive,
-      '[data-disabled]': colors.mutedForeground
-    }
-  },
-  subTriggerChevron: {
-    color: colors.mutedForeground,
-    flexShrink: 0,
-    marginLeft: 'auto'
-  },
-  shortcut: {
-    color: colors.mutedForeground,
-    fontSize: fontSize.xs,
-    letterSpacing: '0.1em',
-    marginLeft: 'auto'
-  },
-  separator: {
-    backgroundColor: colors.border,
-    height: stroke.border,
-    marginBlock: space.s1
-  },
-  label: {
-    color: colors.mutedForeground,
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.medium,
-    paddingBlock: space.s15,
-    paddingInline: space.s3
-  }
-})

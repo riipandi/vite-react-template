@@ -1,3 +1,19 @@
+/**
+ * A set of collapsible panels with headings.
+ *
+ * @see: https://base-ui.com/react/components/accordion
+ *
+ * BaseUI Anatomy:
+ * <Accordion.Root>
+ *   <Accordion.Item>
+ *     <Accordion.Header>
+ *       <Accordion.Trigger />
+ *     </Accordion.Header>
+ *     <Accordion.Panel />
+ *   </Accordion.Item>
+ * </Accordion.Root>
+ */
+
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'

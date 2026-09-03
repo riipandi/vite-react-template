@@ -1,3 +1,24 @@
+/**
+ * A dialog that requires a user response to proceed.
+ *
+ * @see: https://base-ui.com/react/components/alert-dialog
+ *
+ * BaseUI Anatomy:
+ * <AlertDialog.Root>
+ *   <AlertDialog.Trigger />
+ *   <AlertDialog.Portal>
+ *     <AlertDialog.Backdrop />
+ *     <AlertDialog.Viewport>
+ *       <AlertDialog.Popup>
+ *         <AlertDialog.Title />
+ *         <AlertDialog.Description />
+ *         <AlertDialog.Close />
+ *       </AlertDialog.Popup>
+ *     </AlertDialog.Viewport>
+ *   </AlertDialog.Portal>
+ * </AlertDialog.Root>
+ */
+
 import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'

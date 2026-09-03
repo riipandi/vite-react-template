@@ -1,8 +1,22 @@
+/**
+ * A container for toolbar items.
+ *
+ * @see: https://base-ui.com/react/components/toolbar
+ *
+ * BaseUI Anatomy:
+ * <Toolbar.Root>
+ *   <Toolbar.Button />
+ *   <Toolbar.Link />
+ *   <Toolbar.Input />
+ *   <Toolbar.Group />
+ *   <Toolbar.Separator />
+ * </Toolbar.Root>
+ */
+
 import { Toolbar as BaseToolbar } from '@base-ui/react/toolbar'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { space, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { toolbarStyles as s } from './toolbar.stylex'
 
 interface StyleProp {
   style?: stylex.StyleXStyles
@@ -21,7 +35,7 @@ export function Toolbar({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseToolbar.Root>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseToolbar.Root {...props} {...stylex.props(styles.root, style)} />
+  return <BaseToolbar.Root {...props} {...stylex.props(s.root, style)} />
 }
 
 export function ToolbarGroup({
@@ -29,7 +43,7 @@ export function ToolbarGroup({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseToolbar.Group>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseToolbar.Group {...props} {...stylex.props(styles.group, style)} />
+  return <BaseToolbar.Group {...props} {...stylex.props(s.group, style)} />
 }
 
 export function ToolbarSeparator({
@@ -37,32 +51,5 @@ export function ToolbarSeparator({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseToolbar.Separator>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseToolbar.Separator {...props} {...stylex.props(styles.separator, style)} />
+  return <BaseToolbar.Separator {...props} {...stylex.props(s.separator, style)} />
 }
-
-const styles = stylex.create({
-  root: {
-    alignItems: 'center',
-    borderColor: colors.border,
-    borderRadius: radius.lg,
-    borderStyle: 'solid',
-    borderWidth: stroke.border,
-    display: 'flex',
-    fontFamily: font.sans,
-    gap: space.s1,
-    padding: space.s1,
-    width: 'fit-content'
-  },
-  group: {
-    alignItems: 'center',
-    display: 'flex',
-    gap: space.s1
-  },
-  separator: {
-    alignSelf: 'stretch',
-    backgroundColor: colors.border,
-    marginBlock: space.s1,
-    marginInline: space.s1,
-    width: stroke.border
-  }
-})

@@ -1,3 +1,12 @@
+/**
+ * A button component that can be rendered as another HTML tag while remaining keyboard accessible.
+ *
+ * @see: https://base-ui.com/react/components/button
+ *
+ * BaseUI Anatomy:
+ * <Button />
+ */
+
 import { Button as BaseButton } from '@base-ui/react/button'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'

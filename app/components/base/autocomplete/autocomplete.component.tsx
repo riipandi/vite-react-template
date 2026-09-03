@@ -1,3 +1,38 @@
+/**
+ * An input that suggests options as you type.
+ *
+ * @see: https://base-ui.com/react/components/autocomplete
+ *
+ * BaseUI Anatomy:
+ * <Autocomplete.Root>
+ *   <Autocomplete.Input />
+ *   <Autocomplete.Trigger />
+ *   <Autocomplete.Icon />
+ *   <Autocomplete.Clear />
+ *   <Autocomplete.Value />
+ *   <Autocomplete.Portal>
+ *     <Autocomplete.Backdrop />
+ *     <Autocomplete.Positioner>
+ *       <Autocomplete.Popup>
+ *         <Autocomplete.Arrow />
+ *         <Autocomplete.Status />
+ *         <Autocomplete.Empty />
+ *         <Autocomplete.List>
+ *           <Autocomplete.Row>
+ *             <Autocomplete.Item />
+ *           </Autocomplete.Row>
+ *           <Autocomplete.Separator />
+ *           <Autocomplete.Group>
+ *             <Autocomplete.GroupLabel />
+ *           </Autocomplete.Group>
+ *           <Autocomplete.Collection />
+ *         </Autocomplete.List>
+ *       </Autocomplete.Popup>
+ *     </Autocomplete.Positioner>
+ *   </Autocomplete.Portal>
+ * </Autocomplete.Root>
+ */
+
 import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'

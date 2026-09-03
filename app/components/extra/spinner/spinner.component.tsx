@@ -1,5 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
+import { spinnerStyles as s } from './spinner.stylex'
 
 export interface SpinnerProps extends Omit<
   React.ComponentPropsWithoutRef<'svg'>,
@@ -21,24 +22,9 @@ export function Spinner({ style, ...props }: SpinnerProps) {
       strokeWidth='1.5'
       strokeLinecap='round'
       {...props}
-      {...stylex.props(styles.root, style)}
+      {...stylex.props(s.root, style)}
     >
       <path d={`M8 1.5a6.5 6.5 0 1 1-6.5 6.5`} />
     </svg>
   )
 }
-
-const spin = stylex.keyframes({
-  from: { transform: 'rotate(0deg)' },
-  to: { transform: 'rotate(360deg)' }
-})
-
-const styles = stylex.create({
-  root: {
-    animationDuration: '1s',
-    animationIterationCount: 'infinite',
-    animationName: spin,
-    animationTimingFunction: 'linear',
-    flexShrink: 0
-  }
-})

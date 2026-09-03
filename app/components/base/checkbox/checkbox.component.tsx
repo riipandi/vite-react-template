@@ -1,3 +1,20 @@
+/**
+ * An easily stylable checkbox component.
+ *
+ * @see: https://base-ui.com/react/components/checkbox
+ * @see: https://base-ui.com/react/components/checkbox-group
+ *
+ * BaseUI Anatomy for Checkbox:
+ * <Checkbox.Root>
+ *   <Checkbox.Indicator />
+ * </Checkbox.Root>
+ *
+ * BaseUI Anatomy for Checkbox Group:
+ * <CheckboxGroup>
+ *   <Checkbox.Root />
+ * </CheckboxGroup>
+ */
+
 import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox'
 import { CheckboxGroup as BaseCheckboxGroup } from '@base-ui/react/checkbox-group'
 import * as stylex from '@stylexjs/stylex'

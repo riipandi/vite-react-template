@@ -1,3 +1,15 @@
+/**
+ * A component that can be expanded or collapsed to show/hide content.
+ *
+ * @see: https://base-ui.com/react/components/collapsible
+ *
+ * BaseUI Anatomy:
+ * <Collapsible.Root>
+ *   <Collapsible.Trigger />
+ *   <Collapsible.Panel />
+ * </Collapsible.Root>
+ */
+
 import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'

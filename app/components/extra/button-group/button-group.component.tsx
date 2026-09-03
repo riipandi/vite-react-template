@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { Separator } from '#/components/base/separator'
-import { space, fontSize, fontWeight, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { buttonGroupStyles as styles } from './button-group.stylex'
+import { buttonGroupOrientations as orientations } from './button-group.stylex'
+import { buttonGroupJoined as joined } from './button-group.stylex'
 
 interface StyleProp {
   style?: stylex.StyleXStyles
@@ -64,67 +65,3 @@ export function ButtonGroupSeparator({
 }: React.ComponentPropsWithoutRef<typeof Separator>) {
   return <Separator orientation={orientation} {...props} style={[styles.separator, style]} />
 }
-
-const styles = stylex.create({
-  root: {
-    alignItems: 'stretch',
-    display: 'flex',
-    fontFamily: font.sans,
-    width: 'fit-content'
-  },
-  text: {
-    alignItems: 'center',
-    backgroundColor: colors.muted,
-    borderColor: colors.border,
-    borderRadius: radius.lg,
-    borderStyle: 'solid',
-    borderWidth: stroke.border,
-    display: 'flex',
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
-    gap: space.s2,
-    paddingInline: space.s25
-  },
-  separator: {
-    alignSelf: 'stretch',
-    backgroundColor: colors.input
-  }
-})
-
-const orientations = stylex.create({
-  horizontal: {
-    flexDirection: 'row'
-  },
-  vertical: {
-    flexDirection: 'column'
-  }
-})
-
-const joined = stylex.create({
-  'horizontal-first': {
-    borderBottomRightRadius: 0,
-    borderTopRightRadius: 0
-  },
-  'horizontal-middle': {
-    borderLeftWidth: 0,
-    borderRadius: 0
-  },
-  'horizontal-last': {
-    borderBottomLeftRadius: 0,
-    borderLeftWidth: 0,
-    borderTopLeftRadius: 0
-  },
-  'vertical-first': {
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0
-  },
-  'vertical-middle': {
-    borderRadius: 0,
-    borderTopWidth: 0
-  },
-  'vertical-last': {
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-    borderTopWidth: 0
-  }
-})

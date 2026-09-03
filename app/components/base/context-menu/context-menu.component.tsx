@@ -1,3 +1,34 @@
+/**
+ * A menu that appears at the pointer on right click or long press.
+ *
+ * @see: https://base-ui.com/react/components/context-menu
+ *
+ * BaseUI Anatomy:
+ * <ContextMenu.Root>
+ *   <ContextMenu.Trigger />
+ *   <ContextMenu.Portal>
+ *     <ContextMenu.Backdrop />
+ *     <ContextMenu.Positioner>
+ *       <ContextMenu.Popup>
+ *         <ContextMenu.Arrow />
+ *         <ContextMenu.Item />
+ *         <ContextMenu.Separator />
+ *         <ContextMenu.Group>
+ *           <ContextMenu.GroupLabel />
+ *         </ContextMenu.Group>
+ *         <ContextMenu.RadioGroup>
+ *           <ContextMenu.RadioItem />
+ *         </ContextMenu.RadioGroup>
+ *         <ContextMenu.CheckboxItem />
+ *         <ContextMenu.SubmenuRoot>
+ *           <ContextMenu.SubmenuTrigger />
+ *         </ContextMenu.SubmenuRoot>
+ *       </ContextMenu.Popup>
+ *     </ContextMenu.Positioner>
+ *   </ContextMenu.Portal>
+ * </ContextMenu.Root>
+ */
+
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'

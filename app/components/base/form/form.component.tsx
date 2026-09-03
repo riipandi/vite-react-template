@@ -1,8 +1,13 @@
+/**
+ * A native form element with consolidated error handling.
+ *
+ * @see: https://base-ui.com/react/components/form
+ */
+
 import { Form as BaseForm } from '@base-ui/react/form'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { space } from '#/lib/constants.stylex'
-import { font } from '#/lib/tokens.stylex'
+import { formStyles as s } from './form.stylex'
 
 export interface FormProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BaseForm>,
@@ -17,15 +22,5 @@ export interface FormProps extends Omit<
  * action — via the `errors` prop, keyed by Field `name`.
  */
 export function Form({ style, ...props }: FormProps) {
-  return <BaseForm {...props} {...stylex.props(styles.root, style)} />
+  return <BaseForm {...props} {...stylex.props(s.root, style)} />
 }
-
-const styles = stylex.create({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    fontFamily: font.sans,
-    gap: space.s5,
-    width: '100%'
-  }
-})

@@ -28,9 +28,7 @@ export default defineConfig({
           ['json', { outputFile: './.output/tests-results/vitest-results.json' }],
           ['html', { outputDir: './.output/tests-results' }]
         ],
-    browser: {
-      traceView: true
-    },
+    browser: { traceView: true },
     coverage: {
       provider: 'v8',
       reporter: ['html-spa', 'text-summary'],
@@ -78,6 +76,7 @@ export default defineConfig({
           browser: {
             enabled: true,
             headless: true,
+            traceView: true,
             provider: playwright(),
             instances: [{ browser: 'chromium' }]
           }

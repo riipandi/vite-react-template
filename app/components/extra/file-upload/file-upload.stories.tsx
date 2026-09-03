@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
-import * as Lucide from 'lucide-react'
+import { UploadIcon } from 'lucide-react'
 import * as React from 'react'
 import { Button } from '#/components/base/button'
 import { Badge } from '#/components/extra/badge'
@@ -26,7 +26,7 @@ export const Default: Story = {
   render: (props) => (
     <div style={{ width: 480 }}>
       <FileUpload {...props}>
-        <Lucide.Upload size={20} strokeWidth={1.8} />
+        <UploadIcon size={20} strokeWidth={1.8} />
         Drop files to attach
       </FileUpload>
     </div>
@@ -38,7 +38,7 @@ export const WithTrigger: Story = {
   render: (props) => (
     <div style={{ width: 480 }}>
       <FileUpload {...props}>
-        <Lucide.Upload size={20} strokeWidth={1.8} />
+        <UploadIcon size={20} strokeWidth={1.8} />
         Drop files to attach, or <FileUploadTrigger>browse</FileUploadTrigger>
       </FileUpload>
     </div>
@@ -75,7 +75,7 @@ export const Disabled: Story = {
   render: (props) => (
     <div style={{ width: 480 }}>
       <FileUpload {...props}>
-        <Lucide.Upload size={20} strokeWidth={1.8} />
+        <UploadIcon size={20} strokeWidth={1.8} />
         Drop files to attach
       </FileUpload>
     </div>
@@ -90,7 +90,7 @@ export const WithFileList: Story = {
     return (
       <div style={{ display: 'grid', gap: 16, width: 480 }}>
         <FileUpload name='file' onChange={(args) => setFiles(args.value)}>
-          <Lucide.Upload size={20} strokeWidth={1.8} />
+          <UploadIcon size={20} strokeWidth={1.8} />
           Drop files to attach
         </FileUpload>
         {files.length > 0 ? (

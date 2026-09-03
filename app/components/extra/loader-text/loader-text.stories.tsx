@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import * as Lucide from 'lucide-react'
+import { FileTextIcon, SearchIcon, SparklesIcon } from 'lucide-react'
 import { LoaderText } from './loader-text.component'
 
 const meta = {
@@ -46,7 +46,7 @@ export default meta
 
 export const Playground: Story = {
   args: {
-    icon: Lucide.Search,
+    icon: SearchIcon,
     completed: false,
     completedText: 'Searched 128 files',
     children: 'Searching the codebase'
@@ -61,7 +61,7 @@ export const WithoutIcon: Story = {
 
 export const Completed: Story = {
   args: {
-    icon: Lucide.Search,
+    icon: SearchIcon,
     completed: true,
     completedText: 'Searched 128 files',
     children: 'Searching the codebase'
@@ -79,13 +79,13 @@ export const Sequence: Story = {
         atoms.width('100%')
       )}
     >
-      <LoaderText icon={Lucide.FileText} completed completedText='Read 3 files'>
+      <LoaderText icon={FileTextIcon} completed completedText='Read 3 files'>
         Reading files
       </LoaderText>
-      <LoaderText icon={Lucide.Search} completedText='Searched 128 files'>
+      <LoaderText icon={SearchIcon} completedText='Searched 128 files'>
         Searching the codebase
       </LoaderText>
-      <LoaderText icon={Lucide.Sparkles} completedText='Draft ready'>
+      <LoaderText icon={SparklesIcon} completedText='Draft ready'>
         Drafting a response
       </LoaderText>
     </div>

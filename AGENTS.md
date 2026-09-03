@@ -76,8 +76,11 @@ Each component folder in `app/components/<area>/<name>/` follows the same layout
 - `lint` and `format` write fixes in place (`--fix` / `--write`); `pnpm check` only verifies formatting.
 - The start/preview scripts serve `dist/` — run `pnpm build` first or you serve stale output.
 - Vitest UI (`pnpm test:ui`) requires an authenticated URL: open the `?token=...` URL printed in the terminal; the token changes on every run.
-- StyleX gotchas: `defineConsts` works as a media-query key only when declared in the same file as the `create()` call; template literals interpolating tokens inside composite values can corrupt the dev CSS output; `stylex.props()` must receive compiled styles (never a plain object or module-level array).
-- Base UI gotchas: `CardTitle`/`CardDescription` have no `render` prop (use `Text render={<h1/>}` for headings); when linting `<a/>` inside a `render` prop, put the content inside the render element itself, not the component's children.
+- `.npmrc` sets `min-release-age`: brand-new package versions can be rejected when a command triggers an implicit `pnpm install` (e.g. `pnpm storybook`). Pin an older version or wait out the release-age window.
+- Icons: import Lucide icons as named imports with the `Icon` suffix (`import { UploadIcon } from 'lucide-react'`), never `import * as Lucide` — the barrel executes ~1.5k icon modules and the suffix avoids name clashes.
+- StyleX gotchas: `defineConsts` works as a media-query key only when declared in the same file as the `create()` call; `stylex.props()` must receive compiled styles (never a plain object or module-level array). If the dev server throws a CSS parse error (`virtual:stylex.css` 404), first check the file edited last for syntax slips (missing comma between entries) and restart Storybook — stale transform state keeps 404-ing after the fix.
+- Base UI gotchas: `CardTitle`/`CardDescription` have no `render` prop (use `Text render={<h1/>}` for headings); in a `render` prop, put content inside the render element itself, not the component's children, or oxlint flags an empty anchor/control.
+- Layout gotchas: `ButtonGroup` root is `width: fit-content` — full-width joined buttons need `width: '100%'` on the group style and each child Button; `CardHeader` is a `1fr/auto` grid tuned for left-aligned cards — for a centered header override it to a flex column and pin `CardAction` with `position: absolute` (plus `position: relative` on the Card); `FieldSeparator`'s content background must match its surrounding surface (`backgroundElevationBase` when inside a Card), not `backgroundPage`.
 
 ## Related Agent Instructions
 

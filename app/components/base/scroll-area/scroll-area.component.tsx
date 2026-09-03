@@ -17,7 +17,7 @@
 import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { scrollAreaStyles as styles } from './scroll-area.stylex'
+import { scrollAreaStyles as s } from './scroll-area.stylex'
 import { scrollAreaScrollbarOrientations as orientations } from './scroll-area.stylex'
 
 interface StyleXStyleProps {
@@ -31,10 +31,8 @@ export function ScrollArea({
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseScrollArea.Root>, 'className' | 'style'> &
   StyleXStyleProps) {
   return (
-    <BaseScrollArea.Root {...props} {...stylex.props(styles.root, style)}>
-      <BaseScrollArea.Viewport {...stylex.props(styles.viewport)}>
-        {children}
-      </BaseScrollArea.Viewport>
+    <BaseScrollArea.Root {...props} {...stylex.props(s.root, style)}>
+      <BaseScrollArea.Viewport {...stylex.props(s.viewport)}>{children}</BaseScrollArea.Viewport>
       <ScrollBar />
       <BaseScrollArea.Corner />
     </BaseScrollArea.Root>
@@ -51,9 +49,9 @@ export function ScrollBar({
     <BaseScrollArea.Scrollbar
       orientation={orientation}
       {...props}
-      {...stylex.props(styles.scrollbar, orientations[orientation], style)}
+      {...stylex.props(s.scrollbar, orientations[orientation], style)}
     >
-      <BaseScrollArea.Thumb {...stylex.props(styles.thumb)} />
+      <BaseScrollArea.Thumb {...stylex.props(s.thumb)} />
     </BaseScrollArea.Scrollbar>
   )
 }

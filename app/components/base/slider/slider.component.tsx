@@ -18,7 +18,7 @@
 import { Slider as BaseSlider } from '@base-ui/react/slider'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { sliderStyles as styles } from './slider.stylex'
+import { sliderStyles as s } from './slider.stylex'
 import { sliderRootOrientations as rootOrientations } from './slider.stylex'
 import { sliderControlOrientations as controlOrientations } from './slider.stylex'
 import { sliderTrackOrientations as trackOrientations } from './slider.stylex'
@@ -57,12 +57,12 @@ export function Slider({
       {...props}
       {...stylex.props(rootOrientations[orientation], style)}
     >
-      <BaseSlider.Control {...stylex.props(styles.control, controlOrientations[orientation])}>
-        <BaseSlider.Track {...stylex.props(styles.track, trackOrientations[orientation])}>
-          <BaseSlider.Indicator {...stylex.props(styles.range, rangeOrientations[orientation])} />
+      <BaseSlider.Control {...stylex.props(s.control, controlOrientations[orientation])}>
+        <BaseSlider.Track {...stylex.props(s.track, trackOrientations[orientation])}>
+          <BaseSlider.Indicator {...stylex.props(s.range, rangeOrientations[orientation])} />
         </BaseSlider.Track>
         {Array.from({ length: values.length }, (_, index) => (
-          <BaseSlider.Thumb key={index} {...stylex.props(styles.thumb)} />
+          <BaseSlider.Thumb key={index} {...stylex.props(s.thumb)} />
         ))}
       </BaseSlider.Control>
     </BaseSlider.Root>

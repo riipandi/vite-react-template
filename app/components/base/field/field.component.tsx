@@ -25,7 +25,7 @@ import { Fieldset as BaseFieldset } from '@base-ui/react/fieldset'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { Separator } from '#/components/base/separator'
-import { fieldStyles as styles, fieldOrientations as orientations } from './field.stylex'
+import { fieldStyles as s, fieldOrientations as orientations } from './field.stylex'
 import { fieldLegendVariants as legendVariants } from './field.stylex'
 
 interface StyleProp {
@@ -39,7 +39,7 @@ export function FieldSet({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseFieldset.Root>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseFieldset.Root {...props} {...stylex.props(styles.set, style)} />
+  return <BaseFieldset.Root {...props} {...stylex.props(s.set, style)} />
 }
 
 export type FieldLegendVariant = 'legend' | 'label'
@@ -51,15 +51,12 @@ export function FieldLegend({
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseFieldset.Legend>, 'className' | 'style'> &
   StyleProp & { variant?: FieldLegendVariant }) {
   return (
-    <BaseFieldset.Legend
-      {...props}
-      {...stylex.props(styles.legend, legendVariants[variant], style)}
-    />
+    <BaseFieldset.Legend {...props} {...stylex.props(s.legend, legendVariants[variant], style)} />
   )
 }
 
 export function FieldGroup({ style, ...props }: DivProps) {
-  return <div {...props} {...stylex.props(styles.group, style)} />
+  return <div {...props} {...stylex.props(s.group, style)} />
 }
 
 export type FieldOrientation = 'vertical' | 'horizontal'
@@ -76,13 +73,11 @@ export function Field({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseField.Root>, 'className' | 'style'> &
   StyleProp & { orientation?: FieldOrientation }) {
-  return (
-    <BaseField.Root {...props} {...stylex.props(styles.field, orientations[orientation], style)} />
-  )
+  return <BaseField.Root {...props} {...stylex.props(s.field, orientations[orientation], style)} />
 }
 
 export function FieldContent({ style, ...props }: DivProps) {
-  return <div {...props} {...stylex.props(styles.content, style)} />
+  return <div {...props} {...stylex.props(s.content, style)} />
 }
 
 export function FieldLabel({
@@ -90,11 +85,11 @@ export function FieldLabel({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseField.Label>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseField.Label {...props} {...stylex.props(styles.labelBase, styles.label, style)} />
+  return <BaseField.Label {...props} {...stylex.props(s.labelBase, s.label, style)} />
 }
 
 export function FieldTitle({ style, ...props }: DivProps) {
-  return <div {...props} {...stylex.props(styles.title, style)} />
+  return <div {...props} {...stylex.props(s.title, style)} />
 }
 
 export function FieldDescription({
@@ -102,14 +97,14 @@ export function FieldDescription({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseField.Description>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseField.Description {...props} {...stylex.props(styles.description, style)} />
+  return <BaseField.Description {...props} {...stylex.props(s.description, style)} />
 }
 
 export function FieldSeparator({ children, style, ...props }: DivProps) {
   return (
-    <div {...props} {...stylex.props(styles.separator, style)}>
-      <Separator style={styles.separatorLine} />
-      {children && <span {...stylex.props(styles.separatorContent)}>{children}</span>}
+    <div {...props} {...stylex.props(s.separator, style)}>
+      <Separator style={s.separatorLine} />
+      {children && <span {...stylex.props(s.separatorContent)}>{children}</span>}
     </div>
   )
 }
@@ -135,7 +130,7 @@ export function FieldError({ children, errors, style, ...props }: FieldErrorProp
     if (unique.length === 0) return null
     if (unique.length === 1) return unique[0]?.message
     return (
-      <ul {...stylex.props(styles.errorList)}>
+      <ul {...stylex.props(s.errorList)}>
         {unique.map((error, index) => (
           <li key={index}>{error.message}</li>
         ))}
@@ -146,7 +141,7 @@ export function FieldError({ children, errors, style, ...props }: FieldErrorProp
   if (errors) {
     if (!external) return null
     return (
-      <div role='alert' {...props} {...stylex.props(styles.error, style)}>
+      <div role='alert' {...props} {...stylex.props(s.error, style)}>
         {external}
       </div>
     )
@@ -160,7 +155,7 @@ export function FieldError({ children, errors, style, ...props }: FieldErrorProp
     <BaseField.Error
       {...(children !== undefined && { children })}
       {...props}
-      {...stylex.props(styles.error, style)}
+      {...stylex.props(s.error, style)}
     />
   )
 }

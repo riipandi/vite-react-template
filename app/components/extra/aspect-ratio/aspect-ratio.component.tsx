@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { aspectRatioStyles as styles, aspectRatioRatios as ratios } from './aspect-ratio.stylex'
+import { aspectRatioStyles as s, aspectRatioRatios as ratios } from './aspect-ratio.stylex'
 
 export interface AspectRatioProps extends Omit<
   React.ComponentPropsWithoutRef<'div'>,
@@ -11,5 +11,5 @@ export interface AspectRatioProps extends Omit<
 }
 
 export function AspectRatio({ ratio, style, ...props }: AspectRatioProps) {
-  return <div {...props} {...stylex.props(styles.root, ratios.ratio(ratio), style)} />
+  return <div {...props} {...stylex.props(s.root, ratios.ratio(ratio), style)} />
 }

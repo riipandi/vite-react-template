@@ -10,7 +10,7 @@
 import { Separator as BaseSeparator } from '@base-ui/react/separator'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { separatorStyles as styles } from './separator.stylex'
+import { separatorStyles as s } from './separator.stylex'
 import { separatorOrientations as orientations } from './separator.stylex'
 
 export interface SeparatorProps extends Omit<
@@ -25,7 +25,7 @@ export function Separator({ orientation = 'horizontal', style, ...props }: Separ
     <BaseSeparator
       orientation={orientation}
       {...props}
-      {...stylex.props(styles.root, orientations[orientation], style)}
+      {...stylex.props(s.root, orientations[orientation], style)}
     />
   )
 }

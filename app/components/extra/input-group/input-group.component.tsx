@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Button, type ButtonProps } from '#/components/base/button'
 import { Input } from '#/components/base/input'
 import { Textarea } from '#/components/extra/textarea'
-import { inputGroupStyles as styles } from './input-group.stylex'
+import { inputGroupStyles as s } from './input-group.stylex'
 import { inputGroupAddonAligns as addonAligns } from './input-group.stylex'
 import { inputGroupButtonSizes as buttonSizes } from './input-group.stylex'
 
@@ -15,7 +15,7 @@ export function InputGroup({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'div'>, 'className' | 'style'> & StyleProp) {
-  return <div role='group' {...props} {...stylex.props(styles.root, style)} />
+  return <div role='group' {...props} {...stylex.props(s.root, style)} />
 }
 
 export type InputGroupAddonAlign = 'inline-start' | 'inline-end' | 'block-start' | 'block-end'
@@ -36,7 +36,7 @@ export function InputGroupAddon({
         event.currentTarget.parentElement?.querySelector<HTMLElement>('input, textarea')?.focus()
       }}
       {...props}
-      {...stylex.props(styles.addon, addonAligns[align], style)}
+      {...stylex.props(s.addon, addonAligns[align], style)}
     />
   )
 }
@@ -56,16 +56,16 @@ export function InputGroupText({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'span'>, 'className' | 'style'> & StyleProp) {
-  return <span {...props} {...stylex.props(styles.text, style)} />
+  return <span {...props} {...stylex.props(s.text, style)} />
 }
 
 export function InputGroupInput({ style, ...props }: React.ComponentPropsWithoutRef<typeof Input>) {
-  return <Input {...props} style={[styles.control, style]} />
+  return <Input {...props} style={[s.control, style]} />
 }
 
 export function InputGroupTextarea({
   style,
   ...props
 }: React.ComponentPropsWithoutRef<typeof Textarea>) {
-  return <Textarea {...props} style={[styles.control, styles.textarea, style]} />
+  return <Textarea {...props} style={[s.control, s.textarea, style]} />
 }

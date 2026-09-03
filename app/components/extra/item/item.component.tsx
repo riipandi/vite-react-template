@@ -3,7 +3,7 @@ import { useRender } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { Separator } from '#/components/base/separator'
-import { itemStyles as styles, itemVariants, itemSizes } from './item.stylex'
+import { itemStyles as s, itemVariants, itemSizes } from './item.stylex'
 import { itemMediaVariants as mediaVariants } from './item.stylex'
 
 interface StyleProp {
@@ -13,7 +13,7 @@ interface StyleProp {
 type DivProps = Omit<React.ComponentPropsWithoutRef<'div'>, 'className' | 'style'> & StyleProp
 
 export function ItemGroup({ style, ...props }: DivProps) {
-  return <div role='list' {...props} {...stylex.props(styles.group, style)} />
+  return <div role='list' {...props} {...stylex.props(s.group, style)} />
 }
 
 export function ItemSeparator({ ...props }: React.ComponentPropsWithoutRef<typeof Separator>) {
@@ -33,7 +33,7 @@ export function Item({ variant = 'default', size = 'md', style, render, ...props
   return useRender({
     defaultTagName: 'div',
     props: mergeProps<'div'>(
-      stylex.props(styles.root, itemVariants[variant], itemSizes[size], style),
+      stylex.props(s.root, itemVariants[variant], itemSizes[size], style),
       props
     ),
     render
@@ -47,32 +47,32 @@ export function ItemMedia({
   style,
   ...props
 }: DivProps & { variant?: ItemMediaVariant }) {
-  return <div {...props} {...stylex.props(styles.media, mediaVariants[variant], style)} />
+  return <div {...props} {...stylex.props(s.media, mediaVariants[variant], style)} />
 }
 
 export function ItemContent({ style, ...props }: DivProps) {
-  return <div {...props} {...stylex.props(styles.content, style)} />
+  return <div {...props} {...stylex.props(s.content, style)} />
 }
 
 export function ItemTitle({ style, ...props }: DivProps) {
-  return <div {...props} {...stylex.props(styles.title, style)} />
+  return <div {...props} {...stylex.props(s.title, style)} />
 }
 
 export function ItemDescription({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'p'>, 'className' | 'style'> & StyleProp) {
-  return <p {...props} {...stylex.props(styles.description, style)} />
+  return <p {...props} {...stylex.props(s.description, style)} />
 }
 
 export function ItemActions({ style, ...props }: DivProps) {
-  return <div {...props} {...stylex.props(styles.actions, style)} />
+  return <div {...props} {...stylex.props(s.actions, style)} />
 }
 
 export function ItemHeader({ style, ...props }: DivProps) {
-  return <div {...props} {...stylex.props(styles.headerFooter, style)} />
+  return <div {...props} {...stylex.props(s.headerFooter, style)} />
 }
 
 export function ItemFooter({ style, ...props }: DivProps) {
-  return <div {...props} {...stylex.props(styles.headerFooter, style)} />
+  return <div {...props} {...stylex.props(s.headerFooter, style)} />
 }

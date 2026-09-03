@@ -1,7 +1,7 @@
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { sheetStyles as styles, sheetSides as sides } from './sheet.stylex'
+import { sheetStyles as s, sheetSides as sides } from './sheet.stylex'
 
 interface StyleXStyleProps {
   style?: stylex.StyleXStyles
@@ -19,7 +19,7 @@ export function SheetOverlay({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseDialog.Backdrop>, 'className' | 'style'> &
   StyleXStyleProps) {
-  return <BaseDialog.Backdrop {...props} {...stylex.props(styles.overlay, style)} />
+  return <BaseDialog.Backdrop {...props} {...stylex.props(s.overlay, style)} />
 }
 
 export function SheetContent({
@@ -33,10 +33,10 @@ export function SheetContent({
   return (
     <BaseDialog.Portal>
       <SheetOverlay />
-      <BaseDialog.Popup {...props} {...stylex.props(styles.content, sides[side], style)}>
+      <BaseDialog.Popup {...props} {...stylex.props(s.content, sides[side], style)}>
         {children}
         {showCloseButton && (
-          <BaseDialog.Close aria-label='Close' {...stylex.props(styles.close)}>
+          <BaseDialog.Close aria-label='Close' {...stylex.props(s.close)}>
             <svg
               width='16'
               height='16'
@@ -60,14 +60,14 @@ export function SheetHeader({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'div'>, 'className' | 'style'> & StyleXStyleProps) {
-  return <div {...props} {...stylex.props(styles.header, style)} />
+  return <div {...props} {...stylex.props(s.header, style)} />
 }
 
 export function SheetFooter({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'div'>, 'className' | 'style'> & StyleXStyleProps) {
-  return <div {...props} {...stylex.props(styles.footer, style)} />
+  return <div {...props} {...stylex.props(s.footer, style)} />
 }
 
 export function SheetTitle({
@@ -75,7 +75,7 @@ export function SheetTitle({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseDialog.Title>, 'className' | 'style'> &
   StyleXStyleProps) {
-  return <BaseDialog.Title {...props} {...stylex.props(styles.title, style)} />
+  return <BaseDialog.Title {...props} {...stylex.props(s.title, style)} />
 }
 
 export function SheetDescription({
@@ -83,5 +83,5 @@ export function SheetDescription({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseDialog.Description>, 'className' | 'style'> &
   StyleXStyleProps) {
-  return <BaseDialog.Description {...props} {...stylex.props(styles.description, style)} />
+  return <BaseDialog.Description {...props} {...stylex.props(s.description, style)} />
 }

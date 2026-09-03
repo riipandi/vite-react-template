@@ -12,7 +12,7 @@
 import { Switch as BaseSwitch } from '@base-ui/react/switch'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { switchStyles as styles } from './switch.stylex'
+import { switchStyles as s } from './switch.stylex'
 import { switchRootSizes as rootSizes } from './switch.stylex'
 import { switchThumbSizes as thumbSizes } from './switch.stylex'
 
@@ -28,8 +28,8 @@ export interface SwitchProps extends Omit<
 
 export function Switch({ size = 'md', style, ...props }: SwitchProps) {
   return (
-    <BaseSwitch.Root {...props} {...stylex.props(styles.root, rootSizes[size], style)}>
-      <BaseSwitch.Thumb {...stylex.props(styles.thumb, thumbSizes[size])} />
+    <BaseSwitch.Root {...props} {...stylex.props(s.root, rootSizes[size], style)}>
+      <BaseSwitch.Thumb {...stylex.props(s.thumb, thumbSizes[size])} />
     </BaseSwitch.Root>
   )
 }

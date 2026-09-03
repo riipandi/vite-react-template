@@ -12,7 +12,7 @@ import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { Toggle } from '#/components/base/toggle'
 import type { ToggleSize, ToggleVariant, ToggleProps } from '#/components/base/toggle'
-import { toggleGroupStyles as styles } from './toggle-group.stylex'
+import { toggleGroupStyles as s } from './toggle-group.stylex'
 import { toggleGroupOrientations as orientations } from './toggle-group.stylex'
 import { toggleGroupJoinedItems as joinedItems } from './toggle-group.stylex'
 import { toggleGroupJoinedOutline as joinedOutline } from './toggle-group.stylex'
@@ -57,7 +57,7 @@ export function ToggleGroup({
     <BaseToggleGroup
       orientation={orientation}
       {...props}
-      {...stylex.props(styles.root, orientations[orientation], !joined && styles.gap, style)}
+      {...stylex.props(s.root, orientations[orientation], !joined && s.gap, style)}
     >
       <ToggleGroupContext.Provider value={{ variant, size, joined, orientation }}>
         {children}
@@ -74,7 +74,7 @@ export function ToggleGroupItem({ style, ...props }: ToggleProps) {
       size={props.size ?? size}
       {...props}
       style={[
-        styles.item,
+        s.item,
         joined && joinedItems[orientation],
         joined && variant === 'outline' && joinedOutline[orientation],
         style

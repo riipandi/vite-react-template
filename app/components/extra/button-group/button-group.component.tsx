@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { Separator } from '#/components/base/separator'
-import { buttonGroupStyles as styles } from './button-group.stylex'
+import { buttonGroupStyles as s } from './button-group.stylex'
 import { buttonGroupOrientations as orientations } from './button-group.stylex'
 import { buttonGroupJoined as joined } from './button-group.stylex'
 
@@ -28,7 +28,7 @@ export function ButtonGroup({
 }: ButtonGroupProps) {
   const items = React.Children.toArray(children).filter(React.isValidElement)
   return (
-    <div role='group' {...props} {...stylex.props(styles.root, orientations[orientation], style)}>
+    <div role='group' {...props} {...stylex.props(s.root, orientations[orientation], style)}>
       {items.map((child, index) => {
         const position =
           items.length === 1
@@ -55,7 +55,7 @@ export function ButtonGroupText({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'div'>, 'className' | 'style'> & StyleProp) {
-  return <div {...props} {...stylex.props(styles.text, style)} />
+  return <div {...props} {...stylex.props(s.text, style)} />
 }
 
 export function ButtonGroupSeparator({
@@ -63,5 +63,5 @@ export function ButtonGroupSeparator({
   style,
   ...props
 }: React.ComponentPropsWithoutRef<typeof Separator>) {
-  return <Separator orientation={orientation} {...props} style={[styles.separator, style]} />
+  return <Separator orientation={orientation} {...props} style={[s.separator, style]} />
 }

@@ -1,7 +1,7 @@
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
-import { badgeStyles as styles, badgeVariants as variants } from './badge.stylex'
+import { badgeStyles as s, badgeVariants as variants } from './badge.stylex'
 
 export type BadgeVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive'
 
@@ -13,7 +13,7 @@ export interface BadgeProps extends Omit<useRender.ComponentProps<'span'>, 'clas
 export function Badge({ variant = 'primary', style, render, ...props }: BadgeProps) {
   return useRender({
     defaultTagName: 'span',
-    props: mergeProps<'span'>(stylex.props(styles.root, variants[variant], style), props),
+    props: mergeProps<'span'>(stylex.props(s.root, variants[variant], style), props),
     render
   })
 }

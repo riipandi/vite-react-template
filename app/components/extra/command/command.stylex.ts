@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
-import { stroke, container } from '#/styles/core/size.stylex'
-import { unit, radius } from '#/styles/core/size.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
+import { stroke, container } from '#/styles/core/tokens.stylex'
+import { unit, radius } from '#/styles/core/tokens.stylex'
 
 export const commandStyles = stylex.create({
   root: {

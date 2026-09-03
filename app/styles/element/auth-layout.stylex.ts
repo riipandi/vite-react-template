@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { unit } from '#/styles/core/size.stylex'
+import { unit } from '#/styles/core/tokens.stylex'
 
 export const styles = stylex.create({
   wrapper: {

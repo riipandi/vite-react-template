@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { IconComputerMonitor, IconMoon, IconSun } from 'obra-icons-react'
-import { colors } from '#/styles/core/color.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { colors } from '#/styles/core/colors.stylex'
+import { radius } from '#/styles/core/tokens.stylex'
 import { useTheme } from './theme'
 
 const cycle: Record<string, string> = { light: 'dark', dark: 'system', system: 'light' }

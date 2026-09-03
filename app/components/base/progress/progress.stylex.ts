@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
-import { duration, easing } from '#/styles/core/motion.stylex'
-import { unit, radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/tokens.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
+import { duration, easing } from '#/styles/core/tokens.stylex'
 
 export const progressStyles = stylex.create({
   root: {

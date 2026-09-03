@@ -1,5 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 
+// -----------------------------------------------------------------------------
+// Font variables and constants
+// -----------------------------------------------------------------------------
+
 export const fontFamily = stylex.defineVars({
   headline: '"Mona Sans Variable", system-ui, -apple-system, Roboto, Aptos, Helvetica, sans-serif',
   title: '"Mona Sans Variable", system-ui, -apple-system, Roboto, Aptos, Helvetica, sans-serif',
@@ -95,4 +99,92 @@ export const fontLetterSpacing = stylex.defineVars({
   body2: 'normal',
   caption1: 'normal',
   caption2: 'normal'
+})
+
+// -----------------------------------------------------------------------------
+// Measurement variables and constants
+// -----------------------------------------------------------------------------
+
+export const unit = stylex.defineConsts({
+  x0_5: '2px',
+  x1: '4px',
+  x1_5: '6px',
+  x2: '8px',
+  x3: '12px',
+  x4: '16px',
+  x5: '20px',
+  x6: '24px',
+  x7: '28px',
+  x8: '32px',
+  x9: '36px',
+  x10: '40px',
+  x12: '48px',
+  x14: '56px',
+  x16: '64px',
+  x18: '72px',
+  x20: '80px'
+})
+
+export const stroke = stylex.defineConsts({
+  border: '1px',
+  focus: '2px',
+  // Soft state ring (hover/active halo on slider thumbs etc.), like Tailwind's ring-3.
+  halo: '3px'
+})
+
+// Container widths for popups, panels, and example layouts.
+export const container = stylex.defineConsts({
+  xs: '10rem',
+  card: '16rem',
+  sm: '18rem',
+  md: '20rem',
+  lg: '24rem',
+  xl: '28rem',
+  xxl: '32rem'
+})
+
+export const radius = stylex.defineVars({
+  xsmall: '4px',
+  small: '6px',
+  medium: '8px',
+  large: '10px',
+  xlarge: '12px',
+  circular: '999px',
+  none: '0px'
+})
+
+export const zIndex = stylex.defineConsts({
+  relative: 10,
+  absolute: 100,
+  fixed: 200
+})
+
+export const viewport = stylex.defineConsts({
+  medium: 660,
+  large: 900,
+  xlarge: 1280
+})
+
+export const breakpoints = stylex.defineConsts({
+  small: '@media (max-width: 659px)',
+  medium: '@media (min-width: 660px) and (max-width: 899px)',
+  large: '@media (min-width: 900px) and (max-width: 1279px)',
+  xlarge: '@media (min-width: 1280px)'
+})
+
+// -----------------------------------------------------------------------------
+// Motion variables and constants
+// -----------------------------------------------------------------------------
+
+export const duration = stylex.defineVars({
+  rapid: '100ms',
+  fast: '150ms',
+  medium: '200ms',
+  slow: '300ms'
+})
+
+export const easing = stylex.defineVars({
+  standard: 'cubic-bezier(0.2, 0, 0, 1)',
+  accelerate: 'cubic-bezier(0.4, 0, 1, 1)',
+  decelerate: 'cubic-bezier(0, 0, 0.2, 1)'
 })

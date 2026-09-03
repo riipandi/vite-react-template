@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/styles/core/color.stylex'
-import { fontSize, fontWeight } from '#/styles/core/font.stylex'
-import { radius, unit } from '#/styles/core/size.stylex'
+import { colors } from '#/styles/core/colors.stylex'
+import { fontSize, fontWeight } from '#/styles/core/tokens.stylex'
+import { radius, unit } from '#/styles/core/tokens.stylex'
 
 export const socialStyles = stylex.create({
   socialButton: {

@@ -32,7 +32,7 @@
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { shadow } from '#/styles/core/shadow.stylex'
+import { shadow } from '#/styles/core/colors.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { contextMenuStyles as s } from './context-menu.stylex'
 

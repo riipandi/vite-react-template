@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
-import { unit, radius } from '#/styles/core/size.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/tokens.stylex'
+import { unit, radius } from '#/styles/core/tokens.stylex'
 
 export const kbdStyles = stylex.create({
   root: {

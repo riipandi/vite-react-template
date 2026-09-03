@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { useRouterState } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import { colors } from '#/styles/core/color.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 
 const spinKeyframes = stylex.keyframes({
   '0%': { transform: 'rotate(0deg)' },

@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/lib/tokens.stylex'
-import { duration } from '#/styles/core/motion.stylex'
-import { stroke, container } from '#/styles/core/size.stylex'
-import { unit, radius } from '#/styles/core/size.stylex'
+import { stroke, container } from '#/styles/core/tokens.stylex'
+import { unit, radius } from '#/styles/core/tokens.stylex'
+import { duration } from '#/styles/core/tokens.stylex'
 
 export const sliderHaloShadow = `0 0 0 ${stroke.halo} color-mix(in srgb, ${colors.ring} 50%, transparent)`
 

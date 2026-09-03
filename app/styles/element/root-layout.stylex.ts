@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/styles/core/color.stylex'
-import { radius, unit } from '#/styles/core/size.stylex'
+import { colors } from '#/styles/core/colors.stylex'
+import { radius, unit } from '#/styles/core/tokens.stylex'
 
 export const styles = stylex.create({
   layout: {

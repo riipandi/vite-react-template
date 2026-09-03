@@ -14,7 +14,7 @@ import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { colors } from '#/lib/tokens.stylex'
-import { stroke } from '#/styles/core/size.stylex'
+import { stroke } from '#/styles/core/tokens.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { avatarStyles as s, avatarSizes as sizes } from './avatar.stylex'
 

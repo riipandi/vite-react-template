@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { IconCircleSubtract, IconCircleAdd } from 'obra-icons-react'
@@ -39,9 +39,11 @@ const meta = {
 } satisfies Meta
 
 export default meta
-type Story = StoryObj
+type Story = StoryObj<PlaygroundArgs>
 
-function PlaygroundComponent({ size = 24, color }: { size?: number; color?: string }) {
+interface PlaygroundArgs { size?: number; color?: string }
+
+function PlaygroundComponent({ size = 24, color }: PlaygroundArgs) {
   return (
     <div {...stylex.props(atoms.display.flex, atoms.alignItems.center, atoms.gap['1rem'])}>
       <GitHubIcon size={size} color={color} />

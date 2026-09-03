@@ -1,4 +1,4 @@
-import type { StoryContext } from '@storybook/react-vite'
+import type { StoryContext } from '@storybook/tanstack-react'
 import { ThemeProvider, type ThemeStorage } from '#/components/theme'
 
 export const STORYBOOK_THEME_GLOBAL = 'theme' as const

@@ -1,8 +1,8 @@
 import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox'
+import { CheckboxGroup as BaseCheckboxGroup } from '@base-ui/react/checkbox-group'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { space, duration, stroke } from '#/lib/constants.stylex'
-import { colors, radius } from '#/lib/tokens.stylex'
+import { checkboxStyles, checkboxGroupStyles } from './checkbox.stylex'
 
 export interface CheckboxProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BaseCheckbox.Root>,
@@ -13,10 +13,10 @@ export interface CheckboxProps extends Omit<
 
 export function Checkbox({ style, ...props }: CheckboxProps) {
   return (
-    <BaseCheckbox.Root {...props} {...stylex.props(styles.root, style)}>
+    <BaseCheckbox.Root {...props} {...stylex.props(checkboxStyles.root, style)}>
       <BaseCheckbox.Indicator
         render={(indicatorProps, state) => (
-          <span {...indicatorProps} {...stylex.props(styles.indicator)}>
+          <span {...indicatorProps} {...stylex.props(checkboxStyles.indicator)}>
             <svg
               width='12'
               height='12'
@@ -37,48 +37,18 @@ export function Checkbox({ style, ...props }: CheckboxProps) {
   )
 }
 
-const styles = stylex.create({
-  root: {
-    alignItems: 'center',
-    backgroundColor: {
-      default: colors.background,
-      '[data-checked]': colors.primary,
-      '[data-indeterminate]': colors.primary
-    },
-    borderColor: {
-      default: colors.input,
-      '[data-checked]': colors.primary,
-      '[data-indeterminate]': colors.primary,
-      '[data-invalid]': colors.destructive
-    },
-    borderRadius: radius.sm,
-    borderStyle: 'solid',
-    borderWidth: stroke.border,
-    cursor: { default: 'pointer', ':disabled': 'not-allowed' },
-    display: 'inline-flex',
-    flexShrink: 0,
-    height: space.s4,
-    justifyContent: 'center',
-    opacity: { default: 1, ':disabled': 0.5 },
-    outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
-    outlineOffset: stroke.focus,
-    padding: 0,
-    position: 'relative',
-    transitionDuration: duration.fast,
-    transitionProperty: 'background-color, border-color',
-    width: space.s4,
-    // Invisible expanded hit area (larger touch target).
-    '::after': {
-      content: '""',
-      insetBlock: `calc(-1 * ${space.s2})`,
-      insetInline: `calc(-1 * ${space.s3})`,
-      position: 'absolute'
-    }
-  },
-  indicator: {
-    alignItems: 'center',
-    color: colors.primaryForeground,
-    display: 'flex',
-    justifyContent: 'center'
-  }
-})
+export interface CheckboxGroupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseCheckboxGroup>,
+  'className' | 'style'
+> {
+  style?: stylex.StyleXStyles
+}
+
+/**
+ * Shares checked state across Checkboxes: give each child Checkbox a `name`
+ * and control the group with `value` / `defaultValue` (arrays of names).
+ * A parent checkbox is supported via Base UI's `allValues`.
+ */
+export function CheckboxGroup({ style, ...props }: CheckboxGroupProps) {
+  return <BaseCheckboxGroup {...props} {...stylex.props(checkboxGroupStyles.root, style)} />
+}

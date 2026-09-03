@@ -39,7 +39,16 @@ const config: StorybookConfig = {
         stylex({
           useCSSLayers: true,
           aliases: { '#/*': resolve('./app/*') }
-        })
+        }),
+        {
+          // Mirror the `@layer reset;` prelude from index.html: the StyleX dev middleware
+          // injects its priority layers into <head> before globals.css runs, so without
+          // this the reset layer would outrank every StyleX style in the preview iframe.
+          name: 'storybook-stylex-layer-order',
+          transformIndexHtml(html: string) {
+            return html.replace(/<head([^>]*)>/, `<head$1>\n<style>@layer reset;</style>`)
+          }
+        }
       ],
       resolve: { tsconfigPaths: true },
       build: { chunkSizeWarningLimit: 1024 * 4 }

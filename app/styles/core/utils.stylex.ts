@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
-import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
+import { stroke } from '#/styles/core/size.stylex'
 
 /** Re-exported so component files only import from one place. */
 export type StyleXStyles = stylex.StyleXStyles

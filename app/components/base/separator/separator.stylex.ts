@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
-import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
+import { stroke } from '#/styles/core/size.stylex'
 
 export const separatorStyles = stylex.create({
   root: {

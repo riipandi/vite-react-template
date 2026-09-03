@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { stroke } from '#/styles/core/size.stylex'
 import { unit } from '#/styles/core/size.stylex'
 
 export const tableStyles = stylex.create({

@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { stroke } from '#/styles/core/size.stylex'
 import { unit, radius } from '#/styles/core/size.stylex'
 
 export const scrollAreaStyles = stylex.create({

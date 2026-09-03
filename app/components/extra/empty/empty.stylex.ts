@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { stroke, container } from '#/styles/core/size.stylex'
 import { unit, radius } from '#/styles/core/size.stylex'
 
 export const emptyStyles = stylex.create({

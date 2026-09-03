@@ -23,6 +23,7 @@ export const numberFieldStyles = stylex.create({
       ':focus-within': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     outlineOffset: `calc(-1 * ${stroke.border})`,
+    position: 'relative',
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',
     width: 'fit-content'
@@ -73,5 +74,34 @@ export const numberFieldStyles = stylex.create({
     borderLeftStyle: 'solid',
     borderLeftWidth: stroke.border,
     borderTopRightRadius: `calc(${radius.medium} - ${stroke.border})`
+  },
+  // Stacked controls: a narrow column pinned to the end edge with two
+  // half-height buttons on top of each other (chevron up / chevron down).
+  controls: {
+    alignItems: 'stretch',
+    borderBottomRightRadius: `calc(${radius.medium} - ${stroke.border})`,
+    borderLeftColor: colors.borderNeutralFaded,
+    borderLeftStyle: 'solid',
+    borderLeftWidth: stroke.border,
+    borderTopRightRadius: `calc(${radius.medium} - ${stroke.border})`,
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    bottom: 0
+  },
+  controlStacked: {
+    width: unit.x6
+  },
+  controlStackedFirst: {
+    borderTopRightRadius: `calc(${radius.medium} - ${stroke.border})`
+  },
+  controlStackedLast: {
+    borderBottomRightRadius: `calc(${radius.medium} - ${stroke.border})`,
+    borderTopColor: colors.borderNeutralFaded,
+    borderTopStyle: 'solid',
+    borderTopWidth: stroke.border
   }
 })

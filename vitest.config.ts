@@ -5,7 +5,7 @@ import { playwright } from '@vitest/browser-playwright'
 import { resolve } from 'node:path'
 import { loadEnv } from 'vite'
 import { defineConfig } from 'vitest/config'
-import { vitestStylexCleanup } from './tests/stylex-cleanup'
+import { vitestStylexCleanup } from './tests/stylex-cleanup.ts'
 
 // Storybook test project: renders stories in a real browser (Playwright) and
 // runs a11y checks via @storybook/addon-a11y. The Storybook vite config
@@ -16,13 +16,18 @@ const storybookPlugins = await storybookTest({ configDir: resolve('./.storybook'
 
 export default defineConfig({
   test: {
-    // Root-level options (reporters/outputFile/coverage) apply to the whole run
-    // and are not allowed inside a single project in Vitest 4.
-    reporters: process.env.CI ? ['github-actions'] : ['default', 'html'],
-    outputFile: {
-      json: './.output/tests-results/vitest-results.json',
-      html: './.output/tests-results/index.html'
-    },
+    // Root-level reporters and coverage apply to the whole run.
+    reporters: process.env.CI
+      ? [
+          ['github-actions'],
+          ['json', { outputFile: './.output/tests-results/vitest-results.json' }],
+          ['html', { outputDir: './.output/tests-results' }]
+        ]
+      : [
+          ['default'],
+          ['json', { outputFile: './.output/tests-results/vitest-results.json' }],
+          ['html', { outputDir: './.output/tests-results' }]
+        ],
     coverage: {
       provider: 'v8',
       reporter: ['html-spa', 'text-summary'],
@@ -41,9 +46,7 @@ export default defineConfig({
     },
     projects: [
       {
-        // Unit project (happy-dom, fast, no browser). Plugins and Vite options
-        // must live on the project itself — Vitest 4 does not inherit root
-        // plugins/resolve into `test.projects`.
+        // Unit project (happy-dom, fast, no browser).
         plugins: [
           vitestStylexCleanup(),
           stylex({ useCSSLayers: true, aliases: { '#/*': resolve('./app/*') } }),

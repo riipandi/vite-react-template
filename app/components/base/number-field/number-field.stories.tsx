@@ -30,3 +30,23 @@ export const Playground: Story = {
     </NumberField>
   )
 }
+
+export const StackedControls: Story = {
+  args: { defaultValue: 5 },
+  render: (args) => (
+    <NumberField {...args}>
+      <NumberFieldScrubArea>Age</NumberFieldScrubArea>
+      <NumberFieldGroup controls='stacked' />
+    </NumberField>
+  )
+}
+
+export const SideControls: Story = {
+  args: { defaultValue: 5 },
+  render: (args) => (
+    <NumberField {...args}>
+      <NumberFieldScrubArea>Age</NumberFieldScrubArea>
+      <NumberFieldGroup controls='sides' />
+    </NumberField>
+  )
+}

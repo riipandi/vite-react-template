@@ -14,16 +14,24 @@
  *     <NumberField.Increment />
  *   </NumberField.Group>
  * </NumberField.Root>
+ *
+ * The default `controls` layout is "stacked": a narrow chevron up/down column
+ * pinned to the end edge of the field (Reshaped-style). Use "sides" for the
+ * classic minus / plus buttons flanking the input.
  */
 
 import { NumberField as BaseNumberField } from '@base-ui/react/number-field'
 import * as stylex from '@stylexjs/stylex'
+import * as Lucide from 'lucide-react'
 import * as React from 'react'
 import { numberFieldStyles as s } from './number-field.stylex'
 
 interface StyleProp {
   style?: stylex.StyleXStyles
 }
+
+/** Button placement style of the default group. */
+export type NumberFieldControls = 'stacked' | 'sides'
 
 export const NumberFieldScrubArea = BaseNumberField.ScrubArea
 export const NumberFieldScrubAreaCursor = BaseNumberField.ScrubAreaCursor
@@ -39,16 +47,30 @@ export function NumberField({
 export function NumberFieldGroup({
   style,
   children,
+  controls = 'stacked',
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseNumberField.Group>, 'className' | 'style'> &
-  StyleProp) {
+  StyleProp & {
+    /** Placement of the default increment/decrement buttons */
+    controls?: NumberFieldControls
+  }) {
   return (
     <BaseNumberField.Group {...props} {...stylex.props(s.group, style)}>
       {children ?? (
         <>
-          <NumberFieldDecrement />
           <NumberFieldInput />
-          <NumberFieldIncrement />
+          {controls === 'stacked' ? (
+            <span {...stylex.props(s.controls)}>
+              <NumberFieldIncrement controls='stacked' aria-label='Increase' />
+              <NumberFieldDecrement controls='stacked' aria-label='Decrease' />
+            </span>
+          ) : (
+            <>
+              <NumberFieldDecrement aria-label='Decrease' />
+              <NumberFieldInput />
+              <NumberFieldIncrement aria-label='Increase' />
+            </>
+          )}
         </>
       )}
     </BaseNumberField.Group>
@@ -66,25 +88,29 @@ export function NumberFieldInput({
 export function NumberFieldDecrement({
   style,
   children,
+  icon = 'chevron-down',
+  controls = 'sides',
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseNumberField.Decrement>, 'className' | 'style'> &
-  StyleProp) {
+  StyleProp & {
+    /** Icon preset rendered when no children are provided */
+    icon?: 'chevron-down' | 'minus'
+    /** Layout the button is sized for */
+    controls?: NumberFieldControls
+  }) {
+  const stacked = controls === 'stacked'
+  const Icon = icon === 'chevron-down' ? Lucide.ChevronDown : Lucide.Minus
+
   return (
-    <BaseNumberField.Decrement {...props} {...stylex.props(s.button, s.decrement, style)}>
-      {children ?? (
-        <svg
-          width='16'
-          height='16'
-          viewBox={`0 0 16 16`}
-          fill='none'
-          stroke='currentColor'
-          strokeWidth='1.5'
-          strokeLinecap='round'
-          aria-hidden
-        >
-          <path d={`M4 8h8`} />
-        </svg>
+    <BaseNumberField.Decrement
+      {...props}
+      {...stylex.props(
+        s.button,
+        stacked ? [s.controlStacked, s.controlStackedLast] : s.decrement,
+        style
       )}
+    >
+      {children ?? <Icon size={16} strokeWidth={2} aria-hidden />}
     </BaseNumberField.Decrement>
   )
 }
@@ -92,25 +118,29 @@ export function NumberFieldDecrement({
 export function NumberFieldIncrement({
   style,
   children,
+  icon = 'chevron-up',
+  controls = 'sides',
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseNumberField.Increment>, 'className' | 'style'> &
-  StyleProp) {
+  StyleProp & {
+    /** Icon preset rendered when no children are provided */
+    icon?: 'chevron-up' | 'plus'
+    /** Layout the button is sized for */
+    controls?: NumberFieldControls
+  }) {
+  const stacked = controls === 'stacked'
+  const Icon = icon === 'chevron-up' ? Lucide.ChevronUp : Lucide.Plus
+
   return (
-    <BaseNumberField.Increment {...props} {...stylex.props(s.button, s.increment, style)}>
-      {children ?? (
-        <svg
-          width='16'
-          height='16'
-          viewBox={`0 0 16 16`}
-          fill='none'
-          stroke='currentColor'
-          strokeWidth='1.5'
-          strokeLinecap='round'
-          aria-hidden
-        >
-          <path d={`M8 4v8M4 8h8`} />
-        </svg>
+    <BaseNumberField.Increment
+      {...props}
+      {...stylex.props(
+        s.button,
+        stacked ? [s.controlStacked, s.controlStackedFirst] : s.increment,
+        style
       )}
+    >
+      {children ?? <Icon size={16} strokeWidth={2} aria-hidden />}
     </BaseNumberField.Increment>
   )
 }

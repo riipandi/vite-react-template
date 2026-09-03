@@ -28,6 +28,9 @@ export default defineConfig({
           ['json', { outputFile: './.output/tests-results/vitest-results.json' }],
           ['html', { outputDir: './.output/tests-results' }]
         ],
+    browser: {
+      traceView: true
+    },
     coverage: {
       provider: 'v8',
       reporter: ['html-spa', 'text-summary'],
@@ -55,6 +58,7 @@ export default defineConfig({
         resolve: { tsconfigPaths: true },
         envPrefix: ['VITE_', 'PUBLIC_'],
         define: { 'import.meta.env.PUBLIC_APP_VERSION': '"test"' },
+        extends: true,
         test: {
           name: 'unit',
           environment: 'happy-dom',

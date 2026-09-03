@@ -35,7 +35,7 @@
 import { Select as BaseSelect } from '@base-ui/react/select'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { shadow } from '#/lib/tokens.stylex'
+import { shadow } from '#/styles/core/shadow.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { selectStyles as s } from './select.stylex'
 
@@ -117,7 +117,7 @@ export function SelectContent({
             s.popup,
             // Edge as a ring, not a border: Base UI's align-item-with-trigger
             // math ignores borders and would shift the aligned text.
-            ring({ shadow: shadow.md }),
+            ring({ shadow: shadow.raised }),
             // The align-with-trigger overlay repositions on open; a scale-in
             // animation fights that, so it only fades out. Anchored mode gets
             // the full closed pose on entry and exit.

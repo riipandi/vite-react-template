@@ -32,7 +32,7 @@
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { shadow } from '#/lib/tokens.stylex'
+import { shadow } from '#/styles/core/shadow.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { contextMenuStyles as s } from './context-menu.stylex'
 
@@ -82,7 +82,7 @@ export function ContextMenuContent({
       >
         <BaseContextMenu.Popup
           {...props}
-          {...stylex.props(s.popup, ring({ shadow: shadow.md }), style)}
+          {...stylex.props(s.popup, ring({ shadow: shadow.raised }), style)}
         />
       </BaseContextMenu.Positioner>
     </BaseContextMenu.Portal>

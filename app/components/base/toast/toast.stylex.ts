@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
-import { colors, shadow } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
+import { shadow } from '#/styles/core/shadow.stylex'
 import { radius, zIndex } from '#/styles/core/size.stylex'
 
 export const toastStyles = stylex.create({
@@ -27,7 +28,7 @@ export const toastStyles = stylex.create({
     borderStyle: 'solid',
     borderWidth: stroke.border,
     bottom: 0,
-    boxShadow: shadow.lg,
+    boxShadow: shadow.overlay,
     boxSizing: 'border-box',
     color: colors.popoverForeground,
     display: 'flex',

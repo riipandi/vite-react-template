@@ -25,7 +25,7 @@
 import { Popover as BasePopover } from '@base-ui/react/popover'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { shadow } from '#/lib/tokens.stylex'
+import { shadow } from '#/styles/core/shadow.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { popoverStyles as s } from './popover.stylex'
 
@@ -66,7 +66,7 @@ export function PopoverContent({
       >
         <BasePopover.Popup
           {...props}
-          {...stylex.props(s.popup, ring({ shadow: shadow.md }), style)}
+          {...stylex.props(s.popup, ring({ shadow: shadow.raised }), style)}
         />
       </BasePopover.Positioner>
     </BasePopover.Portal>

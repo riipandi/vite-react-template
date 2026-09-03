@@ -19,7 +19,7 @@
 import { PreviewCard as BasePreviewCard } from '@base-ui/react/preview-card'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { shadow } from '#/lib/tokens.stylex'
+import { shadow } from '#/styles/core/shadow.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { previewCardStyles as s } from './preview-card.stylex'
 
@@ -55,7 +55,7 @@ export function PreviewCardContent({
       >
         <BasePreviewCard.Popup
           {...props}
-          {...stylex.props(s.popup, ring({ shadow: shadow.md }), style)}
+          {...stylex.props(s.popup, ring({ shadow: shadow.raised }), style)}
         />
       </BasePreviewCard.Positioner>
     </BasePreviewCard.Portal>

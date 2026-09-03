@@ -22,7 +22,7 @@
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { shadow } from '#/lib/tokens.stylex'
+import { shadow } from '#/styles/core/shadow.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { dialogStyles as s } from './dialog.stylex'
 
@@ -53,7 +53,10 @@ export function DialogContent({
   return (
     <BaseDialog.Portal>
       <DialogOverlay />
-      <BaseDialog.Popup {...props} {...stylex.props(s.content, ring({ shadow: shadow.lg }), style)}>
+      <BaseDialog.Popup
+        {...props}
+        {...stylex.props(s.content, ring({ shadow: shadow.overlay }), style)}
+      >
         {children}
         {showCloseButton && (
           <BaseDialog.Close aria-label='Close' {...stylex.props(s.close)}>

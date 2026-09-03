@@ -30,7 +30,7 @@
 import { NavigationMenu as BaseNavigationMenu } from '@base-ui/react/navigation-menu'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { shadow } from '#/lib/tokens.stylex'
+import { shadow } from '#/styles/core/shadow.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { navigationMenuStyles as s } from './navigation-menu.stylex'
 
@@ -135,7 +135,7 @@ export function NavigationMenuPositioner({
         {...props}
         {...stylex.props(s.positioner, style)}
       >
-        <BaseNavigationMenu.Popup {...stylex.props(s.popup, ring({ shadow: shadow.md }))}>
+        <BaseNavigationMenu.Popup {...stylex.props(s.popup, ring({ shadow: shadow.raised }))}>
           <BaseNavigationMenu.Viewport {...stylex.props(s.viewport)} />
         </BaseNavigationMenu.Popup>
       </BaseNavigationMenu.Positioner>

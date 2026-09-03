@@ -36,7 +36,7 @@
 import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { shadow } from '#/lib/tokens.stylex'
+import { shadow } from '#/styles/core/shadow.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { autocompleteStyles as s } from './autocomplete.stylex'
 
@@ -91,7 +91,7 @@ export function AutocompleteContent({
       >
         <BaseAutocomplete.Popup
           {...props}
-          {...stylex.props(s.popup, ring({ shadow: shadow.md }), style)}
+          {...stylex.props(s.popup, ring({ shadow: shadow.raised }), style)}
         />
       </BaseAutocomplete.Positioner>
     </BaseAutocomplete.Portal>

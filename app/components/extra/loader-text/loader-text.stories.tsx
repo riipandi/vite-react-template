@@ -75,7 +75,7 @@ export const Sequence: Story = {
       {...stylex.props(
         atoms.display('flex'),
         atoms.flexDirection('column'),
-        atoms.gap(12),
+        atoms.gap['12px'],
         atoms.width('100%')
       )}
     >

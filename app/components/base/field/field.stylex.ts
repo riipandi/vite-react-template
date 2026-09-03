@@ -64,7 +64,7 @@ export const fieldStyles = stylex.create({
   },
   description: {
     color: colors.foregroundNeutralFaded,
-    fontSize: fontSize.body2,
+    fontSize: fontSize.caption1,
     lineHeight: fontLineHeight.body2,
     margin: 0,
     textAlign: 'left'
@@ -81,7 +81,10 @@ export const fieldStyles = stylex.create({
     top: '50%'
   },
   separatorContent: {
-    backgroundColor: colors.backgroundPage,
+    // Matches the Card surface: the separator lives inside a card, and the
+    // content background must mask the line without clashing with it in
+    // either theme.
+    backgroundColor: colors.backgroundElevationBase,
     color: colors.foregroundNeutralFaded,
     display: 'block',
     marginInline: 'auto',

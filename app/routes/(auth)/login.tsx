@@ -1,11 +1,24 @@
+import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useForm } from '@tanstack/react-form'
 import { createFileRoute, Link, useSearch } from '@tanstack/react-router'
+import * as Lucide from 'lucide-react'
 import { useState } from 'react'
 import { z } from 'zod'
 import { Button } from '#/components/base/button'
-import { GitHubIcon, GoogleIcon } from '#/components/icons'
-import { ViteIcon } from '#/components/icons'
+import { Checkbox } from '#/components/base/checkbox'
+import { Field, FieldError, FieldLabel, FieldSeparator } from '#/components/base/field'
+import { Input } from '#/components/base/input'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/components/base/tooltip'
+import { Alert, AlertDescription, AlertTitle } from '#/components/extra/alert'
+import { ButtonGroup } from '#/components/extra/button-group'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '#/components/extra/card'
+import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '#/components/extra/item'
+import { Kbd } from '#/components/extra/kbd'
+import { LoaderText } from '#/components/extra/loader-text'
+import { Spinner } from '#/components/extra/spinner'
+import { Text } from '#/components/extra/text'
+import { GitHubIcon, GoogleIcon, ViteIcon } from '#/components/icons'
 import { useAuthentication } from '#/libraries/guard/auth-provider'
 import { getErrorMessage } from '#/libraries/guard/auth-utils'
 import { loginSchema } from '#/schemas/auth.schema'
@@ -25,6 +38,7 @@ function RouteComponent() {
   const { login } = useAuthentication()
   const { loggedOut } = useSearch({ from: Route.id })
   const [failed, setFailed] = useState<string | null>(null)
+  const [remember, setRemember] = useState(false)
 
   const clearAlerts = () => setFailed(null)
 
@@ -47,130 +61,169 @@ function RouteComponent() {
   })
 
   return (
-    <>
-      {failed && (
-        <div id='login-alert-error' {...stylex.props(styles.alert, styles.alertError)}>
-          {failed}
+    <Card size='md' id='login-card' style={styles.cardRoot}>
+      <CardHeader style={styles.header}>
+        <div {...stylex.props(styles.logo)}>
+          <ViteIcon size={28} />
         </div>
-      )}
-      {loggedOut && !failed && (
-        <div id='login-alert-goodbye' {...stylex.props(styles.alert, styles.alertSuccess)}>
-          <span {...stylex.props(styles.loggedOutMessage)}>Goodbye!</span> Your session has been
-          terminated.
+        <Text render={<h1 />} variant='featured-5' weight='semibold'>
+          Sign in to your account
+        </Text>
+        <CardDescription>Welcome back! Please enter your credentials.</CardDescription>
+      </CardHeader>
+
+      <CardContent>
+        <div {...stylex.props(styles.alerts)}>
+          {failed && (
+            <Alert variant='destructive' id='login-alert-error'>
+              <AlertTitle>Sign in failed</AlertTitle>
+              <AlertDescription>{failed}</AlertDescription>
+            </Alert>
+          )}
+          {loggedOut && !failed && (
+            <Alert id='login-alert-goodbye'>
+              <AlertTitle>Goodbye!</AlertTitle>
+              <AlertDescription>Your session has been terminated.</AlertDescription>
+            </Alert>
+          )}
         </div>
-      )}
 
-      <div id='login-card' {...stylex.props(styles.card)}>
-        <div {...stylex.props(styles.cardBody)}>
-          <div {...stylex.props(styles.header)}>
-            <div {...stylex.props(styles.logoWrapper)}>
-              <div {...stylex.props(styles.logo)}>
-                <ViteIcon size={36} />
-              </div>
-            </div>
-            <h1 {...stylex.props(styles.heading)}>Sign in to your account</h1>
-            <p {...stylex.props(styles.subtitle)}>Welcome back! Please enter your credentials.</p>
+        <ButtonGroup orientation='vertical' style={styles.socialGroup}>
+          <Button type='button' variant='outline' style={socialStyles.socialButton}>
+            <GoogleIcon size={16} />
+            Continue with Google
+          </Button>
+          <Button type='button' variant='outline' style={socialStyles.socialButton}>
+            <GitHubIcon size={16} />
+            Continue with GitHub
+          </Button>
+        </ButtonGroup>
+
+        <FieldSeparator style={styles.divider}>or continue with</FieldSeparator>
+
+        <form
+          id='login-form'
+          autoComplete='on'
+          onSubmit={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            form.handleSubmit()
+          }}
+        >
+          <div id='login-form-grid' {...stylex.props(styles.formGrid)}>
+            <form.Field
+              name='username'
+              children={(field) => {
+                const error = field.state.meta.errors?.[0]?.message
+                return (
+                  <Field id='field-username' invalid={!!error}>
+                    <FieldLabel htmlFor='username'>Username</FieldLabel>
+                    <Input
+                      id='username'
+                      name='username'
+                      placeholder='emilys'
+                      autoComplete='username'
+                      value={field.state.value}
+                      onChange={(e) => {
+                        clearAlerts()
+                        field.handleChange(e.target.value)
+                      }}
+                      onBlur={field.handleBlur}
+                    />
+                    <FieldError errors={error ? [{ message: error }] : undefined} />
+                  </Field>
+                )
+              }}
+            />
+
+            <form.Field
+              name='password'
+              children={(field) => {
+                const error = field.state.meta.errors?.[0]?.message
+                return (
+                  <Field id='field-password' invalid={!!error}>
+                    <FieldLabel htmlFor='password'>Password</FieldLabel>
+                    <Input
+                      id='password'
+                      name='password'
+                      type='password'
+                      placeholder='••••••••'
+                      autoComplete='current-password'
+                      value={field.state.value}
+                      onChange={(e) => {
+                        clearAlerts()
+                        field.handleChange(e.target.value)
+                      }}
+                      onBlur={field.handleBlur}
+                    />
+                    <FieldError errors={error ? [{ message: error }] : undefined} />
+                  </Field>
+                )
+              }}
+            />
           </div>
 
-          <div {...stylex.props(styles.socialButtons)}>
-            <button type='button' {...stylex.props(socialStyles.socialButton)}>
-              <GoogleIcon size={16} />
-              Sign in with Google
-            </button>
-            <button type='button' {...stylex.props(socialStyles.socialButton)}>
-              <GitHubIcon size={16} />
-              Sign in with GitHub
-            </button>
+          <Field orientation='horizontal' style={styles.rememberField}>
+            <Checkbox
+              id='remember'
+              name='remember'
+              checked={remember}
+              onCheckedChange={(checked) => setRemember(checked === true)}
+            />
+            <FieldLabel htmlFor='remember'>Remember me on this device</FieldLabel>
+          </Field>
+
+          <div {...stylex.props(styles.submitWrapper)}>
+            <form.Subscribe
+              selector={(state) => [state.canSubmit, state.isSubmitting] as const}
+              children={([canSubmit, isSubmitting]) => (
+                <Button type='submit' variant='primary' disabled={!canSubmit} style={styles.submit}>
+                  {isSubmitting && <Spinner />}
+                  {isSubmitting ? <LoaderText variant='body-2'>Signing in…</LoaderText> : 'Sign in'}
+                </Button>
+              )}
+            />
           </div>
+        </form>
 
-          <div {...stylex.props(styles.separator)}>
-            <span {...stylex.props(styles.separatorLine)} />
-            <span {...stylex.props(styles.separatorText)}>or continue with</span>
-            <span {...stylex.props(styles.separatorLine)} />
-          </div>
+        <TooltipProvider>
+          <Item variant='muted' size='sm' style={styles.demoItem}>
+            <ItemMedia variant='icon'>
+              <Lucide.KeyRound size={14} />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>
+                Demo credentials
+                <Tooltip>
+                  <TooltipTrigger
+                    render={
+                      <span {...stylex.props(styles.hintIcon)} aria-label='About demo credentials'>
+                        <Lucide.CircleHelp size={13} />
+                      </span>
+                    }
+                    tabIndex={0}
+                  />
+                  <TooltipContent>
+                    Any valid DummyJSON account works with this template.
+                  </TooltipContent>
+                </Tooltip>
+              </ItemTitle>
+              <ItemDescription>
+                Try <Kbd>emilys</Kbd> / <Kbd>emilyspass</Kbd> for demo account.
+              </ItemDescription>
+            </ItemContent>
+          </Item>
+        </TooltipProvider>
+      </CardContent>
 
-          <form
-            id='login-form'
-            autoComplete='on'
-            onSubmit={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              form.handleSubmit()
-            }}
-          >
-            <div {...stylex.props(styles.formGrid)}>
-              <form.Field
-                name='username'
-                children={(field) => {
-                  const error = field.state.meta.errors?.[0]?.message
-                  return (
-                    <div id='field-username' {...stylex.props(styles.field)}>
-                      <label {...stylex.props(styles.label)} htmlFor='username'>
-                        Username
-                      </label>
-                      <input
-                        id='username'
-                        value={field.state.value}
-                        onChange={(e) => {
-                          clearAlerts()
-                          field.handleChange(e.target.value)
-                        }}
-                        onBlur={field.handleBlur}
-                        {...stylex.props(styles.input, error ? styles.inputError : null)}
-                      />
-                      {error && <span {...stylex.props(styles.fieldError)}>{error}</span>}
-                    </div>
-                  )
-                }}
-              />
-
-              <form.Field
-                name='password'
-                children={(field) => {
-                  const error = field.state.meta.errors?.[0]?.message
-                  return (
-                    <div id='field-password' {...stylex.props(styles.field)}>
-                      <label {...stylex.props(styles.label)} htmlFor='password'>
-                        Password
-                      </label>
-                      <input
-                        id='password'
-                        type='password'
-                        value={field.state.value}
-                        onChange={(e) => {
-                          clearAlerts()
-                          field.handleChange(e.target.value)
-                        }}
-                        onBlur={field.handleBlur}
-                        {...stylex.props(styles.input, error ? styles.inputError : null)}
-                      />
-                      {error && <span {...stylex.props(styles.fieldError)}>{error}</span>}
-                    </div>
-                  )
-                }}
-              />
-            </div>
-
-            <div {...stylex.props(styles.submitWrapper)}>
-              <form.Subscribe
-                selector={(state) => [state.canSubmit, state.isSubmitting]}
-                children={([canSubmit, isSubmitting]) => (
-                  <Button type='submit' variant='primary' disabled={!canSubmit}>
-                    {isSubmitting ? 'Signing in...' : 'Sign in'}
-                  </Button>
-                )}
-              />
-            </div>
-          </form>
-
-          <div {...stylex.props(styles.footer)}>
-            <span {...stylex.props(styles.footerText)}>Back to</span>
-            <Link to='/' {...stylex.props(styles.backLink)}>
-              homepage
-            </Link>
-          </div>
-        </div>
-      </div>
-    </>
+      <CardFooter style={atoms.justifyContent.center}>
+        <Text variant='body-2' color='neutral-faded'>
+          Back to{' '}
+          <Link to='/' {...stylex.props(styles.backLink)}>
+            homepage
+          </Link>
+        </Text>
+      </CardFooter>
+    </Card>
   )
 }

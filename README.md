@@ -34,7 +34,7 @@ with [ofetch](https://github.com/unjs/ofetch), easily replaceable with your own 
 - [x] [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling.
 - [x] [React](https://reactjs.org) - A JavaScript library for building user interfaces.
 - [x] [StyleX](https://stylexjs.com) - The styling system for ambitious user interfaces.
-- [x] [Obra Icons](https://icons.obra.studio) - A simple, consistent set of icons, perfect for user interfaces.
+- [x] [Lucide Icons](https://lucide.dev) - Beautiful & consistent 1600+ vector icons.
 - [x] [Typescript](https://www.typescriptlang.org) - Strongly typed programming language.
 - [x] [TanStack Router](https://tanstack.com/router) - Type-safe routing for React.
 - [x] [TanStack Form](https://tanstack.com/form) - Headless, type-safe form state management.

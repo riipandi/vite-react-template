@@ -67,7 +67,7 @@ export const Playground: Story = {
 
 export const Variants: Story = {
   render: () => (
-    <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap[8])}>
+    <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap['8px'])}>
       <Text variant='headline-1'>Headline 1</Text>
       <Text variant='headline-2'>Headline 2</Text>
       <Text variant='headline-3'>Headline 3</Text>
@@ -87,7 +87,7 @@ export const Variants: Story = {
 
 export const Colors: Story = {
   render: () => (
-    <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap[8])}>
+    <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap['8px'])}>
       <Text>Neutral</Text>
       <Text color='neutral-faded'>Neutral faded</Text>
       <Text color='positive'>Positive</Text>
@@ -101,7 +101,7 @@ export const Colors: Story = {
 
 export const Weights: Story = {
   render: () => (
-    <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap[8])}>
+    <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap['8px'])}>
       <Text weight='light'>Light</Text>
       <Text weight='regular'>Regular</Text>
       <Text weight='medium'>Medium</Text>
@@ -115,7 +115,7 @@ export const Weights: Story = {
 
 export const Responsive: Story = {
   render: () => (
-    <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap[8])}>
+    <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap['8px'])}>
       <Text variant={{ s: 'body-2', l: 'body-1' }}>Responsive variant</Text>
       <Text weight={{ s: 'regular', l: 'bold' }}>Responsive weight</Text>
       <Text align={{ s: 'start', l: 'end' }}>Responsive align</Text>
@@ -136,7 +136,7 @@ export const Truncation: Story = {
 
 export const Formatting: Story = {
   render: () => (
-    <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap[8])}>
+    <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap['8px'])}>
       <Text wrap='balance'>
         Text balance wrap keeps line lengths even when the text splits into multiple lines.
       </Text>

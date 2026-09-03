@@ -7,7 +7,7 @@ You are helping maintain this template for its author.
 
 - React 19 + Vite 8 + TypeScript, package manager: pnpm (see `packageManager` in package.json).
 - TanStack Router for routing, TanStack Query for server state, TanStack Form, TanStack Store.
-- StyleX for all styling, Base UI for headless primitives, Obra Icons for icons, ofetch for HTTP.
+- StyleX for all styling, Base UI for headless primitives, Lucide Icons for icons, ofetch for HTTP.
 - Linting and formatting use Oxc tools (`oxlint`, `oxfmt`), configured in `.oxlintrc.json` / `.oxfmtrc.json`. No ESLint/Prettier.
 
 ## Build / Test / Lint

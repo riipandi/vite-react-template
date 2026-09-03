@@ -20,13 +20,13 @@ const entrance = stylex.keyframes({
 
 export const homeStyles = stylex.create({
   header: {
-    marginBottom: 'auto',
     display: 'flex',
     width: '100%',
     justifyContent: 'flex-end',
     padding: unit.x4
   },
   content: {
+    flexGrow: 1,
     marginLeft: 'auto',
     marginRight: 'auto',
     display: 'flex',
@@ -233,7 +233,6 @@ export const homeStyles = stylex.create({
   },
 
   footer: {
-    marginTop: 'auto',
     paddingTop: unit.x5,
     paddingBottom: unit.x5,
     textAlign: 'center'

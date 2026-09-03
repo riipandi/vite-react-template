@@ -1,10 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
-import { z, stroke, container } from '#/lib/constants.stylex'
+import { stroke, container } from '#/lib/constants.stylex'
 import { colors, shadow } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { radius, zIndex } from '#/styles/core/size.stylex'
 
 export const toastStyles = stylex.create({
   viewport: {
@@ -12,7 +12,7 @@ export const toastStyles = stylex.create({
     position: 'fixed',
     right: space.s4,
     width: container.md,
-    zIndex: z.toast
+    zIndex: zIndex.fixed
   },
   root: {
     // Behind toasts peek out above the frontmost one, shrunk slightly; swipe
@@ -67,7 +67,7 @@ export const toastStyles = stylex.create({
     },
     transitionTimingFunction: easing.decelerate,
     width: '100%',
-    zIndex: `calc(${z.toast} - var(--toast-index))`
+    zIndex: `calc(${zIndex.fixed} - var(--toast-index))`
   },
   content: {
     alignItems: 'flex-start',

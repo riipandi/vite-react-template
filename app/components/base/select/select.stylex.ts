@@ -1,10 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
-import { z, stroke, container } from '#/lib/constants.stylex'
+import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { radius, zIndex } from '#/styles/core/size.stylex'
 
 export const selectStyles = stylex.create({
   label: {
@@ -49,7 +49,7 @@ export const selectStyles = stylex.create({
   },
   positioner: {
     outline: 'none',
-    zIndex: z.popup
+    zIndex: zIndex.absolute
   },
   popup: {
     backgroundColor: colors.popover,

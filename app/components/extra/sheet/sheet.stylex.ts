@@ -1,10 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
-import { z, stroke, container } from '#/lib/constants.stylex'
+import { stroke, container } from '#/lib/constants.stylex'
 import { colors, shadow } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { radius, zIndex } from '#/styles/core/size.stylex'
 
 export const sheetStyles = stylex.create({
   overlay: {
@@ -19,7 +19,7 @@ export const sheetStyles = stylex.create({
     transitionDuration: duration.medium,
     transitionProperty: 'opacity',
     transitionTimingFunction: easing.decelerate,
-    zIndex: z.popup
+    zIndex: zIndex.absolute
   },
   content: {
     backgroundColor: colors.popover,
@@ -43,7 +43,7 @@ export const sheetStyles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': 'opacity'
     },
     transitionTimingFunction: easing.decelerate,
-    zIndex: z.popup
+    zIndex: zIndex.absolute
   },
   close: {
     alignItems: 'center',

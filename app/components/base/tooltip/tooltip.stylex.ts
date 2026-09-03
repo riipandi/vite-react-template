@@ -1,14 +1,14 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, z, container } from '#/lib/constants.stylex'
+import { space, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { radius, zIndex } from '#/styles/core/size.stylex'
 
 export const tooltipStyles = stylex.create({
   positioner: {
     outline: 'none',
-    zIndex: z.popup
+    zIndex: zIndex.absolute
   },
   // Closed pose (Base UI's [data-starting-style]/[data-ending-style] frames):
   // faded, slightly shrunk, nudged toward the anchor. [data-side] sets the

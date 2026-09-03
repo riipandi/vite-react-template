@@ -1,10 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, z } from '#/lib/constants.stylex'
+import { space } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { radius, zIndex } from '#/styles/core/size.stylex'
 
 export const dialogStyles = stylex.create({
   overlay: {
@@ -19,7 +19,7 @@ export const dialogStyles = stylex.create({
     transitionDuration: duration.medium,
     transitionProperty: 'opacity',
     transitionTimingFunction: easing.decelerate,
-    zIndex: z.popup
+    zIndex: zIndex.absolute
   },
   content: {
     backgroundColor: colors.popover,
@@ -51,7 +51,7 @@ export const dialogStyles = stylex.create({
     },
     transitionTimingFunction: easing.decelerate,
     width: container.xxl,
-    zIndex: z.popup
+    zIndex: zIndex.absolute
   },
   close: {
     alignItems: 'center',

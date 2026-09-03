@@ -1,10 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
-import { z, stroke, container } from '#/lib/constants.stylex'
+import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { radius, zIndex } from '#/styles/core/size.stylex'
 
 export const drawerStyles = stylex.create({
   overlay: {
@@ -22,14 +22,14 @@ export const drawerStyles = stylex.create({
     transitionProperty: 'opacity',
     transitionTimingFunction: easing.decelerate,
     userSelect: 'none',
-    zIndex: z.popup
+    zIndex: zIndex.absolute
   },
   viewport: {
     inset: 0,
     pointerEvents: 'none',
     position: 'fixed',
     userSelect: 'none',
-    zIndex: z.popup
+    zIndex: zIndex.absolute
   },
   viewportModal: {
     pointerEvents: 'auto'
@@ -56,7 +56,7 @@ export const drawerStyles = stylex.create({
     transitionTimingFunction: easing.decelerate,
     userSelect: 'none',
     willChange: 'transform',
-    zIndex: z.popup
+    zIndex: zIndex.absolute
   },
   content: {
     borderRadius: 'inherit',

@@ -22,16 +22,10 @@ export const space = stylex.defineConsts({
   s16: '4rem'
 })
 
-export const z = stylex.defineConsts({
-  popup: '50',
-  toast: '100'
-})
-
 export const stroke = stylex.defineConsts({
   border: '1px',
   focus: '2px',
-  // Soft state ring (hover/active halo on slider thumbs etc.), like
-  // Tailwind's ring-3.
+  // Soft state ring (hover/active halo on slider thumbs etc.), like Tailwind's ring-3.
   halo: '3px'
 })
 

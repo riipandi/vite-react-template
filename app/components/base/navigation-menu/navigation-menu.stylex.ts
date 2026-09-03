@@ -1,10 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
-import { z, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { radius, zIndex } from '#/styles/core/size.stylex'
 
 export const navigationMenuStyles = stylex.create({
   root: {
@@ -109,7 +109,7 @@ export const navigationMenuStyles = stylex.create({
     // surface during the trigger-to-trigger morph.
     transitionTimingFunction: easing.decelerate,
     width: 'var(--positioner-width)',
-    zIndex: z.popup
+    zIndex: zIndex.absolute
   },
   popup: {
     backgroundColor: colors.popover,

@@ -1,9 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const numberFieldStyles = stylex.create({
   root: {
@@ -17,7 +17,7 @@ export const numberFieldStyles = stylex.create({
     borderStyle: 'solid',
     borderWidth: stroke.border,
     display: 'flex',
-    height: space.s9,
+    height: unit.x9,
     outline: {
       default: 'none',
       ':focus-within': `${stroke.focus} solid ${colors.ring}`
@@ -37,7 +37,7 @@ export const numberFieldStyles = stylex.create({
     outline: 'none',
     padding: 0,
     textAlign: 'center',
-    width: space.s16
+    width: unit.x16
   },
   button: {
     alignItems: 'center',
@@ -58,7 +58,7 @@ export const numberFieldStyles = stylex.create({
     padding: 0,
     transitionDuration: duration.fast,
     transitionProperty: 'background-color, color',
-    width: space.s9
+    width: unit.x9
   },
   decrement: {
     borderBottomLeftRadius: `calc(${radius.medium} - ${stroke.border})`,

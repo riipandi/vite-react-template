@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { unit } from '#/styles/core/size.stylex'
 
 export const labelStyles = stylex.create({
   root: {
@@ -9,7 +9,7 @@ export const labelStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    gap: space.s2,
+    gap: unit.x2,
     lineHeight: fontLineHeight.body2,
     userSelect: 'none'
   }

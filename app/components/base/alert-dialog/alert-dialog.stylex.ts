@@ -1,10 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius, zIndex } from '#/styles/core/size.stylex'
+import { unit, radius, zIndex } from '#/styles/core/size.stylex'
 
 export const alertDialogStyles = stylex.create({
   overlay: {
@@ -28,15 +27,15 @@ export const alertDialogStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
-    gap: space.s4,
+    gap: unit.x4,
     left: '50%',
-    maxWidth: `calc(100% - ${space.s8})`,
+    maxWidth: `calc(100% - ${unit.x8})`,
     opacity: {
       default: 1,
       '[data-starting-style]': 0,
       '[data-ending-style]': 0
     },
-    padding: space.s4,
+    padding: unit.x4,
     position: 'fixed',
     top: '50%',
     transform: {
@@ -59,7 +58,7 @@ export const alertDialogStyles = stylex.create({
     },
     display: 'flex',
     flexDirection: 'column',
-    gap: space.s15,
+    gap: unit.x1_5,
     textAlign: {
       default: 'center',
       '@media (min-width: 640px)': 'left'
@@ -70,10 +69,10 @@ export const alertDialogStyles = stylex.create({
     backgroundColor: colors.muted,
     borderRadius: radius.medium,
     display: 'inline-flex',
-    height: space.s10,
+    height: unit.x10,
     justifyContent: 'center',
-    marginBottom: space.s2,
-    width: space.s10
+    marginBottom: unit.x2,
+    width: unit.x10
   },
   footer: {
     backgroundColor: `color-mix(in srgb, ${colors.muted} 50%, transparent)`,
@@ -87,14 +86,14 @@ export const alertDialogStyles = stylex.create({
       default: 'column-reverse',
       '@media (min-width: 640px)': 'row'
     },
-    gap: space.s2,
+    gap: unit.x2,
     justifyContent: {
       default: 'stretch',
       '@media (min-width: 640px)': 'flex-end'
     },
-    marginBottom: `calc(-1 * ${space.s4})`,
-    marginInline: `calc(-1 * ${space.s4})`,
-    padding: space.s4
+    marginBottom: `calc(-1 * ${unit.x4})`,
+    marginInline: `calc(-1 * ${unit.x4})`,
+    padding: unit.x4
   },
   title: {
     fontSize: fontSize.body1,

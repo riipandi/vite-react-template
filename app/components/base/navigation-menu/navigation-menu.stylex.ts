@@ -1,10 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius, zIndex } from '#/styles/core/size.stylex'
+import { unit, radius, zIndex } from '#/styles/core/size.stylex'
 
 export const navigationMenuStyles = stylex.create({
   root: {
@@ -18,7 +17,7 @@ export const navigationMenuStyles = stylex.create({
   list: {
     alignItems: 'center',
     display: 'flex',
-    gap: space.s1,
+    gap: unit.x1,
     justifyContent: 'center',
     listStyle: 'none',
     margin: 0,
@@ -50,16 +49,16 @@ export const navigationMenuStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    gap: space.s1,
-    height: space.s9,
+    gap: unit.x1,
+    height: unit.x9,
     justifyContent: 'center',
     lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
       ':focus-visible': `${stroke.focus} solid ${colors.ring}`
     },
-    paddingBlock: space.s15,
-    paddingInline: space.s25,
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x2,
     transitionDuration: duration.fast,
     transitionProperty: 'background-color, color',
     userSelect: 'none',
@@ -73,7 +72,7 @@ export const navigationMenuStyles = stylex.create({
     transitionTimingFunction: easing.decelerate
   },
   content: {
-    padding: space.s1
+    padding: unit.x1
   },
   link: {
     alignItems: 'center',
@@ -86,13 +85,13 @@ export const navigationMenuStyles = stylex.create({
     color: colors.foreground,
     display: 'flex',
     fontSize: fontSize.body2,
-    gap: space.s2,
+    gap: unit.x2,
     lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
       ':focus-visible': `${stroke.focus} solid ${colors.ring}`
     },
-    padding: space.s2,
+    padding: unit.x2,
     textDecoration: 'none',
     transitionDuration: duration.fast,
     transitionProperty: 'background-color'

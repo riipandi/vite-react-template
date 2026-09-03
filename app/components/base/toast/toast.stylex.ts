@@ -1,24 +1,23 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
 import { shadow } from '#/styles/core/shadow.stylex'
-import { radius, zIndex } from '#/styles/core/size.stylex'
+import { unit, radius, zIndex } from '#/styles/core/size.stylex'
 
 export const toastStyles = stylex.create({
   viewport: {
-    bottom: space.s4,
+    bottom: unit.x4,
     position: 'fixed',
-    right: space.s4,
+    right: unit.x4,
     width: container.md,
     zIndex: zIndex.fixed
   },
   root: {
     // Behind toasts peek out above the frontmost one, shrunk slightly; swipe
     // movement rides along via the Base UI-provided CSS variables.
-    '--toast-gap': space.s2,
+    '--toast-gap': unit.x2,
     alignItems: 'flex-start',
     backgroundColor: colors.popover,
     // Error toasts get a destructive accent; other types render neutrally
@@ -49,7 +48,7 @@ export const toastStyles = stylex.create({
       '[data-ending-style]': 0
     },
     overflow: 'hidden',
-    padding: space.s4,
+    padding: unit.x4,
     position: 'absolute',
     right: 0,
     // Later conditions win at equal specificity: the closed pose overrides
@@ -57,8 +56,8 @@ export const toastStyles = stylex.create({
     transform: {
       default: `translateX(var(--toast-swipe-movement-x, 0px)) translateY(calc(var(--toast-swipe-movement-y, 0px) + min(var(--toast-index), 10) * -1 * var(--toast-gap))) scale(calc(max(0.8, 1 - var(--toast-index) * 0.05)))`,
       '[data-expanded]': `translateX(var(--toast-swipe-movement-x, 0px)) translateY(calc(var(--toast-swipe-movement-y, 0px) - var(--toast-offset-y) - var(--toast-index) * var(--toast-gap)))`,
-      '[data-starting-style]': `translateY(calc(100% + ${space.s4}))`,
-      '[data-ending-style]': `translateY(calc(100% + ${space.s4}))`
+      '[data-starting-style]': `translateY(calc(100% + ${unit.x4}))`,
+      '[data-ending-style]': `translateY(calc(100% + ${unit.x4}))`
     },
     transformOrigin: 'center bottom',
     transitionDuration: { default: duration.slow, '[data-swiping]': '0s' },
@@ -73,7 +72,7 @@ export const toastStyles = stylex.create({
   content: {
     alignItems: 'flex-start',
     display: 'flex',
-    gap: space.s2,
+    gap: unit.x2,
     justifyContent: 'space-between',
     // Behind toasts hide their content so the collapsed stack shows only the
     // frontmost card's text; expanding reveals every card (custom property set
@@ -87,7 +86,7 @@ export const toastStyles = stylex.create({
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
-    gap: space.s1
+    gap: unit.x1
   },
   title: {
     fontSize: fontSize.body2,
@@ -118,10 +117,10 @@ export const toastStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
-    height: space.s6,
+    height: unit.x6,
     justifyContent: 'center',
     outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
-    paddingInline: space.s2
+    paddingInline: unit.x2
   },
   close: {
     alignItems: 'center',
@@ -135,10 +134,10 @@ export const toastStyles = stylex.create({
     cursor: 'pointer',
     display: 'inline-flex',
     flexShrink: 0,
-    height: space.s6,
+    height: unit.x6,
     justifyContent: 'center',
     outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
     padding: 0,
-    width: space.s6
+    width: unit.x6
   }
 })

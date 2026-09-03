@@ -1,9 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const inputGroupStyles = stylex.create({
   root: {
@@ -40,9 +40,9 @@ export const inputGroupStyles = stylex.create({
     cursor: 'text',
     display: 'flex',
     fontSize: fontSize.body2,
-    gap: space.s2,
+    gap: unit.x2,
     justifyContent: 'center',
-    paddingBlock: space.s15,
+    paddingBlock: unit.x1_5,
     userSelect: 'none'
   },
   text: {
@@ -50,7 +50,7 @@ export const inputGroupStyles = stylex.create({
     color: colors.mutedForeground,
     display: 'flex',
     fontSize: fontSize.body2,
-    gap: space.s2
+    gap: unit.x2
   },
   // The group draws the border and focus ring; the control inside goes bare.
   control: {
@@ -60,7 +60,7 @@ export const inputGroupStyles = stylex.create({
     outline: 'none'
   },
   textarea: {
-    paddingBlock: space.s2,
+    paddingBlock: unit.x2,
     resize: 'none'
   }
 })
@@ -68,24 +68,24 @@ export const inputGroupStyles = stylex.create({
 export const inputGroupAddonAligns = stylex.create({
   'inline-start': {
     order: -1,
-    paddingLeft: space.s2
+    paddingLeft: unit.x2
   },
   'inline-end': {
     order: 9,
-    paddingRight: space.s2
+    paddingRight: unit.x2
   },
   'block-start': {
     justifyContent: 'flex-start',
     order: -1,
-    paddingInline: space.s25,
-    paddingTop: space.s2,
+    paddingInline: unit.x3,
+    paddingTop: unit.x2,
     width: '100%'
   },
   'block-end': {
     justifyContent: 'flex-start',
     order: 9,
-    paddingBottom: space.s2,
-    paddingInline: space.s25,
+    paddingBottom: unit.x2,
+    paddingInline: unit.x3,
     width: '100%'
   }
 })
@@ -93,19 +93,19 @@ export const inputGroupAddonAligns = stylex.create({
 export const inputGroupButtonSizes = stylex.create({
   xs: {
     borderRadius: radius.small,
-    gap: space.s1,
-    height: space.s6,
-    paddingInline: space.s15
+    gap: unit.x1,
+    height: unit.x6,
+    paddingInline: unit.x1_5
   },
   iconXs: {
     borderRadius: radius.small,
-    height: space.s6,
+    height: unit.x6,
     paddingInline: 0,
-    width: space.s6
+    width: unit.x6
   },
   iconSm: {
-    height: space.s8,
+    height: unit.x8,
     paddingInline: 0,
-    width: space.s8
+    width: unit.x8
   }
 })

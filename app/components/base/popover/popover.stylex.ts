@@ -1,10 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius, zIndex } from '#/styles/core/size.stylex'
+import { unit, radius, zIndex } from '#/styles/core/size.stylex'
 
 export const popoverStyles = stylex.create({
   positioner: {
@@ -20,15 +19,15 @@ export const popoverStyles = stylex.create({
     // var() fallback covers the unset case instead.
     '--popup-shift-x': {
       default: null,
-      '[data-side="left"]': space.s2,
-      '[data-side="right"]': `calc(-1 * ${space.s2})`,
-      '[data-side="inline-start"]': space.s2,
-      '[data-side="inline-end"]': `calc(-1 * ${space.s2})`
+      '[data-side="left"]': unit.x2,
+      '[data-side="right"]': `calc(-1 * ${unit.x2})`,
+      '[data-side="inline-start"]': unit.x2,
+      '[data-side="inline-end"]': `calc(-1 * ${unit.x2})`
     },
     '--popup-shift-y': {
       default: null,
-      '[data-side="top"]': space.s2,
-      '[data-side="bottom"]': `calc(-1 * ${space.s2})`
+      '[data-side="top"]': unit.x2,
+      '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
     },
     backgroundColor: colors.popover,
     borderRadius: radius.medium,
@@ -42,7 +41,7 @@ export const popoverStyles = stylex.create({
       '[data-ending-style]': 0
     },
     outline: 'none',
-    padding: space.s4,
+    padding: unit.x4,
     transform: {
       default: 'scale(1)',
       '[data-starting-style]':
@@ -62,7 +61,7 @@ export const popoverStyles = stylex.create({
   header: {
     display: 'flex',
     flexDirection: 'column',
-    gap: space.s15
+    gap: unit.x1_5
   },
   title: {
     fontSize: fontSize.body2,

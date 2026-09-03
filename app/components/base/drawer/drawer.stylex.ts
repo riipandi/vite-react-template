@@ -1,10 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius, zIndex } from '#/styles/core/size.stylex'
+import { unit, radius, zIndex } from '#/styles/core/size.stylex'
 
 export const drawerStyles = stylex.create({
   overlay: {
@@ -86,8 +85,8 @@ export const drawerStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     flexShrink: 0,
-    gap: space.s05,
-    padding: space.s4,
+    gap: unit.x0_5,
+    padding: unit.x4,
     paddingBottom: 0
   },
   headerCentered: {
@@ -97,9 +96,9 @@ export const drawerStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     flexShrink: 0,
-    gap: space.s2,
+    gap: unit.x2,
     marginTop: 'auto',
-    padding: space.s4
+    padding: unit.x4
   },
   title: {
     color: colors.foreground,
@@ -122,8 +121,8 @@ export const drawerDirections = stylex.create({
     transform: {
       default:
         'translate3d(var(--drawer-swipe-movement-x, 0px), calc(var(--drawer-snap-point-offset, 0px) + var(--drawer-swipe-movement-y, 0px)), 0)',
-      '[data-starting-style]': `translate3d(0, calc(100% + ${space.s05}), 0)`,
-      '[data-ending-style]': `translate3d(0, calc(100% + ${space.s05}), 0)`
+      '[data-starting-style]': `translate3d(0, calc(100% + ${unit.x0_5}), 0)`,
+      '[data-ending-style]': `translate3d(0, calc(100% + ${unit.x0_5}), 0)`
     },
     borderTopColor: colors.border,
     borderTopLeftRadius: radius.xlarge,
@@ -132,7 +131,7 @@ export const drawerDirections = stylex.create({
     borderTopWidth: stroke.border,
     bottom: 0,
     left: 0,
-    maxHeight: `calc(100dvh - ${space.s16} - ${space.s8})`,
+    maxHeight: `calc(100dvh - ${unit.x16} - ${unit.x8})`,
     right: 0
   },
   up: {
@@ -140,8 +139,8 @@ export const drawerDirections = stylex.create({
     transform: {
       default:
         'translate3d(var(--drawer-swipe-movement-x, 0px), calc(var(--drawer-snap-point-offset, 0px) + var(--drawer-swipe-movement-y, 0px)), 0)',
-      '[data-starting-style]': `translate3d(0, calc(-100% - ${space.s05}), 0)`,
-      '[data-ending-style]': `translate3d(0, calc(-100% - ${space.s05}), 0)`
+      '[data-starting-style]': `translate3d(0, calc(-100% - ${unit.x0_5}), 0)`,
+      '[data-ending-style]': `translate3d(0, calc(-100% - ${unit.x0_5}), 0)`
     },
     borderBottomColor: colors.border,
     borderBottomLeftRadius: radius.xlarge,
@@ -149,7 +148,7 @@ export const drawerDirections = stylex.create({
     borderBottomStyle: 'solid',
     borderBottomWidth: stroke.border,
     left: 0,
-    maxHeight: `calc(100dvh - ${space.s16} - ${space.s8})`,
+    maxHeight: `calc(100dvh - ${unit.x16} - ${unit.x8})`,
     right: 0,
     top: 0
   },
@@ -158,8 +157,8 @@ export const drawerDirections = stylex.create({
     transform: {
       default:
         'translate3d(var(--drawer-swipe-movement-x, 0px), calc(var(--drawer-snap-point-offset, 0px) + var(--drawer-swipe-movement-y, 0px)), 0)',
-      '[data-starting-style]': `translate3d(calc(-100% - ${space.s05}), 0, 0)`,
-      '[data-ending-style]': `translate3d(calc(-100% - ${space.s05}), 0, 0)`
+      '[data-starting-style]': `translate3d(calc(-100% - ${unit.x0_5}), 0, 0)`,
+      '[data-ending-style]': `translate3d(calc(-100% - ${unit.x0_5}), 0, 0)`
     },
     borderRightColor: colors.border,
     borderBottomRightRadius: radius.xlarge,
@@ -178,8 +177,8 @@ export const drawerDirections = stylex.create({
     transform: {
       default:
         'translate3d(var(--drawer-swipe-movement-x, 0px), calc(var(--drawer-snap-point-offset, 0px) + var(--drawer-swipe-movement-y, 0px)), 0)',
-      '[data-starting-style]': `translate3d(calc(100% + ${space.s05}), 0, 0)`,
-      '[data-ending-style]': `translate3d(calc(100% + ${space.s05}), 0, 0)`
+      '[data-starting-style]': `translate3d(calc(100% + ${unit.x0_5}), 0, 0)`,
+      '[data-ending-style]': `translate3d(calc(100% + ${unit.x0_5}), 0, 0)`
     },
     borderLeftColor: colors.border,
     borderBottomLeftRadius: radius.xlarge,
@@ -198,23 +197,23 @@ export const drawerDirections = stylex.create({
 export const drawerSwipeHandles = stylex.create({
   down: {
     alignItems: 'flex-end',
-    height: space.s3,
+    height: unit.x3,
     justifyContent: 'center',
     width: '100%',
     '::after': {
-      height: space.s1,
-      width: `calc(${space.s16} + ${space.s8})`
+      height: unit.x1,
+      width: `calc(${unit.x16} + ${unit.x8})`
     }
   },
   up: {
     alignItems: 'flex-start',
-    height: space.s3,
+    height: unit.x3,
     justifyContent: 'center',
     order: 1,
     width: '100%',
     '::after': {
-      height: space.s1,
-      width: `calc(${space.s16} + ${space.s8})`
+      height: unit.x1,
+      width: `calc(${unit.x16} + ${unit.x8})`
     }
   },
   left: {
@@ -222,20 +221,20 @@ export const drawerSwipeHandles = stylex.create({
     height: '100%',
     justifyContent: 'flex-start',
     order: 1,
-    width: space.s3,
+    width: unit.x3,
     '::after': {
-      height: `calc(${space.s16} + ${space.s8})`,
-      width: space.s1
+      height: `calc(${unit.x16} + ${unit.x8})`,
+      width: unit.x1
     }
   },
   right: {
     alignItems: 'center',
     height: '100%',
     justifyContent: 'flex-end',
-    width: space.s3,
+    width: unit.x3,
     '::after': {
-      height: `calc(${space.s16} + ${space.s8})`,
-      width: space.s1
+      height: `calc(${unit.x16} + ${unit.x8})`,
+      width: unit.x1
     }
   }
 })

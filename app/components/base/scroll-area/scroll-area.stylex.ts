@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { duration } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const scrollAreaStyles = stylex.create({
   root: {
@@ -49,10 +49,10 @@ export const scrollAreaStyles = stylex.create({
 export const scrollAreaScrollbarOrientations = stylex.create({
   vertical: {
     height: '100%',
-    width: space.s25
+    width: unit.x3
   },
   horizontal: {
     flexDirection: 'column',
-    height: space.s25
+    height: unit.x3
   }
 })

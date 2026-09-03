@@ -1,9 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const checkboxStyles = stylex.create({
   root: {
@@ -25,7 +25,7 @@ export const checkboxStyles = stylex.create({
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
     flexShrink: 0,
-    height: space.s4,
+    height: unit.x4,
     justifyContent: 'center',
     opacity: { default: 1, ':disabled': 0.5 },
     outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
@@ -34,12 +34,12 @@ export const checkboxStyles = stylex.create({
     position: 'relative',
     transitionDuration: duration.fast,
     transitionProperty: 'background-color, border-color',
-    width: space.s4,
+    width: unit.x4,
     // Invisible expanded hit area (larger touch target).
     '::after': {
       content: '""',
-      insetBlock: `calc(-1 * ${space.s2})`,
-      insetInline: `calc(-1 * ${space.s3})`,
+      insetBlock: `calc(-1 * ${unit.x2})`,
+      insetInline: `calc(-1 * ${unit.x3})`,
       position: 'absolute'
     }
   },
@@ -56,6 +56,6 @@ export const checkboxGroupStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
-    gap: space.s2
+    gap: unit.x2
   }
 })

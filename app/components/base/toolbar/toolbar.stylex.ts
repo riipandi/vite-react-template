@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily } from '#/styles/core/font.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const toolbarStyles = stylex.create({
   root: {
@@ -13,20 +13,20 @@ export const toolbarStyles = stylex.create({
     borderWidth: stroke.border,
     display: 'flex',
     fontFamily: fontFamily.body,
-    gap: space.s1,
-    padding: space.s1,
+    gap: unit.x1,
+    padding: unit.x1,
     width: 'fit-content'
   },
   group: {
     alignItems: 'center',
     display: 'flex',
-    gap: space.s1
+    gap: unit.x1
   },
   separator: {
     alignSelf: 'stretch',
     backgroundColor: colors.border,
-    marginBlock: space.s1,
-    marginInline: space.s1,
+    marginBlock: unit.x1,
+    marginInline: unit.x1,
     width: stroke.border
   }
 })

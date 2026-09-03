@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
+import { unit } from '#/styles/core/size.stylex'
 
 export const breadcrumbStyles = stylex.create({
   list: {
@@ -12,7 +12,7 @@ export const breadcrumbStyles = stylex.create({
     flexWrap: 'wrap',
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
-    gap: space.s15,
+    gap: unit.x1_5,
     listStyle: 'none',
     margin: 0,
     overflowWrap: 'break-word',
@@ -21,7 +21,7 @@ export const breadcrumbStyles = stylex.create({
   item: {
     alignItems: 'center',
     display: 'inline-flex',
-    gap: space.s1
+    gap: unit.x1
   },
   link: {
     color: {
@@ -42,9 +42,9 @@ export const breadcrumbStyles = stylex.create({
   ellipsis: {
     alignItems: 'center',
     display: 'flex',
-    height: space.s5,
+    height: unit.x5,
     justifyContent: 'center',
-    width: space.s5
+    width: unit.x5
   },
   srOnly: {
     clip: 'rect(0 0 0 0)',

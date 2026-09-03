@@ -1,23 +1,22 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius, zIndex } from '#/styles/core/size.stylex'
+import { unit, radius, zIndex } from '#/styles/core/size.stylex'
 
 export const selectStyles = stylex.create({
   label: {
     color: colors.mutedForeground,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
-    paddingBlock: space.s15,
-    paddingInline: space.s3
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x3
   },
   separator: {
     backgroundColor: colors.border,
     height: stroke.border,
-    marginBlock: space.s1
+    marginBlock: unit.x1
   },
   trigger: {
     alignItems: 'center',
@@ -31,15 +30,15 @@ export const selectStyles = stylex.create({
     display: 'inline-flex',
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
-    gap: space.s2,
-    height: space.s9,
+    gap: unit.x2,
+    height: unit.x9,
     justifyContent: 'space-between',
     lineHeight: fontLineHeight.body2,
     minWidth: container.xs,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
     outlineOffset: `calc(-1 * ${stroke.border})`,
-    paddingInline: space.s3,
+    paddingInline: unit.x3,
     userSelect: 'none',
     whiteSpace: 'nowrap'
   },
@@ -79,15 +78,15 @@ export const selectStyles = stylex.create({
     // var() fallback covers the unset case instead.
     '--popup-shift-x': {
       default: null,
-      '[data-side="left"]': space.s2,
-      '[data-side="right"]': `calc(-1 * ${space.s2})`,
-      '[data-side="inline-start"]': space.s2,
-      '[data-side="inline-end"]': `calc(-1 * ${space.s2})`
+      '[data-side="left"]': unit.x2,
+      '[data-side="right"]': `calc(-1 * ${unit.x2})`,
+      '[data-side="inline-start"]': unit.x2,
+      '[data-side="inline-end"]': `calc(-1 * ${unit.x2})`
     },
     '--popup-shift-y': {
       default: null,
-      '[data-side="top"]': space.s2,
-      '[data-side="bottom"]': `calc(-1 * ${space.s2})`
+      '[data-side="top"]': unit.x2,
+      '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
     },
     maxHeight: `min(${container.sm}, var(--available-height))`,
     opacity: {
@@ -104,7 +103,7 @@ export const selectStyles = stylex.create({
     }
   },
   list: {
-    paddingBlock: space.s1
+    paddingBlock: unit.x1
   },
   scrollArrow: {
     alignItems: 'center',
@@ -112,7 +111,7 @@ export const selectStyles = stylex.create({
     color: colors.mutedForeground,
     cursor: 'default',
     display: 'flex',
-    height: space.s4,
+    height: unit.x4,
     justifyContent: 'center',
     position: 'sticky',
     width: '100%',
@@ -139,13 +138,13 @@ export const selectStyles = stylex.create({
     cursor: 'default',
     display: 'grid',
     fontSize: fontSize.body2,
-    gap: space.s2,
-    gridTemplateColumns: `1fr ${space.s4}`,
-    marginInline: space.s1,
+    gap: unit.x2,
+    gridTemplateColumns: `1fr ${unit.x4}`,
+    marginInline: unit.x1,
     opacity: { default: 1, '[data-disabled]': 0.5 },
     outline: 'none',
-    paddingBlock: space.s15,
-    paddingInline: space.s2,
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x2,
     userSelect: 'none'
   },
   itemIndicator: {

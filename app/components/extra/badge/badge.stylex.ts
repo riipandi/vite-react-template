@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const badgeStyles = stylex.create({
   root: {
@@ -12,15 +12,15 @@ export const badgeStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
-    gap: space.s1,
+    gap: unit.x1,
     lineHeight: fontLineHeight.caption1,
     outline: {
       default: 'none',
       ':focus-visible': `${stroke.focus} solid ${colors.ring}`
     },
     outlineOffset: stroke.focus,
-    paddingBlock: space.s1,
-    paddingInline: space.s25,
+    paddingBlock: unit.x1,
+    paddingInline: unit.x3,
     whiteSpace: 'nowrap'
   }
 })

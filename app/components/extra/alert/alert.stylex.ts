@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const alertStyles = stylex.create({
   root: {
@@ -15,8 +15,8 @@ export const alertStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
-    gap: space.s1,
-    padding: space.s4,
+    gap: unit.x1,
+    padding: unit.x4,
     position: 'relative',
     width: '100%'
   },
@@ -32,8 +32,8 @@ export const alertStyles = stylex.create({
     lineHeight: fontLineHeight.body2
   },
   action: {
-    insetBlockStart: space.s4,
-    insetInlineEnd: space.s4,
+    insetBlockStart: unit.x4,
+    insetInlineEnd: unit.x4,
     position: 'absolute'
   }
 })

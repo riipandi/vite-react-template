@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const switchStyles = stylex.create({
   root: {
@@ -19,15 +19,15 @@ export const switchStyles = stylex.create({
     opacity: { default: 1, ':disabled': 0.5 },
     outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
     outlineOffset: stroke.focus,
-    padding: space.s05,
+    padding: unit.x0_5,
     position: 'relative',
     transitionDuration: duration.fast,
     transitionProperty: 'background-color',
     // Invisible expanded hit area (larger touch target).
     '::after': {
       content: '""',
-      insetBlock: `calc(-1 * ${space.s2})`,
-      insetInline: `calc(-1 * ${space.s3})`,
+      insetBlock: `calc(-1 * ${unit.x2})`,
+      insetInline: `calc(-1 * ${unit.x3})`,
       position: 'absolute'
     }
   },
@@ -45,30 +45,30 @@ export const switchStyles = stylex.create({
 
 export const switchRootSizes = stylex.create({
   md: {
-    height: space.s5,
-    width: space.s9
+    height: unit.x5,
+    width: unit.x9
   },
   sm: {
-    height: space.s4,
-    width: space.s7
+    height: unit.x4,
+    width: unit.x7
   }
 })
 
 export const switchThumbSizes = stylex.create({
   md: {
-    height: space.s4,
+    height: unit.x4,
     transform: {
       default: 'translateX(0)',
-      '[data-checked]': `translateX(${space.s4})`
+      '[data-checked]': `translateX(${unit.x4})`
     },
-    width: space.s4
+    width: unit.x4
   },
   sm: {
-    height: space.s3,
+    height: unit.x3,
     transform: {
       default: 'translateX(0)',
-      '[data-checked]': `translateX(${space.s3})`
+      '[data-checked]': `translateX(${unit.x3})`
     },
-    width: space.s3
+    width: unit.x3
   }
 })

@@ -1,11 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
 import { shadow } from '#/styles/core/shadow.stylex'
-import { radius, zIndex } from '#/styles/core/size.stylex'
+import { unit, radius, zIndex } from '#/styles/core/size.stylex'
 
 export const sheetStyles = stylex.create({
   overlay: {
@@ -30,7 +29,7 @@ export const sheetStyles = stylex.create({
     flexDirection: 'column',
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
-    gap: space.s4,
+    gap: unit.x4,
     lineHeight: fontLineHeight.body2,
     opacity: {
       default: 1,
@@ -60,7 +59,7 @@ export const sheetStyles = stylex.create({
     },
     cursor: 'pointer',
     display: 'inline-flex',
-    height: space.s7,
+    height: unit.x7,
     justifyContent: 'center',
     outline: {
       default: 'none',
@@ -68,22 +67,22 @@ export const sheetStyles = stylex.create({
     },
     padding: 0,
     position: 'absolute',
-    right: space.s3,
-    top: space.s3,
-    width: space.s7
+    right: unit.x3,
+    top: unit.x3,
+    width: unit.x7
   },
   header: {
     display: 'flex',
     flexDirection: 'column',
-    gap: space.s05,
-    padding: space.s4
+    gap: unit.x0_5,
+    padding: unit.x4
   },
   footer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: space.s2,
+    gap: unit.x2,
     marginTop: 'auto',
-    padding: space.s4
+    padding: unit.x4
   },
   title: {
     color: colors.foreground,
@@ -104,8 +103,8 @@ export const sheetSides = stylex.create({
   right: {
     transform: {
       default: 'translate(0, 0)',
-      '[data-starting-style]': `translateX(${space.s10})`,
-      '[data-ending-style]': `translateX(${space.s10})`
+      '[data-starting-style]': `translateX(${unit.x10})`,
+      '[data-ending-style]': `translateX(${unit.x10})`
     },
     borderLeftColor: colors.border,
     borderLeftStyle: 'solid',
@@ -119,8 +118,8 @@ export const sheetSides = stylex.create({
   left: {
     transform: {
       default: 'translate(0, 0)',
-      '[data-starting-style]': `translateX(calc(-1 * ${space.s10}))`,
-      '[data-ending-style]': `translateX(calc(-1 * ${space.s10}))`
+      '[data-starting-style]': `translateX(calc(-1 * ${unit.x10}))`,
+      '[data-ending-style]': `translateX(calc(-1 * ${unit.x10}))`
     },
     borderRightColor: colors.border,
     borderRightStyle: 'solid',
@@ -134,8 +133,8 @@ export const sheetSides = stylex.create({
   top: {
     transform: {
       default: 'translate(0, 0)',
-      '[data-starting-style]': `translateY(calc(-1 * ${space.s10}))`,
-      '[data-ending-style]': `translateY(calc(-1 * ${space.s10}))`
+      '[data-starting-style]': `translateY(calc(-1 * ${unit.x10}))`,
+      '[data-ending-style]': `translateY(calc(-1 * ${unit.x10}))`
     },
     borderBottomColor: colors.border,
     borderBottomStyle: 'solid',
@@ -147,8 +146,8 @@ export const sheetSides = stylex.create({
   bottom: {
     transform: {
       default: 'translate(0, 0)',
-      '[data-starting-style]': `translateY(${space.s10})`,
-      '[data-ending-style]': `translateY(${space.s10})`
+      '[data-starting-style]': `translateY(${unit.x10})`,
+      '[data-ending-style]': `translateY(${unit.x10})`
     },
     borderBottomStyle: 'none',
     borderTopColor: colors.border,

@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { stroke } from '#/lib/constants.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const toggleGroupStyles = stylex.create({
   root: {
@@ -8,7 +8,7 @@ export const toggleGroupStyles = stylex.create({
     width: 'fit-content'
   },
   gap: {
-    gap: space.s2
+    gap: unit.x2
   },
   item: {
     flexShrink: 0
@@ -32,14 +32,14 @@ export const toggleGroupJoinedItems = stylex.create({
     borderBottomRightRadius: { default: 0, ':last-child': radius.large },
     borderTopLeftRadius: { default: 0, ':first-child': radius.large },
     borderTopRightRadius: { default: 0, ':last-child': radius.large },
-    paddingInline: space.s2
+    paddingInline: unit.x2
   },
   vertical: {
     borderBottomLeftRadius: { default: 0, ':last-child': radius.large },
     borderBottomRightRadius: { default: 0, ':last-child': radius.large },
     borderTopLeftRadius: { default: 0, ':first-child': radius.large },
     borderTopRightRadius: { default: 0, ':first-child': radius.large },
-    paddingInline: space.s2
+    paddingInline: unit.x2
   }
 })
 

@@ -1,9 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, container } from '#/lib/constants.stylex'
+import { container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius, zIndex } from '#/styles/core/size.stylex'
+import { unit, radius, zIndex } from '#/styles/core/size.stylex'
 
 export const tooltipStyles = stylex.create({
   positioner: {
@@ -19,15 +19,15 @@ export const tooltipStyles = stylex.create({
     // var() fallback covers the unset case instead.
     '--popup-shift-x': {
       default: null,
-      '[data-side="left"]': space.s2,
-      '[data-side="right"]': `calc(-1 * ${space.s2})`,
-      '[data-side="inline-start"]': space.s2,
-      '[data-side="inline-end"]': `calc(-1 * ${space.s2})`
+      '[data-side="left"]': unit.x2,
+      '[data-side="right"]': `calc(-1 * ${unit.x2})`,
+      '[data-side="inline-start"]': unit.x2,
+      '[data-side="inline-end"]': `calc(-1 * ${unit.x2})`
     },
     '--popup-shift-y': {
       default: null,
-      '[data-side="top"]': space.s2,
-      '[data-side="bottom"]': `calc(-1 * ${space.s2})`
+      '[data-side="top"]': unit.x2,
+      '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
     },
     backgroundColor: colors.foreground,
     borderRadius: radius.small,
@@ -41,8 +41,8 @@ export const tooltipStyles = stylex.create({
       '[data-starting-style]': 0,
       '[data-ending-style]': 0
     },
-    paddingBlock: space.s15,
-    paddingInline: space.s3,
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x3,
     transform: {
       default: 'scale(1)',
       '[data-starting-style]':
@@ -63,21 +63,21 @@ export const tooltipStyles = stylex.create({
   // corner peeks out just enough to bridge the default 4px sideOffset gap.
   arrow: {
     backgroundColor: colors.foreground,
-    bottom: { default: null, '[data-side="top"]': `calc(-1 * ${space.s05})` },
-    height: space.s25,
+    bottom: { default: null, '[data-side="top"]': `calc(-1 * ${unit.x0_5})` },
+    height: unit.x3,
     left: {
       default: null,
-      '[data-side="right"]': `calc(-1 * ${space.s05})`,
-      '[data-side="inline-end"]': `calc(-1 * ${space.s05})`
+      '[data-side="right"]': `calc(-1 * ${unit.x0_5})`,
+      '[data-side="inline-end"]': `calc(-1 * ${unit.x0_5})`
     },
     position: 'absolute',
     right: {
       default: null,
-      '[data-side="left"]': `calc(-1 * ${space.s05})`,
-      '[data-side="inline-start"]': `calc(-1 * ${space.s05})`
+      '[data-side="left"]': `calc(-1 * ${unit.x0_5})`,
+      '[data-side="inline-start"]': `calc(-1 * ${unit.x0_5})`
     },
-    top: { default: null, '[data-side="bottom"]': `calc(-1 * ${space.s05})` },
+    top: { default: null, '[data-side="bottom"]': `calc(-1 * ${unit.x0_5})` },
     transform: 'rotate(45deg)',
-    width: space.s25
+    width: unit.x3
   }
 })

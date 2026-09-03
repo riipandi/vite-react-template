@@ -1,16 +1,16 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const tabsStyles = stylex.create({
   root: {
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
-    gap: space.s2
+    gap: unit.x2
   },
   rootVertical: {
     flexDirection: 'row'
@@ -21,9 +21,9 @@ export const tabsStyles = stylex.create({
     borderRadius: radius.medium,
     display: 'inline-flex',
     flexDirection: { default: 'row', '[data-orientation="vertical"]': 'column' },
-    gap: space.s1,
+    gap: unit.x1,
     height: { default: null, '[data-orientation="vertical"]': 'fit-content' },
-    padding: space.s1,
+    padding: unit.x1,
     width: 'fit-content'
   },
   listLine: {
@@ -49,13 +49,13 @@ export const tabsStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    height: space.s7,
+    height: unit.x7,
     justifyContent: 'center',
     lineHeight: fontLineHeight.body2,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
     outlineOffset: `calc(-1 * ${stroke.focus})`,
-    paddingInline: space.s3,
+    paddingInline: unit.x3,
     transitionDuration: duration.fast,
     transitionProperty: 'background-color, color, border-color',
     userSelect: 'none',
@@ -71,7 +71,7 @@ export const tabsStyles = stylex.create({
     borderBottomStyle: 'solid',
     borderBottomWidth: stroke.focus,
     borderRadius: 0,
-    height: space.s9,
+    height: unit.x9,
     marginBottom: `calc(-1 * ${stroke.border})`
   },
   content: {

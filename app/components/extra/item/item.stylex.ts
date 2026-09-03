@@ -1,15 +1,15 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const itemStyles = stylex.create({
   group: {
     display: 'flex',
     flexDirection: 'column',
-    gap: space.s4,
+    gap: unit.x4,
     width: '100%'
   },
   root: {
@@ -35,21 +35,21 @@ export const itemStyles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     flexShrink: 0,
-    gap: space.s2,
+    gap: unit.x2,
     justifyContent: 'center'
   },
   content: {
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
-    gap: space.s1
+    gap: unit.x1
   },
   title: {
     alignItems: 'center',
     display: 'flex',
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    gap: space.s2,
+    gap: unit.x2,
     lineHeight: fontLineHeight.body2,
     width: 'fit-content'
   },
@@ -63,13 +63,13 @@ export const itemStyles = stylex.create({
   actions: {
     alignItems: 'center',
     display: 'flex',
-    gap: space.s2
+    gap: unit.x2
   },
   headerFooter: {
     alignItems: 'center',
     display: 'flex',
     flexBasis: '100%',
-    gap: space.s2,
+    gap: unit.x2,
     justifyContent: 'space-between'
   }
 })
@@ -89,19 +89,19 @@ export const itemVariants = stylex.create({
 
 export const itemSizes = stylex.create({
   xs: {
-    gap: space.s2,
-    paddingBlock: space.s2,
-    paddingInline: space.s25
+    gap: unit.x2,
+    paddingBlock: unit.x2,
+    paddingInline: unit.x3
   },
   sm: {
-    gap: space.s25,
-    paddingBlock: space.s25,
-    paddingInline: space.s3
+    gap: unit.x3,
+    paddingBlock: unit.x3,
+    paddingInline: unit.x3
   },
   md: {
-    gap: space.s25,
-    paddingBlock: space.s25,
-    paddingInline: space.s3
+    gap: unit.x3,
+    paddingBlock: unit.x3,
+    paddingInline: unit.x3
   }
 })
 
@@ -112,8 +112,8 @@ export const itemMediaVariants = stylex.create({
   },
   image: {
     borderRadius: radius.small,
-    height: space.s10,
+    height: unit.x10,
     overflow: 'hidden',
-    width: space.s10
+    width: unit.x10
   }
 })

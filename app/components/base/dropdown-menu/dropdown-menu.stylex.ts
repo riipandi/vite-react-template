@@ -1,10 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius, zIndex } from '#/styles/core/size.stylex'
+import { unit, radius, zIndex } from '#/styles/core/size.stylex'
 
 export const dropdownMenuStyles = stylex.create({
   positioner: {
@@ -20,15 +19,15 @@ export const dropdownMenuStyles = stylex.create({
     // var() fallback covers the unset case instead.
     '--popup-shift-x': {
       default: null,
-      '[data-side="left"]': space.s2,
-      '[data-side="right"]': `calc(-1 * ${space.s2})`,
-      '[data-side="inline-start"]': space.s2,
-      '[data-side="inline-end"]': `calc(-1 * ${space.s2})`
+      '[data-side="left"]': unit.x2,
+      '[data-side="right"]': `calc(-1 * ${unit.x2})`,
+      '[data-side="inline-start"]': unit.x2,
+      '[data-side="inline-end"]': `calc(-1 * ${unit.x2})`
     },
     '--popup-shift-y': {
       default: null,
-      '[data-side="top"]': space.s2,
-      '[data-side="bottom"]': `calc(-1 * ${space.s2})`
+      '[data-side="top"]': unit.x2,
+      '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
     },
     backgroundColor: colors.popover,
     borderRadius: radius.medium,
@@ -44,7 +43,7 @@ export const dropdownMenuStyles = stylex.create({
     outline: 'none',
     overflowX: 'hidden',
     overflowY: 'auto',
-    paddingBlock: space.s1,
+    paddingBlock: unit.x1,
     transform: {
       default: 'scale(1)',
       '[data-starting-style]':
@@ -82,12 +81,12 @@ export const dropdownMenuStyles = stylex.create({
     cursor: 'default',
     display: 'flex',
     fontSize: fontSize.body2,
-    gap: space.s2,
-    marginInline: space.s1,
+    gap: unit.x2,
+    marginInline: unit.x1,
     opacity: { default: 1, '[data-disabled]': 0.5 },
     outline: 'none',
-    paddingBlock: space.s15,
-    paddingInline: space.s2,
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x2,
     userSelect: 'none'
   },
   // Submenu triggers also light up while their submenu is open.
@@ -105,22 +104,22 @@ export const dropdownMenuStyles = stylex.create({
     }
   },
   itemInset: {
-    paddingLeft: space.s7
+    paddingLeft: unit.x7
   },
   // Reserve room for the trailing check indicator (absolute, right-aligned).
   indicatorItem: {
-    paddingRight: space.s8,
+    paddingRight: unit.x8,
     position: 'relative'
   },
   indicator: {
     alignItems: 'center',
     display: 'flex',
-    height: space.s4,
+    height: unit.x4,
     justifyContent: 'center',
     pointerEvents: 'none',
     position: 'absolute',
-    right: space.s2,
-    width: space.s4
+    right: unit.x2,
+    width: unit.x4
   },
   itemDestructive: {
     backgroundColor: {
@@ -146,13 +145,13 @@ export const dropdownMenuStyles = stylex.create({
   separator: {
     backgroundColor: colors.border,
     height: stroke.border,
-    marginBlock: space.s1
+    marginBlock: unit.x1
   },
   label: {
     color: colors.mutedForeground,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
-    paddingBlock: space.s15,
-    paddingInline: space.s3
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x3
   }
 })

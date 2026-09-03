@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke, container } from '#/lib/constants.stylex'
+import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const commandStyles = stylex.create({
   root: {
@@ -14,7 +14,7 @@ export const commandStyles = stylex.create({
     fontFamily: fontFamily.body,
     height: '100%',
     overflow: 'hidden',
-    padding: space.s1,
+    padding: unit.x1,
     width: '100%'
   },
   dialogContent: {
@@ -42,11 +42,11 @@ export const commandStyles = stylex.create({
     borderStyle: 'solid',
     borderWidth: stroke.border,
     display: 'flex',
-    gap: space.s2,
-    height: space.s8,
-    margin: space.s1,
+    gap: unit.x2,
+    height: unit.x8,
+    margin: unit.x1,
     marginBottom: 0,
-    paddingInline: space.s2
+    paddingInline: unit.x2
   },
   inputIcon: {
     flexShrink: 0,
@@ -68,23 +68,23 @@ export const commandStyles = stylex.create({
     maxHeight: container.sm,
     outline: 'none',
     overflowY: 'auto',
-    padding: space.s1,
-    scrollPaddingBlock: space.s1
+    padding: unit.x1,
+    scrollPaddingBlock: unit.x1
   },
   empty: {
     // Base UI renders the element with no children while results exist —
     // hide it then so its padding doesn't reserve space.
     display: { default: 'block', ':empty': 'none' },
     fontSize: fontSize.body2,
-    paddingBlock: space.s6,
+    paddingBlock: unit.x6,
     textAlign: 'center'
   },
   groupLabel: {
     color: colors.mutedForeground,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
-    paddingBlock: space.s15,
-    paddingInline: space.s2
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x2
   },
   item: {
     alignItems: 'center',
@@ -101,20 +101,20 @@ export const commandStyles = stylex.create({
     cursor: 'default',
     display: 'flex',
     fontSize: fontSize.body2,
-    gap: space.s2,
+    gap: unit.x2,
     lineHeight: fontLineHeight.body2,
     outline: 'none',
     opacity: { default: 1, '[data-disabled]': 0.5 },
-    paddingBlock: space.s15,
-    paddingInline: space.s2,
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x2,
     position: 'relative',
     userSelect: 'none'
   },
   separator: {
     backgroundColor: colors.border,
     height: stroke.border,
-    marginBlock: space.s1,
-    marginInline: `calc(-1 * ${space.s1})`
+    marginBlock: unit.x1,
+    marginInline: `calc(-1 * ${unit.x1})`
   },
   shortcut: {
     color: colors.mutedForeground,

@@ -1,16 +1,15 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const meterStyles = stylex.create({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
     fontFamily: fontFamily.body,
-    gap: space.s3,
+    gap: unit.x3,
     width: '100%'
   },
   track: {
@@ -18,7 +17,7 @@ export const meterStyles = stylex.create({
     backgroundColor: colors.muted,
     borderRadius: radius.circular,
     display: 'flex',
-    height: space.s1,
+    height: unit.x1,
     overflowX: 'hidden',
     position: 'relative',
     width: '100%'

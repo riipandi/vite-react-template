@@ -1,9 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const buttonStyles = stylex.create({
   root: {
@@ -15,7 +15,7 @@ export const buttonStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    gap: space.s2,
+    gap: unit.x2,
     justifyContent: 'center',
     lineHeight: fontLineHeight.body2,
     opacity: { default: 1, ':disabled': 0.5 },
@@ -80,12 +80,12 @@ export const buttonVariants = stylex.create({
 })
 
 export const buttonSizes = stylex.create({
-  xs: { fontSize: fontSize.caption1, gap: space.s1, height: space.s7, paddingInline: space.s2 },
-  sm: { height: space.s8, paddingInline: space.s3 },
-  md: { height: space.s9, paddingInline: space.s4 },
-  lg: { fontSize: fontSize.body1, height: space.s10, paddingInline: space.s6 },
-  icon: { height: space.s9, paddingInline: 0, width: space.s9 },
-  iconXs: { height: space.s7, paddingInline: 0, width: space.s7 },
-  iconSm: { height: space.s8, paddingInline: 0, width: space.s8 },
-  iconLg: { height: space.s10, paddingInline: 0, width: space.s10 }
+  xs: { fontSize: fontSize.caption1, gap: unit.x1, height: unit.x7, paddingInline: unit.x2 },
+  sm: { height: unit.x8, paddingInline: unit.x3 },
+  md: { height: unit.x9, paddingInline: unit.x4 },
+  lg: { fontSize: fontSize.body1, height: unit.x10, paddingInline: unit.x6 },
+  icon: { height: unit.x9, paddingInline: 0, width: unit.x9 },
+  iconXs: { height: unit.x7, paddingInline: 0, width: unit.x7 },
+  iconSm: { height: unit.x8, paddingInline: 0, width: unit.x8 },
+  iconLg: { height: unit.x10, paddingInline: 0, width: unit.x10 }
 })

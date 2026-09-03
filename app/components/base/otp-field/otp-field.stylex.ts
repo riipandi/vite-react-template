@@ -1,16 +1,16 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const otpFieldStyles = stylex.create({
   root: {
     alignItems: 'center',
     display: 'flex',
     fontFamily: fontFamily.body,
-    gap: space.s2
+    gap: unit.x2
   },
   group: {
     alignItems: 'center',
@@ -34,7 +34,7 @@ export const otpFieldStyles = stylex.create({
     },
     color: colors.foreground,
     fontSize: fontSize.body2,
-    height: space.s8,
+    height: unit.x8,
     lineHeight: fontLineHeight.body2,
     marginLeft: { default: `calc(-1 * ${stroke.border})`, ':first-child': 0 },
     opacity: { default: 1, ':disabled': 0.5 },
@@ -44,7 +44,7 @@ export const otpFieldStyles = stylex.create({
     textAlign: 'center',
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, box-shadow',
-    width: space.s8,
+    width: unit.x8,
     zIndex: { default: 0, ':focus': 1 }
   },
   separator: {

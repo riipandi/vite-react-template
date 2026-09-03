@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke, container } from '#/lib/constants.stylex'
+import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const emptyStyles = stylex.create({
   root: {
@@ -15,10 +15,10 @@ export const emptyStyles = stylex.create({
     flex: 1,
     flexDirection: 'column',
     fontFamily: fontFamily.body,
-    gap: space.s4,
+    gap: unit.x4,
     justifyContent: 'center',
     minWidth: 0,
-    padding: space.s6,
+    padding: unit.x6,
     textAlign: 'center',
     textWrap: 'balance',
     width: '100%'
@@ -27,7 +27,7 @@ export const emptyStyles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    gap: space.s2,
+    gap: unit.x2,
     maxWidth: container.lg
   },
   media: {
@@ -35,7 +35,7 @@ export const emptyStyles = stylex.create({
     display: 'flex',
     flexShrink: 0,
     justifyContent: 'center',
-    marginBottom: space.s2
+    marginBottom: unit.x2
   },
   title: {
     fontSize: fontSize.body2,
@@ -52,7 +52,7 @@ export const emptyStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     fontSize: fontSize.body2,
-    gap: space.s25,
+    gap: unit.x2,
     maxWidth: container.lg,
     minWidth: 0,
     width: '100%'
@@ -65,7 +65,7 @@ export const emptyMediaVariants = stylex.create({
     backgroundColor: colors.muted,
     borderRadius: radius.large,
     color: colors.foreground,
-    height: space.s8,
-    width: space.s8
+    height: unit.x8,
+    width: unit.x8
   }
 })

@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const buttonGroupStyles = stylex.create({
   root: {
@@ -21,8 +21,8 @@ export const buttonGroupStyles = stylex.create({
     display: 'flex',
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    gap: space.s2,
-    paddingInline: space.s25
+    gap: unit.x2,
+    paddingInline: unit.x2
   },
   separator: {
     alignSelf: 'stretch',

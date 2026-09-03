@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { fontFamily, fontSize } from '#/styles/core/font.stylex'
+import { unit } from '#/styles/core/size.stylex'
 
 export const paginationStyles = stylex.create({
   nav: {
@@ -13,16 +13,16 @@ export const paginationStyles = stylex.create({
   content: {
     alignItems: 'center',
     display: 'flex',
-    gap: space.s05,
+    gap: unit.x0_5,
     listStyle: 'none',
     margin: 0,
     padding: 0
   },
   previous: {
-    paddingLeft: space.s15
+    paddingLeft: unit.x1_5
   },
   next: {
-    paddingRight: space.s15
+    paddingRight: unit.x1_5
   },
   linkText: {
     display: {
@@ -34,9 +34,9 @@ export const paginationStyles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     fontSize: fontSize.body2,
-    height: space.s8,
+    height: unit.x8,
     justifyContent: 'center',
-    width: space.s8
+    width: unit.x8
   },
   srOnly: {
     clip: 'rect(0 0 0 0)',

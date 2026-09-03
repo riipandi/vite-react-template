@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke, container } from '#/lib/constants.stylex'
+import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { duration } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const sliderHaloShadow = `0 0 0 ${stroke.halo} color-mix(in srgb, ${colors.ring} 50%, transparent)`
 
@@ -44,13 +44,13 @@ export const sliderStyles = stylex.create({
       ':active': sliderHaloShadow
     },
     flexShrink: 0,
-    height: space.s3,
+    height: unit.x3,
     outline: 'none',
     position: 'relative',
     transitionDuration: duration.fast,
     transitionProperty: 'box-shadow',
     userSelect: 'none',
-    width: space.s3
+    width: unit.x3
   }
 })
 
@@ -77,12 +77,12 @@ export const sliderControlOrientations = stylex.create({
 
 export const sliderTrackOrientations = stylex.create({
   horizontal: {
-    height: space.s1,
+    height: unit.x1,
     width: '100%'
   },
   vertical: {
     height: '100%',
-    width: space.s1
+    width: unit.x1
   }
 })
 

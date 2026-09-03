@@ -1,9 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const textareaStyles = stylex.create({
   root: {
@@ -20,12 +20,12 @@ export const textareaStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
-    minHeight: space.s16,
+    minHeight: unit.x16,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
     outlineOffset: `calc(-1 * ${stroke.border})`,
-    paddingBlock: space.s2,
-    paddingInline: space.s3,
+    paddingBlock: unit.x2,
+    paddingInline: unit.x3,
     resize: 'vertical',
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',

@@ -1,9 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const accordionStyles = stylex.create({
   root: {
@@ -33,7 +33,7 @@ export const accordionStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    gap: space.s4,
+    gap: unit.x4,
     justifyContent: 'space-between',
     lineHeight: fontLineHeight.body2,
     outline: {
@@ -48,7 +48,7 @@ export const accordionStyles = stylex.create({
       default: null,
       '[data-panel-open]': '180deg'
     },
-    paddingBlock: space.s25,
+    paddingBlock: unit.x2,
     paddingInline: 0,
     textAlign: 'left',
     textDecoration: { default: 'none', ':hover': 'underline' }
@@ -57,7 +57,7 @@ export const accordionStyles = stylex.create({
     color: colors.mutedForeground,
     flexShrink: 0,
     marginLeft: 'auto',
-    marginTop: space.s05,
+    marginTop: unit.x0_5,
     pointerEvents: 'none',
     transform: 'rotate(var(--accordion-trigger-rotation, 0deg))',
     transitionDuration: duration.fast,
@@ -87,6 +87,6 @@ export const accordionStyles = stylex.create({
     transitionTimingFunction: easing.decelerate
   },
   inner: {
-    paddingBottom: space.s25
+    paddingBottom: unit.x1
   }
 })

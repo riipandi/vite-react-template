@@ -153,7 +153,7 @@ export const sidebarStyles = stylex.create({
     width: '1.75rem',
     height: '1px',
     backgroundColor: colors.backgroundNeutralFaded,
-    marginTop: unit['x1.5'],
+    marginTop: unit.x1_5,
     marginBottom: unit.x1,
     flexShrink: 0
   },
@@ -313,7 +313,7 @@ export const sidebarStyles = stylex.create({
     alignItems: 'center',
     gap: unit.x2,
     paddingTop: unit.x3,
-    paddingBottom: unit['x0.5']
+    paddingBottom: unit.x0_5
   },
   bottomRow: {
     display: 'flex',

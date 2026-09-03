@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const menubarStyles = stylex.create({
   root: {
@@ -13,9 +13,9 @@ export const menubarStyles = stylex.create({
     borderWidth: stroke.border,
     display: 'flex',
     fontFamily: fontFamily.body,
-    gap: space.s05,
-    height: space.s8,
-    paddingInline: space.s05
+    gap: unit.x0_5,
+    height: unit.x8,
+    paddingInline: unit.x0_5
   },
   trigger: {
     alignItems: 'center',
@@ -33,8 +33,8 @@ export const menubarStyles = stylex.create({
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     outline: 'none',
-    paddingBlock: space.s05,
-    paddingInline: space.s15,
+    paddingBlock: unit.x0_5,
+    paddingInline: unit.x1_5,
     userSelect: 'none'
   },
   // Menubar popups size to their content, not the trigger.

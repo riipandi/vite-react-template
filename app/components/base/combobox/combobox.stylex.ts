@@ -1,10 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius, zIndex } from '#/styles/core/size.stylex'
+import { unit, radius, zIndex } from '#/styles/core/size.stylex'
 
 export const comboboxStyles = stylex.create({
   inputWrap: {
@@ -20,14 +19,14 @@ export const comboboxStyles = stylex.create({
     color: colors.foreground,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
-    height: space.s9,
+    height: unit.x9,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
       ':focus-visible': `${stroke.focus} solid ${colors.ring}`
     },
     outlineOffset: `calc(-1 * ${stroke.border})`,
-    paddingLeft: space.s3,
+    paddingLeft: unit.x3,
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',
     width: '100%',
@@ -35,9 +34,9 @@ export const comboboxStyles = stylex.create({
   },
   // Right padding reserves room for the trigger/clear buttons overlaid on
   // the input — one button width each, none when both are hidden.
-  inputPaddingNone: { paddingRight: space.s3 },
-  inputPaddingButtons1: { paddingRight: space.s8 },
-  inputPaddingButtons2: { paddingRight: space.s16 },
+  inputPaddingNone: { paddingRight: unit.x3 },
+  inputPaddingButtons1: { paddingRight: unit.x8 },
+  inputPaddingButtons2: { paddingRight: unit.x16 },
   // Shared box for the absolutely-positioned icon buttons overlaid on the
   // input (trigger, clear).
   iconButton: {
@@ -53,7 +52,7 @@ export const comboboxStyles = stylex.create({
     padding: 0,
     position: 'absolute',
     top: 0,
-    width: space.s8
+    width: unit.x8
   },
   inputTrigger: {
     right: 0
@@ -62,7 +61,7 @@ export const comboboxStyles = stylex.create({
     right: 0
   },
   inputClearWithTrigger: {
-    right: space.s8
+    right: unit.x8
   },
   trigger: {
     alignItems: 'center',
@@ -76,8 +75,8 @@ export const comboboxStyles = stylex.create({
     display: 'inline-flex',
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
-    gap: space.s2,
-    height: space.s9,
+    gap: unit.x2,
+    height: unit.x9,
     justifyContent: 'space-between',
     lineHeight: fontLineHeight.body2,
     minWidth: container.xs,
@@ -87,7 +86,7 @@ export const comboboxStyles = stylex.create({
       ':focus-visible': `${stroke.focus} solid ${colors.ring}`
     },
     outlineOffset: `calc(-1 * ${stroke.border})`,
-    paddingInline: space.s3,
+    paddingInline: unit.x3,
     userSelect: 'none',
     whiteSpace: 'nowrap'
   },
@@ -104,15 +103,15 @@ export const comboboxStyles = stylex.create({
     borderWidth: stroke.border,
     display: 'flex',
     flexWrap: 'wrap',
-    gap: space.s1,
-    minHeight: space.s9,
+    gap: unit.x1,
+    minHeight: unit.x9,
     outline: {
       default: 'none',
       ':focus-within': `${stroke.focus} solid ${colors.ring}`
     },
     outlineOffset: `calc(-1 * ${stroke.border})`,
-    paddingBlock: space.s1,
-    paddingInline: space.s2,
+    paddingBlock: unit.x1,
+    paddingInline: unit.x2,
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',
     width: container.sm
@@ -124,12 +123,12 @@ export const comboboxStyles = stylex.create({
     color: colors.secondaryForeground,
     display: 'inline-flex',
     fontSize: fontSize.caption1,
-    gap: space.s1,
+    gap: unit.x1,
     lineHeight: fontLineHeight.caption1,
     opacity: { default: 1, '[data-disabled]': 0.5 },
-    paddingBlock: space.s1,
-    paddingLeft: space.s2,
-    paddingRight: space.s1
+    paddingBlock: unit.x1,
+    paddingLeft: unit.x2,
+    paddingRight: unit.x1
   },
   chipRemove: {
     alignItems: 'center',
@@ -139,14 +138,14 @@ export const comboboxStyles = stylex.create({
     color: 'inherit',
     cursor: 'pointer',
     display: 'flex',
-    height: space.s4,
+    height: unit.x4,
     justifyContent: 'center',
     outline: {
       default: 'none',
       ':focus-visible': `${stroke.focus} solid ${colors.ring}`
     },
     padding: 0,
-    width: space.s4
+    width: unit.x4
   },
   chipsInput: {
     backgroundColor: 'transparent',
@@ -157,7 +156,7 @@ export const comboboxStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
-    minWidth: space.s16,
+    minWidth: unit.x16,
     outline: 'none',
     padding: 0,
     '::placeholder': { color: colors.mutedForeground }
@@ -175,15 +174,15 @@ export const comboboxStyles = stylex.create({
     // var() fallback covers the unset case instead.
     '--popup-shift-x': {
       default: null,
-      '[data-side="left"]': space.s2,
-      '[data-side="right"]': `calc(-1 * ${space.s2})`,
-      '[data-side="inline-start"]': space.s2,
-      '[data-side="inline-end"]': `calc(-1 * ${space.s2})`
+      '[data-side="left"]': unit.x2,
+      '[data-side="right"]': `calc(-1 * ${unit.x2})`,
+      '[data-side="inline-start"]': unit.x2,
+      '[data-side="inline-end"]': `calc(-1 * ${unit.x2})`
     },
     '--popup-shift-y': {
       default: null,
-      '[data-side="top"]': space.s2,
-      '[data-side="bottom"]': `calc(-1 * ${space.s2})`
+      '[data-side="top"]': unit.x2,
+      '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
     },
     backgroundColor: colors.popover,
     borderRadius: radius.medium,
@@ -218,7 +217,7 @@ export const comboboxStyles = stylex.create({
   list: {
     overflowY: 'auto',
     overscrollBehavior: 'contain',
-    paddingBlock: space.s1
+    paddingBlock: unit.x1
   },
   item: {
     alignItems: 'center',
@@ -235,33 +234,33 @@ export const comboboxStyles = stylex.create({
     cursor: 'default',
     display: 'flex',
     fontSize: fontSize.body2,
-    gap: space.s2,
+    gap: unit.x2,
     lineHeight: fontLineHeight.body2,
-    marginInline: space.s1,
+    marginInline: unit.x1,
     outline: 'none',
     opacity: { default: 1, '[data-disabled]': 0.5 },
-    paddingBlock: space.s15,
-    paddingLeft: space.s2,
-    paddingRight: space.s8,
+    paddingBlock: unit.x1_5,
+    paddingLeft: unit.x2,
+    paddingRight: unit.x8,
     position: 'relative',
     userSelect: 'none'
   },
   indicator: {
     alignItems: 'center',
     display: 'flex',
-    height: space.s4,
+    height: unit.x4,
     justifyContent: 'center',
     pointerEvents: 'none',
     position: 'absolute',
-    right: space.s2,
-    width: space.s4
+    right: unit.x2,
+    width: unit.x4
   },
   label: {
     color: colors.mutedForeground,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
-    paddingBlock: space.s15,
-    paddingInline: space.s3
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x3
   },
   empty: {
     color: colors.mutedForeground,
@@ -269,12 +268,12 @@ export const comboboxStyles = stylex.create({
     // hide it then so its padding doesn't reserve space.
     display: { default: 'block', ':empty': 'none' },
     fontSize: fontSize.body2,
-    paddingBlock: space.s2,
+    paddingBlock: unit.x2,
     textAlign: 'center'
   },
   separator: {
     backgroundColor: colors.border,
     height: stroke.border,
-    marginBlock: space.s1
+    marginBlock: unit.x1
   }
 })

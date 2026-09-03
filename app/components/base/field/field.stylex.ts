@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { unit } from '#/styles/core/size.stylex'
 
 export const fieldStyles = stylex.create({
   set: {
@@ -9,34 +9,34 @@ export const fieldStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
-    gap: space.s4,
+    gap: unit.x4,
     margin: 0,
     minWidth: 0,
     padding: 0
   },
   legend: {
     fontWeight: fontWeight.medium,
-    marginBottom: space.s15,
+    marginBottom: unit.x1_5,
     padding: 0
   },
   group: {
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
-    gap: space.s5,
+    gap: unit.x5,
     width: '100%'
   },
   field: {
     display: 'flex',
     fontFamily: fontFamily.body,
-    gap: space.s2,
+    gap: unit.x2,
     width: '100%'
   },
   content: {
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
-    gap: space.s05,
+    gap: unit.x0_5,
     lineHeight: fontLineHeight.body2
   },
   labelBase: {
@@ -45,7 +45,7 @@ export const fieldStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    gap: space.s2,
+    gap: unit.x2,
     userSelect: 'none'
   },
   label: {
@@ -58,7 +58,7 @@ export const fieldStyles = stylex.create({
     display: 'flex',
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    gap: space.s2,
+    gap: unit.x2,
     lineHeight: fontLineHeight.body2,
     width: 'fit-content'
   },
@@ -71,8 +71,8 @@ export const fieldStyles = stylex.create({
   },
   separator: {
     lineHeight: fontLineHeight.body2,
-    height: space.s5,
-    marginBlock: `calc(-1 * ${space.s2})`,
+    height: unit.x5,
+    marginBlock: `calc(-1 * ${unit.x2})`,
     position: 'relative'
   },
   separatorLine: {
@@ -85,7 +85,7 @@ export const fieldStyles = stylex.create({
     color: colors.mutedForeground,
     display: 'block',
     marginInline: 'auto',
-    paddingInline: space.s2,
+    paddingInline: unit.x2,
     position: 'relative',
     width: 'fit-content'
   },
@@ -96,10 +96,10 @@ export const fieldStyles = stylex.create({
   errorList: {
     display: 'flex',
     flexDirection: 'column',
-    gap: space.s1,
+    gap: unit.x1,
     listStyle: 'disc',
     margin: 0,
-    paddingLeft: space.s4
+    paddingLeft: unit.x4
   }
 })
 

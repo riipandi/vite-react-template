@@ -1,10 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { stroke, container } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
-import { radius, zIndex } from '#/styles/core/size.stylex'
+import { unit, radius, zIndex } from '#/styles/core/size.stylex'
 
 export const autocompleteStyles = stylex.create({
   input: {
@@ -16,14 +15,14 @@ export const autocompleteStyles = stylex.create({
     color: colors.foreground,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
-    height: space.s9,
+    height: unit.x9,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
       ':focus-visible': `${stroke.focus} solid ${colors.ring}`
     },
     outlineOffset: `calc(-1 * ${stroke.border})`,
-    paddingInline: space.s3,
+    paddingInline: unit.x3,
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',
     width: container.sm,
@@ -42,15 +41,15 @@ export const autocompleteStyles = stylex.create({
     // var() fallback covers the unset case instead.
     '--popup-shift-x': {
       default: null,
-      '[data-side="left"]': space.s2,
-      '[data-side="right"]': `calc(-1 * ${space.s2})`,
-      '[data-side="inline-start"]': space.s2,
-      '[data-side="inline-end"]': `calc(-1 * ${space.s2})`
+      '[data-side="left"]': unit.x2,
+      '[data-side="right"]': `calc(-1 * ${unit.x2})`,
+      '[data-side="inline-start"]': unit.x2,
+      '[data-side="inline-end"]': `calc(-1 * ${unit.x2})`
     },
     '--popup-shift-y': {
       default: null,
-      '[data-side="top"]': space.s2,
-      '[data-side="bottom"]': `calc(-1 * ${space.s2})`
+      '[data-side="top"]': unit.x2,
+      '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
     },
     backgroundColor: colors.popover,
     borderRadius: radius.medium,
@@ -85,7 +84,7 @@ export const autocompleteStyles = stylex.create({
   list: {
     overflowY: 'auto',
     overscrollBehavior: 'contain',
-    paddingBlock: space.s1
+    paddingBlock: unit.x1
   },
   item: {
     alignItems: 'center',
@@ -102,21 +101,21 @@ export const autocompleteStyles = stylex.create({
     cursor: 'default',
     display: 'flex',
     fontSize: fontSize.body2,
-    gap: space.s2,
+    gap: unit.x2,
     lineHeight: fontLineHeight.body2,
-    marginInline: space.s1,
+    marginInline: unit.x1,
     outline: 'none',
     opacity: { default: 1, '[data-disabled]': 0.5 },
-    paddingBlock: space.s15,
-    paddingInline: space.s2,
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x2,
     userSelect: 'none'
   },
   label: {
     color: colors.mutedForeground,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
-    paddingBlock: space.s15,
-    paddingInline: space.s3
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x3
   },
   empty: {
     color: colors.mutedForeground,
@@ -124,12 +123,12 @@ export const autocompleteStyles = stylex.create({
     // hide it then so its padding doesn't reserve space.
     display: { default: 'block', ':empty': 'none' },
     fontSize: fontSize.body2,
-    paddingBlock: space.s2,
+    paddingBlock: unit.x2,
     textAlign: 'center'
   },
   separator: {
     backgroundColor: colors.border,
     height: stroke.border,
-    marginBlock: space.s1
+    marginBlock: unit.x1
   }
 })

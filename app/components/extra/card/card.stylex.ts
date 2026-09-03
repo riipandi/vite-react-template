@@ -1,9 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { shadow } from '#/styles/core/shadow.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 // `--card-spacing` lets `size` retune the paddings owned by the sections
 // below without prop-drilling: `sizes.sm` sets it, every section's own
@@ -23,15 +23,15 @@ export const cardStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
-    gap: `var(--card-spacing, ${space.s5})`,
-    paddingBlock: `var(--card-spacing, ${space.s5})`
+    gap: `var(--card-spacing, ${unit.x5})`,
+    paddingBlock: `var(--card-spacing, ${unit.x5})`
   },
   header: {
-    columnGap: space.s2,
+    columnGap: unit.x2,
     display: 'grid',
     gridTemplateColumns: '1fr auto',
-    paddingInline: `var(--card-spacing, ${space.s5})`,
-    rowGap: space.s15
+    paddingInline: `var(--card-spacing, ${unit.x5})`,
+    rowGap: unit.x1_5
   },
   title: {
     fontSize: fontSize.body1,
@@ -54,17 +54,17 @@ export const cardStyles = stylex.create({
     justifySelf: 'end'
   },
   content: {
-    paddingInline: `var(--card-spacing, ${space.s5})`
+    paddingInline: `var(--card-spacing, ${unit.x5})`
   },
   footer: {
     alignItems: 'center',
     display: 'flex',
-    gap: space.s2,
-    paddingInline: `var(--card-spacing, ${space.s5})`
+    gap: unit.x2,
+    paddingInline: `var(--card-spacing, ${unit.x5})`
   }
 })
 
 export const cardSizes = stylex.create({
   md: {},
-  sm: { '--card-spacing': space.s4 }
+  sm: { '--card-spacing': unit.x4 }
 })

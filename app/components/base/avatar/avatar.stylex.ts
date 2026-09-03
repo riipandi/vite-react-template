@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const avatarStyles = stylex.create({
   root: {
@@ -49,8 +49,8 @@ export const avatarStyles = stylex.create({
     insetInlineEnd: 0,
     insetBlockEnd: 0,
     justifyContent: 'center',
-    minHeight: space.s4,
-    minWidth: space.s4,
+    minHeight: unit.x4,
+    minWidth: unit.x4,
     position: 'absolute'
   },
   group: {
@@ -62,7 +62,7 @@ export const avatarStyles = stylex.create({
     display: 'inline-flex'
   },
   groupItemOverlap: {
-    marginInlineStart: `calc(-1 * ${space.s2})`
+    marginInlineStart: `calc(-1 * ${unit.x2})`
   },
   groupItemStack: (order: number) => ({
     zIndex: order
@@ -81,7 +81,7 @@ export const avatarStyles = stylex.create({
 })
 
 export const avatarSizes = stylex.create({
-  sm: { height: space.s8, width: space.s8 },
-  md: { height: space.s10, width: space.s10 },
-  lg: { height: space.s12, width: space.s12 }
+  sm: { height: unit.x8, width: unit.x8 },
+  md: { height: unit.x10, width: unit.x10 },
+  lg: { height: unit.x12, width: unit.x12 }
 })

@@ -1,9 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 
-export const unit = stylex.defineVars({
-  'x0.5': '2px',
+export const unit = stylex.defineConsts({
+  x0_5: '2px',
   x1: '4px',
-  'x1.5': '6px',
+  x1_5: '6px',
   x2: '8px',
   x3: '12px',
   x4: '16px',

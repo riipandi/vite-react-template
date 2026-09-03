@@ -1,9 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 import { duration } from '#/styles/core/motion.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const toggleStyles = stylex.create({
   root: {
@@ -24,7 +24,7 @@ export const toggleStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    gap: space.s1,
+    gap: unit.x1,
     justifyContent: 'center',
     lineHeight: fontLineHeight.body2,
     opacity: { default: 1, ':disabled': 0.5 },
@@ -52,18 +52,18 @@ export const toggleVariants = stylex.create({
 export const toggleSizes = stylex.create({
   sm: {
     fontSize: fontSize.caption1,
-    height: space.s7,
-    minWidth: space.s7,
-    paddingInline: space.s25
+    height: unit.x7,
+    minWidth: unit.x7,
+    paddingInline: unit.x2
   },
   md: {
-    height: space.s8,
-    minWidth: space.s8,
-    paddingInline: space.s25
+    height: unit.x8,
+    minWidth: unit.x8,
+    paddingInline: unit.x2
   },
   lg: {
-    height: space.s9,
-    minWidth: space.s9,
-    paddingInline: space.s25
+    height: unit.x9,
+    minWidth: unit.x9,
+    paddingInline: unit.x2
   }
 })

@@ -1,8 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
-import { radius } from '#/styles/core/size.stylex'
+import { unit, radius } from '#/styles/core/size.stylex'
 
 export const kbdStyles = stylex.create({
   root: {
@@ -14,11 +13,11 @@ export const kbdStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
-    gap: space.s1,
-    height: space.s5,
+    gap: unit.x1,
+    height: unit.x5,
     justifyContent: 'center',
-    minWidth: space.s5,
-    paddingInline: space.s1,
+    minWidth: unit.x5,
+    paddingInline: unit.x1,
     pointerEvents: 'none',
     userSelect: 'none',
     width: 'fit-content'
@@ -27,6 +26,6 @@ export const kbdStyles = stylex.create({
     alignItems: 'center',
     display: 'inline-flex',
     fontFamily: fontFamily.body,
-    gap: space.s1
+    gap: unit.x1
   }
 })

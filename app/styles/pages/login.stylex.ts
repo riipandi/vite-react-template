@@ -112,7 +112,7 @@ export const styles = stylex.create({
   field: {
     display: 'flex',
     flexDirection: 'column',
-    gap: unit['x1.5']
+    gap: unit.x1_5
   },
   label: {
     fontSize: fontSize.body2,
@@ -149,7 +149,7 @@ export const styles = stylex.create({
   fieldError: {
     fontSize: fontSize.caption1,
     color: colors.foregroundCritical,
-    marginTop: unit['x0.5']
+    marginTop: unit.x0_5
   },
   submitWrapper: {
     marginTop: unit.x7,

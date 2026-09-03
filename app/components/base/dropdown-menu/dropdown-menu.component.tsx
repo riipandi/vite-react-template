@@ -1,4 +1,4 @@
-import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
+import { Menu as BaseMenu } from '@base-ui/react/menu'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import {
@@ -18,74 +18,67 @@ interface StyleProp {
   style?: stylex.StyleXStyles
 }
 
-export const ContextMenu = BaseContextMenu.Root
-export const ContextMenuGroup = BaseContextMenu.Group
-export const ContextMenuPortal = BaseContextMenu.Portal
-export const ContextMenuSub = BaseContextMenu.SubmenuRoot
-export const ContextMenuRadioGroup = BaseContextMenu.RadioGroup
+export const DropdownMenu = BaseMenu.Root
+export const DropdownMenuTrigger = BaseMenu.Trigger
+export const DropdownMenuGroup = BaseMenu.Group
+export const DropdownMenuPortal = BaseMenu.Portal
+export const DropdownMenuSub = BaseMenu.SubmenuRoot
+export const DropdownMenuRadioGroup = BaseMenu.RadioGroup
 
-export function ContextMenuTrigger({
-  style,
-  ...props
-}: Omit<React.ComponentPropsWithoutRef<typeof BaseContextMenu.Trigger>, 'className' | 'style'> &
-  StyleProp) {
-  return <BaseContextMenu.Trigger {...props} {...stylex.props(styles.trigger, style)} />
-}
-
-export interface ContextMenuContentProps
+export interface DropdownMenuContentProps
   extends
-    Omit<React.ComponentPropsWithoutRef<typeof BaseContextMenu.Popup>, 'className' | 'style'>,
+    Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Popup>, 'className' | 'style'>,
     Pick<
-      React.ComponentPropsWithoutRef<typeof BaseContextMenu.Positioner>,
+      React.ComponentPropsWithoutRef<typeof BaseMenu.Positioner>,
       'align' | 'alignOffset' | 'side' | 'sideOffset'
     >,
     StyleProp {}
 
-export function ContextMenuContent({
+export function DropdownMenuContent({
   style,
-  side = 'right',
-  sideOffset = 0,
+  side = 'bottom',
+  sideOffset = 4,
   align = 'start',
-  alignOffset = 4,
+  alignOffset = 0,
   ...props
-}: ContextMenuContentProps) {
+}: DropdownMenuContentProps) {
   return (
-    <BaseContextMenu.Portal>
-      <BaseContextMenu.Positioner
+    <BaseMenu.Portal>
+      <BaseMenu.Positioner
         align={align}
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
         {...stylex.props(styles.positioner)}
       >
-        <BaseContextMenu.Popup
+        <BaseMenu.Popup
           {...props}
           {...stylex.props(styles.popup, ring({ shadow: shadow.md }), style)}
         />
-      </BaseContextMenu.Positioner>
-    </BaseContextMenu.Portal>
+      </BaseMenu.Positioner>
+    </BaseMenu.Portal>
   )
 }
 
-export type ContextMenuItemVariant = 'default' | 'destructive'
+export type DropdownMenuItemVariant = 'default' | 'destructive'
 
-export interface ContextMenuItemProps
+export interface DropdownMenuItemProps
   extends
-    Omit<React.ComponentPropsWithoutRef<typeof BaseContextMenu.Item>, 'className' | 'style'>,
+    Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Item>, 'className' | 'style'>,
     StyleProp {
-  variant?: ContextMenuItemVariant
+  variant?: DropdownMenuItemVariant
   /** Indents the item to align with checkbox/radio item labels. */
   inset?: boolean
 }
 
-export function ContextMenuItem({
+export function DropdownMenuItem({
   style,
   variant = 'default',
   inset,
   ...props
-}: ContextMenuItemProps) {
+}: DropdownMenuItemProps) {
   return (
-    <BaseContextMenu.Item
+    <BaseMenu.Item
       {...props}
       {...stylex.props(
         styles.item,
@@ -115,63 +108,51 @@ function IndicatorCheck() {
   )
 }
 
-export function ContextMenuCheckboxItem({
+export function DropdownMenuCheckboxItem({
   style,
   children,
   ...props
-}: Omit<
-  React.ComponentPropsWithoutRef<typeof BaseContextMenu.CheckboxItem>,
-  'className' | 'style'
-> &
+}: Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.CheckboxItem>, 'className' | 'style'> &
   StyleProp) {
   return (
-    <BaseContextMenu.CheckboxItem
-      {...props}
-      {...stylex.props(styles.item, styles.indicatorItem, style)}
-    >
+    <BaseMenu.CheckboxItem {...props} {...stylex.props(styles.item, styles.indicatorItem, style)}>
       <span {...stylex.props(styles.indicator)}>
-        <BaseContextMenu.CheckboxItemIndicator>
+        <BaseMenu.CheckboxItemIndicator>
           <IndicatorCheck />
-        </BaseContextMenu.CheckboxItemIndicator>
+        </BaseMenu.CheckboxItemIndicator>
       </span>
       {children}
-    </BaseContextMenu.CheckboxItem>
+    </BaseMenu.CheckboxItem>
   )
 }
 
-export function ContextMenuRadioItem({
+export function DropdownMenuRadioItem({
   style,
   children,
   ...props
-}: Omit<React.ComponentPropsWithoutRef<typeof BaseContextMenu.RadioItem>, 'className' | 'style'> &
+}: Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.RadioItem>, 'className' | 'style'> &
   StyleProp) {
   return (
-    <BaseContextMenu.RadioItem
-      {...props}
-      {...stylex.props(styles.item, styles.indicatorItem, style)}
-    >
+    <BaseMenu.RadioItem {...props} {...stylex.props(styles.item, styles.indicatorItem, style)}>
       <span {...stylex.props(styles.indicator)}>
-        <BaseContextMenu.RadioItemIndicator>
+        <BaseMenu.RadioItemIndicator>
           <IndicatorCheck />
-        </BaseContextMenu.RadioItemIndicator>
+        </BaseMenu.RadioItemIndicator>
       </span>
       {children}
-    </BaseContextMenu.RadioItem>
+    </BaseMenu.RadioItem>
   )
 }
 
-export function ContextMenuSubTrigger({
+export function DropdownMenuSubTrigger({
   style,
   inset,
   children,
   ...props
-}: Omit<
-  React.ComponentPropsWithoutRef<typeof BaseContextMenu.SubmenuTrigger>,
-  'className' | 'style'
-> &
+}: Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.SubmenuTrigger>, 'className' | 'style'> &
   StyleProp & { inset?: boolean }) {
   return (
-    <BaseContextMenu.SubmenuTrigger
+    <BaseMenu.SubmenuTrigger
       {...props}
       {...stylex.props(styles.item, styles.subTrigger, inset && styles.itemInset, style)}
     >
@@ -190,19 +171,18 @@ export function ContextMenuSubTrigger({
       >
         <path d={`m6 3 5 5-5 5`} />
       </svg>
-    </BaseContextMenu.SubmenuTrigger>
+    </BaseMenu.SubmenuTrigger>
   )
 }
 
-export function ContextMenuSubContent({
+export function DropdownMenuSubContent({
   style,
   sideOffset = 0,
   alignOffset = -4,
   ...props
-}: ContextMenuContentProps) {
+}: DropdownMenuContentProps) {
   return (
-    <ContextMenuContent
-      side='right'
+    <DropdownMenuContent
       sideOffset={sideOffset}
       alignOffset={alignOffset}
       {...props}
@@ -211,29 +191,29 @@ export function ContextMenuSubContent({
   )
 }
 
-export function ContextMenuShortcut({
+export function DropdownMenuShortcut({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'span'>, 'className' | 'style'> & StyleProp) {
   return <span {...props} {...stylex.props(styles.shortcut, style)} />
 }
 
-export function ContextMenuSeparator({
+export function DropdownMenuSeparator({
   style,
   ...props
-}: Omit<React.ComponentPropsWithoutRef<typeof BaseContextMenu.Separator>, 'className' | 'style'> &
+}: Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Separator>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseContextMenu.Separator {...props} {...stylex.props(styles.separator, style)} />
+  return <BaseMenu.Separator {...props} {...stylex.props(styles.separator, style)} />
 }
 
-export function ContextMenuLabel({
+export function DropdownMenuLabel({
   style,
   inset,
   ...props
-}: Omit<React.ComponentPropsWithoutRef<typeof BaseContextMenu.GroupLabel>, 'className' | 'style'> &
+}: Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.GroupLabel>, 'className' | 'style'> &
   StyleProp & { inset?: boolean }) {
   return (
-    <BaseContextMenu.GroupLabel
+    <BaseMenu.GroupLabel
       {...props}
       {...stylex.props(styles.label, inset && styles.itemInset, style)}
     />
@@ -241,9 +221,6 @@ export function ContextMenuLabel({
 }
 
 const styles = stylex.create({
-  trigger: {
-    userSelect: 'none'
-  },
   positioner: {
     outline: 'none',
     zIndex: z.popup
@@ -295,9 +272,13 @@ const styles = stylex.create({
       default: 'opacity, transform',
       '@media (prefers-reduced-motion: reduce)': 'opacity'
     },
-    transitionTimingFunction: easing.out
+    transitionTimingFunction: easing.out,
+    width: 'var(--anchor-width)'
   },
+  // Submenus anchor to their trigger item — the anchor width is the item, not
+  // the menu, so size to content instead.
   subPopup: {
+    minWidth: container.xs,
     width: 'max-content'
   },
   item: {
@@ -340,6 +321,7 @@ const styles = stylex.create({
   itemInset: {
     paddingLeft: space.s7
   },
+  // Reserve room for the trailing check indicator (absolute, right-aligned).
   indicatorItem: {
     paddingRight: space.s8,
     position: 'relative'

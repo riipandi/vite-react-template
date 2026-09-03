@@ -8,7 +8,6 @@ export interface SliderProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BaseSlider.Root>,
   'className' | 'style'
 > {
-  /** StyleX styles merged last — always win over the component's own. */
   style?: stylex.StyleXStyles
 }
 

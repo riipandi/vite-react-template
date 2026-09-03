@@ -41,7 +41,10 @@ const meta = {
 export default meta
 type Story = StoryObj<PlaygroundArgs>
 
-interface PlaygroundArgs { size?: number; color?: string }
+interface PlaygroundArgs {
+  size?: number
+  color?: string
+}
 
 function PlaygroundComponent({ size = 24, color }: PlaygroundArgs) {
   return (

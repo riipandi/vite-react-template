@@ -5,7 +5,6 @@ import { space, duration, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
 
 interface StyleXStyleProps {
-  /** StyleX styles merged last — always win over the component's own. */
   style?: stylex.StyleXStyles
 }
 

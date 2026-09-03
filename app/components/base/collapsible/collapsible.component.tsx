@@ -12,7 +12,6 @@ export function CollapsibleContent({
   style,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseCollapsible.Panel>, 'className' | 'style'> & {
-  /** StyleX styles merged last — always win over the component's own. */
   style?: stylex.StyleXStyles
 }) {
   return <BaseCollapsible.Panel {...props} {...stylex.props(styles.panel, style)} />

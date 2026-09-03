@@ -13,7 +13,7 @@ export interface ToggleProps extends Omit<
 > {
   variant?: ToggleVariant
   size?: ToggleSize
-  /** StyleX styles merged last — always win over the component's own. */
+
   style?: stylex.StyleXStyles
 }
 

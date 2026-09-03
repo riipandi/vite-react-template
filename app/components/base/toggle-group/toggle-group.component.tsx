@@ -32,7 +32,7 @@ export interface ToggleGroupProps extends Omit<
   size?: ToggleSize
   /** Item gap. `joined` fuses the items into one segmented control. */
   spacing?: 'gap' | 'joined'
-  /** StyleX styles merged last — always win over the component's own. */
+
   style?: stylex.StyleXStyles
 }
 

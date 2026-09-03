@@ -5,9 +5,7 @@ export interface AspectRatioProps extends Omit<
   React.ComponentPropsWithoutRef<'div'>,
   'className' | 'style'
 > {
-  /** Width / height, e.g. `16 / 9`. */
   ratio: number
-  /** StyleX styles merged last — always win over the component's own. */
   style?: stylex.StyleXStyles
 }
 

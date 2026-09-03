@@ -7,7 +7,6 @@ export interface LabelProps extends Omit<
   React.ComponentPropsWithoutRef<'label'>,
   'className' | 'style'
 > {
-  /** StyleX styles merged last — always win over the component's own. */
   style?: stylex.StyleXStyles
 }
 

@@ -26,7 +26,6 @@ export interface MenubarProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BaseMenubar>,
   'className' | 'style'
 > {
-  /** StyleX styles merged last — always win over the component's own. */
   style?: stylex.StyleXStyles
 }
 

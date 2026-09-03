@@ -15,7 +15,6 @@ import {
 import { colors, font, shadow, radius } from '#/lib/tokens.stylex'
 
 interface StyleXStyleProps {
-  /** StyleX styles merged last — always win over the component's own. */
   style?: stylex.StyleXStyles
 }
 

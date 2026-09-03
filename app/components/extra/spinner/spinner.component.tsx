@@ -5,7 +5,6 @@ export interface SpinnerProps extends Omit<
   React.ComponentPropsWithoutRef<'svg'>,
   'className' | 'style'
 > {
-  /** StyleX styles merged last — always win over the component's own. */
   style?: stylex.StyleXStyles
 }
 

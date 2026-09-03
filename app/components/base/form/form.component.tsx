@@ -8,7 +8,6 @@ export interface FormProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BaseForm>,
   'className' | 'style'
 > {
-  /** StyleX styles merged last — always win over the component's own. */
   style?: stylex.StyleXStyles
 }
 

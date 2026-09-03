@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, z, duration, easing, container } from '#/lib/constants.stylex'
+import { space, z, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { duration, easing } from '#/styles/core/motion.stylex'
 
 export const tooltipStyles = stylex.create({
   positioner: {
@@ -54,7 +55,7 @@ export const tooltipStyles = stylex.create({
       default: 'opacity, transform',
       '@media (prefers-reduced-motion: reduce)': 'opacity'
     },
-    transitionTimingFunction: easing.out
+    transitionTimingFunction: easing.decelerate
   },
   // A rotated square, half tucked under the popup; Base UI positions it along
   // the anchor axis, we offset the cross axis per [data-side] — the rotated

@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, duration, easing, stroke } from '#/lib/constants.stylex'
+import { space, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
+import { duration, easing } from '#/styles/core/motion.stylex'
 
 export const switchStyles = stylex.create({
   root: {
@@ -37,7 +38,7 @@ export const switchStyles = stylex.create({
       default: 'transform',
       '@media (prefers-reduced-motion: reduce)': 'none'
     },
-    transitionTimingFunction: easing.inOut
+    transitionTimingFunction: easing.standard
   }
 })
 

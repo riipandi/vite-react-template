@@ -21,9 +21,11 @@ export const unit = stylex.defineVars({
 })
 
 export const radius = stylex.defineVars({
-  small: '4px',
-  medium: '6px',
+  xsmall: '4px',
+  small: '6px',
+  medium: '8px',
   large: '10px',
+  xlarge: '12px',
   circular: '999px',
   none: '0px'
 })

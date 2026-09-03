@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
-import { z, duration, easing, stroke, container } from '#/lib/constants.stylex'
+import { z, stroke, container } from '#/lib/constants.stylex'
 import { colors, shadow, radius } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { duration, easing } from '#/styles/core/motion.stylex'
 
 export const sheetStyles = stylex.create({
   overlay: {
@@ -14,9 +15,9 @@ export const sheetStyles = stylex.create({
       '[data-ending-style]': 0
     },
     position: 'fixed',
-    transitionDuration: duration.normal,
+    transitionDuration: duration.medium,
     transitionProperty: 'opacity',
-    transitionTimingFunction: easing.out,
+    transitionTimingFunction: easing.decelerate,
     zIndex: z.popup
   },
   content: {
@@ -35,12 +36,12 @@ export const sheetStyles = stylex.create({
       '[data-ending-style]': 0
     },
     position: 'fixed',
-    transitionDuration: duration.normal,
+    transitionDuration: duration.medium,
     transitionProperty: {
       default: 'opacity, transform',
       '@media (prefers-reduced-motion: reduce)': 'opacity'
     },
-    transitionTimingFunction: easing.out,
+    transitionTimingFunction: easing.decelerate,
     zIndex: z.popup
   },
   close: {

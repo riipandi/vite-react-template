@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, duration, easing, stroke } from '#/lib/constants.stylex'
+import { space, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { duration, easing } from '#/styles/core/motion.stylex'
 
 export const accordionStyles = stylex.create({
   root: {
@@ -63,7 +64,7 @@ export const accordionStyles = stylex.create({
       default: 'transform',
       '@media (prefers-reduced-motion: reduce)': 'none'
     },
-    transitionTimingFunction: easing.out
+    transitionTimingFunction: easing.decelerate
   },
   // Height transition through Base UI's measured --accordion-panel-height;
   // the starting/ending frames pin it to 0 so both open AND close animate
@@ -82,7 +83,7 @@ export const accordionStyles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': '0s'
     },
     transitionProperty: 'height',
-    transitionTimingFunction: easing.out
+    transitionTimingFunction: easing.decelerate
   },
   inner: {
     paddingBottom: space.s25

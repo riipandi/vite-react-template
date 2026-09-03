@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, duration, stroke } from '#/lib/constants.stylex'
+import { space, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
 import { fontFamily, fontSize } from '#/styles/core/font.stylex'
+import { duration } from '#/styles/core/motion.stylex'
 
 export const inputGroupStyles = stylex.create({
   root: {

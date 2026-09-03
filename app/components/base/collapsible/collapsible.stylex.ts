@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { duration, easing } from '#/lib/constants.stylex'
+import { duration, easing } from '#/styles/core/motion.stylex'
 
 export const collapsibleStyles = stylex.create({
   // Height transition through Base UI's measured --collapsible-panel-height;
@@ -16,6 +16,6 @@ export const collapsibleStyles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': '0s'
     },
     transitionProperty: 'height',
-    transitionTimingFunction: easing.out
+    transitionTimingFunction: easing.decelerate
   }
 })

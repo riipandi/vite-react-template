@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
-import { z, duration, easing, stroke, container } from '#/lib/constants.stylex'
+import { z, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { duration, easing } from '#/styles/core/motion.stylex'
 
 export const drawerStyles = stylex.create({
   overlay: {
@@ -18,7 +19,7 @@ export const drawerStyles = stylex.create({
     position: 'fixed',
     transitionDuration: duration.slow,
     transitionProperty: 'opacity',
-    transitionTimingFunction: easing.drawer,
+    transitionTimingFunction: easing.decelerate,
     userSelect: 'none',
     zIndex: z.popup
   },
@@ -51,7 +52,7 @@ export const drawerStyles = stylex.create({
       default: 'transform, opacity',
       '@media (prefers-reduced-motion: reduce)': 'opacity'
     },
-    transitionTimingFunction: easing.drawer,
+    transitionTimingFunction: easing.decelerate,
     userSelect: 'none',
     willChange: 'transform',
     zIndex: z.popup

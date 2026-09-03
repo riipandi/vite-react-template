@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, duration, easing } from '#/lib/constants.stylex'
+import { space } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { duration, easing } from '#/styles/core/motion.stylex'
 
 export const meterStyles = stylex.create({
   root: {
@@ -26,7 +27,7 @@ export const meterStyles = stylex.create({
     height: '100%',
     transitionDuration: duration.fast,
     transitionProperty: 'width',
-    transitionTimingFunction: easing.out
+    transitionTimingFunction: easing.decelerate
   },
   label: {
     fontSize: fontSize.body2,

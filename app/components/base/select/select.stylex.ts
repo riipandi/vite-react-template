@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
-import { z, duration, easing, stroke, container } from '#/lib/constants.stylex'
+import { z, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { duration, easing } from '#/styles/core/motion.stylex'
 
 export const selectStyles = stylex.create({
   label: {
@@ -67,7 +68,7 @@ export const selectStyles = stylex.create({
       default: 'opacity, transform',
       '@media (prefers-reduced-motion: reduce)': 'opacity'
     },
-    transitionTimingFunction: easing.out
+    transitionTimingFunction: easing.decelerate
   },
   // Closed pose (anchored mode only — [data-side] sets the nudge direction,
   // [data-starting-style]/[data-ending-style] apply it).

@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, z } from '#/lib/constants.stylex'
-import { duration, easing, stroke, container } from '#/lib/constants.stylex'
+import { stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { duration, easing } from '#/styles/core/motion.stylex'
 
 export const comboboxStyles = stylex.create({
   inputWrap: {
@@ -210,7 +211,7 @@ export const comboboxStyles = stylex.create({
       default: 'opacity, transform',
       '@media (prefers-reduced-motion: reduce)': 'opacity'
     },
-    transitionTimingFunction: easing.out,
+    transitionTimingFunction: easing.decelerate,
     width: 'var(--anchor-width)'
   },
   list: {

@@ -1,8 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { space } from '#/lib/constants.stylex'
-import { z, duration, easing, stroke } from '#/lib/constants.stylex'
+import { z, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
+import { duration, easing } from '#/styles/core/motion.stylex'
 
 export const navigationMenuStyles = stylex.create({
   root: {
@@ -68,7 +69,7 @@ export const navigationMenuStyles = stylex.create({
     transform: 'rotate(var(--navigation-menu-chevron-rotation, 0deg))',
     transitionDuration: duration.slow,
     transitionProperty: 'transform',
-    transitionTimingFunction: easing.out
+    transitionTimingFunction: easing.decelerate
   },
   content: {
     padding: space.s1
@@ -105,7 +106,7 @@ export const navigationMenuStyles = stylex.create({
     },
     // Must match the popup's curve — positioner and popup move as one
     // surface during the trigger-to-trigger morph.
-    transitionTimingFunction: easing.out,
+    transitionTimingFunction: easing.decelerate,
     width: 'var(--positioner-width)',
     zIndex: z.popup
   },
@@ -132,7 +133,7 @@ export const navigationMenuStyles = stylex.create({
       default: 'opacity, transform, width, height',
       '@media (prefers-reduced-motion: reduce)': 'opacity'
     },
-    transitionTimingFunction: easing.out,
+    transitionTimingFunction: easing.decelerate,
     width: 'var(--popup-width)'
   },
   viewport: {

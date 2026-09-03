@@ -27,27 +27,6 @@ export const z = stylex.defineConsts({
   toast: '100'
 })
 
-export const duration = stylex.defineConsts({
-  fast: '150ms',
-  // Modal-tier surfaces (dialog, sheet): big enough to read as deliberate,
-  // still under the 300ms ceiling for UI motion.
-  normal: '200ms',
-  // Larger surface moves (drawer, toast stack, navigation menu morph).
-  slow: '350ms'
-})
-
-// Easing curves. Built-in CSS keywords are too weak for UI motion; these are
-// the house curves — never inline a cubic-bezier in component styles.
-export const easing = stylex.defineConsts({
-  // Enter/exit and state response: fast start, gentle settle.
-  out: 'cubic-bezier(0.23, 1, 0.32, 1)',
-  // On-screen movement between two resting positions (switch thumb,
-  // navigation menu morph).
-  inOut: 'cubic-bezier(0.77, 0, 0.175, 1)',
-  // iOS-like drawer curve.
-  drawer: 'cubic-bezier(0.32, 0.72, 0, 1)'
-})
-
 export const stroke = stylex.defineConsts({
   border: '1px',
   focus: '2px',

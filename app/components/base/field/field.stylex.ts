@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight } from '#/lib/constants.stylex'
+import { space, lineHeight } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const fieldStyles = stylex.create({
   set: {
@@ -43,7 +43,7 @@ export const fieldStyles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     gap: space.s2,
     userSelect: 'none'
@@ -56,7 +56,7 @@ export const fieldStyles = stylex.create({
   title: {
     alignItems: 'center',
     display: 'flex',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     gap: space.s2,
     lineHeight: lineHeight.snug,
@@ -64,13 +64,13 @@ export const fieldStyles = stylex.create({
   },
   description: {
     color: colors.mutedForeground,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     lineHeight: lineHeight.normal,
     margin: 0,
     textAlign: 'left'
   },
   separator: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     height: space.s5,
     marginBlock: `calc(-1 * ${space.s2})`,
     position: 'relative'
@@ -91,7 +91,7 @@ export const fieldStyles = stylex.create({
   },
   error: {
     color: colors.destructive,
-    fontSize: fontSize.sm
+    fontSize: fontSize.body2
   },
   errorList: {
     display: 'flex',
@@ -105,10 +105,10 @@ export const fieldStyles = stylex.create({
 
 export const fieldLegendVariants = stylex.create({
   legend: {
-    fontSize: fontSize.base
+    fontSize: fontSize.body1
   },
   label: {
-    fontSize: fontSize.sm
+    fontSize: fontSize.body2
   }
 })
 

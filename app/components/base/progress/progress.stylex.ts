@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, duration, easing } from '#/lib/constants.stylex'
+import { space, lineHeight, duration, easing } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const progressStyles = stylex.create({
   root: {
@@ -29,13 +29,13 @@ export const progressStyles = stylex.create({
     transitionTimingFunction: easing.out
   },
   label: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     lineHeight: lineHeight.control
   },
   value: {
     color: colors.mutedForeground,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontVariantNumeric: 'tabular-nums',
     lineHeight: lineHeight.control,
     marginLeft: 'auto'

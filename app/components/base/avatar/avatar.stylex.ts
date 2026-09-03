@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, stroke } from '#/lib/constants.stylex'
+import { space, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const avatarStyles = stylex.create({
   root: {
@@ -30,7 +30,7 @@ export const avatarStyles = stylex.create({
     borderRadius: radius.full,
     color: colors.mutedForeground,
     display: 'flex',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     height: '100%',
     justifyContent: 'center',
@@ -73,7 +73,7 @@ export const avatarStyles = stylex.create({
     color: colors.mutedForeground,
     display: 'flex',
     fontFamily: fontFamily.body,
-    fontSize: fontSize.xs,
+    fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
     justifyContent: 'center'
   }

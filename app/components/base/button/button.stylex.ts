@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, duration, stroke } from '#/lib/constants.stylex'
+import { space, lineHeight, duration, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const buttonStyles = stylex.create({
   root: {
@@ -11,7 +11,7 @@ export const buttonStyles = stylex.create({
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     gap: space.s2,
     justifyContent: 'center',
@@ -78,10 +78,10 @@ export const buttonVariants = stylex.create({
 })
 
 export const buttonSizes = stylex.create({
-  xs: { fontSize: fontSize.xs, gap: space.s1, height: space.s7, paddingInline: space.s2 },
+  xs: { fontSize: fontSize.caption1, gap: space.s1, height: space.s7, paddingInline: space.s2 },
   sm: { height: space.s8, paddingInline: space.s3 },
   md: { height: space.s9, paddingInline: space.s4 },
-  lg: { fontSize: fontSize.base, height: space.s10, paddingInline: space.s6 },
+  lg: { fontSize: fontSize.body1, height: space.s10, paddingInline: space.s6 },
   icon: { height: space.s9, paddingInline: 0, width: space.s9 },
   iconXs: { height: space.s7, paddingInline: 0, width: space.s7 },
   iconSm: { height: space.s8, paddingInline: 0, width: space.s8 },

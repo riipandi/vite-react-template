@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight } from '#/lib/constants.stylex'
+import { space, lineHeight } from '#/lib/constants.stylex'
 import { z, duration, easing, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const navigationMenuStyles = stylex.create({
   root: {
@@ -46,7 +46,7 @@ export const navigationMenuStyles = stylex.create({
     cursor: 'pointer',
     display: 'inline-flex',
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     gap: space.s1,
     height: space.s9,
@@ -83,7 +83,7 @@ export const navigationMenuStyles = stylex.create({
     borderRadius: radius.md,
     color: colors.foreground,
     display: 'flex',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     gap: space.s2,
     lineHeight: lineHeight.control,
     outline: {

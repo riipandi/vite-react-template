@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, duration, stroke } from '#/lib/constants.stylex'
+import { space, lineHeight, duration, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily } from '#/styles/core/font.stylex'
+import { fontFamily, fontSize } from '#/styles/core/font.stylex'
 
 export const otpFieldStyles = stylex.create({
   root: {
@@ -31,7 +31,7 @@ export const otpFieldStyles = stylex.create({
       ':focus': `0 0 0 ${stroke.halo} color-mix(in srgb, ${colors.ring} 50%, transparent)`
     },
     color: colors.foreground,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     height: space.s8,
     lineHeight: lineHeight.control,
     marginLeft: { default: `calc(-1 * ${stroke.border})`, ':first-child': 0 },

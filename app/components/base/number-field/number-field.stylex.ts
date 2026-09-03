@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, duration, stroke } from '#/lib/constants.stylex'
+import { space, duration, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily } from '#/styles/core/font.stylex'
+import { fontFamily, fontSize } from '#/styles/core/font.stylex'
 
 export const numberFieldStyles = stylex.create({
   root: {
@@ -30,7 +30,7 @@ export const numberFieldStyles = stylex.create({
     borderStyle: 'none',
     color: colors.foreground,
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontVariantNumeric: 'tabular-nums',
     outline: 'none',
     padding: 0,

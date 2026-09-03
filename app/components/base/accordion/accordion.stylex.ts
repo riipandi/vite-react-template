@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, duration, easing, stroke } from '#/lib/constants.stylex'
+import { space, lineHeight, duration, easing, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const accordionStyles = stylex.create({
   root: {
@@ -29,7 +29,7 @@ export const accordionStyles = stylex.create({
     display: 'flex',
     flex: 1,
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     gap: space.s4,
     justifyContent: 'space-between',
@@ -69,7 +69,7 @@ export const accordionStyles = stylex.create({
   // the starting/ending frames pin it to 0 so both open AND close animate
   // (a one-way keyframe would replay its open animation on close).
   panel: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     height: {
       default: 'var(--accordion-panel-height)',
       '[data-starting-style]': 0,

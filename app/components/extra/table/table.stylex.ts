@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, duration, stroke } from '#/lib/constants.stylex'
+import { space, lineHeight, duration, stroke } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const tableStyles = stylex.create({
   container: {
@@ -13,7 +13,7 @@ export const tableStyles = stylex.create({
     borderCollapse: 'collapse',
     captionSide: 'bottom',
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     lineHeight: lineHeight.control,
     width: '100%'
   },
@@ -59,7 +59,7 @@ export const tableStyles = stylex.create({
   },
   caption: {
     color: colors.mutedForeground,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     marginTop: space.s4
   }
 })

@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, z } from '#/lib/constants.stylex'
+import { space, lineHeight, z } from '#/lib/constants.stylex'
 import { duration, easing, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const autocompleteStyles = stylex.create({
   input: {
@@ -13,7 +13,7 @@ export const autocompleteStyles = stylex.create({
     borderWidth: stroke.border,
     color: colors.foreground,
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     height: space.s9,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
@@ -99,7 +99,7 @@ export const autocompleteStyles = stylex.create({
     },
     cursor: 'default',
     display: 'flex',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     gap: space.s2,
     lineHeight: lineHeight.control,
     marginInline: space.s1,
@@ -111,7 +111,7 @@ export const autocompleteStyles = stylex.create({
   },
   label: {
     color: colors.mutedForeground,
-    fontSize: fontSize.xs,
+    fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
     paddingBlock: space.s15,
     paddingInline: space.s3
@@ -121,7 +121,7 @@ export const autocompleteStyles = stylex.create({
     // Base UI renders the element with no children while results exist —
     // hide it then so its padding doesn't reserve space.
     display: { default: 'block', ':empty': 'none' },
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     paddingBlock: space.s2,
     textAlign: 'center'
   },

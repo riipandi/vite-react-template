@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, stroke } from '#/lib/constants.stylex'
+import { space, lineHeight, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const alertStyles = stylex.create({
   root: {
@@ -20,14 +20,14 @@ export const alertStyles = stylex.create({
     width: '100%'
   },
   title: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.semibold,
     lineHeight: lineHeight.tight,
     margin: 0
   },
   description: {
     color: colors.mutedForeground,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     lineHeight: lineHeight.normal
   },
   action: {

@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, stroke, container } from '#/lib/constants.stylex'
+import { space, lineHeight, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const emptyStyles = stylex.create({
   root: {
@@ -37,20 +37,20 @@ export const emptyStyles = stylex.create({
     marginBottom: space.s2
   },
   title: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     letterSpacing: '-0.01em'
   },
   description: {
     color: colors.mutedForeground,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     lineHeight: lineHeight.normal
   },
   content: {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     gap: space.s25,
     maxWidth: container.lg,
     minWidth: 0,

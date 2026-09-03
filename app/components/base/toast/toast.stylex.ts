@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight } from '#/lib/constants.stylex'
+import { space, lineHeight } from '#/lib/constants.stylex'
 import { z, duration, easing, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius, shadow } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const toastStyles = stylex.create({
   viewport: {
@@ -87,14 +87,14 @@ export const toastStyles = stylex.create({
     gap: space.s1
   },
   title: {
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.semibold,
     lineHeight: lineHeight.tight,
     margin: 0
   },
   description: {
     color: colors.mutedForeground,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     lineHeight: lineHeight.snug,
     margin: 0
   },
@@ -113,7 +113,7 @@ export const toastStyles = stylex.create({
     display: 'inline-flex',
     flexShrink: 0,
     fontFamily: fontFamily.body,
-    fontSize: fontSize.xs,
+    fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
     height: space.s6,
     justifyContent: 'center',

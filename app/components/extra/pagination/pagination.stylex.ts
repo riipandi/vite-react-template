@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize } from '#/lib/constants.stylex'
-import { fontFamily } from '#/styles/core/font.stylex'
+import { space } from '#/lib/constants.stylex'
+import { fontFamily, fontSize } from '#/styles/core/font.stylex'
 
 export const paginationStyles = stylex.create({
   nav: {
@@ -33,7 +33,7 @@ export const paginationStyles = stylex.create({
   ellipsis: {
     alignItems: 'center',
     display: 'flex',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     height: space.s8,
     justifyContent: 'center',
     width: space.s8

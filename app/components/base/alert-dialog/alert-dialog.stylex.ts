@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, z } from '#/lib/constants.stylex'
+import { space, lineHeight, z } from '#/lib/constants.stylex'
 import { duration, easing, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const alertDialogStyles = stylex.create({
   overlay: {
@@ -95,14 +95,14 @@ export const alertDialogStyles = stylex.create({
     padding: space.s4
   },
   title: {
-    fontSize: fontSize.base,
+    fontSize: fontSize.body1,
     fontWeight: fontWeight.medium,
     lineHeight: lineHeight.tight,
     margin: 0
   },
   description: {
     color: colors.mutedForeground,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     lineHeight: lineHeight.normal,
     margin: 0
   }

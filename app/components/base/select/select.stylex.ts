@@ -1,13 +1,13 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight } from '#/lib/constants.stylex'
+import { space, lineHeight } from '#/lib/constants.stylex'
 import { z, duration, easing, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const selectStyles = stylex.create({
   label: {
     color: colors.mutedForeground,
-    fontSize: fontSize.xs,
+    fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
     paddingBlock: space.s15,
     paddingInline: space.s3
@@ -28,7 +28,7 @@ export const selectStyles = stylex.create({
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     gap: space.s2,
     height: space.s9,
     justifyContent: 'space-between',
@@ -136,7 +136,7 @@ export const selectStyles = stylex.create({
     },
     cursor: 'default',
     display: 'grid',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     gap: space.s2,
     gridTemplateColumns: `1fr ${space.s4}`,
     marginInline: space.s1,

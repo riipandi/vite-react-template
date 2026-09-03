@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, stroke, container } from '#/lib/constants.stylex'
+import { space, lineHeight, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const commandStyles = stylex.create({
   root: {
@@ -56,7 +56,7 @@ export const commandStyles = stylex.create({
     borderStyle: 'none',
     color: colors.foreground,
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     height: '100%',
     outline: 'none',
     padding: 0,
@@ -74,13 +74,13 @@ export const commandStyles = stylex.create({
     // Base UI renders the element with no children while results exist —
     // hide it then so its padding doesn't reserve space.
     display: { default: 'block', ':empty': 'none' },
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     paddingBlock: space.s6,
     textAlign: 'center'
   },
   groupLabel: {
     color: colors.mutedForeground,
-    fontSize: fontSize.xs,
+    fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
     paddingBlock: space.s15,
     paddingInline: space.s2
@@ -99,7 +99,7 @@ export const commandStyles = stylex.create({
     },
     cursor: 'default',
     display: 'flex',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     gap: space.s2,
     lineHeight: lineHeight.control,
     outline: 'none',
@@ -117,7 +117,7 @@ export const commandStyles = stylex.create({
   },
   shortcut: {
     color: colors.mutedForeground,
-    fontSize: fontSize.xs,
+    fontSize: fontSize.caption1,
     letterSpacing: '0.1em',
     marginLeft: 'auto'
   }

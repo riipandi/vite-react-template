@@ -22,14 +22,6 @@ export const space = stylex.defineConsts({
   s16: '4rem'
 })
 
-export const fontSize = stylex.defineConsts({
-  xs: '0.75rem',
-  sm: '0.875rem',
-  base: '1rem',
-  lg: '1.125rem',
-  xl: '1.5rem'
-})
-
 export const lineHeight = stylex.defineConsts({
   none: '1',
   tight: '1.3',

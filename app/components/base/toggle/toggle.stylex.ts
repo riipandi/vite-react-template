@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, duration, stroke } from '#/lib/constants.stylex'
+import { space, lineHeight, duration, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const toggleStyles = stylex.create({
   root: {
@@ -20,7 +20,7 @@ export const toggleStyles = stylex.create({
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     gap: space.s1,
     justifyContent: 'center',
@@ -49,7 +49,7 @@ export const toggleVariants = stylex.create({
 
 export const toggleSizes = stylex.create({
   sm: {
-    fontSize: fontSize.xs,
+    fontSize: fontSize.caption1,
     height: space.s7,
     minWidth: space.s7,
     paddingInline: space.s25

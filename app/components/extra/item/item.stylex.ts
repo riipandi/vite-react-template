@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, duration, stroke } from '#/lib/constants.stylex'
+import { space, lineHeight, duration, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const itemStyles = stylex.create({
   group: {
@@ -18,7 +18,7 @@ export const itemStyles = stylex.create({
     display: 'flex',
     flexWrap: 'wrap',
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     lineHeight: lineHeight.snug,
     outline: {
       default: 'none',
@@ -45,7 +45,7 @@ export const itemStyles = stylex.create({
   title: {
     alignItems: 'center',
     display: 'flex',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     gap: space.s2,
     lineHeight: lineHeight.snug,
@@ -53,7 +53,7 @@ export const itemStyles = stylex.create({
   },
   description: {
     color: colors.mutedForeground,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     lineHeight: lineHeight.normal,
     margin: 0,
     textAlign: 'left'

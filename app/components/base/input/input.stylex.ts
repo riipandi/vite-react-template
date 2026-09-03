@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, duration, stroke } from '#/lib/constants.stylex'
+import { space, duration, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const inputStyles = stylex.create({
   root: {
@@ -16,7 +16,7 @@ export const inputStyles = stylex.create({
     borderWidth: stroke.border,
     color: colors.foreground,
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     height: space.s9,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
@@ -33,7 +33,7 @@ export const inputStyles = stylex.create({
       borderStyle: 'none',
       color: colors.foreground,
       fontFamily: fontFamily.body,
-      fontSize: fontSize.sm,
+      fontSize: fontSize.body2,
       fontWeight: fontWeight.medium,
       height: '100%',
       marginInlineEnd: space.s3,

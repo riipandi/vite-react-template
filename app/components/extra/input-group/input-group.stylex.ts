@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, duration, stroke } from '#/lib/constants.stylex'
+import { space, duration, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily } from '#/styles/core/font.stylex'
+import { fontFamily, fontSize } from '#/styles/core/font.stylex'
 
 export const inputGroupStyles = stylex.create({
   root: {
@@ -37,7 +37,7 @@ export const inputGroupStyles = stylex.create({
     color: colors.mutedForeground,
     cursor: 'text',
     display: 'flex',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     gap: space.s2,
     justifyContent: 'center',
     paddingBlock: space.s15,
@@ -47,7 +47,7 @@ export const inputGroupStyles = stylex.create({
     alignItems: 'center',
     color: colors.mutedForeground,
     display: 'flex',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     gap: space.s2
   },
   // The group draws the border and focus ring; the control inside goes bare.

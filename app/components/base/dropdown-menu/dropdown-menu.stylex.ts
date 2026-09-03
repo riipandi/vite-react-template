@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, z } from '#/lib/constants.stylex'
+import { space, z } from '#/lib/constants.stylex'
 import { duration, easing, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
 
 export const dropdownMenuStyles = stylex.create({
   positioner: {
@@ -79,7 +79,7 @@ export const dropdownMenuStyles = stylex.create({
     },
     cursor: 'default',
     display: 'flex',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     gap: space.s2,
     marginInline: space.s1,
     opacity: { default: 1, '[data-disabled]': 0.5 },
@@ -137,7 +137,7 @@ export const dropdownMenuStyles = stylex.create({
   },
   shortcut: {
     color: colors.mutedForeground,
-    fontSize: fontSize.xs,
+    fontSize: fontSize.caption1,
     letterSpacing: '0.1em',
     marginLeft: 'auto'
   },
@@ -148,7 +148,7 @@ export const dropdownMenuStyles = stylex.create({
   },
   label: {
     color: colors.mutedForeground,
-    fontSize: fontSize.xs,
+    fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
     paddingBlock: space.s15,
     paddingInline: space.s3

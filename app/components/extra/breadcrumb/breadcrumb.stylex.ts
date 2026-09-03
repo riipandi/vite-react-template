@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, duration } from '#/lib/constants.stylex'
+import { space, duration } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
-import { fontFamily } from '#/styles/core/font.stylex'
+import { fontFamily, fontSize } from '#/styles/core/font.stylex'
 
 export const breadcrumbStyles = stylex.create({
   list: {
@@ -10,7 +10,7 @@ export const breadcrumbStyles = stylex.create({
     display: 'flex',
     flexWrap: 'wrap',
     fontFamily: fontFamily.body,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.body2,
     gap: space.s15,
     listStyle: 'none',
     margin: 0,

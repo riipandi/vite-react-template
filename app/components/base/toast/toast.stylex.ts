@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight } from '#/lib/constants.stylex'
+import { space } from '#/lib/constants.stylex'
 import { z, duration, easing, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius, shadow } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const toastStyles = stylex.create({
   viewport: {
@@ -89,13 +89,13 @@ export const toastStyles = stylex.create({
   title: {
     fontSize: fontSize.body2,
     fontWeight: fontWeight.semibold,
-    lineHeight: lineHeight.tight,
+    lineHeight: fontLineHeight.body2,
     margin: 0
   },
   description: {
     color: colors.mutedForeground,
     fontSize: fontSize.body2,
-    lineHeight: lineHeight.snug,
+    lineHeight: fontLineHeight.body2,
     margin: 0
   },
   action: {

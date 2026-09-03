@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight, stroke, container } from '#/lib/constants.stylex'
+import { space, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const commandStyles = stylex.create({
   root: {
@@ -101,7 +101,7 @@ export const commandStyles = stylex.create({
     display: 'flex',
     fontSize: fontSize.body2,
     gap: space.s2,
-    lineHeight: lineHeight.control,
+    lineHeight: fontLineHeight.body2,
     outline: 'none',
     opacity: { default: 1, '[data-disabled]': 0.5 },
     paddingBlock: space.s15,

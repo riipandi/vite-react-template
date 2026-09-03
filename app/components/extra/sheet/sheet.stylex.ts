@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight } from '#/lib/constants.stylex'
+import { space } from '#/lib/constants.stylex'
 import { z, duration, easing, stroke, container } from '#/lib/constants.stylex'
 import { colors, shadow, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const sheetStyles = stylex.create({
   overlay: {
@@ -28,7 +28,7 @@ export const sheetStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     gap: space.s4,
-    lineHeight: lineHeight.normal,
+    lineHeight: fontLineHeight.body2,
     opacity: {
       default: 1,
       '[data-starting-style]': 0,
@@ -86,13 +86,13 @@ export const sheetStyles = stylex.create({
     color: colors.foreground,
     fontSize: fontSize.body1,
     fontWeight: fontWeight.medium,
-    lineHeight: lineHeight.tight,
+    lineHeight: fontLineHeight.body1,
     margin: 0
   },
   description: {
     color: colors.mutedForeground,
     fontSize: fontSize.body2,
-    lineHeight: lineHeight.normal,
+    lineHeight: fontLineHeight.body2,
     margin: 0
   }
 })

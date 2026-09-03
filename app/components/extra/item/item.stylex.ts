@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight, duration, stroke } from '#/lib/constants.stylex'
+import { space, duration, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const itemStyles = stylex.create({
   group: {
@@ -19,7 +19,7 @@ export const itemStyles = stylex.create({
     flexWrap: 'wrap',
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
-    lineHeight: lineHeight.snug,
+    lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
       ':focus-visible': `${stroke.focus} solid ${colors.ring}`
@@ -48,13 +48,13 @@ export const itemStyles = stylex.create({
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     gap: space.s2,
-    lineHeight: lineHeight.snug,
+    lineHeight: fontLineHeight.body2,
     width: 'fit-content'
   },
   description: {
     color: colors.mutedForeground,
     fontSize: fontSize.body2,
-    lineHeight: lineHeight.normal,
+    lineHeight: fontLineHeight.body2,
     margin: 0,
     textAlign: 'left'
   },

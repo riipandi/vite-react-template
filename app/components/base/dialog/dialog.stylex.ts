@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight, z } from '#/lib/constants.stylex'
+import { space, z } from '#/lib/constants.stylex'
 import { duration, easing, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const dialogStyles = stylex.create({
   overlay: {
@@ -88,13 +88,13 @@ export const dialogStyles = stylex.create({
   title: {
     fontSize: fontSize.featured6,
     fontWeight: fontWeight.semibold,
-    lineHeight: lineHeight.tight,
+    lineHeight: fontLineHeight.featured6,
     margin: 0
   },
   description: {
     color: colors.mutedForeground,
     fontSize: fontSize.body2,
-    lineHeight: lineHeight.normal,
+    lineHeight: fontLineHeight.body2,
     margin: 0
   }
 })

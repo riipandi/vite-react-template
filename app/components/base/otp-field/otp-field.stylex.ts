@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight, duration, stroke } from '#/lib/constants.stylex'
+import { space, duration, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const otpFieldStyles = stylex.create({
   root: {
@@ -33,7 +33,7 @@ export const otpFieldStyles = stylex.create({
     color: colors.foreground,
     fontSize: fontSize.body2,
     height: space.s8,
-    lineHeight: lineHeight.control,
+    lineHeight: fontLineHeight.body2,
     marginLeft: { default: `calc(-1 * ${stroke.border})`, ':first-child': 0 },
     opacity: { default: 1, ':disabled': 0.5 },
     outline: 'none',

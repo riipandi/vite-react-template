@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight, duration, stroke } from '#/lib/constants.stylex'
+import { space, duration, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const toggleStyles = stylex.create({
   root: {
@@ -24,7 +24,7 @@ export const toggleStyles = stylex.create({
     fontWeight: fontWeight.medium,
     gap: space.s1,
     justifyContent: 'center',
-    lineHeight: lineHeight.none,
+    lineHeight: fontLineHeight.body2,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',

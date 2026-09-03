@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight, z, duration, easing, container } from '#/lib/constants.stylex'
+import { space, z, duration, easing, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const previewCardStyles = stylex.create({
   positioner: {
@@ -32,7 +32,7 @@ export const previewCardStyles = stylex.create({
     color: colors.popoverForeground,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
-    lineHeight: lineHeight.normal,
+    lineHeight: fontLineHeight.body2,
     opacity: {
       default: 1,
       '[data-starting-style]': 0,

@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight } from '#/lib/constants.stylex'
+import { space } from '#/lib/constants.stylex'
 import { colors } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const fieldStyles = stylex.create({
   set: {
@@ -37,7 +37,7 @@ export const fieldStyles = stylex.create({
     flex: 1,
     flexDirection: 'column',
     gap: space.s05,
-    lineHeight: lineHeight.snug
+    lineHeight: fontLineHeight.body2
   },
   labelBase: {
     alignItems: 'center',
@@ -50,7 +50,7 @@ export const fieldStyles = stylex.create({
   },
   label: {
     color: { default: null, '[data-invalid]': colors.destructive },
-    lineHeight: lineHeight.snug,
+    lineHeight: fontLineHeight.body2,
     width: 'fit-content'
   },
   title: {
@@ -59,18 +59,18 @@ export const fieldStyles = stylex.create({
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     gap: space.s2,
-    lineHeight: lineHeight.snug,
+    lineHeight: fontLineHeight.body2,
     width: 'fit-content'
   },
   description: {
     color: colors.mutedForeground,
     fontSize: fontSize.body2,
-    lineHeight: lineHeight.normal,
+    lineHeight: fontLineHeight.body2,
     margin: 0,
     textAlign: 'left'
   },
   separator: {
-    fontSize: fontSize.body2,
+    lineHeight: fontLineHeight.body2,
     height: space.s5,
     marginBlock: `calc(-1 * ${space.s2})`,
     position: 'relative'

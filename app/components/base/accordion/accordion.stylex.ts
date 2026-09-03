@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight, duration, easing, stroke } from '#/lib/constants.stylex'
+import { space, duration, easing, stroke } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const accordionStyles = stylex.create({
   root: {
@@ -33,7 +33,7 @@ export const accordionStyles = stylex.create({
     fontWeight: fontWeight.medium,
     gap: space.s4,
     justifyContent: 'space-between',
-    lineHeight: lineHeight.control,
+    lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
       ':focus-visible': `${stroke.focus} solid ${colors.ring}`
@@ -75,7 +75,7 @@ export const accordionStyles = stylex.create({
       '[data-starting-style]': 0,
       '[data-ending-style]': 0
     },
-    lineHeight: lineHeight.normal,
+    lineHeight: fontLineHeight.body2,
     overflow: 'hidden',
     transitionDuration: {
       default: duration.fast,

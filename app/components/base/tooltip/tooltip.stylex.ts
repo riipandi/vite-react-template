@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight, z, duration, easing, container } from '#/lib/constants.stylex'
+import { space, z, duration, easing, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const tooltipStyles = stylex.create({
   positioner: {
@@ -32,7 +32,7 @@ export const tooltipStyles = stylex.create({
     color: colors.background,
     fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,
-    lineHeight: lineHeight.snug,
+    lineHeight: fontLineHeight.caption1,
     maxWidth: container.sm,
     opacity: {
       default: 1,

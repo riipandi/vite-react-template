@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight, duration, easing } from '#/lib/constants.stylex'
+import { space, duration, easing } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const meterStyles = stylex.create({
   root: {
@@ -31,13 +31,13 @@ export const meterStyles = stylex.create({
   label: {
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    lineHeight: lineHeight.control
+    lineHeight: fontLineHeight.body2
   },
   value: {
     color: colors.mutedForeground,
     fontSize: fontSize.body2,
     fontVariantNumeric: 'tabular-nums',
-    lineHeight: lineHeight.control,
+    lineHeight: fontLineHeight.body2,
     marginLeft: 'auto'
   }
 })

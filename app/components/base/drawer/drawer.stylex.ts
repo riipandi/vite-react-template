@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, lineHeight } from '#/lib/constants.stylex'
+import { space } from '#/lib/constants.stylex'
 import { z, duration, easing, stroke, container } from '#/lib/constants.stylex'
 import { colors, radius } from '#/lib/tokens.stylex'
-import { fontFamily, fontWeight, fontSize } from '#/styles/core/font.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/font.stylex'
 
 export const drawerStyles = stylex.create({
   overlay: {
@@ -39,7 +39,7 @@ export const drawerStyles = stylex.create({
     flexDirection: 'column',
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
-    lineHeight: lineHeight.normal,
+    lineHeight: fontLineHeight.body2,
     minHeight: 0,
     outline: 'none',
     pointerEvents: 'auto',
@@ -103,13 +103,13 @@ export const drawerStyles = stylex.create({
     color: colors.foreground,
     fontSize: fontSize.body1,
     fontWeight: fontWeight.medium,
-    lineHeight: lineHeight.tight,
+    lineHeight: fontLineHeight.body1,
     margin: 0
   },
   description: {
     color: colors.mutedForeground,
     fontSize: fontSize.body2,
-    lineHeight: lineHeight.normal,
+    lineHeight: fontLineHeight.body2,
     margin: 0
   }
 })

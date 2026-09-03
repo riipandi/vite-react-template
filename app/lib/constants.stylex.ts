@@ -22,18 +22,6 @@ export const space = stylex.defineConsts({
   s16: '4rem'
 })
 
-export const lineHeight = stylex.defineConsts({
-  none: '1',
-  tight: '1.3',
-  snug: '1.4',
-  normal: '1.5',
-  // Single-line control text (paired with fontSize.sm, like Tailwind's
-  // text-sm 14/20). A 20px line box centers on whole pixels inside our
-  // control heights — ratio-based heights land on half pixels and make
-  // Base UI's align-item-with-trigger text drift by 1px.
-  control: '1.25rem'
-})
-
 export const z = stylex.defineConsts({
   popup: '50',
   toast: '100'

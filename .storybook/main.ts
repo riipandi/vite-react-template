@@ -1,4 +1,4 @@
-import type { StorybookConfig } from '@storybook/react-vite'
+import type { StorybookConfig } from '@storybook/tanstack-react'
 import stylex from '@stylexjs/unplugin/vite'
 import { resolve } from 'node:path'
 import remarkGfm from 'remark-gfm'
@@ -23,7 +23,7 @@ const config: StorybookConfig = {
     '@storybook/addon-vitest',
     '@github-ui/storybook-addon-performance-panel'
   ],
-  framework: '@storybook/react-vite',
+  framework: '@storybook/tanstack-react',
   core: {
     disableTelemetry: true,
     disableWhatsNewNotifications: true,
@@ -34,31 +34,24 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen'
   },
   async viteFinal(viteConfig) {
-    // Storybook's dev/build merges the root vite.config.ts (which already wires
-    // the StyleX plugin + tsconfigPaths). The addon-vitest test runner does NOT
-    // load that root config, so StyleX stays uncompiled (runtime defineVars
-    // error) and the `#/*` alias is unresolved. Add them here, but only under
-    // Vitest, to avoid applying the StyleX plugin twice in dev/build.
-    const isVitest = Boolean(process.env.VITEST)
     return mergeConfig(viteConfig, {
-      ...(isVitest
-        ? {
-            plugins: [
-              stylex({
-                useCSSLayers: true,
-                aliases: { '#/*': resolve('./app/*') }
-              })
-            ],
-            resolve: { tsconfigPaths: true }
+      plugins: [
+        stylex({
+          useCSSLayers: true,
+          aliases: { '#/*': resolve('./app/*') }
+        }),
+        {
+          // Mirror the `@layer reset;` prelude from index.html: the StyleX dev middleware
+          // injects its priority layers into <head> before globals.css runs, so without
+          // this the reset layer would outrank every StyleX style in the preview iframe.
+          name: 'storybook-stylex-layer-order',
+          transformIndexHtml(html: string) {
+            return html.replace(/<head([^>]*)>/, `<head$1>\n<style>@layer reset;</style>`)
           }
-        : {}),
-      build: {
-        chunkSizeWarningLimit: 1024 * 2,
-        rolldownOptions: {
-          checks: { pluginTimings: false },
-          output: { codeSplitting: true }
         }
-      }
+      ],
+      resolve: { tsconfigPaths: true },
+      build: { chunkSizeWarningLimit: 1024 * 4 }
     })
   }
 }

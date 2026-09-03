@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { IconCircleSubtract, IconCircleAdd } from 'obra-icons-react'
-import { colors } from '#/styles/core/color.stylex'
-import { fontSize, fontWeightVar } from '#/styles/core/font.stylex'
+import { CircleMinusIcon, CirclePlusIcon } from 'lucide-react'
+import { colors } from '#/styles/core/colors.stylex'
+import { fontSize, fontWeight } from '#/styles/core/tokens.stylex'
 import { FacebookIcon, GitHubIcon, GoogleIcon, InstagramIcon } from './index'
 import { LinkedInIcon, TelegramIcon, WhatsAppIcon, XIcon } from './index'
 
@@ -39,9 +39,14 @@ const meta = {
 } satisfies Meta
 
 export default meta
-type Story = StoryObj
+type Story = StoryObj<PlaygroundArgs>
 
-function PlaygroundComponent({ size = 24, color }: { size?: number; color?: string }) {
+interface PlaygroundArgs {
+  size?: number
+  color?: string
+}
+
+function PlaygroundComponent({ size = 24, color }: PlaygroundArgs) {
   return (
     <div {...stylex.props(atoms.display.flex, atoms.alignItems.center, atoms.gap['1rem'])}>
       <GitHubIcon size={size} color={color} />
@@ -120,17 +125,17 @@ export const Sizes: Story = {
             {...stylex.props(
               atoms.minWidth['4rem'],
               atoms.fontSize[fontSize.caption1],
-              atoms.fontWeight[fontWeightVar.semibold],
+              atoms.fontWeight[fontWeight.semibold],
               atoms.color[colors.foregroundNeutralFaded]
             )}
           >
             {name}
           </span>
-          <IconCircleSubtract {...stylex.props(atoms.margin['0 1rem'])} />
+          <CircleMinusIcon {...stylex.props(atoms.margin['0 1rem'])} />
           {sizeSteps.map((s) => (
             <Icon key={s} size={s} />
           ))}
-          <IconCircleAdd {...stylex.props(atoms.margin['0 1rem'])} />
+          <CirclePlusIcon {...stylex.props(atoms.margin['0 1rem'])} />
         </div>
       ))}
     </div>

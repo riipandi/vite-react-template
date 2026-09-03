@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { darkThemeClass } from '#/styles/core/themes'
 import { ThemeScript } from './theme-script'
 import { getStorageAdapter } from './theme-storage'
 import { disableAnimation, getSystemTheme, handleAttribute, isServer, MEDIA } from './theme-utils'
@@ -92,10 +93,18 @@ const Theme = ({
         handleAttribute(attribute, d, attrs, name)
       }
 
+      // Toggle the compiled dark theme class. Themes are applied to the root
+      // element (not a wrapper): dialogs and popovers portal out and would
+      // escape a subtree theme. Light values are the `defineVars` defaults,
+      // so the class is only needed when dark.
+      for (const cls of darkThemeClass.split(' ')) {
+        if (cls) d.classList.toggle(cls, resolved === 'dark')
+      }
+
       if (enableColorScheme) {
         const fallback = colorSchemes.includes(defaultTheme) ? defaultTheme : null
         const colorScheme = colorSchemes.includes(resolved) ? resolved : fallback
-        // @ts-ignore
+        // @ts-expect-error -- colorScheme is `''` for non light/dark themes
         d.style.colorScheme = colorScheme
       }
 
@@ -167,53 +176,6 @@ const Theme = ({
   useEffect(() => {
     applyTheme(forcedTheme ?? theme)
   }, [forcedTheme, theme, applyTheme])
-
-  // Fix StyleX's broken `[data-theme="dark"] :root` descendant selector.
-  // StyleX token file uses `[data-theme=dark]` regardless of attribute/value
-  // being `class` or a different `data-*` attribute. This patches the
-  // generated CSS to use the correct selector based on props.
-  useEffect(() => {
-    const pattern = /\[data-theme="?dark"?\]\s+:root/
-
-    const primary = Array.isArray(attribute) ? attribute[0] : attribute
-    const darkVal = value?.dark ?? 'dark'
-
-    // Build the replacement selector root based on attribute type
-    const rootSelector: string =
-      primary && primary.startsWith('data-') ? `:root[${primary}="${darkVal}"]` : `:root.${darkVal}`
-
-    const tryPatch = (): boolean => {
-      const sheets = document.styleSheets
-      for (let i = 0; i < sheets.length; i++) {
-        const sheet = sheets[i]
-        try {
-          const rules = sheet?.cssRules || sheet?.rules
-          if (!rules) continue
-          for (let j = 0; j < rules.length; j++) {
-            const rule = rules[j] as CSSStyleRule
-            if ('selectorText' in rule && rule.selectorText && pattern.test(rule.selectorText)) {
-              const fixed = document.createElement('style')
-              fixed.textContent = rule.cssText.replace(pattern, rootSelector)
-              document.head.appendChild(fixed)
-              return true
-            }
-          }
-        } catch {
-          // cross-origin stylesheets throw on cssRules access
-        }
-      }
-      return false
-    }
-
-    if (tryPatch()) return
-
-    // Storybook/Vite may inject StyleX stylesheets after the first paint.
-    const retryId = window.setInterval(() => {
-      if (tryPatch()) window.clearInterval(retryId)
-    }, 50)
-
-    return () => window.clearInterval(retryId)
-  }, [attribute, value])
 
   const providerValue = useMemo(
     () => ({

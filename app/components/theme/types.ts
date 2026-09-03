@@ -55,14 +55,3 @@ export interface ThemeProviderProps extends React.PropsWithChildren<unknown> {
   /** Storage to use for persisting theme. Can be "localStorage", "cookie", or a custom ThemeStorage object. Defaults to "localStorage" */
   storage?: BuiltInStorage | ThemeStorage | undefined
 }
-
-export type ThemeScriptType = (
-  attribute: ThemeProviderProps['attribute'],
-  storageKey: ThemeProviderProps['storageKey'],
-  defaultTheme: ThemeProviderProps['defaultTheme'],
-  forcedTheme: ThemeProviderProps['forcedTheme'],
-  themes: ThemeProviderProps['themes'],
-  value: ThemeProviderProps['value'],
-  enableSystem: ThemeProviderProps['enableSystem'],
-  enableColorScheme: ThemeProviderProps['enableColorScheme']
-) => void

@@ -6,6 +6,7 @@ import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
 const isTestOrCI = process.env.CI || process.env.VITEST
+const isStorybook = process.env.STORYBOOK === 'true'
 
 export default defineConfig({
   plugins: [
@@ -13,8 +14,9 @@ export default defineConfig({
       useCSSLayers: true,
       aliases: { '#/*': resolve('./app/*') }
     }),
-    !isTestOrCI && devtools(),
+    !isTestOrCI && !isStorybook && devtools(),
     !isTestOrCI &&
+      !isStorybook &&
       tanstackRouter({
         routesDirectory: resolve('./app/routes'),
         generatedRouteTree: resolve('./app/routes.gen.ts'),
@@ -36,5 +38,5 @@ export default defineConfig({
       input: { app: resolve('index.html') }
     }
   },
-  server: { port: 3000, strictPort: true }
+  server: isStorybook ? undefined : { port: 3000, strictPort: true }
 })

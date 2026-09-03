@@ -1,12 +1,13 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/styles/core/color.stylex'
-import { radius, unit } from '#/styles/core/size.stylex'
+import { colors } from '#/styles/core/colors.stylex'
+import { fontSize, fontWeight } from '#/styles/core/tokens.stylex'
+import { radius, unit, duration } from '#/styles/core/tokens.stylex'
 
 export const styles = stylex.create({
   layout: {
     backgroundColor: colors.backgroundPage,
     transitionProperty: 'background-color',
-    transitionDuration: '200ms',
+    transitionDuration: duration.medium,
     height: '100vh',
     overflow: 'hidden',
     display: 'flex',
@@ -35,8 +36,8 @@ export const styles = stylex.create({
     }
   },
   mobileHeaderTitle: {
-    fontSize: '0.875rem',
-    fontWeight: 700,
+    fontSize: fontSize.body2,
+    fontWeight: fontWeight.bold,
     color: colors.foregroundNeutral
   },
   hamburger: {

@@ -1,31 +1,32 @@
 @import './reset.css' layer(reset);
 @import './fontface.css';
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
-}
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
 
-body {
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  font-family:
-    'Mona Sans Variable',
-    system-ui,
-    -apple-system,
-    Roboto,
-    Aptos,
-    Helvetica,
-    sans-serif;
-  color-scheme: dark light;
+  body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family:
+      'Mona Sans Variable',
+      system-ui,
+      -apple-system,
+      Roboto,
+      Aptos,
+      Helvetica,
+      sans-serif;
+  }
 }
 
 @layer utilities {
@@ -33,5 +34,72 @@ body {
     border-width: 1px;
     border-style: dashed;
     border-color: #f87171;
+  }
+}
+
+/*
+ * ScrollArea fade — registered custom properties so the fade mask can be
+ * animated by scroll-driven animations (Chrome/Edge/Safari 26+; other
+ * browsers skip the fade entirely). Kept as raw CSS because StyleX cannot
+ * declare @property. Consumed by `scrollAreaFadeStyles` in
+ * app/components/base/scroll-area/scroll-area.stylex.ts.
+ */
+@property --scroll-area-fade-block-start {
+  syntax: '<length>';
+  initial-value: 0px;
+  inherits: false;
+}
+
+@property --scroll-area-fade-block-end {
+  syntax: '<length>';
+  initial-value: 0px;
+  inherits: false;
+}
+
+@property --scroll-area-fade-inline-start {
+  syntax: '<length>';
+  initial-value: 0px;
+  inherits: false;
+}
+
+@property --scroll-area-fade-inline-end {
+  syntax: '<length>';
+  initial-value: 0px;
+  inherits: false;
+}
+
+@keyframes scroll-area-fade-block-start {
+  from {
+    --scroll-area-fade-block-start: 0px;
+  }
+  to {
+    --scroll-area-fade-block-start: 32px;
+  }
+}
+
+@keyframes scroll-area-fade-block-end {
+  from {
+    --scroll-area-fade-block-end: 32px;
+  }
+  to {
+    --scroll-area-fade-block-end: 0px;
+  }
+}
+
+@keyframes scroll-area-fade-inline-start {
+  from {
+    --scroll-area-fade-inline-start: 0px;
+  }
+  to {
+    --scroll-area-fade-inline-start: 32px;
+  }
+}
+
+@keyframes scroll-area-fade-inline-end {
+  from {
+    --scroll-area-fade-inline-end: 32px;
+  }
+  to {
+    --scroll-area-fade-inline-end: 0px;
   }
 }

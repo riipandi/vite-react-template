@@ -4,6 +4,8 @@ allowBuilds:
   esbuild: true
   lefthook: true
 
+verifyDepsBeforeRun: false
+
 minimumReleaseAge: 1440
 
 minimumReleaseAgeExclude:
@@ -45,7 +47,17 @@ minimumReleaseAgeExclude:
   - '@oxlint/binding-win32-arm64-msvc'
   - '@oxlint/binding-win32-ia32-msvc'
   - '@oxlint/binding-win32-x64-msvc'
+  - '@types/react-dom'
+  - '@vitest/browser'
+  - '@vitest/browser-playwright'
+  - '@vitest/coverage-v8'
+  - '@vitest/mocker'
+  - '@vitest/pretty-format'
+  - '@vitest/spy'
+  - '@vitest/ui'
+  - '@vitest/utils'
   - knip
-  - obra-icons-react
+  - lucide-react
   - oxfmt
   - oxlint
+  - vitest

@@ -25,12 +25,16 @@ with [absolute import](https://jsdev.org/env/nodejs/absolute-path-imports/), [Ta
 and [other goodies](./package.json). Authentication is implemented using [DummyJSON](https://dummyjson.com) API
 with [ofetch](https://github.com/unjs/ofetch), easily replaceable with your own backend.
 
+> [!WARNING]
+> This project just a template that I use for my personal use, so you may encounter bugs.
+> Please review the release notes thoroughly before updating, as breaking changes can occur!
+
 ## The Complete Stack
 
 - [x] [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling.
 - [x] [React](https://reactjs.org) - A JavaScript library for building user interfaces.
 - [x] [StyleX](https://stylexjs.com) - The styling system for ambitious user interfaces.
-- [x] [Obra Icons](https://icons.obra.studio) - A simple, consistent set of icons, perfect for user interfaces.
+- [x] [Lucide Icons](https://lucide.dev) - Beautiful & consistent 1600+ vector icons.
 - [x] [Typescript](https://www.typescriptlang.org) - Strongly typed programming language.
 - [x] [TanStack Router](https://tanstack.com/router) - Type-safe routing for React.
 - [x] [TanStack Form](https://tanstack.com/form) - Headless, type-safe form state management.

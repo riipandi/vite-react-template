@@ -5,11 +5,7 @@ export const isServer = typeof window === 'undefined'
 
 export const disableAnimation = () => {
   const css = document.createElement('style')
-  css.appendChild(
-    document.createTextNode(
-      `*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`
-    )
-  )
+  css.appendChild(document.createTextNode(`*,*::before,*::after{transition:none!important}`))
   document.head.appendChild(css)
 
   return () => {
@@ -24,15 +20,9 @@ export const disableAnimation = () => {
 }
 
 export const getSystemTheme = (e?: MediaQueryList | MediaQueryListEvent) => {
-  return ssrSafeAction(
-    () => {
-      if (!e) e = window.matchMedia(MEDIA)
-      const isDark = e.matches
-      const systemTheme = isDark ? 'dark' : 'light'
-      return systemTheme
-    },
-    () => 'light'
-  )
+  if (isServer) return 'light'
+  if (!e) e = window.matchMedia(MEDIA)
+  return e.matches ? 'dark' : 'light'
 }
 
 export const handleAttribute = (
@@ -51,11 +41,4 @@ export const handleAttribute = (
       el.removeAttribute(attr)
     }
   }
-}
-
-export const ssrSafeAction = <T>(action: () => T, fallback: () => T): T => {
-  if (isServer) {
-    return fallback()
-  }
-  return action()
 }

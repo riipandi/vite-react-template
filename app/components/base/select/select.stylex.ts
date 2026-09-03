@@ -1,3 +1,165 @@
 import * as stylex from '@stylexjs/stylex'
+import { colors } from '#/styles/core/colors.stylex'
+import { stroke, container } from '#/styles/core/tokens.stylex'
+import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
+import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
+import { duration, easing } from '#/styles/core/tokens.stylex'
 
-export const selectStyles = stylex.create({})
+export const selectStyles = stylex.create({
+  label: {
+    color: colors.foregroundNeutralFaded,
+    fontSize: fontSize.caption1,
+    fontWeight: fontWeight.medium,
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x3
+  },
+  separator: {
+    backgroundColor: colors.borderNeutralFaded,
+    height: stroke.border,
+    marginBlock: unit.x1
+  },
+  trigger: {
+    alignItems: 'center',
+    backgroundColor: colors.backgroundPage,
+    borderColor: {
+      default: colors.borderNeutralFaded,
+      '[data-invalid]': colors.backgroundCritical
+    },
+    borderRadius: radius.medium,
+    borderStyle: 'solid',
+    borderWidth: stroke.border,
+    color: colors.foregroundNeutral,
+    cursor: { default: 'pointer', ':disabled': 'not-allowed' },
+    display: 'inline-flex',
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.body2,
+    gap: unit.x2,
+    height: unit.x9,
+    justifyContent: 'space-between',
+    lineHeight: fontLineHeight.body2,
+    minWidth: container.xs,
+    opacity: { default: 1, ':disabled': 0.5 },
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+    },
+    outlineOffset: `calc(-1 * ${stroke.border})`,
+    paddingInline: unit.x3,
+    userSelect: 'none',
+    whiteSpace: 'nowrap'
+  },
+  icon: {
+    color: colors.foregroundNeutralFaded,
+    display: 'flex'
+  },
+  positioner: {
+    outline: 'none',
+    zIndex: zIndex.absolute
+  },
+  popup: {
+    backgroundColor: colors.backgroundElevationOverlay,
+    borderRadius: radius.medium,
+    color: colors.foregroundNeutral,
+    fontFamily: fontFamily.body,
+    lineHeight: fontLineHeight.body2,
+    maxHeight: 'var(--available-height)',
+    opacity: { default: 1, '[data-ending-style]': 0 },
+    width: 'var(--anchor-width)',
+    overflowX: 'hidden',
+    overflowY: 'auto',
+    position: 'relative',
+    transformOrigin: 'var(--transform-origin)',
+    transitionDuration: duration.fast,
+    transitionProperty: {
+      default: 'opacity, transform',
+      '@media (prefers-reduced-motion: reduce)': 'opacity'
+    },
+    transitionTimingFunction: easing.decelerate
+  },
+  // Closed pose (anchored mode only — [data-side] sets the nudge direction,
+  // [data-starting-style]/[data-ending-style] apply it).
+  popupAnchored: {
+    // No `default` for conditional custom properties: StyleX emits the
+    // default rule unlayered (beating the layered [data-*] rules); the
+    // var() fallback covers the unset case instead.
+    '--popup-shift-x': {
+      default: null,
+      '[data-side="left"]': unit.x2,
+      '[data-side="right"]': `calc(-1 * ${unit.x2})`,
+      '[data-side="inline-start"]': unit.x2,
+      '[data-side="inline-end"]': `calc(-1 * ${unit.x2})`
+    },
+    '--popup-shift-y': {
+      default: null,
+      '[data-side="top"]': unit.x2,
+      '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
+    },
+    maxHeight: `min(${container.sm}, var(--available-height))`,
+    opacity: {
+      default: 1,
+      '[data-starting-style]': 0,
+      '[data-ending-style]': 0
+    },
+    transform: {
+      default: 'scale(1)',
+      '[data-starting-style]':
+        'translate(var(--popup-shift-x, 0px), var(--popup-shift-y, 0px)) scale(0.97)',
+      '[data-ending-style]':
+        'translate(var(--popup-shift-x, 0px), var(--popup-shift-y, 0px)) scale(0.97)'
+    }
+  },
+  list: {
+    paddingBlock: unit.x1
+  },
+  scrollArrow: {
+    alignItems: 'center',
+    backgroundColor: colors.backgroundElevationOverlay,
+    color: colors.foregroundNeutralFaded,
+    cursor: 'default',
+    display: 'flex',
+    height: unit.x4,
+    justifyContent: 'center',
+    position: 'sticky',
+    width: '100%',
+    zIndex: 1
+  },
+  scrollArrowUp: {
+    top: 0
+  },
+  scrollArrowDown: {
+    bottom: 0
+  },
+  item: {
+    alignItems: 'center',
+    backgroundColor: {
+      default: 'transparent',
+      '[data-highlighted]': colors.backgroundNeutralFaded
+    },
+    borderRadius: radius.small,
+    color: {
+      default: null,
+      '[data-highlighted]': colors.foregroundNeutral,
+      '[data-disabled]': colors.foregroundNeutralFaded
+    },
+    cursor: 'default',
+    display: 'grid',
+    fontSize: fontSize.body2,
+    gap: unit.x2,
+    gridTemplateColumns: `1fr ${unit.x4}`,
+    marginInline: unit.x1,
+    opacity: { default: 1, '[data-disabled]': 0.5 },
+    outline: 'none',
+    paddingBlock: unit.x1_5,
+    paddingInline: unit.x2,
+    userSelect: 'none'
+  },
+  itemIndicator: {
+    alignItems: 'center',
+    display: 'flex',
+    gridColumnStart: 2,
+    justifyContent: 'center'
+  },
+  itemText: {
+    gridColumnStart: 1
+  }
+})

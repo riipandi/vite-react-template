@@ -1,13 +1,14 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, fontWeight } from '#/lib/constants.stylex'
-import { colors, font } from '#/lib/tokens.stylex'
+import { space, fontSize, lineHeight } from '#/lib/constants.stylex'
+import { colors } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const fieldStyles = stylex.create({
   set: {
     borderStyle: 'none',
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     gap: space.s4,
     margin: 0,
     minWidth: 0,
@@ -21,13 +22,13 @@ export const fieldStyles = stylex.create({
   group: {
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     gap: space.s5,
     width: '100%'
   },
   field: {
     display: 'flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     gap: space.s2,
     width: '100%'
   },
@@ -41,7 +42,7 @@ export const fieldStyles = stylex.create({
   labelBase: {
     alignItems: 'center',
     display: 'flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     fontWeight: fontWeight.medium,
     gap: space.s2,

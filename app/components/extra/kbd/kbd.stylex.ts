@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, fontWeight } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { space, fontSize } from '#/lib/constants.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const kbdStyles = stylex.create({
   root: {
@@ -9,7 +10,7 @@ export const kbdStyles = stylex.create({
     borderRadius: radius.sm,
     color: colors.mutedForeground,
     display: 'inline-flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.xs,
     fontWeight: fontWeight.medium,
     gap: space.s1,
@@ -24,7 +25,7 @@ export const kbdStyles = stylex.create({
   group: {
     alignItems: 'center',
     display: 'inline-flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     gap: space.s1
   }
 })

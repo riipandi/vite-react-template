@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, fontWeight, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius, shadow } from '#/lib/tokens.stylex'
+import { space, fontSize, lineHeight, stroke } from '#/lib/constants.stylex'
+import { colors, radius, shadow } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 // `--card-spacing` lets `size` retune the paddings owned by the sections
 // below without prop-drilling: `sizes.sm` sets it, every section's own
@@ -19,7 +20,7 @@ export const cardStyles = stylex.create({
     color: colors.cardForeground,
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     gap: `var(--card-spacing, ${space.s5})`,
     paddingBlock: `var(--card-spacing, ${space.s5})`
   },

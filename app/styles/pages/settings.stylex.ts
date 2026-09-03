@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/color.stylex'
-import { fontSize, fontWeightVar } from '#/styles/core/font.stylex'
+import { fontSize, fontWeight } from '#/styles/core/font.stylex'
 import { unit } from '#/styles/core/size.stylex'
 
 export const styles = stylex.create({
@@ -37,7 +37,7 @@ export const styles = stylex.create({
   headerLeft: { display: 'flex', flexDirection: 'column', gap: unit.x1 },
   pageLabel: {
     fontSize: fontSize.caption1,
-    fontWeight: fontWeightVar.semibold,
+    fontWeight: fontWeight.semibold,
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
     color: colors.foregroundPrimary

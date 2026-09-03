@@ -1,13 +1,14 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, fontWeight, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { space, fontSize, lineHeight, stroke } from '#/lib/constants.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const badgeStyles = stylex.create({
   root: {
     alignItems: 'center',
     borderRadius: radius.full,
     display: 'inline-flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.xs,
     fontWeight: fontWeight.medium,
     gap: space.s1,

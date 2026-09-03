@@ -1,20 +1,13 @@
 import * as stylex from '@stylexjs/stylex'
-import {
-  space,
-  fontSize,
-  lineHeight,
-  fontWeight,
-  duration,
-  easing,
-  stroke
-} from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { space, fontSize, lineHeight, duration, easing, stroke } from '#/lib/constants.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const accordionStyles = stylex.create({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     width: '100%'
   },
   item: {
@@ -35,7 +28,7 @@ export const accordionStyles = stylex.create({
     cursor: 'pointer',
     display: 'flex',
     flex: 1,
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     fontWeight: fontWeight.medium,
     gap: space.s4,

@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, fontWeight, z } from '#/lib/constants.stylex'
+import { space, fontSize, z } from '#/lib/constants.stylex'
 import { duration, easing, stroke, container } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const contextMenuStyles = stylex.create({
   trigger: {
@@ -33,7 +34,7 @@ export const contextMenuStyles = stylex.create({
     backgroundColor: colors.popover,
     borderRadius: radius.md,
     color: colors.popoverForeground,
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     maxHeight: 'var(--available-height)',
     minWidth: container.xs,
     opacity: {

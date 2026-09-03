@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, fontSize, duration, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily } from '#/styles/core/font.stylex'
 
 export const inputGroupStyles = stylex.create({
   root: {
@@ -19,7 +20,7 @@ export const inputGroupStyles = stylex.create({
       default: 'row',
       ':has([data-align^="block"])': 'column'
     },
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     minWidth: 0,
     outline: {
       default: 'none',

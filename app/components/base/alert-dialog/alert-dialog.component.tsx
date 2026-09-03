@@ -23,8 +23,8 @@ import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { Button, type ButtonProps } from '#/components/base/button'
-import { ring } from '#/lib/stylex-utils'
 import { shadow } from '#/lib/tokens.stylex'
+import { ring } from '#/styles/core/utils.stylex'
 import { alertDialogStyles as s, alertDialogSizes as sizes } from './alert-dialog.stylex'
 
 interface StyleXStyleProps {

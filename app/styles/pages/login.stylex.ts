@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/color.stylex'
-import { fontSize, fontWeightVar } from '#/styles/core/font.stylex'
+import { fontSize, fontWeight } from '#/styles/core/font.stylex'
 import { radius, unit } from '#/styles/core/size.stylex'
 
 export const socialStyles = stylex.create({
@@ -20,7 +20,7 @@ export const socialStyles = stylex.create({
     paddingTop: '0.625rem',
     paddingBottom: '0.625rem',
     fontSize: fontSize.body2,
-    fontWeight: fontWeightVar.medium,
+    fontWeight: fontWeight.medium,
     color: colors.foregroundNeutral,
     transitionProperty: 'background-color, border-color, box-shadow, color',
     transitionDuration: '150ms',
@@ -74,7 +74,7 @@ export const styles = stylex.create({
   },
   heading: {
     fontSize: fontSize.featured4,
-    fontWeight: fontWeightVar.bold,
+    fontWeight: fontWeight.bold,
     color: colors.foregroundNeutral,
     textAlign: 'center'
   },
@@ -116,7 +116,7 @@ export const styles = stylex.create({
   },
   label: {
     fontSize: fontSize.body2,
-    fontWeight: fontWeightVar.medium,
+    fontWeight: fontWeight.medium,
     color: colors.foregroundNeutral
   },
   input: {
@@ -169,13 +169,13 @@ export const styles = stylex.create({
   },
   backLink: {
     fontSize: fontSize.body2,
-    fontWeight: fontWeightVar.medium,
+    fontWeight: fontWeight.medium,
     color: colors.foregroundPrimary,
     textDecoration: 'none',
     ':hover': { textDecoration: 'underline' }
   },
   loggedOutMessage: {
-    fontWeight: fontWeightVar.semibold
+    fontWeight: fontWeight.semibold
   },
   alert: {
     display: 'flex',
@@ -187,7 +187,7 @@ export const styles = stylex.create({
     paddingTop: unit.x3,
     paddingBottom: unit.x3,
     fontSize: fontSize.body2,
-    fontWeight: fontWeightVar.medium,
+    fontWeight: fontWeight.medium,
     width: '100%',
     boxSizing: 'border-box',
     marginBottom: unit.x4

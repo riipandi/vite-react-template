@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, fontWeight, lineHeight, z } from '#/lib/constants.stylex'
+import { space, fontSize, lineHeight, z } from '#/lib/constants.stylex'
 import { duration, easing, stroke, container } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const comboboxStyles = stylex.create({
   inputWrap: {
@@ -15,7 +16,7 @@ export const comboboxStyles = stylex.create({
     borderStyle: 'solid',
     borderWidth: stroke.border,
     color: colors.foreground,
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     height: space.s9,
     opacity: { default: 1, ':disabled': 0.5 },
@@ -71,7 +72,7 @@ export const comboboxStyles = stylex.create({
     color: colors.foreground,
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     gap: space.s2,
     height: space.s9,
@@ -151,7 +152,7 @@ export const comboboxStyles = stylex.create({
     color: colors.foreground,
     flexBasis: 0,
     flexGrow: 1,
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     lineHeight: lineHeight.control,
     minWidth: space.s16,
@@ -187,7 +188,7 @@ export const comboboxStyles = stylex.create({
     color: colors.popoverForeground,
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     maxHeight: `min(${container.sm}, var(--available-height))`,
     opacity: {
       default: 1,

@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/color.stylex'
-import { fontSize, fontWeightVar } from '#/styles/core/font.stylex'
+import { fontSize, fontWeight } from '#/styles/core/font.stylex'
 import { radius, unit } from '#/styles/core/size.stylex'
 
 export const sidebarStyles = stylex.create({
@@ -109,7 +109,7 @@ export const sidebarStyles = stylex.create({
   },
   logoText: {
     fontSize: fontSize.body2,
-    fontWeight: fontWeightVar.bold,
+    fontWeight: fontWeight.bold,
     color: colors.foregroundNeutral,
     letterSpacing: '-0.01em'
   },
@@ -143,7 +143,7 @@ export const sidebarStyles = stylex.create({
     paddingTop: unit.x4,
     paddingBottom: unit.x1,
     fontSize: fontSize.caption1,
-    fontWeight: fontWeightVar.semibold,
+    fontWeight: fontWeight.semibold,
     color: colors.foregroundNeutralFaded,
     letterSpacing: '0.07em',
     textTransform: 'uppercase',
@@ -177,7 +177,7 @@ export const sidebarStyles = stylex.create({
     transitionProperty: 'background-color, color',
     transitionDuration: '150ms',
     fontSize: fontSize.body2,
-    fontWeight: fontWeightVar.medium,
+    fontWeight: fontWeight.medium,
     backgroundColor: {
       default: 'transparent',
       ':hover': colors.backgroundNeutralFaded
@@ -219,7 +219,7 @@ export const sidebarStyles = stylex.create({
   navLabel: {
     flex: 1,
     fontSize: fontSize.body2,
-    fontWeight: fontWeightVar.medium,
+    fontWeight: fontWeight.medium,
     whiteSpace: 'nowrap'
   },
   badge: {

@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, fontSize, lineHeight, duration, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily } from '#/styles/core/font.stylex'
 
 export const textareaStyles = stylex.create({
   root: {
@@ -14,7 +15,7 @@ export const textareaStyles = stylex.create({
     borderStyle: 'solid',
     borderWidth: stroke.border,
     color: colors.foreground,
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     lineHeight: lineHeight.normal,
     minHeight: space.s16,

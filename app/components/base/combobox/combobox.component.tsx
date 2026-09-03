@@ -28,8 +28,8 @@
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { ring } from '#/lib/stylex-utils'
 import { shadow } from '#/lib/tokens.stylex'
+import { ring } from '#/styles/core/utils.stylex'
 import { comboboxStyles as s } from './combobox.stylex'
 
 interface StyleProp {

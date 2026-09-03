@@ -1,10 +1,11 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, fontSize, duration, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily } from '#/styles/core/font.stylex'
 
 export const numberFieldStyles = stylex.create({
   root: {
-    fontFamily: font.sans
+    fontFamily: fontFamily.body
   },
   group: {
     alignItems: 'stretch',
@@ -28,7 +29,7 @@ export const numberFieldStyles = stylex.create({
     backgroundColor: 'transparent',
     borderStyle: 'none',
     color: colors.foreground,
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     fontVariantNumeric: 'tabular-nums',
     outline: 'none',

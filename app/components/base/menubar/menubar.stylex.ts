@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, fontWeight, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { space, fontSize, stroke } from '#/lib/constants.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const menubarStyles = stylex.create({
   root: {
@@ -10,7 +11,7 @@ export const menubarStyles = stylex.create({
     borderStyle: 'solid',
     borderWidth: stroke.border,
     display: 'flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     gap: space.s05,
     height: space.s8,
     paddingInline: space.s05
@@ -27,7 +28,7 @@ export const menubarStyles = stylex.create({
     color: colors.foreground,
     cursor: 'default',
     display: 'flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     fontWeight: fontWeight.medium,
     outline: 'none',

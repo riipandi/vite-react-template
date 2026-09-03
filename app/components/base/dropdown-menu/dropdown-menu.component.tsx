@@ -32,8 +32,8 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { ring } from '#/lib/stylex-utils'
 import { shadow } from '#/lib/tokens.stylex'
+import { ring } from '#/styles/core/utils.stylex'
 import { dropdownMenuStyles as s } from './dropdown-menu.stylex'
 
 interface StyleProp {

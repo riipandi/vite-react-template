@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, fontWeight } from '#/lib/constants.stylex'
+import { space, fontSize, lineHeight } from '#/lib/constants.stylex'
 import { z, duration, easing, stroke, container } from '#/lib/constants.stylex'
-import { colors, font, radius, shadow } from '#/lib/tokens.stylex'
+import { colors, radius, shadow } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const toastStyles = stylex.create({
   viewport: {
@@ -28,7 +29,7 @@ export const toastStyles = stylex.create({
     boxSizing: 'border-box',
     color: colors.popoverForeground,
     display: 'flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     // Behind-card content fades in when the stack expands (read by .content).
     '--toast-content-visible': { default: null, '[data-expanded]': '1' },
     // All toasts share the frontmost height while collapsed so the stack
@@ -111,7 +112,7 @@ export const toastStyles = stylex.create({
     cursor: 'pointer',
     display: 'inline-flex',
     flexShrink: 0,
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.xs,
     fontWeight: fontWeight.medium,
     height: space.s6,

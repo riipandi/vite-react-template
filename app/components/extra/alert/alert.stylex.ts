@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, fontWeight, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { space, fontSize, lineHeight, stroke } from '#/lib/constants.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const alertStyles = stylex.create({
   root: {
@@ -12,7 +13,7 @@ export const alertStyles = stylex.create({
     color: colors.cardForeground,
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     gap: space.s1,
     padding: space.s4,
     position: 'relative',

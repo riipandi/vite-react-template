@@ -3,7 +3,7 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { IconCircleSubtract, IconCircleAdd } from 'obra-icons-react'
 import { colors } from '#/styles/core/color.stylex'
-import { fontSize, fontWeightVar } from '#/styles/core/font.stylex'
+import { fontSize, fontWeight } from '#/styles/core/font.stylex'
 import { FacebookIcon, GitHubIcon, GoogleIcon, InstagramIcon } from './index'
 import { LinkedInIcon, TelegramIcon, WhatsAppIcon, XIcon } from './index'
 
@@ -125,7 +125,7 @@ export const Sizes: Story = {
             {...stylex.props(
               atoms.minWidth['4rem'],
               atoms.fontSize[fontSize.caption1],
-              atoms.fontWeight[fontWeightVar.semibold],
+              atoms.fontWeight[fontWeight.semibold],
               atoms.color[colors.foregroundNeutralFaded]
             )}
           >

@@ -39,11 +39,6 @@ export const radius = stylex.defineVars({
   full: '9999px'
 })
 
-export const font = stylex.defineVars({
-  sans: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-  mono: "ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace"
-})
-
 // Shadows stay hex-alpha: the CLI parses shadow shorthands separately
 // and mangles oklch() inside them.
 export const shadow = stylex.defineVars({

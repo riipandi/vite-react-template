@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, fontWeight } from '#/lib/constants.stylex'
+import { space, fontSize, lineHeight } from '#/lib/constants.stylex'
 import { z, duration, easing, stroke, container } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const drawerStyles = stylex.create({
   overlay: {
@@ -36,7 +37,7 @@ export const drawerStyles = stylex.create({
     color: colors.popoverForeground,
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     lineHeight: lineHeight.normal,
     minHeight: 0,

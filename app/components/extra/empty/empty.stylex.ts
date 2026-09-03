@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, fontWeight, stroke, container } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { space, fontSize, lineHeight, stroke, container } from '#/lib/constants.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const emptyStyles = stylex.create({
   root: {
@@ -12,7 +13,7 @@ export const emptyStyles = stylex.create({
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     gap: space.s4,
     justifyContent: 'center',
     minWidth: 0,

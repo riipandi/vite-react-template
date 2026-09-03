@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/color.stylex'
-import { fontSize, fontWeightVar } from '#/styles/core/font.stylex'
+import { fontSize, fontWeight } from '#/styles/core/font.stylex'
 import { radius, unit } from '#/styles/core/size.stylex'
 
 export const styles = stylex.create({
@@ -22,7 +22,7 @@ export const styles = stylex.create({
   title: {
     display: 'block',
     fontSize: fontSize.headline1,
-    fontWeight: fontWeightVar.bold,
+    fontWeight: fontWeight.bold,
     color: colors.foregroundNeutral,
     '@media (min-width: 640px)': {
       fontSize: fontSize.headline2
@@ -56,7 +56,7 @@ export const styles = stylex.create({
     paddingTop: unit.x2,
     paddingBottom: unit.x2,
     fontSize: fontSize.body2,
-    fontWeight: fontWeightVar.semibold,
+    fontWeight: fontWeight.semibold,
     color: colors.foregroundPrimary,
     textDecoration: 'none',
     transitionProperty: 'all',

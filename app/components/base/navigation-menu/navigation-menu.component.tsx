@@ -30,8 +30,8 @@
 import { NavigationMenu as BaseNavigationMenu } from '@base-ui/react/navigation-menu'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { ring } from '#/lib/stylex-utils'
 import { shadow } from '#/lib/tokens.stylex'
+import { ring } from '#/styles/core/utils.stylex'
 import { navigationMenuStyles as s } from './navigation-menu.stylex'
 
 interface StyleProp {

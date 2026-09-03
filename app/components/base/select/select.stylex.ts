@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, fontWeight, lineHeight } from '#/lib/constants.stylex'
+import { space, fontSize, lineHeight } from '#/lib/constants.stylex'
 import { z, duration, easing, stroke, container } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const selectStyles = stylex.create({
   label: {
@@ -26,7 +27,7 @@ export const selectStyles = stylex.create({
     color: colors.foreground,
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     gap: space.s2,
     height: space.s9,
@@ -52,7 +53,7 @@ export const selectStyles = stylex.create({
     backgroundColor: colors.popover,
     borderRadius: radius.md,
     color: colors.popoverForeground,
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     lineHeight: lineHeight.control,
     maxHeight: 'var(--available-height)',
     opacity: { default: 1, '[data-ending-style]': 0 },

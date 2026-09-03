@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, fontWeight, z } from '#/lib/constants.stylex'
+import { space, fontSize, lineHeight, z } from '#/lib/constants.stylex'
 import { duration, easing, stroke, container } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const dialogStyles = stylex.create({
   overlay: {
@@ -24,7 +25,7 @@ export const dialogStyles = stylex.create({
     color: colors.popoverForeground,
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     gap: space.s4,
     left: '50%',
     maxWidth: `calc(100% - ${space.s8})`,

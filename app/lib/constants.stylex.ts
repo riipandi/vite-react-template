@@ -42,12 +42,6 @@ export const lineHeight = stylex.defineConsts({
   control: '1.25rem'
 })
 
-export const fontWeight = stylex.defineConsts({
-  medium: '500',
-  semibold: '600',
-  bold: '700'
-})
-
 export const z = stylex.defineConsts({
   popup: '50',
   toast: '100'

@@ -1,13 +1,13 @@
 import * as stylex from '@stylexjs/stylex'
 
-export const fontFamilyVar = stylex.defineVars({
+export const fontFamily = stylex.defineVars({
   headline: '"Mona Sans Variable", system-ui, -apple-system, Roboto, Aptos, Helvetica, sans-serif',
   title: '"Mona Sans Variable", system-ui, -apple-system, Roboto, Aptos, Helvetica, sans-serif',
   body: '"Mona Sans Variable", system-ui, -apple-system, Roboto, Aptos, Helvetica, sans-serif',
   monospace: '"JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'
 })
 
-export const fontWeightVar = stylex.defineVars({
+export const fontWeight = stylex.defineConsts({
   light: 300,
   regular: 400,
   medium: 500,
@@ -17,36 +17,36 @@ export const fontWeightVar = stylex.defineVars({
   black: 900
 })
 
-export const fontFamily = stylex.defineVars({
-  headline1: fontFamilyVar.headline,
-  headline2: fontFamilyVar.headline,
-  headline3: fontFamilyVar.headline,
-  featured1: fontFamilyVar.title,
-  featured2: fontFamilyVar.title,
-  featured3: fontFamilyVar.title,
-  featured4: fontFamilyVar.title,
-  featured5: fontFamilyVar.title,
-  featured6: fontFamilyVar.title,
-  body1: fontFamilyVar.body,
-  body2: fontFamilyVar.body,
-  caption1: fontFamilyVar.body,
-  caption2: fontFamilyVar.body
+export const fontFamilyVar = stylex.defineVars({
+  headline1: fontFamily.headline,
+  headline2: fontFamily.headline,
+  headline3: fontFamily.headline,
+  featured1: fontFamily.title,
+  featured2: fontFamily.title,
+  featured3: fontFamily.title,
+  featured4: fontFamily.title,
+  featured5: fontFamily.title,
+  featured6: fontFamily.title,
+  body1: fontFamily.body,
+  body2: fontFamily.body,
+  caption1: fontFamily.body,
+  caption2: fontFamily.body
 })
 
-export const fontWeight = stylex.defineVars({
-  headline1: fontWeightVar.bold,
-  headline2: fontWeightVar.bold,
-  headline3: fontWeightVar.bold,
-  featured1: fontWeightVar.semibold,
-  featured2: fontWeightVar.semibold,
-  featured3: fontWeightVar.semibold,
-  featured4: fontWeightVar.semibold,
-  featured5: fontWeightVar.semibold,
-  featured6: fontWeightVar.semibold,
-  body1: fontWeightVar.regular,
-  body2: fontWeightVar.regular,
-  caption1: fontWeightVar.regular,
-  caption2: fontWeightVar.regular
+export const fontWeightVar = stylex.defineVars({
+  headline1: fontWeight.bold,
+  headline2: fontWeight.bold,
+  headline3: fontWeight.bold,
+  featured1: fontWeight.semibold,
+  featured2: fontWeight.semibold,
+  featured3: fontWeight.semibold,
+  featured4: fontWeight.semibold,
+  featured5: fontWeight.semibold,
+  featured6: fontWeight.semibold,
+  body1: fontWeight.regular,
+  body2: fontWeight.regular,
+  caption1: fontWeight.regular,
+  caption2: fontWeight.regular
 })
 
 export const fontSize = stylex.defineVars({

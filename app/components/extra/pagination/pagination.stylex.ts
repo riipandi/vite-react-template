@@ -1,11 +1,11 @@
 import * as stylex from '@stylexjs/stylex'
 import { space, fontSize } from '#/lib/constants.stylex'
-import { font } from '#/lib/tokens.stylex'
+import { fontFamily } from '#/styles/core/font.stylex'
 
 export const paginationStyles = stylex.create({
   nav: {
     display: 'flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     justifyContent: 'center',
     marginInline: 'auto',
     width: '100%'

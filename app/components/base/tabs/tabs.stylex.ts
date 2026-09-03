@@ -1,12 +1,13 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, fontWeight, duration, stroke } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { space, fontSize, lineHeight, duration, stroke } from '#/lib/constants.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const tabsStyles = stylex.create({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     gap: space.s2
   },
   rootVertical: {
@@ -43,7 +44,7 @@ export const tabsStyles = stylex.create({
     color: { default: colors.mutedForeground, '[data-active]': colors.foreground },
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     fontWeight: fontWeight.medium,
     height: space.s7,

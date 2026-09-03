@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, fontWeight, stroke, container } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { space, fontSize, lineHeight, stroke, container } from '#/lib/constants.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const commandStyles = stylex.create({
   root: {
@@ -9,7 +10,7 @@ export const commandStyles = stylex.create({
     color: colors.popoverForeground,
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     height: '100%',
     overflow: 'hidden',
     padding: space.s1,
@@ -54,7 +55,7 @@ export const commandStyles = stylex.create({
     backgroundColor: 'transparent',
     borderStyle: 'none',
     color: colors.foreground,
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.sm,
     height: '100%',
     outline: 'none',

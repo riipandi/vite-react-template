@@ -25,8 +25,8 @@
 import { Popover as BasePopover } from '@base-ui/react/popover'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { ring } from '#/lib/stylex-utils'
 import { shadow } from '#/lib/tokens.stylex'
+import { ring } from '#/styles/core/utils.stylex'
 import { popoverStyles as s } from './popover.stylex'
 
 interface StyleProp {

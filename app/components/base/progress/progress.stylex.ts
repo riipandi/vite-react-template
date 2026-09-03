@@ -1,12 +1,13 @@
 import * as stylex from '@stylexjs/stylex'
-import { space, fontSize, lineHeight, fontWeight, duration, easing } from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { space, fontSize, lineHeight, duration, easing } from '#/lib/constants.stylex'
+import { colors, radius } from '#/lib/tokens.stylex'
+import { fontFamily, fontWeight } from '#/styles/core/font.stylex'
 
 export const progressStyles = stylex.create({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    fontFamily: font.sans,
+    fontFamily: fontFamily.body,
     gap: space.s3,
     width: '100%'
   },

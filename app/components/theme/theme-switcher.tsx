@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { IconComputerMonitor, IconMoon, IconSun } from 'obra-icons-react'
+import * as Lucide from 'lucide-react'
 import { colors } from '#/styles/core/colors.stylex'
 import { radius } from '#/styles/core/tokens.stylex'
 import { useTheme } from './theme'
@@ -49,9 +49,9 @@ export function ThemeSwitcher() {
         {...stylex.props(styles.base)}
         aria-label={labels[current]}
       >
-        {current === 'light' && <IconSun {...stylex.props(styles.icon)} />}
-        {current === 'dark' && <IconMoon {...stylex.props(styles.icon)} />}
-        {current === 'system' && <IconComputerMonitor {...stylex.props(styles.icon)} />}
+        {current === 'light' && <Lucide.Sun {...stylex.props(styles.icon)} />}
+        {current === 'dark' && <Lucide.Moon {...stylex.props(styles.icon)} />}
+        {current === 'system' && <Lucide.Monitor {...stylex.props(styles.icon)} />}
       </button>
     </div>
   )

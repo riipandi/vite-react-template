@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -24,7 +24,7 @@ export const itemStyles = stylex.create({
     lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.ring}`
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     textDecoration: 'none',
     transitionDuration: duration.fast,
@@ -54,7 +54,7 @@ export const itemStyles = stylex.create({
     width: 'fit-content'
   },
   description: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
     margin: 0,
@@ -79,10 +79,10 @@ export const itemVariants = stylex.create({
     borderColor: 'transparent'
   },
   outline: {
-    borderColor: colors.border
+    borderColor: colors.borderNeutralFaded
   },
   muted: {
-    backgroundColor: `color-mix(in srgb, ${colors.muted} 50%, transparent)`,
+    backgroundColor: `color-mix(in srgb, ${colors.backgroundNeutral} 50%, transparent)`,
     borderColor: 'transparent'
   }
 })
@@ -108,7 +108,7 @@ export const itemSizes = stylex.create({
 export const itemMediaVariants = stylex.create({
   default: {},
   icon: {
-    color: colors.foreground
+    color: colors.foregroundNeutral
   },
   image: {
     borderRadius: radius.small,

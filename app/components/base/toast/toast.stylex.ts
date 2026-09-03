@@ -1,6 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
-import { shadow } from '#/styles/core/colors.stylex'
+import { colors, shadow } from '#/styles/core/colors.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -19,17 +18,20 @@ export const toastStyles = stylex.create({
     // movement rides along via the Base UI-provided CSS variables.
     '--toast-gap': unit.x2,
     alignItems: 'flex-start',
-    backgroundColor: colors.popover,
-    // Error toasts get a destructive accent; other types render neutrally
+    backgroundColor: colors.backgroundElevationOverlay,
+    // Error toasts get a critical accent; other types render neutrally
     // (matches sonner's default look — no per-type colors without opt-in).
-    borderColor: { default: colors.border, '[data-type="error"]': colors.destructive },
+    borderColor: {
+      default: colors.borderNeutralFaded,
+      '[data-type="error"]': colors.borderCritical
+    },
     borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     bottom: 0,
     boxShadow: shadow.overlay,
     boxSizing: 'border-box',
-    color: colors.popoverForeground,
+    color: colors.foregroundNeutral,
     display: 'flex',
     fontFamily: fontFamily.body,
     // Behind-card content fades in when the stack expands (read by .content).
@@ -95,7 +97,7 @@ export const toastStyles = stylex.create({
     margin: 0
   },
   description: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
     margin: 0
@@ -104,13 +106,13 @@ export const toastStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      ':hover': colors.accent
+      ':hover': colors.backgroundNeutralFaded
     },
-    borderColor: colors.border,
+    borderColor: colors.borderNeutralFaded,
     borderRadius: radius.small,
     borderStyle: 'solid',
     borderWidth: stroke.border,
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     cursor: 'pointer',
     display: 'inline-flex',
     flexShrink: 0,
@@ -119,24 +121,30 @@ export const toastStyles = stylex.create({
     fontWeight: fontWeight.medium,
     height: unit.x6,
     justifyContent: 'center',
-    outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+    },
     paddingInline: unit.x2
   },
   close: {
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      ':hover': colors.accent
+      ':hover': colors.backgroundNeutralFaded
     },
     borderRadius: radius.small,
     borderStyle: 'none',
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     cursor: 'pointer',
     display: 'inline-flex',
     flexShrink: 0,
     height: unit.x6,
     justifyContent: 'center',
-    outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+    },
     padding: 0,
     width: unit.x6
   }

@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { radius } from '#/styles/core/tokens.stylex'
 
 export const skeletonPulse = stylex.keyframes({
@@ -14,7 +14,7 @@ export const skeletonStyles = stylex.create({
     animationIterationCount: 'infinite',
     animationName: skeletonPulse,
     animationTimingFunction: 'cubic-bezier(0.4, 0, 0.6, 1)',
-    backgroundColor: colors.muted,
+    backgroundColor: colors.backgroundNeutral,
     borderRadius: radius.medium
   }
 })

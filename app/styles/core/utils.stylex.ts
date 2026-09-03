@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 
 /** Re-exported so component files only import from one place. */
@@ -11,7 +11,7 @@ export type StyleXStyles = stylex.StyleXStyles
  * any style:
  *
  *   {...stylex.props(styles.popup, ring({ shadow: shadow.md }), style)}
- *   {...stylex.props(styles.card, ring({ width: stroke.focus, color: colors.ring }))}
+ *   {...stylex.props(styles.card, ring({ width: stroke.focus, color: colors.foregroundPrimary }))}
  *
  * Use it on popups instead of a border: Base UI's align-item-with-trigger
  * math ignores borders (a border shifts the aligned text by its width), and a
@@ -25,7 +25,7 @@ const recipes = stylex.create({
 export interface RingOptions {
   /** Ring thickness. Default: `stroke.border` (1px). */
   width?: string
-  /** Ring color. Default: `colors.border`. */
+  /** Ring color. Default: `colors.borderNeutralFaded`. */
   color?: string
   /** Extra drop shadow layered under the ring (e.g. `shadow.md`). Default: none. */
   shadow?: string | null
@@ -33,7 +33,7 @@ export interface RingOptions {
 
 export const ring = ({
   width = stroke.border,
-  color = colors.border,
+  color = colors.borderNeutralFaded,
   shadow: drop = null
 }: RingOptions = {}) => recipes.boxShadow(`0 0 0 ${width} ${color}${drop ? `, ${drop}` : ''}`)
 
@@ -41,4 +41,4 @@ export const ring = ({
 // selectors are valid condition keys, and Base UI mirrors every state as a
 // data attribute — style it inline:
 //
-//   backgroundColor: { default: 'transparent', '[data-highlighted]': colors.accent }
+//   backgroundColor: { default: 'transparent', '[data-highlighted]': colors.backgroundNeutralFaded }

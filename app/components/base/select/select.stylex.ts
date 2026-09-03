@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -7,25 +7,28 @@ import { duration, easing } from '#/styles/core/tokens.stylex'
 
 export const selectStyles = stylex.create({
   label: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
     paddingBlock: unit.x1_5,
     paddingInline: unit.x3
   },
   separator: {
-    backgroundColor: colors.border,
+    backgroundColor: colors.borderNeutralFaded,
     height: stroke.border,
     marginBlock: unit.x1
   },
   trigger: {
     alignItems: 'center',
-    backgroundColor: colors.background,
-    borderColor: { default: colors.input, '[data-invalid]': colors.destructive },
+    backgroundColor: colors.backgroundPage,
+    borderColor: {
+      default: colors.borderNeutralFaded,
+      '[data-invalid]': colors.backgroundCritical
+    },
     borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
     fontFamily: fontFamily.body,
@@ -36,14 +39,17 @@ export const selectStyles = stylex.create({
     lineHeight: fontLineHeight.body2,
     minWidth: container.xs,
     opacity: { default: 1, ':disabled': 0.5 },
-    outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+    },
     outlineOffset: `calc(-1 * ${stroke.border})`,
     paddingInline: unit.x3,
     userSelect: 'none',
     whiteSpace: 'nowrap'
   },
   icon: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     display: 'flex'
   },
   positioner: {
@@ -51,9 +57,9 @@ export const selectStyles = stylex.create({
     zIndex: zIndex.absolute
   },
   popup: {
-    backgroundColor: colors.popover,
+    backgroundColor: colors.backgroundElevationOverlay,
     borderRadius: radius.medium,
-    color: colors.popoverForeground,
+    color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     lineHeight: fontLineHeight.body2,
     maxHeight: 'var(--available-height)',
@@ -107,8 +113,8 @@ export const selectStyles = stylex.create({
   },
   scrollArrow: {
     alignItems: 'center',
-    backgroundColor: colors.popover,
-    color: colors.mutedForeground,
+    backgroundColor: colors.backgroundElevationOverlay,
+    color: colors.foregroundNeutralFaded,
     cursor: 'default',
     display: 'flex',
     height: unit.x4,
@@ -127,13 +133,13 @@ export const selectStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      '[data-highlighted]': colors.accent
+      '[data-highlighted]': colors.backgroundNeutralFaded
     },
     borderRadius: radius.small,
     color: {
       default: null,
-      '[data-highlighted]': colors.accentForeground,
-      '[data-disabled]': colors.mutedForeground
+      '[data-highlighted]': colors.foregroundNeutral,
+      '[data-disabled]': colors.foregroundNeutralFaded
     },
     cursor: 'default',
     display: 'grid',

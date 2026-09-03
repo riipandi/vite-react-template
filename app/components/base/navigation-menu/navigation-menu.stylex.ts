@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -38,12 +38,12 @@ export const navigationMenuStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      ':hover': colors.muted,
-      '[data-popup-open]': `color-mix(in srgb, ${colors.muted} 50%, transparent)`
+      ':hover': colors.backgroundNeutral,
+      '[data-popup-open]': `color-mix(in srgb, ${colors.backgroundNeutral} 50%, transparent)`
     },
     borderRadius: radius.large,
     borderStyle: 'none',
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     cursor: 'pointer',
     display: 'inline-flex',
     fontFamily: fontFamily.body,
@@ -55,7 +55,7 @@ export const navigationMenuStyles = stylex.create({
     lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.ring}`
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     paddingBlock: unit.x1_5,
     paddingInline: unit.x2,
@@ -78,18 +78,18 @@ export const navigationMenuStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      ':hover': colors.muted,
-      '[data-active]': `color-mix(in srgb, ${colors.muted} 50%, transparent)`
+      ':hover': colors.backgroundNeutral,
+      '[data-active]': `color-mix(in srgb, ${colors.backgroundNeutral} 50%, transparent)`
     },
     borderRadius: radius.medium,
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     display: 'flex',
     fontSize: fontSize.body2,
     gap: unit.x2,
     lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.ring}`
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     padding: unit.x2,
     textDecoration: 'none',
@@ -111,9 +111,9 @@ export const navigationMenuStyles = stylex.create({
     zIndex: zIndex.absolute
   },
   popup: {
-    backgroundColor: colors.popover,
+    backgroundColor: colors.backgroundElevationOverlay,
     borderRadius: radius.large,
-    color: colors.popoverForeground,
+    color: colors.foregroundNeutral,
     height: 'var(--popup-height)',
     opacity: {
       default: 1,

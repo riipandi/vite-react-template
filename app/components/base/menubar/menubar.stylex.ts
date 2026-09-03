@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/tokens.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
@@ -7,7 +7,7 @@ import { unit, radius } from '#/styles/core/tokens.stylex'
 export const menubarStyles = stylex.create({
   root: {
     alignItems: 'center',
-    borderColor: colors.border,
+    borderColor: colors.borderNeutralFaded,
     borderRadius: radius.large,
     borderStyle: 'solid',
     borderWidth: stroke.border,
@@ -21,12 +21,12 @@ export const menubarStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      ':hover': colors.muted,
-      '[data-popup-open]': colors.muted
+      ':hover': colors.backgroundNeutral,
+      '[data-popup-open]': colors.backgroundNeutral
     },
     borderRadius: radius.small,
     borderStyle: 'none',
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     cursor: 'default',
     display: 'flex',
     fontFamily: fontFamily.body,

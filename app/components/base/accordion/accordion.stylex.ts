@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { duration, easing } from '#/styles/core/tokens.stylex'
@@ -13,7 +13,7 @@ export const accordionStyles = stylex.create({
     width: '100%'
   },
   item: {
-    borderBottomColor: colors.border,
+    borderBottomColor: colors.borderNeutralFaded,
     borderBottomStyle: { default: 'solid', ':last-child': 'none' },
     borderBottomWidth: { default: stroke.border, ':last-child': 0 }
   },
@@ -26,7 +26,7 @@ export const accordionStyles = stylex.create({
     backgroundColor: 'transparent',
     borderRadius: radius.large,
     borderStyle: 'none',
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     cursor: 'pointer',
     display: 'flex',
     flex: 1,
@@ -38,7 +38,7 @@ export const accordionStyles = stylex.create({
     lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.ring}`
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     // Read by the chevron below — StyleX has no child selectors, so the
     // trigger's [data-panel-open] state travels via a custom property.
@@ -54,7 +54,7 @@ export const accordionStyles = stylex.create({
     textDecoration: { default: 'none', ':hover': 'underline' }
   },
   chevron: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     flexShrink: 0,
     marginLeft: 'auto',
     marginTop: unit.x0_5,

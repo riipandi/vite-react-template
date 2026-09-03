@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontSize } from '#/styles/core/tokens.stylex'
@@ -11,8 +11,8 @@ export const numberFieldStyles = stylex.create({
   },
   group: {
     alignItems: 'stretch',
-    backgroundColor: colors.background,
-    borderColor: { default: colors.input, ':focus-within': colors.ring },
+    backgroundColor: colors.backgroundPage,
+    borderColor: { default: colors.borderNeutralFaded, ':focus-within': colors.foregroundPrimary },
     borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
@@ -20,7 +20,7 @@ export const numberFieldStyles = stylex.create({
     height: unit.x9,
     outline: {
       default: 'none',
-      ':focus-within': `${stroke.focus} solid ${colors.ring}`
+      ':focus-within': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     outlineOffset: `calc(-1 * ${stroke.border})`,
     transitionDuration: duration.fast,
@@ -30,7 +30,7 @@ export const numberFieldStyles = stylex.create({
   input: {
     backgroundColor: 'transparent',
     borderStyle: 'none',
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontVariantNumeric: 'tabular-nums',
@@ -43,12 +43,12 @@ export const numberFieldStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      ':hover:not(:disabled)': colors.muted
+      ':hover:not(:disabled)': colors.backgroundNeutral
     },
     borderStyle: 'none',
     color: {
-      default: colors.mutedForeground,
-      ':hover:not(:disabled)': colors.foreground
+      default: colors.foregroundNeutralFaded,
+      ':hover:not(:disabled)': colors.foregroundNeutral
     },
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'flex',
@@ -62,14 +62,14 @@ export const numberFieldStyles = stylex.create({
   },
   decrement: {
     borderBottomLeftRadius: `calc(${radius.medium} - ${stroke.border})`,
-    borderRightColor: colors.border,
+    borderRightColor: colors.borderNeutralFaded,
     borderRightStyle: 'solid',
     borderRightWidth: stroke.border,
     borderTopLeftRadius: `calc(${radius.medium} - ${stroke.border})`
   },
   increment: {
     borderBottomRightRadius: `calc(${radius.medium} - ${stroke.border})`,
-    borderLeftColor: colors.border,
+    borderLeftColor: colors.borderNeutralFaded,
     borderLeftStyle: 'solid',
     borderLeftWidth: stroke.border,
     borderTopRightRadius: `calc(${radius.medium} - ${stroke.border})`

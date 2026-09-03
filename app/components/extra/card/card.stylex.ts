@@ -1,6 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
-import { shadow } from '#/styles/core/colors.stylex'
+import { colors, shadow } from '#/styles/core/colors.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
@@ -13,13 +12,13 @@ import { unit, radius } from '#/styles/core/tokens.stylex'
 // apply here.
 export const cardStyles = stylex.create({
   root: {
-    backgroundColor: colors.card,
-    borderColor: colors.border,
+    backgroundColor: colors.backgroundElevationBase,
+    borderColor: colors.borderNeutralFaded,
     borderRadius: radius.large,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     boxShadow: shadow.outline,
-    color: colors.cardForeground,
+    color: colors.foregroundNeutral,
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
@@ -41,7 +40,7 @@ export const cardStyles = stylex.create({
     margin: 0
   },
   description: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     gridColumn: 1,
     lineHeight: fontLineHeight.body2,

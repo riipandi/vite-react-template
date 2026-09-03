@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
 import { duration, easing } from '#/styles/core/tokens.stylex'
@@ -7,26 +7,26 @@ import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/
 
 export const autocompleteStyles = stylex.create({
   input: {
-    backgroundColor: colors.background,
-    borderColor: { default: colors.input, ':focus-visible': colors.ring },
+    backgroundColor: colors.backgroundPage,
+    borderColor: { default: colors.borderNeutralFaded, ':focus-visible': colors.foregroundPrimary },
     borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     height: unit.x9,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.ring}`
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     outlineOffset: `calc(-1 * ${stroke.border})`,
     paddingInline: unit.x3,
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',
     width: container.sm,
-    '::placeholder': { color: colors.mutedForeground }
+    '::placeholder': { color: colors.foregroundNeutralFaded }
   },
   positioner: {
     outline: 'none',
@@ -51,9 +51,9 @@ export const autocompleteStyles = stylex.create({
       '[data-side="top"]': unit.x2,
       '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
     },
-    backgroundColor: colors.popover,
+    backgroundColor: colors.backgroundElevationOverlay,
     borderRadius: radius.medium,
-    color: colors.popoverForeground,
+    color: colors.foregroundNeutral,
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
@@ -90,13 +90,13 @@ export const autocompleteStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      '[data-highlighted]': colors.accent
+      '[data-highlighted]': colors.backgroundNeutralFaded
     },
     borderRadius: radius.small,
     color: {
       default: null,
-      '[data-highlighted]': colors.accentForeground,
-      '[data-disabled]': colors.mutedForeground
+      '[data-highlighted]': colors.foregroundNeutral,
+      '[data-disabled]': colors.foregroundNeutralFaded
     },
     cursor: 'default',
     display: 'flex',
@@ -111,14 +111,14 @@ export const autocompleteStyles = stylex.create({
     userSelect: 'none'
   },
   label: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
     paddingBlock: unit.x1_5,
     paddingInline: unit.x3
   },
   empty: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     // Base UI renders the element with no children while results exist —
     // hide it then so its padding doesn't reserve space.
     display: { default: 'block', ':empty': 'none' },
@@ -127,7 +127,7 @@ export const autocompleteStyles = stylex.create({
     textAlign: 'center'
   },
   separator: {
-    backgroundColor: colors.border,
+    backgroundColor: colors.borderNeutralFaded,
     height: stroke.border,
     marginBlock: unit.x1
   }

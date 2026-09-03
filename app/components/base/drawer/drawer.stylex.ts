@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -7,7 +7,7 @@ import { duration, easing } from '#/styles/core/tokens.stylex'
 
 export const drawerStyles = stylex.create({
   overlay: {
-    backgroundColor: colors.overlay,
+    backgroundColor: `color-mix(in srgb, ${colors.black} 50%, transparent)`,
     inset: 0,
     minHeight: '100dvh',
     // Fades with the swipe: Base UI drives --drawer-swipe-progress inline.
@@ -34,8 +34,8 @@ export const drawerStyles = stylex.create({
     pointerEvents: 'auto'
   },
   popup: {
-    backgroundColor: colors.popover,
-    color: colors.popoverForeground,
+    backgroundColor: colors.backgroundElevationOverlay,
+    color: colors.foregroundNeutral,
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
@@ -73,7 +73,7 @@ export const drawerStyles = stylex.create({
     flexShrink: 0,
     position: 'relative',
     '::after': {
-      backgroundColor: colors.muted,
+      backgroundColor: colors.backgroundNeutral,
       borderRadius: radius.circular,
       content: '""',
       display: 'block',
@@ -101,14 +101,14 @@ export const drawerStyles = stylex.create({
     padding: unit.x4
   },
   title: {
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     fontSize: fontSize.body1,
     fontWeight: fontWeight.medium,
     lineHeight: fontLineHeight.body1,
     margin: 0
   },
   description: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
     margin: 0
@@ -124,7 +124,7 @@ export const drawerDirections = stylex.create({
       '[data-starting-style]': `translate3d(0, calc(100% + ${unit.x0_5}), 0)`,
       '[data-ending-style]': `translate3d(0, calc(100% + ${unit.x0_5}), 0)`
     },
-    borderTopColor: colors.border,
+    borderTopColor: colors.borderNeutralFaded,
     borderTopLeftRadius: radius.xlarge,
     borderTopRightRadius: radius.xlarge,
     borderTopStyle: 'solid',
@@ -142,7 +142,7 @@ export const drawerDirections = stylex.create({
       '[data-starting-style]': `translate3d(0, calc(-100% - ${unit.x0_5}), 0)`,
       '[data-ending-style]': `translate3d(0, calc(-100% - ${unit.x0_5}), 0)`
     },
-    borderBottomColor: colors.border,
+    borderBottomColor: colors.borderNeutralFaded,
     borderBottomLeftRadius: radius.xlarge,
     borderBottomRightRadius: radius.xlarge,
     borderBottomStyle: 'solid',
@@ -160,7 +160,7 @@ export const drawerDirections = stylex.create({
       '[data-starting-style]': `translate3d(calc(-100% - ${unit.x0_5}), 0, 0)`,
       '[data-ending-style]': `translate3d(calc(-100% - ${unit.x0_5}), 0, 0)`
     },
-    borderRightColor: colors.border,
+    borderRightColor: colors.borderNeutralFaded,
     borderBottomRightRadius: radius.xlarge,
     borderRightStyle: 'solid',
     borderRightWidth: stroke.border,
@@ -180,7 +180,7 @@ export const drawerDirections = stylex.create({
       '[data-starting-style]': `translate3d(calc(100% + ${unit.x0_5}), 0, 0)`,
       '[data-ending-style]': `translate3d(calc(100% + ${unit.x0_5}), 0, 0)`
     },
-    borderLeftColor: colors.border,
+    borderLeftColor: colors.borderNeutralFaded,
     borderBottomLeftRadius: radius.xlarge,
     borderLeftStyle: 'solid',
     borderLeftWidth: stroke.border,

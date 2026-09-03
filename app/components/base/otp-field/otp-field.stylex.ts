@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -20,19 +20,19 @@ export const otpFieldStyles = stylex.create({
   // on the first slot, and end radii — joined-slot look. The
   // focused slot draws a full ring above its neighbors.
   slot: {
-    backgroundColor: colors.background,
+    backgroundColor: colors.backgroundPage,
     borderBottomLeftRadius: { default: 0, ':first-child': radius.large },
     borderBottomRightRadius: { default: 0, ':last-child': radius.large },
-    borderColor: { default: colors.input, ':focus': colors.ring },
+    borderColor: { default: colors.borderNeutralFaded, ':focus': colors.foregroundPrimary },
     borderStyle: 'solid',
     borderTopLeftRadius: { default: 0, ':first-child': radius.large },
     borderTopRightRadius: { default: 0, ':last-child': radius.large },
     borderWidth: stroke.border,
     boxShadow: {
       default: 'none',
-      ':focus': `0 0 0 ${stroke.halo} color-mix(in srgb, ${colors.ring} 50%, transparent)`
+      ':focus': `0 0 0 ${stroke.halo} color-mix(in srgb, ${colors.foregroundPrimary} 50%, transparent)`
     },
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     fontSize: fontSize.body2,
     height: unit.x8,
     lineHeight: fontLineHeight.body2,
@@ -49,7 +49,7 @@ export const otpFieldStyles = stylex.create({
   },
   separator: {
     alignItems: 'center',
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     display: 'flex'
   }
 })

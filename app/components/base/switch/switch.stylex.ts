@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { duration, easing } from '#/styles/core/tokens.stylex'
@@ -7,9 +7,9 @@ import { duration, easing } from '#/styles/core/tokens.stylex'
 export const switchStyles = stylex.create({
   root: {
     backgroundColor: {
-      default: colors.input,
-      '[data-checked]': colors.primary,
-      '[data-invalid]': colors.destructive
+      default: colors.borderNeutralFaded,
+      '[data-checked]': colors.backgroundPrimary,
+      '[data-invalid]': colors.backgroundCritical
     },
     borderRadius: radius.circular,
     borderStyle: 'none',
@@ -17,7 +17,10 @@ export const switchStyles = stylex.create({
     display: 'inline-flex',
     flexShrink: 0,
     opacity: { default: 1, ':disabled': 0.5 },
-    outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+    },
     outlineOffset: stroke.focus,
     padding: unit.x0_5,
     position: 'relative',
@@ -32,7 +35,7 @@ export const switchStyles = stylex.create({
     }
   },
   thumb: {
-    backgroundColor: colors.background,
+    backgroundColor: colors.backgroundPage,
     borderRadius: radius.circular,
     transitionDuration: duration.fast,
     transitionProperty: {

@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
 import { duration, easing } from '#/styles/core/tokens.stylex'
@@ -7,7 +7,7 @@ import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/
 
 export const alertDialogStyles = stylex.create({
   overlay: {
-    backgroundColor: colors.overlay,
+    backgroundColor: `color-mix(in srgb, ${colors.black} 50%, transparent)`,
     inset: 0,
     opacity: {
       default: 1,
@@ -21,9 +21,9 @@ export const alertDialogStyles = stylex.create({
     zIndex: zIndex.absolute
   },
   content: {
-    backgroundColor: colors.popover,
+    backgroundColor: colors.backgroundElevationOverlay,
     borderRadius: radius.xlarge,
-    color: colors.popoverForeground,
+    color: colors.foregroundNeutral,
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
@@ -66,7 +66,7 @@ export const alertDialogStyles = stylex.create({
   },
   media: {
     alignItems: 'center',
-    backgroundColor: colors.muted,
+    backgroundColor: colors.backgroundNeutral,
     borderRadius: radius.medium,
     display: 'inline-flex',
     height: unit.x10,
@@ -75,10 +75,10 @@ export const alertDialogStyles = stylex.create({
     width: unit.x10
   },
   footer: {
-    backgroundColor: `color-mix(in srgb, ${colors.muted} 50%, transparent)`,
+    backgroundColor: `color-mix(in srgb, ${colors.backgroundNeutral} 50%, transparent)`,
     borderBottomLeftRadius: radius.xlarge,
     borderBottomRightRadius: radius.xlarge,
-    borderTopColor: colors.border,
+    borderTopColor: colors.borderNeutralFaded,
     borderTopStyle: 'solid',
     borderTopWidth: stroke.border,
     display: 'flex',
@@ -102,7 +102,7 @@ export const alertDialogStyles = stylex.create({
     margin: 0
   },
   description: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
     margin: 0

@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { duration } from '#/styles/core/tokens.stylex'
@@ -12,11 +12,11 @@ export const radioStyles = stylex.create({
   },
   item: {
     alignItems: 'center',
-    backgroundColor: colors.background,
+    backgroundColor: colors.backgroundPage,
     borderColor: {
-      default: colors.input,
-      '[data-checked]': colors.primary,
-      '[data-invalid]': colors.destructive
+      default: colors.borderNeutralFaded,
+      '[data-checked]': colors.backgroundPrimary,
+      '[data-invalid]': colors.backgroundCritical
     },
     borderRadius: radius.circular,
     borderStyle: 'solid',
@@ -27,7 +27,10 @@ export const radioStyles = stylex.create({
     height: unit.x4,
     justifyContent: 'center',
     opacity: { default: 1, ':disabled': 0.5 },
-    outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+    },
     outlineOffset: stroke.focus,
     padding: 0,
     position: 'relative',
@@ -43,7 +46,7 @@ export const radioStyles = stylex.create({
     }
   },
   indicator: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.backgroundPrimary,
     borderRadius: radius.circular,
     display: 'block',
     height: unit.x2,

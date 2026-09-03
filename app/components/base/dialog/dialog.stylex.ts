@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -7,7 +7,7 @@ import { duration, easing } from '#/styles/core/tokens.stylex'
 
 export const dialogStyles = stylex.create({
   overlay: {
-    backgroundColor: colors.overlay,
+    backgroundColor: `color-mix(in srgb, ${colors.black} 50%, transparent)`,
     inset: 0,
     opacity: {
       default: 1,
@@ -21,9 +21,9 @@ export const dialogStyles = stylex.create({
     zIndex: zIndex.absolute
   },
   content: {
-    backgroundColor: colors.popover,
+    backgroundColor: colors.backgroundElevationOverlay,
     borderRadius: radius.large,
-    color: colors.popoverForeground,
+    color: colors.foregroundNeutral,
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
@@ -56,19 +56,22 @@ export const dialogStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      ':hover': colors.accent
+      ':hover': colors.backgroundNeutralFaded
     },
     borderRadius: radius.small,
     borderStyle: 'none',
     color: {
-      default: colors.mutedForeground,
-      ':hover': colors.accentForeground
+      default: colors.foregroundNeutralFaded,
+      ':hover': colors.foregroundNeutral
     },
     cursor: 'pointer',
     display: 'inline-flex',
     height: unit.x7,
     justifyContent: 'center',
-    outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+    },
     padding: 0,
     position: 'absolute',
     right: unit.x3,
@@ -93,7 +96,7 @@ export const dialogStyles = stylex.create({
     margin: 0
   },
   description: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
     margin: 0

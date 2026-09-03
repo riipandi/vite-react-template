@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
@@ -16,7 +16,7 @@ export const badgeStyles = stylex.create({
     lineHeight: fontLineHeight.caption1,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.ring}`
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     outlineOffset: stroke.focus,
     paddingBlock: unit.x1,
@@ -27,25 +27,25 @@ export const badgeStyles = stylex.create({
 
 export const badgeVariants = stylex.create({
   primary: {
-    backgroundColor: colors.primary,
-    color: colors.primaryForeground
+    backgroundColor: colors.backgroundPrimary,
+    color: colors.onBrand
   },
   secondary: {
-    backgroundColor: colors.secondary,
-    color: colors.secondaryForeground
+    backgroundColor: colors.backgroundNeutral,
+    color: colors.foregroundNeutral
   },
   outline: {
-    borderColor: colors.border,
+    borderColor: colors.borderNeutralFaded,
     borderStyle: 'solid',
     borderWidth: stroke.border,
-    color: colors.foreground
+    color: colors.foregroundNeutral
   },
   ghost: {
     backgroundColor: 'transparent',
-    color: colors.foreground
+    color: colors.foregroundNeutral
   },
   destructive: {
-    backgroundColor: colors.destructive,
-    color: colors.destructiveForeground
+    backgroundColor: colors.backgroundCritical,
+    color: colors.onBackgroundCritical
   }
 })

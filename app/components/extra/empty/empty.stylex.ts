@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
@@ -7,7 +7,7 @@ import { unit, radius } from '#/styles/core/tokens.stylex'
 export const emptyStyles = stylex.create({
   root: {
     alignItems: 'center',
-    borderColor: colors.border,
+    borderColor: colors.borderNeutralFaded,
     borderRadius: radius.xlarge,
     borderStyle: 'dashed',
     borderWidth: stroke.border,
@@ -43,7 +43,7 @@ export const emptyStyles = stylex.create({
     letterSpacing: '-0.01em'
   },
   description: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2
   },
@@ -62,9 +62,9 @@ export const emptyStyles = stylex.create({
 export const emptyMediaVariants = stylex.create({
   default: {},
   icon: {
-    backgroundColor: colors.muted,
+    backgroundColor: colors.backgroundNeutral,
     borderRadius: radius.large,
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     height: unit.x8,
     width: unit.x8
   }

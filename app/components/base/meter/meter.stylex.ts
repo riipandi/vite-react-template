@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
 import { duration, easing } from '#/styles/core/tokens.stylex'
@@ -14,7 +14,7 @@ export const meterStyles = stylex.create({
   },
   track: {
     alignItems: 'center',
-    backgroundColor: colors.muted,
+    backgroundColor: colors.backgroundNeutral,
     borderRadius: radius.circular,
     display: 'flex',
     height: unit.x1,
@@ -23,7 +23,7 @@ export const meterStyles = stylex.create({
     width: '100%'
   },
   indicator: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.backgroundPrimary,
     height: '100%',
     transitionDuration: duration.fast,
     transitionProperty: 'width',
@@ -35,7 +35,7 @@ export const meterStyles = stylex.create({
     lineHeight: fontLineHeight.body2
   },
   value: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     fontVariantNumeric: 'tabular-nums',
     lineHeight: fontLineHeight.body2,

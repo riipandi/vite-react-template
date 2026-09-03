@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { unit } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontSize } from '#/styles/core/tokens.stylex'
 import { duration } from '#/styles/core/tokens.stylex'
@@ -7,7 +7,7 @@ import { duration } from '#/styles/core/tokens.stylex'
 export const breadcrumbStyles = stylex.create({
   list: {
     alignItems: 'center',
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     display: 'flex',
     flexWrap: 'wrap',
     fontFamily: fontFamily.body,
@@ -26,14 +26,14 @@ export const breadcrumbStyles = stylex.create({
   link: {
     color: {
       default: 'inherit',
-      ':hover': colors.foreground
+      ':hover': colors.foregroundNeutral
     },
     textDecoration: 'none',
     transitionDuration: duration.fast,
     transitionProperty: 'color'
   },
   page: {
-    color: colors.foreground
+    color: colors.foregroundNeutral
   },
   separator: {
     alignItems: 'center',

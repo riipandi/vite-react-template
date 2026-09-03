@@ -1,14 +1,14 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 
 export const commandStyles = stylex.create({
   root: {
-    backgroundColor: colors.popover,
+    backgroundColor: colors.backgroundElevationOverlay,
     borderRadius: radius.xlarge,
-    color: colors.popoverForeground,
+    color: colors.foregroundNeutral,
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
@@ -36,8 +36,8 @@ export const commandStyles = stylex.create({
   },
   inputWrap: {
     alignItems: 'center',
-    backgroundColor: `color-mix(in srgb, ${colors.input} 30%, transparent)`,
-    borderColor: `color-mix(in srgb, ${colors.input} 30%, transparent)`,
+    backgroundColor: `color-mix(in srgb, ${colors.borderNeutralFaded} 30%, transparent)`,
+    borderColor: `color-mix(in srgb, ${colors.borderNeutralFaded} 30%, transparent)`,
     borderRadius: radius.large,
     borderStyle: 'solid',
     borderWidth: stroke.border,
@@ -55,14 +55,14 @@ export const commandStyles = stylex.create({
   input: {
     backgroundColor: 'transparent',
     borderStyle: 'none',
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     height: '100%',
     outline: 'none',
     padding: 0,
     width: '100%',
-    '::placeholder': { color: colors.mutedForeground }
+    '::placeholder': { color: colors.foregroundNeutralFaded }
   },
   list: {
     maxHeight: container.sm,
@@ -80,7 +80,7 @@ export const commandStyles = stylex.create({
     textAlign: 'center'
   },
   groupLabel: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
     paddingBlock: unit.x1_5,
@@ -90,13 +90,13 @@ export const commandStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      '[data-highlighted]': colors.muted
+      '[data-highlighted]': colors.backgroundNeutral
     },
     borderRadius: radius.small,
     color: {
       default: null,
-      '[data-highlighted]': colors.foreground,
-      '[data-disabled]': colors.mutedForeground
+      '[data-highlighted]': colors.foregroundNeutral,
+      '[data-disabled]': colors.foregroundNeutralFaded
     },
     cursor: 'default',
     display: 'flex',
@@ -111,13 +111,13 @@ export const commandStyles = stylex.create({
     userSelect: 'none'
   },
   separator: {
-    backgroundColor: colors.border,
+    backgroundColor: colors.borderNeutralFaded,
     height: stroke.border,
     marginBlock: unit.x1,
     marginInline: `calc(-1 * ${unit.x1})`
   },
   shortcut: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.caption1,
     letterSpacing: '0.1em',
     marginLeft: 'auto'

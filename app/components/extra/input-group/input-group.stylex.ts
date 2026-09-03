@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontSize } from '#/styles/core/tokens.stylex'
@@ -12,8 +12,11 @@ export const inputGroupStyles = stylex.create({
       default: 'center',
       ':has([data-align^="block"])': 'stretch'
     },
-    backgroundColor: colors.background,
-    borderColor: { default: colors.input, ':focus-within': colors.ring },
+    backgroundColor: colors.backgroundPage,
+    borderColor: {
+      default: colors.borderNeutralFaded,
+      ':focus-within': colors.foregroundPrimary
+    },
     borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
@@ -26,7 +29,7 @@ export const inputGroupStyles = stylex.create({
     minWidth: 0,
     outline: {
       default: 'none',
-      ':focus-within': `${stroke.focus} solid ${colors.ring}`
+      ':focus-within': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     outlineOffset: `calc(-1 * ${stroke.border})`,
     position: 'relative',
@@ -36,7 +39,7 @@ export const inputGroupStyles = stylex.create({
   },
   addon: {
     alignItems: 'center',
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     cursor: 'text',
     display: 'flex',
     fontSize: fontSize.body2,
@@ -47,7 +50,7 @@ export const inputGroupStyles = stylex.create({
   },
   text: {
     alignItems: 'center',
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     display: 'flex',
     fontSize: fontSize.body2,
     gap: unit.x2

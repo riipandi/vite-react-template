@@ -13,7 +13,7 @@
 import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { avatarStyles as s, avatarSizes as sizes } from './avatar.stylex'
@@ -58,7 +58,7 @@ export function AvatarBadge({ style, ...props }: DivProps) {
 
 /**
  * Overlaps its `Avatar` (and `AvatarGroupCount`) children, each with a
- * `colors.background` ring separating it from its neighbors. StyleX has no
+ * `colors.backgroundPage` ring separating it from its neighbors. StyleX has no
  * sibling selectors, so each child is wrapped in a span carrying the
  * overlap + ring styles directly.
  */
@@ -73,7 +73,7 @@ export function AvatarGroup({ style, children, ...props }: DivProps) {
             s.groupItem,
             index > 0 && s.groupItemOverlap,
             s.groupItemStack(items.length - index),
-            ring({ width: stroke.focus, color: colors.background })
+            ring({ width: stroke.focus, color: colors.backgroundPage })
           )}
         >
           {child}

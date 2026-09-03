@@ -46,6 +46,6 @@ minimumReleaseAgeExclude:
   - '@oxlint/binding-win32-ia32-msvc'
   - '@oxlint/binding-win32-x64-msvc'
   - knip
-  - obra-icons-react
+  - lucide-react
   - oxfmt
   - oxlint

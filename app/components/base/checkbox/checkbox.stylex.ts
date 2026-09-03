@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { duration } from '#/styles/core/tokens.stylex'
@@ -9,15 +9,15 @@ export const checkboxStyles = stylex.create({
   root: {
     alignItems: 'center',
     backgroundColor: {
-      default: colors.background,
-      '[data-checked]': colors.primary,
-      '[data-indeterminate]': colors.primary
+      default: colors.backgroundPage,
+      '[data-checked]': colors.backgroundPrimary,
+      '[data-indeterminate]': colors.backgroundPrimary
     },
     borderColor: {
-      default: colors.input,
-      '[data-checked]': colors.primary,
-      '[data-indeterminate]': colors.primary,
-      '[data-invalid]': colors.destructive
+      default: colors.borderNeutralFaded,
+      '[data-checked]': colors.backgroundPrimary,
+      '[data-indeterminate]': colors.backgroundPrimary,
+      '[data-invalid]': colors.backgroundCritical
     },
     borderRadius: radius.small,
     borderStyle: 'solid',
@@ -28,7 +28,10 @@ export const checkboxStyles = stylex.create({
     height: unit.x4,
     justifyContent: 'center',
     opacity: { default: 1, ':disabled': 0.5 },
-    outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+    },
     outlineOffset: stroke.focus,
     padding: 0,
     position: 'relative',
@@ -45,7 +48,7 @@ export const checkboxStyles = stylex.create({
   },
   indicator: {
     alignItems: 'center',
-    color: colors.primaryForeground,
+    color: colors.onBrand,
     display: 'flex',
     justifyContent: 'center'
   }

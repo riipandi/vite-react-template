@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { container } from '#/styles/core/tokens.stylex'
 import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -29,9 +29,9 @@ export const popoverStyles = stylex.create({
       '[data-side="top"]': unit.x2,
       '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
     },
-    backgroundColor: colors.popover,
+    backgroundColor: colors.backgroundElevationOverlay,
     borderRadius: radius.medium,
-    color: colors.popoverForeground,
+    color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
@@ -70,7 +70,7 @@ export const popoverStyles = stylex.create({
     margin: 0
   },
   description: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
     margin: 0

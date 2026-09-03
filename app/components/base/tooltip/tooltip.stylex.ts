@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { container } from '#/styles/core/tokens.stylex'
 import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -29,9 +29,9 @@ export const tooltipStyles = stylex.create({
       '[data-side="top"]': unit.x2,
       '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
     },
-    backgroundColor: colors.foreground,
+    backgroundColor: colors.foregroundNeutral,
     borderRadius: radius.small,
-    color: colors.background,
+    color: colors.backgroundPage,
     fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,
     lineHeight: fontLineHeight.caption1,
@@ -62,7 +62,7 @@ export const tooltipStyles = stylex.create({
   // the anchor axis, we offset the cross axis per [data-side] — the rotated
   // corner peeks out just enough to bridge the default 4px sideOffset gap.
   arrow: {
-    backgroundColor: colors.foreground,
+    backgroundColor: colors.foregroundNeutral,
     bottom: { default: null, '[data-side="top"]': `calc(-1 * ${unit.x0_5})` },
     height: unit.x3,
     left: {

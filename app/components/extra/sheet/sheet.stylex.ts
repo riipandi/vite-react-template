@@ -1,6 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
-import { shadow } from '#/styles/core/colors.stylex'
+import { colors, shadow } from '#/styles/core/colors.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -8,7 +7,7 @@ import { duration, easing } from '#/styles/core/tokens.stylex'
 
 export const sheetStyles = stylex.create({
   overlay: {
-    backgroundColor: colors.overlay,
+    backgroundColor: `color-mix(in srgb, ${colors.black} 50%, transparent)`,
     inset: 0,
     opacity: {
       default: 1,
@@ -22,9 +21,9 @@ export const sheetStyles = stylex.create({
     zIndex: zIndex.absolute
   },
   content: {
-    backgroundColor: colors.popover,
+    backgroundColor: colors.backgroundElevationOverlay,
     boxShadow: shadow.overlay,
-    color: colors.popoverForeground,
+    color: colors.foregroundNeutral,
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
@@ -49,13 +48,13 @@ export const sheetStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      ':hover': colors.accent
+      ':hover': colors.backgroundNeutralFaded
     },
     borderRadius: radius.small,
     borderStyle: 'none',
     color: {
-      default: colors.mutedForeground,
-      ':hover': colors.accentForeground
+      default: colors.foregroundNeutralFaded,
+      ':hover': colors.foregroundNeutral
     },
     cursor: 'pointer',
     display: 'inline-flex',
@@ -63,7 +62,7 @@ export const sheetStyles = stylex.create({
     justifyContent: 'center',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.ring}`
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     padding: 0,
     position: 'absolute',
@@ -85,14 +84,14 @@ export const sheetStyles = stylex.create({
     padding: unit.x4
   },
   title: {
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     fontSize: fontSize.body1,
     fontWeight: fontWeight.medium,
     lineHeight: fontLineHeight.body1,
     margin: 0
   },
   description: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
     margin: 0
@@ -106,7 +105,7 @@ export const sheetSides = stylex.create({
       '[data-starting-style]': `translateX(${unit.x10})`,
       '[data-ending-style]': `translateX(${unit.x10})`
     },
-    borderLeftColor: colors.border,
+    borderLeftColor: colors.borderNeutralFaded,
     borderLeftStyle: 'solid',
     borderLeftWidth: stroke.border,
     bottom: 0,
@@ -121,7 +120,7 @@ export const sheetSides = stylex.create({
       '[data-starting-style]': `translateX(calc(-1 * ${unit.x10}))`,
       '[data-ending-style]': `translateX(calc(-1 * ${unit.x10}))`
     },
-    borderRightColor: colors.border,
+    borderRightColor: colors.borderNeutralFaded,
     borderRightStyle: 'solid',
     borderRightWidth: stroke.border,
     bottom: 0,
@@ -136,7 +135,7 @@ export const sheetSides = stylex.create({
       '[data-starting-style]': `translateY(calc(-1 * ${unit.x10}))`,
       '[data-ending-style]': `translateY(calc(-1 * ${unit.x10}))`
     },
-    borderBottomColor: colors.border,
+    borderBottomColor: colors.borderNeutralFaded,
     borderBottomStyle: 'solid',
     borderBottomWidth: stroke.border,
     left: 0,
@@ -150,7 +149,7 @@ export const sheetSides = stylex.create({
       '[data-ending-style]': `translateY(${unit.x10})`
     },
     borderBottomStyle: 'none',
-    borderTopColor: colors.border,
+    borderTopColor: colors.borderNeutralFaded,
     borderTopStyle: 'solid',
     borderTopWidth: stroke.border,
     bottom: 0,

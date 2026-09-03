@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -17,7 +17,7 @@ export const tabsStyles = stylex.create({
   },
   list: {
     alignItems: { default: 'center', '[data-orientation="vertical"]': 'stretch' },
-    backgroundColor: colors.muted,
+    backgroundColor: colors.backgroundNeutral,
     borderRadius: radius.medium,
     display: 'inline-flex',
     flexDirection: { default: 'row', '[data-orientation="vertical"]': 'column' },
@@ -28,7 +28,7 @@ export const tabsStyles = stylex.create({
   },
   listLine: {
     backgroundColor: 'transparent',
-    borderBottomColor: colors.border,
+    borderBottomColor: colors.borderNeutralFaded,
     borderBottomStyle: 'solid',
     borderBottomWidth: stroke.border,
     borderRadius: 0,
@@ -39,11 +39,11 @@ export const tabsStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      '[data-active]': colors.background
+      '[data-active]': colors.backgroundPage
     },
     borderRadius: radius.small,
     borderStyle: 'none',
-    color: { default: colors.mutedForeground, '[data-active]': colors.foreground },
+    color: { default: colors.foregroundNeutralFaded, '[data-active]': colors.foregroundNeutral },
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
     fontFamily: fontFamily.body,
@@ -53,7 +53,10 @@ export const tabsStyles = stylex.create({
     justifyContent: 'center',
     lineHeight: fontLineHeight.body2,
     opacity: { default: 1, ':disabled': 0.5 },
-    outline: { default: 'none', ':focus-visible': `${stroke.focus} solid ${colors.ring}` },
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+    },
     outlineOffset: `calc(-1 * ${stroke.focus})`,
     paddingInline: unit.x3,
     transitionDuration: duration.fast,
@@ -66,7 +69,7 @@ export const tabsStyles = stylex.create({
     backgroundColor: 'transparent',
     borderBottomColor: {
       default: 'transparent',
-      '[data-active]': colors.primary
+      '[data-active]': colors.backgroundPrimary
     },
     borderBottomStyle: 'solid',
     borderBottomWidth: stroke.focus,
@@ -75,7 +78,7 @@ export const tabsStyles = stylex.create({
     marginBottom: `calc(-1 * ${stroke.border})`
   },
   content: {
-    color: colors.foreground,
+    color: colors.foregroundNeutral,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
     outline: 'none'

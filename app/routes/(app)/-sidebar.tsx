@@ -1,18 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import type { LinkProps } from '@tanstack/react-router'
-import {
-  IconBarChart,
-  IconMasonry,
-  IconDocument,
-  IconLogOut,
-  IconMessage,
-  IconSearch,
-  IconSettings,
-  IconShoppingCart,
-  IconSidebar,
-  IconSidebarFillLeft
-} from 'obra-icons-react'
+import * as Lucide from 'lucide-react'
 import { useState } from 'react'
 import { ThemeSwitcher } from '#/components/theme'
 import { useAuthentication } from '#/libraries/guard/auth-provider'
@@ -26,16 +15,16 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { icon: IconMasonry, label: 'Overview', href: '/overview' },
-  { icon: IconSearch, label: 'Search', href: undefined },
-  { icon: IconBarChart, label: 'Analytics', href: undefined },
-  { icon: IconDocument, label: 'Docs', href: undefined }
+  { icon: Lucide.LayoutDashboard, label: 'Overview', href: '/overview' },
+  { icon: Lucide.Search, label: 'Search', href: undefined },
+  { icon: Lucide.ChartColumn, label: 'Analytics', href: undefined },
+  { icon: Lucide.FileText, label: 'Docs', href: undefined }
 ]
 
 const secondaryItems: NavItem[] = [
-  { icon: IconShoppingCart, label: 'Products', href: undefined },
-  { icon: IconSettings, label: 'Settings', href: '/settings' },
-  { icon: IconMessage, label: 'Messages', href: undefined, badge: true }
+  { icon: Lucide.ShoppingCart, label: 'Products', href: undefined },
+  { icon: Lucide.Settings, label: 'Settings', href: '/settings' },
+  { icon: Lucide.MessageSquare, label: 'Messages', href: undefined, badge: true }
 ]
 
 function LogoMark() {
@@ -146,7 +135,7 @@ export function SideNavbar({ collapsed = false, onToggleCollapse }: SideNavbarPr
               collapsed && sidebarStyles.collapseTriggerCollapsed
             )}
           >
-            {collapsed ? <IconSidebar size={16} /> : <IconSidebarFillLeft size={16} />}
+            {collapsed ? <Lucide.PanelLeftOpen size={16} /> : <Lucide.PanelLeftClose size={16} />}
           </button>
         )}
       </div>
@@ -184,7 +173,7 @@ export function SideNavbar({ collapsed = false, onToggleCollapse }: SideNavbarPr
               !collapsed && sidebarStyles.signOutButtonExpanded
             )}
           >
-            <IconLogOut {...stylex.props(sidebarStyles.navIcon)} />
+            <Lucide.LogOut {...stylex.props(sidebarStyles.navIcon)} />
             {!collapsed && <span {...stylex.props(sidebarStyles.navLabel)}>Sign Out</span>}
           </button>
           <div

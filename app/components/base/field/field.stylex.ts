@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
 import { unit } from '#/styles/core/tokens.stylex'
 
@@ -49,7 +49,7 @@ export const fieldStyles = stylex.create({
     userSelect: 'none'
   },
   label: {
-    color: { default: null, '[data-invalid]': colors.destructive },
+    color: { default: null, '[data-invalid]': colors.foregroundCritical },
     lineHeight: fontLineHeight.body2,
     width: 'fit-content'
   },
@@ -63,7 +63,7 @@ export const fieldStyles = stylex.create({
     width: 'fit-content'
   },
   description: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
     margin: 0,
@@ -81,8 +81,8 @@ export const fieldStyles = stylex.create({
     top: '50%'
   },
   separatorContent: {
-    backgroundColor: colors.background,
-    color: colors.mutedForeground,
+    backgroundColor: colors.backgroundPage,
+    color: colors.foregroundNeutralFaded,
     display: 'block',
     marginInline: 'auto',
     paddingInline: unit.x2,
@@ -90,7 +90,7 @@ export const fieldStyles = stylex.create({
     width: 'fit-content'
   },
   error: {
-    color: colors.destructive,
+    color: colors.foregroundCritical,
     fontSize: fontSize.body2
   },
   errorList: {

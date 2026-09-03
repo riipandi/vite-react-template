@@ -1,10 +1,10 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 
 export const separatorStyles = stylex.create({
   root: {
-    backgroundColor: colors.border,
+    backgroundColor: colors.borderNeutralFaded,
     flexShrink: 0
   }
 })

@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/tokens.stylex'
@@ -7,7 +7,7 @@ import { fontFamily, fontWeight, fontSize } from '#/styles/core/tokens.stylex'
 export const avatarStyles = stylex.create({
   root: {
     alignItems: 'center',
-    backgroundColor: colors.muted,
+    backgroundColor: colors.backgroundNeutral,
     borderRadius: radius.circular,
     display: 'inline-flex',
     // Fixed-size chrome: never let a flex row squeeze the avatar.
@@ -29,7 +29,7 @@ export const avatarStyles = stylex.create({
   fallback: {
     alignItems: 'center',
     borderRadius: radius.circular,
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     display: 'flex',
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
@@ -39,12 +39,12 @@ export const avatarStyles = stylex.create({
   },
   badge: {
     alignItems: 'center',
-    backgroundColor: colors.primary,
-    borderColor: colors.background,
+    backgroundColor: colors.backgroundPrimary,
+    borderColor: colors.backgroundPage,
     borderRadius: radius.circular,
     borderStyle: 'solid',
     borderWidth: stroke.focus,
-    color: colors.primaryForeground,
+    color: colors.onBrand,
     display: 'flex',
     insetInlineEnd: 0,
     insetBlockEnd: 0,
@@ -69,9 +69,9 @@ export const avatarStyles = stylex.create({
   }),
   groupCount: {
     alignItems: 'center',
-    backgroundColor: colors.muted,
+    backgroundColor: colors.backgroundNeutral,
     borderRadius: radius.circular,
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     display: 'flex',
     fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,

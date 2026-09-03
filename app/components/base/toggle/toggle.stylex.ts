@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
@@ -10,14 +10,14 @@ export const toggleStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      ':hover:not(:disabled)': colors.muted,
-      '[data-pressed]': colors.muted
+      ':hover:not(:disabled)': colors.backgroundNeutral,
+      '[data-pressed]': colors.backgroundNeutral
     },
     borderRadius: radius.large,
     borderStyle: 'none',
     color: {
-      default: colors.foreground,
-      ':hover:not(:disabled)': colors.foreground
+      default: colors.foregroundNeutral,
+      ':hover:not(:disabled)': colors.foregroundNeutral
     },
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
@@ -30,7 +30,7 @@ export const toggleStyles = stylex.create({
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.ring}`
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     outlineOffset: stroke.focus,
     transitionDuration: duration.fast,
@@ -43,7 +43,7 @@ export const toggleStyles = stylex.create({
 export const toggleVariants = stylex.create({
   default: {},
   outline: {
-    borderColor: colors.input,
+    borderColor: colors.borderNeutralFaded,
     borderStyle: 'solid',
     borderWidth: stroke.border
   }

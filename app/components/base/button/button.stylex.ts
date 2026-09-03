@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { duration } from '#/styles/core/tokens.stylex'
@@ -22,7 +22,7 @@ export const buttonStyles = stylex.create({
     textDecoration: 'none',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.ring}`
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     outlineOffset: stroke.focus,
     transitionDuration: duration.fast,
@@ -35,47 +35,47 @@ export const buttonStyles = stylex.create({
 export const buttonVariants = stylex.create({
   primary: {
     backgroundColor: {
-      default: colors.primary,
-      ':hover:not(:disabled)': `color-mix(in srgb, ${colors.primary} 90%, transparent)`
+      default: colors.backgroundPrimary,
+      ':hover:not(:disabled)': `color-mix(in srgb, ${colors.backgroundPrimary} 90%, transparent)`
     },
-    color: colors.primaryForeground
+    color: colors.onBrand
   },
   secondary: {
     backgroundColor: {
-      default: colors.secondary,
-      ':hover:not(:disabled)': `color-mix(in srgb, ${colors.secondary} 80%, ${colors.foreground} 4%)`
+      default: colors.backgroundNeutral,
+      ':hover:not(:disabled)': `color-mix(in srgb, ${colors.backgroundNeutral} 80%, ${colors.foregroundNeutral} 4%)`
     },
-    color: colors.secondaryForeground
+    color: colors.foregroundNeutral
   },
   outline: {
     backgroundColor: {
-      default: colors.background,
-      ':hover:not(:disabled)': colors.accent
+      default: colors.backgroundPage,
+      ':hover:not(:disabled)': colors.backgroundNeutralFaded
     },
-    borderColor: colors.border,
+    borderColor: colors.borderNeutralFaded,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     color: {
-      default: colors.foreground,
-      ':hover:not(:disabled)': colors.accentForeground
+      default: colors.foregroundNeutral,
+      ':hover:not(:disabled)': colors.foregroundNeutral
     }
   },
   ghost: {
     backgroundColor: {
       default: 'transparent',
-      ':hover:not(:disabled)': colors.accent
+      ':hover:not(:disabled)': colors.backgroundNeutralFaded
     },
     color: {
-      default: colors.foreground,
-      ':hover:not(:disabled)': colors.accentForeground
+      default: colors.foregroundNeutral,
+      ':hover:not(:disabled)': colors.foregroundNeutral
     }
   },
   destructive: {
     backgroundColor: {
-      default: colors.destructive,
-      ':hover:not(:disabled)': `color-mix(in srgb, ${colors.destructive} 90%, transparent)`
+      default: colors.backgroundCritical,
+      ':hover:not(:disabled)': `color-mix(in srgb, ${colors.backgroundCritical} 90%, transparent)`
     },
-    color: colors.destructiveForeground
+    color: colors.onBackgroundCritical
   }
 })
 

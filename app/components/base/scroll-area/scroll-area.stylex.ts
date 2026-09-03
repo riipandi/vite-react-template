@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { duration } from '#/styles/core/tokens.stylex'
@@ -13,7 +13,7 @@ export const scrollAreaStyles = stylex.create({
     height: '100%',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.ring}`
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     width: '100%'
   },
@@ -39,7 +39,7 @@ export const scrollAreaStyles = stylex.create({
     userSelect: 'none'
   },
   thumb: {
-    backgroundColor: colors.border,
+    backgroundColor: colors.borderNeutralFaded,
     borderRadius: radius.circular,
     flex: 1,
     position: 'relative'

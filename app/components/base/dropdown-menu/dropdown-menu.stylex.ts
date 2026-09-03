@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex'
-import { colors } from '#/lib/tokens.stylex'
+import { colors } from '#/styles/core/colors.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/tokens.stylex'
@@ -29,9 +29,9 @@ export const dropdownMenuStyles = stylex.create({
       '[data-side="top"]': unit.x2,
       '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
     },
-    backgroundColor: colors.popover,
+    backgroundColor: colors.backgroundElevationOverlay,
     borderRadius: radius.medium,
-    color: colors.popoverForeground,
+    color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     maxHeight: 'var(--available-height)',
     minWidth: container.xs,
@@ -70,13 +70,13 @@ export const dropdownMenuStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      '[data-highlighted]': colors.accent
+      '[data-highlighted]': colors.backgroundNeutralFaded
     },
     borderRadius: radius.small,
     color: {
       default: null,
-      '[data-highlighted]': colors.accentForeground,
-      '[data-disabled]': colors.mutedForeground
+      '[data-highlighted]': colors.foregroundNeutral,
+      '[data-disabled]': colors.foregroundNeutralFaded
     },
     cursor: 'default',
     display: 'flex',
@@ -93,14 +93,14 @@ export const dropdownMenuStyles = stylex.create({
   subTrigger: {
     backgroundColor: {
       default: 'transparent',
-      '[data-highlighted]': colors.accent,
-      '[data-popup-open]': colors.accent
+      '[data-highlighted]': colors.backgroundNeutralFaded,
+      '[data-popup-open]': colors.backgroundNeutralFaded
     },
     color: {
       default: null,
-      '[data-highlighted]': colors.accentForeground,
-      '[data-popup-open]': colors.accentForeground,
-      '[data-disabled]': colors.mutedForeground
+      '[data-highlighted]': colors.foregroundNeutral,
+      '[data-popup-open]': colors.foregroundNeutral,
+      '[data-disabled]': colors.foregroundNeutralFaded
     }
   },
   itemInset: {
@@ -124,31 +124,31 @@ export const dropdownMenuStyles = stylex.create({
   itemDestructive: {
     backgroundColor: {
       default: 'transparent',
-      '[data-highlighted]': `color-mix(in srgb, ${colors.destructive} 10%, transparent)`
+      '[data-highlighted]': `color-mix(in srgb, ${colors.backgroundCritical} 10%, transparent)`
     },
     color: {
-      default: colors.destructive,
-      '[data-disabled]': colors.mutedForeground
+      default: colors.foregroundCritical,
+      '[data-disabled]': colors.foregroundNeutralFaded
     }
   },
   subTriggerChevron: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     flexShrink: 0,
     marginLeft: 'auto'
   },
   shortcut: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.caption1,
     letterSpacing: '0.1em',
     marginLeft: 'auto'
   },
   separator: {
-    backgroundColor: colors.border,
+    backgroundColor: colors.borderNeutralFaded,
     height: stroke.border,
     marginBlock: unit.x1
   },
   label: {
-    color: colors.mutedForeground,
+    color: colors.foregroundNeutralFaded,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
     paddingBlock: unit.x1_5,

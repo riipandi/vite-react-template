@@ -3,9 +3,9 @@ import { colors } from '#/styles/core/color.stylex'
 import { fontFamilyVar, fontSize, fontLineHeight, fontWeightVar } from '#/styles/core/font.stylex'
 import { duration, easing } from '#/styles/core/motion.stylex'
 import { shadow } from '#/styles/core/shadow.stylex'
-import { unit } from '#/styles/core/size.stylex'
+import { radius, unit } from '#/styles/core/size.stylex'
 
-export const radioStyles = {
+export const checkboxStyles = {
   // -------------------------------------------------------------------------
   // Root label wrapper
   // -------------------------------------------------------------------------
@@ -26,7 +26,7 @@ export const radioStyles = {
   }),
 
   // -------------------------------------------------------------------------
-  // Size variants – circle dimensions
+  // Size variants – box dimensions
   // -------------------------------------------------------------------------
 
   sizes: stylex.create({
@@ -61,7 +61,7 @@ export const radioStyles = {
   }),
 
   // -------------------------------------------------------------------------
-  // Radio circle (Base UI Root)
+  // Checkbox box (Base UI Root)
   // -------------------------------------------------------------------------
 
   field: stylex.create({
@@ -75,7 +75,7 @@ export const radioStyles = {
       borderStyle: 'solid',
       borderWidth: '1px',
       borderColor: colors.borderNeutral,
-      borderRadius: '50%',
+      borderRadius: radius.small,
       backgroundColor: {
         default: colors.backgroundElevationBase,
         ':hover': colors.backgroundNeutralFaded
@@ -127,7 +127,7 @@ export const radioStyles = {
   }),
 
   // -------------------------------------------------------------------------
-  // Indicator (the dot)
+  // Indicator (check / indeterminate marks)
   // -------------------------------------------------------------------------
 
   indicator: stylex.create({
@@ -154,12 +154,19 @@ export const radioStyles = {
     }
   }),
 
-  dot: stylex.create({
+  dash: stylex.create({
     root: {
-      width: '40%',
-      height: '40%',
-      borderRadius: '50%',
+      width: '50%',
+      height: '1.5px',
+      borderRadius: radius.circular,
       backgroundColor: 'currentcolor'
+    }
+  }),
+
+  icon: stylex.create({
+    root: {
+      width: '60%',
+      height: '60%'
     }
   }),
 

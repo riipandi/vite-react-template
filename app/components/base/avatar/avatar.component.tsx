@@ -1,9 +1,10 @@
 import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { space, fontSize, fontWeight, stroke } from '#/lib/constants.stylex'
+import { stroke } from '#/lib/constants.stylex'
 import { ring } from '#/lib/stylex-utils'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { colors } from '#/lib/tokens.stylex'
+import { avatarStyles as s, avatarSizes as sizes } from './avatar.stylex'
 
 export type AvatarSize = 'sm' | 'md' | 'lg'
 
@@ -19,7 +20,7 @@ export function Avatar({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseAvatar.Root>, 'className' | 'style'> &
   StyleProp & { size?: AvatarSize }) {
-  return <BaseAvatar.Root {...props} {...stylex.props(styles.root, sizes[size], style)} />
+  return <BaseAvatar.Root {...props} {...stylex.props(s.root, sizes[size], style)} />
 }
 
 export function AvatarImage({
@@ -27,7 +28,7 @@ export function AvatarImage({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseAvatar.Image>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseAvatar.Image {...props} {...stylex.props(styles.image, style)} />
+  return <BaseAvatar.Image {...props} {...stylex.props(s.image, style)} />
 }
 
 export function AvatarFallback({
@@ -35,12 +36,12 @@ export function AvatarFallback({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseAvatar.Fallback>, 'className' | 'style'> &
   StyleProp) {
-  return <BaseAvatar.Fallback {...props} {...stylex.props(styles.fallback, style)} />
+  return <BaseAvatar.Fallback {...props} {...stylex.props(s.fallback, style)} />
 }
 
 /** Status indicator anchored to the bottom-right corner of an `Avatar`. */
 export function AvatarBadge({ style, ...props }: DivProps) {
-  return <div {...props} {...stylex.props(styles.badge, style)} />
+  return <div {...props} {...stylex.props(s.badge, style)} />
 }
 
 /**
@@ -52,14 +53,14 @@ export function AvatarBadge({ style, ...props }: DivProps) {
 export function AvatarGroup({ style, children, ...props }: DivProps) {
   const items = React.Children.toArray(children)
   return (
-    <div {...props} {...stylex.props(styles.group, style)}>
+    <div {...props} {...stylex.props(s.group, style)}>
       {items.map((child, index) => (
         <span
           key={index}
           {...stylex.props(
-            styles.groupItem,
-            index > 0 && styles.groupItemOverlap,
-            styles.groupItemStack(items.length - index),
+            s.groupItem,
+            index > 0 && s.groupItemOverlap,
+            s.groupItemStack(items.length - index),
             ring({ width: stroke.focus, color: colors.background })
           )}
         >
@@ -77,87 +78,5 @@ export function AvatarGroupCount({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<'span'>, 'className' | 'style'> &
   StyleProp & { size?: AvatarSize }) {
-  return <span {...props} {...stylex.props(styles.groupCount, sizes[size], style)} />
+  return <span {...props} {...stylex.props(s.groupCount, sizes[size], style)} />
 }
-
-const styles = stylex.create({
-  root: {
-    alignItems: 'center',
-    backgroundColor: colors.muted,
-    borderRadius: radius.full,
-    display: 'inline-flex',
-    // Fixed-size chrome: never let a flex row squeeze the avatar.
-    flexShrink: 0,
-    fontFamily: font.sans,
-    justifyContent: 'center',
-    // No overflow:hidden here — it would clip AvatarBadge at the corner;
-    // the image and fallback round themselves instead.
-    position: 'relative',
-    userSelect: 'none',
-    verticalAlign: 'middle'
-  },
-  image: {
-    borderRadius: radius.full,
-    height: '100%',
-    objectFit: 'cover',
-    width: '100%'
-  },
-  fallback: {
-    alignItems: 'center',
-    borderRadius: radius.full,
-    color: colors.mutedForeground,
-    display: 'flex',
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
-    height: '100%',
-    justifyContent: 'center',
-    width: '100%'
-  },
-  badge: {
-    alignItems: 'center',
-    backgroundColor: colors.primary,
-    borderColor: colors.background,
-    borderRadius: radius.full,
-    borderStyle: 'solid',
-    borderWidth: stroke.focus,
-    color: colors.primaryForeground,
-    display: 'flex',
-    insetInlineEnd: 0,
-    insetBlockEnd: 0,
-    justifyContent: 'center',
-    minHeight: space.s4,
-    minWidth: space.s4,
-    position: 'absolute'
-  },
-  group: {
-    alignItems: 'center',
-    display: 'flex'
-  },
-  groupItem: {
-    borderRadius: radius.full,
-    display: 'inline-flex'
-  },
-  groupItemOverlap: {
-    marginInlineStart: `calc(-1 * ${space.s2})`
-  },
-  groupItemStack: (order: number) => ({
-    zIndex: order
-  }),
-  groupCount: {
-    alignItems: 'center',
-    backgroundColor: colors.muted,
-    borderRadius: radius.full,
-    color: colors.mutedForeground,
-    display: 'flex',
-    fontFamily: font.sans,
-    fontSize: fontSize.xs,
-    fontWeight: fontWeight.medium,
-    justifyContent: 'center'
-  }
-})
-
-const sizes = stylex.create({
-  sm: { height: space.s8, width: space.s8 },
-  md: { height: space.s10, width: space.s10 },
-  lg: { height: space.s12, width: space.s12 }
-})

@@ -1,16 +1,7 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import {
-  space,
-  fontSize,
-  lineHeight,
-  fontWeight,
-  duration,
-  easing,
-  stroke
-} from '#/lib/constants.stylex'
-import { colors, font, radius } from '#/lib/tokens.stylex'
+import { accordionStyles as s } from './accordion.stylex'
 
 interface StyleXStyleProps {
   style?: stylex.StyleXStyles
@@ -21,7 +12,7 @@ export function Accordion({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseAccordion.Root>, 'className' | 'style'> &
   StyleXStyleProps) {
-  return <BaseAccordion.Root {...props} {...stylex.props(styles.root, style)} />
+  return <BaseAccordion.Root {...props} {...stylex.props(s.root, style)} />
 }
 
 export function AccordionItem({
@@ -29,7 +20,7 @@ export function AccordionItem({
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseAccordion.Item>, 'className' | 'style'> &
   StyleXStyleProps) {
-  return <BaseAccordion.Item {...props} {...stylex.props(styles.item, style)} />
+  return <BaseAccordion.Item {...props} {...stylex.props(s.item, style)} />
 }
 
 export function AccordionTrigger({
@@ -39,8 +30,8 @@ export function AccordionTrigger({
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseAccordion.Trigger>, 'className' | 'style'> &
   StyleXStyleProps) {
   return (
-    <BaseAccordion.Header {...stylex.props(styles.header)}>
-      <BaseAccordion.Trigger {...props} {...stylex.props(styles.trigger, style)}>
+    <BaseAccordion.Header {...stylex.props(s.header)}>
+      <BaseAccordion.Trigger {...props} {...stylex.props(s.trigger, style)}>
         {children}
         <svg
           width='16'
@@ -52,7 +43,7 @@ export function AccordionTrigger({
           strokeLinecap='round'
           strokeLinejoin='round'
           aria-hidden
-          {...stylex.props(styles.chevron)}
+          {...stylex.props(s.chevron)}
         >
           <path d={`m3 6 5 5 5-5`} />
         </svg>
@@ -68,94 +59,8 @@ export function AccordionContent({
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseAccordion.Panel>, 'className' | 'style'> &
   StyleXStyleProps) {
   return (
-    <BaseAccordion.Panel {...props} {...stylex.props(styles.panel)}>
-      <div {...stylex.props(styles.inner, style)}>{children}</div>
+    <BaseAccordion.Panel {...props} {...stylex.props(s.panel)}>
+      <div {...stylex.props(s.inner, style)}>{children}</div>
     </BaseAccordion.Panel>
   )
 }
-
-const styles = stylex.create({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    fontFamily: font.sans,
-    width: '100%'
-  },
-  item: {
-    borderBottomColor: colors.border,
-    borderBottomStyle: { default: 'solid', ':last-child': 'none' },
-    borderBottomWidth: { default: stroke.border, ':last-child': 0 }
-  },
-  header: {
-    display: 'flex',
-    margin: 0
-  },
-  trigger: {
-    alignItems: 'flex-start',
-    backgroundColor: 'transparent',
-    borderRadius: radius.lg,
-    borderStyle: 'none',
-    color: colors.foreground,
-    cursor: 'pointer',
-    display: 'flex',
-    flex: 1,
-    fontFamily: font.sans,
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.medium,
-    gap: space.s4,
-    justifyContent: 'space-between',
-    lineHeight: lineHeight.control,
-    outline: {
-      default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.ring}`
-    },
-    // Read by the chevron below — StyleX has no child selectors, so the
-    // trigger's [data-panel-open] state travels via a custom property.
-    // No `default` here: StyleX emits it unlayered, beating the layered
-    // [data-*] rule; the chevron's var() fallback covers the closed state.
-    '--accordion-trigger-rotation': {
-      default: null,
-      '[data-panel-open]': '180deg'
-    },
-    paddingBlock: space.s25,
-    paddingInline: 0,
-    textAlign: 'left',
-    textDecoration: { default: 'none', ':hover': 'underline' }
-  },
-  chevron: {
-    color: colors.mutedForeground,
-    flexShrink: 0,
-    marginLeft: 'auto',
-    marginTop: space.s05,
-    pointerEvents: 'none',
-    transform: 'rotate(var(--accordion-trigger-rotation, 0deg))',
-    transitionDuration: duration.fast,
-    transitionProperty: {
-      default: 'transform',
-      '@media (prefers-reduced-motion: reduce)': 'none'
-    },
-    transitionTimingFunction: easing.out
-  },
-  // Height transition through Base UI's measured --accordion-panel-height;
-  // the starting/ending frames pin it to 0 so both open AND close animate
-  // (a one-way keyframe would replay its open animation on close).
-  panel: {
-    fontSize: fontSize.sm,
-    height: {
-      default: 'var(--accordion-panel-height)',
-      '[data-starting-style]': 0,
-      '[data-ending-style]': 0
-    },
-    lineHeight: lineHeight.normal,
-    overflow: 'hidden',
-    transitionDuration: {
-      default: duration.fast,
-      '@media (prefers-reduced-motion: reduce)': '0s'
-    },
-    transitionProperty: 'height',
-    transitionTimingFunction: easing.out
-  },
-  inner: {
-    paddingBottom: space.s25
-  }
-})

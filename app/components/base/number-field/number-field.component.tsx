@@ -14,10 +14,6 @@
  *     <NumberField.Increment />
  *   </NumberField.Group>
  * </NumberField.Root>
- *
- * The default `controls` layout is "stacked": a narrow chevron up/down column
- * pinned to the end edge of the field (Reshaped-style). Use "sides" for the
- * classic minus / plus buttons flanking the input.
  */
 
 import { NumberField as BaseNumberField } from '@base-ui/react/number-field'
@@ -50,20 +46,19 @@ export function NumberFieldGroup({
   controls = 'stacked',
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseNumberField.Group>, 'className' | 'style'> &
-  StyleProp & {
-    /** Placement of the default increment/decrement buttons */
-    controls?: NumberFieldControls
-  }) {
+  StyleProp & { controls?: NumberFieldControls }) {
   return (
     <BaseNumberField.Group {...props} {...stylex.props(s.group, style)}>
       {children ?? (
         <>
-          <NumberFieldInput />
           {controls === 'stacked' ? (
-            <span {...stylex.props(s.controls)}>
-              <NumberFieldIncrement controls='stacked' aria-label='Increase' />
-              <NumberFieldDecrement controls='stacked' aria-label='Decrease' />
-            </span>
+            <>
+              <NumberFieldInput />
+              <span {...stylex.props(s.controls)}>
+                <NumberFieldIncrement controls='stacked' aria-label='Increase' />
+                <NumberFieldDecrement controls='stacked' aria-label='Decrease' />
+              </span>
+            </>
           ) : (
             <>
               <NumberFieldDecrement aria-label='Decrease' />
@@ -88,18 +83,17 @@ export function NumberFieldInput({
 export function NumberFieldDecrement({
   style,
   children,
-  icon = 'chevron-down',
+  icon,
   controls = 'sides',
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseNumberField.Decrement>, 'className' | 'style'> &
   StyleProp & {
-    /** Icon preset rendered when no children are provided */
     icon?: 'chevron-down' | 'minus'
-    /** Layout the button is sized for */
     controls?: NumberFieldControls
   }) {
   const stacked = controls === 'stacked'
-  const Icon = icon === 'chevron-down' ? Lucide.ChevronDown : Lucide.Minus
+  const preset = icon ?? (stacked ? 'chevron-down' : 'minus')
+  const Icon = preset === 'chevron-down' ? Lucide.ChevronDown : Lucide.Minus
 
   return (
     <BaseNumberField.Decrement
@@ -118,18 +112,17 @@ export function NumberFieldDecrement({
 export function NumberFieldIncrement({
   style,
   children,
-  icon = 'chevron-up',
+  icon,
   controls = 'sides',
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseNumberField.Increment>, 'className' | 'style'> &
   StyleProp & {
-    /** Icon preset rendered when no children are provided */
     icon?: 'chevron-up' | 'plus'
-    /** Layout the button is sized for */
     controls?: NumberFieldControls
   }) {
   const stacked = controls === 'stacked'
-  const Icon = icon === 'chevron-up' ? Lucide.ChevronUp : Lucide.Plus
+  const preset = icon ?? (stacked ? 'chevron-up' : 'plus')
+  const Icon = preset === 'chevron-up' ? Lucide.ChevronUp : Lucide.Plus
 
   return (
     <BaseNumberField.Increment

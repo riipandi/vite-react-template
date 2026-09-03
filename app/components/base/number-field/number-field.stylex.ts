@@ -23,7 +23,6 @@ export const numberFieldStyles = stylex.create({
       ':focus-within': `${stroke.focus} solid ${colors.foregroundPrimary}`
     },
     outlineOffset: `calc(-1 * ${stroke.border})`,
-    position: 'relative',
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',
     width: 'fit-content'
@@ -77,6 +76,8 @@ export const numberFieldStyles = stylex.create({
   },
   // Stacked controls: a narrow column pinned to the end edge with two
   // half-height buttons on top of each other (chevron up / chevron down).
+  // It is a normal flex item (not absolute) so it reserves space next to
+  // the input instead of covering it.
   controls: {
     alignItems: 'stretch',
     borderBottomRightRadius: `calc(${radius.medium} - ${stroke.border})`,
@@ -86,11 +87,8 @@ export const numberFieldStyles = stylex.create({
     borderTopRightRadius: `calc(${radius.medium} - ${stroke.border})`,
     display: 'flex',
     flexDirection: 'column',
-    overflow: 'hidden',
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    bottom: 0
+    flexShrink: 0,
+    overflow: 'hidden'
   },
   controlStacked: {
     width: unit.x6

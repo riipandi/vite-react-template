@@ -56,3 +56,20 @@ export const scrollAreaScrollbarOrientations = stylex.create({
     height: unit.x3
   }
 })
+
+export const scrollAreaFadeStyles = stylex.create({
+  fade: {
+    '@supports (animation-timeline: scroll(self block))': {
+      animationFillMode: 'both',
+      animationName:
+        'scroll-area-fade-block-start, scroll-area-fade-block-end, scroll-area-fade-inline-start, scroll-area-fade-inline-end',
+      animationTimeline:
+        'scroll(self block), scroll(self block), scroll(self inline), scroll(self inline)',
+      animationRange: '0 32px, calc(100% - 32px) 100%, 0 32px, calc(100% - 32px) 100%',
+      animationTimingFunction: 'linear',
+      maskComposite: 'intersect',
+      maskImage:
+        'linear-gradient(to bottom, rgb(0 0 0 / 0%) 0, rgb(0 0 0 / 10%) calc(var(--scroll-area-fade-block-start) * 0.2), rgb(0 0 0 / 35%) calc(var(--scroll-area-fade-block-start) * 0.4), rgb(0 0 0 / 65%) calc(var(--scroll-area-fade-block-start) * 0.6), rgb(0 0 0 / 90%) calc(var(--scroll-area-fade-block-start) * 0.8), rgb(0 0 0 / 100%) var(--scroll-area-fade-block-start), rgb(0 0 0 / 100%) calc(100% - var(--scroll-area-fade-block-end)), rgb(0 0 0 / 90%) calc(100% - var(--scroll-area-fade-block-end) * 0.8), rgb(0 0 0 / 65%) calc(100% - var(--scroll-area-fade-block-end) * 0.6), rgb(0 0 0 / 35%) calc(100% - var(--scroll-area-fade-block-end) * 0.4), rgb(0 0 0 / 10%) calc(100% - var(--scroll-area-fade-block-end) * 0.2), rgb(0 0 0 / 0%) 100%), linear-gradient(to right, rgb(0 0 0 / 0%) 0, rgb(0 0 0 / 10%) calc(var(--scroll-area-fade-inline-start) * 0.2), rgb(0 0 0 / 35%) calc(var(--scroll-area-fade-inline-start) * 0.4), rgb(0 0 0 / 65%) calc(var(--scroll-area-fade-inline-start) * 0.6), rgb(0 0 0 / 90%) calc(var(--scroll-area-fade-inline-start) * 0.8), rgb(0 0 0 / 100%) var(--scroll-area-fade-inline-start), rgb(0 0 0 / 100%) calc(100% - var(--scroll-area-fade-inline-end)), rgb(0 0 0 / 90%) calc(100% - var(--scroll-area-fade-inline-end) * 0.8), rgb(0 0 0 / 65%) calc(100% - var(--scroll-area-fade-inline-end) * 0.6), rgb(0 0 0 / 35%) calc(100% - var(--scroll-area-fade-inline-end) * 0.4), rgb(0 0 0 / 10%) calc(100% - var(--scroll-area-fade-inline-end) * 0.2), rgb(0 0 0 / 0%) 100%)'
+    }
+  }
+})

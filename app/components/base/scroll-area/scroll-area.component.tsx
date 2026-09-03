@@ -19,6 +19,7 @@ import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { scrollAreaStyles as s } from './scroll-area.stylex'
 import { scrollAreaScrollbarOrientations as orientations } from './scroll-area.stylex'
+import { scrollAreaFadeStyles } from './scroll-area.stylex'
 
 interface StyleXStyleProps {
   style?: stylex.StyleXStyles
@@ -27,12 +28,18 @@ interface StyleXStyleProps {
 export function ScrollArea({
   style,
   children,
+  fade = false,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseScrollArea.Root>, 'className' | 'style'> &
-  StyleXStyleProps) {
+  StyleXStyleProps & {
+    /** Display a fade mask on the sides of the area that can be scrolled towards. */
+    fade?: boolean
+  }) {
   return (
     <BaseScrollArea.Root {...props} {...stylex.props(s.root, style)}>
-      <BaseScrollArea.Viewport {...stylex.props(s.viewport)}>{children}</BaseScrollArea.Viewport>
+      <BaseScrollArea.Viewport {...stylex.props(s.viewport, fade && scrollAreaFadeStyles.fade)}>
+        {children}
+      </BaseScrollArea.Viewport>
       <ScrollBar />
       <BaseScrollArea.Corner />
     </BaseScrollArea.Root>

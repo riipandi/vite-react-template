@@ -1,3 +1,16 @@
+/**
+ * Design tokens for the Base UI + StyleX component set, based on Reshaped.
+ *
+ * Common props for component: color, variant, shape, size
+ * Colors (default: neutral): primary|neutral|positive|warning|critical
+ * Variants: solid|faded|outline|ghost
+ * Shape: pill|rectangle|rounded
+ * Size: xs|sm|md|lg|xl
+ *
+ * @ref: https://www.reshaped.so/docs/getting-started/overview
+ * @ref: https://madeui.com/docs/customization
+ */
+
 import * as stylex from '@stylexjs/stylex'
 
 // -----------------------------------------------------------------------------

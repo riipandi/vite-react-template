@@ -29,7 +29,7 @@ function RootComponent() {
 
   return (
     <Fragment>
-      <title>{pageTitle ? `${pageTitle} - MyApplication` : 'MyApplication'}</title>
+      <title>{pageTitle ? `${pageTitle} - React Application` : 'React Application'}</title>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <ThemeProvider>

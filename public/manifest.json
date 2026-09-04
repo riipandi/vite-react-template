@@ -1,11 +1,11 @@
 {
     "lang": "en",
     "dir": "ltr",
-    "name": "MyApplication",
-    "short_name": "my-application",
-    "description": "TanStack React + Base UI",
-    "theme_color": "#5a58f2",
-    "background_color": "#0c0a09",
+    "name": "React Application",
+    "short_name": "react-application",
+    "description": "TanStack React + Base UI + StyleX",
+    "theme_color": "#1860FA",
+    "background_color": "#271C1C",
     "start_url": "/?source=pwa",
     "id": "/?source=pwa",
     "icons": [

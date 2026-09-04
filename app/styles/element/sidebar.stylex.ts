@@ -92,13 +92,13 @@ export const sidebarStyles = stylex.create({
     paddingBottom: 0
   },
   logoIconWrap: {
-    width: '1.85rem',
-    height: '1.85rem',
-    borderRadius: radius.large,
+    width: '1.95rem',
+    height: '1.95rem',
+    borderRadius: radius.medium,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: colors.backgroundPrimary,
+    backgroundColor: colors.backgroundPrimary,
     flexShrink: 0
   },
   logoSvg: {

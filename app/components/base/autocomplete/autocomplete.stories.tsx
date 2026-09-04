@@ -26,9 +26,27 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
-const tags = ['feature', 'fix', 'bug', 'docs', 'internal', 'mobile', 'performance', 'refactor']
+const tags = [
+  'Expelliarmus',
+  'Expecto Patronum',
+  'Lumos',
+  'Alohomora',
+  'Accio',
+  'Wingardium Leviosa',
+  'Riddikulus',
+  'Obliviate'
+]
 
-const countries = ['Canada', 'France', 'Germany', 'Italy', 'Japan', 'Norway', 'Spain', 'Turkey']
+const countries = [
+  'Paris',
+  'Rome',
+  'Florence',
+  'Venice',
+  'Geneva',
+  'Cambridge',
+  'Boston',
+  'Seville'
+]
 
 export default meta
 
@@ -36,9 +54,9 @@ export const Playground: Story = {
   args: { items: tags },
   render: (args) => (
     <Autocomplete {...args}>
-      <AutocompleteInput placeholder='Search tags…' />
+      <AutocompleteInput placeholder='Search spells…' />
       <AutocompleteContent>
-        <AutocompleteEmpty>No tags found.</AutocompleteEmpty>
+        <AutocompleteEmpty>No spells found.</AutocompleteEmpty>
         <AutocompleteList>
           {(tag) => (
             <AutocompleteItem key={tag} value={tag}>
@@ -55,9 +73,9 @@ export const AutoHighlight: Story = {
   args: { items: countries, autoHighlight: true },
   render: (args) => (
     <Autocomplete {...args}>
-      <AutocompleteInput placeholder='Search countries…' />
+      <AutocompleteInput placeholder='Search cities…' />
       <AutocompleteContent>
-        <AutocompleteEmpty>No countries found.</AutocompleteEmpty>
+        <AutocompleteEmpty>No cities found.</AutocompleteEmpty>
         <AutocompleteList>
           {(country) => (
             <AutocompleteItem key={country} value={country}>

@@ -39,53 +39,55 @@ export const Playground: Story = {
   render: () => (
     <Menubar>
       <MenubarMenu>
-        <MenubarTrigger>File</MenubarTrigger>
+        <MenubarTrigger>Grimoire</MenubarTrigger>
         <MenubarContent>
           <MenubarItem>
-            New tab
+            New scroll
             <MenubarShortcut>⌘T</MenubarShortcut>
           </MenubarItem>
           <MenubarItem>
-            New window
+            New parchment
             <MenubarShortcut>⌘N</MenubarShortcut>
           </MenubarItem>
           <MenubarSeparator />
           <MenubarSub>
-            <MenubarSubTrigger>Share</MenubarSubTrigger>
+            <MenubarSubTrigger>Dispatch</MenubarSubTrigger>
             <MenubarSubContent>
-              <MenubarItem>Email link</MenubarItem>
-              <MenubarItem>Messages</MenubarItem>
+              <MenubarItem>Send by owl</MenubarItem>
+              <MenubarItem>Message Bezu Fache</MenubarItem>
             </MenubarSubContent>
           </MenubarSub>
           <MenubarSeparator />
           <MenubarItem>
-            Print…
+            Transcribe…
             <MenubarShortcut>⌘P</MenubarShortcut>
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger>Edit</MenubarTrigger>
+        <MenubarTrigger>Cryptex</MenubarTrigger>
         <MenubarContent>
           <MenubarItem>
-            Undo
+            Rotate dial left
             <MenubarShortcut>⌘Z</MenubarShortcut>
           </MenubarItem>
           <MenubarItem>
-            Redo
+            Rotate dial right
             <MenubarShortcut>⇧⌘Z</MenubarShortcut>
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger>View</MenubarTrigger>
+        <MenubarTrigger>Divination</MenubarTrigger>
         <MenubarContent>
-          <MenubarCheckboxItem defaultChecked>Always show bookmarks bar</MenubarCheckboxItem>
-          <MenubarCheckboxItem>Always show full URLs</MenubarCheckboxItem>
+          <MenubarCheckboxItem defaultChecked>
+            Always show the Marauder&apos;s Map bar
+          </MenubarCheckboxItem>
+          <MenubarCheckboxItem>Always show full incantations</MenubarCheckboxItem>
           <MenubarSeparator />
           <MenubarRadioGroup defaultValue='andy'>
-            <MenubarRadioItem value='andy'>Andy</MenubarRadioItem>
-            <MenubarRadioItem value='benoit'>Benoit</MenubarRadioItem>
+            <MenubarRadioItem value='andy'>Gryffindor</MenubarRadioItem>
+            <MenubarRadioItem value='benoit'>Slytherin</MenubarRadioItem>
           </MenubarRadioGroup>
         </MenubarContent>
       </MenubarMenu>
@@ -98,12 +100,14 @@ export const Checkbox: Story = {
   render: () => (
     <Menubar>
       <MenubarMenu>
-        <MenubarTrigger>View</MenubarTrigger>
+        <MenubarTrigger>Divination</MenubarTrigger>
         <MenubarContent>
-          <MenubarCheckboxItem defaultChecked>Always show bookmarks bar</MenubarCheckboxItem>
-          <MenubarCheckboxItem>Always show full URLs</MenubarCheckboxItem>
+          <MenubarCheckboxItem defaultChecked>
+            Always show the Marauder&apos;s Map bar
+          </MenubarCheckboxItem>
+          <MenubarCheckboxItem>Always show full incantations</MenubarCheckboxItem>
           <MenubarSeparator />
-          <MenubarCheckboxItem>Show tab preview</MenubarCheckboxItem>
+          <MenubarCheckboxItem>Show crystal ball preview</MenubarCheckboxItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
@@ -115,12 +119,12 @@ export const Radio: Story = {
   render: () => (
     <Menubar>
       <MenubarMenu>
-        <MenubarTrigger>Profiles</MenubarTrigger>
+        <MenubarTrigger>Ministry staff</MenubarTrigger>
         <MenubarContent>
           <MenubarRadioGroup defaultValue='andy'>
-            <MenubarRadioItem value='andy'>Andy</MenubarRadioItem>
-            <MenubarRadioItem value='benoit'>Benoit</MenubarRadioItem>
-            <MenubarRadioItem value='luis'>Luis</MenubarRadioItem>
+            <MenubarRadioItem value='andy'>Harry</MenubarRadioItem>
+            <MenubarRadioItem value='benoit'>Ron</MenubarRadioItem>
+            <MenubarRadioItem value='luis'>Hermione</MenubarRadioItem>
           </MenubarRadioGroup>
         </MenubarContent>
       </MenubarMenu>
@@ -132,16 +136,16 @@ export const Submenu: Story = {
   render: () => (
     <Menubar>
       <MenubarMenu>
-        <MenubarTrigger>File</MenubarTrigger>
+        <MenubarTrigger>Grimoire</MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>New tab</MenubarItem>
+          <MenubarItem>New scroll</MenubarItem>
           <MenubarSub>
-            <MenubarSubTrigger>Share</MenubarSubTrigger>
+            <MenubarSubTrigger>Dispatch</MenubarSubTrigger>
             <MenubarSubContent>
-              <MenubarItem>Email link</MenubarItem>
-              <MenubarItem>Messages</MenubarItem>
+              <MenubarItem>Send by owl</MenubarItem>
+              <MenubarItem>Message Bezu Fache</MenubarItem>
               <MenubarSeparator />
-              <MenubarItem>Copy link</MenubarItem>
+              <MenubarItem>Copy incantation</MenubarItem>
             </MenubarSubContent>
           </MenubarSub>
         </MenubarContent>

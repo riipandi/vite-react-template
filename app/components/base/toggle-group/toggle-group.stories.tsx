@@ -43,14 +43,14 @@ export const Playground: Story = {
   args: { defaultValue: ['bold'] },
   render: (args) => (
     <ToggleGroup {...args}>
-      <ToggleGroupItem value='bold' aria-label='Toggle bold'>
-        Bold
+      <ToggleGroupItem value='bold' aria-label='Toggle charm'>
+        Charm
       </ToggleGroupItem>
-      <ToggleGroupItem value='italic' aria-label='Toggle italic'>
-        Italic
+      <ToggleGroupItem value='italic' aria-label='Toggle hex'>
+        Hex
       </ToggleGroupItem>
-      <ToggleGroupItem value='underline' aria-label='Toggle underline'>
-        Underline
+      <ToggleGroupItem value='underline' aria-label='Toggle jinx'>
+        Jinx
       </ToggleGroupItem>
     </ToggleGroup>
   )
@@ -94,27 +94,27 @@ export const Sizes: Story = {
   render: () => (
     <div {...stylex.props(styles.col)}>
       <ToggleGroup size='sm' variant='outline' defaultValue={['bold']}>
-        <ToggleGroupItem value='bold' aria-label='Toggle bold'>
-          Bold
+        <ToggleGroupItem value='bold' aria-label='Toggle charm'>
+          Charm
         </ToggleGroupItem>
-        <ToggleGroupItem value='italic' aria-label='Toggle italic'>
-          Italic
+        <ToggleGroupItem value='italic' aria-label='Toggle hex'>
+          Hex
         </ToggleGroupItem>
       </ToggleGroup>
       <ToggleGroup size='md' variant='outline' defaultValue={['bold']}>
-        <ToggleGroupItem value='bold' aria-label='Toggle bold'>
-          Bold
+        <ToggleGroupItem value='bold' aria-label='Toggle charm'>
+          Charm
         </ToggleGroupItem>
-        <ToggleGroupItem value='italic' aria-label='Toggle italic'>
-          Italic
+        <ToggleGroupItem value='italic' aria-label='Toggle hex'>
+          Hex
         </ToggleGroupItem>
       </ToggleGroup>
       <ToggleGroup size='lg' variant='outline' defaultValue={['bold']}>
-        <ToggleGroupItem value='bold' aria-label='Toggle bold'>
-          Bold
+        <ToggleGroupItem value='bold' aria-label='Toggle charm'>
+          Charm
         </ToggleGroupItem>
-        <ToggleGroupItem value='italic' aria-label='Toggle italic'>
-          Italic
+        <ToggleGroupItem value='italic' aria-label='Toggle hex'>
+          Hex
         </ToggleGroupItem>
       </ToggleGroup>
     </div>
@@ -147,14 +147,14 @@ export const Disabled: Story = {
   args: { disabled: true, variant: 'outline', defaultValue: ['bold'] },
   render: (args) => (
     <ToggleGroup {...args}>
-      <ToggleGroupItem value='bold' aria-label='Toggle bold'>
-        Bold
+      <ToggleGroupItem value='bold' aria-label='Toggle charm'>
+        Charm
       </ToggleGroupItem>
-      <ToggleGroupItem value='italic' aria-label='Toggle italic'>
-        Italic
+      <ToggleGroupItem value='italic' aria-label='Toggle hex'>
+        Hex
       </ToggleGroupItem>
-      <ToggleGroupItem value='underline' aria-label='Toggle underline'>
-        Underline
+      <ToggleGroupItem value='underline' aria-label='Toggle jinx'>
+        Jinx
       </ToggleGroupItem>
     </ToggleGroup>
   )

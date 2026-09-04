@@ -38,7 +38,7 @@ export default meta
 
 export const Playground: Story = {
   render: () => (
-    <Toggle aria-label='Toggle bold'>
+    <Toggle aria-label='Toggle charm'>
       <BoldIcon {...stylex.props(styles.icon)} />
     </Toggle>
   )
@@ -47,8 +47,8 @@ export const Playground: Story = {
 export const Outline: Story = {
   args: { variant: 'outline' },
   render: (args) => (
-    <Toggle {...args} aria-label='Toggle italic'>
-      Italic
+    <Toggle {...args} aria-label='Toggle hex'>
+      Hex
     </Toggle>
   )
 }
@@ -56,9 +56,9 @@ export const Outline: Story = {
 export const WithText: Story = {
   name: 'With text',
   render: () => (
-    <Toggle aria-label='Toggle italic'>
+    <Toggle aria-label='Toggle hex'>
       <ItalicIcon {...stylex.props(styles.icon)} />
-      Italic
+      Hex
     </Toggle>
   )
 }
@@ -66,14 +66,14 @@ export const WithText: Story = {
 export const Sizes: Story = {
   render: () => (
     <div {...stylex.props(styles.row)}>
-      <Toggle size='sm' aria-label='Toggle small'>
-        Small
+      <Toggle size='sm' aria-label='Toggle imp'>
+        Imp
       </Toggle>
-      <Toggle size='md' aria-label='Toggle medium'>
-        Medium
+      <Toggle size='md' aria-label='Toggle wizard'>
+        Wizard
       </Toggle>
-      <Toggle size='lg' aria-label='Toggle large'>
-        Large
+      <Toggle size='lg' aria-label='Toggle giant'>
+        Giant
       </Toggle>
     </div>
   )
@@ -82,8 +82,8 @@ export const Sizes: Story = {
 export const Disabled: Story = {
   args: { disabled: true },
   render: (args) => (
-    <Toggle {...args} aria-label='Toggle bold'>
-      Bold
+    <Toggle {...args} aria-label='Toggle charm'>
+      Charm
     </Toggle>
   )
 }

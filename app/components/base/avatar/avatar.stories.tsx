@@ -39,8 +39,8 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <Avatar>
-      <AvatarImage src='https://github.com/madeui.png' alt='@madeui' />
-      <AvatarFallback>MD</AvatarFallback>
+      <AvatarImage src='https://github.com/madeui.png' alt='@harry.potter' />
+      <AvatarFallback>HP</AvatarFallback>
     </Avatar>
   )
 }
@@ -56,13 +56,13 @@ export const Sizes: Story = {
       )}
     >
       <Avatar size='sm'>
-        <AvatarFallback>SM</AvatarFallback>
+        <AvatarFallback>HP</AvatarFallback>
       </Avatar>
       <Avatar size='md'>
-        <AvatarFallback>MD</AvatarFallback>
+        <AvatarFallback>RW</AvatarFallback>
       </Avatar>
       <Avatar size='lg'>
-        <AvatarFallback>LG</AvatarFallback>
+        <AvatarFallback>HG</AvatarFallback>
       </Avatar>
     </div>
   )
@@ -71,8 +71,8 @@ export const Sizes: Story = {
 export const Fallback: Story = {
   render: () => (
     <Avatar>
-      <AvatarImage src='https://example.com/broken.png' alt='Broken' />
-      <AvatarFallback>UI</AvatarFallback>
+      <AvatarImage src='https://example.com/broken.png' alt='Vanished portrait' />
+      <AvatarFallback>GH</AvatarFallback>
     </Avatar>
   )
 }
@@ -81,13 +81,13 @@ export const Badge: Story = {
   render: () => (
     <div {...stylex.props(atoms.display.flex, atoms.gap['24px'])}>
       <Avatar>
-        <AvatarImage src='https://github.com/madeui.png' alt='@madeui' />
-        <AvatarFallback>MD</AvatarFallback>
+        <AvatarImage src='https://github.com/madeui.png' alt='@luna.lovegood' />
+        <AvatarFallback>LL</AvatarFallback>
         <AvatarBadge />
       </Avatar>
       <Avatar>
-        <AvatarImage src='https://github.com/github.png' alt='@github' />
-        <AvatarFallback>GH</AvatarFallback>
+        <AvatarImage src='https://github.com/github.png' alt='@hermione.granger' />
+        <AvatarFallback>HG</AvatarFallback>
         <AvatarBadge>
           <CheckIcon {...stylex.props(styles.badgeIcon)} />
         </AvatarBadge>
@@ -100,16 +100,16 @@ export const Group: Story = {
   render: () => (
     <AvatarGroup>
       <Avatar>
-        <AvatarImage src='https://github.com/madeui.png' alt='@madeui' />
-        <AvatarFallback>MD</AvatarFallback>
+        <AvatarImage src='https://github.com/madeui.png' alt='@harry.potter' />
+        <AvatarFallback>HP</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage src='https://github.com/github.png' alt='@github' />
-        <AvatarFallback>GH</AvatarFallback>
+        <AvatarImage src='https://github.com/github.png' alt='@ron.weasley' />
+        <AvatarFallback>RW</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage src='https://github.com/vercel.png' alt='@vercel' />
-        <AvatarFallback>VC</AvatarFallback>
+        <AvatarImage src='https://github.com/vercel.png' alt='@hermione.granger' />
+        <AvatarFallback>HG</AvatarFallback>
       </Avatar>
     </AvatarGroup>
   )
@@ -119,12 +119,12 @@ export const GroupCount: Story = {
   render: () => (
     <AvatarGroup>
       <Avatar>
-        <AvatarImage src='https://github.com/madeui.png' alt='@madeui' />
-        <AvatarFallback>MD</AvatarFallback>
+        <AvatarImage src='https://github.com/madeui.png' alt='@harry.potter' />
+        <AvatarFallback>HP</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarImage src='https://github.com/github.png' alt='@github' />
-        <AvatarFallback>GH</AvatarFallback>
+        <AvatarImage src='https://github.com/github.png' alt='@ron.weasley' />
+        <AvatarFallback>RW</AvatarFallback>
       </Avatar>
       <AvatarGroupCount>+3</AvatarGroupCount>
     </AvatarGroup>

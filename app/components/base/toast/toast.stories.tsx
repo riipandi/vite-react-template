@@ -46,13 +46,13 @@ function DurationButton() {
       variant='outline'
       onClick={() =>
         toastApi.add({
-          title: 'Sticky toast',
-          description: 'Stays for 10 seconds.',
+          title: 'Pinned Howler',
+          description: 'Howls for 10 seconds.',
           timeout: 10000
         })
       }
     >
-      Show sticky toast
+      Show pinned Howler
     </Button>
   )
 }
@@ -65,12 +65,12 @@ export const Playground: Story = {
       <Button
         variant='outline'
         onClick={() =>
-          toast('Scheduled: Catch up', {
-            description: 'Friday, February 10 at 5:57 PM'
+          toast('Scheduled: Hogsmeade trip', {
+            description: 'Departure from Platform 9¾ at 11:00 AM'
           })
         }
       >
-        Show toast
+        Show Ministry notice
       </Button>
       <Toaster />
     </ToastProvider>
@@ -85,13 +85,13 @@ export const ToastPromise: Story = {
         variant='outline'
         onClick={() =>
           toast.promise(save(), {
-            loading: 'Saving…',
-            success: 'Changes saved',
-            error: 'Could not save'
+            loading: 'Sealing the cryptex…',
+            success: 'Cryptex sealed',
+            error: 'The cryptex jammed'
           })
         }
       >
-        Save with toast.promise
+        Seal the cryptex
       </Button>
       <Toaster />
     </ToastProvider>
@@ -113,16 +113,18 @@ export const Types: Story = {
       <div {...stylex.props(styles.row)}>
         <Button
           variant='outline'
-          onClick={() => toast('Event created', { description: 'Team sync at 3 PM.' })}
+          onClick={() => toast('Spell cast', { description: 'D.A. meeting at 3 PM.' })}
         >
           Default
         </Button>
-        <Button variant='outline' onClick={() => toast.success('Changes saved')}>
+        <Button variant='outline' onClick={() => toast.success('Vault updated at Gringotts')}>
           Success
         </Button>
         <Button
           variant='outline'
-          onClick={() => toast.error('Could not save', { description: 'Try again.' })}
+          onClick={() =>
+            toast.error('Alohomora failed', { description: 'The door is still locked.' })
+          }
         >
           Error
         </Button>
@@ -138,15 +140,15 @@ export const Action: Story = {
       <Button
         variant='outline'
         onClick={() =>
-          toast('Message archived', {
+          toast('Howler silenced', {
             actionProps: {
-              children: 'Undo',
-              onClick: () => toast('Message restored')
+              children: 'Rewind',
+              onClick: () => toast('Howler restored')
             }
           })
         }
       >
-        Archive message
+        Silence a Howler
       </Button>
       <Toaster />
     </ToastProvider>
@@ -156,8 +158,8 @@ export const Action: Story = {
 export const Position: Story = {
   render: () => (
     <ToastProvider>
-      <Button variant='outline' onClick={() => toast('Synced to top left')}>
-        Show toast
+      <Button variant='outline' onClick={() => toast("Owl delivered to the Headmaster's tower")}>
+        Show owl delivery
       </Button>
       <Toaster style={styles.topLeft} />
     </ToastProvider>

@@ -60,9 +60,9 @@ export const InTooltip: Story = {
   render: () => (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger render={<Button variant='outline' />}>Save</TooltipTrigger>
+        <TooltipTrigger render={<Button variant='outline' />}>Alohomora</TooltipTrigger>
         <TooltipContent style={styles.content}>
-          Save <Kbd style={styles.kbd}>⌘S</Kbd>
+          Alohomora <Kbd style={styles.kbd}>⌘S</Kbd>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -73,7 +73,7 @@ export const InButton: Story = {
   name: 'In a button',
   render: () => (
     <Button variant='outline'>
-      Save
+      Lumos
       <KbdGroup>
         <Kbd>⌘</Kbd>
         <Kbd>S</Kbd>

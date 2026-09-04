@@ -46,8 +46,8 @@ export const Playground: Story = {
   render: () => (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger render={<Button variant='outline' />}>Hover me</TooltipTrigger>
-        <TooltipContent>Add to library</TooltipContent>
+        <TooltipTrigger render={<Button variant='outline' />}>Lumos</TooltipTrigger>
+        <TooltipContent>Add to the Restricted Section</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   )
@@ -61,7 +61,7 @@ export const Sides: Story = {
         {sides.map((side) => (
           <Tooltip key={side}>
             <TooltipTrigger render={<Button variant='outline' />}>{side}</TooltipTrigger>
-            <TooltipContent side={side}>Tooltip on {side}</TooltipContent>
+            <TooltipContent side={side}>Reveals the {side} of the map</TooltipContent>
           </Tooltip>
         ))}
       </div>
@@ -77,10 +77,10 @@ export const DisabledButton: Story = {
       <Tooltip>
         <TooltipTrigger render={<span {...stylex.props(styles.trigger)} />}>
           <Button variant='outline' disabled>
-            Submit
+            Alohomora
           </Button>
         </TooltipTrigger>
-        <TooltipContent>Complete the form to submit</TooltipContent>
+        <TooltipContent>Speak the riddle to unlock the door</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   )

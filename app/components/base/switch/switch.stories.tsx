@@ -54,7 +54,7 @@ export const Playground: Story = {
   args: { defaultChecked: true },
   render: (args) => (
     <label {...stylex.props(styles.label)}>
-      <Switch {...args} aria-label='Airplane mode' /> Airplane mode
+      <Switch {...args} aria-label='Invisibility Cloak' /> Invisibility Cloak
     </label>
   )
 }
@@ -64,11 +64,11 @@ export const Sizes: Story = {
     <div {...stylex.props(styles.row)}>
       <Label>
         <Switch size='sm' defaultChecked />
-        Small
+        House-elf
       </Label>
       <Label>
         <Switch defaultChecked />
-        Medium
+        Half-giant
       </Label>
     </div>
   )
@@ -78,8 +78,8 @@ export const Description: Story = {
   render: () => (
     <Field orientation='horizontal'>
       <FieldContent>
-        <FieldLabel htmlFor='switch-description-marketing'>Marketing emails</FieldLabel>
-        <FieldDescription>Receive emails about new products and features.</FieldDescription>
+        <FieldLabel htmlFor='switch-description-marketing'>Owl post from Gringotts</FieldLabel>
+        <FieldDescription>Receive Daily Prophet updates about new vault services.</FieldDescription>
       </FieldContent>
       <Switch id='switch-description-marketing' />
     </Field>
@@ -98,8 +98,8 @@ export const Invalid: Story = {
   render: () => (
     <Field orientation='horizontal' invalid>
       <FieldContent>
-        <FieldLabel htmlFor='switch-invalid-two-factor'>Two-factor authentication</FieldLabel>
-        <FieldError>Two-factor authentication is required.</FieldError>
+        <FieldLabel htmlFor='switch-invalid-two-factor'>Gringotts security charms</FieldLabel>
+        <FieldError>A security charm is required to enter your vault.</FieldError>
       </FieldContent>
       <Switch id='switch-invalid-two-factor' />
     </Field>

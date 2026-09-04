@@ -39,9 +39,9 @@ const meta = {
 type Story = StoryObj<typeof meta>
 
 const activity = [
-  { title: 'Deploy succeeded', description: 'Production · 2 minutes ago' },
-  { title: 'New comment', description: 'On issue #482 · 1 hour ago' },
-  { title: 'Build failed', description: 'staging branch · yesterday' }
+  { title: 'Patronus received', description: "Headmaster's office · 2 minutes ago" },
+  { title: 'Howler received', description: 'On essay #482 · 1 hour ago' },
+  { title: 'Polyjuice failed', description: "Moody's flask · yesterday" }
 ]
 
 const styles = stylex.create({
@@ -59,8 +59,8 @@ export const Playground: Story = {
     <ItemGroup style={styles.group}>
       <Item variant='outline'>
         <ItemContent>
-          <ItemTitle>Two-factor authentication</ItemTitle>
-          <ItemDescription>Add an extra layer of security to your account.</ItemDescription>
+          <ItemTitle>Protego Totalum</ItemTitle>
+          <ItemDescription>Add an extra layer of protection to the Burrow.</ItemDescription>
         </ItemContent>
         <ItemActions>
           <Switch defaultChecked />
@@ -71,12 +71,12 @@ export const Playground: Story = {
           <InfoIcon {...stylex.props(styles.icon)} />
         </ItemMedia>
         <ItemContent>
-          <ItemTitle>Update available</ItemTitle>
-          <ItemDescription>Version 2.4 is ready to install.</ItemDescription>
+          <ItemTitle>Broom in stock</ItemTitle>
+          <ItemDescription>Nimbus 2.4 is ready to order.</ItemDescription>
         </ItemContent>
         <ItemActions>
           <Button variant='outline' size='sm'>
-            Install
+            Order
           </Button>
         </ItemActions>
       </Item>
@@ -89,20 +89,20 @@ export const Variants: Story = {
     <ItemGroup style={styles.group}>
       <Item variant='default'>
         <ItemContent>
-          <ItemTitle>Default</ItemTitle>
-          <ItemDescription>A borderless row.</ItemDescription>
+          <ItemTitle>Madam Malkin's robes</ItemTitle>
+          <ItemDescription>Standard fit, no embellishments.</ItemDescription>
         </ItemContent>
       </Item>
       <Item variant='outline'>
         <ItemContent>
-          <ItemTitle>Outline</ItemTitle>
-          <ItemDescription>A bordered row.</ItemDescription>
+          <ItemTitle>Quidditch robes</ItemTitle>
+          <ItemDescription>House colours with a bold border.</ItemDescription>
         </ItemContent>
       </Item>
       <Item variant='muted'>
         <ItemContent>
-          <ItemTitle>Muted</ItemTitle>
-          <ItemDescription>A tinted background row.</ItemDescription>
+          <ItemTitle>Dress robes</ItemTitle>
+          <ItemDescription>Soft tones for the Yule Ball.</ItemDescription>
         </ItemContent>
       </Item>
     </ItemGroup>
@@ -114,17 +114,17 @@ export const Sizes: Story = {
     <ItemGroup style={styles.group}>
       <Item variant='outline' size='xs'>
         <ItemContent>
-          <ItemTitle>Extra small</ItemTitle>
+          <ItemTitle>House-elf size</ItemTitle>
         </ItemContent>
       </Item>
       <Item variant='outline' size='sm'>
         <ItemContent>
-          <ItemTitle>Small</ItemTitle>
+          <ItemTitle>First-year size</ItemTitle>
         </ItemContent>
       </Item>
       <Item variant='outline' size='md'>
         <ItemContent>
-          <ItemTitle>Medium</ItemTitle>
+          <ItemTitle>Hagrid size</ItemTitle>
         </ItemContent>
       </Item>
     </ItemGroup>
@@ -138,13 +138,13 @@ export const WithAvatar: Story = {
       <Item variant='outline'>
         <ItemMedia>
           <Avatar>
-            <AvatarImage src='https://github.com/madeui.png' alt='@madeui' />
-            <AvatarFallback>MD</AvatarFallback>
+            <AvatarImage src='https://github.com/madeui.png' alt='Luna Lovegood' />
+            <AvatarFallback>LL</AvatarFallback>
           </Avatar>
         </ItemMedia>
         <ItemContent>
-          <ItemTitle>madeui</ItemTitle>
-          <ItemDescription>Left a comment on your pull request.</ItemDescription>
+          <ItemTitle>Luna Lovegood</ItemTitle>
+          <ItemDescription>Left a note in your Advanced Potion-Making.</ItemDescription>
         </ItemContent>
       </Item>
     </ItemGroup>
@@ -178,8 +178,8 @@ export const Link: Story = {
         <HouseIcon {...stylex.props(styles.icon)} />
       </ItemMedia>
       <ItemContent>
-        <ItemTitle>Dashboard</ItemTitle>
-        <ItemDescription>Overview of your account and activity.</ItemDescription>
+        <ItemTitle>Marauder's Map</ItemTitle>
+        <ItemDescription>Every corridor of Hogwarts, live on parchment.</ItemDescription>
       </ItemContent>
     </Item>
   )

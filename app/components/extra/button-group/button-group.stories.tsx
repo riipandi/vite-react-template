@@ -40,9 +40,9 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <ButtonGroup>
-      <Button variant='outline'>Archive</Button>
-      <Button variant='outline'>Report</Button>
-      <Button variant='outline'>Snooze</Button>
+      <Button variant='outline'>Expelliarmus</Button>
+      <Button variant='outline'>Petrificus Totalus</Button>
+      <Button variant='outline'>Stupefy</Button>
     </ButtonGroup>
   )
 }
@@ -51,9 +51,9 @@ export const Orientation: Story = {
   args: { orientation: 'vertical' },
   render: (args) => (
     <ButtonGroup {...args}>
-      <Button variant='outline'>Archive</Button>
-      <Button variant='outline'>Report</Button>
-      <Button variant='outline'>Snooze</Button>
+      <Button variant='outline'>Accio</Button>
+      <Button variant='outline'>Alohomora</Button>
+      <Button variant='outline'>Lumos</Button>
     </ButtonGroup>
   )
 }
@@ -64,14 +64,14 @@ export const Split: Story = {
     // The trigger's `render` swaps it for a Button — ButtonGroup then fuses both
     // the primary action and the trigger into one segmented control.
     <ButtonGroup>
-      <Button>Deploy</Button>
+      <Button>Apparate</Button>
       <DropdownMenu>
-        <DropdownMenuTrigger render={<Button size='icon' aria-label='More deploy options' />}>
+        <DropdownMenuTrigger render={<Button size='icon' aria-label='More apparition options' />}>
           <ChevronDownIcon {...stylex.props(styles.icon)} />
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end'>
-          <DropdownMenuItem>Deploy to staging</DropdownMenuItem>
-          <DropdownMenuItem>Roll back last deploy</DropdownMenuItem>
+          <DropdownMenuItem>Apparate to Hogsmeade</DropdownMenuItem>
+          <DropdownMenuItem>Return to Hogwarts</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </ButtonGroup>
@@ -81,10 +81,10 @@ export const Split: Story = {
 export const Text: Story = {
   render: () => (
     <ButtonGroup>
-      <ButtonGroupText>Filter</ButtonGroupText>
+      <ButtonGroupText>House</ButtonGroupText>
       <ButtonGroupSeparator />
-      <Button variant='outline'>Open</Button>
-      <Button variant='outline'>Closed</Button>
+      <Button variant='outline'>Gryffindor</Button>
+      <Button variant='outline'>Slytherin</Button>
       <Button variant='outline'>All</Button>
     </ButtonGroup>
   )
@@ -94,8 +94,8 @@ export const WithInput: Story = {
   name: 'Input',
   render: () => (
     <ButtonGroup>
-      <Input type='email' placeholder='Email address' />
-      <Button variant='outline'>Subscribe</Button>
+      <Input type='email' placeholder='Owl address' />
+      <Button variant='outline'>Join the Order</Button>
     </ButtonGroup>
   )
 }

@@ -58,15 +58,15 @@ export const Playground: Story = {
   args: {
     icon: MicIcon,
     completed: false,
-    completedText: 'Recorded audio',
-    children: 'Recording audio'
+    completedText: 'Quill notes saved',
+    children: 'Transcribing with the Quick-Quotes Quill'
   },
   render: (args) => <LoaderText {...args} />
 }
 
 export const WithoutIcon: Story = {
   name: 'Text only',
-  args: { children: 'Inspecting code' },
+  args: { children: 'Deciphering the cryptex' },
   render: (args) => <LoaderText {...args} />
 }
 
@@ -76,9 +76,9 @@ export const Completed: Story = {
 
     return (
       <div {...stylex.props(styles.stack)}>
-        <LoaderText completed>Inspected 5 files</LoaderText>
-        <LoaderText icon={MicIcon} completed={completed} completedText='Recorded audio'>
-          Recording audio
+        <LoaderText completed>Deciphered 5 symbols</LoaderText>
+        <LoaderText icon={MicIcon} completed={completed} completedText='Quill notes saved'>
+          Transcribing with the Quick-Quotes Quill
         </LoaderText>
         <div>
           <Button variant='outline' size='sm' onClick={() => setCompleted((value) => !value)}>
@@ -100,14 +100,14 @@ export const Sequence: Story = {
         atoms.width('100%')
       )}
     >
-      <LoaderText icon={FileTextIcon} completed completedText='Read 3 files'>
-        Reading files
+      <LoaderText icon={FileTextIcon} completed completedText='Read 3 articles'>
+        Reading the Daily Prophet archive
       </LoaderText>
-      <LoaderText icon={SearchIcon} completedText='Searched 128 files'>
-        Searching the codebase
+      <LoaderText icon={SearchIcon} completedText='Searched 128 footprints'>
+        Consulting the Marauder&apos;s Map
       </LoaderText>
-      <LoaderText icon={SparklesIcon} completedText='Draft ready'>
-        Drafting a response
+      <LoaderText icon={SparklesIcon} completedText='Lecture notes ready'>
+        Drafting the symbology lecture
       </LoaderText>
     </div>
   )

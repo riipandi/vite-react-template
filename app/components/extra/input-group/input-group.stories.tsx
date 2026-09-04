@@ -52,12 +52,12 @@ export const Playground: Story = {
         <InputGroupAddon>
           <InputGroupText>https://</InputGroupText>
         </InputGroupAddon>
-        <InputGroupInput placeholder='example.com' />
+        <InputGroupInput placeholder='dailyprophet.co.uk' />
       </InputGroup>
       <InputGroup>
-        <InputGroupInput placeholder='Search…' />
+        <InputGroupInput placeholder='Search spells…' />
         <InputGroupAddon align='inline-end'>
-          <InputGroupButton>Go</InputGroupButton>
+          <InputGroupButton>Accio</InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
     </div>
@@ -70,7 +70,7 @@ export const Icon: Story = {
       <InputGroupAddon>
         <SearchIcon {...stylex.props(styles.icon)} />
       </InputGroupAddon>
-      <InputGroupInput placeholder='Search…' />
+      <InputGroupInput placeholder='Search the Restricted Section…' />
     </InputGroup>
   )
 }
@@ -78,9 +78,9 @@ export const Icon: Story = {
 export const Button: Story = {
   render: () => (
     <InputGroup style={styles.group}>
-      <InputGroupInput readOnly defaultValue='https://useblume.dev/i/8f3c1' />
+      <InputGroupInput readOnly defaultValue='https://dailyprophet.co.uk/howlers' />
       <InputGroupAddon align='inline-end'>
-        <InputGroupButton aria-label='Copy link'>
+        <InputGroupButton aria-label='Copy howler address'>
           <CopyIcon {...stylex.props(styles.icon)} />
         </InputGroupButton>
       </InputGroupAddon>
@@ -92,7 +92,7 @@ export const WithKbd: Story = {
   name: 'Kbd',
   render: () => (
     <InputGroup style={styles.group}>
-      <InputGroupInput placeholder='Search the docs…' />
+      <InputGroupInput placeholder='Search the restricted stacks…' />
       <InputGroupAddon align='inline-end'>
         <Kbd>⌘K</Kbd>
       </InputGroupAddon>
@@ -104,7 +104,7 @@ export const WithSpinner: Story = {
   name: 'Spinner',
   render: () => (
     <InputGroup style={styles.group}>
-      <InputGroupInput placeholder='Enter a username' defaultValue='useblume' />
+      <InputGroupInput placeholder='Enter an auror codename' defaultValue='mad-eye' />
       <InputGroupAddon align='inline-end'>
         <Spinner />
       </InputGroupAddon>
@@ -115,10 +115,10 @@ export const WithSpinner: Story = {
 export const Textarea: Story = {
   render: () => (
     <InputGroup style={styles.group}>
-      <InputGroupTextarea placeholder='Type your message…' rows={3} />
+      <InputGroupTextarea placeholder='Write to Sirius…' rows={3} />
       <InputGroupAddon align='block-end'>
         <InputGroupButton variant='outline' size='xs'>
-          Send
+          Send owl
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>

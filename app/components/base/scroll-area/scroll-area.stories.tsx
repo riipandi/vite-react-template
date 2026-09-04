@@ -30,15 +30,15 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
-const tags = Array.from({ length: 50 }, (_, i) => `v1.2.0-beta.${50 - i}`)
+const tags = Array.from({ length: 50 }, (_, i) => `Daily Prophet edition ${50 - i}`)
 
 const artworks = [
-  { title: 'Ocean Horizon', artist: 'Reyes' },
-  { title: 'Desert Bloom', artist: 'Okafor' },
-  { title: 'City Lights', artist: 'Petrova' },
-  { title: 'Quiet Forest', artist: 'Lindgren' },
-  { title: 'Northern Sky', artist: 'Haruki' },
-  { title: 'Red Canyon', artist: 'Alvarez' }
+  { title: 'The Mona Lisa', artist: 'Jacques Saunière' },
+  { title: 'The Vitruvian Man', artist: 'Robert Langdon' },
+  { title: 'The Last Supper Cipher', artist: 'Silas' },
+  { title: 'Portrait of Hogwarts', artist: 'Luna Lovegood' },
+  { title: "Marauder's Map", artist: 'Sirius Black' },
+  { title: 'The Golden Snitch', artist: 'Dobby' }
 ]
 
 const styles = stylex.create({
@@ -106,7 +106,7 @@ export const Playground: Story = {
   render: () => (
     <ScrollArea style={styles.root}>
       <div {...stylex.props(styles.inner)}>
-        <h4 {...stylex.props(styles.heading)}>Tags</h4>
+        <h4 {...stylex.props(styles.heading)}>Daily Prophet editions</h4>
         {tags.map((tag) => (
           <React.Fragment key={tag}>
             <div {...stylex.props(styles.tag)}>{tag}</div>

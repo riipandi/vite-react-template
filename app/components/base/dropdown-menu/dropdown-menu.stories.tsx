@@ -40,16 +40,16 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Open menu</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline' />}>Open the menu</DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <DropdownMenuLabel>My account</DropdownMenuLabel>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuLabel>Gringotts</DropdownMenuLabel>
+          <DropdownMenuItem>Vault holder</DropdownMenuItem>
+          <DropdownMenuItem>Galleon balance</DropdownMenuItem>
+          <DropdownMenuItem>Vault settings</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Log out</DropdownMenuItem>
+        <DropdownMenuItem>Disapparate</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
@@ -59,12 +59,12 @@ export const DisabledItem: Story = {
   name: 'Disabled item',
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Actions</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline' />}>Spells</DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <DropdownMenuItem>Duplicate</DropdownMenuItem>
-          <DropdownMenuItem disabled>Archive (coming soon)</DropdownMenuItem>
-          <DropdownMenuItem>Delete</DropdownMenuItem>
+          <DropdownMenuItem>Gemino</DropdownMenuItem>
+          <DropdownMenuItem disabled>Archive (Ministry pending)</DropdownMenuItem>
+          <DropdownMenuItem>Evanesco</DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -75,20 +75,20 @@ export const Checkboxes: Story = {
   name: 'Checkbox and radio items',
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>View options</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline' />}>Map options</DropdownMenuTrigger>
       <DropdownMenuContent>
         {/* Menu labels are Base UI GroupLabels — they must live inside a
             Group or RadioGroup. */}
         <DropdownMenuGroup>
-          <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-          <DropdownMenuCheckboxItem defaultChecked>Status bar</DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem>Activity bar</DropdownMenuCheckboxItem>
+          <DropdownMenuLabel>Enchantments</DropdownMenuLabel>
+          <DropdownMenuCheckboxItem defaultChecked>Show whispers</DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem>Show traces</DropdownMenuCheckboxItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup defaultValue='bottom'>
-          <DropdownMenuLabel>Panel position</DropdownMenuLabel>
-          <DropdownMenuRadioItem value='top'>Top</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value='bottom'>Bottom</DropdownMenuRadioItem>
+          <DropdownMenuLabel>Map position</DropdownMenuLabel>
+          <DropdownMenuRadioItem value='top'>Ceiling</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value='bottom'>Floor</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -99,16 +99,18 @@ export const RadioGroup: Story = {
   name: 'Radio group',
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Text size</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline' />}>
+        Incantation size
+      </DropdownMenuTrigger>
       <DropdownMenuContent>
         {/* Menu labels are Base UI GroupLabels — they must live inside a
             Group or RadioGroup. */}
         <DropdownMenuRadioGroup defaultValue='md'>
-          <DropdownMenuLabel>Font size</DropdownMenuLabel>
+          <DropdownMenuLabel>Scroll size</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuRadioItem value='sm'>Small</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value='md'>Medium</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value='lg'>Large</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value='sm'>Imp</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value='md'>Wizard</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value='lg'>Giant</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -118,23 +120,25 @@ export const RadioGroup: Story = {
 export const Shortcuts: Story = {
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Edit</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline' />}>
+        Edit the Prophet
+      </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>
-          Cut
+          Sever
           <DropdownMenuShortcut>⌘X</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          Copy
+          Gemino
           <DropdownMenuShortcut>⌘C</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          Paste
+          Reparo
           <DropdownMenuShortcut>⌘V</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          Select all
+          Select every scroll
           <DropdownMenuShortcut>⌘A</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -145,12 +149,14 @@ export const Shortcuts: Story = {
 export const Destructive: Story = {
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Post options</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline' />}>
+        Prophet article options
+      </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Duplicate</DropdownMenuItem>
+        <DropdownMenuItem>Revise</DropdownMenuItem>
+        <DropdownMenuItem>Gemino</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant='destructive'>Delete</DropdownMenuItem>
+        <DropdownMenuItem variant='destructive'>Evanesco</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
@@ -160,22 +166,22 @@ export const Submenu: Story = {
   name: 'Submenu, shortcuts, destructive',
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant='outline' />}>Actions</DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant='outline' />}>Quill actions</DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>
-          New file
+          New article
           <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>Send by Owl</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
-            <DropdownMenuItem>Email link</DropdownMenuItem>
-            <DropdownMenuItem>Copy link</DropdownMenuItem>
+            <DropdownMenuItem>Email the Prophet</DropdownMenuItem>
+            <DropdownMenuItem>Gemino the link</DropdownMenuItem>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuItem variant='destructive'>
-          Delete
+          Evanesco
           <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>

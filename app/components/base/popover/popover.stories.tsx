@@ -56,12 +56,12 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' />}>Open popover</PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' />}>Summon popover</PopoverTrigger>
       <PopoverContent>
         <div {...stylex.props(styles.form)}>
-          <strong {...stylex.props(styles.heading)}>Dimensions</strong>
-          <Input placeholder='Width' defaultValue='100%' />
-          <Input placeholder='Height' defaultValue='25px' />
+          <strong {...stylex.props(styles.heading)}>Cryptex settings</strong>
+          <Input placeholder='First dial' defaultValue='100%' />
+          <Input placeholder='Second dial' defaultValue='25px' />
         </div>
       </PopoverContent>
     </Popover>
@@ -71,9 +71,9 @@ export const Playground: Story = {
 export const Placement: Story = {
   render: () => (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' />}>Open above</PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' />}>Levitate above</PopoverTrigger>
       <PopoverContent side='top' align='start'>
-        Anchored to the top-start of the trigger.
+        Wingardium Leviosa — hovering above the trigger.
       </PopoverContent>
     </Popover>
   )
@@ -83,11 +83,11 @@ export const Parts: Story = {
   name: 'Header, title, description',
   render: () => (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' />}>Open popover</PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' />}>Summon popover</PopoverTrigger>
       <PopoverContent>
         <PopoverHeader>
-          <PopoverTitle>Dimensions</PopoverTitle>
-          <PopoverDescription>Set the dimensions for the layer.</PopoverDescription>
+          <PopoverTitle>Cryptex settings</PopoverTitle>
+          <PopoverDescription>Dial the letters to crack the vault seal.</PopoverDescription>
         </PopoverHeader>
       </PopoverContent>
     </Popover>
@@ -98,23 +98,23 @@ export const Form: Story = {
   name: 'With form',
   render: () => (
     <Popover>
-      <PopoverTrigger render={<Button variant='outline' />}>Edit profile</PopoverTrigger>
+      <PopoverTrigger render={<Button variant='outline' />}>Edit vault permit</PopoverTrigger>
       <PopoverContent>
         <PopoverHeader>
-          <PopoverTitle>Edit profile</PopoverTitle>
-          <PopoverDescription>Update your display name and handle.</PopoverDescription>
+          <PopoverTitle>Edit vault permit</PopoverTitle>
+          <PopoverDescription>Update the name engraved on your Gringotts key.</PopoverDescription>
         </PopoverHeader>
         <form {...stylex.props(styles.formCol)}>
           <Field>
-            <FieldLabel htmlFor='popover-form-name'>Name</FieldLabel>
-            <Input id='popover-form-name' defaultValue='Evil Rabbit' />
+            <FieldLabel htmlFor='popover-form-name'>Account holder</FieldLabel>
+            <Input id='popover-form-name' defaultValue='Hermione Granger' />
           </Field>
           <Field>
             <FieldLabel htmlFor='popover-form-handle'>Handle</FieldLabel>
-            <Input id='popover-form-handle' defaultValue='@evilrabbit' />
+            <Input id='popover-form-handle' defaultValue='@brightestwitch' />
           </Field>
           <Button type='submit' size='sm'>
-            Save
+            Save permit
           </Button>
         </form>
       </PopoverContent>

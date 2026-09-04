@@ -39,24 +39,24 @@ const meta = {
 type Story = StoryObj<typeof meta>
 
 const invoices = [
-  { invoice: 'INV001', status: 'Paid', method: 'Credit card', amount: '$250.00' },
-  { invoice: 'INV002', status: 'Pending', method: 'PayPal', amount: '$150.00' },
-  { invoice: 'INV003', status: 'Unpaid', method: 'Bank transfer', amount: '$350.00' },
-  { invoice: 'INV004', status: 'Paid', method: 'Credit card', amount: '$450.00' }
+  { invoice: 'GRN001', status: 'Settled', method: 'Galleon transfer', amount: '$250.00' },
+  { invoice: 'GRN002', status: 'Awaiting galleons', method: 'Owl post', amount: '$150.00' },
+  { invoice: 'GRN003', status: 'Overdue', method: 'Vault withdrawal', amount: '$350.00' },
+  { invoice: 'GRN004', status: 'Settled', method: 'Galleon transfer', amount: '$450.00' }
 ]
 
 const footerInvoices = [
-  { invoice: 'INV001', method: 'Credit card', amount: 250 },
-  { invoice: 'INV002', method: 'PayPal', amount: 150 },
-  { invoice: 'INV003', method: 'Bank transfer', amount: 350 }
+  { invoice: 'GRN001', method: 'Galleon transfer', amount: 250 },
+  { invoice: 'GRN002', method: 'Owl post', amount: 150 },
+  { invoice: 'GRN003', method: 'Vault withdrawal', amount: 350 }
 ]
 
 const total = footerInvoices.reduce((sum, row) => sum + row.amount, 0)
 
 const members = [
-  { name: 'Ada Lovelace', role: 'Owner' },
-  { name: 'Grace Hopper', role: 'Admin' },
-  { name: 'Margaret Hamilton', role: 'Member' }
+  { name: 'Albus Dumbledore', role: 'Headmaster' },
+  { name: 'Severus Snape', role: 'Professor' },
+  { name: 'Robert Langdon', role: 'Guest lecturer' }
 ]
 
 const styles = stylex.create({
@@ -84,10 +84,10 @@ export const Playground: Story = {
   render: () => (
     <div {...stylex.props(styles.root)}>
       <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableCaption>A list of your recent Gringotts vault transactions.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Invoice</TableHead>
+            <TableHead>Ledger no.</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Method</TableHead>
             <TableHead style={styles.right}>Amount</TableHead>
@@ -120,7 +120,7 @@ export const Footer: Story = {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Invoice</TableHead>
+            <TableHead>Ledger no.</TableHead>
             <TableHead>Method</TableHead>
             <TableHead style={styles.right}>Amount</TableHead>
           </TableRow>
@@ -151,8 +151,8 @@ export const Actions: Story = {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Role</TableHead>
+            <TableHead>Scholar</TableHead>
+            <TableHead>Title</TableHead>
             <TableHead style={styles.right} />
           </TableRow>
         </TableHeader>
@@ -164,15 +164,15 @@ export const Actions: Story = {
               <TableCell style={styles.right}>
                 <DropdownMenu>
                   <DropdownMenuTrigger
-                    render={<Button variant='ghost' size='icon' aria-label='Row actions' />}
+                    render={<Button variant='ghost' size='icon' aria-label='Ledger actions' />}
                   >
                     <EllipsisVerticalIcon {...stylex.props(styles.icon)} />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align='end'>
-                    <DropdownMenuItem>Edit role</DropdownMenuItem>
-                    <DropdownMenuItem>Copy email</DropdownMenuItem>
+                    <DropdownMenuItem>Edit title</DropdownMenuItem>
+                    <DropdownMenuItem>Send an owl</DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem variant='destructive'>Remove</DropdownMenuItem>
+                    <DropdownMenuItem variant='destructive'>Expel</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>

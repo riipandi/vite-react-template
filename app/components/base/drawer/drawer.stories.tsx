@@ -49,14 +49,14 @@ export const Playground: Story = {
   args: { showSwipeHandle: true },
   render: (args) => (
     <Drawer {...args}>
-      <DrawerTrigger render={<Button variant='outline' />}>Open drawer</DrawerTrigger>
+      <DrawerTrigger render={<Button variant='outline' />}>Open the vault</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Move goal</DrawerTitle>
-          <DrawerDescription>Set your daily activity goal.</DrawerDescription>
+          <DrawerTitle>Brew Polyjuice</DrawerTitle>
+          <DrawerDescription>Set your daily dosage for the potion.</DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
-          <DrawerClose render={<Button />}>Submit</DrawerClose>
+          <DrawerClose render={<Button />}>Begin brewing</DrawerClose>
           <DrawerClose render={<Button variant='outline' />}>Cancel</DrawerClose>
         </DrawerFooter>
       </DrawerContent>
@@ -72,9 +72,9 @@ export const Directions: Story = {
           <DrawerTrigger render={<Button variant='outline' />}>{direction}</DrawerTrigger>
           <DrawerContent>
             <DrawerHeader>
-              <DrawerTitle>Drawer from {direction}</DrawerTitle>
+              <DrawerTitle>Owl from the {direction}</DrawerTitle>
               <DrawerDescription>
-                Rests on and swipes back toward the {direction} edge.
+                Swoops in and swipes back toward the {direction} edge.
               </DrawerDescription>
             </DrawerHeader>
           </DrawerContent>

@@ -114,7 +114,9 @@ export const Controlled: Story = {
             <OTPFieldSlot />
           </OTPFieldGroup>
         </OTPField>
-        <p {...stylex.props(styles.value)}>{value ? `Entered: ${value}` : 'Enter your code.'}</p>
+        <p {...stylex.props(styles.value)}>
+          {value ? `Vault code: ${value}` : 'Enter your Gringotts vault code.'}
+        </p>
       </div>
     )
   }

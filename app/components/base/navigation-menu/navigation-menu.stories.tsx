@@ -57,22 +57,22 @@ export const Playground: Story = {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+          <NavigationMenuTrigger>First year at Hogwarts</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div {...stylex.props(styles.panel)}>
               <NavigationMenuLink href='#'>
                 <div {...stylex.props(styles.linkBody)}>
-                  <span {...stylex.props(styles.linkTitle)}>Introduction</span>
+                  <span {...stylex.props(styles.linkTitle)}>Platform Nine and Three-Quarters</span>
                   <span {...stylex.props(styles.linkText)}>
-                    Base UI + StyleX components you own.
+                    Run straight at the barrier between platforms nine and ten.
                   </span>
                 </div>
               </NavigationMenuLink>
               <NavigationMenuLink href='#'>
                 <div {...stylex.props(styles.linkBody)}>
-                  <span {...stylex.props(styles.linkTitle)}>Installation</span>
+                  <span {...stylex.props(styles.linkTitle)}>Diagon Alley</span>
                   <span {...stylex.props(styles.linkText)}>
-                    Set up StyleX and install components via the CLI.
+                    Tap the third brick from the left above the dustbin.
                   </span>
                 </div>
               </NavigationMenuLink>
@@ -80,22 +80,22 @@ export const Playground: Story = {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Codebreaking</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div {...stylex.props(styles.panel)}>
               <NavigationMenuLink href='#'>
                 <div {...stylex.props(styles.linkBody)}>
-                  <span {...stylex.props(styles.linkTitle)}>Button</span>
+                  <span {...stylex.props(styles.linkTitle)}>Cryptex</span>
                   <span {...stylex.props(styles.linkText)}>
-                    Variants, sizes, and render-prop composition.
+                    A medieval lock with twenty-six rotating dials.
                   </span>
                 </div>
               </NavigationMenuLink>
               <NavigationMenuLink href='#'>
                 <div {...stylex.props(styles.linkBody)}>
-                  <span {...stylex.props(styles.linkTitle)}>Dialog</span>
+                  <span {...stylex.props(styles.linkTitle)}>Keystone</span>
                   <span {...stylex.props(styles.linkText)}>
-                    Modal dialogs with overlay and close button.
+                    The only key to the vault hidden beneath the Louvre.
                   </span>
                 </div>
               </NavigationMenuLink>
@@ -103,7 +103,7 @@ export const Playground: Story = {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink href='#'>Docs</NavigationMenuLink>
+          <NavigationMenuLink href='#'>Library</NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
@@ -116,14 +116,14 @@ export const Link: Story = {
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuLink href='#' active>
-            Overview
+            Headmaster&apos;s tower
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink href='#'>Integrations</NavigationMenuLink>
+          <NavigationMenuLink href='#'>Illuminati archives</NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink href='#'>Pricing</NavigationMenuLink>
+          <NavigationMenuLink href='#'>Gringotts exchange rates</NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

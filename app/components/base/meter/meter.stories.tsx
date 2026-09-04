@@ -37,8 +37,8 @@ export const Playground: Story = {
   args: { value: 24, max: 64, locale: 'en-US' },
   render: (args) => (
     <Meter {...args} style={styles.root}>
-      <MeterLabel>Storage used</MeterLabel>
-      <MeterValue>{(_, value) => `${value} GB of 64 GB`}</MeterValue>
+      <MeterLabel>Polyjuice Potion brewed</MeterLabel>
+      <MeterValue>{(_, value) => `${value} ml of 64 ml`}</MeterValue>
     </Meter>
   )
 }
@@ -48,8 +48,8 @@ export const CustomRange: Story = {
   args: { value: 72, min: 30, max: 90, locale: 'en-US' },
   render: (args) => (
     <Meter {...args} style={styles.root}>
-      <MeterLabel>CPU temperature</MeterLabel>
-      <MeterValue>{(_, value) => `${value}°C`}</MeterValue>
+      <MeterLabel>Cryptex pressure</MeterLabel>
+      <MeterValue>{(_, value) => `${value} psi`}</MeterValue>
     </Meter>
   )
 }

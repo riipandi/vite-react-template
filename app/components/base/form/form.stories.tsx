@@ -46,22 +46,22 @@ export const Playground: Story = {
         name='username'
         validate={(value) =>
           typeof value === 'string' && value.length < 2
-            ? 'Username must be at least 2 characters.'
+            ? 'Your wizarding name must be at least 2 characters.'
             : null
         }
       >
-        <FieldLabel>Username</FieldLabel>
-        <Input placeholder='madeui' required />
-        <FieldDescription>This is your public display name.</FieldDescription>
+        <FieldLabel>Wizard name</FieldLabel>
+        <Input placeholder='sneveu' required />
+        <FieldDescription>Engraved on your Gringotts vault key.</FieldDescription>
         <FieldError />
       </Field>
       <Field name='email'>
-        <FieldLabel>Email</FieldLabel>
-        <Input type='email' placeholder='m@example.com' required />
+        <FieldLabel>Owl post address</FieldLabel>
+        <Input type='email' placeholder='s.neveu@dbf.org' required />
         <FieldError />
       </Field>
       <Button type='submit' style={styles.submit}>
-        Submit
+        Send via owl
       </Button>
     </Form>
   )

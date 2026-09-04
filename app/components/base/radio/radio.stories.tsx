@@ -31,11 +31,19 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
-const options = ['Default', 'Comfortable', 'Compact']
+const options = ['Gryffindor', 'Slytherin', 'Ravenclaw']
 
 const plans = [
-  { value: 'starter', label: 'Starter', description: 'Up to 5 projects and community support.' },
-  { value: 'pro', label: 'Pro', description: 'Unlimited projects and priority support.' }
+  {
+    value: 'starter',
+    label: 'Owl post plan',
+    description: 'Five vault visits a month and standard owl support.'
+  },
+  {
+    value: 'pro',
+    label: 'Galleon plan',
+    description: 'Unlimited vault visits and priority House-elf support.'
+  }
 ]
 
 const styles = stylex.create({
@@ -75,7 +83,7 @@ const styles = stylex.create({
 export default meta
 
 export const Playground: Story = {
-  args: { defaultValue: 'Comfortable' },
+  args: { defaultValue: 'Slytherin' },
   render: (args) => (
     <RadioGroup {...args}>
       {options.map((option) => (
@@ -130,10 +138,10 @@ export const Disabled: Story = {
   render: (args) => (
     <RadioGroup {...args}>
       <label {...stylex.props(styles.label, styles.disabled)}>
-        <RadioGroupItem value='a' /> Option A
+        <RadioGroupItem value='a' /> Illuminati dossier
       </label>
       <label {...stylex.props(styles.label, styles.disabled)}>
-        <RadioGroupItem value='b' /> Option B
+        <RadioGroupItem value='b' /> Priory of Sion dossier
       </label>
     </RadioGroup>
   )

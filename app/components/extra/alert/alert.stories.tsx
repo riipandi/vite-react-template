@@ -36,8 +36,10 @@ export const Playground: Story = {
   args: { variant: 'default' },
   render: (args) => (
     <Alert {...args} style={styles.alert}>
-      <AlertTitle>Heads up!</AlertTitle>
-      <AlertDescription>You can add components to your app using the CLI.</AlertDescription>
+      <AlertTitle>Lumos!</AlertTitle>
+      <AlertDescription>
+        Point your wand and speak the incantation to light the darkest corridor.
+      </AlertDescription>
     </Alert>
   )
 }
@@ -46,8 +48,10 @@ export const Destructive: Story = {
   args: { variant: 'destructive' },
   render: (args) => (
     <Alert {...args} style={styles.alert}>
-      <AlertTitle>Error</AlertTitle>
-      <AlertDescription>Your session has expired. Log in again.</AlertDescription>
+      <AlertTitle>Illuminati threat detected</AlertTitle>
+      <AlertDescription>
+        An antimatter canister is armed inside Vatican City. Alert the Swiss Guard.
+      </AlertDescription>
     </Alert>
   )
 }
@@ -56,11 +60,13 @@ export const Action: Story = {
   args: { variant: 'default' },
   render: (args) => (
     <Alert {...args} style={styles.alert}>
-      <AlertTitle>Changes saved</AlertTitle>
-      <AlertDescription>Your changes have been saved successfully.</AlertDescription>
+      <AlertTitle>Spell recorded</AlertTitle>
+      <AlertDescription>
+        Expecto Patronum cast successfully. Your patronus is on file with the Ministry.
+      </AlertDescription>
       <AlertAction>
         <Button size='sm' variant='outline'>
-          Undo
+          Reversal
         </Button>
       </AlertAction>
     </Alert>

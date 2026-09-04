@@ -43,11 +43,11 @@ export const Playground: Story = {
   render: (args) => (
     <Tabs {...args} style={styles.tabs}>
       <TabsList>
-        <TabsTrigger value='account'>Account</TabsTrigger>
-        <TabsTrigger value='password'>Password</TabsTrigger>
+        <TabsTrigger value='account'>Gringotts Vault</TabsTrigger>
+        <TabsTrigger value='password'>Vault Password</TabsTrigger>
       </TabsList>
-      <TabsContent value='account'>Make changes to your account here.</TabsContent>
-      <TabsContent value='password'>Change your password here.</TabsContent>
+      <TabsContent value='account'>Manage your vault at Gringotts.</TabsContent>
+      <TabsContent value='password'>Change the password to your vault.</TabsContent>
     </Tabs>
   )
 }
@@ -58,13 +58,13 @@ export const Line: Story = {
   render: (args) => (
     <Tabs {...args}>
       <TabsList variant='line'>
-        <TabsTrigger value='overview'>Overview</TabsTrigger>
-        <TabsTrigger value='analytics'>Analytics</TabsTrigger>
-        <TabsTrigger value='reports'>Reports</TabsTrigger>
+        <TabsTrigger value='overview'>Daily Prophet</TabsTrigger>
+        <TabsTrigger value='analytics'>The Quibbler</TabsTrigger>
+        <TabsTrigger value='reports'>Ministry Briefings</TabsTrigger>
       </TabsList>
-      <TabsContent value='overview'>Overview of your project.</TabsContent>
-      <TabsContent value='analytics'>Traffic and usage.</TabsContent>
-      <TabsContent value='reports'>Exportable reports.</TabsContent>
+      <TabsContent value='overview'>The latest from the Daily Prophet.</TabsContent>
+      <TabsContent value='analytics'>Theories from Luna Lovegood.</TabsContent>
+      <TabsContent value='reports'>Notices from the Ministry of Magic.</TabsContent>
     </Tabs>
   )
 }
@@ -75,12 +75,12 @@ export const Disabled: Story = {
   render: (args) => (
     <Tabs {...args} style={styles.tabs}>
       <TabsList>
-        <TabsTrigger value='active'>Active</TabsTrigger>
+        <TabsTrigger value='active'>Hogsmeade</TabsTrigger>
         <TabsTrigger value='disabled' disabled>
-          Disabled
+          Azkaban
         </TabsTrigger>
       </TabsList>
-      <TabsContent value='active'>The other tab is disabled.</TabsContent>
+      <TabsContent value='active'>The other tab is locked away in Azkaban.</TabsContent>
     </Tabs>
   )
 }
@@ -90,13 +90,13 @@ export const Vertical: Story = {
   render: (args) => (
     <Tabs {...args} style={styles.tabs}>
       <TabsList>
-        <TabsTrigger value='profile'>Profile</TabsTrigger>
-        <TabsTrigger value='account'>Account</TabsTrigger>
-        <TabsTrigger value='notifications'>Notifications</TabsTrigger>
+        <TabsTrigger value='profile'>Prefect</TabsTrigger>
+        <TabsTrigger value='account'>Gringotts Vault</TabsTrigger>
+        <TabsTrigger value='notifications'>Owl Post</TabsTrigger>
       </TabsList>
-      <TabsContent value='profile'>Update your name and photo.</TabsContent>
-      <TabsContent value='account'>Manage your account details.</TabsContent>
-      <TabsContent value='notifications'>Choose what you're notified about.</TabsContent>
+      <TabsContent value='profile'>Update your name at Hogwarts.</TabsContent>
+      <TabsContent value='account'>Manage your vault details.</TabsContent>
+      <TabsContent value='notifications'>Choose which owls you receive.</TabsContent>
     </Tabs>
   )
 }
@@ -108,15 +108,15 @@ export const Icons: Story = {
       <TabsList>
         <TabsTrigger value='account' style={styles.trigger}>
           <UserIcon {...stylex.props(styles.icon)} />
-          Account
+          Wizard Profile
         </TabsTrigger>
         <TabsTrigger value='notifications' style={styles.trigger}>
           <BellIcon {...stylex.props(styles.icon)} />
-          Notifications
+          Owl Post
         </TabsTrigger>
       </TabsList>
-      <TabsContent value='account'>Update your account settings.</TabsContent>
-      <TabsContent value='notifications'>Manage notification preferences.</TabsContent>
+      <TabsContent value='account'>Update your wizard profile.</TabsContent>
+      <TabsContent value='notifications'>Manage your owl post preferences.</TabsContent>
     </Tabs>
   )
 }

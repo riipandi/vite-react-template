@@ -33,11 +33,11 @@ export const Playground: Story = {
   render: () => (
     <Toolbar>
       <ToolbarGroup>
-        <ToolbarButton render={<Toggle aria-label='Toggle bold' />}>Bold</ToolbarButton>
-        <ToolbarButton render={<Toggle aria-label='Toggle italic' />}>Italic</ToolbarButton>
+        <ToolbarButton render={<Toggle aria-label='Toggle charm' />}>Charm</ToolbarButton>
+        <ToolbarButton render={<Toggle aria-label='Toggle hex' />}>Hex</ToolbarButton>
       </ToolbarGroup>
       <ToolbarSeparator />
-      <ToolbarButton render={<Button variant='ghost' size='sm' />}>Share</ToolbarButton>
+      <ToolbarButton render={<Button variant='ghost' size='sm' />}>Send by Owl</ToolbarButton>
     </Toolbar>
   )
 }
@@ -58,7 +58,7 @@ export const WithToggleGroup: Story = {
         </ToolbarButton>
       </ToggleGroup>
       <ToolbarSeparator />
-      <ToolbarButton render={<Button variant='ghost' size='sm' />}>Export</ToolbarButton>
+      <ToolbarButton render={<Button variant='ghost' size='sm' />}>Accio</ToolbarButton>
     </Toolbar>
   )
 }

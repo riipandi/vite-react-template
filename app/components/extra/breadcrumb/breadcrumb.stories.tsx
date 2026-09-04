@@ -52,7 +52,7 @@ export const Playground: Story = {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+          <BreadcrumbLink href='/'>Louvre</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
@@ -60,11 +60,11 @@ export const Playground: Story = {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href='/docs/components'>Components</BreadcrumbLink>
+          <BreadcrumbLink href='/docs/components'>Sistine Chapel</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+          <BreadcrumbPage>Vatican Archives</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
@@ -76,7 +76,7 @@ export const Ellipsis: Story = {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+          <BreadcrumbLink href='/'>Great Hall</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
@@ -84,7 +84,7 @@ export const Ellipsis: Story = {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>Settings</BreadcrumbPage>
+          <BreadcrumbPage>Potions classroom</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
@@ -96,7 +96,7 @@ export const Dropdown: Story = {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+          <BreadcrumbLink href='/'>Hogwarts</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
@@ -105,19 +105,19 @@ export const Dropdown: Story = {
               <BreadcrumbEllipsis />
             </DropdownMenuTrigger>
             <DropdownMenuContent align='start'>
-              <DropdownMenuItem>Documentation</DropdownMenuItem>
-              <DropdownMenuItem>Themes</DropdownMenuItem>
-              <DropdownMenuItem>GitHub</DropdownMenuItem>
+              <DropdownMenuItem>Marauder's Map</DropdownMenuItem>
+              <DropdownMenuItem>Daily Prophet</DropdownMenuItem>
+              <DropdownMenuItem>Gringotts</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href='/docs/components'>Components</BreadcrumbLink>
+          <BreadcrumbLink href='/docs/components'>Diagon Alley</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+          <BreadcrumbPage>Honeydukes</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
@@ -130,15 +130,15 @@ export const CustomSeparator: Story = {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+          <BreadcrumbLink href='/'>Hogsmeade</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>/</BreadcrumbSeparator>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/docs'>Docs</BreadcrumbLink>
+          <BreadcrumbLink href='/docs'>Zonko's Joke Shop</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>/</BreadcrumbSeparator>
         <BreadcrumbItem>
-          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+          <BreadcrumbPage>Honeydukes</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

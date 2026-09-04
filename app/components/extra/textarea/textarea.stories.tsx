@@ -35,7 +35,7 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <div {...stylex.props(styles.wrap)}>
-      <Textarea placeholder='Type your message here.' />
+      <Textarea placeholder='Draft your letter to the Daily Prophet…' />
     </div>
   )
 }
@@ -44,9 +44,14 @@ export const WithField: Story = {
   name: 'With field',
   render: () => (
     <Field style={styles.wrap}>
-      <FieldLabel htmlFor='textarea-with-field-bio'>Bio</FieldLabel>
-      <Textarea id='textarea-with-field-bio' placeholder='Tell us a little about yourself' />
-      <FieldDescription>You can @mention other users and organizations.</FieldDescription>
+      <FieldLabel htmlFor='textarea-with-field-bio'>Symbologist bio</FieldLabel>
+      <Textarea
+        id='textarea-with-field-bio'
+        placeholder='Tell us about your strangest symbol discovery'
+      />
+      <FieldDescription>
+        You can @mention other wizards and wizarding organizations.
+      </FieldDescription>
     </Field>
   )
 }
@@ -54,7 +59,7 @@ export const WithField: Story = {
 export const Disabled: Story = {
   render: () => (
     <div {...stylex.props(styles.wrap)}>
-      <Textarea placeholder='Disabled' disabled />
+      <Textarea placeholder='Locked by Ministry decree' disabled />
     </div>
   )
 }
@@ -62,9 +67,9 @@ export const Disabled: Story = {
 export const Invalid: Story = {
   render: () => (
     <Field invalid style={styles.wrap}>
-      <FieldLabel htmlFor='textarea-invalid-bio'>Bio</FieldLabel>
-      <Textarea id='textarea-invalid-bio' defaultValue='Hi' />
-      <FieldError>Bio must be at least 10 characters.</FieldError>
+      <FieldLabel htmlFor='textarea-invalid-bio'>Symbologist bio</FieldLabel>
+      <Textarea id='textarea-invalid-bio' defaultValue='Dear Editor,' />
+      <FieldError>Your letter must be at least 10 characters.</FieldError>
     </Field>
   )
 }

@@ -40,17 +40,17 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <FieldSet style={styles.root}>
-      <FieldLegend>Profile</FieldLegend>
+      <FieldLegend>Ministry of Magic security pass</FieldLegend>
       <FieldGroup>
         <Field>
-          <FieldLabel htmlFor='field-name'>Name</FieldLabel>
-          <Input id='field-name' placeholder='Evil Rabbit' />
-          <FieldDescription>Shown on your public profile.</FieldDescription>
+          <FieldLabel htmlFor='field-name'>Wizard name</FieldLabel>
+          <Input id='field-name' placeholder='Hermione Granger' />
+          <FieldDescription>Embossed on your Daily Prophet press badge.</FieldDescription>
         </Field>
-        <FieldSeparator>Contact</FieldSeparator>
+        <FieldSeparator>Owl contact</FieldSeparator>
         <Field>
-          <FieldLabel htmlFor='field-email'>Email</FieldLabel>
-          <Input id='field-email' type='email' placeholder='you@example.com' />
+          <FieldLabel htmlFor='field-email'>Owl post address</FieldLabel>
+          <Input id='field-email' type='email' placeholder='hermione.granger@hogwarts.edu' />
         </Field>
       </FieldGroup>
     </FieldSet>

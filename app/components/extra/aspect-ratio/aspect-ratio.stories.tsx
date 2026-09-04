@@ -54,7 +54,7 @@ export const Playground: Story = {
       <AspectRatio {...args}>
         <img
           src='https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80'
-          alt='Landscape by Drew Beamer'
+          alt='The Mona Lisa in the Louvre'
           {...stylex.props(styles.image)}
         />
       </AspectRatio>

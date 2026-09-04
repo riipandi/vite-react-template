@@ -75,8 +75,17 @@ You'll want to fork this repository and deploy your own Next.js website. Once yo
 image generator that sparks joy, you can setup [automatic GitHub](https://vercel.com/github)
 deployments so that pushing to master will deploy to production! 🚀
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/riipandi/vite-react-template&project-name=vite-react-template&repo-name=my-vite-react-app&env=PUBLIC_SITE_URL)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/riipandi/vite-react-template)
+<p>
+  <a href="https://vercel.com/new/clone?repository-url=https://github.com/riipandi/vite-react-template&project-name=vite-react-template&repo-name=my-vite-react-app&env=PUBLIC_SITE_URL">
+    <img src="https://vercel.com/button" alt="Deploy to Vercel" height="32" />
+  </a>
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/riipandi/vite-react-template">
+    <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" height="32" />
+  </a>
+  <a href="https://deploy.workers.cloudflare.com/?url=https://github.com/riipandi/vite-react-template">
+    <img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare" height="32" />
+  </a>
+</p>
 
 ### Cloudflare Deployment
 
@@ -101,9 +110,13 @@ auto-formatting on saving and get a really great in-editor experience with type 
 
 ## Thanks to
 
-In general, I'd like to thank every single one who open-sources their
-source code for their effort to contribute something to the open-source
-community. Your work means the world! 🌍 ❤️
+In general, I'd like to thank every single one who open-sources their source code for their effort
+to contribute something to the open-source community. Your work means the world! 🌍 ❤️
+
+### Attribution
+
+- [MadeUI](https://madeui.com/) — the Base UI + StyleX components in this template are based on its components.
+- [Reshaped](https://www.reshaped.so/) — the design system in this template is built on its design system.
 
 ## License
 

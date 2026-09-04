@@ -34,75 +34,82 @@ const meta = {
 type Story = StoryObj<typeof meta>
 
 const commands = [
-  { value: 'calendar', label: 'Calendar', group: 'Suggestions' },
-  { value: 'search-emoji', label: 'Search emoji', group: 'Suggestions' },
-  { value: 'calculator', label: 'Calculator', group: 'Suggestions' },
-  { value: 'profile', label: 'Profile', group: 'Settings', shortcut: '⌘P' },
-  { value: 'billing', label: 'Billing', group: 'Settings', shortcut: '⌘B' },
-  { value: 'settings', label: 'Settings', group: 'Settings', shortcut: '⌘S' }
+  { value: 'expelliarmus', label: 'Expelliarmus', group: 'Spells' },
+  { value: 'expecto-patronum', label: 'Expecto Patronum', group: 'Spells' },
+  { value: 'wingardium-leviosa', label: 'Wingardium Leviosa', group: 'Spells' },
+  { value: 'potions', label: 'Potions', group: 'Subjects', shortcut: '⌘P' },
+  { value: 'divination', label: 'Divination', group: 'Subjects', shortcut: '⌘B' },
+  {
+    value: 'defence-against-the-dark-arts',
+    label: 'Defence Against the Dark Arts',
+    group: 'Subjects',
+    shortcut: '⌘S'
+  }
 ]
 
 type CommandEntry = (typeof commands)[number]
 
 const commandGroups = [
   {
-    value: 'suggestions',
-    label: 'Suggestions',
+    value: 'spells',
+    label: 'Spells',
     items: [
-      { value: 'calendar', label: 'Calendar' },
-      { value: 'search-emoji', label: 'Search emoji' }
+      { value: 'expelliarmus', label: 'Expelliarmus' },
+      { value: 'expecto-patronum', label: 'Expecto Patronum' }
     ]
   },
   {
-    value: 'settings',
-    label: 'Settings',
+    value: 'subjects',
+    label: 'Subjects',
     items: [
-      { value: 'profile', label: 'Profile', shortcut: '⌘P' },
-      { value: 'billing', label: 'Billing', shortcut: '⌘B' }
+      { value: 'potions', label: 'Potions', shortcut: '⌘P' },
+      { value: 'divination', label: 'Divination', shortcut: '⌘B' }
     ]
   }
 ]
 
-const fruits = [
-  'Apple',
-  'Apricot',
-  'Banana',
-  'Blackberry',
-  'Blueberry',
-  'Cantaloupe',
-  'Cherry',
-  'Clementine',
-  'Coconut',
-  'Cranberry',
-  'Date',
-  'Dragonfruit',
-  'Elderberry',
-  'Fig',
-  'Grape',
-  'Grapefruit',
-  'Guava',
-  'Honeydew',
-  'Kiwi',
-  'Lemon',
-  'Lime',
-  'Lychee',
-  'Mango',
-  'Mandarin',
-  'Nectarine',
-  'Orange',
-  'Papaya',
-  'Passionfruit',
-  'Peach',
-  'Pear',
-  'Persimmon',
-  'Pineapple',
-  'Plum',
-  'Pomegranate',
-  'Raspberry',
-  'Star fruit',
-  'Strawberry',
-  'Tangerine',
-  'Watermelon'
+const spells = [
+  'Accio',
+  'Aguamenti',
+  'Alohomora',
+  'Anapneo',
+  'Aparecium',
+  'Ascendio',
+  'Bombarda',
+  'Colloportus',
+  'Confringo',
+  'Confundo',
+  'Descendo',
+  'Deprimo',
+  'Duro',
+  'Engorgio',
+  'Episkey',
+  'Expelliarmus',
+  'Expecto Patronum',
+  'Ferula',
+  'Finite Incantatem',
+  'Flagrate',
+  'Glisseo',
+  'Homenum Revelio',
+  'Immobulus',
+  'Impedimenta',
+  'Incendio',
+  'Lumos',
+  'Meteolojinx Recanto',
+  'Muffliato',
+  'Nox',
+  'Obliviate',
+  'Petrificus Totalus',
+  'Prior Incantato',
+  'Protego',
+  'Reducio',
+  'Rennervate',
+  'Reparo',
+  'Riddikulus',
+  'Silencio',
+  'Sonorus',
+  'Stupefy',
+  'Wingardium Leviosa'
 ].map((label) => ({ label, value: label }))
 
 const styles = stylex.create({
@@ -120,8 +127,8 @@ export const Playground: Story = {
       itemToStringValue={(item) => (item as CommandEntry).label}
       style={styles.root}
     >
-      <CommandInput placeholder='Type a command or search…' />
-      <CommandEmpty>No results found.</CommandEmpty>
+      <CommandInput placeholder='Cast a spell or search…' />
+      <CommandEmpty>No spells found.</CommandEmpty>
       <CommandList>
         {(item: CommandEntry) => (
           <CommandItem key={item.value} value={item}>
@@ -137,8 +144,8 @@ export const Playground: Story = {
 export const Groups: Story = {
   render: () => (
     <Command items={commandGroups} style={styles.root}>
-      <CommandInput placeholder='Type a command or search…' />
-      <CommandEmpty>No results found.</CommandEmpty>
+      <CommandInput placeholder='Cast a spell or search…' />
+      <CommandEmpty>No spells found.</CommandEmpty>
       <CommandList>
         {(group: (typeof commandGroups)[number]) => (
           <React.Fragment key={group.value}>
@@ -163,14 +170,14 @@ export const Groups: Story = {
 export const Scrollable: Story = {
   render: () => (
     <Command
-      items={fruits}
+      items={spells}
       itemToStringValue={(item) => (item as { label: string }).label}
       style={styles.root}
     >
-      <CommandInput placeholder='Search fruit…' />
-      <CommandEmpty>No results found.</CommandEmpty>
+      <CommandInput placeholder='Search spells…' />
+      <CommandEmpty>No spells found.</CommandEmpty>
       <CommandList>
-        {(item: (typeof fruits)[number]) => (
+        {(item: (typeof spells)[number]) => (
           <CommandItem key={item.value} value={item}>
             {item.label}
           </CommandItem>
@@ -188,7 +195,7 @@ export const DialogHotkey: Story = {
     return (
       <>
         <Button variant='outline' onClick={() => setOpen(true)}>
-          Open command palette
+          Open the Marauder's Map
           <KbdGroup>
             <Kbd>⌘</Kbd>
             <Kbd>K</Kbd>
@@ -196,8 +203,8 @@ export const DialogHotkey: Story = {
         </Button>
         <CommandDialog open={open} onOpenChange={setOpen}>
           <Command items={commands} itemToStringValue={(item) => (item as CommandEntry).label}>
-            <CommandInput placeholder='Type a command or search…' />
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandInput placeholder='Cast a spell or search…' />
+            <CommandEmpty>No spells found.</CommandEmpty>
             <CommandList>
               {(item: CommandEntry) => (
                 <CommandItem key={item.value} value={item} onClick={() => setOpen(false)}>

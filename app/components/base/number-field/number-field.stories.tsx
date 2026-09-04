@@ -32,7 +32,7 @@ export const Playground: Story = {
   render: (args) => (
     <NumberField {...args}>
       <Label>
-        Quantity
+        Galleons
         <NumberFieldGroup />
       </Label>
     </NumberField>
@@ -45,7 +45,7 @@ export const MinMaxStep: Story = {
   render: (args) => (
     <NumberField {...args}>
       <Label>
-        Volume
+        Butterbeer pints
         <NumberFieldGroup />
       </Label>
     </NumberField>
@@ -62,7 +62,7 @@ export const Formatted: Story = {
   render: (args) => (
     <NumberField {...args}>
       <Label>
-        Price
+        Gringotts fee
         <NumberFieldGroup />
       </Label>
     </NumberField>

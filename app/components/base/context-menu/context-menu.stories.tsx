@@ -60,35 +60,35 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <ContextMenu>
-      <ContextMenuTrigger style={styles.trigger}>Right-click here</ContextMenuTrigger>
+      <ContextMenuTrigger style={styles.trigger}>Right-click the map</ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuItem>
-          Back
+          Retrace steps
           <ContextMenuShortcut>⌘[</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuItem disabled>
-          Forward
+          Follow the dot
           <ContextMenuShortcut>⌘]</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuSub>
-          <ContextMenuSubTrigger>More tools</ContextMenuSubTrigger>
+          <ContextMenuSubTrigger>More enchantments</ContextMenuSubTrigger>
           <ContextMenuSubContent>
-            <ContextMenuItem>Save page…</ContextMenuItem>
-            <ContextMenuItem>Create shortcut…</ContextMenuItem>
+            <ContextMenuItem>Wipe the map…</ContextMenuItem>
+            <ContextMenuItem>Add a secret passage…</ContextMenuItem>
             <ContextMenuSeparator />
-            <ContextMenuItem>Developer tools</ContextMenuItem>
+            <ContextMenuItem>Marauder settings</ContextMenuItem>
           </ContextMenuSubContent>
         </ContextMenuSub>
         <ContextMenuSeparator />
-        <ContextMenuCheckboxItem defaultChecked>Show bookmarks</ContextMenuCheckboxItem>
-        <ContextMenuCheckboxItem>Show full URLs</ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem defaultChecked>Show secret passages</ContextMenuCheckboxItem>
+        <ContextMenuCheckboxItem>Show real names</ContextMenuCheckboxItem>
         <ContextMenuSeparator />
-        <ContextMenuRadioGroup defaultValue='pedro'>
-          <ContextMenuRadioItem value='pedro'>Pedro Duarte</ContextMenuRadioItem>
-          <ContextMenuRadioItem value='colm'>Colm Tuite</ContextMenuRadioItem>
+        <ContextMenuRadioGroup defaultValue='padfoot'>
+          <ContextMenuRadioItem value='padfoot'>Sirius Black</ContextMenuRadioItem>
+          <ContextMenuRadioItem value='prongs'>James Potter</ContextMenuRadioItem>
         </ContextMenuRadioGroup>
         <ContextMenuSeparator />
-        <ContextMenuItem variant='destructive'>Delete</ContextMenuItem>
+        <ContextMenuItem variant='destructive'>Mischief managed</ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   )
@@ -97,16 +97,16 @@ export const Playground: Story = {
 export const Submenu: Story = {
   render: () => (
     <ContextMenu>
-      <ContextMenuTrigger style={styles.trigger}>Right-click here</ContextMenuTrigger>
+      <ContextMenuTrigger style={styles.trigger}>Right-click the map</ContextMenuTrigger>
       <ContextMenuContent>
-        <ContextMenuItem>Save page…</ContextMenuItem>
+        <ContextMenuItem>I solemnly swear…</ContextMenuItem>
         <ContextMenuSub>
-          <ContextMenuSubTrigger>More tools</ContextMenuSubTrigger>
+          <ContextMenuSubTrigger>More enchantments</ContextMenuSubTrigger>
           <ContextMenuSubContent>
-            <ContextMenuItem>Save page as…</ContextMenuItem>
-            <ContextMenuItem>Create shortcut…</ContextMenuItem>
+            <ContextMenuItem>Chart a new passage…</ContextMenuItem>
+            <ContextMenuItem>Add a secret passage…</ContextMenuItem>
             <ContextMenuSeparator />
-            <ContextMenuItem>Developer tools</ContextMenuItem>
+            <ContextMenuItem>Marauder settings</ContextMenuItem>
           </ContextMenuSubContent>
         </ContextMenuSub>
       </ContextMenuContent>
@@ -117,14 +117,14 @@ export const Submenu: Story = {
 export const Checkboxes: Story = {
   render: () => (
     <ContextMenu>
-      <ContextMenuTrigger style={styles.trigger}>Right-click here</ContextMenuTrigger>
+      <ContextMenuTrigger style={styles.trigger}>Right-click the map</ContextMenuTrigger>
       <ContextMenuContent>
         {/* Menu labels are Base UI GroupLabels — they must live inside a
             Group or RadioGroup. */}
         <ContextMenuGroup>
-          <ContextMenuLabel>Appearance</ContextMenuLabel>
-          <ContextMenuCheckboxItem defaultChecked>Show bookmarks bar</ContextMenuCheckboxItem>
-          <ContextMenuCheckboxItem>Show full URLs</ContextMenuCheckboxItem>
+          <ContextMenuLabel>Map layers</ContextMenuLabel>
+          <ContextMenuCheckboxItem defaultChecked>Show secret passages</ContextMenuCheckboxItem>
+          <ContextMenuCheckboxItem>Show real names</ContextMenuCheckboxItem>
         </ContextMenuGroup>
       </ContextMenuContent>
     </ContextMenu>
@@ -134,15 +134,15 @@ export const Checkboxes: Story = {
 export const Radio: Story = {
   render: () => (
     <ContextMenu>
-      <ContextMenuTrigger style={styles.trigger}>Right-click here</ContextMenuTrigger>
+      <ContextMenuTrigger style={styles.trigger}>Right-click the map</ContextMenuTrigger>
       <ContextMenuContent>
-        <ContextMenuRadioGroup defaultValue='pedro'>
-          <ContextMenuRadioItem value='pedro'>Pedro Duarte</ContextMenuRadioItem>
-          <ContextMenuRadioItem value='colm'>Colm Tuite</ContextMenuRadioItem>
+        <ContextMenuRadioGroup defaultValue='padfoot'>
+          <ContextMenuRadioItem value='padfoot'>Sirius Black</ContextMenuRadioItem>
+          <ContextMenuRadioItem value='prongs'>James Potter</ContextMenuRadioItem>
         </ContextMenuRadioGroup>
         <ContextMenuSeparator />
         {/* A radio item outside its RadioGroup has no context — plain item. */}
-        <ContextMenuItem disabled>Add new user…</ContextMenuItem>
+        <ContextMenuItem disabled>Add a new Marauder…</ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   )
@@ -151,12 +151,12 @@ export const Radio: Story = {
 export const Destructive: Story = {
   render: () => (
     <ContextMenu>
-      <ContextMenuTrigger style={styles.trigger}>Right-click here</ContextMenuTrigger>
+      <ContextMenuTrigger style={styles.trigger}>Right-click the map</ContextMenuTrigger>
       <ContextMenuContent>
-        <ContextMenuItem>Rename</ContextMenuItem>
-        <ContextMenuItem>Duplicate</ContextMenuItem>
+        <ContextMenuItem>Re-ink the map</ContextMenuItem>
+        <ContextMenuItem>Duplicate parchment</ContextMenuItem>
         <ContextMenuSeparator />
-        <ContextMenuItem variant='destructive'>Delete</ContextMenuItem>
+        <ContextMenuItem variant='destructive'>Mischief managed</ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   )

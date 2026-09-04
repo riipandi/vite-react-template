@@ -56,18 +56,18 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <Dialog>
-      <DialogTrigger render={<Button variant='outline' />}>Open dialog</DialogTrigger>
+      <DialogTrigger render={<Button variant='outline' />}>Open the cryptex</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete project</DialogTitle>
+          <DialogTitle>Erase the map?</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. The project and all of its data will be permanently
-            removed.
+            This action cannot be undone. The Marauder&apos;s Map and all of its secret passages
+            will be permanently wiped.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose render={<Button variant='ghost' />}>Cancel</DialogClose>
-          <DialogClose render={<Button variant='destructive' />}>Delete</DialogClose>
+          <DialogClose render={<Button variant='destructive' />}>Erase</DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -81,10 +81,10 @@ export const Custom: Story = {
       <DialogTrigger render={<Button />}>Rename</DialogTrigger>
       <DialogContent style={styles.narrow}>
         <DialogHeader>
-          <DialogTitle>Rename project</DialogTitle>
-          <DialogDescription>Give your project a new name.</DialogDescription>
+          <DialogTitle>Rename the owl</DialogTitle>
+          <DialogDescription>Give your owl a new name.</DialogDescription>
         </DialogHeader>
-        <Input defaultValue='madeui' />
+        <Input defaultValue='Hedwig' />
         <DialogFooter>
           <DialogClose render={<Button variant='ghost' />}>Cancel</DialogClose>
           <DialogClose render={<Button />}>Save</DialogClose>
@@ -98,48 +98,47 @@ export const Scrollable: Story = {
   name: 'Scrollable content',
   render: () => (
     <Dialog>
-      <DialogTrigger render={<Button variant='outline' />}>View terms</DialogTrigger>
+      <DialogTrigger render={<Button variant='outline' />}>View the decrees</DialogTrigger>
       <DialogContent style={styles.content}>
         <DialogHeader>
-          <DialogTitle>Terms of Service</DialogTitle>
+          <DialogTitle>Ministry of Magic Decrees</DialogTitle>
           <DialogDescription>
-            Last updated February 2026. Please read before continuing.
+            Last updated February 2026. Please read before your first visit to Hogsmeade.
           </DialogDescription>
         </DialogHeader>
         <div {...stylex.props(styles.body)}>
           <p>
-            1. Acceptance of terms. By accessing or using this service, you agree to be bound by
-            these terms and all applicable laws and regulations.
+            1. Acceptance of decrees. By setting foot within the castle or its grounds, you agree to
+            be bound by these decrees and the decisions of the Headmaster.
           </p>
           <p>
-            2. Use license. Permission is granted to temporarily use this service for personal,
-            non-commercial purposes only. This is the grant of a license, not a transfer of title.
+            2. Wand license. Permission is granted to use your wand for study purposes only. This is
+            a license granted by the Ministry, not a transfer of magical title.
           </p>
           <p>
-            3. Account responsibilities. You are responsible for maintaining the confidentiality of
-            your account credentials and for all activity that occurs under your account.
+            3. Dormitory responsibilities. You are responsible for the confidentiality of your
+            common room password and for all magic performed under your house banner.
           </p>
           <p>
-            4. Service availability. We do not guarantee that the service will be uninterrupted,
-            timely, secure, or error-free, and we reserve the right to modify or discontinue it at
-            any time.
+            4. Owl delivery. We do not guarantee that owls will be uninterrupted, timely, or dry,
+            and the Owlery reserves the right to suspend deliveries in stormy weather.
           </p>
           <p>
-            5. Limitation of liability. In no event shall we be liable for any indirect, incidental,
-            special, or consequential damages arising out of your use of the service.
+            5. Limitation of liability. In no event shall the Ministry be liable for any hexed,
+            jinxed, or cursed damages arising from moving staircases or misfired charms.
           </p>
           <p>
-            6. Changes to terms. We may revise these terms at any time. By continuing to use the
-            service after changes take effect, you agree to the revised terms.
+            6. Changes to decrees. The Ministry may revise these decrees at any time. By remaining
+            at Hogwarts after changes take effect, you agree to the revised decrees.
           </p>
           <p>
-            7. Termination. We may suspend or terminate your access at any time, without notice, for
-            conduct that violates these terms.
+            7. Expulsion. We may suspend or expel your attendance at any time, without notice, for
+            conduct that violates these decrees.
           </p>
         </div>
         <DialogFooter>
           <DialogClose render={<Button variant='ghost' />}>Decline</DialogClose>
-          <DialogClose render={<Button />}>Accept</DialogClose>
+          <DialogClose render={<Button />}>I solemnly swear</DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -150,18 +149,18 @@ export const NoCloseButton: Story = {
   name: 'No close button',
   render: () => (
     <Dialog>
-      <DialogTrigger render={<Button variant='outline' />}>Open dialog</DialogTrigger>
+      <DialogTrigger render={<Button variant='outline' />}>Open the sealed letter</DialogTrigger>
       <DialogContent showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle>Confirm your email</DialogTitle>
+          <DialogTitle>Confirm your owl address</DialogTitle>
           <DialogDescription>
-            We sent a confirmation link to your inbox. This dialog only closes through the buttons
+            We sent an owl to langdon@harvard.edu. This letter only closes through the buttons
             below.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <DialogClose render={<Button variant='ghost' />}>Resend later</DialogClose>
-          <DialogClose render={<Button />}>Got it</DialogClose>
+          <DialogClose render={<Button variant='ghost' />}>Send an owl later</DialogClose>
+          <DialogClose render={<Button />}>Noted</DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -26,9 +26,9 @@ const meta = {
 type Story = StoryObj<typeof meta>
 
 const notifications = [
-  { title: 'Your invoice has been paid', time: '2h ago' },
-  { title: 'New comment on your PR', time: '4h ago' },
-  { title: 'Weekly digest is ready', time: '1d ago' }
+  { title: 'Your Gringotts vault statement is ready', time: '2h ago' },
+  { title: 'Howler received from Molly Weasley', time: '4h ago' },
+  { title: 'Daily Prophet morning edition is ready', time: '1d ago' }
 ]
 
 const styles = stylex.create({
@@ -75,16 +75,16 @@ export const Playground: Story = {
   render: () => (
     <div {...stylex.props(styles.root)}>
       <div>
-        <div {...stylex.props(styles.title)}>Base UI Primitives</div>
-        <div {...stylex.props(styles.muted)}>An open-source UI component library.</div>
+        <div {...stylex.props(styles.title)}>Professor Robert Langdon</div>
+        <div {...stylex.props(styles.muted)}>Symbologist, Harvard University.</div>
       </div>
       <Separator />
       <div {...stylex.props(styles.row)}>
-        <span>Blog</span>
+        <span>Louvre</span>
         <Separator orientation='vertical' />
-        <span>Docs</span>
+        <span>Vatican</span>
         <Separator orientation='vertical' />
-        <span>Source</span>
+        <span>CERN</span>
       </div>
     </div>
   )
@@ -93,11 +93,11 @@ export const Playground: Story = {
 export const Vertical: Story = {
   render: () => (
     <div {...stylex.props(styles.row)}>
-      <span>Blog</span>
+      <span>Louvre</span>
       <Separator orientation='vertical' />
-      <span>Docs</span>
+      <span>Vatican</span>
       <Separator orientation='vertical' />
-      <span>Source</span>
+      <span>CERN</span>
     </div>
   )
 }

@@ -48,13 +48,13 @@ export const Playground: Story = {
         <EmptyMedia variant='icon'>
           <PackageIcon {...stylex.props(styles.icon)} />
         </EmptyMedia>
-        <EmptyTitle>No projects yet</EmptyTitle>
+        <EmptyTitle>No potions brewed</EmptyTitle>
         <EmptyDescription>
-          You haven't created any projects. Get started by creating your first one.
+          You haven't brewed anything yet. Start with a simple Cure for Boils.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button size='sm'>Create project</Button>
+        <Button size='sm'>Brew a potion</Button>
       </EmptyContent>
     </Empty>
   )
@@ -67,12 +67,12 @@ export const Outline: Story = {
         <EmptyMedia variant='icon'>
           <TextIcon {...stylex.props(styles.icon)} />
         </EmptyMedia>
-        <EmptyTitle>No messages</EmptyTitle>
-        <EmptyDescription>You're all caught up. New messages will show up here.</EmptyDescription>
+        <EmptyTitle>No owls today</EmptyTitle>
+        <EmptyDescription>No letters from Hogwarts. New post will show up here.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <Button variant='outline' size='sm'>
-          Refresh
+          Check the owlery
         </Button>
       </EmptyContent>
     </Empty>
@@ -86,15 +86,15 @@ export const WithAvatar: Story = {
       <EmptyHeader>
         <EmptyMedia>
           <Avatar size='lg'>
-            <AvatarImage src='https://github.com/madeui.png' alt='@madeui' />
-            <AvatarFallback>MD</AvatarFallback>
+            <AvatarImage src='https://github.com/madeui.png' alt='Luna Lovegood' />
+            <AvatarFallback>LL</AvatarFallback>
           </Avatar>
         </EmptyMedia>
-        <EmptyTitle>No team members</EmptyTitle>
-        <EmptyDescription>Invite people to collaborate on this project.</EmptyDescription>
+        <EmptyTitle>No aurors found</EmptyTitle>
+        <EmptyDescription>Recruit members for the Order of the Phoenix.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button size='sm'>Invite members</Button>
+        <Button size='sm'>Send an owl</Button>
       </EmptyContent>
     </Empty>
   )
@@ -108,12 +108,12 @@ export const WithInputGroup: Story = {
         <EmptyMedia variant='icon'>
           <SearchIcon {...stylex.props(styles.icon)} />
         </EmptyMedia>
-        <EmptyTitle>No results found</EmptyTitle>
-        <EmptyDescription>Try searching for a different keyword.</EmptyDescription>
+        <EmptyTitle>No spells found</EmptyTitle>
+        <EmptyDescription>Try a different incantation.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <InputGroup>
-          <InputGroupInput placeholder='Search…' />
+          <InputGroupInput placeholder='Search spells…' />
           <InputGroupAddon>
             <SearchIcon {...stylex.props(styles.smallIcon)} />
           </InputGroupAddon>

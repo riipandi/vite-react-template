@@ -33,26 +33,26 @@ const meta = {
 type Story = StoryObj<typeof meta>
 
 const fruits = [
-  { label: 'Apple', value: 'apple' },
-  { label: 'Banana', value: 'banana' },
-  { label: 'Cherry', value: 'cherry' }
+  { label: 'Phoenix feather', value: 'phoenix' },
+  { label: 'Dragon heartstring', value: 'dragon' },
+  { label: 'Unicorn hair', value: 'unicorn' }
 ]
 
 const groups = [
   {
-    label: 'Fruits',
+    label: 'Wand cores',
     items: [
-      { label: 'Apple', value: 'apple' },
-      { label: 'Banana', value: 'banana' },
-      { label: 'Cherry', value: 'cherry' }
+      { label: 'Phoenix feather', value: 'phoenix' },
+      { label: 'Dragon heartstring', value: 'dragon' },
+      { label: 'Unicorn hair', value: 'unicorn' }
     ]
   },
   {
-    label: 'Vegetables',
+    label: 'Potion ingredients',
     items: [
-      { label: 'Carrot', value: 'carrot' },
-      { label: 'Potato', value: 'potato' },
-      { label: 'Onion', value: 'onion' }
+      { label: 'Bezoar', value: 'bezoar' },
+      { label: 'Asphodel', value: 'asphodel' },
+      { label: 'Wormwood', value: 'wormwood' }
     ]
   }
 ]
@@ -60,13 +60,14 @@ const groups = [
 const items = groups.flatMap((group) => group.items)
 
 const timezones = [
-  'UTC-08:00 Pacific',
-  'UTC-07:00 Mountain',
-  'UTC-06:00 Central',
-  'UTC-05:00 Eastern',
+  'UTC-08:00 Salem',
+  'UTC-07:00 Denver',
+  'UTC-06:00 Mexico City',
+  'UTC-05:00 Boston',
   'UTC-03:00 Buenos Aires',
   'UTC+00:00 London',
   'UTC+01:00 Paris',
+  'UTC+01:00 Geneva',
   'UTC+02:00 Athens',
   'UTC+03:00 Istanbul',
   'UTC+04:00 Dubai',
@@ -74,22 +75,21 @@ const timezones = [
   'UTC+07:00 Bangkok',
   'UTC+08:00 Singapore',
   'UTC+09:00 Tokyo',
-  'UTC+10:00 Sydney',
   'UTC+12:00 Auckland'
 ].map((label) => ({ label, value: label }))
 
 const plansWithOptions = [
-  { label: 'Free', value: 'free' },
-  { label: 'Pro', value: 'pro' },
-  { label: 'Enterprise (contact us)', value: 'enterprise', disabled: true }
+  { label: 'Muggle', value: 'free' },
+  { label: 'Prefect', value: 'pro' },
+  { label: 'Ministry of Magic (contact us)', value: 'enterprise', disabled: true }
 ]
 
-const disabledFruits = [{ label: 'Apple', value: 'apple' }]
+const disabledFruits = [{ label: 'Phoenix feather', value: 'phoenix' }]
 
 const invalidPlans = [
-  { label: 'Free', value: 'free' },
-  { label: 'Pro', value: 'pro' },
-  { label: 'Enterprise', value: 'enterprise' }
+  { label: 'Muggle', value: 'free' },
+  { label: 'Prefect', value: 'pro' },
+  { label: 'Ministry of Magic', value: 'enterprise' }
 ]
 
 export default meta
@@ -99,7 +99,7 @@ export const Playground: Story = {
   render: (args) => (
     <Select {...args}>
       <SelectTrigger>
-        <SelectValue placeholder='Select a fruit' />
+        <SelectValue placeholder='Select a wand core' />
       </SelectTrigger>
       <SelectContent>
         {fruits.map(({ label, value }) => (
@@ -117,7 +117,7 @@ export const Groups: Story = {
   render: (args) => (
     <Select {...args}>
       <SelectTrigger>
-        <SelectValue placeholder='Select a food' />
+        <SelectValue placeholder='Select an ingredient' />
       </SelectTrigger>
       <SelectContent>
         {groups.map((group, index) => (
@@ -141,7 +141,7 @@ export const Scrollable: Story = {
   render: (args) => (
     <Select {...args}>
       <SelectTrigger>
-        <SelectValue placeholder='Select a timezone' />
+        <SelectValue placeholder='Select a city' />
       </SelectTrigger>
       <SelectContent>
         {timezones.map(({ label, value }) => (
@@ -195,10 +195,10 @@ export const Invalid: Story = {
   args: { items: invalidPlans },
   render: (args) => (
     <Field invalid>
-      <FieldLabel htmlFor='select-invalid-plan'>Plan</FieldLabel>
+      <FieldLabel htmlFor='select-invalid-plan'>Gringotts plan</FieldLabel>
       <Select {...args}>
         <SelectTrigger id='select-invalid-plan'>
-          <SelectValue placeholder='Select a plan' />
+          <SelectValue placeholder='Select a Gringotts plan' />
         </SelectTrigger>
         <SelectContent>
           {invalidPlans.map(({ label, value }) => (
@@ -208,7 +208,7 @@ export const Invalid: Story = {
           ))}
         </SelectContent>
       </Select>
-      <FieldError>Please select a plan to continue.</FieldError>
+      <FieldError>Please select a Gringotts plan to continue.</FieldError>
     </Field>
   )
 }

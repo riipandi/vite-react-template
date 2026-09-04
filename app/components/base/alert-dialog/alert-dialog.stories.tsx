@@ -47,18 +47,20 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <AlertDialog>
-      <AlertDialogTrigger render={<Button variant='outline' />}>Delete account</AlertDialogTrigger>
+      <AlertDialogTrigger render={<Button variant='outline' />}>
+        Seal the cryptex
+      </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>Are you absolutely sure, Professor?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your account and remove your
-            data from our servers.
+            This action cannot be undone. The cryptex will seal itself forever and the Priory&apos;s
+            secret will be lost to the Illuminati.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogCancel variant='destructive'>Delete</AlertDialogCancel>
+          <AlertDialogCancel variant='destructive'>Seal</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -68,20 +70,22 @@ export const Playground: Story = {
 export const Media: Story = {
   render: () => (
     <AlertDialog>
-      <AlertDialogTrigger render={<Button variant='outline' />}>Empty trash</AlertDialogTrigger>
+      <AlertDialogTrigger render={<Button variant='outline' />}>
+        Empty the Room of Requirement
+      </AlertDialogTrigger>
       <AlertDialogContent size='sm'>
         <AlertDialogHeader>
           <AlertDialogMedia>
             <Trash2Icon {...stylex.props(styles.icon)} />
           </AlertDialogMedia>
-          <AlertDialogTitle>Empty trash?</AlertDialogTitle>
+          <AlertDialogTitle>Empty the room?</AlertDialogTitle>
           <AlertDialogDescription>
-            All items in the trash will be permanently deleted.
+            Everything hidden inside will be permanently vanished from the castle.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogCancel variant='destructive'>Empty</AlertDialogCancel>
+          <AlertDialogCancel variant='destructive'>Vanish</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -91,15 +95,19 @@ export const Media: Story = {
 export const Small: Story = {
   render: () => (
     <AlertDialog>
-      <AlertDialogTrigger render={<Button variant='outline' />}>Leave page</AlertDialogTrigger>
+      <AlertDialogTrigger render={<Button variant='outline' />}>
+        Leave the archive
+      </AlertDialogTrigger>
       <AlertDialogContent size='sm'>
         <AlertDialogHeader>
-          <AlertDialogTitle>Leave without saving?</AlertDialogTitle>
-          <AlertDialogDescription>Your changes will be lost.</AlertDialogDescription>
+          <AlertDialogTitle>Leave without casting Lumos?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Your unfinished incantations will be lost.
+          </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Stay</AlertDialogCancel>
-          <AlertDialogCancel variant='destructive'>Leave</AlertDialogCancel>
+          <AlertDialogCancel variant='destructive'>Disapparate</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -121,21 +129,21 @@ export const Destructive: Story = {
     return (
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogTrigger render={<Button variant='destructive' />}>
-          Delete account
+          Close the Gringotts vault
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete your account?</AlertDialogTitle>
+            <AlertDialogTitle>Close your vault?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your account and remove
-              your data from our servers.
+              This action cannot be undone. The goblins will permanently close the vault and melt
+              down every remaining Galleon.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
             <AlertDialogAction variant='destructive' disabled={deleting} onClick={handleDelete}>
               {deleting && <Spinner />}
-              {deleting ? 'Deleting…' : 'Delete account'}
+              {deleting ? 'Closing…' : 'Close the vault'}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

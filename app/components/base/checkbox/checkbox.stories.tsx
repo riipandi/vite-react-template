@@ -45,7 +45,8 @@ export const Playground: Story = {
   args: { defaultChecked: true },
   render: (args) => (
     <Label>
-      <Checkbox {...args} aria-label='Accept terms' /> Accept terms and conditions
+      <Checkbox {...args} aria-label='Accept the Hogwarts letter' /> Accept the Hogwarts letter and
+      its terms
     </Label>
   )
 }
@@ -54,7 +55,7 @@ export const Indeterminate: Story = {
   args: { indeterminate: true },
   render: (args) => (
     <Label>
-      <Checkbox {...args} aria-label='Select all' /> Select all
+      <Checkbox {...args} aria-label='Select all Marauders' /> Select all Marauders
     </Label>
   )
 }
@@ -64,8 +65,10 @@ export const Description: Story = {
     <Field orientation='horizontal'>
       <Checkbox id='checkbox-description-newsletter' defaultChecked />
       <FieldContent>
-        <FieldLabel htmlFor='checkbox-description-newsletter'>Newsletter</FieldLabel>
-        <FieldDescription>Receive occasional product updates and announcements.</FieldDescription>
+        <FieldLabel htmlFor='checkbox-description-newsletter'>Daily Prophet</FieldLabel>
+        <FieldDescription>
+          Receive occasional owl-delivered updates and announcements from Hogwarts.
+        </FieldDescription>
       </FieldContent>
     </Field>
   )
@@ -74,7 +77,8 @@ export const Description: Story = {
 export const Disabled: Story = {
   render: () => (
     <Label>
-      <Checkbox disabled defaultChecked aria-label='Disabled checkbox' /> Disabled
+      <Checkbox disabled defaultChecked aria-label='Hogsmeade permission slip' /> Hogsmeade
+      permission slip
     </Label>
   )
 }
@@ -84,8 +88,8 @@ export const Invalid: Story = {
     <Field orientation='horizontal' invalid>
       <Checkbox id='checkbox-invalid-terms' />
       <FieldContent>
-        <FieldLabel htmlFor='checkbox-invalid-terms'>Accept terms and conditions</FieldLabel>
-        <FieldError>You must accept the terms to continue.</FieldError>
+        <FieldLabel htmlFor='checkbox-invalid-terms'>Accept the Hogwarts school rules</FieldLabel>
+        <FieldError>You must accept the school rules before the Sorting begins.</FieldError>
       </FieldContent>
     </Field>
   )
@@ -93,15 +97,15 @@ export const Invalid: Story = {
 
 export const Group: Story = {
   render: () => (
-    <CheckboxGroup defaultValue={['newsletter']} aria-label='Email preferences'>
+    <CheckboxGroup defaultValue={['newsletter']} aria-label='Owl post preferences'>
       <Label>
-        <Checkbox name='newsletter' /> Newsletter
+        <Checkbox name='newsletter' /> Daily Prophet
       </Label>
       <Label>
-        <Checkbox name='product-updates' /> Product updates
+        <Checkbox name='product-updates' /> Ministry memos
       </Label>
       <Label>
-        <Checkbox name='promotions' /> Promotions
+        <Checkbox name='promotions' /> Weasleys&apos; Wizard Wheezes deals
       </Label>
     </CheckboxGroup>
   )
@@ -117,19 +121,19 @@ export const GroupWithParent: Story = {
         value={value}
         onValueChange={setValue}
         allValues={notifications}
-        aria-label='Notification preferences'
+        aria-label='Owl post preferences'
       >
         <Label>
-          <Checkbox parent /> All notifications
+          <Checkbox parent /> All owl post
         </Label>
         <Label style={styles.child}>
-          <Checkbox name='comments' /> Comments
+          <Checkbox name='comments' /> Howlers
         </Label>
         <Label style={styles.child}>
-          <Checkbox name='mentions' /> Mentions
+          <Checkbox name='mentions' /> Prophet mentions
         </Label>
         <Label style={styles.child}>
-          <Checkbox name='follows' /> Follows
+          <Checkbox name='follows' /> Quidditch updates
         </Label>
       </CheckboxGroup>
     )

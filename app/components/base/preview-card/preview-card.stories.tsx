@@ -55,17 +55,19 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <PreviewCard>
-      <PreviewCardTrigger render={<Button variant='ghost' />}>@nextjs</PreviewCardTrigger>
+      <PreviewCardTrigger render={<Button variant='ghost' />}>@dumbledore</PreviewCardTrigger>
       <PreviewCardContent>
         <div {...stylex.props(styles.row)}>
           <Avatar>
-            <AvatarImage src='https://github.com/vercel.png' alt='@vercel' />
-            <AvatarFallback>VC</AvatarFallback>
+            <AvatarImage src='https://github.com/vercel.png' alt='@dumbledore' />
+            <AvatarFallback>AD</AvatarFallback>
           </Avatar>
           <div {...stylex.props(styles.info)}>
-            <span {...stylex.props(styles.name)}>@nextjs</span>
-            <span>The React framework — created and maintained by Vercel.</span>
-            <span {...stylex.props(styles.muted)}>Joined December 2021</span>
+            <span {...stylex.props(styles.name)}>@dumbledore</span>
+            <span>
+              Transfiguration professor at Hogwarts — keeper of the Philosopher&apos;s Stone.
+            </span>
+            <span {...stylex.props(styles.muted)}>Joined September 1892</span>
           </div>
         </div>
       </PreviewCardContent>
@@ -79,7 +81,7 @@ export const Sides: Story = {
       {sides.map((side) => (
         <PreviewCard key={side}>
           <PreviewCardTrigger render={<Button variant='outline' />}>{side}</PreviewCardTrigger>
-          <PreviewCardContent side={side}>Preview card on {side}</PreviewCardContent>
+          <PreviewCardContent side={side}>Preview floats to the {side}</PreviewCardContent>
         </PreviewCard>
       ))}
     </div>

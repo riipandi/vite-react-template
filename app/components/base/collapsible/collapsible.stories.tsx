@@ -153,15 +153,15 @@ export const Playground: Story = {
   render: () => (
     <Collapsible defaultOpen {...stylex.props(styles.root)}>
       <div {...stylex.props(styles.header)}>
-        <span {...stylex.props(styles.title)}>@peduarte starred 3 repositories</span>
+        <span {...stylex.props(styles.title)}>@hermione starred 3 repositories</span>
         <CollapsibleTrigger render={<Button variant='ghost' size='sm' />}>
-          Toggle
+          Alohomora
         </CollapsibleTrigger>
       </div>
-      <div {...stylex.props(styles.repo)}>@radix-ui/primitives</div>
+      <div {...stylex.props(styles.repo)}>@marauders/map</div>
       <CollapsibleContent style={styles.panel}>
-        <div {...stylex.props(styles.repo)}>@base-ui/react</div>
-        <div {...stylex.props(styles.repo)}>@stylexjs/stylex</div>
+        <div {...stylex.props(styles.repo)}>@gringotts/vaults</div>
+        <div {...stylex.props(styles.repo)}>@ministry/memos</div>
       </CollapsibleContent>
     </Collapsible>
   )
@@ -170,17 +170,17 @@ export const Playground: Story = {
 export const FileTree: Story = {
   render: () => (
     <div {...stylex.props(styles.tree)}>
-      <Folder name='src' defaultOpen depth={0}>
-        <Folder name='components' defaultOpen depth={1}>
-          <File name='button.tsx' depth={2} />
-          <File name='dialog.tsx' depth={2} />
+      <Folder name='marauders-map' defaultOpen depth={0}>
+        <Folder name='spells' defaultOpen depth={1}>
+          <File name='lumos.tsx' depth={2} />
+          <File name='nox.tsx' depth={2} />
         </Folder>
-        <File name='index.ts' depth={1} />
+        <File name='incantations.ts' depth={1} />
       </Folder>
-      <Folder name='public' depth={0}>
-        <File name='favicon.ico' depth={1} />
+      <Folder name='diagon-alley' depth={0}>
+        <File name='golden-snitch.ico' depth={1} />
       </Folder>
-      <File name='package.json' depth={0} />
+      <File name='horcrux.json' depth={0} />
     </div>
   )
 }

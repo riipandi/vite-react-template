@@ -73,26 +73,29 @@ const styles = stylex.create({
 export default meta
 
 export const Playground: Story = {
-  args: { variant: 'body-1', children: 'The quick brown fox jumps over the lazy dog' },
+  args: {
+    variant: 'body-1',
+    children: 'Professor Langdon deciphered the cryptex beneath the Louvre'
+  },
   render: (args) => <Text {...args} />
 }
 
 export const Variants: Story = {
   render: () => (
     <div {...stylex.props(styles.col)}>
-      <Text variant='headline-1'>Headline 1</Text>
-      <Text variant='headline-2'>Headline 2</Text>
-      <Text variant='headline-3'>Headline 3</Text>
-      <Text variant='featured-1'>Title 1</Text>
-      <Text variant='featured-2'>Title 2</Text>
-      <Text variant='featured-3'>Title 3</Text>
-      <Text variant='featured-4'>Title 4</Text>
-      <Text variant='featured-5'>Title 5</Text>
-      <Text variant='featured-6'>Title 6</Text>
-      <Text variant='body-1'>Body 1</Text>
-      <Text variant='body-2'>Body 2</Text>
-      <Text variant='caption-1'>Caption 1</Text>
-      <Text variant='caption-2'>Caption 2</Text>
+      <Text variant='headline-1'>The Boy Who Lived</Text>
+      <Text variant='headline-2'>The Lost Symbol</Text>
+      <Text variant='headline-3'>Hogwarts: A History</Text>
+      <Text variant='featured-1'>The Louvre by Night</Text>
+      <Text variant='featured-2'>Gringotts Under Lockdown</Text>
+      <Text variant='featured-3'>Decoding the Cryptex</Text>
+      <Text variant='featured-4'>Secrets of the Priory</Text>
+      <Text variant='featured-5'>The Last Supper Cipher</Text>
+      <Text variant='featured-6'>Shadows of the Vatican</Text>
+      <Text variant='body-1'>Langdon studied the symbols in silence.</Text>
+      <Text variant='body-2'>Hermione cast the charm perfectly.</Text>
+      <Text variant='caption-1'>From the Daily Prophet archives</Text>
+      <Text variant='caption-2'>Grand Gallery, the Louvre</Text>
       <Text variant={{ s: 'body-2', m: 'featured-4' }}>Responsive variant</Text>
     </div>
   )
@@ -139,7 +142,7 @@ export const Decoration: Story = {
 export const Wrap: Story = {
   render: () => (
     <Text wrap='balance' variant='featured-3'>
-      The design system you want to build
+      The manuscript every symbologist wants to decipher
     </Text>
   )
 }
@@ -147,9 +150,9 @@ export const Wrap: Story = {
 export const Monospace: Story = {
   render: () => (
     <div {...stylex.props(styles.col)}>
-      <Text monospace>Content</Text>
+      <Text monospace>Fib: 1 1 2 3 5 8</Text>
       <Text monospace variant='featured-1' weight='regular'>
-        Content
+        CERN 1998
       </Text>
     </div>
   )
@@ -159,10 +162,10 @@ export const MaxLines: Story = {
   render: () => (
     <div {...stylex.props(styles.clamp)}>
       <Text maxLines={2}>
-        There are many variations of passages of Lorem Ipsum available, but the majority have
-        suffered alteration in some form, by injected humour, or randomised words which don't look
-        even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be
-        sure there isn't anything embarrassing hidden in the middle of text.
+        The Marauder's Map revealed many variations of hidden passages, but the majority have
+        suffered alteration in some form, by mischievous enchantments, or randomised footprints
+        which don't look even slightly believable. If you are going to trace a passage of the Map,
+        you need to be sure there isn't anything embarrassing hidden in the middle of the parchment.
       </Text>
     </div>
   )
@@ -175,9 +178,9 @@ export const Numeric: Story = {
 export const Align: Story = {
   render: () => (
     <div {...stylex.props(styles.col)}>
-      <Text align='start'>Text content</Text>
-      <Text align='center'>Text content</Text>
-      <Text align='end'>Text content</Text>
+      <Text align='start'>Expelliarmus</Text>
+      <Text align='center'>Expelliarmus</Text>
+      <Text align='end'>Expelliarmus</Text>
       <Text align={{ s: 'center', m: 'start' }}>Responsive alignment</Text>
     </div>
   )
@@ -187,9 +190,9 @@ export const Render: Story = {
   name: 'as',
   render: () => (
     <div {...stylex.props(styles.col)}>
-      <Text render={<h1 />}>Content</Text>
-      <Text variant='featured-3'>Content</Text>
-      <Text variant={{ s: 'featured-3', m: 'featured-4' }}>Content</Text>
+      <Text render={<h1 />}>The Da Vinci Code</Text>
+      <Text variant='featured-3'>Chapter 1: The Louvre</Text>
+      <Text variant={{ s: 'featured-3', m: 'featured-4' }}>Chapter 2: The Vatican</Text>
     </div>
   ),
   play: async ({ canvas }) => {

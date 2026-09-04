@@ -55,7 +55,7 @@ export const Playground: Story = {
 
     return (
       <Progress value={value} locale='en-US' style={styles.root}>
-        <ProgressLabel>Uploading…</ProgressLabel>
+        <ProgressLabel>Brewing Polyjuice Potion…</ProgressLabel>
         <ProgressValue />
       </Progress>
     )
@@ -66,7 +66,7 @@ export const Label: Story = {
   args: { value: 72, locale: 'en-US' },
   render: (args) => (
     <Progress {...args} style={styles.root}>
-      <ProgressLabel>Storage used</ProgressLabel>
+      <ProgressLabel>Gringotts vault capacity used</ProgressLabel>
       <ProgressValue />
     </Progress>
   )
@@ -88,7 +88,7 @@ export const Controlled: Story = {
           onClick={() => setValue((current) => Math.min(current + 20, 100))}
           style={styles.button}
         >
-          Advance
+          Decrypt next ring
         </Button>
       </div>
     )

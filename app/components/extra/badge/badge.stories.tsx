@@ -42,15 +42,15 @@ export default meta
 
 export const Playground: Story = {
   args: { variant: 'primary' },
-  render: (args) => <Badge {...args}>Badge</Badge>
+  render: (args) => <Badge {...args}>Gryffindor</Badge>
 }
 
 export const Variants: Story = {
   render: () => (
     <div {...stylex.props(styles.row)}>
-      <Badge variant='secondary'>Secondary</Badge>
-      <Badge variant='outline'>Outline</Badge>
-      <Badge variant='destructive'>Destructive</Badge>
+      <Badge variant='secondary'>Hufflepuff</Badge>
+      <Badge variant='outline'>Ravenclaw</Badge>
+      <Badge variant='destructive'>Azkaban</Badge>
     </div>
   )
 }
@@ -60,7 +60,7 @@ export const Icon: Story = {
   render: () => (
     <Badge variant='secondary'>
       <CheckIcon {...stylex.props(styles.icon)} />
-      Verified
+      Ministry approved
     </Badge>
   )
 }
@@ -70,7 +70,7 @@ export const WithSpinner: Story = {
   render: () => (
     <Badge variant='secondary'>
       <Spinner {...stylex.props(styles.spinner)} />
-      Syncing
+      Apparating
     </Badge>
   )
 }
@@ -78,7 +78,7 @@ export const WithSpinner: Story = {
 export const Link: Story = {
   render: () => (
     <Badge variant='secondary' render={<a href='#new-release' />}>
-      New release
+      New at Weasleys'
     </Badge>
   )
 }

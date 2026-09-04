@@ -56,7 +56,7 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <div {...stylex.props(styles.wrap)}>
-      <Input placeholder='Email' type='email' />
+      <Input placeholder='Owl post address' type='email' />
     </div>
   )
 }
@@ -66,9 +66,9 @@ export const WithLabel: Story = {
   render: () => (
     <div {...stylex.props(styles.field)}>
       <label htmlFor='input-with-label-email' {...stylex.props(styles.label)}>
-        Email
+        Owl post address
       </label>
-      <Input id='input-with-label-email' placeholder='you@example.com' type='email' />
+      <Input id='input-with-label-email' placeholder='luna.lovegood@ravenclaw.edu' type='email' />
     </div>
   )
 }
@@ -76,7 +76,7 @@ export const WithLabel: Story = {
 export const Disabled: Story = {
   render: () => (
     <div {...stylex.props(styles.wrap)}>
-      <Input placeholder='Disabled' disabled />
+      <Input placeholder='Sealed by the Ministry' disabled />
     </div>
   )
 }
@@ -84,9 +84,9 @@ export const Disabled: Story = {
 export const Invalid: Story = {
   render: () => (
     <Field invalid style={styles.narrow}>
-      <FieldLabel htmlFor='input-invalid-email'>Email</FieldLabel>
-      <Input id='input-invalid-email' type='email' defaultValue='not-an-email' />
-      <FieldError>Please enter a valid email address.</FieldError>
+      <FieldLabel htmlFor='input-invalid-email'>Owl post address</FieldLabel>
+      <Input id='input-invalid-email' type='email' defaultValue='ron.weasley@hogwarts' />
+      <FieldError>That owl address is not registered with the Owl Office.</FieldError>
     </Field>
   )
 }
@@ -95,7 +95,7 @@ export const File: Story = {
   name: 'File',
   render: () => (
     <Field style={styles.narrow}>
-      <FieldLabel htmlFor='input-file-picture'>Picture</FieldLabel>
+      <FieldLabel htmlFor='input-file-picture'>Chocolate Frog card</FieldLabel>
       <Input id='input-file-picture' type='file' />
     </Field>
   )
@@ -105,10 +105,10 @@ export const WithButton: Story = {
   name: 'With button',
   render: () => (
     <Field style={styles.wrap}>
-      <FieldLabel htmlFor='input-with-button-search'>Search</FieldLabel>
+      <FieldLabel htmlFor='input-with-button-search'>Hogwarts archives</FieldLabel>
       <div {...stylex.props(styles.row)}>
-        <Input id='input-with-button-search' placeholder='Search…' />
-        <Button type='submit'>Search</Button>
+        <Input id='input-with-button-search' placeholder='Search the restricted section…' />
+        <Button type='submit'>Accio</Button>
       </div>
     </Field>
   )

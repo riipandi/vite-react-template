@@ -25,7 +25,7 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <Label>
-      <Checkbox aria-label='Accept terms' /> Accept terms and conditions
+      <Checkbox aria-label='Accept the Hogwarts letter' /> Accept the Hogwarts letter and its terms
     </Label>
   )
 }

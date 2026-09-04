@@ -49,15 +49,15 @@ export const Playground: Story = {
   render: (args) => (
     <Card {...args} style={styles.card}>
       <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one click.</CardDescription>
+        <CardTitle>Submit to the Prophet</CardTitle>
+        <CardDescription>Publish your story in the Daily Prophet with one click.</CardDescription>
       </CardHeader>
       <CardContent>
-        <Input placeholder='Project name' />
+        <Input placeholder='Headline' />
       </CardContent>
       <CardFooter>
-        <Button>Deploy</Button>
-        <Button variant='ghost'>Cancel</Button>
+        <Button>Publish</Button>
+        <Button variant='ghost'>Discard</Button>
       </CardFooter>
     </Card>
   )
@@ -68,16 +68,16 @@ export const Action: Story = {
   render: (args) => (
     <Card {...args} style={styles.card}>
       <CardHeader>
-        <CardTitle>Notifications</CardTitle>
-        <CardDescription>You have 3 unread messages.</CardDescription>
+        <CardTitle>Howlers</CardTitle>
+        <CardDescription>You have 3 unread howlers.</CardDescription>
         <CardAction>
           <Button size='sm' variant='ghost'>
-            Mark all read
+            Burn all howlers
           </Button>
         </CardAction>
       </CardHeader>
       <CardContent>
-        <p>New comment on your pull request.</p>
+        <p>A red letter is smoking on the kitchen table.</p>
       </CardContent>
     </Card>
   )
@@ -88,11 +88,11 @@ export const Small: Story = {
   render: (args) => (
     <Card {...args} style={styles.smallCard}>
       <CardHeader>
-        <CardTitle>Compact card</CardTitle>
-        <CardDescription>Tighter padding for dense layouts.</CardDescription>
+        <CardTitle>Chocolate Frog card</CardTitle>
+        <CardDescription>Tighter padding for your collectibles.</CardDescription>
       </CardHeader>
       <CardFooter>
-        <Button size='sm'>Continue</Button>
+        <Button size='sm'>Collect</Button>
       </CardFooter>
     </Card>
   )

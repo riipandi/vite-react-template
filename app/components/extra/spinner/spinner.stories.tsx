@@ -51,7 +51,7 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <Button disabled>
-      <Spinner /> Loading…
+      <Spinner /> Divining…
     </Button>
   )
 }
@@ -71,11 +71,11 @@ export const Composition: Story = {
     <div {...stylex.props(styles.stack)}>
       <Badge variant='secondary'>
         <Spinner {...stylex.props(styles.spinnerSm)} />
-        Syncing
+        Brewing
       </Badge>
       <p {...stylex.props(styles.line)}>
         <Spinner />
-        Fetching the latest results…
+        Decoding the cryptex…
       </p>
     </div>
   )

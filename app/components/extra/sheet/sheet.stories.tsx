@@ -53,24 +53,24 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <Sheet>
-      <SheetTrigger render={<Button variant='outline' />}>Open</SheetTrigger>
+      <SheetTrigger render={<Button variant='outline' />}>Alohomora</SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
+          <SheetTitle>Edit vault record</SheetTitle>
           <SheetDescription>
-            Make changes to your profile here. Click save when you're done.
+            Make changes to the vault holder here. Click save when you're done.
           </SheetDescription>
         </SheetHeader>
         <div {...stylex.props(styles.fields)}>
           <Label>
-            Name <Input defaultValue='Pedro Duarte' />
+            Account holder <Input defaultValue='Luna Lovegood' />
           </Label>
           <Label>
-            Username <Input defaultValue='@peduarte' />
+            Vault key <Input defaultValue='@quibbler' />
           </Label>
         </div>
         <SheetFooter>
-          <SheetClose render={<Button />}>Save changes</SheetClose>
+          <SheetClose render={<Button />}>Save vault record</SheetClose>
           <SheetClose render={<Button variant='outline' />}>Close</SheetClose>
         </SheetFooter>
       </SheetContent>
@@ -86,8 +86,10 @@ export const Sides: Story = {
           <SheetTrigger render={<Button variant='outline' />}>{side}</SheetTrigger>
           <SheetContent side={side}>
             <SheetHeader>
-              <SheetTitle>Sheet from {side}</SheetTitle>
-              <SheetDescription>Slides in from the {side} edge of the screen.</SheetDescription>
+              <SheetTitle>Entrance on the {side}</SheetTitle>
+              <SheetDescription>
+                A hidden passage opens on the {side} side of the castle.
+              </SheetDescription>
             </SheetHeader>
           </SheetContent>
         </Sheet>
@@ -100,17 +102,15 @@ export const NoCloseButton: Story = {
   name: 'No close button',
   render: () => (
     <Sheet>
-      <SheetTrigger render={<Button variant='outline' />}>Open</SheetTrigger>
+      <SheetTrigger render={<Button variant='outline' />}>Alohomora</SheetTrigger>
       <SheetContent showCloseButton={false}>
         <SheetHeader>
-          <SheetTitle>Publish changes</SheetTitle>
-          <SheetDescription>
-            Review your changes, then publish or discard them below.
-          </SheetDescription>
+          <SheetTitle>Publish in the Daily Prophet</SheetTitle>
+          <SheetDescription>Review the article, then publish or discard it below.</SheetDescription>
         </SheetHeader>
         <SheetFooter>
-          <SheetClose render={<Button />}>Publish</SheetClose>
-          <SheetClose render={<Button variant='outline' />}>Discard</SheetClose>
+          <SheetClose render={<Button />}>Print edition</SheetClose>
+          <SheetClose render={<Button variant='outline' />}>Discard draft</SheetClose>
         </SheetFooter>
       </SheetContent>
     </Sheet>

@@ -76,7 +76,7 @@ export const Playground: Story = {
         <FileUpload name='file' onChange={(args) => setFiles((prev) => [...prev, ...args.value])}>
           <div {...stylex.props(styles.col)}>
             <MicIcon {...stylex.props(styles.icon)} strokeWidth={1.8} />
-            Drop files to attach
+            Drop wand permits here
           </div>
         </FileUpload>
         {files.length > 0 ? (
@@ -102,9 +102,9 @@ export const Trigger: Story = {
     <div {...stylex.props(styles.width)}>
       <FileUpload name='file'>
         <div>
-          Drop files to attach, or{' '}
+          Drop wand permits here, or{' '}
           <FileUploadTrigger>
-            <span {...stylex.props(styles.browse)}>browse</span>
+            <span {...stylex.props(styles.browse)}>browse Honeydukes</span>
           </FileUploadTrigger>
         </div>
       </FileUpload>
@@ -117,16 +117,20 @@ export const Variants: Story = {
   render: () => (
     <div {...stylex.props(styles.stack)}>
       <FileUpload name='file' inline onChange={console.log}>
-        <div {...stylex.props(styles.padded)}>Upload</div>
+        <div {...stylex.props(styles.padded)}>Owl order</div>
       </FileUpload>
       <FileUpload name='file-2' variant='headless' onChange={console.log}>
-        <Button variant='outline'>Upload</Button>
+        <Button variant='outline'>Upload wand permit</Button>
       </FileUpload>
       <FileUpload name='file-3' variant='headless' inline onChange={console.log}>
-        <Button>Upload</Button>
+        <Button>Upload broom license</Button>
       </FileUpload>
       <FileUpload name='file-4' variant='headless' inline onChange={console.log}>
-        {(props) => <Button variant={props.highlighted ? 'primary' : 'secondary'}>Upload</Button>}
+        {(props) => (
+          <Button variant={props.highlighted ? 'primary' : 'secondary'}>
+            Upload potion license
+          </Button>
+        )}
       </FileUpload>
     </div>
   )
@@ -139,7 +143,7 @@ export const Height: Story = {
       <FileUpload {...args}>
         <div {...stylex.props(styles.col)}>
           <MicIcon {...stylex.props(styles.icon)} strokeWidth={1.8} />
-          Drop files to attach
+          Drop wand permits here
         </div>
       </FileUpload>
     </div>
@@ -185,7 +189,7 @@ export const Disabled: Story = {
       <FileUpload {...args}>
         <div {...stylex.props(styles.row)}>
           <MicIcon {...stylex.props(styles.icon)} strokeWidth={1.8} />
-          Content
+          Drop wand permits here
         </div>
       </FileUpload>
     </div>

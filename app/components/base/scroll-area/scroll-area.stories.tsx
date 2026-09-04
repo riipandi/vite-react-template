@@ -1,7 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { ScrollArea } from './scroll-area.component'
+import * as React from 'react'
+import { Separator } from '#/components/base/separator'
+import { colors } from '#/styles/core/colors.stylex'
+import {
+  container,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  radius,
+  stroke
+} from '#/styles/core/tokens.stylex'
+import { ScrollArea, ScrollBar } from './scroll-area.component'
 
 const meta = {
   title: 'Base Components/ScrollArea',
@@ -10,7 +21,7 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
         <Story />
       </div>
     )
@@ -19,43 +30,107 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
+const tags = Array.from({ length: 50 }, (_, i) => `Daily Prophet edition ${50 - i}`)
+
+const artworks = [
+  { title: 'The Mona Lisa', artist: 'Jacques Saunière' },
+  { title: 'The Vitruvian Man', artist: 'Robert Langdon' },
+  { title: 'The Last Supper Cipher', artist: 'Silas' },
+  { title: 'Portrait of Hogwarts', artist: 'Luna Lovegood' },
+  { title: "Marauder's Map", artist: 'Sirius Black' },
+  { title: 'The Golden Snitch', artist: 'Dobby' }
+]
+
+const styles = stylex.create({
+  root: {
+    borderColor: colors.borderNeutral,
+    borderRadius: radius.medium,
+    borderStyle: 'solid',
+    borderWidth: stroke.border,
+    height: container.xs,
+    width: container.xs
+  },
+  inner: {
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: fontFamily.body,
+    gap: 8,
+    padding: 16
+  },
+  heading: {
+    fontSize: fontSize.body2,
+    fontWeight: fontWeight.medium,
+    margin: 0
+  },
+  tag: {
+    fontSize: fontSize.body2
+  },
+  wide: {
+    width: container.xl
+  },
+  row: {
+    display: 'flex',
+    gap: 16,
+    paddingBottom: 16,
+    width: 'max-content'
+  },
+  card: {
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: fontFamily.body,
+    gap: 8,
+    width: container.card
+  },
+  thumb: {
+    backgroundColor: colors.backgroundNeutral,
+    borderColor: colors.borderNeutral,
+    borderRadius: radius.medium,
+    borderStyle: 'solid',
+    borderWidth: stroke.border,
+    height: 64,
+    width: '100%'
+  },
+  title: {
+    fontSize: fontSize.body2,
+    fontWeight: fontWeight.medium
+  },
+  artist: {
+    color: colors.foregroundNeutralFaded,
+    fontSize: fontSize.caption1
+  }
+})
+
 export default meta
 
 export const Playground: Story = {
   render: () => (
-    <ScrollArea style={atoms.height['240px']}>
-      <div {...stylex.props(atoms.padding['16px'])}>
-        <p>Kafka, twelve monkeys, temporal blues, time is the fire in which we burn.</p>
-        <p>Long time no see the apocalypse. Great minds think alike, but fools rarely differ.</p>
-        <p>It is a curious thing, the death of a human being, even one we love.</p>
-        <p>Don't panic. We're in the golden age of remembering what we've forgotten.</p>
-        <p>Everything inside this box scrolls vertically with a custom scrollbar.</p>
+    <ScrollArea style={styles.root}>
+      <div {...stylex.props(styles.inner)}>
+        <h4 {...stylex.props(styles.heading)}>Daily Prophet editions</h4>
+        {tags.map((tag) => (
+          <React.Fragment key={tag}>
+            <div {...stylex.props(styles.tag)}>{tag}</div>
+            <Separator />
+          </React.Fragment>
+        ))}
       </div>
     </ScrollArea>
   )
 }
 
-export const Fade: Story = {
+export const Horizontal: Story = {
   render: () => (
-    <ScrollArea fade style={atoms.height['240px']}>
-      <div {...stylex.props(atoms.padding['16px'])}>
-        <p style={{ height: 48 }}>
-          Kafka, twelve monkeys, temporal blues, time is the fire in which we burn.
-        </p>
-        <p style={{ height: 48 }}>
-          Long time no see the apocalypse. Great minds think alike, but fools rarely differ.
-        </p>
-        <p style={{ height: 48 }}>
-          It is a curious thing, the death of a human being, even one we love.
-        </p>
-        <p style={{ height: 48 }}>
-          Don't panic. We're in the golden age of remembering what we've forgotten.
-        </p>
-        <p style={{ height: 48 }}>
-          Everything inside this box scrolls vertically with a custom scrollbar.
-        </p>
-        <p style={{ height: 48 }}>The fade mask follows the scroll position on every edge.</p>
+    <ScrollArea style={styles.wide}>
+      <div {...stylex.props(styles.row)}>
+        {artworks.map((art) => (
+          <div key={art.title} {...stylex.props(styles.card)}>
+            <div {...stylex.props(styles.thumb)} />
+            <div {...stylex.props(styles.title)}>{art.title}</div>
+            <div {...stylex.props(styles.artist)}>{art.artist}</div>
+          </div>
+        ))}
       </div>
+      <ScrollBar orientation='horizontal' />
     </ScrollArea>
   )
 }

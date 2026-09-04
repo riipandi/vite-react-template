@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { container, radius } from '#/styles/core/tokens.stylex'
 import { Skeleton } from './skeleton.component'
 
 const meta = {
@@ -10,7 +11,7 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
         <Story />
       </div>
     )
@@ -19,19 +20,118 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
+const styles = stylex.create({
+  root: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: 16
+  },
+  avatar: {
+    borderRadius: radius.circular,
+    height: 48,
+    width: 48
+  },
+  lines: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 8
+  },
+  lineWide: {
+    height: 16,
+    width: container.xs
+  },
+  line: {
+    height: 16,
+    width: 64
+  },
+  cardRoot: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 12,
+    width: container.card
+  },
+  image: {
+    borderRadius: radius.large,
+    height: container.xs,
+    width: '100%'
+  },
+  cardLineWide: {
+    height: 16,
+    width: '100%'
+  },
+  cardLine: {
+    height: 16,
+    width: '60%'
+  },
+  listRoot: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 16,
+    width: container.sm
+  },
+  listRow: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: 12
+  },
+  listAvatar: {
+    borderRadius: radius.circular,
+    flexShrink: 0,
+    height: 40,
+    width: 40
+  },
+  listLines: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    gap: 8
+  },
+  listLineWide: {
+    height: 16,
+    width: '70%'
+  },
+  listLine: {
+    height: 16,
+    width: '40%'
+  }
+})
+
 export default meta
 
 export const Playground: Story = {
   render: () => (
-    <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap['12px'])}>
-      <div {...stylex.props(atoms.display.flex, atoms.alignItems.center, atoms.gap['12px'])}>
-        <Skeleton style={[atoms.width['40px'], atoms.height['40px']]} />
-        <div {...stylex.props(atoms.display.flex, atoms.flexDirection.column, atoms.gap['8px'])}>
-          <Skeleton style={[atoms.width['240px'], atoms.height['16px']]} />
-          <Skeleton style={[atoms.width['160px'], atoms.height['12px']]} />
-        </div>
+    <div {...stylex.props(styles.root)}>
+      <Skeleton style={styles.avatar} />
+      <div {...stylex.props(styles.lines)}>
+        <Skeleton style={styles.lineWide} />
+        <Skeleton style={styles.line} />
       </div>
-      <Skeleton style={[atoms.width['100%'], atoms.height['120px']]} />
+    </div>
+  )
+}
+
+export const Card: Story = {
+  render: () => (
+    <div {...stylex.props(styles.cardRoot)}>
+      <Skeleton style={styles.image} />
+      <Skeleton style={styles.cardLineWide} />
+      <Skeleton style={styles.cardLine} />
+    </div>
+  )
+}
+
+export const List: Story = {
+  render: () => (
+    <div {...stylex.props(styles.listRoot)}>
+      {Array.from({ length: 3 }, (_, index) => (
+        <div key={index} {...stylex.props(styles.listRow)}>
+          <Skeleton style={styles.listAvatar} />
+          <div {...stylex.props(styles.listLines)}>
+            <Skeleton style={styles.listLineWide} />
+            <Skeleton style={styles.listLine} />
+          </div>
+        </div>
+      ))}
     </div>
   )
 }

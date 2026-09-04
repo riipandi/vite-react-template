@@ -2,14 +2,18 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Button } from '#/components/base/button'
+import { Input } from '#/components/base/input'
+import { Label } from '#/components/extra/label'
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetTrigger
+  SheetTrigger,
+  type SheetSide
 } from './sheet.component'
 
 const meta = {
@@ -19,7 +23,7 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
         <Story />
       </div>
     )
@@ -28,21 +32,85 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
+const sides: SheetSide[] = ['top', 'right', 'bottom', 'left']
+
+const styles = stylex.create({
+  fields: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 16,
+    paddingInline: 16
+  },
+  row: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: 8
+  }
+})
+
 export default meta
 
 export const Playground: Story = {
   render: () => (
     <Sheet>
-      <SheetTrigger render={<Button variant='outline'>Open sheet</Button>} />
+      <SheetTrigger render={<Button variant='outline' />}>Alohomora</SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
+          <SheetTitle>Edit vault record</SheetTitle>
           <SheetDescription>
-            Make changes to your profile here. Click save when you're done.
+            Make changes to the vault holder here. Click save when you're done.
           </SheetDescription>
         </SheetHeader>
+        <div {...stylex.props(styles.fields)}>
+          <Label>
+            Account holder <Input defaultValue='Luna Lovegood' />
+          </Label>
+          <Label>
+            Vault key <Input defaultValue='@quibbler' />
+          </Label>
+        </div>
         <SheetFooter>
-          <Button>Save changes</Button>
+          <SheetClose render={<Button />}>Save vault record</SheetClose>
+          <SheetClose render={<Button variant='outline' />}>Close</SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  )
+}
+
+export const Sides: Story = {
+  render: () => (
+    <div {...stylex.props(styles.row)}>
+      {sides.map((side) => (
+        <Sheet key={side}>
+          <SheetTrigger render={<Button variant='outline' />}>{side}</SheetTrigger>
+          <SheetContent side={side}>
+            <SheetHeader>
+              <SheetTitle>Entrance on the {side}</SheetTitle>
+              <SheetDescription>
+                A hidden passage opens on the {side} side of the castle.
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
+      ))}
+    </div>
+  )
+}
+
+export const NoCloseButton: Story = {
+  name: 'No close button',
+  render: () => (
+    <Sheet>
+      <SheetTrigger render={<Button variant='outline' />}>Alohomora</SheetTrigger>
+      <SheetContent showCloseButton={false}>
+        <SheetHeader>
+          <SheetTitle>Publish in the Daily Prophet</SheetTitle>
+          <SheetDescription>Review the article, then publish or discard it below.</SheetDescription>
+        </SheetHeader>
+        <SheetFooter>
+          <SheetClose render={<Button />}>Print edition</SheetClose>
+          <SheetClose render={<Button variant='outline' />}>Discard draft</SheetClose>
         </SheetFooter>
       </SheetContent>
     </Sheet>

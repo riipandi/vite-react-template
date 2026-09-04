@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { Trash2Icon } from 'lucide-react'
 import * as React from 'react'
 import { Button } from '#/components/base/button'
+import { Spinner } from '#/components/extra/spinner'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,7 +13,9 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogMedia,
+  AlertDialogTitle,
+  AlertDialogTrigger
 } from './alert-dialog.component'
 
 const meta = {
@@ -21,7 +25,7 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
         <Story />
       </div>
     )
@@ -30,34 +34,120 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
+const styles = stylex.create({
+  icon: { width: 24, height: 24 }
+})
+
+function deleteAccount() {
+  return new Promise<void>((resolve) => setTimeout(resolve, 1500))
+}
+
 export default meta
 
 export const Playground: Story = {
+  render: () => (
+    <AlertDialog>
+      <AlertDialogTrigger render={<Button variant='outline' />}>
+        Seal the cryptex
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure, Professor?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. The cryptex will seal itself forever and the Priory&apos;s
+            secret will be lost to the Illuminati.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel variant='destructive'>Seal</AlertDialogCancel>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+
+export const Media: Story = {
+  render: () => (
+    <AlertDialog>
+      <AlertDialogTrigger render={<Button variant='outline' />}>
+        Empty the Room of Requirement
+      </AlertDialogTrigger>
+      <AlertDialogContent size='sm'>
+        <AlertDialogHeader>
+          <AlertDialogMedia>
+            <Trash2Icon {...stylex.props(styles.icon)} />
+          </AlertDialogMedia>
+          <AlertDialogTitle>Empty the room?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Everything hidden inside will be permanently vanished from the castle.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel variant='destructive'>Vanish</AlertDialogCancel>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+
+export const Small: Story = {
+  render: () => (
+    <AlertDialog>
+      <AlertDialogTrigger render={<Button variant='outline' />}>
+        Leave the archive
+      </AlertDialogTrigger>
+      <AlertDialogContent size='sm'>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Leave without casting Lumos?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Your unfinished incantations will be lost.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Stay</AlertDialogCancel>
+          <AlertDialogCancel variant='destructive'>Disapparate</AlertDialogCancel>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+
+export const Destructive: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false)
+    const [deleting, setDeleting] = React.useState(false)
+
+    async function handleDelete() {
+      setDeleting(true)
+      await deleteAccount()
+      setDeleting(false)
+      setOpen(false)
+    }
+
     return (
-      <>
-        <Button variant='outline' onClick={() => setOpen(true)}>
-          Open alert dialog
-        </Button>
-        <AlertDialog open={open} onOpenChange={setOpen}>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. It will permanently delete your account and remove
-                your data from our servers.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction variant='destructive' onClick={() => setOpen(false)}>
-                Continue
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </>
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogTrigger render={<Button variant='destructive' />}>
+          Close the Gringotts vault
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Close your vault?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. The goblins will permanently close the vault and melt
+              down every remaining Galleon.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction variant='destructive' disabled={deleting} onClick={handleDelete}>
+              {deleting && <Spinner />}
+              {deleting ? 'Closing…' : 'Close the vault'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     )
   }
 }

@@ -1,13 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { FileTextIcon, SearchIcon, SparklesIcon } from 'lucide-react'
+import { FileTextIcon, MicIcon, SearchIcon, SparklesIcon } from 'lucide-react'
+import * as React from 'react'
+import { Button } from '#/components/base/button'
 import { LoaderText } from './loader-text.component'
 
 const meta = {
   title: 'Extra Components/LoaderText',
   component: LoaderText,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
   argTypes: {
     variant: {
       control: 'select',
@@ -42,31 +44,50 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
+const styles = stylex.create({
+  stack: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 12
+  }
+})
+
 export default meta
 
 export const Playground: Story = {
   args: {
-    icon: SearchIcon,
+    icon: MicIcon,
     completed: false,
-    completedText: 'Searched 128 files',
-    children: 'Searching the codebase'
+    completedText: 'Quill notes saved',
+    children: 'Transcribing with the Quick-Quotes Quill'
   },
   render: (args) => <LoaderText {...args} />
 }
 
 export const WithoutIcon: Story = {
-  args: { children: 'Generating a response' },
+  name: 'Text only',
+  args: { children: 'Deciphering the cryptex' },
   render: (args) => <LoaderText {...args} />
 }
 
 export const Completed: Story = {
-  args: {
-    icon: SearchIcon,
-    completed: true,
-    completedText: 'Searched 128 files',
-    children: 'Searching the codebase'
-  },
-  render: (args) => <LoaderText {...args} />
+  render: () => {
+    const [completed, setCompleted] = React.useState(false)
+
+    return (
+      <div {...stylex.props(styles.stack)}>
+        <LoaderText completed>Deciphered 5 symbols</LoaderText>
+        <LoaderText icon={MicIcon} completed={completed} completedText='Quill notes saved'>
+          Transcribing with the Quick-Quotes Quill
+        </LoaderText>
+        <div>
+          <Button variant='outline' size='sm' onClick={() => setCompleted((value) => !value)}>
+            {completed ? 'Restart' : 'Complete'}
+          </Button>
+        </div>
+      </div>
+    )
+  }
 }
 
 export const Sequence: Story = {
@@ -79,14 +100,14 @@ export const Sequence: Story = {
         atoms.width('100%')
       )}
     >
-      <LoaderText icon={FileTextIcon} completed completedText='Read 3 files'>
-        Reading files
+      <LoaderText icon={FileTextIcon} completed completedText='Read 3 articles'>
+        Reading the Daily Prophet archive
       </LoaderText>
-      <LoaderText icon={SearchIcon} completedText='Searched 128 files'>
-        Searching the codebase
+      <LoaderText icon={SearchIcon} completedText='Searched 128 footprints'>
+        Consulting the Marauder&apos;s Map
       </LoaderText>
-      <LoaderText icon={SparklesIcon} completedText='Draft ready'>
-        Drafting a response
+      <LoaderText icon={SparklesIcon} completedText='Lecture notes ready'>
+        Drafting the symbology lecture
       </LoaderText>
     </div>
   )

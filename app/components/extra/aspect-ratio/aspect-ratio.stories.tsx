@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { colors } from '#/styles/core/colors.stylex'
+import { container, radius } from '#/styles/core/tokens.stylex'
 import { AspectRatio } from './aspect-ratio.component'
 
 const meta = {
@@ -13,7 +15,7 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
         <Story />
       </div>
     )
@@ -22,17 +24,62 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
+const styles = stylex.create({
+  frame: {
+    width: container.lg
+  },
+  smallFrame: {
+    width: container.xs
+  },
+  image: {
+    borderRadius: radius.large,
+    height: '100%',
+    objectFit: 'cover',
+    width: '100%'
+  },
+  placeholder: {
+    backgroundColor: colors.backgroundNeutral,
+    borderRadius: radius.large,
+    height: '100%',
+    width: '100%'
+  }
+})
+
 export default meta
 
 export const Playground: Story = {
   args: { ratio: 16 / 9 },
   render: (args) => (
-    <AspectRatio {...args}>
-      <img
-        src='https://images.unsplash.com/photo-1498050108023-c5249f4df085'
-        alt='Laptop with code on screen'
-        style={{ height: '100%', objectFit: 'cover', width: '100%' }}
-      />
-    </AspectRatio>
+    <div {...stylex.props(styles.frame)}>
+      <AspectRatio {...args}>
+        <img
+          src='https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80'
+          alt='The Mona Lisa in the Louvre'
+          {...stylex.props(styles.image)}
+        />
+      </AspectRatio>
+    </div>
+  )
+}
+
+export const Square: Story = {
+  args: { ratio: 1 / 1 },
+  render: (args) => (
+    <div {...stylex.props(styles.smallFrame)}>
+      <AspectRatio {...args}>
+        <div {...stylex.props(styles.placeholder)} />
+      </AspectRatio>
+    </div>
+  )
+}
+
+export const Portrait: Story = {
+  args: { ratio: 9 / 16 },
+  render: (args) => (
+    <div {...stylex.props(styles.smallFrame)}>
+      <AspectRatio {...args}>
+        <div {...stylex.props(styles.placeholder)} />
+      </AspectRatio>
+    </div>
   )
 }

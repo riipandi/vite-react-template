@@ -1,5 +1,5 @@
 {
-    "$schema": "https://unpkg.com/oxfmt@0.55/configuration_schema.json",
+    "$schema": "./node_modules/oxfmt/configuration_schema.json",
     "endOfLine": "lf",
     "useTabs": false,
     "tabWidth": 2,
@@ -36,7 +36,6 @@
         ".wrangler",
         "**/*.md",
         "**/*.mdx",
-        "**/*.go",
         "**/*.yml",
         "**/*.yaml",
         "**/*.toml",

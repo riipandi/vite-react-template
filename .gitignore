@@ -77,8 +77,10 @@ storybook-static/
 
 # Generated files
 .tanstack/
+cloudflare-env.d.ts
 routeTree.gen.ts
 routes.gen.ts
+__unconfig*
 *.gen.ts
 
 # Miscellaneous

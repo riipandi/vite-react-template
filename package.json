@@ -2,6 +2,14 @@
     "name": "vite-react-template",
     "version": "0.0.0",
     "private": true,
+    "homepage": "https://github.com/riipandi/vite-react-template",
+    "bugs": {
+        "url": "https://github.com/riipandi/vite-react-template/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/riipandi/vite-react-template.git"
+    },
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -10,11 +18,21 @@
         "storybook": "storybook dev -p 6006 --no-open",
         "storybook:build": "storybook build -o .output/storybook",
         "storybook:start": "pnpm dlx serve .output/storybook -l 6006 -n -C",
-        "cleanup": "pnpm dlx del-cli .{output,tanstack} app/routes.gen.ts dist node_modules",
+        "cleanup": "pnpm --silent cleanup:dist && pnpm --silent cleanup:deps",
+        "cleanup:dist": "pnpm dlx del-cli dist storybook-static e2e-result app/routes.gen.ts",
+        "cleanup:deps": "pnpm dlx del-cli .{output,tanstack,wrangler} pnpm-lock.yaml node_modules",
         "pre-commit": "lefthook run pre-commit --force",
         "prepare": "lefthook install || true",
         "update-deps": "npm-check-updates --configFileName .ncurc.json",
         "knip": "knip -c .knip.jsonc --reporter markdown --no-exit-code",
+        "e2e-install": "playwright install chromium --with-deps",
+        "e2e-chrome": "playwright test --headed --project Chromium",
+        "e2e-firefox": "playwright test --headed --project Firefox",
+        "e2e-mobile": "playwright test --headed --project 'Mobile Chrome'",
+        "e2e-safari": "playwright test --headed --project Safari",
+        "e2e-report": "playwright show-report e2e-result",
+        "e2e-ui": "playwright test --ui",
+        "e2e": "playwright test",
         "test:report": "pnpm dlx serve .output/tests-results -l 8000 -s -n -C",
         "test:coverage": "vitest run --coverage --project unit",
         "test:ui": "vitest --ui",
@@ -75,6 +93,9 @@
         "typescript": "^7.0.2",
         "vite": "^8.2.2",
         "vitest": "^5.0.0"
+    },
+    "engines": {
+        "node": ">=24.12.0"
     },
     "packageManager": "pnpm@11.25.0"
 }

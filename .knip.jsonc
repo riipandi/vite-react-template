@@ -1,5 +1,5 @@
 {
-    "$schema": "https://unpkg.com/knip@6.17/schema-jsonc.json",
+    "$schema": "./node_modules/knip/schema-jsonc.json",
     "entry": ["app/routes.gen.ts"],
     "exclude": ["binaries", "dependencies"],
     "project": ["app/**/*.{ts,tsx}", "!app/components/**/*", "!app/**/*.d.ts"],

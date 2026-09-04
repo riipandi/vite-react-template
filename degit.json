@@ -2,12 +2,14 @@
     {
         "action": "remove",
         "files": [
+            "LICENSE",
             "LICENSE-APACHE",
             "LICENSE-MIT",
             "DEPLOY.md",
             "README.md",
             "AGENTS.md",
-            "netlify.toml"
+            "netlify.toml",
+            "wrangler.jsonc"
         ]
     }
 ]

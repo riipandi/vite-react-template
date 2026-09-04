@@ -60,6 +60,12 @@ Each component folder in `app/components/<area>/<name>/` follows the same layout
 - `@stylexjs/atoms` for one-off layout in stories/routes: static styles by property access (`atoms.display.flex`), dynamic values by bracket-string form (`atoms.gap['8px']`) — numeric calls like `atoms.gap(8)` emit invalid unitless CSS.
 - Use Zod schemas from `app/schemas/` for form validation (TanStack Form), not inline validation.
 - Page-level shared styles (page header, kicker, card grid) live in `app/styles/pages/page.stylex.ts`; reuse them instead of redefining per-page.
+- Surface style conventions (keep components in sync):
+  - Radius by role: tooltip, kbd, small chips = `radius.small`; buttons, inputs, popups, menus = `radius.medium`; cards, toolbars, menubar, preview-card, empty state = `radius.large`; modals, drawers, sheets, command dialog = `radius.xlarge`; toasts (stacked cards) = `radius.medium`.
+  - Title tiers: modal surfaces (dialog, alert-dialog, drawer, sheet) use `fontSize.body1` + `fontWeight.semibold`; inline titled surfaces (alert, popover, item, empty) use `fontSize.body2` + `fontWeight.medium`.
+  - Focus rings: form-control inputs draw an inset outline (`outlineOffset: calc(-1 * stroke.border)`); standalone controls draw an outside outline (`outlineOffset: stroke.focus`); slider thumbs and OTP slots draw a `stroke.halo` box-shadow at 50% `foregroundPrimary`. Never leave `outline: 'none'` without a visible `:focus-visible`/state replacement.
+  - Disabled controls use `opacity: 0.5` — never a per-component value.
+  - Media queries: raw string keys in `stylex.create` conditionals are fine (`'@media (min-width: 660px)'`); `defineConsts` media keys must be **exported** and declared in the same file that uses them (babel limitation). Align boundaries to the token breakpoints (660/900/1280), not raw 640px.
 - TypeScript strictness is enforced via `tsc -b`; run `pnpm typecheck` after changes that touch types.
 
 ## Common Tasks

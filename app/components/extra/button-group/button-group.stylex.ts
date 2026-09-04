@@ -15,7 +15,7 @@ export const buttonGroupStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: colors.backgroundNeutral,
     borderColor: colors.borderNeutralFaded,
-    borderRadius: radius.large,
+    borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
     display: 'flex',
@@ -46,24 +46,24 @@ export const buttonGroupJoined = stylex.create({
   },
   'horizontal-middle': {
     borderLeftWidth: 0,
-    borderRadius: 0
+    borderRadius: radius.none
   },
   'horizontal-last': {
-    borderBottomLeftRadius: 0,
+    borderBottomLeftRadius: radius.none,
     borderLeftWidth: 0,
-    borderTopLeftRadius: 0
+    borderTopLeftRadius: radius.none
   },
   'vertical-first': {
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0
+    borderBottomLeftRadius: radius.none,
+    borderBottomRightRadius: radius.none
   },
   'vertical-middle': {
-    borderRadius: 0,
+    borderRadius: radius.none,
     borderTopWidth: 0
   },
   'vertical-last': {
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
+    borderTopLeftRadius: radius.none,
+    borderTopRightRadius: radius.none,
     borderTopWidth: 0
   }
 })

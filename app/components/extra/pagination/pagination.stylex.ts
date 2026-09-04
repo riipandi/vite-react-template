@@ -27,7 +27,7 @@ export const paginationStyles = stylex.create({
   linkText: {
     display: {
       default: 'none',
-      '@media (min-width: 640px)': 'block'
+      '@media (min-width: 660px)': 'block'
     }
   },
   ellipsis: {

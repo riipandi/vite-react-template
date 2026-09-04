@@ -31,7 +31,7 @@ export const tabsStyles = stylex.create({
     borderBottomColor: colors.borderNeutralFaded,
     borderBottomStyle: 'solid',
     borderBottomWidth: stroke.border,
-    borderRadius: 0,
+    borderRadius: radius.none,
     gap: 0,
     padding: 0
   },
@@ -73,7 +73,7 @@ export const tabsStyles = stylex.create({
     },
     borderBottomStyle: 'solid',
     borderBottomWidth: stroke.focus,
-    borderRadius: 0,
+    borderRadius: radius.none,
     height: unit.x9,
     marginBottom: `calc(-1 * ${stroke.border})`
   },

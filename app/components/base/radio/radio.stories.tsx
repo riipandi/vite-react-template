@@ -13,7 +13,7 @@ import { fontFamily, fontSize, radius, stroke } from '#/styles/core/tokens.style
 import { RadioGroup, RadioGroupItem } from './radio.component'
 
 const meta = {
-  title: 'Base Components/RadioGroup',
+  title: 'Base Components/Radio',
   component: RadioGroup,
   parameters: { layout: 'centered' },
   argTypes: {
@@ -85,6 +85,9 @@ const styles = stylex.create({
     display: 'flex',
     gap: 12,
     padding: 16
+  },
+  cardItem: {
+    marginTop: 4
   }
 })
 
@@ -129,7 +132,7 @@ export const ChoiceCard: Story = {
         <Field key={plan.value} orientation='horizontal'>
           {/* The label is the card, so the whole surface toggles the radio. */}
           <FieldLabel style={styles.card}>
-            <RadioGroupItem value={plan.value} />
+            <RadioGroupItem value={plan.value} style={styles.cardItem} />
             <FieldContent>
               <FieldTitle>{plan.label}</FieldTitle>
               <FieldDescription>{plan.description}</FieldDescription>

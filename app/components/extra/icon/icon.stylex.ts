@@ -1,5 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
+import { duration, easing } from '#/styles/core/tokens.stylex'
 
 /**
  * Icon styles — ported from Reshaped's Icon utility
@@ -14,8 +15,8 @@ export const iconStyles = stylex.create({
     flexShrink: 0,
     justifyContent: 'center',
     transitionProperty: 'color',
-    transitionDuration: '150ms',
-    transitionTimingFunction: 'ease',
+    transitionDuration: duration.fast,
+    transitionTimingFunction: easing.decelerate,
     verticalAlign: 'middle'
   },
   // Keep only the vertical bounding box and use the svg asset's own width.

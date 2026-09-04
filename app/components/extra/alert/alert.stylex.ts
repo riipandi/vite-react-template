@@ -22,7 +22,7 @@ export const alertStyles = stylex.create({
   },
   title: {
     fontSize: fontSize.body2,
-    fontWeight: fontWeight.semibold,
+    fontWeight: fontWeight.medium,
     lineHeight: fontLineHeight.body2,
     margin: 0
   },

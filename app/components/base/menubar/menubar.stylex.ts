@@ -32,7 +32,10 @@ export const menubarStyles = stylex.create({
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
-    outline: 'none',
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+    },
     paddingBlock: unit.x0_5,
     paddingInline: unit.x1_5,
     userSelect: 'none'

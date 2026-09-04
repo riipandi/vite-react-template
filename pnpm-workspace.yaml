@@ -9,6 +9,8 @@ verifyDepsBeforeRun: false
 minimumReleaseAge: 1440
 
 minimumReleaseAgeExclude:
+  - '@base-ui/react'
+  - '@base-ui/utils'
   - '@oxfmt/binding-android-arm-eabi'
   - '@oxfmt/binding-android-arm64'
   - '@oxfmt/binding-darwin-arm64'
@@ -56,6 +58,7 @@ minimumReleaseAgeExclude:
   - '@vitest/spy'
   - '@vitest/ui'
   - '@vitest/utils'
+  - happy-dom
   - knip
   - lucide-react
   - oxfmt

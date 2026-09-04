@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
-import { stroke, container } from '#/styles/core/tokens.stylex'
+import { stroke, container, duration } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 
 export const commandStyles = stylex.create({
@@ -37,7 +37,10 @@ export const commandStyles = stylex.create({
   inputWrap: {
     alignItems: 'center',
     backgroundColor: `color-mix(in srgb, ${colors.borderNeutralFaded} 30%, transparent)`,
-    borderColor: `color-mix(in srgb, ${colors.borderNeutralFaded} 30%, transparent)`,
+    borderColor: {
+      default: `color-mix(in srgb, ${colors.borderNeutralFaded} 30%, transparent)`,
+      ':focus-within': colors.foregroundPrimary
+    },
     borderRadius: radius.large,
     borderStyle: 'solid',
     borderWidth: stroke.border,
@@ -46,7 +49,9 @@ export const commandStyles = stylex.create({
     height: unit.x8,
     margin: unit.x1,
     marginBottom: 0,
-    paddingInline: unit.x2
+    paddingInline: unit.x2,
+    transitionDuration: duration.fast,
+    transitionProperty: 'border-color'
   },
   inputIcon: {
     flexShrink: 0,
@@ -90,7 +95,7 @@ export const commandStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      '[data-highlighted]': colors.backgroundNeutral
+      '[data-highlighted]': colors.backgroundNeutralFaded
     },
     borderRadius: radius.small,
     color: {

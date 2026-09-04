@@ -48,6 +48,13 @@ const styles = stylex.create({
     display: 'flex',
     flexWrap: 'wrap',
     gap: 8
+  },
+  // Vertical drawers (up/down) span the full viewport width; keep their text
+  // in a readable, centered column instead of stretching edge to edge.
+  headerColumn: {
+    marginInline: 'auto',
+    maxWidth: 448,
+    width: '100%'
   }
 })
 
@@ -79,7 +86,9 @@ export const Directions: Story = {
         <Drawer key={direction} swipeDirection={direction}>
           <DrawerTrigger render={<Button variant='outline' />}>{direction}</DrawerTrigger>
           <DrawerContent>
-            <DrawerHeader>
+            <DrawerHeader
+              style={direction === 'up' || direction === 'down' ? styles.headerColumn : undefined}
+            >
               <DrawerTitle>Owl from the {direction}</DrawerTitle>
               <DrawerDescription>
                 Swoops in and swipes back toward the {direction} edge.

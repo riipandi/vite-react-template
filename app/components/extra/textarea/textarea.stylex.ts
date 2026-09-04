@@ -11,7 +11,7 @@ export const textareaStyles = stylex.create({
     borderColor: {
       default: colors.borderNeutralFaded,
       ':focus-visible': colors.foregroundPrimary,
-      '[data-invalid]': colors.backgroundCritical
+      '[data-invalid]': colors.borderCritical
     },
     borderRadius: radius.medium,
     borderStyle: 'solid',

@@ -86,7 +86,7 @@ export const sheetStyles = stylex.create({
   title: {
     color: colors.foregroundNeutral,
     fontSize: fontSize.body1,
-    fontWeight: fontWeight.medium,
+    fontWeight: fontWeight.semibold,
     lineHeight: fontLineHeight.body1,
     margin: 0
   },
@@ -106,6 +106,8 @@ export const sheetSides = stylex.create({
       '[data-starting-style]': `translateX(${unit.x10})`,
       '[data-ending-style]': `translateX(${unit.x10})`
     },
+    borderBottomLeftRadius: radius.xlarge,
+    borderTopLeftRadius: radius.xlarge,
     borderLeftColor: colors.borderNeutralFaded,
     borderLeftStyle: 'solid',
     borderLeftWidth: stroke.border,
@@ -121,6 +123,8 @@ export const sheetSides = stylex.create({
       '[data-starting-style]': `translateX(calc(-1 * ${unit.x10}))`,
       '[data-ending-style]': `translateX(calc(-1 * ${unit.x10}))`
     },
+    borderBottomRightRadius: radius.xlarge,
+    borderTopRightRadius: radius.xlarge,
     borderRightColor: colors.borderNeutralFaded,
     borderRightStyle: 'solid',
     borderRightWidth: stroke.border,
@@ -137,6 +141,8 @@ export const sheetSides = stylex.create({
       '[data-ending-style]': `translateY(calc(-1 * ${unit.x10}))`
     },
     borderBottomColor: colors.borderNeutralFaded,
+    borderBottomLeftRadius: radius.xlarge,
+    borderBottomRightRadius: radius.xlarge,
     borderBottomStyle: 'solid',
     borderBottomWidth: stroke.border,
     left: 0,
@@ -151,6 +157,8 @@ export const sheetSides = stylex.create({
     },
     borderBottomStyle: 'none',
     borderTopColor: colors.borderNeutralFaded,
+    borderTopLeftRadius: radius.xlarge,
+    borderTopRightRadius: radius.xlarge,
     borderTopStyle: 'solid',
     borderTopWidth: stroke.border,
     bottom: 0,

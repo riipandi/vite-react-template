@@ -80,7 +80,7 @@ export const fileUploadStyles = stylex.create({
   disabled: {
     borderColor: colors.borderDisabled,
     cursor: 'not-allowed',
-    opacity: 0.4,
+    opacity: 0.5,
     ':hover': {
       backgroundColor: 'transparent'
     }

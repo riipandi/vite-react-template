@@ -48,7 +48,10 @@ export const comboboxStyles = stylex.create({
     display: 'flex',
     height: '100%',
     justifyContent: 'center',
-    outline: 'none',
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+    },
     padding: 0,
     position: 'absolute',
     top: 0,

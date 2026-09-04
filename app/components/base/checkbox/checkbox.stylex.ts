@@ -17,7 +17,7 @@ export const checkboxStyles = stylex.create({
       default: colors.borderNeutralFaded,
       '[data-checked]': colors.backgroundPrimary,
       '[data-indeterminate]': colors.backgroundPrimary,
-      '[data-invalid]': colors.backgroundCritical
+      '[data-invalid]': colors.borderCritical
     },
     borderRadius: radius.small,
     borderStyle: 'solid',

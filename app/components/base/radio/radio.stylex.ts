@@ -16,7 +16,7 @@ export const radioStyles = stylex.create({
     borderColor: {
       default: colors.borderNeutralFaded,
       '[data-checked]': colors.backgroundPrimary,
-      '[data-invalid]': colors.backgroundCritical
+      '[data-invalid]': colors.borderCritical
     },
     borderRadius: radius.circular,
     borderStyle: 'solid',

@@ -22,7 +22,7 @@ export const dialogStyles = stylex.create({
   },
   content: {
     backgroundColor: colors.backgroundElevationOverlay,
-    borderRadius: radius.large,
+    borderRadius: radius.xlarge,
     color: colors.foregroundNeutral,
     display: 'flex',
     flexDirection: 'column',
@@ -90,9 +90,9 @@ export const dialogStyles = stylex.create({
     justifyContent: 'flex-end'
   },
   title: {
-    fontSize: fontSize.featured6,
+    fontSize: fontSize.body1,
     fontWeight: fontWeight.semibold,
-    lineHeight: fontLineHeight.featured6,
+    lineHeight: fontLineHeight.body1,
     margin: 0
   },
   description: {

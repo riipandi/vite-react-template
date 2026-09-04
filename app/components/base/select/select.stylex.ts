@@ -23,7 +23,7 @@ export const selectStyles = stylex.create({
     backgroundColor: colors.backgroundPage,
     borderColor: {
       default: colors.borderNeutralFaded,
-      '[data-invalid]': colors.backgroundCritical
+      '[data-invalid]': colors.borderCritical
     },
     borderRadius: radius.medium,
     borderStyle: 'solid',

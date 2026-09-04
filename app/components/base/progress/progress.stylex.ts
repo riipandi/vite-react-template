@@ -4,6 +4,9 @@ import { unit, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
 import { duration, easing } from '#/styles/core/tokens.stylex'
 
+// Kept in sync with ../meter/meter.stylex.ts — intentional duplication
+// so both components stay independently styled but visually identical.
+
 export const progressStyles = stylex.create({
   root: {
     display: 'flex',

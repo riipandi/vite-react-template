@@ -122,7 +122,7 @@ export const contextMenuStyles = stylex.create({
   itemDestructive: {
     backgroundColor: {
       default: 'transparent',
-      '[data-highlighted]': `color-mix(in srgb, ${colors.backgroundCritical} 10%, transparent)`
+      '[data-highlighted]': colors.backgroundCriticalHighlightedFaded
     },
     color: {
       default: colors.foregroundCritical,

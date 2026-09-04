@@ -40,6 +40,7 @@
         "**/*.yaml",
         "**/*.toml",
         "/public/**",
-        "/temp/**"
+        "/temp/**",
+        "/index.html"
     ]
 }

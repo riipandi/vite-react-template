@@ -25,7 +25,9 @@ with [absolute import](https://jsdev.org/env/nodejs/absolute-path-imports/), [Ta
 and [other goodies](./package.json). Authentication is implemented using [DummyJSON](https://dummyjson.com) API
 with [ofetch](https://github.com/unjs/ofetch), easily replaceable with your own backend.
 
-> [!WARNING]
+Browse the component library live in [Storybook](https://reactivite-storybook.netlify.app/).
+
+> [!NOTE]
 > This project just a template that I use for my personal use, so you may encounter bugs.
 > Please review the release notes thoroughly before updating, as breaking changes can occur!
 

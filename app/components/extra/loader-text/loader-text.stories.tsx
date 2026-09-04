@@ -1,13 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { FileTextIcon, SearchIcon, SparklesIcon } from 'lucide-react'
+import { FileTextIcon, MicIcon, SearchIcon, SparklesIcon } from 'lucide-react'
+import * as React from 'react'
+import { Button } from '#/components/base/button'
 import { LoaderText } from './loader-text.component'
 
 const meta = {
   title: 'Extra Components/LoaderText',
   component: LoaderText,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
   argTypes: {
     variant: {
       control: 'select',
@@ -42,31 +44,50 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
+const styles = stylex.create({
+  stack: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 12
+  }
+})
+
 export default meta
 
 export const Playground: Story = {
   args: {
-    icon: SearchIcon,
+    icon: MicIcon,
     completed: false,
-    completedText: 'Searched 128 files',
-    children: 'Searching the codebase'
+    completedText: 'Recorded audio',
+    children: 'Recording audio'
   },
   render: (args) => <LoaderText {...args} />
 }
 
 export const WithoutIcon: Story = {
-  args: { children: 'Generating a response' },
+  name: 'Text only',
+  args: { children: 'Inspecting code' },
   render: (args) => <LoaderText {...args} />
 }
 
 export const Completed: Story = {
-  args: {
-    icon: SearchIcon,
-    completed: true,
-    completedText: 'Searched 128 files',
-    children: 'Searching the codebase'
-  },
-  render: (args) => <LoaderText {...args} />
+  render: () => {
+    const [completed, setCompleted] = React.useState(false)
+
+    return (
+      <div {...stylex.props(styles.stack)}>
+        <LoaderText completed>Inspected 5 files</LoaderText>
+        <LoaderText icon={MicIcon} completed={completed} completedText='Recorded audio'>
+          Recording audio
+        </LoaderText>
+        <div>
+          <Button variant='outline' size='sm' onClick={() => setCompleted((value) => !value)}>
+            {completed ? 'Restart' : 'Complete'}
+          </Button>
+        </div>
+      </div>
+    )
+  }
 }
 
 export const Sequence: Story = {

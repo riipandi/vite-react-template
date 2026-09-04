@@ -1,7 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { InputGroup, InputGroupButton, InputGroupInput } from './input-group.component'
+import { CopyIcon, SearchIcon } from 'lucide-react'
+import { Kbd } from '#/components/extra/kbd'
+import { Spinner } from '#/components/extra/spinner'
+import { container } from '#/styles/core/tokens.stylex'
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+  InputGroupTextarea
+} from './input-group.component'
 
 const meta = {
   title: 'Extra Components/InputGroup',
@@ -10,7 +21,7 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
         <Story />
       </div>
     )
@@ -19,13 +30,97 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
+const styles = stylex.create({
+  icon: { height: 14, width: 14 },
+  col: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 12,
+    width: container.sm
+  },
+  group: {
+    maxWidth: container.sm
+  }
+})
+
 export default meta
 
 export const Playground: Story = {
   render: () => (
-    <InputGroup>
+    <div {...stylex.props(styles.col)}>
+      <InputGroup>
+        <InputGroupAddon>
+          <InputGroupText>https://</InputGroupText>
+        </InputGroupAddon>
+        <InputGroupInput placeholder='example.com' />
+      </InputGroup>
+      <InputGroup>
+        <InputGroupInput placeholder='Search…' />
+        <InputGroupAddon align='inline-end'>
+          <InputGroupButton>Go</InputGroupButton>
+        </InputGroupAddon>
+      </InputGroup>
+    </div>
+  )
+}
+
+export const Icon: Story = {
+  render: () => (
+    <InputGroup style={styles.group}>
+      <InputGroupAddon>
+        <SearchIcon {...stylex.props(styles.icon)} />
+      </InputGroupAddon>
+      <InputGroupInput placeholder='Search…' />
+    </InputGroup>
+  )
+}
+
+export const Button: Story = {
+  render: () => (
+    <InputGroup style={styles.group}>
+      <InputGroupInput readOnly defaultValue='https://useblume.dev/i/8f3c1' />
+      <InputGroupAddon align='inline-end'>
+        <InputGroupButton aria-label='Copy link'>
+          <CopyIcon {...stylex.props(styles.icon)} />
+        </InputGroupButton>
+      </InputGroupAddon>
+    </InputGroup>
+  )
+}
+
+export const WithKbd: Story = {
+  name: 'Kbd',
+  render: () => (
+    <InputGroup style={styles.group}>
       <InputGroupInput placeholder='Search the docs…' />
-      <InputGroupButton>Search</InputGroupButton>
+      <InputGroupAddon align='inline-end'>
+        <Kbd>⌘K</Kbd>
+      </InputGroupAddon>
+    </InputGroup>
+  )
+}
+
+export const WithSpinner: Story = {
+  name: 'Spinner',
+  render: () => (
+    <InputGroup style={styles.group}>
+      <InputGroupInput placeholder='Enter a username' defaultValue='useblume' />
+      <InputGroupAddon align='inline-end'>
+        <Spinner />
+      </InputGroupAddon>
+    </InputGroup>
+  )
+}
+
+export const Textarea: Story = {
+  render: () => (
+    <InputGroup style={styles.group}>
+      <InputGroupTextarea placeholder='Type your message…' rows={3} />
+      <InputGroupAddon align='block-end'>
+        <InputGroupButton variant='outline' size='xs'>
+          Send
+        </InputGroupButton>
+      </InputGroupAddon>
     </InputGroup>
   )
 }

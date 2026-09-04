@@ -1,13 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import {
-  Toolbar,
-  ToolbarButton,
-  ToolbarGroup,
-  ToolbarLink,
-  ToolbarSeparator
-} from './toolbar.component'
+import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'lucide-react'
+import { Button } from '#/components/base/button'
+import { Toggle } from '#/components/base/toggle'
+import { ToggleGroup, ToggleGroupItem } from '#/components/base/toggle-group'
+import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarSeparator } from './toolbar.component'
 
 const meta = {
   title: 'Base Components/Toolbar',
@@ -16,7 +14,7 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
         <Story />
       </div>
     )
@@ -25,20 +23,42 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
+const styles = stylex.create({
+  icon: { width: 16, height: 16 }
+})
+
 export default meta
 
 export const Playground: Story = {
   render: () => (
     <Toolbar>
-      <ToolbarButton>Bold</ToolbarButton>
-      <ToolbarButton>Italic</ToolbarButton>
-      <ToolbarSeparator />
       <ToolbarGroup>
-        <ToolbarButton>Undo</ToolbarButton>
-        <ToolbarButton>Redo</ToolbarButton>
+        <ToolbarButton render={<Toggle aria-label='Toggle bold' />}>Bold</ToolbarButton>
+        <ToolbarButton render={<Toggle aria-label='Toggle italic' />}>Italic</ToolbarButton>
       </ToolbarGroup>
       <ToolbarSeparator />
-      <ToolbarLink href='https://react.dev'>React docs</ToolbarLink>
+      <ToolbarButton render={<Button variant='ghost' size='sm' />}>Share</ToolbarButton>
+    </Toolbar>
+  )
+}
+
+export const WithToggleGroup: Story = {
+  name: 'With a toggle group',
+  render: () => (
+    <Toolbar>
+      <ToggleGroup variant='outline' spacing='joined' defaultValue={['left']}>
+        <ToolbarButton render={<ToggleGroupItem value='left' aria-label='Align left' />}>
+          <AlignLeftIcon {...stylex.props(styles.icon)} />
+        </ToolbarButton>
+        <ToolbarButton render={<ToggleGroupItem value='center' aria-label='Align center' />}>
+          <AlignCenterIcon {...stylex.props(styles.icon)} />
+        </ToolbarButton>
+        <ToolbarButton render={<ToggleGroupItem value='right' aria-label='Align right' />}>
+          <AlignRightIcon {...stylex.props(styles.icon)} />
+        </ToolbarButton>
+      </ToggleGroup>
+      <ToolbarSeparator />
+      <ToolbarButton render={<Button variant='ghost' size='sm' />}>Export</ToolbarButton>
     </Toolbar>
   )
 }

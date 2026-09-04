@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { Button } from '#/components/base/button'
+import { Badge } from '#/components/extra/badge'
+import { colors } from '#/styles/core/colors.stylex'
 import { Spinner } from './spinner.component'
 
 const meta = {
@@ -10,7 +13,7 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['12px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
         <Story />
       </div>
     )
@@ -19,8 +22,61 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
+const styles = stylex.create({
+  iconXs: { height: 14, width: 14 },
+  iconLg: { height: 24, width: 24 },
+  spinnerSm: { height: 12, width: 12 },
+  row: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: 16
+  },
+  stack: {
+    alignItems: 'flex-start',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 16
+  },
+  line: {
+    alignItems: 'center',
+    color: colors.foregroundNeutralFaded,
+    display: 'flex',
+    gap: 8,
+    margin: 0
+  }
+})
+
 export default meta
 
 export const Playground: Story = {
-  render: () => <Spinner />
+  render: () => (
+    <Button disabled>
+      <Spinner /> Loading…
+    </Button>
+  )
+}
+
+export const Sizes: Story = {
+  render: () => (
+    <div {...stylex.props(styles.row)}>
+      <Spinner style={styles.iconXs} />
+      <Spinner />
+      <Spinner style={styles.iconLg} />
+    </div>
+  )
+}
+
+export const Composition: Story = {
+  render: () => (
+    <div {...stylex.props(styles.stack)}>
+      <Badge variant='secondary'>
+        <Spinner {...stylex.props(styles.spinnerSm)} />
+        Syncing
+      </Badge>
+      <p {...stylex.props(styles.line)}>
+        <Spinner />
+        Fetching the latest results…
+      </p>
+    </div>
+  )
 }

@@ -6,6 +6,7 @@ TZ = "Asia/Jakarta"
 
 [build]
 publish = "dist"
+# command = "pnpm exec storybook build -o dist"
 command = "pnpm run build"
 
 [[redirects]]

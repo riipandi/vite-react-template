@@ -24,31 +24,50 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="any" href="/favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
 
-    <!-- Preload Fonts -->
+    <!-- Preload Fonts (pinned major — jsDelivr serves immutable TTLs for ranged versions) -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link
       rel="preload"
       as="font"
       type="font/woff2"
-      href="https://cdn.jsdelivr.net/fontsource/fonts/mona-sans:vf@latest/latin-wght-normal.woff2"
+      href="https://cdn.jsdelivr.net/fontsource/fonts/mona-sans:vf@5/latin-wght-normal.woff2"
       crossorigin
     />
     <link
       rel="preload"
       as="font"
       type="font/woff2"
-      href="https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono:vf@latest/latin-wght-normal.woff2"
+      href="https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono:vf@5/latin-wght-normal.woff2"
       crossorigin
     />
 
     <!-- Page Title -->
     <title>Vite React StyleX</title>
+
+    <!-- Static SPA loader; React clears #root on mount. -->
+    <style>
+      html { color-scheme: light dark; }
+      .s-loader { position: fixed; inset: 0; display: grid; place-content: center; }
+      .s-loader-mark { width: 2.25rem; height: auto; fill: oklch(0.55 0.24 262.67); }
+      .s-dot { animation: s-pulse 1s ease-in-out infinite; }
+      .s-dot-2 { animation-delay: 150ms; }
+      .s-dot-3 { animation-delay: 300ms; }
+      @keyframes s-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+      @media (prefers-reduced-motion: reduce) { .s-dot { animation: none; opacity: 0.7; } }
+    </style>
   </head>
   <body>
-    <div id="root" class="isolate"></div>
+    <div id="root" class="isolate">
+      <div id="s-loader" class="s-loader" role="status" aria-label="Loading">
+        <svg class="s-loader-mark" aria-hidden="true" viewBox="0 0 36 12" xmlns="http://www.w3.org/2000/svg">
+          <circle class="s-dot" cx="6" cy="6" r="4"/>
+          <circle class="s-dot s-dot-2" cx="18" cy="6" r="4"/>
+          <circle class="s-dot s-dot-3" cx="30" cy="6" r="4"/>
+        </svg>
+      </div>
+    </div>
     <script type="module" src="/app/main.tsx"></script>
   </body>
 </html>

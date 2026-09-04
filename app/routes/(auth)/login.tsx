@@ -2,7 +2,7 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useForm } from '@tanstack/react-form'
 import { createFileRoute, Link, useSearch } from '@tanstack/react-router'
-import * as Lucide from 'lucide-react'
+import { CircleHelpIcon, KeyRoundIcon } from 'lucide-react'
 import { useState } from 'react'
 import { z } from 'zod'
 import { Button } from '#/components/base/button'
@@ -189,7 +189,7 @@ function RouteComponent() {
         <TooltipProvider>
           <Item variant='muted' size='sm' style={styles.demoItem}>
             <ItemMedia variant='icon'>
-              <Lucide.KeyRound size={14} />
+              <KeyRoundIcon size={14} />
             </ItemMedia>
             <ItemContent>
               <ItemTitle>
@@ -198,7 +198,7 @@ function RouteComponent() {
                   <TooltipTrigger
                     render={
                       <span {...stylex.props(styles.hintIcon)} aria-label='About demo credentials'>
-                        <Lucide.CircleHelp size={13} />
+                        <CircleHelpIcon size={13} />
                       </span>
                     }
                     tabIndex={0}

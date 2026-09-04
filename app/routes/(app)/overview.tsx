@@ -1,7 +1,7 @@
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import * as Lucide from 'lucide-react'
+import { ChevronRightIcon, ExternalLinkIcon, LogOutIcon, SettingsIcon } from 'lucide-react'
 import { Button } from '#/components/base/button'
 import { Badge } from '#/components/extra/badge'
 import { Card, CardContent } from '#/components/extra/card'
@@ -106,14 +106,14 @@ function RouteComponent() {
               render={
                 <Link to='/settings'>
                   <ItemMedia variant='icon'>
-                    <Lucide.Settings size={16} />
+                    <SettingsIcon size={16} />
                   </ItemMedia>
                   <ItemContent>
                     <ItemTitle>Settings</ItemTitle>
                     <ItemDescription>Theme preference and account details.</ItemDescription>
                   </ItemContent>
                   <ItemActions>
-                    <Lucide.ChevronRight size={16} />
+                    <ChevronRightIcon size={16} />
                   </ItemActions>
                 </Link>
               }
@@ -127,7 +127,7 @@ function RouteComponent() {
                   rel='noreferrer'
                 >
                   <ItemMedia variant='icon'>
-                    <Lucide.ExternalLink size={16} />
+                    <ExternalLinkIcon size={16} />
                   </ItemMedia>
                   <ItemContent>
                     <ItemTitle>Source code</ItemTitle>
@@ -141,7 +141,7 @@ function RouteComponent() {
             />
             <Item size='sm' variant='muted'>
               <ItemMedia variant='icon'>
-                <Lucide.LogOut size={16} />
+                <LogOutIcon size={16} />
               </ItemMedia>
               <ItemContent>
                 <ItemTitle>Sign out</ItemTitle>

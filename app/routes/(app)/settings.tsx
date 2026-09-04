@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute } from '@tanstack/react-router'
-import * as Lucide from 'lucide-react'
+import { LogOutIcon } from 'lucide-react'
 import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Field, FieldLabel } from '#/components/base/field'
@@ -131,7 +131,7 @@ function RouteComponent() {
                 </Text>
               </div>
               <Button variant='destructive' onClick={() => logout()}>
-                <Lucide.LogOut size={16} />
+                <LogOutIcon size={16} />
                 Sign out
               </Button>
             </div>

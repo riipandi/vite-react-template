@@ -1,4 +1,4 @@
-@import './reset.css' layer(reset);
+@import './reset.css';
 @import './fontface.css';
 
 @layer base {

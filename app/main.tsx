@@ -26,13 +26,11 @@ declare module '@tanstack/react-router' {
   }
 }
 
-// Create root element and ensure exists.
+// Create root element and ensure exists. React clears the static shell on first commit.
 const rootElement = document.getElementById('root')
 if (!rootElement) {
   throw new Error('Root element missing. Verify the element exists and the ID is correct.')
 }
 
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement)
-  root.render(<RouterProvider router={appRoutes} context={{ queryClient }} />)
-}
+const root = ReactDOM.createRoot(rootElement)
+root.render(<RouterProvider router={appRoutes} context={{ queryClient }} />)

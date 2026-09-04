@@ -1,7 +1,7 @@
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect, useRouterState } from '@tanstack/react-router'
-import * as Lucide from 'lucide-react'
+import { MenuIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useSidebarOpen, useSidebarCollapsed } from '#/libraries/app.store'
 import { toggleSidebar, toggleSidebarCollapsed } from '#/libraries/app.store'
@@ -50,7 +50,7 @@ function RouteComponent() {
           {...stylex.props(styles.hamburger)}
           aria-label='Toggle navigation'
         >
-          <Lucide.Menu size={20} strokeWidth={1.8} />
+          <MenuIcon size={20} strokeWidth={1.8} />
         </button>
         <span {...stylex.props(styles.mobileHeaderTitle)}>Dashboard</span>
         <div {...stylex.props(atoms.width['2.25rem'])} />

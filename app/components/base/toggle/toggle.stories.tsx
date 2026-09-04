@@ -7,7 +7,7 @@ import { Toggle } from './toggle.component'
 const meta = {
   title: 'Base Components/Toggle',
   component: Toggle,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
   argTypes: {
     variant: { control: 'radio', options: ['default', 'outline'] },
     size: { control: 'radio', options: ['sm', 'md', 'lg'] },
@@ -16,7 +16,15 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div
+        {...stylex.props(
+          atoms.display.flex,
+          atoms.justifyContent.center,
+          atoms.padding['20px'],
+          atoms.minWidth['448px'],
+          atoms.width['100%']
+        )}
+      >
         <Story />
       </div>
     )

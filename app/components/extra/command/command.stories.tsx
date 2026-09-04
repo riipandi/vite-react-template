@@ -20,11 +20,19 @@ import {
 const meta = {
   title: 'Extra Components/Command',
   component: Command,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div
+        {...stylex.props(
+          atoms.display.flex,
+          atoms.justifyContent.center,
+          atoms.padding['20px'],
+          atoms.minWidth['448px'],
+          atoms.width['100%']
+        )}
+      >
         <Story />
       </div>
     )
@@ -114,7 +122,7 @@ const spells = [
 
 const styles = stylex.create({
   root: {
-    maxWidth: container.lg
+    maxWidth: container.xl
   }
 })
 

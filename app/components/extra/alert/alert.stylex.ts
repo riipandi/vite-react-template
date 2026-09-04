@@ -29,7 +29,9 @@ export const alertStyles = stylex.create({
   description: {
     color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
-    lineHeight: fontLineHeight.body2
+    lineHeight: fontLineHeight.body2,
+    marginTop: unit.x2,
+    margin: 0
   },
   action: {
     insetBlockStart: unit.x4,

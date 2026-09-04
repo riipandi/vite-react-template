@@ -10,7 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '#/components/base/dropdown-menu'
-import { container } from '#/styles/core/tokens.stylex'
 import {
   Table,
   TableBody,
@@ -61,15 +60,12 @@ const members = [
 
 const styles = stylex.create({
   root: {
-    maxWidth: container.xl,
     width: '100%'
   },
   footerRoot: {
-    maxWidth: container.lg,
     width: '100%'
   },
   actionsRoot: {
-    maxWidth: container.lg,
     width: '100%'
   },
   right: {

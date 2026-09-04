@@ -35,10 +35,10 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   card: {
-    width: container.md
+    width: container.xl
   },
   smallCard: {
-    width: container.sm
+    width: container.md
   }
 })
 

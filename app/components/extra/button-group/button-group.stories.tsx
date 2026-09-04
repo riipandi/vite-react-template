@@ -15,14 +15,22 @@ import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from './button-gro
 const meta = {
   title: 'Extra Components/ButtonGroup',
   component: ButtonGroup,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
   argTypes: {
     orientation: { control: 'radio', options: ['horizontal', 'vertical'] }
   },
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div
+        {...stylex.props(
+          atoms.display.flex,
+          atoms.justifyContent.center,
+          atoms.padding['20px'],
+          atoms.minWidth['448px'],
+          atoms.width['100%']
+        )}
+      >
         <Story />
       </div>
     )
@@ -32,7 +40,11 @@ const meta = {
 type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
-  icon: { width: 16, height: 16 }
+  icon: { width: 16, height: 16 },
+  fusedTrigger: {
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0
+  }
 })
 
 export default meta
@@ -66,7 +78,11 @@ export const Split: Story = {
     <ButtonGroup>
       <Button>Apparate</Button>
       <DropdownMenu>
-        <DropdownMenuTrigger render={<Button size='icon' aria-label='More apparition options' />}>
+        <DropdownMenuTrigger
+          render={
+            <Button size='icon' aria-label='More apparition options' style={styles.fusedTrigger} />
+          }
+        >
           <ChevronDownIcon {...stylex.props(styles.icon)} />
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end'>

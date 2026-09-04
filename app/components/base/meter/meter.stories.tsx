@@ -7,7 +7,7 @@ import { Meter, MeterLabel, MeterValue } from './meter.component'
 const meta = {
   title: 'Base Components/Meter',
   component: Meter,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
   argTypes: {
     value: { control: 'number' },
     min: { control: 'number' },
@@ -16,7 +16,15 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div
+        {...stylex.props(
+          atoms.display.flex,
+          atoms.justifyContent.center,
+          atoms.padding['20px'],
+          atoms.minWidth['448px'],
+          atoms.width['100%']
+        )}
+      >
         <Story />
       </div>
     )

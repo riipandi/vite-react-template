@@ -105,6 +105,7 @@ export const alertDialogStyles = stylex.create({
     color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2,
     lineHeight: fontLineHeight.body2,
+    marginTop: unit.x1,
     margin: 0
   }
 })

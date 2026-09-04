@@ -3,7 +3,7 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Button } from '#/components/base/button'
 import { Input } from '#/components/base/input'
-import { container } from '#/styles/core/tokens.stylex'
+import { container, fontSize, unit } from '#/styles/core/tokens.stylex'
 import {
   Dialog,
   DialogClose,
@@ -18,14 +18,22 @@ import {
 const meta = {
   title: 'Base Components/Dialog',
   component: Dialog,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
   argTypes: {
     open: { control: 'boolean' }
   },
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div
+        {...stylex.props(
+          atoms.display.flex,
+          atoms.justifyContent.center,
+          atoms.padding['20px'],
+          atoms.minWidth['448px'],
+          atoms.width['100%']
+        )}
+      >
         <Story />
       </div>
     )
@@ -47,6 +55,8 @@ const styles = stylex.create({
     flex: 1,
     gap: 12,
     minHeight: 0,
+    fontSize: fontSize.body2,
+    paddingRight: unit.x4,
     overflowY: 'auto'
   }
 })

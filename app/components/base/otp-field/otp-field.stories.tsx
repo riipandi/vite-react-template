@@ -9,7 +9,7 @@ import { OTPField, OTPFieldGroup, OTPFieldSeparator, OTPFieldSlot } from './otp-
 const meta = {
   title: 'Base Components/OTPField',
   component: OTPField,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
   argTypes: {
     length: { control: 'number' },
     disabled: { control: 'boolean' }
@@ -17,7 +17,15 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div
+        {...stylex.props(
+          atoms.display.flex,
+          atoms.justifyContent.center,
+          atoms.padding['20px'],
+          atoms.minWidth['448px'],
+          atoms.width['100%']
+        )}
+      >
         <Story />
       </div>
     )
@@ -49,9 +57,6 @@ export const Playground: Story = {
         <OTPFieldSlot />
         <OTPFieldSlot />
         <OTPFieldSlot />
-      </OTPFieldGroup>
-      <OTPFieldSeparator />
-      <OTPFieldGroup>
         <OTPFieldSlot />
         <OTPFieldSlot />
         <OTPFieldSlot />

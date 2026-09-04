@@ -65,7 +65,7 @@ export const Action: Story = {
         Expecto Patronum cast successfully. Your patronus is on file with the Ministry.
       </AlertDescription>
       <AlertAction>
-        <Button size='sm' variant='outline'>
+        <Button size='xs' variant='outline'>
           Reversal
         </Button>
       </AlertAction>

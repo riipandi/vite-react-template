@@ -17,11 +17,19 @@ import {
 const meta = {
   title: 'Extra Components/InputGroup',
   component: InputGroup,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div
+        {...stylex.props(
+          atoms.display.flex,
+          atoms.justifyContent.center,
+          atoms.padding['20px'],
+          atoms.minWidth['448px'],
+          atoms.width['100%']
+        )}
+      >
         <Story />
       </div>
     )

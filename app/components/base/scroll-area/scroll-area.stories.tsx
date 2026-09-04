@@ -17,11 +17,19 @@ import { ScrollArea, ScrollBar } from './scroll-area.component'
 const meta = {
   title: 'Base Components/ScrollArea',
   component: ScrollArea,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div
+        {...stylex.props(
+          atoms.display.flex,
+          atoms.justifyContent.center,
+          atoms.padding['20px'],
+          atoms.minWidth['448px'],
+          atoms.width['100%']
+        )}
+      >
         <Story />
       </div>
     )
@@ -47,8 +55,8 @@ const styles = stylex.create({
     borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.border,
-    height: container.xs,
-    width: container.xs
+    height: container.sm,
+    width: container.card
   },
   inner: {
     display: 'flex',
@@ -104,7 +112,7 @@ export default meta
 
 export const Playground: Story = {
   render: () => (
-    <ScrollArea style={styles.root}>
+    <ScrollArea style={styles.root} fade>
       <div {...stylex.props(styles.inner)}>
         <h4 {...stylex.props(styles.heading)}>Daily Prophet editions</h4>
         {tags.map((tag) => (

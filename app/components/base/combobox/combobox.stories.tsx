@@ -24,7 +24,7 @@ import {
 const meta = {
   title: 'Base Components/Combobox',
   component: Combobox,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'centered' },
   argTypes: {
     multiple: { control: 'boolean' },
     disabled: { control: 'boolean' },
@@ -33,7 +33,15 @@ const meta = {
   tags: [], // ['autodocs']
   decorators: [
     (Story) => (
-      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+      <div
+        {...stylex.props(
+          atoms.display.flex,
+          atoms.justifyContent.center,
+          atoms.padding['20px'],
+          atoms.minWidth['448px'],
+          atoms.width['100%']
+        )}
+      >
         <Story />
       </div>
     )

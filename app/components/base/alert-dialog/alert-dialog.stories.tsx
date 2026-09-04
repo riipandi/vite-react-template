@@ -4,6 +4,7 @@ import * as stylex from '@stylexjs/stylex'
 import { Trash2Icon } from 'lucide-react'
 import * as React from 'react'
 import { Button } from '#/components/base/button'
+import { Icon } from '#/components/extra/icon'
 import { Spinner } from '#/components/extra/spinner'
 import {
   AlertDialog,
@@ -42,10 +43,6 @@ const meta = {
 
 type Story = StoryObj<typeof meta>
 
-const styles = stylex.create({
-  icon: { width: 24, height: 24 }
-})
-
 function deleteAccount() {
   return new Promise<void>((resolve) => setTimeout(resolve, 1500))
 }
@@ -83,8 +80,8 @@ export const Media: Story = {
       </AlertDialogTrigger>
       <AlertDialogContent size='sm'>
         <AlertDialogHeader>
-          <AlertDialogMedia>
-            <Trash2Icon {...stylex.props(styles.icon)} />
+          <AlertDialogMedia color='critical'>
+            <Icon svg={Trash2Icon} size={24} color='critical' />
           </AlertDialogMedia>
           <AlertDialogTitle>Empty the room?</AlertDialogTitle>
           <AlertDialogDescription>

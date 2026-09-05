@@ -91,6 +91,8 @@ export const calendarStyles = stylex.create({
       ':hover': colors.backgroundPrimary,
       default: colors.backgroundPrimary
     },
+    borderBottomLeftRadius: 0,
+    borderTopLeftRadius: 0,
     borderBottomRightRadius: radius.medium,
     borderTopRightRadius: radius.medium,
     color: {
@@ -115,7 +117,9 @@ export const calendarStyles = stylex.create({
       default: colors.backgroundPrimary
     },
     borderBottomLeftRadius: radius.medium,
+    borderBottomRightRadius: 0,
     borderTopLeftRadius: radius.medium,
+    borderTopRightRadius: 0,
     color: {
       ':hover': colors.onBrand,
       default: colors.onBrand

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import { barY, crosshair, defineChart, lineY, ruleY } from '@tanstack/charts'
 import { tooltip } from '@tanstack/charts/tooltip'
+import { portal } from '@tanstack/charts/tooltip/portal'
 import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
@@ -58,14 +59,21 @@ export const BarsWithTrendLine: Story = {
           strokeWidth: 2,
           points: true
         }),
-        crosshair({ x: true, y: false, marker: true }),
+        crosshair({ x: { label: true }, y: false, marker: true }),
         ruleY([0])
       ],
       scales: checkoutScales,
       theme: chartTheme,
       motion: barMotion,
       focus: 'group-x',
-      tooltip
+      tooltip: {
+        use: tooltip,
+        portal,
+        anchor: 'group-center',
+        placement: ['top', 'right', 'left', 'bottom'],
+        sort: 'color-domain',
+        items: [{ channel: 'y', label: 'Checkouts' }] as const
+      }
     })
 
     return (

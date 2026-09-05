@@ -3,6 +3,7 @@ import * as stylex from '@stylexjs/stylex'
 import { defineChart } from '@tanstack/charts'
 import { pie, polar, radialArc } from '@tanstack/charts/polar'
 import { tooltip } from '@tanstack/charts/tooltip'
+import { portal } from '@tanstack/charts/tooltip/portal'
 import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import { fontSize, fontWeight, unit } from '#/styles/core/tokens.stylex'
@@ -39,7 +40,14 @@ const donutDefinition = defineChart({
   scales: { x: null, y: null },
   theme: chartTheme,
   motion: chartMotion,
-  tooltip
+  tooltip: {
+    use: tooltip,
+    portal,
+    items: [
+      { field: 'house', label: 'House' },
+      { field: 'points', label: 'Points' }
+    ] as const
+  }
 })
 
 const styles = stylex.create({

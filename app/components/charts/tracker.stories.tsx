@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
-import { expect } from 'storybook/test'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
+import { Tooltip, TooltipContent, TooltipTrigger } from '#/components/base/tooltip'
 import { duration, easing, fontSize, unit } from '#/styles/core/tokens.stylex'
 import {
   canvasDecorator,
@@ -23,8 +24,8 @@ type Story = StoryObj<typeof meta>
 export default meta
 
 // Tremor-style tracker: one small segment per day, colored by shelf status.
-// Native title attributes double as the tooltip; a real integration would
-// swap them for the base tooltip component.
+// Each segment is a Base UI Tooltip trigger, so the popup follows the design
+// system instead of relying on native `title` attributes.
 
 const styles = stylex.create({
   wrapper: {
@@ -41,6 +42,7 @@ const styles = stylex.create({
   segment: {
     backgroundColor: 'var(--seg-color, currentColor)',
     borderRadius: 2,
+    cursor: 'default',
     display: 'block',
     flexBasis: 0,
     flexGrow: 1,
@@ -71,13 +73,14 @@ function Tracker() {
     >
       <div {...stylex.props(styles.track)}>
         {shelfStatuses.map((status: AvailabilityStatus, day) => (
-          <span
-            key={day}
-            data-status={status}
-            title={`Day ${day + 1}: ${statusLabels[status]}`}
-            {...stylex.props(styles.segment)}
-            style={{ '--seg-color': statusColors[status] } as React.CSSProperties}
-          />
+          <Tooltip key={day}>
+            <TooltipTrigger
+              data-status={status}
+              {...stylex.props(styles.segment)}
+              style={{ '--seg-color': statusColors[status] } as React.CSSProperties}
+            />
+            <TooltipContent>{`Day ${day + 1}: ${statusLabels[status]}`}</TooltipContent>
+          </Tooltip>
         ))}
       </div>
       <div {...stylex.props(styles.weekLabels)}>
@@ -94,7 +97,16 @@ export const ShelfAvailability: Story = {
   render: () => <Tracker />,
   play: async ({ canvas }) => {
     expect(canvas.getByRole('img', { name: /Shelf status for The Da Vinci Code/ })).toBeVisible()
-    expect(canvas.getAllByTitle(/Day \d+/).length).toBe(shelfStatuses.length)
+    expect(document.querySelectorAll('[data-status]').length).toBe(shelfStatuses.length)
     expect(document.querySelectorAll('[data-status="overdue"]').length).toBeGreaterThan(0)
+
+    // Hovering a segment opens the Base UI tooltip for that day.
+    const firstSegment = document.querySelector('[data-status="low"]')
+    if (firstSegment) {
+      await userEvent.hover(firstSegment)
+      await waitFor(() =>
+        expect(within(document.body).getByText('Day 1: Last copies')).toBeVisible()
+      )
+    }
   }
 }

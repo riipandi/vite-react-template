@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
-import { barY, defineChart, fold, group, stack } from '@tanstack/charts'
+import { barY, defineChart, fold, group, stack, whenFocused } from '@tanstack/charts'
+import { bandX } from '@tanstack/charts/band'
 import { barX } from '@tanstack/charts/bar'
 import { scaleBand } from '@tanstack/charts/scales/band'
 import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { tooltip } from '@tanstack/charts/tooltip'
+import { portal } from '@tanstack/charts/tooltip/portal'
 import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
@@ -32,11 +34,24 @@ type Story = StoryObj<typeof meta>
 
 export default meta
 
+// Tooltip labels for the internal channels; the portal keeps the surface
+// visible inside clipped containers.
+const verticalItems = [
+  { channel: 'x', label: 'Novel' },
+  { channel: 'y', label: 'Chapters' }
+] as const
+const horizontalItems = [
+  { channel: 'x', label: 'Pages' },
+  { channel: 'y', label: 'Book' }
+] as const
+
 export const Vertical: Story = {
   name: 'Vertical',
   render: () => {
     const definition = defineChart({
       marks: [
+        // Painted band behind the hovered month column.
+        whenFocused(bandX(langdonNovels, { x: 'title' }), { match: 'x' }),
         barY(langdonNovels, {
           id: 'langdon',
           x: 'title',
@@ -50,7 +65,7 @@ export const Vertical: Story = {
       theme: chartTheme,
       motion: barMotion,
       focus: 'nearest',
-      tooltip
+      tooltip: { use: tooltip, portal, items: verticalItems }
     })
 
     return (
@@ -89,7 +104,7 @@ export const Horizontal: Story = {
       motion: barMotion,
       theme: chartTheme,
       focus: 'nearest',
-      tooltip
+      tooltip: { use: tooltip, portal, items: horizontalItems }
     })
 
     return (
@@ -114,6 +129,7 @@ export const Stacked: Story = {
     })
     const definition = defineChart({
       marks: [
+        whenFocused(bandX(rows, { x: 'month' }), { match: 'x' }),
         barY(rows, {
           id: 'stacked-bars',
           x: 'month',
@@ -130,7 +146,7 @@ export const Stacked: Story = {
       color: { domain: ['langdon', 'potter'], range: [seriesColors.langdon, seriesColors.potter] },
       theme: chartTheme,
       focus: 'nearest',
-      tooltip
+      tooltip: { use: tooltip, portal, items: [{ channel: 'y', label: 'Checkouts' }] as const }
     })
 
     return (
@@ -161,6 +177,7 @@ export const Grouped: Story = {
     })
     const definition = defineChart({
       marks: [
+        whenFocused(bandX(rows, { x: 'month' }), { match: 'x' }),
         barY(rows, {
           id: 'grouped-bars',
           x: 'month',
@@ -177,7 +194,7 @@ export const Grouped: Story = {
       color: { domain: ['langdon', 'potter'], range: [seriesColors.langdon, seriesColors.potter] },
       theme: chartTheme,
       focus: 'nearest',
-      tooltip
+      tooltip: { use: tooltip, portal, items: [{ channel: 'y', label: 'Checkouts' }] as const }
     })
 
     return (

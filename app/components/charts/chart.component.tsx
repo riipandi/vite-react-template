@@ -12,6 +12,10 @@
  * and colors. Mark colors must be concrete color strings — TanStack paints
  * them as SVG presentation attributes, which do not resolve CSS variables.
  *
+ * SSR and multi-chart hygiene: keep `initialWidth` stable across server and
+ * client, and give every chart in the same document an explicit `idPrefix` so
+ * gradient and clip IDs cannot collide.
+ *
  * @see: https://tanstack.com/charts/latest/docs/framework/react/adapter
  * @see: https://tanstack.com/charts/catalog/collections/shadcn
  * @see: https://ui.shadcn.com/docs/components/base/chart
@@ -20,7 +24,7 @@
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
-import type { ChartTooltipRow, ChartValue } from '@tanstack/charts'
+import type { ChartValue } from '@tanstack/charts'
 import { motion } from '@tanstack/charts/motion'
 import {
   RendererChart as TanStackChart,
@@ -110,120 +114,26 @@ export function Chart<
   const contextConfig = React.useContext(ChartContext)
   const activeConfig = config ?? contextConfig
 
-  const tooltipBody = React.useMemo(() => {
-    if (renderTooltipBody) {
-      return renderTooltipBody
-    }
-    if (!activeConfig || Object.keys(activeConfig).length === 0) {
-      return undefined
-    }
-    return (context: ChartTooltipBodyRenderContext<TDatum, TXValue, TYValue>) => (
-      <ChartTooltipContent config={activeConfig} context={context} />
-    )
-  }, [activeConfig, renderTooltipBody])
-
-  // TanStack's host appends consumer classes itself; merge the StyleX class
-  // alongside them instead of clobbering (mergeProps is typed for intrinsic
-  // elements only, and the TanStack host props are a custom shape).
-  const host = stylex.props(s.chart, style)
-  const mergedClassName = [props.className, host.className].filter(Boolean).join(' ')
-
-  return (
+  // Rich tooltip bodies stay opt-in via `renderTooltipBody`; the default is
+  // the native body (title, per-series rows with swatches, locale formatting)
+  // themed through the `--ts-chart-tooltip-*` variables on the host class.
+  const chart = (
     <TanStackChart
       {...props}
       renderer={chartMotionRenderer}
-      renderTooltipBody={tooltipBody}
-      className={mergedClassName === '' ? undefined : mergedClassName}
-      style={host.style}
+      renderTooltipBody={renderTooltipBody}
+      className={
+        [props.className, stylex.props(s.chart, style).className].filter(Boolean).join(' ') ||
+        undefined
+      }
+      style={stylex.props(s.chart, style).style}
     />
   )
-}
 
-export interface ChartTooltipContentProps<
-  TDatum = unknown,
-  TXValue extends ChartValue = ChartValue,
-  TYValue extends ChartValue = ChartValue
-> extends Omit<React.ComponentPropsWithoutRef<'div'>, 'className' | 'style'> {
-  context: ChartTooltipBodyRenderContext<TDatum, TXValue, TYValue>
-  config?: ChartConfig
-  style?: stylex.StyleXStyles
-}
-
-/** Styled replacement for the native tooltip body. Builds shadcn-style rows
- * from the focused points (one per series, native formatting) instead of the
- * native channel rows ("x: Mar", "y: 272"). The title is the categorical
- * value of the first point — the band category for cartesian charts, the
- * group label for radial charts. */
-export function ChartTooltipContent<
-  TDatum = unknown,
-  TXValue extends ChartValue = ChartValue,
-  TYValue extends ChartValue = ChartValue
->({ context, config, style, ...props }: ChartTooltipContentProps<TDatum, TXValue, TYValue>) {
-  const contextConfig = React.useContext(ChartContext)
-  const activeConfig = config ?? contextConfig
-
-  const points = context.points
-  const first = points[0]
-  const nativeTitle = typeof context.content === 'string' ? context.content : context.content?.title
-  const categorical = first
-    ? [first.xValue, first.yValue].find((value) => typeof value === 'string')
-    : undefined
-  const title =
-    nativeTitle ??
-    (typeof categorical === 'string' ? categorical : undefined) ??
-    (first && typeof first.groupLabel === 'string' && first.groupLabel !== ''
-      ? first.groupLabel
-      : undefined)
-
-  const rows: readonly ChartTooltipRow[] = points.map((point) => {
-    const itemConfig = activeConfig?.[point.markId]
-    // Radial arcs carry the measure on the datum (`value`); cartesian marks on
-    // the semantic y channel (barX measures on x — swap then). The native
-    // formatters are not exposed to the React body, so numbers render with
-    // the runtime locale.
-    const datumValue =
-      typeof point.datum === 'object' && point.datum !== null && 'value' in point.datum
-        ? (point.datum as { value: unknown }).value
-        : undefined
-    const measure =
-      typeof datumValue === 'number'
-        ? datumValue
-        : typeof point.yValue === 'number'
-          ? point.yValue
-          : point.xValue
-    const value = typeof measure === 'number' ? measure.toLocaleString() : String(measure ?? '')
-    return {
-      label: String(itemConfig?.label ?? point.groupLabel ?? point.markId),
-      value,
-      color: point.color ?? itemConfig?.color
-    }
-  })
-
-  if (!title && rows.length === 0) {
-    return null
-  }
-
-  return (
-    <div {...mergeProps<'div'>(stylex.props(s.tooltip, style), props)}>
-      {title != null && title !== '' && <div {...stylex.props(s.tooltipTitle)}>{title}</div>}
-      {rows.map((row, index) => (
-        // Rows have no stable key in the native content; label+index is unique enough.
-        <div key={`${row.label}-${index}`} {...stylex.props(s.tooltipRow)}>
-          <span {...stylex.props(s.tooltipLabel)}>
-            {row.color != null && (
-              // Runtime value → custom property on the style attr; the class
-              // reads var(--swatch-color).
-              <span
-                {...stylex.props(s.tooltipSwatch)}
-                style={{ '--swatch-color': row.color } as React.CSSProperties}
-              />
-            )}
-            {row.label}
-          </span>
-          <span {...stylex.props(s.tooltipValue)}>{row.value}</span>
-        </div>
-      ))}
-    </div>
+  return activeConfig ? (
+    <ChartContext.Provider value={activeConfig}>{chart}</ChartContext.Provider>
+  ) : (
+    chart
   )
 }
 

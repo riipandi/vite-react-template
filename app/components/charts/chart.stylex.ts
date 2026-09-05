@@ -5,7 +5,6 @@ import {
   fontFamily,
   fontLineHeight,
   fontSize,
-  fontWeight,
   radius,
   stroke,
   unit
@@ -16,7 +15,36 @@ import {
 // Legend and chrome text stay on `foregroundNeutral`. `minWidth` has no unit
 // token — it mirrors shadcn's 8rem tooltip floor.
 
+// Tooltip chrome follows the repo's elevated non-inverted card language (same
+// surface as toast: overlay elevation + thin dimmed border, radius.medium),
+// applied by redirecting the native surface's `--ts-chart-tooltip-*`
+// variables. The native tooltip body provides its own internal layout.
+// `chartPalette` is exported so standalone visualizations (bar list, tracker)
+// can opt into the same categorical palette outside the chart host.
+
+const chartPaletteOverrides = {
+  '--ts-chart-1': colors.backgroundPrimary,
+  '--ts-chart-2': colors.backgroundPositive,
+  '--ts-chart-3': colors.backgroundWarning,
+  '--ts-chart-4': colors.backgroundCritical,
+  '--chart-foreground': colors.foregroundNeutral,
+  '--chart-muted': colors.foregroundNeutralFaded,
+  '--chart-grid': colors.borderNeutralFaded
+}
+
+const chartTooltipOverrides = {
+  '--ts-chart-tooltip-background': colors.backgroundElevationOverlay,
+  '--ts-chart-tooltip-border': `${stroke.ring1} solid ${colors.borderNeutralFaded}`,
+  '--ts-chart-tooltip-border-radius': radius.medium,
+  '--ts-chart-tooltip-color': colors.foregroundNeutral,
+  '--ts-chart-tooltip-font': `500 ${fontSize.caption1}/${fontLineHeight.caption1} ${fontFamily.body}`,
+  '--ts-chart-tooltip-max-width': container.small,
+  '--ts-chart-tooltip-padding': `${unit.x1_5} ${unit.x3}`,
+  '--ts-chart-tooltip-shadow': 'none'
+}
+
 export const chartStyles = stylex.create({
+  palette: chartPaletteOverrides,
   root: {
     alignItems: 'stretch',
     color: colors.foregroundNeutral,
@@ -28,65 +56,9 @@ export const chartStyles = stylex.create({
     width: '100%'
   },
   chart: {
-    // Redirect the native tooltip surface chrome (see tooltip.js in
-    // @tanstack/charts: it paints via these vars with Canvas fallbacks) to the
-    // elevated card surface. The palette vars (--ts-chart-N) feed TanStack's
-    // default categorical color scale; both chain into core theme vars, so
-    // charts and tooltips stay theme-adaptive in dark mode.
-    '--ts-chart-1': colors.backgroundPrimary,
-    '--ts-chart-2': colors.backgroundPositive,
-    '--ts-chart-3': colors.backgroundWarning,
-    '--ts-chart-4': colors.backgroundCritical,
-    '--chart-foreground': colors.foregroundNeutral,
-    '--chart-muted': colors.foregroundNeutralFaded,
-    '--chart-grid': colors.borderNeutralFaded,
-    '--ts-chart-tooltip-background': colors.backgroundElevationOverlay,
-    '--ts-chart-tooltip-border': `${stroke.ring1} solid ${colors.borderNeutralFaded}`,
-    '--ts-chart-tooltip-border-radius': radius.medium,
-    '--ts-chart-tooltip-color': colors.foregroundNeutral,
-    '--ts-chart-tooltip-font': `500 ${fontSize.caption1}/${fontLineHeight.caption1} ${fontFamily.body}`,
-    '--ts-chart-tooltip-max-width': container.small,
-    '--ts-chart-tooltip-padding': `${unit.x1_5} ${unit.x3}`,
-    '--ts-chart-tooltip-shadow': 'none',
+    ...chartPaletteOverrides,
+    ...chartTooltipOverrides,
     width: '100%'
-  },
-  // Body of the tooltip — chrome lives on the native surface above,
-  // this only lays out the title and rows.
-  tooltip: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: unit.x1_5,
-    lineHeight: fontLineHeight.caption1,
-    minWidth: '8rem'
-  },
-  tooltipTitle: {
-    color: colors.foregroundNeutralFaded,
-    fontWeight: fontWeight.medium
-  },
-  tooltipRow: {
-    alignItems: 'center',
-    display: 'flex',
-    gap: unit.x2,
-    justifyContent: 'space-between'
-  },
-  tooltipLabel: {
-    alignItems: 'center',
-    display: 'flex',
-    fontWeight: fontWeight.regular,
-    gap: unit.x1_5,
-    minWidth: 0
-  },
-  tooltipSwatch: {
-    backgroundColor: 'var(--swatch-color, currentColor)',
-    borderRadius: radius.xsmall,
-    display: 'block',
-    flexShrink: 0,
-    height: unit.x2,
-    width: unit.x2
-  },
-  tooltipValue: {
-    fontVariantNumeric: 'tabular-nums',
-    fontWeight: fontWeight.medium
   },
   legend: {
     alignItems: 'center',

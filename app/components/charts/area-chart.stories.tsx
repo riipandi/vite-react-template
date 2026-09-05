@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import { areaY, defineChart, fold, stack } from '@tanstack/charts'
 import { tooltip } from '@tanstack/charts/tooltip'
+import { portal } from '@tanstack/charts/tooltip/portal'
 import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
@@ -118,7 +119,14 @@ export const Stacked: Story = {
       theme: chartTheme,
       motion: chartMotion,
       focus: 'group-x',
-      tooltip
+      tooltip: {
+        use: tooltip,
+        portal,
+        anchor: 'group-center',
+        placement: ['top', 'right', 'left', 'bottom'],
+        sort: 'color-domain',
+        items: [{ channel: 'y', label: 'Checkouts' }] as const
+      }
     })
 
     return (

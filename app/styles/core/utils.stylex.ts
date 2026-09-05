@@ -1,9 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
+import type { StyleXStyles } from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
-
-/** Re-exported so component files only import from one place. */
-export type StyleXStyles = stylex.StyleXStyles
 
 /**
  * `ring` — the Tailwind `ring-*` equivalent, defined once as a StyleX dynamic
@@ -37,8 +35,6 @@ export const ring = ({
   shadow: drop = null
 }: RingOptions = {}) => recipes.boxShadow(`0 0 0 ${width} ${color}${drop ? `, ${drop}` : ''}`)
 
-// Base UI state styling needs no JS adapter: since StyleX 0.18, attribute
-// selectors are valid condition keys, and Base UI mirrors every state as a
-// data attribute — style it inline:
-//
-//   backgroundColor: { default: 'transparent', '[data-highlighted]': colors.backgroundNeutralFaded }
+export const customClassName = (className: string | undefined) => {
+  return className ? ({ [className]: className, $$css: true } as StyleXStyles) : null
+}

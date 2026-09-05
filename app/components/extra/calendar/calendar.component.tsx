@@ -59,7 +59,7 @@ const CalendarDayButton = ({
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={[dayBtnStyleProps.className, defaultClassNames.day].filter(Boolean).join(' ')}
-      style={{ border: 'none', ...dayBtnStyleProps.style }}
+      style={dayBtnStyleProps.style}
       {...props}
     />
   )

@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
 import { radius, unit, stroke } from '#/styles/core/tokens.stylex'
-import { fontSize, fontWeight } from '#/styles/core/tokens.stylex'
+import { fontLineHeight, fontSize, fontWeight } from '#/styles/core/tokens.stylex'
 
 const cellSize = '1.75rem'
 
@@ -52,7 +52,7 @@ export const calendarStyles = stylex.create({
     alignItems: 'center',
     aspectRatio: '1 / 1',
     backgroundColor: {
-      ':hover': colors.backgroundNeutralFaded,
+      ':hover:not(:disabled)': colors.backgroundNeutralFaded,
       default: 'transparent'
     },
     borderColor: 'transparent',
@@ -60,9 +60,10 @@ export const calendarStyles = stylex.create({
     borderStyle: 'none',
     borderWidth: 0,
     color: {
-      ':hover': colors.foregroundNeutral,
+      ':hover:not(:disabled)': colors.foregroundNeutral,
       default: colors.foregroundNeutral
     },
+    cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'flex',
     flexDirection: 'column',
     fontSize: fontSize.body2,
@@ -78,7 +79,8 @@ export const calendarStyles = stylex.create({
     zIndex: 10
   },
   dayBtnFocused: {
-    boxShadow: `0 0 0 ${stroke.ring2} color-mix(in oklab, ${colors.borderPrimaryFaded} 50%, transparent)`,
+    outline: `${stroke.ring2} solid ${colors.foregroundPrimary}`,
+    outlineOffset: stroke.ring2,
     position: 'relative',
     zIndex: 10
   },
@@ -137,6 +139,7 @@ export const calendarStyles = stylex.create({
   },
   dropdownTrigger: {
     backgroundColor: {
+      ':focus-visible': colors.backgroundNeutralFaded,
       ':hover': colors.backgroundNeutralFaded,
       default: 'transparent'
     },
@@ -145,6 +148,11 @@ export const calendarStyles = stylex.create({
     gap: unit.x1,
     height: cellSize,
     minWidth: null,
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
+    },
+    outlineOffset: stroke.ring2,
     paddingInline: unit.x1_5
   },
   dropdowns: {
@@ -183,7 +191,7 @@ export const calendarStyles = stylex.create({
   months: {
     display: 'flex',
     flexDirection: {
-      '@media (min-width: 768px)': 'row',
+      '@media (min-width: 660px)': 'row',
       default: 'column'
     },
     gap: unit.x4,
@@ -241,7 +249,8 @@ export const calendarStyles = stylex.create({
     zIndex: 0
   },
   root: {
-    backgroundColor: colors.backgroundPage,
+    backgroundColor: colors.backgroundElevationBase,
+    borderRadius: radius.large,
     padding: unit.x2,
     position: 'relative'
   },
@@ -257,7 +266,8 @@ export const calendarStyles = stylex.create({
   },
   weekNumber: {
     color: colors.foregroundNeutralFaded,
-    fontSize: '0.8rem',
+    fontSize: fontSize.caption1,
+    lineHeight: fontLineHeight.caption1,
     userSelect: 'none'
   },
   weekNumberCell: {
@@ -276,8 +286,9 @@ export const calendarStyles = stylex.create({
     borderRadius: radius.medium,
     color: colors.foregroundNeutralFaded,
     flex: 1,
-    fontSize: '0.8rem',
-    fontWeight: fontWeight.regular,
+    fontSize: fontSize.caption1,
+    fontWeight: fontWeight.medium,
+    lineHeight: fontLineHeight.caption1,
     textAlign: 'center',
     userSelect: 'none'
   },

@@ -9,8 +9,6 @@ import { shelfStatuses, statusColors, statusLabels, type AvailabilityStatus } fr
 const meta = {
   title: 'Visualizations/Tracker',
   component: undefined,
-  // A status strip is a full-width visualization — the centered layout
-  // shrink-wraps the story (fit-content parent), collapsing the segments.
   parameters: { layout: 'centered' },
   tags: [], // ['autodocs']
   decorators: [

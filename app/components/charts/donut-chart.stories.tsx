@@ -5,7 +5,7 @@ import { pie, polar, radialArc } from '@tanstack/charts/polar'
 import { tooltip } from '@tanstack/charts/tooltip'
 import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
-import { canvasDecorator, houses, houseConfig } from './chart.samples'
+import { canvasDecorator, chartTheme, houses, houseConfig } from './chart.samples'
 
 const meta = {
   title: 'Visualizations/DonutChart',
@@ -34,6 +34,7 @@ const donutDefinition = defineChart({
     })
   ],
   scales: { x: null, y: null },
+  theme: chartTheme,
   tooltip
 })
 

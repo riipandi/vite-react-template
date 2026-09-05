@@ -27,6 +27,22 @@ export const seriesColors = {
   neutral: 'oklch(0.9118 0 89.88)'
 } as const
 
+/**
+ * Chart chrome (axis lines, tick labels, grid hairlines) mirroring the core
+ * tokens — `colors.foregroundNeutral`, `colors.foregroundNeutralFaded`, and
+ * `colors.borderNeutralFaded`. Concrete strings, same reason as the series
+ * colors: the SVG renderer paints theme values as presentation attributes.
+ */
+export const chartTheme = {
+  foreground: 'oklch(0.24 0 89.88)',
+  muted: 'oklch(0.54 0 89.88)',
+  grid: 'oklch(0 0 89.88 / 0.08)',
+  background: 'transparent'
+} as const
+
+/** Rounded bar corners — mirrors `radius.xsmall` (4px). */
+export const barRadius = 4
+
 // ---------------------------------------------------------------------------
 // Monthly checkouts (area / line / combo / stacked charts)
 // ---------------------------------------------------------------------------

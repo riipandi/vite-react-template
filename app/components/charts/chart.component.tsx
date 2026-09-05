@@ -13,6 +13,7 @@
  * them as SVG presentation attributes, which do not resolve CSS variables.
  *
  * @see: https://tanstack.com/charts/latest/docs/framework/react/adapter
+ * @see: https://tanstack.com/charts/catalog/collections/shadcn
  * @see: https://ui.shadcn.com/docs/components/base/chart
  */
 
@@ -20,10 +21,11 @@ import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
 import type { ChartTooltipRow, ChartValue } from '@tanstack/charts'
+import { motion } from '@tanstack/charts/motion'
 import {
-  Chart as TanStackChart,
-  type ChartProps as TanStackChartProps,
-  type ChartTooltipBodyRenderContext
+  RendererChart as TanStackChart,
+  type ChartTooltipBodyRenderContext,
+  type RendererChartProps as TanStackRendererChartProps
 } from '@tanstack/charts/react/tooltip'
 import * as React from 'react'
 import { chartStyles as s } from './chart.stylex'
@@ -36,6 +38,18 @@ export interface ChartConfigItem {
 
 /** Maps mark `id`s (or series keys) to presentation metadata. */
 export type ChartConfig = Record<string, ChartConfigItem>
+
+// Motion timing mirrors the core motion tokens — `duration.medium` ('200ms')
+// and `easing.decelerate` ('cubic-bezier(0, 0, 0.2, 1)', approximated by the
+// 'ease-out' preset) — because the motion driver needs plain numbers. The
+// driver respects `prefers-reduced-motion` by default, matching how the
+// popup recipe reduces its transitions to opacity. Module scope keeps the
+// renderer identity stable across renders (the motion renderer relies on
+// stable keys for DOM identity and spring velocity).
+const chartMotionRenderer = motion({
+  initial: true,
+  transition: { type: 'tween', duration: 200, easing: 'ease-out' }
+})
 
 const ChartContext = React.createContext<ChartConfig | null>(null)
 
@@ -80,7 +94,10 @@ export type ChartProps<
   TDatum = unknown,
   TXValue extends ChartValue = ChartValue,
   TYValue extends ChartValue = ChartValue
-> = Omit<TanStackChartProps<TDatum, TXValue, TYValue>, 'renderTooltipBody' | 'style'> &
+> = Omit<
+  TanStackRendererChartProps<TDatum, TXValue, TYValue>,
+  'renderTooltipBody' | 'style' | 'renderer'
+> &
   ChartOwnProps<TDatum, TXValue, TYValue>
 
 export function Chart<
@@ -112,6 +129,7 @@ export function Chart<
   return (
     <TanStackChart
       {...props}
+      renderer={chartMotionRenderer}
       renderTooltipBody={tooltipBody}
       className={mergedClassName === '' ? undefined : mergedClassName}
       style={host.style}

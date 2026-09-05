@@ -5,6 +5,7 @@ import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
   canvasDecorator,
+  chartTheme,
   checkouts,
   checkoutConfig,
   checkoutScales,
@@ -48,6 +49,7 @@ export const Overlaid: Story = {
         })
       ],
       scales: checkoutScales,
+      theme: chartTheme,
       tooltip
     })
 
@@ -95,6 +97,7 @@ export const Stacked: Story = {
       ],
       scales: checkoutScales,
       color: { domain: ['langdon', 'potter'], range: [seriesColors.langdon, seriesColors.potter] },
+      theme: chartTheme,
       tooltip
     })
 

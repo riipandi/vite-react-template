@@ -5,6 +5,7 @@ import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
   canvasDecorator,
+  chartTheme,
   checkouts,
   checkoutConfig,
   checkoutScales,
@@ -44,6 +45,7 @@ export const Multiple: Story = {
         })
       ],
       scales: checkoutScales,
+      theme: chartTheme,
       tooltip
     })
 
@@ -84,6 +86,7 @@ export const WithDots: Story = {
         })
       ],
       scales: checkoutScales,
+      theme: chartTheme,
       tooltip
     })
 

@@ -7,7 +7,9 @@ import { tooltip } from '@tanstack/charts/tooltip'
 import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
+  barRadius,
   canvasDecorator,
+  chartTheme,
   checkouts,
   checkoutConfig,
   checkoutScales,
@@ -37,10 +39,12 @@ export const Vertical: Story = {
           id: 'langdon',
           x: 'title',
           y: 'chapters',
-          fill: seriesColors.langdon
+          fill: seriesColors.langdon,
+          radius: barRadius
         })
       ],
       scales: checkoutScales,
+      theme: chartTheme,
       tooltip
     })
 
@@ -68,13 +72,15 @@ export const Horizontal: Story = {
           id: 'pages',
           x: 'pages',
           y: 'title',
-          fill: seriesColors.brand
+          fill: seriesColors.brand,
+          radius: barRadius
         })
       ],
       scales: {
         x: { scale: scaleLinear, nice: true, grid: true, axis: { label: 'Pages' } },
         y: { scale: () => scaleBand<string>().padding(0.2) }
       },
+      theme: chartTheme,
       tooltip
     })
 
@@ -106,11 +112,13 @@ export const Stacked: Story = {
           y: 'checkouts',
           z: 'series',
           color: 'series',
-          layout: stack()
+          layout: stack(),
+          radius: barRadius
         })
       ],
       scales: checkoutScales,
       color: { domain: ['langdon', 'potter'], range: [seriesColors.langdon, seriesColors.potter] },
+      theme: chartTheme,
       tooltip
     })
 
@@ -148,11 +156,13 @@ export const Grouped: Story = {
           y: 'checkouts',
           z: 'series',
           color: 'series',
-          layout: group()
+          layout: group(),
+          radius: barRadius
         })
       ],
       scales: checkoutScales,
       color: { domain: ['langdon', 'potter'], range: [seriesColors.langdon, seriesColors.potter] },
+      theme: chartTheme,
       tooltip
     })
 

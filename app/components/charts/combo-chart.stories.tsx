@@ -4,7 +4,9 @@ import { tooltip } from '@tanstack/charts/tooltip'
 import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
+  barRadius,
   canvasDecorator,
+  chartTheme,
   checkouts,
   checkoutConfig,
   checkoutScales,
@@ -42,7 +44,8 @@ export const BarsWithTrendLine: Story = {
           x: 'month',
           y: 'langdon',
           fill: seriesColors.langdon,
-          fillOpacity: 0.85
+          fillOpacity: 0.85,
+          radius: barRadius
         }),
         lineY(checkouts, {
           id: 'potter',
@@ -55,6 +58,7 @@ export const BarsWithTrendLine: Story = {
         ruleY([0])
       ],
       scales: checkoutScales,
+      theme: chartTheme,
       tooltip
     })
 

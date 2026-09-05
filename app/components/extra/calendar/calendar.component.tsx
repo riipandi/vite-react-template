@@ -3,9 +3,11 @@ import type { StyleXStyles } from '@stylexjs/stylex'
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import * as React from 'react'
 import { DayPicker, getDefaultClassNames } from 'react-day-picker'
-import type { DayButton, Locale } from 'react-day-picker'
+import type { DayButton, DropdownOption, Locale } from 'react-day-picker'
 import type { ButtonVariant } from '#/components/base/button/button.component'
 import { buttonStyles, buttonVariants } from '#/components/base/button/button.stylex'
+import { Select, SelectItem, SelectValue } from '#/components/base/select/select.component'
+import { SelectContent, SelectTrigger } from '#/components/base/select/select.component'
 import { customClassName } from '#/styles/core/utils.stylex'
 import { calendarStyles } from './calendar.stylex'
 
@@ -91,6 +93,57 @@ const CalendarWeekNumber = ({ children, ...weekNumProps }: React.ComponentProps<
     <div {...stylex.props(calendarStyles.weekNumberCell)}>{children}</div>
   </td>
 )
+
+interface CalendarDropdownProps {
+  options?: DropdownOption[]
+  value?: number | string | readonly string[]
+  'aria-label'?: string
+  disabled?: boolean
+  onChange?: React.ChangeEventHandler<HTMLSelectElement>
+}
+
+/**
+ * Month/year caption dropdown built on the Base UI Select (scrollable popup
+ * with keyboard navigation) instead of a native `<select>` overlay.
+ */
+const CalendarDropdown = ({
+  options,
+  value,
+  'aria-label': ariaLabel,
+  disabled,
+  onChange
+}: CalendarDropdownProps) => {
+  const selected = options?.find((option) => String(option.value) === String(value))
+
+  return (
+    <Select
+      items={options?.map((option) => ({ label: option.label, value: String(option.value) }))}
+      value={selected ? String(selected.value) : null}
+      onValueChange={(newValue) => {
+        if (newValue == null) return
+        const syntheticEvent = {
+          target: { value: String(newValue) }
+        } as unknown as React.ChangeEvent<HTMLSelectElement>
+        onChange?.(syntheticEvent)
+      }}
+    >
+      <SelectTrigger
+        aria-label={ariaLabel}
+        disabled={disabled}
+        style={calendarStyles.dropdownTrigger}
+      >
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent style={calendarStyles.dropdownContent}>
+        {options?.map((option) => (
+          <SelectItem key={option.value} value={String(option.value)} disabled={option.disabled}>
+            {option.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  )
+}
 
 const CalendarDayButtonWrapper = (
   props: React.ComponentProps<typeof DayButton> & { locale?: Partial<Locale> }
@@ -180,15 +233,6 @@ export function Calendar({
         disabled: [stylex.props(calendarStyles.disabled).className, defaultClassNames.disabled]
           .filter(Boolean)
           .join(' '),
-        dropdown: [stylex.props(calendarStyles.dropdown).className, defaultClassNames.dropdown]
-          .filter(Boolean)
-          .join(' '),
-        dropdown_root: [
-          stylex.props(calendarStyles.dropdownRoot).className,
-          defaultClassNames.dropdown_root
-        ]
-          .filter(Boolean)
-          .join(' '),
         dropdowns: [stylex.props(calendarStyles.dropdowns).className, defaultClassNames.dropdowns]
           .filter(Boolean)
           .join(' '),
@@ -264,6 +308,7 @@ export function Calendar({
         Root: CalendarRoot,
         Chevron: CalendarChevron,
         DayButton: CalendarDayButtonWrapper,
+        Dropdown: CalendarDropdown,
         WeekNumber: CalendarWeekNumber,
         ...components
       }}

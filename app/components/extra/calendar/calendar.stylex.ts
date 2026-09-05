@@ -132,20 +132,14 @@ export const calendarStyles = stylex.create({
     color: colors.foregroundNeutralFaded,
     opacity: 0.5
   },
-  dropdown: {
-    cursor: 'pointer',
-    height: '100%',
-    inset: 0,
-    opacity: 0,
-    position: 'absolute',
-    width: '100%',
-    zIndex: 10
+  dropdownContent: {
+    width: 'max-content'
   },
-  dropdownRoot: {
-    alignItems: 'center',
-    borderRadius: radius.medium,
-    display: 'inline-flex',
-    position: 'relative'
+  dropdownTrigger: {
+    gap: unit.x1,
+    height: cellSize,
+    minWidth: null,
+    paddingInline: unit.x2
   },
   dropdowns: {
     alignItems: 'center',
@@ -155,7 +149,9 @@ export const calendarStyles = stylex.create({
     gap: unit.x1_5,
     height: cellSize,
     justifyContent: 'center',
-    width: '100%'
+    position: 'relative',
+    width: 'fit-content',
+    zIndex: 10
   },
   hidden: {
     visibility: 'hidden'

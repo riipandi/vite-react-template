@@ -3,18 +3,20 @@ import { colors } from '#/styles/core/colors.stylex'
 import { radius, unit, stroke } from '#/styles/core/tokens.stylex'
 import { fontLineHeight, fontSize, fontWeight } from '#/styles/core/tokens.stylex'
 
-const cellSize = '1.75rem'
+export const calendarConsts = stylex.defineConsts({
+  cellSize: '2rem'
+})
 
 export const calendarStyles = stylex.create({
   buttonNav: {
-    height: cellSize,
+    height: calendarConsts.cellSize,
     opacity: {
       ':disabled': 0.5,
       default: 1
     },
     padding: 0,
     userSelect: 'none',
-    width: cellSize
+    width: calendarConsts.cellSize
   },
   captionLabel: {
     fontSize: fontSize.body2,
@@ -73,7 +75,7 @@ export const calendarStyles = stylex.create({
     isolation: 'isolate',
     justifyContent: 'center',
     lineHeight: 1,
-    minWidth: cellSize,
+    minWidth: calendarConsts.cellSize,
     position: 'relative',
     width: '100%',
     zIndex: 10
@@ -146,7 +148,7 @@ export const calendarStyles = stylex.create({
     borderStyle: 'none',
     borderWidth: 0,
     gap: unit.x1,
-    height: cellSize,
+    height: calendarConsts.cellSize,
     minWidth: null,
     outline: {
       default: 'none',
@@ -161,7 +163,7 @@ export const calendarStyles = stylex.create({
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     gap: unit.x1_5,
-    height: cellSize,
+    height: calendarConsts.cellSize,
     justifyContent: 'center',
     position: 'relative',
     width: 'fit-content',
@@ -173,13 +175,13 @@ export const calendarStyles = stylex.create({
   month: {
     display: 'flex',
     flexDirection: 'column',
-    gap: unit.x4,
+    gap: unit.x3,
     width: '100%'
   },
   monthCaption: {
     alignItems: 'center',
     display: 'flex',
-    height: cellSize,
+    height: calendarConsts.cellSize,
     justifyContent: 'center',
     paddingInline: 0,
     width: '100%'
@@ -194,7 +196,10 @@ export const calendarStyles = stylex.create({
       '@media (min-width: 660px)': 'row',
       default: 'column'
     },
-    gap: unit.x4,
+    gap: {
+      '@media (min-width: 900px)': unit.x6,
+      default: unit.x4
+    },
     position: 'relative'
   },
   nav: {
@@ -273,21 +278,25 @@ export const calendarStyles = stylex.create({
   weekNumberCell: {
     alignItems: 'center',
     display: 'flex',
-    height: cellSize,
+    height: calendarConsts.cellSize,
     justifyContent: 'center',
     textAlign: 'center',
-    width: cellSize
+    width: calendarConsts.cellSize
   },
   weekNumberHeader: {
     userSelect: 'none',
-    width: cellSize
+    width: calendarConsts.cellSize
   },
   weekday: {
+    alignItems: 'center',
     borderRadius: radius.medium,
     color: colors.foregroundNeutralFaded,
+    display: 'flex',
     flex: 1,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
+    height: calendarConsts.cellSize,
+    justifyContent: 'center',
     lineHeight: fontLineHeight.caption1,
     textAlign: 'center',
     userSelect: 'none'

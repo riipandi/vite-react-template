@@ -55,7 +55,7 @@ const styles = stylex.create({
     borderColor: colors.borderNeutral,
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     height: container.sm,
     width: container.card
   },
@@ -95,7 +95,7 @@ const styles = stylex.create({
     borderColor: colors.borderNeutral,
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     height: 64,
     width: '100%'
   },

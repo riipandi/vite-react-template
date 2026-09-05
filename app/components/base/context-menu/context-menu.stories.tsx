@@ -51,7 +51,7 @@ const styles = stylex.create({
     borderColor: colors.borderNeutral,
     borderRadius: radius.large,
     borderStyle: 'dashed',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     color: colors.foregroundNeutral,
     display: 'flex',
     fontFamily: fontFamily.body,

@@ -10,7 +10,7 @@ export const emptyStyles = stylex.create({
     borderColor: colors.borderNeutralFaded,
     borderRadius: radius.xlarge,
     borderStyle: 'dashed',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     display: 'flex',
     flex: 1,
     flexDirection: 'column',

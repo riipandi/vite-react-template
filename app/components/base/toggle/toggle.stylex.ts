@@ -30,9 +30,9 @@ export const toggleStyles = stylex.create({
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: stroke.focus,
+    outlineOffset: stroke.ring2,
     transitionDuration: duration.fast,
     transitionProperty: 'background-color, border-color, color, opacity',
     userSelect: 'none',
@@ -45,7 +45,7 @@ export const toggleVariants = stylex.create({
   outline: {
     borderColor: colors.borderNeutralFaded,
     borderStyle: 'solid',
-    borderWidth: stroke.border
+    borderWidth: stroke.ring1
   }
 })
 

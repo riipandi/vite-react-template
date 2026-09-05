@@ -64,7 +64,7 @@ export const fileUploadStyles = stylex.create({
     backgroundColor: 'transparent',
     borderColor: colors.borderNeutral,
     borderStyle: 'dashed',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     cursor: 'pointer',
     ':hover': {
       backgroundColor: colors.backgroundNeutralHighlightedFaded

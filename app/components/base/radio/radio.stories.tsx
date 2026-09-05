@@ -81,7 +81,7 @@ const styles = stylex.create({
     },
     borderRadius: radius.large,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     cursor: 'pointer',
     display: 'flex',
     gap: 12,

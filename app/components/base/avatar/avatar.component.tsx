@@ -73,7 +73,7 @@ export function AvatarGroup({ style, children, ...props }: DivProps) {
             s.groupItem,
             index > 0 && s.groupItemOverlap,
             s.groupItemStack(items.length - index),
-            ring({ width: stroke.focus, color: colors.backgroundPage })
+            ring({ width: stroke.ring2, color: colors.backgroundPage })
           )}
         >
           {child}

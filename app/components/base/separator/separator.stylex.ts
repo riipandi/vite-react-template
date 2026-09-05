@@ -11,11 +11,11 @@ export const separatorStyles = stylex.create({
 
 export const separatorOrientations = stylex.create({
   horizontal: {
-    height: stroke.border,
+    height: stroke.ring1,
     width: '100%'
   },
   vertical: {
     alignSelf: 'stretch',
-    width: stroke.border
+    width: stroke.ring1
   }
 })

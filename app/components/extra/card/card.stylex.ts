@@ -16,7 +16,7 @@ export const cardStyles = stylex.create({
     borderColor: colors.borderNeutralFaded,
     borderRadius: radius.large,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     boxShadow: shadow.outline,
     color: colors.foregroundNeutral,
     display: 'flex',

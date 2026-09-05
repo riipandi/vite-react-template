@@ -14,7 +14,7 @@ export const selectStyles = stylex.create({
   },
   separator: {
     backgroundColor: colors.borderNeutralFaded,
-    height: stroke.border,
+    height: stroke.ring1,
     marginBlock: unit.x1
   },
   trigger: {
@@ -26,7 +26,7 @@ export const selectStyles = stylex.create({
     },
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     color: colors.foregroundNeutral,
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
@@ -40,9 +40,9 @@ export const selectStyles = stylex.create({
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: `calc(-1 * ${stroke.border})`,
+    outlineOffset: `calc(-1 * ${stroke.ring1})`,
     paddingInline: unit.x3,
     userSelect: 'none',
     whiteSpace: 'nowrap'

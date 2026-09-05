@@ -70,7 +70,7 @@ export const dialogStyles = stylex.create({
     justifyContent: 'center',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     padding: 0,
     position: 'absolute',

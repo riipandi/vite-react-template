@@ -80,7 +80,7 @@ export const alertDialogStyles = stylex.create({
     borderBottomRightRadius: radius.xlarge,
     borderTopColor: colors.borderNeutralFaded,
     borderTopStyle: 'solid',
-    borderTopWidth: stroke.border,
+    borderTopWidth: stroke.ring1,
     display: 'flex',
     flexDirection: {
       default: 'column-reverse',

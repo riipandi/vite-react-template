@@ -21,7 +21,7 @@ export const checkboxStyles = stylex.create({
     },
     borderRadius: radius.small,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
     flexShrink: 0,
@@ -30,9 +30,9 @@ export const checkboxStyles = stylex.create({
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: stroke.focus,
+    outlineOffset: stroke.ring2,
     padding: 0,
     position: 'relative',
     transitionDuration: duration.fast,

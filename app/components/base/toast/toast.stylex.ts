@@ -27,7 +27,7 @@ export const toastStyles = stylex.create({
     },
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     bottom: 0,
     boxShadow: shadow.overlay,
     boxSizing: 'border-box',
@@ -111,7 +111,7 @@ export const toastStyles = stylex.create({
     borderColor: colors.borderNeutralFaded,
     borderRadius: radius.small,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     color: colors.foregroundNeutral,
     cursor: 'pointer',
     display: 'inline-flex',
@@ -123,7 +123,7 @@ export const toastStyles = stylex.create({
     justifyContent: 'center',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     paddingInline: unit.x2
   },
@@ -143,7 +143,7 @@ export const toastStyles = stylex.create({
     justifyContent: 'center',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     padding: 0,
     width: unit.x6

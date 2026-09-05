@@ -117,7 +117,10 @@ export const Dropdown: Story = {
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <DropdownMenu>
-            <DropdownMenuTrigger {...stylex.props(styles.trigger)}>
+            <DropdownMenuTrigger
+              aria-label='Collapsed breadcrumb levels'
+              {...stylex.props(styles.trigger)}
+            >
               <BreadcrumbEllipsis />
             </DropdownMenuTrigger>
             <DropdownMenuContent align='start'>
@@ -141,10 +144,7 @@ export const Dropdown: Story = {
   play: async ({ canvas }) => {
     const body = within(document.body)
 
-    // The ellipsis trigger carries no accessible name (it renders aria-hidden);
-    // it is the only button in this story.
-    const trigger = canvas.getByRole('button')
-    await userEvent.click(trigger)
+    await userEvent.click(canvas.getByRole('button', { name: 'Collapsed breadcrumb levels' }))
     await body.findByRole('menu')
     expect(body.getByRole('menuitem', { name: "Marauder's Map" })).toBeInTheDocument()
 

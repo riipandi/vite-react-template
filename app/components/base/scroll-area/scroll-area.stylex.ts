@@ -13,7 +13,7 @@ export const scrollAreaStyles = stylex.create({
     height: '100%',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     width: '100%'
   },
@@ -27,7 +27,7 @@ export const scrollAreaStyles = stylex.create({
       '[data-hovering]': 1,
       '[data-scrolling]': 1
     },
-    padding: stroke.border,
+    padding: stroke.ring1,
     touchAction: 'none',
     transitionDelay: {
       default: duration.slow,

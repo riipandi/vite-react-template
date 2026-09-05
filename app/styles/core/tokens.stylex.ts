@@ -139,10 +139,9 @@ export const unit = stylex.defineConsts({
 })
 
 export const stroke = stylex.defineConsts({
-  border: '1px',
-  focus: '2px',
-  // Soft state ring (hover/active halo on slider thumbs etc.), like Tailwind's ring-3.
-  halo: '3px'
+  ring1: '1px',
+  ring2: '2px',
+  ring3: '3px'
 })
 
 // Container widths for popups, panels, and example layouts.

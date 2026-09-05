@@ -52,7 +52,7 @@ const styles = stylex.create({
     borderColor: colors.borderNeutral,
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     fontFamily: fontFamily.monospace,
     fontSize: fontSize.body2,
     paddingBlock: unit.x2,
@@ -81,7 +81,7 @@ const styles = stylex.create({
     gap: unit.x1,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.borderPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.borderPrimary}`
     },
     // Read by the chevron below — StyleX has no child selectors, so the
     // trigger's [data-panel-open] state travels via a custom property.

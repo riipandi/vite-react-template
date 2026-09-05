@@ -30,7 +30,7 @@ export const tabsStyles = stylex.create({
     backgroundColor: 'transparent',
     borderBottomColor: colors.borderNeutralFaded,
     borderBottomStyle: 'solid',
-    borderBottomWidth: stroke.border,
+    borderBottomWidth: stroke.ring1,
     borderRadius: radius.none,
     gap: 0,
     padding: 0
@@ -55,9 +55,9 @@ export const tabsStyles = stylex.create({
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: `calc(-1 * ${stroke.focus})`,
+    outlineOffset: `calc(-1 * ${stroke.ring2})`,
     paddingInline: unit.x3,
     transitionDuration: duration.fast,
     transitionProperty: 'background-color, color, border-color',
@@ -72,10 +72,10 @@ export const tabsStyles = stylex.create({
       '[data-active]': colors.backgroundPrimary
     },
     borderBottomStyle: 'solid',
-    borderBottomWidth: stroke.focus,
+    borderBottomWidth: stroke.ring2,
     borderRadius: radius.none,
     height: unit.x9,
-    marginBottom: `calc(-1 * ${stroke.border})`
+    marginBottom: `calc(-1 * ${stroke.ring1})`
   },
   content: {
     color: colors.foregroundNeutral,

@@ -10,7 +10,7 @@ export const menubarStyles = stylex.create({
     borderColor: colors.borderNeutralFaded,
     borderRadius: radius.large,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     display: 'flex',
     fontFamily: fontFamily.body,
     gap: unit.x0_5,
@@ -34,7 +34,7 @@ export const menubarStyles = stylex.create({
     fontWeight: fontWeight.medium,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     paddingBlock: unit.x0_5,
     paddingInline: unit.x1_5,

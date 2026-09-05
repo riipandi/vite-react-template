@@ -109,7 +109,7 @@ export const contextMenuStyles = stylex.create({
   },
   separator: {
     backgroundColor: colors.borderNeutralFaded,
-    height: stroke.border,
+    height: stroke.ring1,
     marginBlock: unit.x1
   },
   label: {

@@ -10,7 +10,7 @@ export const toolbarStyles = stylex.create({
     borderColor: colors.borderNeutralFaded,
     borderRadius: radius.large,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     display: 'flex',
     fontFamily: fontFamily.body,
     gap: unit.x1,
@@ -27,6 +27,6 @@ export const toolbarStyles = stylex.create({
     backgroundColor: colors.borderNeutralFaded,
     marginBlock: unit.x1,
     marginInline: unit.x1,
-    width: stroke.border
+    width: stroke.ring1
   }
 })

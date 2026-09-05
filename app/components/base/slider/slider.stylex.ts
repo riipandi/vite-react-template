@@ -4,7 +4,7 @@ import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { duration } from '#/styles/core/tokens.stylex'
 
-export const sliderHaloShadow = `0 0 0 ${stroke.halo} color-mix(in srgb, ${colors.foregroundPrimary} 50%, transparent)`
+export const sliderHaloShadow = `0 0 0 ${stroke.ring3} color-mix(in srgb, ${colors.foregroundPrimary} 50%, transparent)`
 
 export const sliderStyles = stylex.create({
   control: {
@@ -36,7 +36,7 @@ export const sliderStyles = stylex.create({
     borderColor: colors.foregroundPrimary,
     borderRadius: radius.circular,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     boxShadow: {
       default: 'none',
       ':hover': sliderHaloShadow,

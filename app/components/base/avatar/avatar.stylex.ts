@@ -43,7 +43,7 @@ export const avatarStyles = stylex.create({
     borderColor: colors.backgroundPage,
     borderRadius: radius.circular,
     borderStyle: 'solid',
-    borderWidth: stroke.focus,
+    borderWidth: stroke.ring2,
     color: colors.onBrand,
     display: 'flex',
     insetInlineEnd: 0,

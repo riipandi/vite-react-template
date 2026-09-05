@@ -16,7 +16,7 @@ export const itemStyles = stylex.create({
     alignItems: 'center',
     borderRadius: radius.large,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     display: 'flex',
     flexWrap: 'wrap',
     fontFamily: fontFamily.body,
@@ -24,7 +24,7 @@ export const itemStyles = stylex.create({
     lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     textDecoration: 'none',
     transitionDuration: duration.fast,

@@ -39,13 +39,13 @@ const styles = stylex.create({
     gap: 2
   },
   segment: {
-    backgroundColor: 'currentColor',
+    backgroundColor: 'var(--seg-color, currentColor)',
     borderRadius: 2,
     display: 'block',
     flexBasis: 0,
     flexGrow: 1,
     flexShrink: 1,
-    height: unit.x4,
+    height: unit.x2,
     minWidth: 0
   },
   weekLabels: {
@@ -71,7 +71,7 @@ function Tracker() {
             data-status={status}
             title={`Day ${day + 1}: ${statusLabels[status]}`}
             {...stylex.props(styles.segment)}
-            style={{ color: statusColors[status] }}
+            style={{ '--seg-color': statusColors[status] } as React.CSSProperties}
           />
         ))}
       </div>

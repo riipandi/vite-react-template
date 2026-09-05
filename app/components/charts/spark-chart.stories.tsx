@@ -5,7 +5,7 @@ import { scaleBand } from '@tanstack/charts/scales/band'
 import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
-import { fontWeight, radius } from '#/styles/core/tokens.stylex'
+import { fontSize, fontWeight, radius, unit } from '#/styles/core/tokens.stylex'
 import { Chart } from './chart.component'
 import { canvasDecorator, checkouts, seriesColors } from './chart.samples'
 
@@ -49,7 +49,7 @@ const cards = [
 const styles = stylex.create({
   row: {
     display: 'grid',
-    gap: 12,
+    gap: unit.x3,
     gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
     width: '100%'
   },
@@ -61,14 +61,14 @@ const styles = stylex.create({
     borderWidth: 1,
     display: 'flex',
     flexDirection: 'column',
-    gap: 8,
-    padding: 12
+    gap: unit.x2,
+    padding: unit.x3
   },
   label: {
-    fontSize: '0.75rem'
+    fontSize: fontSize.caption1
   },
   value: {
-    fontSize: '1.5rem',
+    fontSize: fontSize.featured5,
     fontWeight: fontWeight.semibold,
     fontVariantNumeric: 'tabular-nums'
   }

@@ -50,11 +50,13 @@ const styles = stylex.create({
   },
   barFill: {
     backgroundColor: colors.backgroundPrimary,
-    height: '100%'
+    height: '100%',
+    width: 'var(--bar-width, 100%)'
   },
   barFillMuted: {
     backgroundColor: colors.backgroundNeutralHighlighted,
-    height: '100%'
+    height: '100%',
+    width: 'var(--bar-width, 100%)'
   },
   value: {
     fontVariantNumeric: 'tabular-nums',
@@ -81,7 +83,7 @@ function BarList({ rows, highlightFirst = true }: BarListProps) {
               {...stylex.props(
                 highlightFirst && index === 0 ? styles.barFill : styles.barFillMuted
               )}
-              style={{ width: `${(row.pages / max) * 100}%` }}
+              style={{ '--bar-width': `${(row.pages / max) * 100}%` } as React.CSSProperties}
             />
           </div>
           <span {...stylex.props(styles.value)}>{row.pages}</span>

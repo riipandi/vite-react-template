@@ -147,8 +147,11 @@ export interface ChartTooltipContentProps<
   style?: stylex.StyleXStyles
 }
 
-/** Styled replacement for the native tooltip body. Falls back to the points'
- * resolved colors and mark ids when the native content carries no rows. */
+/** Styled replacement for the native tooltip body. Builds shadcn-style rows
+ * from the focused points (one per series, native formatting) instead of the
+ * native channel rows ("x: Mar", "y: 272"). The title is the categorical
+ * value of the first point — the band category for cartesian charts, the
+ * group label for radial charts. */
 export function ChartTooltipContent<
   TDatum = unknown,
   TXValue extends ChartValue = ChartValue,
@@ -157,19 +160,42 @@ export function ChartTooltipContent<
   const contextConfig = React.useContext(ChartContext)
   const activeConfig = config ?? contextConfig
 
-  const native = typeof context.content === 'string' ? null : context.content
-  const title = native?.title ?? (typeof context.content === 'string' ? context.content : undefined)
-  const rows: readonly ChartTooltipRow[] =
-    native && native.rows.length > 0
-      ? native.rows
-      : context.points.map((point) => {
-          const itemConfig = activeConfig?.[point.markId]
-          return {
-            label: String(itemConfig?.label ?? point.groupLabel ?? point.markId),
-            value: String(point.yValue ?? ''),
-            color: point.color ?? itemConfig?.color
-          }
-        })
+  const points = context.points
+  const first = points[0]
+  const nativeTitle = typeof context.content === 'string' ? context.content : context.content?.title
+  const categorical = first
+    ? [first.xValue, first.yValue].find((value) => typeof value === 'string')
+    : undefined
+  const title =
+    nativeTitle ??
+    (typeof categorical === 'string' ? categorical : undefined) ??
+    (first && typeof first.groupLabel === 'string' && first.groupLabel !== ''
+      ? first.groupLabel
+      : undefined)
+
+  const rows: readonly ChartTooltipRow[] = points.map((point) => {
+    const itemConfig = activeConfig?.[point.markId]
+    // Radial arcs carry the measure on the datum (`value`); cartesian marks on
+    // the semantic y channel (barX measures on x — swap then). The native
+    // formatters are not exposed to the React body, so numbers render with
+    // the runtime locale.
+    const datumValue =
+      typeof point.datum === 'object' && point.datum !== null && 'value' in point.datum
+        ? (point.datum as { value: unknown }).value
+        : undefined
+    const measure =
+      typeof datumValue === 'number'
+        ? datumValue
+        : typeof point.yValue === 'number'
+          ? point.yValue
+          : point.xValue
+    const value = typeof measure === 'number' ? measure.toLocaleString() : String(measure ?? '')
+    return {
+      label: String(itemConfig?.label ?? point.groupLabel ?? point.markId),
+      value,
+      color: point.color ?? itemConfig?.color
+    }
+  })
 
   if (!title && rows.length === 0) {
     return null
@@ -177,13 +203,18 @@ export function ChartTooltipContent<
 
   return (
     <div {...mergeProps<'div'>(stylex.props(s.tooltip, style), props)}>
-      {title != null && <div {...stylex.props(s.tooltipTitle)}>{title}</div>}
+      {title != null && title !== '' && <div {...stylex.props(s.tooltipTitle)}>{title}</div>}
       {rows.map((row, index) => (
         // Rows have no stable key in the native content; label+index is unique enough.
         <div key={`${row.label}-${index}`} {...stylex.props(s.tooltipRow)}>
           <span {...stylex.props(s.tooltipLabel)}>
             {row.color != null && (
-              <span {...stylex.props(s.tooltipSwatch)} style={{ color: row.color }} />
+              // Runtime value → custom property on the style attr; the class
+              // reads var(--swatch-color).
+              <span
+                {...stylex.props(s.tooltipSwatch)}
+                style={{ '--swatch-color': row.color } as React.CSSProperties}
+              />
             )}
             {row.label}
           </span>
@@ -226,9 +257,12 @@ export function ChartLegend({ config, hide, style, ...props }: ChartLegendProps)
         return (
           <div key={key} {...stylex.props(s.legendItem)}>
             {Icon ? (
-              <Icon height={12} width={12} style={{ color: item.color }} />
+              <Icon height={12} width={12} color={item.color} />
             ) : (
-              <span {...stylex.props(s.legendSwatch)} style={{ color: item.color }} />
+              <span
+                {...stylex.props(s.legendSwatch)}
+                style={{ '--swatch-color': item.color ?? 'currentColor' } as React.CSSProperties}
+              />
             )}
             {item.label ?? key}
           </div>

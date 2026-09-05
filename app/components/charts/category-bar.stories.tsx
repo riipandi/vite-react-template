@@ -57,8 +57,10 @@ const styles = stylex.create({
     overflowX: 'hidden'
   },
   segment: {
+    backgroundColor: 'var(--seg-bg, currentColor)',
     display: 'flex',
-    height: '100%'
+    height: '100%',
+    width: 'var(--seg-width, auto)'
   },
   segmentFirst: {
     borderTopLeftRadius: radius.full,
@@ -109,7 +111,6 @@ export function CategoryBar() {
       </div>
       <div {...stylex.props(styles.segments)}>
         {houses.map((row, index) => {
-          const share = (row.points / total) * 100
           return (
             <div
               key={row.house}
@@ -120,10 +121,12 @@ export function CategoryBar() {
                 index === 0 && styles.segmentFirst,
                 index === houses.length - 1 && styles.segmentLast
               )}
-              style={{
-                backgroundColor: houseConfig[row.house.toLowerCase()]?.color,
-                width: `${share}%`
-              }}
+              style={
+                {
+                  '--seg-bg': houseConfig[row.house.toLowerCase()]?.color,
+                  '--seg-width': `${((row.points / total) * 100).toFixed(2)}%`
+                } as React.CSSProperties
+              }
             />
           )
         })}

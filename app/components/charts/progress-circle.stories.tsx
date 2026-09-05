@@ -3,7 +3,7 @@ import * as stylex from '@stylexjs/stylex'
 import { defineChart } from '@tanstack/charts'
 import { polar, radialArc } from '@tanstack/charts/polar'
 import { expect } from 'storybook/test'
-import { fontWeight, unit } from '#/styles/core/tokens.stylex'
+import { fontSize, fontWeight, unit } from '#/styles/core/tokens.stylex'
 import { Chart, ChartContainer } from './chart.component'
 import { canvasDecorator, seriesColors } from './chart.samples'
 
@@ -25,17 +25,16 @@ const RING_OUTER = 56
 const styles = stylex.create({
   overlay: {
     alignItems: 'center',
-    display: 'grid',
+    display: 'flex',
     inset: 0,
     justifyContent: 'center',
     pointerEvents: 'none',
-    position: 'relative'
+    position: 'absolute'
   },
   label: {
-    fontSize: '1.125rem',
+    fontSize: fontSize.featured6,
     fontWeight: fontWeight.semibold,
-    fontVariantNumeric: 'tabular-nums',
-    position: 'absolute'
+    fontVariantNumeric: 'tabular-nums'
   },
   relative: {
     position: 'relative'
@@ -66,7 +65,7 @@ function ProgressCircle({ fraction, label }: ProgressStoryProps) {
             endAngle: 'end',
             innerRadius: RING_INNER,
             outerRadius: RING_OUTER,
-            fill: 'oklch(0.9118 0 89.88)'
+            fill: seriesColors.neutral
           }),
           radialArc([{ start: 0, end: turns * fraction }], {
             id: 'value',

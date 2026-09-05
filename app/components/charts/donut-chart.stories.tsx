@@ -4,6 +4,8 @@ import { defineChart } from '@tanstack/charts'
 import { pie, polar, radialArc } from '@tanstack/charts/polar'
 import { tooltip } from '@tanstack/charts/tooltip'
 import { expect } from 'storybook/test'
+import { colors } from '#/styles/core/colors.stylex'
+import { fontSize, fontWeight, unit } from '#/styles/core/tokens.stylex'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import { canvasDecorator, chartTheme, houses, houseConfig } from './chart.samples'
 
@@ -26,6 +28,7 @@ const donutDefinition = defineChart({
       marks: [
         radialArc(pie(houses, { value: 'points' }), {
           id: 'house',
+          z: 'house',
           innerRadius: 56,
           outerRadius: 96,
           fill: (datum) => houseConfig[datum.house.toLowerCase()]?.color ?? 'transparent'
@@ -42,22 +45,23 @@ const styles = stylex.create({
   // Overlays sit on top of the chart surface without stealing pointer events.
   centerOverlay: {
     alignItems: 'center',
-    display: 'grid',
+    display: 'flex',
+    flexDirection: 'column',
     inset: 0,
     justifyContent: 'center',
     pointerEvents: 'none',
-    position: 'relative'
-  },
-  centerTotal: {
-    fontSize: '1.25rem',
-    fontWeight: 600,
-    fontVariantNumeric: 'tabular-nums',
     position: 'absolute'
   },
+  centerTotal: {
+    fontSize: fontSize.featured5,
+    fontWeight: fontWeight.semibold,
+    fontVariantNumeric: 'tabular-nums',
+    lineHeight: 1.2
+  },
   centerCaption: {
-    fontSize: '0.75rem',
-    position: 'absolute',
-    transform: 'translateY(1.25rem)'
+    color: colors.foregroundNeutralFaded,
+    fontSize: fontSize.caption1,
+    marginTop: unit.x0_5
   },
   relative: {
     position: 'relative'

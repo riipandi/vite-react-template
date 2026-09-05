@@ -1,40 +1,66 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
-import { fontWeight, radius, unit } from '#/styles/core/tokens.stylex'
-import { fontFamily, fontLineHeight, fontSize } from '#/styles/core/tokens.stylex'
+import {
+  container,
+  fontFamily,
+  fontLineHeight,
+  fontSize,
+  fontWeight,
+  radius,
+  stroke,
+  unit
+} from '#/styles/core/tokens.stylex'
 
-// Tooltip and legend follow the repo's anchored-popup language (see
-// tooltip.stylex.ts / popup.stylex.ts): inverted surface, radius.small,
-// caption1 typography, no border or shadow. `minWidth` has no unit token —
-// it mirrors shadcn's 8rem tooltip floor.
+// Tooltip follows the repo's elevated non-inverted card language (same
+// surface as toast: overlay elevation + thin dimmed border, radius.medium).
+// Legend and chrome text stay on `foregroundNeutral`. `minWidth` has no unit
+// token — it mirrors shadcn's 8rem tooltip floor.
 
 export const chartStyles = stylex.create({
   root: {
     alignItems: 'stretch',
+    color: colors.foregroundNeutral,
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,
-    gap: unit.x2,
+    gap: unit.x3,
     width: '100%'
   },
   chart: {
+    // Redirect the native tooltip surface chrome (see tooltip.js in
+    // @tanstack/charts: it paints via these vars with Canvas fallbacks) to the
+    // elevated card surface. The palette vars (--ts-chart-N) feed TanStack's
+    // default categorical color scale; both chain into core theme vars, so
+    // charts and tooltips stay theme-adaptive in dark mode.
+    '--ts-chart-1': colors.backgroundPrimary,
+    '--ts-chart-2': colors.backgroundPositive,
+    '--ts-chart-3': colors.backgroundWarning,
+    '--ts-chart-4': colors.backgroundCritical,
+    '--chart-foreground': colors.foregroundNeutral,
+    '--chart-muted': colors.foregroundNeutralFaded,
+    '--chart-grid': colors.borderNeutralFaded,
+    '--ts-chart-tooltip-background': colors.backgroundElevationOverlay,
+    '--ts-chart-tooltip-border': `${stroke.ring1} solid ${colors.borderNeutralFaded}`,
+    '--ts-chart-tooltip-border-radius': radius.medium,
+    '--ts-chart-tooltip-color': colors.foregroundNeutral,
+    '--ts-chart-tooltip-font': `500 ${fontSize.caption1}/${fontLineHeight.caption1} ${fontFamily.body}`,
+    '--ts-chart-tooltip-max-width': container.small,
+    '--ts-chart-tooltip-padding': `${unit.x1_5} ${unit.x3}`,
+    '--ts-chart-tooltip-shadow': 'none',
     width: '100%'
   },
+  // Body of the tooltip — chrome lives on the native surface above,
+  // this only lays out the title and rows.
   tooltip: {
-    backgroundColor: colors.foregroundNeutral,
-    borderRadius: radius.small,
-    color: colors.backgroundPage,
     display: 'flex',
     flexDirection: 'column',
     gap: unit.x1_5,
     lineHeight: fontLineHeight.caption1,
-    minWidth: '8rem',
-    paddingBlock: unit.x1_5,
-    paddingInline: unit.x2
+    minWidth: '8rem'
   },
   tooltipTitle: {
-    color: colors.backgroundNeutral,
+    color: colors.foregroundNeutralFaded,
     fontWeight: fontWeight.medium
   },
   tooltipRow: {
@@ -46,11 +72,12 @@ export const chartStyles = stylex.create({
   tooltipLabel: {
     alignItems: 'center',
     display: 'flex',
+    fontWeight: fontWeight.regular,
     gap: unit.x1_5,
     minWidth: 0
   },
   tooltipSwatch: {
-    backgroundColor: 'currentColor',
+    backgroundColor: 'var(--swatch-color, currentColor)',
     borderRadius: radius.xsmall,
     display: 'block',
     flexShrink: 0,
@@ -74,7 +101,7 @@ export const chartStyles = stylex.create({
     gap: unit.x1_5
   },
   legendSwatch: {
-    backgroundColor: 'currentColor',
+    backgroundColor: 'var(--swatch-color, currentColor)',
     borderRadius: radius.xsmall,
     display: 'block',
     flexShrink: 0,

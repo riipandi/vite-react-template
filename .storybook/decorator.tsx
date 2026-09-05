@@ -21,7 +21,7 @@ const ephemeralStorage: ThemeStorage = {
 
 const pageBackgroundColor = {
   light: 'oklch(1 0 0)',
-  dark: 'oklch(0.15 0.02 17.58)'
+  dark: 'oklch(0.16 0 89.88)'
 } as const
 
 const canvasBackgroundCss = `

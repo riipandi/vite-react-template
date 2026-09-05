@@ -2,9 +2,10 @@
  * Shared fixtures for the chart storybook: a public library tracking two
  * rival franchises — Dan Brown's Robert Langdon novels and Harry Potter.
  *
- * Colors are concrete oklch strings (TanStack paints fills/strokes as SVG
- * presentation attributes, which do not resolve CSS variables) and mirror
- * the core palette from `#/styles/core/colors.stylex.ts`.
+ * Series and chrome colors reference the categorical palette variables that
+ * `chartStyles.chart` chains to the core theme tokens (see chart.stylex.ts).
+ * The SVG renderer resolves var() in presentation attributes, so every paint
+ * follows light/dark themes through `themes.ts`.
  */
 
 import atoms from '@stylexjs/atoms'
@@ -17,26 +18,28 @@ import type { ChartConfig } from './chart.component'
 // Series palettes
 // ---------------------------------------------------------------------------
 
+// Series colors reference the categorical palette variables defined on the
+// chart container (see chartStyles.chart). They chain into core theme vars,
+// so marks, legend swatches, and tooltip rows stay theme-adaptive in dark
+// mode — the SVG renderer resolves var() in presentation attributes.
 export const seriesColors = {
-  langdon: 'oklch(0.55 0.24 262.67)', // brand blue
-  potter: 'oklch(0.55 0.13 151.8)', // positive green
-  brand: 'oklch(0.55 0.24 262.67)',
-  green: 'oklch(0.55 0.13 151.8)',
-  amber: 'oklch(0.82 0.22 80)',
-  red: 'oklch(0.59 0.205 20.28)',
-  neutral: 'oklch(0.9118 0 89.88)'
+  langdon: 'var(--ts-chart-1)', // brand blue
+  potter: 'var(--ts-chart-2)', // positive green
+  brand: 'var(--ts-chart-1)',
+  green: 'var(--ts-chart-2)',
+  amber: 'var(--ts-chart-3)',
+  red: 'var(--ts-chart-4)',
+  neutral: 'var(--chart-grid, currentColor)'
 } as const
 
 /**
  * Chart chrome (axis lines, tick labels, grid hairlines) mirroring the core
- * tokens — `colors.foregroundNeutral`, `colors.foregroundNeutralFaded`, and
- * `colors.borderNeutralFaded`. Concrete strings, same reason as the series
- * colors: the SVG renderer paints theme values as presentation attributes.
+ * tokens via the container variables defined in `chart` — theme-adaptive.
  */
 export const chartTheme = {
-  foreground: 'oklch(0.24 0 89.88)',
-  muted: 'oklch(0.54 0 89.88)',
-  grid: 'oklch(0 0 89.88 / 0.08)',
+  foreground: 'var(--chart-foreground, currentColor)',
+  muted: 'var(--chart-muted, currentColor)',
+  grid: 'var(--chart-grid, currentColor)',
   background: 'transparent'
 } as const
 
@@ -108,10 +111,10 @@ export const houses = [
 ]
 
 export const houseConfig: ChartConfig = {
-  gryffindor: { label: 'Gryffindor', color: 'oklch(0.53 0.2 20.28)' },
-  slytherin: { label: 'Slytherin', color: 'oklch(0.55 0.13 151.8)' },
-  ravenclaw: { label: 'Ravenclaw', color: 'oklch(0.55 0.24 262.67)' },
-  hufflepuff: { label: 'Hufflepuff', color: 'oklch(0.82 0.22 80)' }
+  gryffindor: { label: 'Gryffindor', color: 'var(--ts-chart-4)' },
+  slytherin: { label: 'Slytherin', color: 'var(--ts-chart-2)' },
+  ravenclaw: { label: 'Ravenclaw', color: 'var(--ts-chart-1)' },
+  hufflepuff: { label: 'Hufflepuff', color: 'var(--ts-chart-3)' }
 }
 
 /** Weekly Quidditch pitch availability for the tracker stories. */
@@ -125,10 +128,10 @@ export const statusLabels: Record<AvailabilityStatus, string> = {
 }
 
 export const statusColors: Record<AvailabilityStatus, string> = {
-  available: seriesColors.green,
-  low: seriesColors.amber,
-  checkedOut: seriesColors.langdon,
-  overdue: seriesColors.red
+  available: 'var(--ts-chart-2)',
+  low: 'var(--ts-chart-3)',
+  checkedOut: 'var(--ts-chart-1)',
+  overdue: 'var(--ts-chart-4)'
 }
 
 /** Four weeks of shelf status for a single popular title. */

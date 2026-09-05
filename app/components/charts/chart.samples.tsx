@@ -209,7 +209,7 @@ export const readingPalette: Record<1 | 2 | 3 | 4, string> = {
   4: '#167a3f'
 }
 
-function mulberry32(seed: number) {
+export function mulberry32(seed: number) {
   return () => {
     seed |= 0
     seed = (seed + 0x6d2b79f5) | 0

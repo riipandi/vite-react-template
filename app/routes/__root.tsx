@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AnyRouteMatch } from '@tanstack/react-router'
 import { Outlet, createRootRouteWithContext, useMatches } from '@tanstack/react-router'
-import { Fragment } from 'react'
+import { UIProvider } from '#/components/base/provider'
 import { ThemeProvider } from '#/components/theme'
 import { AuthProvider } from '#/libraries/guard/auth-provider'
 import { GlobalNotFound, GlobalError } from './-boundaries'
@@ -28,7 +28,7 @@ function RootComponent() {
   const pageTitle = matches.findLast((match) => match.staticData?.pageTitle)?.staticData?.pageTitle
 
   return (
-    <Fragment>
+    <UIProvider direction='ltr'>
       <title>{pageTitle ? `${pageTitle} - React Application` : 'React Application'}</title>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
@@ -38,6 +38,6 @@ function RootComponent() {
         </AuthProvider>
         <DevTools queryClient={queryClient} />
       </QueryClientProvider>
-    </Fragment>
+    </UIProvider>
   )
 }

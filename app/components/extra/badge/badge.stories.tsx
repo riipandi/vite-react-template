@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { CheckIcon } from 'lucide-react'
+import { expect } from 'storybook/test'
 import { Spinner } from '#/components/extra/spinner'
 import { Badge } from './badge.component'
 
@@ -88,5 +89,9 @@ export const Link: Story = {
     <Badge variant='secondary' render={<a href='#new-release' />}>
       New at Weasleys'
     </Badge>
-  )
+  ),
+  play: ({ canvas }) => {
+    const link = canvas.getByRole('link', { name: "New at Weasleys'" })
+    expect(link).toHaveAttribute('href', '#new-release')
+  }
 }

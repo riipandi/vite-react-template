@@ -1,4 +1,5 @@
 import type { StoryContext } from '@storybook/tanstack-react'
+import { UIProvider } from '#/components/base/provider'
 import { ThemeProvider, type ThemeStorage } from '#/components/theme'
 
 export const STORYBOOK_THEME_GLOBAL = 'theme' as const
@@ -37,14 +38,16 @@ export function GlobalDecorator({ context, children }: GlobalDecoratorProps) {
   const forcedTheme = globalTheme === 'system' ? undefined : globalTheme
 
   return (
-    <ThemeProvider
-      attribute='data-theme'
-      defaultTheme='system'
-      forcedTheme={forcedTheme}
-      storage={ephemeralStorage}
-    >
-      <style dangerouslySetInnerHTML={{ __html: canvasBackgroundCss }} />
-      {children}
-    </ThemeProvider>
+    <UIProvider direction='ltr'>
+      <ThemeProvider
+        attribute='data-theme'
+        defaultTheme='system'
+        forcedTheme={forcedTheme}
+        storage={ephemeralStorage}
+      >
+        <style dangerouslySetInnerHTML={{ __html: canvasBackgroundCss }} />
+        {children}
+      </ThemeProvider>
+    </UIProvider>
   )
 }

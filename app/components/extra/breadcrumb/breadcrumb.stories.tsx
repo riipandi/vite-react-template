@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -76,7 +77,14 @@ export const Playground: Story = {
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  ),
+  // The current page carries aria-current; ancestors are plain links.
+  play: ({ canvas }) => {
+    expect(canvas.getByRole('link', { name: 'Louvre' })).toBeInTheDocument()
+    const current = canvas.getByRole('link', { name: 'Vatican Archives' })
+    expect(current).toHaveAttribute('aria-current', 'page')
+    expect(current).toHaveAttribute('aria-disabled', 'true')
+  }
 }
 
 export const Ellipsis: Story = {
@@ -129,7 +137,20 @@ export const Dropdown: Story = {
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    // The ellipsis trigger carries no accessible name (it renders aria-hidden);
+    // it is the only button in this story.
+    const trigger = canvas.getByRole('button')
+    await userEvent.click(trigger)
+    await body.findByRole('menu')
+    expect(body.getByRole('menuitem', { name: "Marauder's Map" })).toBeInTheDocument()
+
+    await userEvent.click(body.getByRole('menuitem', { name: 'Gringotts' }))
+    await waitFor(() => expect(body.queryByRole('menu')).toBeNull())
+  }
 }
 
 export const CustomSeparator: Story = {

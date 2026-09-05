@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import {
   Menubar,
   MenubarCheckboxItem,
@@ -92,7 +93,41 @@ export const Playground: Story = {
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    // Clicking a trigger opens its dropdown. Menubar triggers render as
+    // menuitem elements inside the menubar role.
+    await userEvent.click(canvas.getByRole('menuitem', { name: 'Grimoire' }))
+    await body.findByRole('menu')
+    expect(body.getByRole('menuitem', { name: /new scroll/i })).toBeInTheDocument()
+
+    // Submenus open from their trigger.
+    await userEvent.click(body.getByRole('menuitem', { name: /dispatch/i }))
+    await waitFor(() =>
+      expect(body.getByRole('menuitem', { name: 'Send by owl' })).toBeInTheDocument()
+    )
+
+    // The first Escape closes the submenu, the second the root menu.
+    await userEvent.keyboard('{Escape}')
+    await waitFor(() => expect(body.queryByRole('menuitem', { name: 'Send by owl' })).toBeNull())
+    await userEvent.keyboard('{Escape}')
+    await waitFor(() => expect(body.queryByRole('menu')).toBeNull())
+
+    // The radio group switches exclusively inside the third dropdown.
+    await userEvent.click(canvas.getByRole('menuitem', { name: 'Divination' }))
+    await body.findByRole('menu')
+    await userEvent.click(body.getByRole('menuitemradio', { name: 'Slytherin' }))
+    expect(body.getByRole('menuitemradio', { name: 'Slytherin' })).toHaveAttribute(
+      'aria-checked',
+      'true'
+    )
+    expect(body.getByRole('menuitemradio', { name: 'Gryffindor' })).toHaveAttribute(
+      'aria-checked',
+      'false'
+    )
+  }
 }
 
 export const Checkbox: Story = {

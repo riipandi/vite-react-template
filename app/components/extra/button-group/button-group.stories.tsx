@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { ChevronDownIcon } from 'lucide-react'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import {
   DropdownMenu,
@@ -91,7 +92,15 @@ export const Split: Story = {
         </DropdownMenuContent>
       </DropdownMenu>
     </ButtonGroup>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    await userEvent.click(canvas.getByRole('button', { name: 'More apparition options' }))
+    await body.findByRole('menu')
+    await userEvent.click(body.getByRole('menuitem', { name: 'Apparate to Hogsmeade' }))
+    await waitFor(() => expect(body.queryByRole('menu')).toBeNull())
+  }
 }
 
 export const Text: Story = {

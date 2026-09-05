@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'lucide-react'
+import { expect, userEvent } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Toggle } from '#/components/base/toggle'
 import { ToggleGroup, ToggleGroupItem } from '#/components/base/toggle-group'
@@ -47,7 +48,17 @@ export const Playground: Story = {
       <ToolbarSeparator />
       <ToolbarButton render={<Button variant='ghost' size='sm' />}>Send by Owl</ToolbarButton>
     </Toolbar>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const charm = canvas.getByRole('button', { name: 'Toggle charm' })
+    expect(charm).toHaveAttribute('aria-pressed', 'false')
+
+    // Toggles inside the toolbar keep their own state.
+    await userEvent.click(charm)
+    expect(charm).toHaveAttribute('aria-pressed', 'true')
+
+    expect(canvas.getByRole('separator')).toBeInTheDocument()
+  }
 }
 
 export const WithToggleGroup: Story = {

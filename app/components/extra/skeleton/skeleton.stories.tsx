@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect } from 'storybook/test'
 import { container, radius } from '#/styles/core/tokens.stylex'
 import { Skeleton } from './skeleton.component'
 
@@ -100,14 +101,20 @@ export default meta
 
 export const Playground: Story = {
   render: () => (
-    <div {...stylex.props(styles.root)}>
+    <div data-testid='skeleton-scene' {...stylex.props(styles.root)}>
       <Skeleton style={styles.avatar} />
       <div {...stylex.props(styles.lines)}>
         <Skeleton style={styles.lineWide} />
         <Skeleton style={styles.line} />
       </div>
     </div>
-  )
+  ),
+  // Skeletons are empty presentational placeholders — four shapes for the
+  // avatar and two text lines (plus their wrapper).
+  play: ({ canvas }) => {
+    const scene = canvas.getByTestId('skeleton-scene')
+    expect(scene.querySelectorAll('div').length).toBe(4)
+  }
 }
 
 export const Card: Story = {

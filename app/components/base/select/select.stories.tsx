@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Field, FieldError, FieldLabel } from '#/components/base/field'
 import {
   Select,
@@ -117,7 +118,28 @@ export const Playground: Story = {
         ))}
       </SelectContent>
     </Select>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+    const trigger = canvas.getByText('Select a wand core')
+
+    // Opening lists every wand core.
+    await userEvent.click(trigger)
+    const listbox = await body.findByRole('listbox')
+    expect(body.getAllByRole('option').length).toBe(3)
+
+    // Selecting updates the trigger and closes the popup.
+    await userEvent.click(within(listbox).getByRole('option', { name: 'Dragon heartstring' }))
+    await waitFor(() => expect(body.queryByRole('listbox')).toBeNull())
+    expect(canvas.getByText('Dragon heartstring')).toBeInTheDocument()
+
+    // Escape dismisses without changing the value.
+    await userEvent.click(trigger)
+    await body.findByRole('listbox')
+    await userEvent.keyboard('{Escape}')
+    await waitFor(() => expect(body.queryByRole('listbox')).toBeNull())
+    expect(canvas.getByText('Dragon heartstring')).toBeInTheDocument()
+  }
 }
 
 export const Groups: Story = {

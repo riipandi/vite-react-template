@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'lucide-react'
+import { expect, userEvent } from 'storybook/test'
 import { ToggleGroup, ToggleGroupItem } from './toggle-group.component'
 
 const meta = {
@@ -61,7 +62,23 @@ export const Playground: Story = {
         Jinx
       </ToggleGroupItem>
     </ToggleGroup>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const charm = canvas.getByRole('button', { name: 'Toggle charm' })
+    const hex = canvas.getByRole('button', { name: 'Toggle hex' })
+
+    // defaultValue starts pressed.
+    expect(charm).toHaveAttribute('data-pressed')
+
+    // Without `multiple`, selection is exclusive: pressing hex releases charm.
+    await userEvent.click(hex)
+    expect(hex).toHaveAttribute('data-pressed')
+    expect(charm).not.toHaveAttribute('data-pressed')
+
+    await userEvent.click(charm)
+    expect(charm).toHaveAttribute('data-pressed')
+    expect(hex).not.toHaveAttribute('data-pressed')
+  }
 }
 
 export const Joined: Story = {

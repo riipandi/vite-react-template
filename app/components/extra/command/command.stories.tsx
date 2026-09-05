@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Kbd, KbdGroup } from '#/components/extra/kbd'
 import { container } from '#/styles/core/tokens.stylex'
@@ -146,7 +147,20 @@ export const Playground: Story = {
         )}
       </CommandList>
     </Command>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+    const input = canvas.getByPlaceholderText('Cast a spell or search…')
+
+    // Typing filters the command list.
+    await userEvent.type(input, 'expecto')
+    await waitFor(() => expect(body.getByText('Expecto Patronum')).toBeInTheDocument())
+
+    // No match shows the empty message.
+    await userEvent.clear(input)
+    await userEvent.type(input, 'aquamenti maxima')
+    await waitFor(() => expect(body.getByText('No spells found.')).toBeInTheDocument())
+  }
 }
 
 export const Groups: Story = {
@@ -224,5 +238,16 @@ export const DialogHotkey: Story = {
         </CommandDialog>
       </>
     )
+  },
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    // Opening via the button mounts the command dialog.
+    await userEvent.click(canvas.getByRole('button', { name: /marauder's map/i }))
+    await body.findByRole('dialog')
+
+    // Selecting an item closes the dialog.
+    await userEvent.click(body.getByText('Potions'))
+    await waitFor(() => expect(body.queryByRole('dialog')).toBeNull())
   }
 }

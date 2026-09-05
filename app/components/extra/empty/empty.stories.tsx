@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { PackageIcon, SearchIcon, TextIcon } from 'lucide-react'
+import { expect, userEvent } from 'storybook/test'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '#/components/extra/input-group'
@@ -120,5 +121,10 @@ export const WithInputGroup: Story = {
         </InputGroup>
       </EmptyContent>
     </Empty>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const input = canvas.getByPlaceholderText('Search spells…')
+    await userEvent.type(input, 'riddikulus')
+    expect(input).toHaveValue('riddikulus')
+  }
 }

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, fn, userEvent } from 'storybook/test'
 import {
   Field,
   FieldContent,
@@ -103,7 +104,18 @@ export const Playground: Story = {
         </label>
       ))}
     </RadioGroup>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const slytherin = canvas.getByRole('radio', { name: 'Slytherin' })
+    const ravenclaw = canvas.getByRole('radio', { name: 'Ravenclaw' })
+
+    expect(slytherin).toHaveAttribute('aria-checked', 'true')
+
+    // Selection is exclusive.
+    await userEvent.click(ravenclaw)
+    expect(ravenclaw).toHaveAttribute('aria-checked', 'true')
+    expect(slytherin).toHaveAttribute('aria-checked', 'false')
+  }
 }
 
 export const Description: Story = {
@@ -155,5 +167,34 @@ export const Disabled: Story = {
         <RadioGroupItem value='b' /> Priory of Sion dossier
       </label>
     </RadioGroup>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const items = canvas.getAllByRole('radio')
+    for (const item of items) expect(item).toHaveAttribute('data-disabled')
+
+    const second = items[1]
+    if (!second) throw new Error('Second radio not found')
+    await userEvent.click(second)
+    expect(second).toHaveAttribute('aria-checked', 'false')
+    expect(items[0]).toHaveAttribute('aria-checked', 'true')
+  }
+}
+
+export const OnValueChange: StoryObj<{ handleChange: ReturnType<typeof fn> }> = {
+  name: 'onValueChange',
+  args: { handleChange: fn() },
+  render: (args) => (
+    <RadioGroup onValueChange={args.handleChange}>
+      {options.map((option) => (
+        <label key={option} {...stylex.props(styles.label)}>
+          <RadioGroupItem value={option} /> {option}
+        </label>
+      ))}
+    </RadioGroup>
+  ),
+  play: async ({ canvas, args }) => {
+    await userEvent.click(canvas.getByRole('radio', { name: 'Gryffindor' }))
+    // onValueChange carries (value, eventDetails) — check the value arg.
+    expect(args.handleChange.mock.calls[0]?.[0]).toBe('Gryffindor')
+  }
 }

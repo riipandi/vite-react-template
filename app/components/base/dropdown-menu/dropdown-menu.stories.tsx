@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import {
   DropdownMenu,
@@ -60,7 +61,18 @@ export const Playground: Story = {
         <DropdownMenuItem>Disapparate</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Open the menu' }))
+    await body.findByRole('menu')
+    expect(body.getByRole('menuitem', { name: 'Vault holder' })).toBeInTheDocument()
+
+    // Escape dismisses the menu.
+    await userEvent.keyboard('{Escape}')
+    await waitFor(() => expect(body.queryByRole('menu')).toBeNull())
+  }
 }
 
 export const DisabledItem: Story = {
@@ -100,7 +112,30 @@ export const Checkboxes: Story = {
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Map options' }))
+    await body.findByRole('menu')
+
+    // Checkbox items toggle open state.
+    const traces = body.getByRole('menuitemcheckbox', { name: 'Show traces' })
+    expect(traces).toHaveAttribute('aria-checked', 'false')
+    await userEvent.click(traces)
+    expect(traces).toHaveAttribute('aria-checked', 'true')
+
+    // Radio items switch exclusively.
+    await userEvent.click(body.getByRole('menuitemradio', { name: 'Ceiling' }))
+    expect(body.getByRole('menuitemradio', { name: 'Ceiling' })).toHaveAttribute(
+      'aria-checked',
+      'true'
+    )
+    expect(body.getByRole('menuitemradio', { name: 'Floor' })).toHaveAttribute(
+      'aria-checked',
+      'false'
+    )
+  }
 }
 
 export const RadioGroup: Story = {

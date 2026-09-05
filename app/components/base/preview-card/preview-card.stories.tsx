@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { colors } from '#/styles/core/colors.stylex'
@@ -80,7 +81,18 @@ export const Playground: Story = {
         </div>
       </PreviewCardContent>
     </PreviewCard>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    // Hovering the trigger reveals the preview card.
+    await userEvent.hover(canvas.getByRole('button', { name: '@dumbledore' }))
+    await body.findByText('Joined September 1892')
+
+    // Hovering away dismisses it.
+    await userEvent.unhover(canvas.getByRole('button', { name: '@dumbledore' }))
+    await waitFor(() => expect(body.queryByText('Joined September 1892')).toBeNull())
+  }
 }
 
 export const Sides: Story = {

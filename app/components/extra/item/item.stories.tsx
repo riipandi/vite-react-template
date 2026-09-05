@@ -3,6 +3,7 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { HouseIcon, InfoIcon } from 'lucide-react'
 import * as React from 'react'
+import { expect, userEvent } from 'storybook/test'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Switch } from '#/components/base/switch'
@@ -81,7 +82,15 @@ export const Playground: Story = {
         </ItemActions>
       </Item>
     </ItemGroup>
-  )
+  ),
+  play: async ({ canvas }) => {
+    // Embedded controls stay interactive inside items.
+    const protection = canvas.getByRole('switch')
+    await userEvent.click(protection)
+    expect(protection).toHaveAttribute('aria-checked', 'false')
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Order' }))
+  }
 }
 
 export const Variants: Story = {
@@ -182,5 +191,9 @@ export const Link: Story = {
         <ItemDescription>Every corridor of Hogwarts, live on parchment.</ItemDescription>
       </ItemContent>
     </Item>
-  )
+  ),
+  play: ({ canvas }) => {
+    const link = canvas.getByRole('link', { name: /marauder's map/i })
+    expect(link).toHaveAttribute('href', '#dashboard')
+  }
 }

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, fn, userEvent, waitFor } from 'storybook/test'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './accordion.component'
 
 const meta = {
@@ -91,5 +92,101 @@ export const Disabled: Story = {
         </AccordionContent>
       </AccordionItem>
     </Accordion>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const triggers = canvas.getAllByRole('button')
+    const available = triggers[0]
+    const restricted = triggers[1]
+    if (!available || !restricted) throw new Error('Accordion triggers not found')
+
+    // Disabled item: marked with data-disabled and never expands.
+    expect(restricted).toHaveAttribute('data-disabled')
+    await userEvent.click(restricted)
+    expect(restricted).toHaveAttribute('aria-expanded', 'false')
+
+    // The enabled sibling still works.
+    await userEvent.click(available)
+    expect(available).toHaveAttribute('aria-expanded', 'true')
+  }
+}
+
+export const OpenClose: Story = {
+  name: 'open/close',
+  args: { multiple: false },
+  render: (args) => (
+    <Accordion {...args}>
+      <AccordionItem value='item-1'>
+        <AccordionTrigger>Alohomora</AccordionTrigger>
+        <AccordionContent>Unlocked.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  ),
+  play: async ({ canvas }) => {
+    const trigger = canvas.getByRole('button', { name: 'Alohomora' })
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+    // The closed panel is not mounted.
+    expect(canvas.queryByText('Unlocked.')).toBeNull()
+
+    await userEvent.click(trigger)
+    await waitFor(() => expect(canvas.getByText('Unlocked.')).toBeVisible())
+    expect(trigger).toHaveAttribute('aria-expanded', 'true')
+
+    await userEvent.click(trigger)
+    await waitFor(() => expect(canvas.queryByText('Unlocked.')).toBeNull())
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+  }
+}
+
+export const OnValueChange: StoryObj<{ handleValueChange: ReturnType<typeof fn> }> = {
+  name: 'onValueChange',
+  args: { handleValueChange: fn() },
+  render: (args) => (
+    <Accordion onValueChange={args.handleValueChange}>
+      <AccordionItem value='item-1'>
+        <AccordionTrigger>Sonorus</AccordionTrigger>
+        <AccordionContent>Louder.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  ),
+  play: async ({ canvas, args }) => {
+    const trigger = canvas.getByRole('button', { name: 'Sonorus' })
+    await userEvent.click(trigger)
+    expect(args.handleValueChange).toHaveBeenCalledTimes(1)
+    // The value is the (array of) open item values.
+    const value = args.handleValueChange.mock.calls[0]?.[0]
+    expect(Array.isArray(value) ? value : [value]).toContain('item-1')
+
+    await userEvent.click(trigger)
+    expect(args.handleValueChange).toHaveBeenCalledTimes(2)
+  }
+}
+
+export const MultiplePlay: Story = {
+  name: 'multiple (interaction)',
+  args: { multiple: true },
+  render: (args) => (
+    <Accordion {...args}>
+      <AccordionItem value='item-1'>
+        <AccordionTrigger>Can I unlock more than one chamber?</AccordionTrigger>
+        <AccordionContent>
+          Yes. Pass `multiple` to keep several chambers open at once.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value='item-2'>
+        <AccordionTrigger>Is each horcrux tracked separately?</AccordionTrigger>
+        <AccordionContent>
+          Yes. Each fragment keeps its own state, hidden like Tom Riddle&apos;s diary.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  ),
+  play: async ({ canvas }) => {
+    const first = canvas.getByRole('button', { name: /unlock more than one chamber/i })
+    const second = canvas.getByRole('button', { name: /horcrux tracked separately/i })
+
+    await userEvent.click(first)
+    await userEvent.click(second)
+    expect(first).toHaveAttribute('aria-expanded', 'true')
+    expect(second).toHaveAttribute('aria-expanded', 'true')
+  }
 }

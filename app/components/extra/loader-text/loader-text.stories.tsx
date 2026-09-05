@@ -3,6 +3,7 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { FileTextIcon, MicIcon, SearchIcon, SparklesIcon } from 'lucide-react'
 import * as React from 'react'
+import { expect, userEvent, waitFor } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { LoaderText } from './loader-text.component'
 
@@ -87,6 +88,22 @@ export const Completed: Story = {
         </div>
       </div>
     )
+  },
+  play: async ({ canvas }) => {
+    // Both texts stay mounted for the cross-fade; visibility flips over the
+    // 200ms transition, so wait for the end state.
+    const loading = canvas.getByText('Transcribing with the Quick-Quotes Quill')
+    const completed = canvas.getByText('Quill notes saved')
+    expect(loading).toBeVisible()
+    expect(completed).not.toBeVisible()
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Complete' }))
+    await waitFor(() => expect(loading).not.toBeVisible())
+    expect(completed).toBeVisible()
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Restart' }))
+    await waitFor(() => expect(completed).not.toBeVisible())
+    expect(loading).toBeVisible()
   }
 }
 

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent } from 'storybook/test'
 import { Field, FieldDescription, FieldError, FieldLabel } from '#/components/base/field'
 import { container } from '#/styles/core/tokens.stylex'
 import { Textarea } from './textarea.component'
@@ -37,7 +38,12 @@ export const Playground: Story = {
     <div {...stylex.props(styles.wrap)}>
       <Textarea placeholder='Draft your letter to the Daily Prophet…' />
     </div>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const el = canvas.getByPlaceholderText('Draft your letter to the Daily Prophet…')
+    await userEvent.type(el, 'Dear Editor,')
+    expect(el).toHaveValue('Dear Editor,')
+  }
 }
 
 export const WithField: Story = {
@@ -61,7 +67,13 @@ export const Disabled: Story = {
     <div {...stylex.props(styles.wrap)}>
       <Textarea placeholder='Locked by Ministry decree' disabled />
     </div>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const el = canvas.getByPlaceholderText('Locked by Ministry decree')
+    expect(el).toBeDisabled()
+    await userEvent.type(el, 'alohomora')
+    expect(el).toHaveValue('')
+  }
 }
 
 export const Invalid: Story = {

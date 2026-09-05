@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
+import { expect } from 'storybook/test'
 import { Separator } from '#/components/base/separator'
 import { colors } from '#/styles/core/colors.stylex'
 import {
@@ -123,7 +124,11 @@ export const Playground: Story = {
         ))}
       </div>
     </ScrollArea>
-  )
+  ),
+  // All 50 editions are rendered — the viewport clips, not the DOM.
+  play: ({ canvas }) => {
+    expect(canvas.getAllByText(/^Daily Prophet edition \d+$/).length).toBe(50)
+  }
 }
 
 export const Horizontal: Story = {

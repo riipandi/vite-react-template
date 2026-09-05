@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect } from 'storybook/test'
 import { container } from '#/styles/core/tokens.stylex'
 import { Meter, MeterLabel, MeterValue } from './meter.component'
 
@@ -48,7 +49,13 @@ export const Playground: Story = {
       <MeterLabel>Polyjuice Potion brewed</MeterLabel>
       <MeterValue>{(_, value) => `${value} ml of 64 ml`}</MeterValue>
     </Meter>
-  )
+  ),
+  play: ({ canvas }) => {
+    const el = canvas.getByRole('meter', { name: 'Polyjuice Potion brewed' })
+    expect(el).toHaveAttribute('aria-valuenow', '24')
+    expect(el).toHaveAttribute('aria-valuemax', '64')
+    expect(canvas.getByText('24 ml of 64 ml')).toBeInTheDocument()
+  }
 }
 
 export const CustomRange: Story = {
@@ -59,5 +66,12 @@ export const CustomRange: Story = {
       <MeterLabel>Cryptex pressure</MeterLabel>
       <MeterValue>{(_, value) => `${value} psi`}</MeterValue>
     </Meter>
-  )
+  ),
+  play: ({ canvas }) => {
+    const el = canvas.getByRole('meter', { name: 'Cryptex pressure' })
+    expect(el).toHaveAttribute('aria-valuemin', '30')
+    expect(el).toHaveAttribute('aria-valuemax', '90')
+    expect(el).toHaveAttribute('aria-valuenow', '72')
+    expect(canvas.getByText('72 psi')).toBeInTheDocument()
+  }
 }

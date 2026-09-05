@@ -3,6 +3,7 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { ChevronRightIcon, FileIcon, FolderIcon } from 'lucide-react'
 import * as React from 'react'
+import { expect, userEvent } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { colors } from '#/styles/core/colors.stylex'
 import { fontFamily, fontSize, stroke, unit, container } from '#/styles/core/tokens.stylex'
@@ -164,7 +165,20 @@ export const Playground: Story = {
         <div {...stylex.props(styles.repo)}>@ministry/memos</div>
       </CollapsibleContent>
     </Collapsible>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const trigger = canvas.getByRole('button', { name: 'Alohomora' })
+    expect(trigger).toHaveAttribute('aria-expanded', 'true')
+
+    const panel = document.getElementById(trigger.getAttribute('aria-controls') ?? '')
+    expect(panel).not.toBeNull()
+
+    await userEvent.click(trigger)
+    expect(trigger).toHaveAttribute('aria-expanded', 'false')
+
+    await userEvent.click(trigger)
+    expect(trigger).toHaveAttribute('aria-expanded', 'true')
+  }
 }
 
 export const FileTree: Story = {
@@ -182,5 +196,14 @@ export const FileTree: Story = {
       </Folder>
       <File name='horcrux.json' depth={0} />
     </div>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const closed = canvas.getByRole('button', { name: /diagon-alley/i })
+    expect(closed).toHaveAttribute('aria-expanded', 'false')
+
+    // Opening a folder reveals nested files, and nested folders compose.
+    await userEvent.click(closed)
+    expect(closed).toHaveAttribute('aria-expanded', 'true')
+    expect(canvas.getByText('golden-snitch.ico')).toBeInTheDocument()
+  }
 }

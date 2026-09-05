@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import { container, fontSize, fontFamily, radius, stroke } from '#/styles/core/tokens.stylex'
 import {
@@ -99,7 +100,29 @@ export const Playground: Story = {
         <ContextMenuItem variant='destructive'>Mischief managed</ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+    const trigger = canvas.getByText('Right-click the map')
+
+    // Right-click opens the menu with all item groups.
+    await userEvent.pointer({ keys: '[MouseRight]', target: trigger })
+    await body.findByRole('menu')
+    expect(body.getByRole('menuitem', { name: /retrace steps/i })).toBeInTheDocument()
+
+    // Disabled items render disabled.
+    expect(body.getByRole('menuitem', { name: /follow the dot/i })).toHaveAttribute('data-disabled')
+
+    // Checkbox items toggle without closing the menu.
+    const showRealNames = body.getByRole('menuitemcheckbox', { name: 'Show real names' })
+    expect(showRealNames).toHaveAttribute('aria-checked', 'false')
+    await userEvent.click(showRealNames)
+    expect(showRealNames).toHaveAttribute('aria-checked', 'true')
+
+    // Selecting a regular item closes the menu.
+    await userEvent.click(body.getByRole('menuitem', { name: /retrace steps/i }))
+    await waitFor(() => expect(body.queryByRole('menu')).toBeNull())
+  }
 }
 
 export const Submenu: Story = {

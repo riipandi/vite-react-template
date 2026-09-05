@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect } from 'storybook/test'
 import { Input } from '#/components/base/input'
 import { container } from '#/styles/core/tokens.stylex'
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
   FieldLegend,
@@ -63,4 +65,40 @@ export const Playground: Story = {
       </FieldGroup>
     </FieldSet>
   )
+}
+
+export const AutoWiring: Story = {
+  name: 'auto wiring',
+  render: () => (
+    <Field>
+      <FieldLabel>Owl post address</FieldLabel>
+      <Input placeholder='hermione.granger@hogwarts.edu' />
+      <FieldDescription>Owls reply within two days.</FieldDescription>
+    </Field>
+  ),
+  // Field wires label, description, and validation to the control without
+  // explicit ids.
+  play: ({ canvas }) => {
+    const input = canvas.getByRole('textbox', { name: 'Owl post address' })
+    const describedBy = input.getAttribute('aria-describedby')
+    expect(describedBy).toBeTruthy()
+    expect(document.getElementById(describedBy ?? '')).toHaveTextContent(
+      'Owls reply within two days.'
+    )
+  }
+}
+
+export const InvalidPlay: Story = {
+  name: 'invalid (interaction)',
+  render: () => (
+    <Field invalid>
+      <FieldLabel>Owl post address</FieldLabel>
+      <Input placeholder='hermione.granger@hogwarts.edu' />
+      <FieldError>You must accept the school rules before the Sorting begins.</FieldError>
+    </Field>
+  ),
+  play: ({ canvas }) => {
+    const input = canvas.getByRole('textbox', { name: 'Owl post address' })
+    expect(input).toHaveAttribute('aria-invalid', 'true')
+  }
 }

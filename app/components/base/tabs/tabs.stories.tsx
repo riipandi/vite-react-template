@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { BellIcon, UserIcon } from 'lucide-react'
+import { expect, userEvent } from 'storybook/test'
 import { container } from '#/styles/core/tokens.stylex'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs.component'
 
@@ -49,7 +50,20 @@ export const Playground: Story = {
       <TabsContent value='account'>Manage your vault at Gringotts.</TabsContent>
       <TabsContent value='password'>Change the password to your vault.</TabsContent>
     </Tabs>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const account = canvas.getByRole('tab', { name: 'Gringotts Vault' })
+    const password = canvas.getByRole('tab', { name: 'Vault Password' })
+
+    expect(account).toHaveAttribute('aria-selected', 'true')
+    expect(canvas.getByText('Manage your vault at Gringotts.')).toBeInTheDocument()
+
+    // Clicking a trigger swaps the visible panel.
+    await userEvent.click(password)
+    expect(password).toHaveAttribute('aria-selected', 'true')
+    expect(account).toHaveAttribute('aria-selected', 'false')
+    expect(canvas.getByText('Change the password to your vault.')).toBeInTheDocument()
+  }
 }
 
 export const Line: Story = {
@@ -82,7 +96,15 @@ export const Disabled: Story = {
       </TabsList>
       <TabsContent value='active'>The other tab is locked away in Azkaban.</TabsContent>
     </Tabs>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const locked = canvas.getByRole('tab', { name: 'Azkaban' })
+    expect(locked).toHaveAttribute('data-disabled')
+
+    await userEvent.click(locked)
+    expect(locked).toHaveAttribute('aria-selected', 'false')
+    expect(canvas.getByRole('tab', { name: 'Hogsmeade' })).toHaveAttribute('aria-selected', 'true')
+  }
 }
 
 export const Vertical: Story = {

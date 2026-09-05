@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Input } from '#/components/base/input'
 import { Label } from '#/components/extra/label'
@@ -83,7 +84,19 @@ export const Playground: Story = {
         </SheetFooter>
       </SheetContent>
     </Sheet>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Alohomora' }))
+    const sheet = await body.findByRole('dialog')
+    expect(body.getByRole('heading', { name: 'Edit vault record' })).toBeInTheDocument()
+    expect(within(sheet).getByDisplayValue('Luna Lovegood')).toBeInTheDocument()
+
+    // Footer close action dismisses the sheet.
+    await userEvent.click(within(sheet).getByRole('button', { name: 'Save vault record' }))
+    await waitFor(() => expect(body.queryByRole('dialog')).toBeNull())
+  }
 }
 
 export const Sides: Story = {

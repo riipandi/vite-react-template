@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Input } from '#/components/base/input'
 import { container, fontSize, unit } from '#/styles/core/tokens.stylex'
@@ -81,7 +82,24 @@ export const Playground: Story = {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Open the cryptex' }))
+    await body.findByRole('dialog')
+    expect(body.getByRole('heading', { name: 'Erase the map?' })).toBeInTheDocument()
+
+    // Escape dismisses the dialog.
+    await userEvent.keyboard('{Escape}')
+    await waitFor(() => expect(body.queryByRole('dialog')).toBeNull())
+
+    // Reopen and confirm with the destructive action.
+    await userEvent.click(canvas.getByRole('button', { name: 'Open the cryptex' }))
+    await body.findByRole('dialog')
+    await userEvent.click(body.getByRole('button', { name: 'Erase' }))
+    await waitFor(() => expect(body.queryByRole('dialog')).toBeNull())
+  }
 }
 
 export const Custom: Story = {

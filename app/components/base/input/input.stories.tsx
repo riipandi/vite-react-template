@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Field, FieldError, FieldLabel } from '#/components/base/field'
 import { colors } from '#/styles/core/colors.stylex'
@@ -86,7 +87,14 @@ export const Disabled: Story = {
     <div {...stylex.props(styles.wrap)}>
       <Input placeholder='Sealed by the Ministry' disabled />
     </div>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const el = canvas.getByPlaceholderText('Sealed by the Ministry')
+    expect(el).toBeDisabled()
+    await userEvent.click(el)
+    await userEvent.type(el, 'alohomora')
+    expect(el).toHaveValue('')
+  }
 }
 
 export const Invalid: Story = {
@@ -119,5 +127,11 @@ export const WithButton: Story = {
         <Button type='submit'>Accio</Button>
       </div>
     </Field>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const el = canvas.getByPlaceholderText('Search the restricted section…')
+    await userEvent.type(el, 'plexiglass')
+    expect(el).toHaveValue('plexiglass')
+    expect(canvas.getByRole('button', { name: 'Accio' })).toBeEnabled()
+  }
 }

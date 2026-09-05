@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { CopyIcon, SearchIcon } from 'lucide-react'
+import { expect, userEvent } from 'storybook/test'
 import { Kbd } from '#/components/extra/kbd'
 import { Spinner } from '#/components/extra/spinner'
 import { container } from '#/styles/core/tokens.stylex'
@@ -130,5 +131,10 @@ export const Textarea: Story = {
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const textarea = canvas.getByPlaceholderText('Write to Sirius…')
+    await userEvent.type(textarea, 'Padfoot, the map is a fake.')
+    expect(textarea).toHaveValue('Padfoot, the map is a fake.')
+  }
 }

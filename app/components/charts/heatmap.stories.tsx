@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
 import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Tooltip, TooltipContent, TooltipTrigger } from '#/components/base/tooltip'
+import { colors } from '#/styles/core/colors.stylex'
 import { breakpoints, fontSize, fontWeight, unit } from '#/styles/core/tokens.stylex'
 import {
   canvasDecorator,
@@ -87,17 +88,20 @@ export function Heatmap({ days, label, summary }: HeatmapProps) {
           {days.map((day) => (
             <Tooltip key={day.date + day.year}>
               <TooltipTrigger
+                delay={10}
                 render={<div />}
                 data-level={day.level}
                 aria-hidden='true'
-                {...stylex.props(styles.cell)}
+                {...stylex.props(
+                  styles.cell,
+                  day.level === 0 ? styles.cellEmpty : styles.cellFilled
+                )}
                 style={
-                  {
-                    '--cell-bg':
-                      day.level === 0
-                        ? 'var(--colors-background-neutral)'
-                        : readingPalette[day.level as 1 | 2 | 3 | 4]
-                  } as React.CSSProperties
+                  day.level === 0
+                    ? undefined
+                    : ({
+                        '--cell-bg': readingPalette[day.level as 1 | 2 | 3 | 4]
+                      } as React.CSSProperties)
                 }
               />
               <TooltipContent>{cellLabel(day)}</TooltipContent>
@@ -114,14 +118,16 @@ export function Heatmap({ days, label, summary }: HeatmapProps) {
             {[0, 1, 2, 3, 4].map((level) => (
               <span
                 key={level}
-                {...stylex.props(styles.swatch)}
+                {...stylex.props(
+                  styles.swatch,
+                  level === 0 ? styles.swatchEmpty : styles.swatchFilled
+                )}
                 style={
-                  {
-                    '--swatch-bg':
-                      level === 0
-                        ? 'var(--colors-background-neutral)'
-                        : readingPalette[level as 1 | 2 | 3 | 4]
-                  } as React.CSSProperties
+                  level === 0
+                    ? undefined
+                    : ({
+                        '--swatch-bg': readingPalette[level as 1 | 2 | 3 | 4]
+                      } as React.CSSProperties)
                 }
               />
             ))}
@@ -236,11 +242,16 @@ const styles = stylex.create({
   },
   cell: {
     aspectRatio: '1',
-    backgroundColor: 'var(--cell-bg, currentColor)',
     borderRadius: 2,
     cursor: 'default',
     minWidth: 0,
     width: '100%'
+  },
+  cellEmpty: {
+    backgroundColor: colors.backgroundNeutralFaded
+  },
+  cellFilled: {
+    backgroundColor: 'var(--cell-bg, currentColor)'
   },
   legend: {
     alignItems: 'center',
@@ -259,11 +270,16 @@ const styles = stylex.create({
     gap: unit.x0_5
   },
   swatch: {
-    backgroundColor: 'var(--swatch-bg, currentColor)',
     borderRadius: 2,
     display: 'block',
     height: unit.x2,
     width: unit.x2
+  },
+  swatchEmpty: {
+    backgroundColor: colors.backgroundNeutralFaded
+  },
+  swatchFilled: {
+    backgroundColor: 'var(--swatch-bg, currentColor)'
   },
   summary: {
     fontWeight: fontWeight.medium

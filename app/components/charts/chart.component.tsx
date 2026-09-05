@@ -26,11 +26,9 @@ import { useRender } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
 import type { ChartValue } from '@tanstack/charts'
 import { motion } from '@tanstack/charts/motion'
-import {
-  RendererChart as TanStackChart,
-  type ChartTooltipBodyRenderContext,
-  type RendererChartProps as TanStackRendererChartProps
-} from '@tanstack/charts/react/tooltip'
+import { RendererChart as TanStackChart } from '@tanstack/charts/react/tooltip'
+import type { ChartTooltipBodyRenderContext } from '@tanstack/charts/react/tooltip'
+import type { RendererChartProps as TanStackRendererChartProps } from '@tanstack/charts/react/tooltip'
 import * as React from 'react'
 import { chartStyles as s } from './chart.stylex'
 

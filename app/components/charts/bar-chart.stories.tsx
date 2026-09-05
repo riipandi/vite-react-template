@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
-import { barY, defineChart, fold, group, stack, whenFocused } from '@tanstack/charts'
-import { bandX } from '@tanstack/charts/band'
+import { barY, defineChart, fold, group, ruleX, ruleY, stack } from '@tanstack/charts'
 import { barX } from '@tanstack/charts/bar'
 import { scaleBand } from '@tanstack/charts/scales/band'
 import { scaleLinear } from '@tanstack/charts/scales/linear'
@@ -51,8 +50,6 @@ export const Vertical: Story = {
   render: () => {
     const definition = defineChart({
       marks: [
-        // Painted band behind the hovered month column.
-        whenFocused(bandX(langdonNovels, { x: 'title' }), { match: 'x' }),
         barY(langdonNovels, {
           id: 'langdon',
           x: 'title',
@@ -60,7 +57,10 @@ export const Vertical: Story = {
           fill: seriesColors.langdon,
           radius: barRadius,
           states: barHoverStates()
-        })
+        }),
+        // Bars can only round all four corners — an opaque baseline rule
+        // covers the bottom rounding so only the tips read as rounded.
+        ruleY([0], { stroke: colors.backgroundPage, strokeWidth: 6 })
       ],
       scales: checkoutScales,
       theme: chartTheme,
@@ -96,7 +96,9 @@ export const Horizontal: Story = {
           fill: seriesColors.brand,
           radius: barRadius,
           states: barHoverStates()
-        })
+        }),
+        // Covers the left rounding so bars meet the baseline squarely.
+        ruleX([0], { stroke: colors.backgroundPage, strokeWidth: 6 })
       ],
       scales: {
         x: { scale: scaleLinear, nice: true, grid: true, axis: { label: 'Pages' } },
@@ -124,16 +126,14 @@ export const Horizontal: Story = {
 export const Stacked: Story = {
   name: 'Stacked',
   render: () => {
+    // Rename folded series keys to their display labels so focus state,
+    // tooltips, and the color scale all speak the same names.
     const rows = fold(checkouts, {
       fields: ['langdon', 'potter'],
       as: { key: 'series', value: 'checkouts' }
-    })
+    }).map((row) => ({ ...row, series: checkoutConfig[row.series]?.label ?? row.series }))
     const definition = defineChart({
       marks: [
-        // Column highlight behind the hovered month — neutral token wash.
-        whenFocused(bandX(rows, { x: 'month', fill: colors.backgroundNeutral }), {
-          match: 'x'
-        }),
         barY(rows, {
           id: 'stacked-bars',
           x: 'month',
@@ -146,7 +146,10 @@ export const Stacked: Story = {
       ],
       scales: checkoutScales,
       motion: barMotion,
-      color: { domain: ['langdon', 'potter'], range: [seriesColors.langdon, seriesColors.potter] },
+      color: {
+        domain: ['Robert Langdon', 'Harry Potter'],
+        range: [seriesColors.langdon, seriesColors.potter]
+      },
       theme: chartTheme,
       focus: 'nearest',
       tooltip: { use: tooltip, portal, items: [{ channel: 'y', label: 'Checkouts' }] as const }
@@ -174,15 +177,14 @@ export const Stacked: Story = {
 export const Grouped: Story = {
   name: 'Grouped',
   render: () => {
+    // Rename folded series keys to their display labels so focus state,
+    // tooltips, and the color scale all speak the same names.
     const rows = fold(checkouts, {
       fields: ['langdon', 'potter'],
       as: { key: 'series', value: 'checkouts' }
-    })
+    }).map((row) => ({ ...row, series: checkoutConfig[row.series]?.label ?? row.series }))
     const definition = defineChart({
       marks: [
-        whenFocused(bandX(rows, { x: 'month', fill: colors.backgroundNeutral }), {
-          match: 'x'
-        }),
         barY(rows, {
           id: 'grouped-bars',
           x: 'month',
@@ -192,11 +194,15 @@ export const Grouped: Story = {
           layout: group(),
           radius: barRadius,
           states: barHoverStates()
-        })
+        }),
+        ruleY([0], { stroke: colors.backgroundPage, strokeWidth: 6 })
       ],
       motion: barMotion,
       scales: checkoutScales,
-      color: { domain: ['langdon', 'potter'], range: [seriesColors.langdon, seriesColors.potter] },
+      color: {
+        domain: ['Robert Langdon', 'Harry Potter'],
+        range: [seriesColors.langdon, seriesColors.potter]
+      },
       theme: chartTheme,
       focus: 'nearest',
       tooltip: { use: tooltip, portal, items: [{ channel: 'y', label: 'Checkouts' }] as const }

@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
-import { defineChart, lineY } from '@tanstack/charts'
+import { crosshair, defineChart, lineY } from '@tanstack/charts'
+import { focusGroupX } from '@tanstack/charts/focus'
 import { tooltip } from '@tanstack/charts/tooltip'
 import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
   canvasDecorator,
+  chartMotion,
   chartTheme,
   checkouts,
   checkoutConfig,
@@ -24,6 +26,13 @@ type Story = StoryObj<typeof meta>
 
 export default meta
 
+// Grouped x-focus: hovering shows every series at the nearest band plus a
+// vertical crosshair guide, so the tooltip rows compare series directly.
+const interaction = {
+  focus: focusGroupX,
+  marks: [crosshair({ x: true, y: false, marker: true })]
+}
+
 export const Multiple: Story = {
   name: 'Multiple series',
   render: () => {
@@ -42,10 +51,13 @@ export const Multiple: Story = {
           y: 'potter',
           stroke: seriesColors.potter,
           strokeWidth: 2
-        })
+        }),
+        ...interaction.marks
       ],
       scales: checkoutScales,
       theme: chartTheme,
+      motion: chartMotion,
+      focus: interaction.focus,
       tooltip
     })
 
@@ -83,10 +95,13 @@ export const WithDots: Story = {
           stroke: seriesColors.potter,
           strokeWidth: 2,
           points: true
-        })
+        }),
+        ...interaction.marks
       ],
       scales: checkoutScales,
       theme: chartTheme,
+      motion: chartMotion,
+      focus: interaction.focus,
       tooltip
     })
 

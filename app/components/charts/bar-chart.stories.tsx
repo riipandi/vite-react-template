@@ -7,6 +7,8 @@ import { tooltip } from '@tanstack/charts/tooltip'
 import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
+  barHoverStates,
+  barMotion,
   barRadius,
   canvasDecorator,
   chartTheme,
@@ -40,11 +42,14 @@ export const Vertical: Story = {
           x: 'title',
           y: 'chapters',
           fill: seriesColors.langdon,
-          radius: barRadius
+          radius: barRadius,
+          states: barHoverStates()
         })
       ],
       scales: checkoutScales,
       theme: chartTheme,
+      motion: barMotion,
+      focus: 'nearest',
       tooltip
     })
 
@@ -73,14 +78,17 @@ export const Horizontal: Story = {
           x: 'pages',
           y: 'title',
           fill: seriesColors.brand,
-          radius: barRadius
+          radius: barRadius,
+          states: barHoverStates()
         })
       ],
       scales: {
         x: { scale: scaleLinear, nice: true, grid: true, axis: { label: 'Pages' } },
         y: { scale: () => scaleBand<string>().padding(0.2) }
       },
+      motion: barMotion,
       theme: chartTheme,
+      focus: 'nearest',
       tooltip
     })
 
@@ -113,12 +121,15 @@ export const Stacked: Story = {
           z: 'series',
           color: 'series',
           layout: stack(),
-          radius: barRadius
+          radius: barRadius,
+          states: barHoverStates()
         })
       ],
       scales: checkoutScales,
+      motion: barMotion,
       color: { domain: ['langdon', 'potter'], range: [seriesColors.langdon, seriesColors.potter] },
       theme: chartTheme,
+      focus: 'nearest',
       tooltip
     })
 
@@ -157,12 +168,15 @@ export const Grouped: Story = {
           z: 'series',
           color: 'series',
           layout: group(),
-          radius: barRadius
+          radius: barRadius,
+          states: barHoverStates()
         })
       ],
+      motion: barMotion,
       scales: checkoutScales,
       color: { domain: ['langdon', 'potter'], range: [seriesColors.langdon, seriesColors.potter] },
       theme: chartTheme,
+      focus: 'nearest',
       tooltip
     })
 

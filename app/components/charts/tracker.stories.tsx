@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
 import { expect } from 'storybook/test'
-import { fontSize, unit } from '#/styles/core/tokens.stylex'
+import { duration, easing, fontSize, unit } from '#/styles/core/tokens.stylex'
 import {
   canvasDecorator,
   shelfStatuses,
@@ -46,7 +46,12 @@ const styles = stylex.create({
     flexGrow: 1,
     flexShrink: 1,
     height: unit.x2,
-    minWidth: 0
+    minWidth: 0,
+    // Subtle feedback only — the segment colors carry the information.
+    opacity: { default: 1, ':hover': 0.6 },
+    transitionDuration: duration.fast,
+    transitionProperty: 'opacity',
+    transitionTimingFunction: easing.decelerate
   },
   weekLabels: {
     display: 'flex',

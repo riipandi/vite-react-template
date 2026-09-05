@@ -5,6 +5,7 @@ import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
   canvasDecorator,
+  chartMotion,
   chartTheme,
   checkouts,
   checkoutConfig,
@@ -36,7 +37,14 @@ export const Overlaid: Story = {
           fill: seriesColors.langdon,
           fillOpacity: 0.15,
           stroke: seriesColors.langdon,
-          strokeWidth: 2
+          strokeWidth: 2,
+          states: [
+            {
+              when: { focus: 'unmatched' },
+              style: { fillOpacity: 0.04, strokeOpacity: 0.3 },
+              transition: { type: 'tween', duration: 150, easing: 'ease-out' }
+            }
+          ]
         }),
         areaY(checkouts, {
           id: 'potter',
@@ -45,11 +53,21 @@ export const Overlaid: Story = {
           fill: seriesColors.potter,
           fillOpacity: 0.15,
           stroke: seriesColors.potter,
-          strokeWidth: 2
+          strokeWidth: 2,
+          states: [
+            {
+              when: { focus: 'unmatched' },
+              style: { fillOpacity: 0.04, strokeOpacity: 0.3 },
+              transition: { type: 'tween', duration: 150, easing: 'ease-out' }
+            }
+          ]
         })
       ],
       scales: checkoutScales,
       theme: chartTheme,
+      // Nearest-x focus: the hovered series stays solid while the other fades
+      // out via its unmatched state.
+      focus: 'nearest-x',
       tooltip
     })
 
@@ -98,6 +116,8 @@ export const Stacked: Story = {
       scales: checkoutScales,
       color: { domain: ['langdon', 'potter'], range: [seriesColors.langdon, seriesColors.potter] },
       theme: chartTheme,
+      motion: chartMotion,
+      focus: 'group-x',
       tooltip
     })
 

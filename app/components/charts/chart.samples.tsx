@@ -9,6 +9,8 @@
 
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import type { ChartBarStateStyle, ChartMarkState, ChartMotionDefinition } from '@tanstack/charts'
+import { stagger } from '@tanstack/charts/motion'
 import { scaleBand } from '@tanstack/charts/scales/band'
 import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { colors } from '#/styles/core/colors.stylex'
@@ -44,6 +46,41 @@ export const chartTheme = {
 
 /** Rounded bar corners — mirrors `radius.xsmall` (4px). */
 export const barRadius = 4
+
+// ---------------------------------------------------------------------------
+// Motion policies — consumed by the `motion()` renderer selected in the Chart
+// wrapper. Timing mirrors the core motion tokens: 200ms (duration.medium) for
+// geometry, ease-out approximating `easing.decelerate`. The stagger delays
+// make multi-series and multi-bar entrances read as one choreographed wave.
+// ---------------------------------------------------------------------------
+
+export const chartMotion: ChartMotionDefinition = {
+  transition: { type: 'tween', duration: 200, easing: 'ease-out' },
+  path: { update: 'rolling', x: 'shift' },
+  ...stagger({ each: 40, by: 'series', phase: 'enter' })
+}
+
+export const barMotion: ChartMotionDefinition = {
+  transition: { type: 'tween', duration: 200, easing: 'ease-out' },
+  ...stagger({ each: 18, by: 'datum', phase: 'enter' })
+}
+
+/**
+ * Active-bar interaction: the focused bar stays solid while the others dim.
+ * Pair with `focus: 'nearest'` on the definition; state transitions ride the
+ * motion renderer (reduced-motion aware).
+ */
+export function barHoverStates<TDatum>(): readonly ChartMarkState<
+  TDatum,
+  ChartBarStateStyle<TDatum>
+>[] {
+  // Hover runs faster than entrance — mirrors `duration.fast` (150ms).
+  const hoverTransition = { type: 'tween', duration: 150, easing: 'ease-out' } as const
+  return [
+    { when: { focus: 'primary' }, style: { fillOpacity: 1 }, transition: hoverTransition },
+    { when: { focus: 'unmatched' }, style: { opacity: 0.4 }, transition: hoverTransition }
+  ]
+}
 
 // ---------------------------------------------------------------------------
 // Monthly checkouts (area / line / combo / stacked charts)

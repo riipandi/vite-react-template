@@ -7,7 +7,7 @@ import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import { fontSize, fontWeight, unit } from '#/styles/core/tokens.stylex'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
-import { canvasDecorator, chartTheme, houses, houseConfig } from './chart.samples'
+import { canvasDecorator, chartMotion, chartTheme, houses, houseConfig } from './chart.samples'
 
 const meta = {
   title: 'Visualizations/DonutChart',
@@ -38,6 +38,7 @@ const donutDefinition = defineChart({
   ],
   scales: { x: null, y: null },
   theme: chartTheme,
+  motion: chartMotion,
   tooltip
 })
 

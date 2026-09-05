@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
-import { barY, defineChart, lineY, ruleY } from '@tanstack/charts'
+import { barY, crosshair, defineChart, lineY, ruleY } from '@tanstack/charts'
 import { tooltip } from '@tanstack/charts/tooltip'
 import { expect } from 'storybook/test'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
+  barHoverStates,
+  barMotion,
   barRadius,
   canvasDecorator,
   chartTheme,
@@ -45,7 +47,8 @@ export const BarsWithTrendLine: Story = {
           y: 'langdon',
           fill: seriesColors.langdon,
           fillOpacity: 0.85,
-          radius: barRadius
+          radius: barRadius,
+          states: barHoverStates()
         }),
         lineY(checkouts, {
           id: 'potter',
@@ -55,10 +58,13 @@ export const BarsWithTrendLine: Story = {
           strokeWidth: 2,
           points: true
         }),
+        crosshair({ x: true, y: false, marker: true }),
         ruleY([0])
       ],
       scales: checkoutScales,
       theme: chartTheme,
+      motion: barMotion,
+      focus: 'group-x',
       tooltip
     })
 

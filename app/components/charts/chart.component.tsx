@@ -43,11 +43,13 @@ export type ChartConfig = Record<string, ChartConfigItem>
 // and `easing.decelerate` ('cubic-bezier(0, 0, 0.2, 1)', approximated by the
 // 'ease-out' preset) — because the motion driver needs plain numbers. The
 // driver respects `prefers-reduced-motion` by default, matching how the
-// popup recipe reduces its transitions to opacity. Module scope keeps the
-// renderer identity stable across renders (the motion renderer relies on
-// stable keys for DOM identity and spring velocity).
+// popup recipe reduces its transitions to opacity. `resize: true` animates
+// container resizes instead of snapping. Module scope keeps the renderer
+// identity stable across renders (the motion renderer relies on stable keys
+// for DOM identity and spring velocity).
 const chartMotionRenderer = motion({
   initial: true,
+  resize: true,
   transition: { type: 'tween', duration: 200, easing: 'ease-out' }
 })
 

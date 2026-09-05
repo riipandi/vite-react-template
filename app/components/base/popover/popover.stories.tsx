@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Field, FieldLabel } from '#/components/base/field'
 import { Input } from '#/components/base/input'
@@ -73,7 +74,18 @@ export const Playground: Story = {
         </div>
       </PopoverContent>
     </Popover>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Summon popover' }))
+    const popover = await body.findByRole('dialog')
+    expect(within(popover).getByPlaceholderText('First dial')).toHaveValue('100%')
+
+    // Clicking outside dismisses the popover.
+    await userEvent.click(document.body)
+    await waitFor(() => expect(body.queryByRole('dialog')).toBeNull())
+  }
 }
 
 export const Placement: Story = {

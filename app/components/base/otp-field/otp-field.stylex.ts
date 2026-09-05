@@ -27,16 +27,16 @@ export const otpFieldStyles = stylex.create({
     borderStyle: 'solid',
     borderTopLeftRadius: { default: 0, ':first-child': radius.large },
     borderTopRightRadius: { default: 0, ':last-child': radius.large },
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     boxShadow: {
       default: 'none',
-      ':focus': `0 0 0 ${stroke.halo} color-mix(in srgb, ${colors.foregroundPrimary} 50%, transparent)`
+      ':focus': `0 0 0 ${stroke.ring3} color-mix(in srgb, ${colors.foregroundPrimary} 50%, transparent)`
     },
     color: colors.foregroundNeutral,
     fontSize: fontSize.body2,
     height: unit.x8,
     lineHeight: fontLineHeight.body2,
-    marginLeft: { default: `calc(-1 * ${stroke.border})`, ':first-child': 0 },
+    marginLeft: { default: `calc(-1 * ${stroke.ring1})`, ':first-child': 0 },
     opacity: { default: 1, ':disabled': 0.5 },
     outline: 'none',
     padding: 0,

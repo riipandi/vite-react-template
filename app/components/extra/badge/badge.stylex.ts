@@ -7,7 +7,7 @@ import { unit, radius } from '#/styles/core/tokens.stylex'
 export const badgeStyles = stylex.create({
   root: {
     alignItems: 'center',
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     display: 'inline-flex',
     fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,
@@ -16,9 +16,9 @@ export const badgeStyles = stylex.create({
     lineHeight: fontLineHeight.caption1,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: stroke.focus,
+    outlineOffset: stroke.ring2,
     paddingBlock: unit.x1,
     paddingInline: unit.x3,
     whiteSpace: 'nowrap'
@@ -37,7 +37,7 @@ export const badgeVariants = stylex.create({
   outline: {
     borderColor: colors.borderNeutralFaded,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     color: colors.foregroundNeutral
   },
   ghost: {

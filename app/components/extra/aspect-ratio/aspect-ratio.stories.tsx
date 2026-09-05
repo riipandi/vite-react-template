@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import { container, radius } from '#/styles/core/tokens.stylex'
 import { AspectRatio } from './aspect-ratio.component'
@@ -26,10 +27,10 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   frame: {
-    width: container.lg
+    width: container.large
   },
   smallFrame: {
-    width: container.xs
+    width: container.xxsmall
   },
   image: {
     borderRadius: radius.large,
@@ -66,11 +67,17 @@ export const Square: Story = {
   args: { ratio: 1 / 1 },
   render: (args) => (
     <div {...stylex.props(styles.smallFrame)}>
-      <AspectRatio {...args}>
+      <AspectRatio {...args} data-testid='ratio-frame'>
         <div {...stylex.props(styles.placeholder)} />
       </AspectRatio>
     </div>
-  )
+  ),
+  // The container keeps a square box regardless of content height.
+  play: ({ canvas }) => {
+    const frame = canvas.getByTestId('ratio-frame')
+    const { width, height } = frame.getBoundingClientRect()
+    expect(Math.abs(width - height)).toBeLessThan(1)
+  }
 }
 
 export const Portrait: Story = {

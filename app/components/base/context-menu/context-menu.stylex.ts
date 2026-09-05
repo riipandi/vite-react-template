@@ -1,43 +1,24 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
-import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
+import { unit, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize } from '#/styles/core/tokens.stylex'
-import { duration, easing } from '#/styles/core/tokens.stylex'
 
 export const contextMenuStyles = stylex.create({
   trigger: {
     userSelect: 'none'
   },
-  positioner: {
-    outline: 'none',
-    zIndex: zIndex.absolute
-  },
   // Closed pose (Base UI's [data-starting-style]/[data-ending-style] frames):
   // faded, slightly shrunk, nudged toward the anchor. [data-side] sets the
   // nudge direction; the transition animates entry and exit through it.
+  // Shared frames live in `popupFx` (positioner/shift/fade/pose).
   popup: {
-    // No `default` for conditional custom properties: StyleX emits the
-    // default rule unlayered (beating the layered [data-*] rules); the
-    // var() fallback covers the unset case instead.
-    '--popup-shift-x': {
-      default: null,
-      '[data-side="left"]': unit.x2,
-      '[data-side="right"]': `calc(-1 * ${unit.x2})`,
-      '[data-side="inline-start"]': unit.x2,
-      '[data-side="inline-end"]': `calc(-1 * ${unit.x2})`
-    },
-    '--popup-shift-y': {
-      default: null,
-      '[data-side="top"]': unit.x2,
-      '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
-    },
     backgroundColor: colors.backgroundElevationOverlay,
     borderRadius: radius.medium,
     color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     maxHeight: 'var(--available-height)',
-    minWidth: container.xs,
+    minWidth: container.xxsmall,
     opacity: {
       default: 1,
       '[data-starting-style]': 0,
@@ -46,21 +27,7 @@ export const contextMenuStyles = stylex.create({
     outline: 'none',
     overflowX: 'hidden',
     overflowY: 'auto',
-    paddingBlock: unit.x1,
-    transform: {
-      default: 'scale(1)',
-      '[data-starting-style]':
-        'translate(var(--popup-shift-x, 0px), var(--popup-shift-y, 0px)) scale(0.97)',
-      '[data-ending-style]':
-        'translate(var(--popup-shift-x, 0px), var(--popup-shift-y, 0px)) scale(0.97)'
-    },
-    transformOrigin: 'var(--transform-origin)',
-    transitionDuration: duration.fast,
-    transitionProperty: {
-      default: 'opacity, transform',
-      '@media (prefers-reduced-motion: reduce)': 'opacity'
-    },
-    transitionTimingFunction: easing.decelerate
+    paddingBlock: unit.x1
   },
   subPopup: {
     width: 'max-content'
@@ -142,7 +109,7 @@ export const contextMenuStyles = stylex.create({
   },
   separator: {
     backgroundColor: colors.borderNeutralFaded,
-    height: stroke.border,
+    height: stroke.ring1,
     marginBlock: unit.x1
   },
   label: {

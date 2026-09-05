@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
+import { expect, userEvent } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import { fontSize } from '#/styles/core/tokens.stylex'
 import { OTPField, OTPFieldGroup, OTPFieldSeparator, OTPFieldSlot } from './otp-field.component'
@@ -99,7 +100,15 @@ export const Disabled: Story = {
         <OTPFieldSlot />
       </OTPFieldGroup>
     </OTPField>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const slots = canvas.getAllByRole('textbox')
+    const first = slots[0]
+    if (!first) throw new Error('No OTP slots rendered')
+    for (const slot of slots) expect(slot).toBeDisabled()
+    await userEvent.type(first, '9')
+    expect(first).toHaveValue('1')
+  }
 }
 
 export const Controlled: Story = {
@@ -124,5 +133,14 @@ export const Controlled: Story = {
         </p>
       </div>
     )
+  },
+  play: async ({ canvas }) => {
+    const slots = canvas.getAllByRole('textbox')
+    const first = slots[0]
+    if (!first) throw new Error('No OTP slots rendered')
+
+    // Typing fills one character per slot and advances focus.
+    await userEvent.type(first, '924')
+    expect(canvas.getByText('Vault code: 924')).toBeInTheDocument()
   }
 }

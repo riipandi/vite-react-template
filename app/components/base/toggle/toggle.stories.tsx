@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { BoldIcon, ItalicIcon } from 'lucide-react'
+import { expect, userEvent } from 'storybook/test'
 import { Toggle } from './toggle.component'
 
 const meta = {
@@ -49,7 +50,17 @@ export const Playground: Story = {
     <Toggle aria-label='Toggle charm'>
       <BoldIcon {...stylex.props(styles.icon)} />
     </Toggle>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const el = canvas.getByRole('button', { name: 'Toggle charm' })
+    expect(el).toHaveAttribute('aria-pressed', 'false')
+
+    await userEvent.click(el)
+    expect(el).toHaveAttribute('aria-pressed', 'true')
+
+    await userEvent.click(el)
+    expect(el).toHaveAttribute('aria-pressed', 'false')
+  }
 }
 
 export const Outline: Story = {

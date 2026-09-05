@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
+import { expect } from 'storybook/test'
 import { Separator } from '#/components/base/separator'
 import { colors } from '#/styles/core/colors.stylex'
 import {
@@ -54,9 +55,9 @@ const styles = stylex.create({
     borderColor: colors.borderNeutral,
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
-    height: container.sm,
-    width: container.card
+    borderWidth: stroke.ring1,
+    height: container.small,
+    width: container.xsmall
   },
   inner: {
     display: 'flex',
@@ -74,7 +75,7 @@ const styles = stylex.create({
     fontSize: fontSize.body2
   },
   wide: {
-    width: container.xl
+    width: container.xlarge
   },
   row: {
     display: 'flex',
@@ -87,14 +88,14 @@ const styles = stylex.create({
     flexDirection: 'column',
     fontFamily: fontFamily.body,
     gap: 8,
-    width: container.card
+    width: container.xsmall
   },
   thumb: {
     backgroundColor: colors.backgroundNeutral,
     borderColor: colors.borderNeutral,
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     height: 64,
     width: '100%'
   },
@@ -123,7 +124,11 @@ export const Playground: Story = {
         ))}
       </div>
     </ScrollArea>
-  )
+  ),
+  // All 50 editions are rendered — the viewport clips, not the DOM.
+  play: ({ canvas }) => {
+    expect(canvas.getAllByText(/^Daily Prophet edition \d+$/).length).toBe(50)
+  }
 }
 
 export const Horizontal: Story = {

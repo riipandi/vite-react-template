@@ -4,7 +4,7 @@ import { stroke, container } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 import { duration } from '#/styles/core/tokens.stylex'
 
-export const sliderHaloShadow = `0 0 0 ${stroke.halo} color-mix(in srgb, ${colors.foregroundPrimary} 50%, transparent)`
+export const sliderHaloShadow = `0 0 0 ${stroke.ring3} color-mix(in srgb, ${colors.foregroundPrimary} 50%, transparent)`
 
 export const sliderStyles = stylex.create({
   control: {
@@ -21,7 +21,7 @@ export const sliderStyles = stylex.create({
   },
   track: {
     backgroundColor: colors.backgroundNeutral,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     flexGrow: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -34,9 +34,9 @@ export const sliderStyles = stylex.create({
   thumb: {
     backgroundColor: colors.backgroundPage,
     borderColor: colors.foregroundPrimary,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     boxShadow: {
       default: 'none',
       ':hover': sliderHaloShadow,
@@ -60,7 +60,7 @@ export const sliderRootOrientations = stylex.create({
   },
   vertical: {
     height: '100%',
-    minHeight: container.xs
+    minHeight: container.xxsmall
   }
 })
 
@@ -71,7 +71,7 @@ export const sliderControlOrientations = stylex.create({
   vertical: {
     flexDirection: 'column',
     height: '100%',
-    minHeight: container.xs
+    minHeight: container.xxsmall
   }
 })
 

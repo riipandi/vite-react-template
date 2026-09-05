@@ -51,8 +51,8 @@ const styles = stylex.create({
     flexWrap: 'wrap',
     gap: 8
   },
-  rounded: { borderRadius: radius.circular },
-  pill: { borderRadius: radius.circular },
+  rounded: { borderRadius: radius.full },
+  pill: { borderRadius: radius.full },
   wide: { paddingInline: 48 }
 })
 

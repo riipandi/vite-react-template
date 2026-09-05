@@ -3,6 +3,7 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { Trash2Icon } from 'lucide-react'
 import * as React from 'react'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Icon } from '#/components/extra/icon'
 import { Spinner } from '#/components/extra/spinner'
@@ -69,7 +70,25 @@ export const Playground: Story = {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
+  ),
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByRole('button', { name: 'Seal the cryptex' }))
+
+    const dialog = within(document.body).getByRole('alertdialog')
+    expect(
+      within(document.body).getByRole('heading', { name: /absolutely sure/i })
+    ).toBeInTheDocument()
+
+    // Cancel dismisses the dialog.
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Cancel' }))
+    await waitFor(() => expect(within(document.body).queryByRole('alertdialog')).toBeNull())
+
+    // Destructive confirm also dismisses.
+    await userEvent.click(canvas.getByRole('button', { name: 'Seal the cryptex' }))
+    const reopened = within(document.body).getByRole('alertdialog')
+    await userEvent.click(within(reopened).getByRole('button', { name: 'Seal' }))
+    await waitFor(() => expect(within(document.body).queryByRole('alertdialog')).toBeNull())
+  }
 }
 
 export const Media: Story = {
@@ -154,5 +173,22 @@ export const Destructive: Story = {
         </AlertDialogContent>
       </AlertDialog>
     )
+  },
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByRole('button', { name: 'Close the Gringotts vault' }))
+
+    const dialog = within(document.body).getByRole('alertdialog')
+    const action = within(dialog).getByRole('button', { name: 'Close the vault' })
+
+    await userEvent.click(action)
+
+    // Pending state disables both actions while the promise runs.
+    expect(within(document.body).getByRole('button', { name: /closing/i })).toBeDisabled()
+    expect(within(document.body).getByRole('button', { name: 'Cancel' })).toBeDisabled()
+
+    // Resolving the action closes the dialog.
+    await waitFor(() => expect(within(document.body).queryByRole('alertdialog')).toBeNull(), {
+      timeout: 4000
+    })
   }
 }

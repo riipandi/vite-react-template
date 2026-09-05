@@ -22,9 +22,9 @@ export const buttonStyles = stylex.create({
     textDecoration: 'none',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: stroke.focus,
+    outlineOffset: stroke.ring2,
     transitionDuration: duration.fast,
     transitionProperty: 'background-color, border-color, color, opacity',
     userSelect: 'none',
@@ -54,7 +54,7 @@ export const buttonVariants = stylex.create({
     },
     borderColor: colors.borderNeutralFaded,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     color: {
       default: colors.foregroundNeutral,
       ':hover:not(:disabled)': colors.foregroundNeutral

@@ -21,6 +21,7 @@
 import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
+import { popupFx } from '#/styles/core/popup.stylex'
 import { tooltipStyles as s } from './tooltip.stylex'
 
 // Instant tooltips by default (Base UI's own default is 600ms).
@@ -60,9 +61,12 @@ export function TooltipContent({
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
-        {...stylex.props(s.positioner)}
+        {...stylex.props(popupFx.positioner)}
       >
-        <BaseTooltip.Popup {...props} {...stylex.props(s.popup, style)}>
+        <BaseTooltip.Popup
+          {...props}
+          {...stylex.props(popupFx.shift, popupFx.fade, popupFx.pose, s.popup, style)}
+        >
           {children}
           <BaseTooltip.Arrow {...stylex.props(s.arrow)} />
         </BaseTooltip.Popup>

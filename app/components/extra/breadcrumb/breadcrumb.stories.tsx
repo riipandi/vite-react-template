@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -76,7 +77,14 @@ export const Playground: Story = {
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  ),
+  // The current page carries aria-current; ancestors are plain links.
+  play: ({ canvas }) => {
+    expect(canvas.getByRole('link', { name: 'Louvre' })).toBeInTheDocument()
+    const current = canvas.getByRole('link', { name: 'Vatican Archives' })
+    expect(current).toHaveAttribute('aria-current', 'page')
+    expect(current).toHaveAttribute('aria-disabled', 'true')
+  }
 }
 
 export const Ellipsis: Story = {
@@ -109,7 +117,10 @@ export const Dropdown: Story = {
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <DropdownMenu>
-            <DropdownMenuTrigger {...stylex.props(styles.trigger)}>
+            <DropdownMenuTrigger
+              aria-label='Collapsed breadcrumb levels'
+              {...stylex.props(styles.trigger)}
+            >
               <BreadcrumbEllipsis />
             </DropdownMenuTrigger>
             <DropdownMenuContent align='start'>
@@ -129,7 +140,17 @@ export const Dropdown: Story = {
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Collapsed breadcrumb levels' }))
+    await body.findByRole('menu')
+    expect(body.getByRole('menuitem', { name: "Marauder's Map" })).toBeInTheDocument()
+
+    await userEvent.click(body.getByRole('menuitem', { name: 'Gringotts' }))
+    await waitFor(() => expect(body.queryByRole('menu')).toBeNull())
+  }
 }
 
 export const CustomSeparator: Story = {

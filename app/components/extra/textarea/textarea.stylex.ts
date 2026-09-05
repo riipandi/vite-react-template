@@ -15,7 +15,7 @@ export const textareaStyles = stylex.create({
     },
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
@@ -24,9 +24,9 @@ export const textareaStyles = stylex.create({
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: `calc(-1 * ${stroke.border})`,
+    outlineOffset: `calc(-1 * ${stroke.ring1})`,
     paddingBlock: unit.x2,
     paddingInline: unit.x3,
     resize: 'vertical',

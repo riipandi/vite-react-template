@@ -10,7 +10,7 @@ export const emptyStyles = stylex.create({
     borderColor: colors.borderNeutralFaded,
     borderRadius: radius.xlarge,
     borderStyle: 'dashed',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
@@ -28,7 +28,7 @@ export const emptyStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: unit.x2,
-    maxWidth: container.lg
+    maxWidth: container.large
   },
   media: {
     alignItems: 'center',
@@ -53,7 +53,7 @@ export const emptyStyles = stylex.create({
     flexDirection: 'column',
     fontSize: fontSize.body2,
     gap: unit.x2,
-    maxWidth: container.lg,
+    maxWidth: container.large,
     minWidth: 0,
     width: '100%'
   }

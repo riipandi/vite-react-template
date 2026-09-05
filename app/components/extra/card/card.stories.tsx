@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Input } from '#/components/base/input'
 import { container } from '#/styles/core/tokens.stylex'
@@ -35,10 +36,10 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   card: {
-    width: container.xl
+    width: container.xlarge
   },
   smallCard: {
-    width: container.md
+    width: container.medium
   }
 })
 
@@ -60,7 +61,15 @@ export const Playground: Story = {
         <Button variant='ghost'>Discard</Button>
       </CardFooter>
     </Card>
-  )
+  ),
+  play: async ({ canvas }) => {
+    expect(canvas.getByRole('heading', { name: 'Submit to the Prophet' })).toBeInTheDocument()
+
+    // The form inside the card accepts typing.
+    const input = canvas.getByPlaceholderText('Headline')
+    await userEvent.type(input, 'Snape Walks the Aisles')
+    expect(input).toHaveValue('Snape Walks the Aisles')
+  }
 }
 
 export const Action: Story = {

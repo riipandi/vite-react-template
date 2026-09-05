@@ -17,7 +17,7 @@ export const buttonGroupStyles = stylex.create({
     borderColor: colors.borderNeutralFaded,
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     display: 'flex',
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,

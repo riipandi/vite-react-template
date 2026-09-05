@@ -1,21 +1,21 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
-import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
+import { unit, radius } from '#/styles/core/tokens.stylex'
+import { duration } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
-import { duration, easing } from '#/styles/core/tokens.stylex'
 
 export const comboboxStyles = stylex.create({
   inputWrap: {
     position: 'relative',
-    width: container.sm
+    width: container.small
   },
   input: {
     backgroundColor: colors.backgroundPage,
     borderColor: { default: colors.borderNeutralFaded, ':focus-visible': colors.foregroundPrimary },
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
@@ -23,9 +23,9 @@ export const comboboxStyles = stylex.create({
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: `calc(-1 * ${stroke.border})`,
+    outlineOffset: `calc(-1 * ${stroke.ring1})`,
     paddingLeft: unit.x3,
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',
@@ -50,7 +50,7 @@ export const comboboxStyles = stylex.create({
     justifyContent: 'center',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     padding: 0,
     position: 'absolute',
@@ -72,7 +72,7 @@ export const comboboxStyles = stylex.create({
     borderColor: colors.borderNeutralFaded,
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     color: colors.foregroundNeutral,
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
@@ -82,13 +82,13 @@ export const comboboxStyles = stylex.create({
     height: unit.x9,
     justifyContent: 'space-between',
     lineHeight: fontLineHeight.body2,
-    minWidth: container.xs,
+    minWidth: container.xxsmall,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: `calc(-1 * ${stroke.border})`,
+    outlineOffset: `calc(-1 * ${stroke.ring1})`,
     paddingInline: unit.x3,
     userSelect: 'none',
     whiteSpace: 'nowrap'
@@ -103,21 +103,21 @@ export const comboboxStyles = stylex.create({
     borderColor: { default: colors.borderNeutralFaded, ':focus-within': colors.foregroundPrimary },
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     display: 'flex',
     flexWrap: 'wrap',
     gap: unit.x1,
     minHeight: unit.x9,
     outline: {
       default: 'none',
-      ':focus-within': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-within': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: `calc(-1 * ${stroke.border})`,
+    outlineOffset: `calc(-1 * ${stroke.ring1})`,
     paddingBlock: unit.x1,
     paddingInline: unit.x2,
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',
-    width: container.sm
+    width: container.small
   },
   chip: {
     alignItems: 'center',
@@ -145,7 +145,7 @@ export const comboboxStyles = stylex.create({
     justifyContent: 'center',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     padding: 0,
     width: unit.x4
@@ -164,36 +164,18 @@ export const comboboxStyles = stylex.create({
     padding: 0,
     '::placeholder': { color: colors.foregroundNeutralFaded }
   },
-  positioner: {
-    outline: 'none',
-    zIndex: zIndex.absolute
-  },
   // Closed pose (Base UI's [data-starting-style]/[data-ending-style] frames):
   // faded, slightly shrunk, nudged toward the anchor. [data-side] sets the
   // nudge direction; the transition animates entry and exit through it.
+  // Shared frames live in `popupFx` (positioner/shift/fade/pose).
   popup: {
-    // No `default` for conditional custom properties: StyleX emits the
-    // default rule unlayered (beating the layered [data-*] rules); the
-    // var() fallback covers the unset case instead.
-    '--popup-shift-x': {
-      default: null,
-      '[data-side="left"]': unit.x2,
-      '[data-side="right"]': `calc(-1 * ${unit.x2})`,
-      '[data-side="inline-start"]': unit.x2,
-      '[data-side="inline-end"]': `calc(-1 * ${unit.x2})`
-    },
-    '--popup-shift-y': {
-      default: null,
-      '[data-side="top"]': unit.x2,
-      '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
-    },
     backgroundColor: colors.backgroundElevationOverlay,
     borderRadius: radius.medium,
     color: colors.foregroundNeutral,
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
-    maxHeight: `min(${container.sm}, var(--available-height))`,
+    maxHeight: `min(${container.small}, var(--available-height))`,
     opacity: {
       default: 1,
       '[data-starting-style]': 0,
@@ -201,20 +183,6 @@ export const comboboxStyles = stylex.create({
     },
     outline: 'none',
     overflow: 'hidden',
-    transform: {
-      default: 'scale(1)',
-      '[data-starting-style]':
-        'translate(var(--popup-shift-x, 0px), var(--popup-shift-y, 0px)) scale(0.97)',
-      '[data-ending-style]':
-        'translate(var(--popup-shift-x, 0px), var(--popup-shift-y, 0px)) scale(0.97)'
-    },
-    transformOrigin: 'var(--transform-origin)',
-    transitionDuration: duration.fast,
-    transitionProperty: {
-      default: 'opacity, transform',
-      '@media (prefers-reduced-motion: reduce)': 'opacity'
-    },
-    transitionTimingFunction: easing.decelerate,
     width: 'var(--anchor-width)'
   },
   list: {
@@ -276,7 +244,7 @@ export const comboboxStyles = stylex.create({
   },
   separator: {
     backgroundColor: colors.borderNeutralFaded,
-    height: stroke.border,
+    height: stroke.ring1,
     marginBlock: unit.x1
   }
 })

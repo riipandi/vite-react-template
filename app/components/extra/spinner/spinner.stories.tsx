@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Badge } from '#/components/extra/badge'
 import { colors } from '#/styles/core/colors.stylex'
@@ -61,7 +62,13 @@ export const Playground: Story = {
     <Button disabled>
       <Spinner /> Divining…
     </Button>
-  )
+  ),
+  // The spinner svg announces itself, so the button name combines both labels.
+  play: ({ canvas }) => {
+    const button = canvas.getByRole('button', { name: /Divining/ })
+    expect(button).toBeDisabled()
+    expect(button.querySelector('svg')).not.toBeNull()
+  }
 }
 
 export const Sizes: Story = {

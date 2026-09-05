@@ -11,7 +11,7 @@ export const switchStyles = stylex.create({
       '[data-checked]': colors.backgroundPrimary,
       '[data-invalid]': colors.backgroundCritical
     },
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     borderStyle: 'none',
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
@@ -19,9 +19,9 @@ export const switchStyles = stylex.create({
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: stroke.focus,
+    outlineOffset: stroke.ring2,
     padding: unit.x0_5,
     position: 'relative',
     transitionDuration: duration.fast,
@@ -36,7 +36,7 @@ export const switchStyles = stylex.create({
   },
   thumb: {
     backgroundColor: colors.backgroundPage,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     transitionDuration: duration.fast,
     transitionProperty: {
       default: 'transform',

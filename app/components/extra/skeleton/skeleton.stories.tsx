@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect } from 'storybook/test'
 import { container, radius } from '#/styles/core/tokens.stylex'
 import { Skeleton } from './skeleton.component'
 
@@ -27,7 +28,7 @@ const styles = stylex.create({
     gap: 16
   },
   avatar: {
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     height: 48,
     width: 48
   },
@@ -38,7 +39,7 @@ const styles = stylex.create({
   },
   lineWide: {
     height: 16,
-    width: container.xs
+    width: container.xxsmall
   },
   line: {
     height: 16,
@@ -48,11 +49,11 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 12,
-    width: container.card
+    width: container.xsmall
   },
   image: {
     borderRadius: radius.large,
-    height: container.xs,
+    height: container.xxsmall,
     width: '100%'
   },
   cardLineWide: {
@@ -67,7 +68,7 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 16,
-    width: container.sm
+    width: container.small
   },
   listRow: {
     alignItems: 'center',
@@ -75,7 +76,7 @@ const styles = stylex.create({
     gap: 12
   },
   listAvatar: {
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     flexShrink: 0,
     height: 40,
     width: 40
@@ -100,14 +101,20 @@ export default meta
 
 export const Playground: Story = {
   render: () => (
-    <div {...stylex.props(styles.root)}>
+    <div data-testid='skeleton-scene' {...stylex.props(styles.root)}>
       <Skeleton style={styles.avatar} />
       <div {...stylex.props(styles.lines)}>
         <Skeleton style={styles.lineWide} />
         <Skeleton style={styles.line} />
       </div>
     </div>
-  )
+  ),
+  // Skeletons are empty presentational placeholders — four shapes for the
+  // avatar and two text lines (plus their wrapper).
+  play: ({ canvas }) => {
+    const scene = canvas.getByTestId('skeleton-scene')
+    expect(scene.querySelectorAll('div').length).toBe(4)
+  }
 }
 
 export const Card: Story = {

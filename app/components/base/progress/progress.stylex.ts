@@ -18,7 +18,7 @@ export const progressStyles = stylex.create({
   track: {
     alignItems: 'center',
     backgroundColor: colors.backgroundNeutral,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     display: 'flex',
     height: unit.x1,
     overflowX: 'hidden',

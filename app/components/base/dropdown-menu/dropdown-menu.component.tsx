@@ -33,6 +33,7 @@ import { Menu as BaseMenu } from '@base-ui/react/menu'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { shadow } from '#/styles/core/colors.stylex'
+import { popupFx } from '#/styles/core/popup.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { dropdownMenuStyles as s } from './dropdown-menu.stylex'
 
@@ -71,11 +72,18 @@ export function DropdownMenuContent({
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
-        {...stylex.props(s.positioner)}
+        {...stylex.props(popupFx.positioner)}
       >
         <BaseMenu.Popup
           {...props}
-          {...stylex.props(s.popup, ring({ shadow: shadow.raised }), style)}
+          {...stylex.props(
+            popupFx.shift,
+            popupFx.fade,
+            popupFx.pose,
+            s.popup,
+            ring({ shadow: shadow.raised }),
+            style
+          )}
         />
       </BaseMenu.Positioner>
     </BaseMenu.Portal>

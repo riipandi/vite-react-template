@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
+import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import { container, fontFamily, fontSize, fontWeight } from '#/styles/core/tokens.stylex'
 import { Separator } from './separator.component'
@@ -64,7 +65,7 @@ const styles = stylex.create({
     flexDirection: 'column',
     fontFamily: fontFamily.body,
     gap: 12,
-    width: container.lg
+    width: container.large
   },
   listRow: {
     alignItems: 'center',
@@ -95,7 +96,14 @@ export const Playground: Story = {
         <span>CERN</span>
       </div>
     </div>
-  )
+  ),
+  play: ({ canvas }) => {
+    const separators = canvas.getAllByRole('separator')
+    // One horizontal divider plus two vertical ones in the row.
+    expect(separators.length).toBe(3)
+    expect(separators[0]).toHaveAttribute('aria-orientation', 'horizontal')
+    expect(separators[1]).toHaveAttribute('aria-orientation', 'vertical')
+  }
 }
 
 export const Vertical: Story = {

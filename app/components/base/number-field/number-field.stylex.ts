@@ -15,14 +15,14 @@ export const numberFieldStyles = stylex.create({
     borderColor: { default: colors.borderNeutralFaded, ':focus-within': colors.foregroundPrimary },
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     display: 'flex',
     height: unit.x9,
     outline: {
       default: 'none',
-      ':focus-within': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-within': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: `calc(-1 * ${stroke.border})`,
+    outlineOffset: `calc(-1 * ${stroke.ring1})`,
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',
     width: 'fit-content'
@@ -61,18 +61,18 @@ export const numberFieldStyles = stylex.create({
     width: unit.x9
   },
   decrement: {
-    borderBottomLeftRadius: `calc(${radius.medium} - ${stroke.border})`,
+    borderBottomLeftRadius: `calc(${radius.medium} - ${stroke.ring1})`,
     borderRightColor: colors.borderNeutralFaded,
     borderRightStyle: 'solid',
-    borderRightWidth: stroke.border,
-    borderTopLeftRadius: `calc(${radius.medium} - ${stroke.border})`
+    borderRightWidth: stroke.ring1,
+    borderTopLeftRadius: `calc(${radius.medium} - ${stroke.ring1})`
   },
   increment: {
-    borderBottomRightRadius: `calc(${radius.medium} - ${stroke.border})`,
+    borderBottomRightRadius: `calc(${radius.medium} - ${stroke.ring1})`,
     borderLeftColor: colors.borderNeutralFaded,
     borderLeftStyle: 'solid',
-    borderLeftWidth: stroke.border,
-    borderTopRightRadius: `calc(${radius.medium} - ${stroke.border})`
+    borderLeftWidth: stroke.ring1,
+    borderTopRightRadius: `calc(${radius.medium} - ${stroke.ring1})`
   },
   // Stacked controls: a narrow column pinned to the end edge with two
   // half-height buttons on top of each other (chevron up / chevron down).
@@ -80,11 +80,11 @@ export const numberFieldStyles = stylex.create({
   // the input instead of covering it.
   controls: {
     alignItems: 'stretch',
-    borderBottomRightRadius: `calc(${radius.medium} - ${stroke.border})`,
+    borderBottomRightRadius: `calc(${radius.medium} - ${stroke.ring1})`,
     borderLeftColor: colors.borderNeutralFaded,
     borderLeftStyle: 'solid',
-    borderLeftWidth: stroke.border,
-    borderTopRightRadius: `calc(${radius.medium} - ${stroke.border})`,
+    borderLeftWidth: stroke.ring1,
+    borderTopRightRadius: `calc(${radius.medium} - ${stroke.ring1})`,
     display: 'flex',
     flexDirection: 'column',
     flexShrink: 0,
@@ -94,12 +94,12 @@ export const numberFieldStyles = stylex.create({
     width: unit.x6
   },
   controlStackedFirst: {
-    borderTopRightRadius: `calc(${radius.medium} - ${stroke.border})`
+    borderTopRightRadius: `calc(${radius.medium} - ${stroke.ring1})`
   },
   controlStackedLast: {
-    borderBottomRightRadius: `calc(${radius.medium} - ${stroke.border})`,
+    borderBottomRightRadius: `calc(${radius.medium} - ${stroke.ring1})`,
     borderTopColor: colors.borderNeutralFaded,
     borderTopStyle: 'solid',
-    borderTopWidth: stroke.border
+    borderTopWidth: stroke.ring1
   }
 })

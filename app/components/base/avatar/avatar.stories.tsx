@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { CheckIcon } from 'lucide-react'
+import { expect, waitFor } from 'storybook/test'
 import {
   Avatar,
   AvatarBadge,
@@ -82,7 +83,12 @@ export const Fallback: Story = {
       <AvatarImage src='https://example.com/broken.png' alt='Vanished portrait' />
       <AvatarFallback>GH</AvatarFallback>
     </Avatar>
-  )
+  ),
+  // A broken image swaps in the fallback initials.
+  play: async ({ canvas }) => {
+    await waitFor(() => expect(canvas.getByText('GH')).toBeInTheDocument())
+    expect(canvas.queryByText('HP')).toBeNull()
+  }
 }
 
 export const Badge: Story = {
@@ -136,5 +142,9 @@ export const GroupCount: Story = {
       </Avatar>
       <AvatarGroupCount>+3</AvatarGroupCount>
     </AvatarGroup>
-  )
+  ),
+  play: ({ canvas }) => {
+    // The trailing count and each avatar render in the stack.
+    expect(canvas.getByText('+3')).toBeInTheDocument()
+  }
 }

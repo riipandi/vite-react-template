@@ -55,7 +55,7 @@ export const navigationMenuStyles = stylex.create({
     lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     paddingBlock: unit.x1_5,
     paddingInline: unit.x2,
@@ -89,7 +89,7 @@ export const navigationMenuStyles = stylex.create({
     lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     padding: unit.x2,
     textDecoration: 'none',

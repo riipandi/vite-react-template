@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Drawer, type DrawerSwipeDirection } from './drawer.component'
 import {
@@ -76,7 +77,23 @@ export const Playground: Story = {
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Open the vault' }))
+    const dialog = await body.findByRole('dialog')
+    expect(body.getByRole('heading', { name: 'Brew Polyjuice' })).toBeInTheDocument()
+
+    // Footer close buttons dismiss the drawer.
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Cancel' }))
+    await waitFor(() => expect(body.queryByRole('dialog')).toBeNull())
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Open the vault' }))
+    await body.findByRole('dialog')
+    await userEvent.click(body.getByRole('button', { name: 'Begin brewing' }))
+    await waitFor(() => expect(body.queryByRole('dialog')).toBeNull())
+  }
 }
 
 export const Directions: Story = {

@@ -28,7 +28,7 @@ export const tableStyles = stylex.create({
     // dropped on the last row.
     borderBottomColor: colors.borderNeutralFaded,
     borderBottomStyle: { default: 'solid', ':last-child': 'none' },
-    borderBottomWidth: { default: stroke.border, ':last-child': 0 },
+    borderBottomWidth: { default: stroke.ring1, ':last-child': 0 },
     transitionDuration: duration.fast,
     transitionProperty: 'background-color'
   },
@@ -38,7 +38,7 @@ export const tableStyles = stylex.create({
     // instead (border-collapse merges them into one line).
     borderBottomColor: colors.borderNeutralFaded,
     borderBottomStyle: 'solid',
-    borderBottomWidth: stroke.border,
+    borderBottomWidth: stroke.ring1,
     color: colors.foregroundNeutral,
     fontWeight: fontWeight.medium,
     height: unit.x10,
@@ -56,7 +56,7 @@ export const tableStyles = stylex.create({
     backgroundColor: `color-mix(in srgb, ${colors.backgroundNeutral} 50%, transparent)`,
     borderTopColor: colors.borderNeutralFaded,
     borderTopStyle: 'solid',
-    borderTopWidth: stroke.border,
+    borderTopWidth: stroke.ring1,
     fontWeight: fontWeight.medium
   },
   caption: {

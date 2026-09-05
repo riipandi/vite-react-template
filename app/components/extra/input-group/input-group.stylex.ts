@@ -19,7 +19,7 @@ export const inputGroupStyles = stylex.create({
     },
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     display: 'flex',
     flexDirection: {
       default: 'row',
@@ -29,9 +29,9 @@ export const inputGroupStyles = stylex.create({
     minWidth: 0,
     outline: {
       default: 'none',
-      ':focus-within': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-within': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
-    outlineOffset: `calc(-1 * ${stroke.border})`,
+    outlineOffset: `calc(-1 * ${stroke.ring1})`,
     position: 'relative',
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',

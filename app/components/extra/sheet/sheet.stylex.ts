@@ -62,7 +62,7 @@ export const sheetStyles = stylex.create({
     justifyContent: 'center',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     padding: 0,
     position: 'absolute',
@@ -110,9 +110,9 @@ export const sheetSides = stylex.create({
     borderTopLeftRadius: radius.xlarge,
     borderLeftColor: colors.borderNeutralFaded,
     borderLeftStyle: 'solid',
-    borderLeftWidth: stroke.border,
+    borderLeftWidth: stroke.ring1,
     bottom: 0,
-    maxWidth: container.lg,
+    maxWidth: container.large,
     right: 0,
     top: 0,
     width: '75%'
@@ -127,10 +127,10 @@ export const sheetSides = stylex.create({
     borderTopRightRadius: radius.xlarge,
     borderRightColor: colors.borderNeutralFaded,
     borderRightStyle: 'solid',
-    borderRightWidth: stroke.border,
+    borderRightWidth: stroke.ring1,
     bottom: 0,
     left: 0,
-    maxWidth: container.lg,
+    maxWidth: container.large,
     top: 0,
     width: '75%'
   },
@@ -144,7 +144,7 @@ export const sheetSides = stylex.create({
     borderBottomLeftRadius: radius.xlarge,
     borderBottomRightRadius: radius.xlarge,
     borderBottomStyle: 'solid',
-    borderBottomWidth: stroke.border,
+    borderBottomWidth: stroke.ring1,
     left: 0,
     right: 0,
     top: 0
@@ -160,7 +160,7 @@ export const sheetSides = stylex.create({
     borderTopLeftRadius: radius.xlarge,
     borderTopRightRadius: radius.xlarge,
     borderTopStyle: 'solid',
-    borderTopWidth: stroke.border,
+    borderTopWidth: stroke.ring1,
     bottom: 0,
     left: 0,
     right: 0

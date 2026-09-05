@@ -80,7 +80,7 @@ export const alertDialogStyles = stylex.create({
     borderBottomRightRadius: radius.xlarge,
     borderTopColor: colors.borderNeutralFaded,
     borderTopStyle: 'solid',
-    borderTopWidth: stroke.border,
+    borderTopWidth: stroke.ring1,
     display: 'flex',
     flexDirection: {
       default: 'column-reverse',
@@ -113,11 +113,11 @@ export const alertDialogStyles = stylex.create({
 export const alertDialogSizes = stylex.create({
   md: {
     width: {
-      default: container.md,
-      '@media (min-width: 660px)': container.lg
+      default: container.medium,
+      '@media (min-width: 660px)': container.large
     }
   },
   sm: {
-    width: container.md
+    width: container.medium
   }
 })

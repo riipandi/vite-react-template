@@ -49,7 +49,7 @@ export const dialogStyles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': 'opacity'
     },
     transitionTimingFunction: easing.decelerate,
-    width: container.xxl,
+    width: container.xxlarge,
     zIndex: zIndex.absolute
   },
   close: {
@@ -70,7 +70,7 @@ export const dialogStyles = stylex.create({
     justifyContent: 'center',
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     padding: 0,
     position: 'absolute',

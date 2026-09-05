@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { toast, ToastProvider, Toaster, useToast } from './toast.component'
 
@@ -82,7 +83,14 @@ export const Playground: Story = {
       </Button>
       <Toaster />
     </ToastProvider>
-  )
+  ),
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByRole('button', { name: 'Show Ministry notice' }))
+    await waitFor(() =>
+      expect(within(document.body).getByText('Scheduled: Hogsmeade trip')).toBeInTheDocument()
+    )
+    expect(within(document.body).getByText(/departure from platform 9¾/i)).toBeInTheDocument()
+  }
 }
 
 export const ToastPromise: Story = {
@@ -103,7 +111,18 @@ export const ToastPromise: Story = {
       </Button>
       <Toaster />
     </ToastProvider>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Seal the cryptex' }))
+    await body.findByText('Sealing the cryptex…')
+
+    // The promise resolves into the success toast.
+    await waitFor(() => expect(body.getByText('Cryptex sealed')).toBeInTheDocument(), {
+      timeout: 4000
+    })
+  }
 }
 
 export const Duration: Story = {

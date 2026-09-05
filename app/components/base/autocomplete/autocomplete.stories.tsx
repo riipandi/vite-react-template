@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import {
   Autocomplete,
   AutocompleteContent,
@@ -74,7 +75,24 @@ export const Playground: Story = {
         </AutocompleteList>
       </AutocompleteContent>
     </Autocomplete>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+    const input = canvas.getByPlaceholderText('Search spells…')
+
+    // Typing filters the suggestion list.
+    await userEvent.type(input, 'lumos')
+    await waitFor(() => expect(body.getByText('Lumos')).toBeInTheDocument())
+
+    // Selecting a suggestion fills the free-text input.
+    await userEvent.click(body.getByText('Lumos'))
+    await waitFor(() => expect(input).toHaveValue('Lumos'))
+
+    // No match renders the empty message.
+    await userEvent.clear(input)
+    await userEvent.type(input, 'hocuspocus')
+    await waitFor(() => expect(body.getByText('No spells found.')).toBeInTheDocument())
+  }
 }
 
 export const AutoHighlight: Story = {

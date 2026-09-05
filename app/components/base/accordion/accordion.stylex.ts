@@ -15,7 +15,7 @@ export const accordionStyles = stylex.create({
   item: {
     borderBottomColor: colors.borderNeutralFaded,
     borderBottomStyle: { default: 'solid', ':last-child': 'none' },
-    borderBottomWidth: { default: stroke.border, ':last-child': 0 }
+    borderBottomWidth: { default: stroke.ring1, ':last-child': 0 }
   },
   header: {
     display: 'flex',
@@ -38,7 +38,7 @@ export const accordionStyles = stylex.create({
     lineHeight: fontLineHeight.body2,
     outline: {
       default: 'none',
-      ':focus-visible': `${stroke.focus} solid ${colors.foregroundPrimary}`
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     // Read by the chevron below — StyleX has no child selectors, so the
     // trigger's [data-panel-open] state travels via a custom property.

@@ -29,6 +29,7 @@ import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { shadow } from '#/styles/core/colors.stylex'
+import { popupFx } from '#/styles/core/popup.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { comboboxStyles as s } from './combobox.stylex'
 
@@ -212,11 +213,18 @@ export function ComboboxContent({
         side={side}
         sideOffset={sideOffset}
         anchor={anchor}
-        {...stylex.props(s.positioner)}
+        {...stylex.props(popupFx.positioner)}
       >
         <BaseCombobox.Popup
           {...props}
-          {...stylex.props(s.popup, ring({ shadow: shadow.raised }), style)}
+          {...stylex.props(
+            popupFx.shift,
+            popupFx.fade,
+            popupFx.pose,
+            s.popup,
+            ring({ shadow: shadow.raised }),
+            style
+          )}
         />
       </BaseCombobox.Positioner>
     </BaseCombobox.Portal>

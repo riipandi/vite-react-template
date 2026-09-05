@@ -139,21 +139,20 @@ export const unit = stylex.defineConsts({
 })
 
 export const stroke = stylex.defineConsts({
-  border: '1px',
-  focus: '2px',
-  // Soft state ring (hover/active halo on slider thumbs etc.), like Tailwind's ring-3.
-  halo: '3px'
+  ring1: '1px',
+  ring2: '2px',
+  ring3: '3px'
 })
 
 // Container widths for popups, panels, and example layouts.
 export const container = stylex.defineConsts({
-  xs: '10rem',
-  card: '16rem',
-  sm: '18rem',
-  md: '20rem',
-  lg: '24rem',
-  xl: '28rem',
-  xxl: '32rem'
+  xxsmall: '10rem',
+  xsmall: '16rem',
+  small: '18rem',
+  medium: '20rem',
+  large: '24rem',
+  xlarge: '28rem',
+  xxlarge: '32rem'
 })
 
 export const radius = stylex.defineVars({
@@ -162,7 +161,7 @@ export const radius = stylex.defineVars({
   medium: '8px',
   large: '10px',
   xlarge: '12px',
-  circular: '999px',
+  full: '999px',
   none: '0px'
 })
 

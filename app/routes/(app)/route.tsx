@@ -25,10 +25,12 @@ function RouteComponent() {
   const sidebarOpen = useSidebarOpen()
   const collapsed = useSidebarCollapsed()
   const pathname = useRouterState({ select: (s) => s.location.pathname })
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches)
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 659px)').matches)
 
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)')
+    // Keep in sync with the `breakpoints.small` media queries in
+    // root-layout/sidebar stylex files (token breakpoint: 660px).
+    const mq = window.matchMedia('(max-width: 659px)')
     const handler = (event: MediaQueryListEvent) => setIsMobile(event.matches)
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)

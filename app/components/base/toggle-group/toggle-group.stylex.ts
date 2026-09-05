@@ -47,9 +47,9 @@ export const toggleGroupJoinedItems = stylex.create({
 // but the first so adjacent borders don't double up.
 export const toggleGroupJoinedOutline = stylex.create({
   horizontal: {
-    borderLeftWidth: { default: 0, ':first-child': stroke.border }
+    borderLeftWidth: { default: 0, ':first-child': stroke.ring1 }
   },
   vertical: {
-    borderTopWidth: { default: 0, ':first-child': stroke.border }
+    borderTopWidth: { default: 0, ':first-child': stroke.ring1 }
   }
 })

@@ -28,7 +28,7 @@ export const commandStyles = stylex.create({
   srOnly: {
     clip: 'rect(0 0 0 0)',
     height: '1px',
-    margin: `calc(-1 * ${stroke.border})`,
+    margin: `calc(-1 * ${stroke.ring1})`,
     overflow: 'hidden',
     position: 'absolute',
     whiteSpace: 'nowrap',
@@ -43,7 +43,7 @@ export const commandStyles = stylex.create({
     },
     borderRadius: radius.large,
     borderStyle: 'solid',
-    borderWidth: stroke.border,
+    borderWidth: stroke.ring1,
     display: 'flex',
     gap: unit.x2,
     height: unit.x8,
@@ -70,7 +70,7 @@ export const commandStyles = stylex.create({
     '::placeholder': { color: colors.foregroundNeutralFaded }
   },
   list: {
-    maxHeight: container.sm,
+    maxHeight: container.small,
     outline: 'none',
     overflowY: 'auto',
     padding: unit.x1,
@@ -117,7 +117,7 @@ export const commandStyles = stylex.create({
   },
   separator: {
     backgroundColor: colors.borderNeutralFaded,
-    height: stroke.border,
+    height: stroke.ring1,
     marginBlock: unit.x1,
     marginInline: `calc(-1 * ${unit.x1})`
   },

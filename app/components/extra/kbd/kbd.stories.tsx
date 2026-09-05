@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/components/base/tooltip'
 import { colors } from '#/styles/core/colors.stylex'
@@ -74,7 +75,12 @@ export const InTooltip: Story = {
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+    await userEvent.hover(canvas.getByRole('button', { name: 'Alohomora' }))
+    await waitFor(() => expect(body.getByText('⌘S')).toBeVisible())
+  }
 }
 
 export const InButton: Story = {

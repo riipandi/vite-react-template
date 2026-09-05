@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect } from 'storybook/test'
 import {
   Pagination,
   PaginationContent,
@@ -70,7 +71,14 @@ export const Playground: Story = {
         </PaginationItem>
       </PaginationContent>
     </Pagination>
-  )
+  ),
+  play: ({ canvas }) => {
+    // Links render as buttons; the active page carries aria-current.
+    expect(canvas.getByRole('button', { name: '2' })).toHaveAttribute('aria-current', 'page')
+    expect(canvas.getByRole('button', { name: '1' }).getAttribute('aria-current')).toBeNull()
+    expect(canvas.getByRole('button', { name: 'Go to previous page' })).toBeInTheDocument()
+    expect(canvas.getByRole('button', { name: 'Go to next page' })).toBeInTheDocument()
+  }
 }
 
 export const Simple: Story = {

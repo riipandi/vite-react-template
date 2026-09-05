@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import {
   Combobox,
@@ -108,7 +109,23 @@ export const Playground: Story = {
         </ComboboxList>
       </ComboboxContent>
     </Combobox>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+    const input = canvas.getByPlaceholderText('Search school…')
+
+    // Typing opens the popup with filtered options.
+    await userEvent.type(input, 'hog')
+    const options = await body.findAllByRole('option')
+    const target = options[0]
+    if (!target) throw new Error('No filtered options found')
+    expect(options.length).toBe(1)
+    expect(target).toHaveTextContent('Hogwarts')
+
+    // Selecting fills the input and closes the popup.
+    await userEvent.click(target)
+    await waitFor(() => expect(input).toHaveValue('Hogwarts'))
+  }
 }
 
 export const Multiple: Story = {
@@ -177,7 +194,14 @@ export const Clear: Story = {
         </ComboboxList>
       </ComboboxContent>
     </Combobox>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const input = canvas.getByPlaceholderText('Search school…')
+    expect(input).toHaveValue('Hogwarts')
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Clear value' }))
+    await waitFor(() => expect(input).toHaveValue(''))
+  }
 }
 
 export const Groups: Story = {
@@ -245,7 +269,13 @@ export const Disabled: Story = {
         </ComboboxList>
       </ComboboxContent>
     </Combobox>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const input = canvas.getByPlaceholderText('Search school…')
+    expect(input).toBeDisabled()
+    await userEvent.click(input)
+    expect(within(document.body).queryByRole('option')).toBeNull()
+  }
 }
 
 export const AutoHighlight: Story = {

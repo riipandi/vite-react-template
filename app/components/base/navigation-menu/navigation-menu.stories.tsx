@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import { container, fontSize, fontWeight, unit } from '#/styles/core/tokens.stylex'
 import {
@@ -33,7 +34,7 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: unit.x1,
-    width: container.md
+    width: container.medium
   },
   linkBody: {
     display: 'flex',
@@ -107,7 +108,32 @@ export const Playground: Story = {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+    const firstTrigger = canvas.getByRole('button', { name: 'First year at Hogwarts' })
+    const secondTrigger = canvas.getByRole('button', { name: 'Codebreaking' })
+
+    // Hovering a trigger reveals its panel of links.
+    await userEvent.hover(firstTrigger)
+    await body.findByRole('link', { name: /platform nine/i })
+
+    // Leave the first trigger so the next one becomes hoverable again.
+    await userEvent.unhover(firstTrigger)
+    await waitFor(() => expect(body.queryByRole('link', { name: /platform nine/i })).toBeNull())
+
+    // Base UI restores pointer-events on the bar after the panel closes.
+    await waitFor(() => {
+      expect(getComputedStyle(secondTrigger).pointerEvents).not.toBe('none')
+    })
+
+    // Hovering the second trigger opens its own panel.
+    await userEvent.hover(secondTrigger)
+    await waitFor(() => expect(body.getByRole('link', { name: /cryptex/i })).toBeInTheDocument(), {
+      timeout: 3000
+    })
+    expect(body.queryByRole('link', { name: /platform nine/i })).toBeNull()
+  }
 }
 
 export const Link: Story = {

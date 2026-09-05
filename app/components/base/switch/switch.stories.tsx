@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent } from 'storybook/test'
 import {
   Field,
   FieldContent,
@@ -64,7 +65,19 @@ export const Playground: Story = {
     <label {...stylex.props(styles.label)}>
       <Switch {...args} aria-label='Invisibility Cloak' /> Invisibility Cloak
     </label>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const el = canvas.getByRole('switch', { name: /Invisibility Cloak/ })
+    expect(el).toHaveAttribute('aria-checked', 'true')
+
+    await userEvent.click(el)
+    expect(el).toHaveAttribute('aria-checked', 'false')
+
+    // Keyboard toggles as well.
+    el.focus()
+    await userEvent.keyboard(' ')
+    expect(el).toHaveAttribute('aria-checked', 'true')
+  }
 }
 
 export const Sizes: Story = {
@@ -99,7 +112,13 @@ export const Disabled: Story = {
     <label {...stylex.props(styles.label, styles.disabled)}>
       <Switch disabled aria-label='Disabled switch' /> Disabled
     </label>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const el = canvas.getByRole('switch', { name: /Disabled switch/ })
+    expect(el).toHaveAttribute('data-disabled')
+    await userEvent.click(el)
+    expect(el).toHaveAttribute('aria-checked', 'false')
+  }
 }
 
 export const Invalid: Story = {

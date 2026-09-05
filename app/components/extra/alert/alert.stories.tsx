@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { container } from '#/styles/core/tokens.stylex'
 import { Alert, AlertAction, AlertDescription, AlertTitle } from './alert.component'
@@ -26,7 +27,7 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   alert: {
-    width: container.xl
+    width: container.xlarge
   }
 })
 
@@ -70,5 +71,11 @@ export const Action: Story = {
         </Button>
       </AlertAction>
     </Alert>
-  )
+  ),
+  play: ({ canvas }) => {
+    // Title, description, and action all render inside the alert.
+    expect(canvas.getByRole('heading', { name: 'Spell recorded' })).toBeInTheDocument()
+    expect(canvas.getByText(/patronus is on file/i)).toBeInTheDocument()
+    expect(canvas.getByRole('button', { name: 'Reversal' })).toBeEnabled()
+  }
 }

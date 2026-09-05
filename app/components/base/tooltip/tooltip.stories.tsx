@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip.component'
 
@@ -58,7 +59,19 @@ export const Playground: Story = {
         <TooltipContent>Add to the Restricted Section</TooltipContent>
       </Tooltip>
     </TooltipProvider>
-  )
+  ),
+  play: async ({ canvas }) => {
+    const body = within(document.body)
+    const trigger = canvas.getByRole('button', { name: 'Lumos' })
+
+    // Hovering opens the tooltip (delay is 0 in this story).
+    await userEvent.hover(trigger)
+    await waitFor(() => expect(body.getByText('Add to the Restricted Section')).toBeVisible())
+
+    // Hovering away dismisses it.
+    await userEvent.unhover(trigger)
+    await waitFor(() => expect(body.queryByText('Add to the Restricted Section')).toBeNull())
+  }
 }
 
 export const Sides: Story = {

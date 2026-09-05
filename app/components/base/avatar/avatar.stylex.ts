@@ -8,7 +8,7 @@ export const avatarStyles = stylex.create({
   root: {
     alignItems: 'center',
     backgroundColor: colors.backgroundNeutral,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     display: 'inline-flex',
     // Fixed-size chrome: never let a flex row squeeze the avatar.
     flexShrink: 0,
@@ -21,14 +21,14 @@ export const avatarStyles = stylex.create({
     verticalAlign: 'middle'
   },
   image: {
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     height: '100%',
     objectFit: 'cover',
     width: '100%'
   },
   fallback: {
     alignItems: 'center',
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     color: colors.foregroundNeutralFaded,
     display: 'flex',
     fontSize: fontSize.body2,
@@ -41,9 +41,9 @@ export const avatarStyles = stylex.create({
     alignItems: 'center',
     backgroundColor: colors.backgroundPrimary,
     borderColor: colors.backgroundPage,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     borderStyle: 'solid',
-    borderWidth: stroke.focus,
+    borderWidth: stroke.ring2,
     color: colors.onBrand,
     display: 'flex',
     insetInlineEnd: 0,
@@ -58,7 +58,7 @@ export const avatarStyles = stylex.create({
     display: 'flex'
   },
   groupItem: {
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     display: 'inline-flex'
   },
   groupItemOverlap: {
@@ -70,7 +70,7 @@ export const avatarStyles = stylex.create({
   groupCount: {
     alignItems: 'center',
     backgroundColor: colors.backgroundNeutral,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     color: colors.foregroundNeutralFaded,
     display: 'flex',
     fontFamily: fontFamily.body,

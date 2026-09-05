@@ -20,6 +20,7 @@ import { PreviewCard as BasePreviewCard } from '@base-ui/react/preview-card'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { shadow } from '#/styles/core/colors.stylex'
+import { popupFx } from '#/styles/core/popup.stylex'
 import { ring } from '#/styles/core/utils.stylex'
 import { previewCardStyles as s } from './preview-card.stylex'
 
@@ -51,11 +52,18 @@ export function PreviewCardContent({
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
-        {...stylex.props(s.positioner)}
+        {...stylex.props(popupFx.positioner)}
       >
         <BasePreviewCard.Popup
           {...props}
-          {...stylex.props(s.popup, ring({ shadow: shadow.raised }), style)}
+          {...stylex.props(
+            popupFx.shift,
+            popupFx.fade,
+            popupFx.pose,
+            s.popup,
+            ring({ shadow: shadow.raised }),
+            style
+          )}
         />
       </BasePreviewCard.Positioner>
     </BasePreviewCard.Portal>

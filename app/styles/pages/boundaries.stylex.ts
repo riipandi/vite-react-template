@@ -3,6 +3,15 @@ import { colors } from '#/styles/core/colors.stylex'
 import { fontSize, fontWeight } from '#/styles/core/tokens.stylex'
 import { radius, unit } from '#/styles/core/tokens.stylex'
 
+// Mirrors the token viewports (660/900) from `#/styles/core/tokens.stylex` as
+// mobile-first `min-width` queries. @stylexjs/babel-plugin only inlines
+// `defineConsts` media keys declared in the SAME file (and bound to a named
+// export), so these cannot be imported cross-file — keep values in sync.
+export const breakpoints = stylex.defineConsts({
+  medium: '@media (min-width: 660px)',
+  large: '@media (min-width: 900px)'
+})
+
 export const styles = stylex.create({
   content: {
     paddingLeft: unit.x4,
@@ -10,11 +19,11 @@ export const styles = stylex.create({
     paddingTop: '2.5rem',
     paddingBottom: '2.5rem',
     textAlign: 'center',
-    '@media (min-width: 640px)': {
+    [breakpoints.medium]: {
       paddingLeft: unit.x6,
       paddingRight: unit.x6
     },
-    '@media (min-width: 1024px)': {
+    [breakpoints.large]: {
       paddingLeft: unit.x8,
       paddingRight: unit.x8
     }
@@ -24,7 +33,7 @@ export const styles = stylex.create({
     fontSize: fontSize.headline1,
     fontWeight: fontWeight.bold,
     color: colors.foregroundNeutral,
-    '@media (min-width: 640px)': {
+    [breakpoints.medium]: {
       fontSize: fontSize.headline2
     }
   },
@@ -32,7 +41,7 @@ export const styles = stylex.create({
     marginTop: unit.x6,
     fontSize: fontSize.body1,
     color: colors.foregroundNeutralFaded,
-    '@media (min-width: 640px)': {
+    [breakpoints.medium]: {
       marginTop: unit.x8
     }
   },
@@ -83,11 +92,11 @@ export const styles = stylex.create({
     maxWidth: '80rem',
     paddingLeft: unit.x4,
     paddingRight: unit.x4,
-    '@media (min-width: 640px)': {
+    [breakpoints.medium]: {
       paddingLeft: unit.x6,
       paddingRight: unit.x6
     },
-    '@media (min-width: 1024px)': {
+    [breakpoints.large]: {
       paddingLeft: unit.x8,
       paddingRight: unit.x8
     }

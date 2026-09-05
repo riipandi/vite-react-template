@@ -1,9 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
 import { stroke, container } from '#/styles/core/tokens.stylex'
-import { unit, radius, zIndex } from '#/styles/core/tokens.stylex'
+import { unit, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
-import { duration, easing } from '#/styles/core/tokens.stylex'
 
 export const selectStyles = stylex.create({
   label: {
@@ -52,10 +51,8 @@ export const selectStyles = stylex.create({
     color: colors.foregroundNeutralFaded,
     display: 'flex'
   },
-  positioner: {
-    outline: 'none',
-    zIndex: zIndex.absolute
-  },
+  // Shared frames (positioner/shift/fade/pose) live in `popupFx`. The base
+  // popup only fades out; the closed pose applies in anchored mode below.
   popup: {
     backgroundColor: colors.backgroundElevationOverlay,
     borderRadius: radius.medium,
@@ -67,45 +64,16 @@ export const selectStyles = stylex.create({
     width: 'var(--anchor-width)',
     overflowX: 'hidden',
     overflowY: 'auto',
-    position: 'relative',
-    transformOrigin: 'var(--transform-origin)',
-    transitionDuration: duration.fast,
-    transitionProperty: {
-      default: 'opacity, transform',
-      '@media (prefers-reduced-motion: reduce)': 'opacity'
-    },
-    transitionTimingFunction: easing.decelerate
+    position: 'relative'
   },
-  // Closed pose (anchored mode only — [data-side] sets the nudge direction,
-  // [data-starting-style]/[data-ending-style] apply it).
+  // Closed pose (anchored mode only): the shrink + nudge rides `popupFx.pose`
+  // and the `--popup-shift-*` custom properties from `popupFx.shift`.
   popupAnchored: {
-    // No `default` for conditional custom properties: StyleX emits the
-    // default rule unlayered (beating the layered [data-*] rules); the
-    // var() fallback covers the unset case instead.
-    '--popup-shift-x': {
-      default: null,
-      '[data-side="left"]': unit.x2,
-      '[data-side="right"]': `calc(-1 * ${unit.x2})`,
-      '[data-side="inline-start"]': unit.x2,
-      '[data-side="inline-end"]': `calc(-1 * ${unit.x2})`
-    },
-    '--popup-shift-y': {
-      default: null,
-      '[data-side="top"]': unit.x2,
-      '[data-side="bottom"]': `calc(-1 * ${unit.x2})`
-    },
     maxHeight: `min(${container.sm}, var(--available-height))`,
     opacity: {
       default: 1,
       '[data-starting-style]': 0,
       '[data-ending-style]': 0
-    },
-    transform: {
-      default: 'scale(1)',
-      '[data-starting-style]':
-        'translate(var(--popup-shift-x, 0px), var(--popup-shift-y, 0px)) scale(0.97)',
-      '[data-ending-style]':
-        'translate(var(--popup-shift-x, 0px), var(--popup-shift-y, 0px)) scale(0.97)'
     }
   },
   list: {

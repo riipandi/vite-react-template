@@ -3,6 +3,14 @@ import { colors } from '#/styles/core/colors.stylex'
 import { fontSize, fontWeight } from '#/styles/core/tokens.stylex'
 import { radius, unit } from '#/styles/core/tokens.stylex'
 
+// Mirrors `breakpoints.small` from `#/styles/core/tokens.stylex` (659px cap).
+// @stylexjs/babel-plugin only inlines `defineConsts` media keys declared in
+// the SAME file (and bound to a named export), so these cannot be imported
+// cross-file — keep values in sync.
+export const breakpoints = stylex.defineConsts({
+  small: '@media (max-width: 659px)'
+})
+
 export const sidebarStyles = stylex.create({
   container: {
     display: 'flex',
@@ -21,7 +29,7 @@ export const sidebarStyles = stylex.create({
   containerExpanded: {
     width: '15rem',
     alignItems: 'stretch',
-    '@media (max-width: 767px)': {
+    [breakpoints.small]: {
       width: '18rem'
     }
   },
@@ -30,7 +38,7 @@ export const sidebarStyles = stylex.create({
     alignItems: 'center',
     paddingTop: unit.x3,
     paddingBottom: unit.x2,
-    '@media (max-width: 767px)': {
+    [breakpoints.small]: {
       width: '18rem',
       alignItems: 'stretch',
       paddingTop: 0,
@@ -288,7 +296,7 @@ export const sidebarStyles = stylex.create({
       opacity: 1,
       pointerEvents: 'auto'
     },
-    '@media (max-width: 767px)': {
+    [breakpoints.small]: {
       display: 'none'
     }
   },

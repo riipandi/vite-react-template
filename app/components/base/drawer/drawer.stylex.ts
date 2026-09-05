@@ -74,7 +74,7 @@ export const drawerStyles = stylex.create({
     position: 'relative',
     '::after': {
       backgroundColor: colors.backgroundNeutral,
-      borderRadius: radius.circular,
+      borderRadius: radius.full,
       content: '""',
       display: 'block',
       flexShrink: 0
@@ -168,7 +168,7 @@ export const drawerDirections = stylex.create({
     bottom: 0,
     flexDirection: 'row',
     left: 0,
-    maxWidth: container.lg,
+    maxWidth: container.large,
     top: 0,
     width: '75%'
   },
@@ -187,7 +187,7 @@ export const drawerDirections = stylex.create({
     borderTopLeftRadius: radius.xlarge,
     bottom: 0,
     flexDirection: 'row',
-    maxWidth: container.lg,
+    maxWidth: container.large,
     right: 0,
     top: 0,
     width: '75%'

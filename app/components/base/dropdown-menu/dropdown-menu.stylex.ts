@@ -15,7 +15,7 @@ export const dropdownMenuStyles = stylex.create({
     color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     maxHeight: 'var(--available-height)',
-    minWidth: container.xs,
+    minWidth: container.xxsmall,
     opacity: {
       default: 1,
       '[data-starting-style]': 0,
@@ -30,7 +30,7 @@ export const dropdownMenuStyles = stylex.create({
   // Submenus anchor to their trigger item — the anchor width is the item, not
   // the menu, so size to content instead.
   subPopup: {
-    minWidth: container.xs,
+    minWidth: container.xxsmall,
     width: 'max-content'
   },
   item: {

@@ -40,7 +40,7 @@ export const scrollAreaStyles = stylex.create({
   },
   thumb: {
     backgroundColor: colors.borderNeutralFaded,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     flex: 1,
     position: 'relative'
   }

@@ -112,7 +112,7 @@ export const sheetSides = stylex.create({
     borderLeftStyle: 'solid',
     borderLeftWidth: stroke.ring1,
     bottom: 0,
-    maxWidth: container.lg,
+    maxWidth: container.large,
     right: 0,
     top: 0,
     width: '75%'
@@ -130,7 +130,7 @@ export const sheetSides = stylex.create({
     borderRightWidth: stroke.ring1,
     bottom: 0,
     left: 0,
-    maxWidth: container.lg,
+    maxWidth: container.large,
     top: 0,
     width: '75%'
   },

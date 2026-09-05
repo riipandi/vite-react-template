@@ -11,7 +11,7 @@ export const switchStyles = stylex.create({
       '[data-checked]': colors.backgroundPrimary,
       '[data-invalid]': colors.backgroundCritical
     },
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     borderStyle: 'none',
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
     display: 'inline-flex',
@@ -36,7 +36,7 @@ export const switchStyles = stylex.create({
   },
   thumb: {
     backgroundColor: colors.backgroundPage,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     transitionDuration: duration.fast,
     transitionProperty: {
       default: 'transform',

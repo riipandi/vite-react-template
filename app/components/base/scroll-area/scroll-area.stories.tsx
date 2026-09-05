@@ -56,8 +56,8 @@ const styles = stylex.create({
     borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.ring1,
-    height: container.sm,
-    width: container.card
+    height: container.small,
+    width: container.xsmall
   },
   inner: {
     display: 'flex',
@@ -75,7 +75,7 @@ const styles = stylex.create({
     fontSize: fontSize.body2
   },
   wide: {
-    width: container.xl
+    width: container.xlarge
   },
   row: {
     display: 'flex',
@@ -88,7 +88,7 @@ const styles = stylex.create({
     flexDirection: 'column',
     fontFamily: fontFamily.body,
     gap: 8,
-    width: container.card
+    width: container.xsmall
   },
   thumb: {
     backgroundColor: colors.backgroundNeutral,

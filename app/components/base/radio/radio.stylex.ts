@@ -18,7 +18,7 @@ export const radioStyles = stylex.create({
       '[data-checked]': colors.backgroundPrimary,
       '[data-invalid]': colors.borderCritical
     },
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     borderStyle: 'solid',
     borderWidth: stroke.ring1,
     cursor: { default: 'pointer', ':disabled': 'not-allowed' },
@@ -47,7 +47,7 @@ export const radioStyles = stylex.create({
   },
   indicator: {
     backgroundColor: colors.backgroundPrimary,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     display: 'block',
     height: unit.x2,
     width: unit.x2

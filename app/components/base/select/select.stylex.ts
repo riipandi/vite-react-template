@@ -36,7 +36,7 @@ export const selectStyles = stylex.create({
     height: unit.x9,
     justifyContent: 'space-between',
     lineHeight: fontLineHeight.body2,
-    minWidth: container.xs,
+    minWidth: container.xxsmall,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
@@ -69,7 +69,7 @@ export const selectStyles = stylex.create({
   // Closed pose (anchored mode only): the shrink + nudge rides `popupFx.pose`
   // and the `--popup-shift-*` custom properties from `popupFx.shift`.
   popupAnchored: {
-    maxHeight: `min(${container.sm}, var(--available-height))`,
+    maxHeight: `min(${container.small}, var(--available-height))`,
     opacity: {
       default: 1,
       '[data-starting-style]': 0,

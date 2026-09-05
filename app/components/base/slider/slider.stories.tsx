@@ -37,13 +37,13 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   root: {
-    maxWidth: container.sm
+    maxWidth: container.small
   },
   row: {
     alignItems: 'center',
     display: 'flex',
     gap: 16,
-    width: container.md
+    width: container.medium
   },
   slider: {
     flex: 1

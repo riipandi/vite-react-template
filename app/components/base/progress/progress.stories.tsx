@@ -35,14 +35,14 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   root: {
-    maxWidth: container.sm
+    maxWidth: container.small
   },
   wrap: {
     alignItems: 'flex-start',
     display: 'flex',
     flexDirection: 'column',
     gap: 12,
-    width: container.sm
+    width: container.small
   },
   button: {
     alignSelf: 'flex-start'

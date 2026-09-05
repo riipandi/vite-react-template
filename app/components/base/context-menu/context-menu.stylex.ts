@@ -18,7 +18,7 @@ export const contextMenuStyles = stylex.create({
     color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     maxHeight: 'var(--available-height)',
-    minWidth: container.xs,
+    minWidth: container.xxsmall,
     opacity: {
       default: 1,
       '[data-starting-style]': 0,

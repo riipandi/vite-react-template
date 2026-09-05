@@ -28,7 +28,7 @@ const styles = stylex.create({
     gap: 16
   },
   avatar: {
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     height: 48,
     width: 48
   },
@@ -39,7 +39,7 @@ const styles = stylex.create({
   },
   lineWide: {
     height: 16,
-    width: container.xs
+    width: container.xxsmall
   },
   line: {
     height: 16,
@@ -49,11 +49,11 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 12,
-    width: container.card
+    width: container.xsmall
   },
   image: {
     borderRadius: radius.large,
-    height: container.xs,
+    height: container.xxsmall,
     width: '100%'
   },
   cardLineWide: {
@@ -68,7 +68,7 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 16,
-    width: container.sm
+    width: container.small
   },
   listRow: {
     alignItems: 'center',
@@ -76,7 +76,7 @@ const styles = stylex.create({
     gap: 12
   },
   listAvatar: {
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     flexShrink: 0,
     height: 40,
     width: 40

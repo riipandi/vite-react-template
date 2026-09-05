@@ -123,7 +123,7 @@ const spells = [
 
 const styles = stylex.create({
   root: {
-    maxWidth: container.xl
+    maxWidth: container.xlarge
   }
 })
 

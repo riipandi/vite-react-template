@@ -27,10 +27,10 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   frame: {
-    width: container.lg
+    width: container.large
   },
   smallFrame: {
-    width: container.xs
+    width: container.xxsmall
   },
   image: {
     borderRadius: radius.large,

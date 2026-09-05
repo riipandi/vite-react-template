@@ -34,7 +34,7 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: unit.x1,
-    width: container.md
+    width: container.medium
   },
   linkBody: {
     display: 'flex',

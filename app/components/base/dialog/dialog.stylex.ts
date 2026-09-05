@@ -49,7 +49,7 @@ export const dialogStyles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': 'opacity'
     },
     transitionTimingFunction: easing.decelerate,
-    width: container.xxl,
+    width: container.xxlarge,
     zIndex: zIndex.absolute
   },
   close: {

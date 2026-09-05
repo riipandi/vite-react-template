@@ -23,7 +23,7 @@ export const popoverStyles = stylex.create({
     },
     outline: 'none',
     padding: unit.x4,
-    width: container.sm
+    width: container.small
   },
   header: {
     display: 'flex',

@@ -48,7 +48,7 @@ const activity = [
 const styles = stylex.create({
   icon: { height: 16, width: 16 },
   group: {
-    maxWidth: container.xl
+    maxWidth: container.xlarge
   }
 })
 

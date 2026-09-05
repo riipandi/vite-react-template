@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   form: {
-    maxWidth: container.md
+    maxWidth: container.medium
   },
   submit: {
     alignSelf: 'flex-start'

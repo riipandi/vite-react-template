@@ -36,7 +36,7 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   root: {
-    maxWidth: container.sm
+    maxWidth: container.small
   }
 })
 

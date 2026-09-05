@@ -23,6 +23,6 @@ export const previewCardStyles = stylex.create({
     },
     outline: 'none',
     padding: unit.x3,
-    width: container.card
+    width: container.xsmall
   }
 })

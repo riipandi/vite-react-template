@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   alert: {
-    width: container.xl
+    width: container.xlarge
   }
 })
 

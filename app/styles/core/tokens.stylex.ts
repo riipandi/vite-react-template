@@ -146,13 +146,13 @@ export const stroke = stylex.defineConsts({
 
 // Container widths for popups, panels, and example layouts.
 export const container = stylex.defineConsts({
-  xs: '10rem',
-  card: '16rem',
-  sm: '18rem',
-  md: '20rem',
-  lg: '24rem',
-  xl: '28rem',
-  xxl: '32rem'
+  xxsmall: '10rem',
+  xsmall: '16rem',
+  small: '18rem',
+  medium: '20rem',
+  large: '24rem',
+  xlarge: '28rem',
+  xxlarge: '32rem'
 })
 
 export const radius = stylex.defineVars({
@@ -161,7 +161,7 @@ export const radius = stylex.defineVars({
   medium: '8px',
   large: '10px',
   xlarge: '12px',
-  circular: '999px',
+  full: '999px',
   none: '0px'
 })
 

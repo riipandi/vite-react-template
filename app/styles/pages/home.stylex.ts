@@ -86,7 +86,7 @@ export const homeStyles = stylex.create({
   },
   heroBlobA: {
     backgroundColor: colors.backgroundPrimary,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     filter: 'blur(64px)',
     height: 224,
     left: -80,
@@ -98,7 +98,7 @@ export const homeStyles = stylex.create({
   },
   heroBlobB: {
     backgroundColor: colors.backgroundPrimaryFaded,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     bottom: -80,
     filter: 'blur(64px)',
     height: 224,
@@ -130,7 +130,7 @@ export const homeStyles = stylex.create({
   pill: {
     alignItems: 'center',
     backgroundColor: 'transparent',
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     borderStyle: 'solid',
     borderWidth: 1,
     color: colors.foregroundNeutral,

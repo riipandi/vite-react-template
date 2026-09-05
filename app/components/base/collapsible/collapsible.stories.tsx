@@ -32,7 +32,7 @@ const styles = stylex.create({
     flexDirection: 'column',
     fontFamily: fontFamily.body,
     gap: unit.x2,
-    width: container.md
+    width: container.medium
   },
   header: {
     alignItems: 'center',

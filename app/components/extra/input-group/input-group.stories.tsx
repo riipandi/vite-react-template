@@ -45,10 +45,10 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 12,
-    width: container.sm
+    width: container.small
   },
   group: {
-    maxWidth: container.sm
+    maxWidth: container.small
   }
 })
 

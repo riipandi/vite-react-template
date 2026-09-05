@@ -113,11 +113,11 @@ export const alertDialogStyles = stylex.create({
 export const alertDialogSizes = stylex.create({
   md: {
     width: {
-      default: container.md,
-      '@media (min-width: 660px)': container.lg
+      default: container.medium,
+      '@media (min-width: 660px)': container.large
     }
   },
   sm: {
-    width: container.md
+    width: container.medium
   }
 })

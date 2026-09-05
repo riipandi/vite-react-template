@@ -70,7 +70,7 @@ export const commandStyles = stylex.create({
     '::placeholder': { color: colors.foregroundNeutralFaded }
   },
   list: {
-    maxHeight: container.sm,
+    maxHeight: container.small,
     outline: 'none',
     overflowY: 'auto',
     padding: unit.x1,

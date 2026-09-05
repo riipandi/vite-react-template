@@ -45,7 +45,7 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   narrow: {
-    width: container.md
+    width: container.medium
   },
   content: {
     maxHeight: 'calc(100dvh - 64px)'

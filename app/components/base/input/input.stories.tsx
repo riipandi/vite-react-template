@@ -37,16 +37,16 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   wrap: {
-    width: container.md
+    width: container.medium
   },
   narrow: {
-    width: container.sm
+    width: container.small
   },
   field: {
     display: 'flex',
     flexDirection: 'column',
     gap: 6,
-    width: container.md
+    width: container.medium
   },
   label: {
     color: colors.foregroundNeutral,

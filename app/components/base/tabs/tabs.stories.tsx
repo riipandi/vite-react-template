@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   tabs: {
-    width: container.lg
+    width: container.large
   },
   trigger: {
     alignItems: 'center',

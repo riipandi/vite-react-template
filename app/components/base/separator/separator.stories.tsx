@@ -65,7 +65,7 @@ const styles = stylex.create({
     flexDirection: 'column',
     fontFamily: fontFamily.body,
     gap: 12,
-    width: container.lg
+    width: container.large
   },
   listRow: {
     alignItems: 'center',

@@ -25,7 +25,7 @@ export const autocompleteStyles = stylex.create({
     paddingInline: unit.x3,
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',
-    width: container.sm,
+    width: container.small,
     '::placeholder': { color: colors.foregroundNeutralFaded }
   },
   // Closed pose (Base UI's [data-starting-style]/[data-ending-style] frames):
@@ -39,7 +39,7 @@ export const autocompleteStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
-    maxHeight: `min(${container.sm}, var(--available-height))`,
+    maxHeight: `min(${container.small}, var(--available-height))`,
     opacity: {
       default: 1,
       '[data-starting-style]': 0,

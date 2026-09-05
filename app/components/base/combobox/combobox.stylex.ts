@@ -8,7 +8,7 @@ import { fontFamily, fontWeight, fontSize, fontLineHeight } from '#/styles/core/
 export const comboboxStyles = stylex.create({
   inputWrap: {
     position: 'relative',
-    width: container.sm
+    width: container.small
   },
   input: {
     backgroundColor: colors.backgroundPage,
@@ -82,7 +82,7 @@ export const comboboxStyles = stylex.create({
     height: unit.x9,
     justifyContent: 'space-between',
     lineHeight: fontLineHeight.body2,
-    minWidth: container.xs,
+    minWidth: container.xxsmall,
     opacity: { default: 1, ':disabled': 0.5 },
     outline: {
       default: 'none',
@@ -117,7 +117,7 @@ export const comboboxStyles = stylex.create({
     paddingInline: unit.x2,
     transitionDuration: duration.fast,
     transitionProperty: 'border-color, outline-color',
-    width: container.sm
+    width: container.small
   },
   chip: {
     alignItems: 'center',
@@ -175,7 +175,7 @@ export const comboboxStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     fontFamily: fontFamily.body,
-    maxHeight: `min(${container.sm}, var(--available-height))`,
+    maxHeight: `min(${container.small}, var(--available-height))`,
     opacity: {
       default: 1,
       '[data-starting-style]': 0,

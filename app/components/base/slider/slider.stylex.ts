@@ -21,7 +21,7 @@ export const sliderStyles = stylex.create({
   },
   track: {
     backgroundColor: colors.backgroundNeutral,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     flexGrow: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -34,7 +34,7 @@ export const sliderStyles = stylex.create({
   thumb: {
     backgroundColor: colors.backgroundPage,
     borderColor: colors.foregroundPrimary,
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     borderStyle: 'solid',
     borderWidth: stroke.ring1,
     boxShadow: {
@@ -60,7 +60,7 @@ export const sliderRootOrientations = stylex.create({
   },
   vertical: {
     height: '100%',
-    minHeight: container.xs
+    minHeight: container.xxsmall
   }
 })
 
@@ -71,7 +71,7 @@ export const sliderControlOrientations = stylex.create({
   vertical: {
     flexDirection: 'column',
     height: '100%',
-    minHeight: container.xs
+    minHeight: container.xxsmall
   }
 })
 

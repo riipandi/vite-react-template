@@ -10,7 +10,7 @@ export const toastStyles = stylex.create({
     bottom: unit.x4,
     position: 'fixed',
     right: unit.x4,
-    width: container.md,
+    width: container.medium,
     zIndex: zIndex.fixed
   },
   root: {

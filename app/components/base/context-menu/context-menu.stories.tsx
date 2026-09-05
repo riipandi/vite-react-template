@@ -56,9 +56,9 @@ const styles = stylex.create({
     display: 'flex',
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
-    height: container.xs,
+    height: container.xxsmall,
     justifyContent: 'center',
-    width: container.sm,
+    width: container.small,
     paddingInline: 16,
     textAlign: 'center'
   }

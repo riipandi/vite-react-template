@@ -7,7 +7,7 @@ import { unit, radius } from '#/styles/core/tokens.stylex'
 export const badgeStyles = stylex.create({
   root: {
     alignItems: 'center',
-    borderRadius: radius.circular,
+    borderRadius: radius.full,
     display: 'inline-flex',
     fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,

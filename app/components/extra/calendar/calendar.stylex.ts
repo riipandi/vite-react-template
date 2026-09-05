@@ -136,10 +136,16 @@ export const calendarStyles = stylex.create({
     width: 'max-content'
   },
   dropdownTrigger: {
+    backgroundColor: {
+      ':hover': colors.backgroundNeutralFaded,
+      default: 'transparent'
+    },
+    borderStyle: 'none',
+    borderWidth: 0,
     gap: unit.x1,
     height: cellSize,
     minWidth: null,
-    paddingInline: unit.x2
+    paddingInline: unit.x1_5
   },
   dropdowns: {
     alignItems: 'center',

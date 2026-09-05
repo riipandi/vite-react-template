@@ -1,22 +1,33 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
+import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Tooltip, TooltipContent, TooltipTrigger } from '#/components/base/tooltip'
-import { duration, easing, fontSize, unit } from '#/styles/core/tokens.stylex'
-import {
-  canvasDecorator,
-  shelfStatuses,
-  statusColors,
-  statusLabels,
-  type AvailabilityStatus
-} from './chart.samples'
+import { duration, easing, fontSize, radius, unit } from '#/styles/core/tokens.stylex'
+import { shelfStatuses, statusColors, statusLabels, type AvailabilityStatus } from './chart.samples'
 
 const meta = {
   title: 'Visualizations/Tracker',
   component: undefined,
+  // A status strip is a full-width visualization — the centered layout
+  // shrink-wraps the story (fit-content parent), collapsing the segments.
   parameters: { layout: 'centered' },
   tags: [], // ['autodocs']
-  decorators: [canvasDecorator]
+  decorators: [
+    (Story) => (
+      <div
+        {...stylex.props(
+          atoms.display.flex,
+          atoms.justifyContent.center,
+          atoms.padding['20px'],
+          atoms.minWidth['659px'],
+          atoms.width['100%']
+        )}
+      >
+        <Story />
+      </div>
+    )
+  ]
 } satisfies Meta
 
 type Story = StoryObj<typeof meta>
@@ -32,27 +43,51 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: unit.x2,
+    paddingInline: unit.x5,
     width: '100%'
   },
+  // Tremor reference: h-8 flex row — a 32px strip, equal-width segments.
   track: {
+    alignItems: 'center',
     display: 'flex',
-    gap: 2
+    height: unit.x8,
+    width: '100%'
   },
+  // Each segment is a full-height clipped cell; the 1px gap between neighbors
+  // comes from 0.5px side padding (dropped on the outer ends), and the strip
+  // reads as a pill because the first/last cells carry the outer rounding.
   segment: {
-    backgroundColor: 'var(--seg-color, currentColor)',
-    borderRadius: 2,
     cursor: 'default',
     display: 'block',
     flexBasis: 0,
     flexGrow: 1,
     flexShrink: 1,
-    height: unit.x3,
+    height: '100%',
     minWidth: 0,
+    overflow: 'hidden',
+    paddingLeft: 0.5,
+    paddingRight: 0.5,
+    ':first-child': {
+      borderBottomLeftRadius: radius.small,
+      borderTopLeftRadius: radius.small,
+      paddingLeft: 0
+    },
+    ':last-child': {
+      borderBottomRightRadius: radius.small,
+      borderTopRightRadius: radius.small,
+      paddingRight: 0
+    },
     // Subtle feedback only — the segment colors carry the information.
     opacity: { default: 1, ':hover': 0.75 },
     transitionDuration: duration.fast,
     transitionProperty: 'opacity',
     transitionTimingFunction: easing.decelerate
+  },
+  bar: {
+    backgroundColor: 'var(--seg-color, currentColor)',
+    borderRadius: 1,
+    height: '100%',
+    width: '100%'
   },
   weekLabels: {
     display: 'flex',
@@ -75,9 +110,12 @@ function Tracker() {
           <Tooltip key={day}>
             <TooltipTrigger
               data-status={status}
+              render={<div />}
               {...stylex.props(styles.segment)}
               style={{ '--seg-color': statusColors[status] } as React.CSSProperties}
-            />
+            >
+              <div {...stylex.props(styles.bar)} />
+            </TooltipTrigger>
             <TooltipContent>{`Day ${day + 1}: ${statusLabels[status]}`}</TooltipContent>
           </Tooltip>
         ))}

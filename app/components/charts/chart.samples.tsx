@@ -182,6 +182,142 @@ export const shelfStatuses: readonly AvailabilityStatus[] = Array.from({ length:
 })
 
 // ---------------------------------------------------------------------------
+// Heatmap datasets (Sep 1991 – Aug 1992, the Hogwarts school year).
+// Both are deterministic seeded values so tests and snapshots stay stable:
+// - `spellingDays` paints RIIPANDI into the week grid with a natural mix of
+//   light and heavy reading days.
+// - `readingDays` is a full year of organic activity with momentum streaks,
+//   rest days, and longer weekend sessions.
+// ---------------------------------------------------------------------------
+
+export interface ReadingDay {
+  /** Short display label, e.g. 'Mar 3'. */
+  date: string
+  year: number
+  /** 0 = Monday … 6 = Sunday. */
+  weekday: number
+  /** Week column index, Monday-based. */
+  week: number
+  chapters: number
+  level: 0 | 1 | 2 | 3 | 4
+}
+
+export const readingPalette: Record<1 | 2 | 3 | 4, string> = {
+  1: '#c9ecd2',
+  2: '#7dd8a0',
+  3: '#33b06a',
+  4: '#167a3f'
+}
+
+function mulberry32(seed: number) {
+  return () => {
+    seed |= 0
+    seed = (seed + 0x6d2b79f5) | 0
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+/** 0 = Monday … 6 = Sunday. */
+const weekdayOf = (d: Date) => (d.getDay() + 6) % 7
+
+function makeDay(d: Date, weekday: number, week: number, chapters: number): ReadingDay {
+  const level = chapters === 0 ? 0 : chapters <= 2 ? 1 : chapters <= 4 ? 2 : chapters <= 7 ? 3 : 4
+  return {
+    date: `${MONTHS[d.getMonth()]} ${d.getDate()}`,
+    year: d.getFullYear(),
+    weekday,
+    week,
+    chapters,
+    level
+  }
+}
+
+/** Weighted chapter counts — most days mid-scale, weekends run longer. */
+function drawChapters(random: () => number, weekday: number): number {
+  const roll = random()
+  let chapters: number
+  if (roll < 0.1) chapters = 1 + Math.floor(random() * 2)
+  else if (roll < 0.35) chapters = 3 + Math.floor(random() * 2)
+  else if (roll < 0.7) chapters = 5 + Math.floor(random() * 3)
+  else chapters = 8 + Math.floor(random() * 3)
+  return weekday >= 5 ? chapters + 2 : chapters
+}
+
+export const readingDays: ReadingDay[] = (() => {
+  const random = mulberry32(1991)
+  const days: ReadingDay[] = []
+  // Monday, Sep 2 1991 — the first full week of the school year.
+  let momentum = false
+  for (let i = 0; i < 365; i++) {
+    const d = new Date(1991, 8, 2 + i)
+    const weekday = weekdayOf(d)
+    // Momentum: keeping a streak alive is easier than starting one.
+    const skipChance = momentum ? 0.12 : 0.3
+    let chapters = 0
+    if (random() >= skipChance) chapters = drawChapters(random, weekday)
+    momentum = chapters > 0
+    days.push(makeDay(d, weekday, Math.floor(i / 7), chapters))
+  }
+  return days
+})()
+
+export const readingWeeks = Math.max(...readingDays.map((d) => d.week)) + 1
+export const readingTotal = readingDays.reduce((sum, d) => sum + d.chapters, 0)
+
+const GLYPHS: Record<string, readonly string[]> = {
+  R: ['XXX.', 'X..X', 'XXX.', 'X.X.', 'X..X'],
+  I: ['X', 'X', 'X', 'X', 'X'],
+  P: ['XXX.', 'X..X', 'XXX.', 'X...', 'X...'],
+  A: ['.X.', 'X.X', 'XXX', 'X.X', 'X.X'],
+  N: ['X..X', 'XX.X', 'X.XX', 'X..X', 'X..X'],
+  D: ['XXX.', 'X..X', 'X..X', 'X..X', 'XXX.']
+}
+
+const ART_ROWS = 7
+const ART_TOP = 1
+const NAME = 'RIIPANDI'
+
+/** One boolean column per week: which weekday cells are part of the art. */
+const artColumns: readonly (readonly boolean[])[] = (() => {
+  const columns: boolean[][] = []
+  ;[...NAME].forEach((char, index) => {
+    if (index > 0) columns.push([false, false, false, false, false, false, false])
+    const glyph = GLYPHS[char]!
+    const width = glyph[0]!.length
+    for (let c = 0; c < width; c++) {
+      columns.push(
+        Array.from(
+          { length: ART_ROWS },
+          (_, row) => row >= ART_TOP && row < ART_TOP + 5 && glyph[row - ART_TOP]![c] === 'X'
+        )
+      )
+    }
+  })
+  return columns
+})()
+
+export const spellingDays: ReadingDay[] = (() => {
+  const random = mulberry32(1991)
+  const days: ReadingDay[] = []
+  // Monday, Sep 2 1991 — the first full week of the school year.
+  for (let week = 0; week < artColumns.length; week++) {
+    for (let weekday = 0; weekday < ART_ROWS; weekday++) {
+      const d = new Date(1991, 8, 2 + week * 7 + weekday)
+      const filled = artColumns[week]![weekday]!
+      days.push(makeDay(d, weekday, week, filled ? drawChapters(random, weekday) : 0))
+    }
+  }
+  return days
+})()
+
+export const spellingWeeks = Math.max(...spellingDays.map((d) => d.week)) + 1
+export const spellingTotal = spellingDays.reduce((sum, d) => sum + d.chapters, 0)
+
+// ---------------------------------------------------------------------------
 // Story decorator — centers every visualization on a roomy canvas. The 448px
 // floor (`container.xlarge`) only applies from the medium breakpoint up, so
 // stories shrink freely on mobile viewports.

@@ -1,3 +1,4 @@
+import { useDirection } from '@base-ui/react/direction-provider'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
 import { addDays } from 'date-fns'
@@ -5,7 +6,7 @@ import { Clock2Icon } from 'lucide-react'
 import * as React from 'react'
 import type { DayButton } from 'react-day-picker'
 import type { DateRange } from 'react-day-picker'
-import { arSA, he } from 'react-day-picker/locale'
+import { arSA } from 'react-day-picker/locale'
 import { Button } from '#/components/base/button/button.component'
 import { Field, FieldGroup, FieldLabel } from '#/components/base/field/field.component'
 import { Card, CardContent, CardFooter } from '#/components/extra/card/card.component'
@@ -55,12 +56,6 @@ const storyStyles = stylex.create({
   dayPriceSelected: {
     color: colors.onBrand,
     opacity: 0.8
-  },
-  rtlWrap: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: unit.x4
   }
 })
 
@@ -347,41 +342,15 @@ export const WeekNumbers: Story = {
   }
 }
 
-export const Rtl: Story = {
+export const Direction: Story = {
   render: () => {
-    const [date, setDate] = React.useState<Date | undefined>(new Date())
-    const [isRtl, setIsRtl] = React.useState(true)
-
-    return (
-      <div {...stylex.props(storyStyles.rtlWrap)}>
-        <Button variant='outline' size='sm' onClick={() => setIsRtl((prev) => !prev)}>
-          {isRtl ? 'Switch to LTR' : 'Switch to RTL'}
-        </Button>
-        <Calendar
-          mode='single'
-          selected={date}
-          onSelect={setDate}
-          dir={isRtl ? 'rtl' : 'ltr'}
-          locale={isRtl ? arSA : undefined}
-          captionLayout='dropdown'
-        />
-      </div>
-    )
-  }
-}
-
-export const Hebrew: Story = {
-  render: () => {
-    const [date, setDate] = React.useState<Date | undefined>(new Date())
+    const direction = useDirection()
 
     return (
       <Calendar
         mode='single'
-        selected={date}
-        onSelect={setDate}
-        dir='rtl'
-        locale={he}
         captionLayout='dropdown'
+        locale={direction === 'rtl' ? arSA : undefined}
       />
     )
   }

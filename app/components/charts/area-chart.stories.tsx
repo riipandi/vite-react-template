@@ -42,7 +42,7 @@ export const Overlaid: Story = {
           states: [
             {
               when: { focus: 'unmatched' },
-              style: { fillOpacity: 0.04, strokeOpacity: 0.3 },
+              style: { fillOpacity: 0.08 },
               transition: { type: 'tween', duration: 150, easing: 'ease-out' }
             }
           ]
@@ -58,7 +58,7 @@ export const Overlaid: Story = {
           states: [
             {
               when: { focus: 'unmatched' },
-              style: { fillOpacity: 0.04, strokeOpacity: 0.3 },
+              style: { fillOpacity: 0.08 },
               transition: { type: 'tween', duration: 150, easing: 'ease-out' }
             }
           ]

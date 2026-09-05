@@ -5,7 +5,7 @@ import { scaleBand } from '@tanstack/charts/scales/band'
 import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
-import { fontSize, fontWeight, radius, unit } from '#/styles/core/tokens.stylex'
+import { breakpoints, fontSize, fontWeight, radius, unit } from '#/styles/core/tokens.stylex'
 import { Chart } from './chart.component'
 import { canvasDecorator, checkouts, seriesColors } from './chart.samples'
 
@@ -50,7 +50,11 @@ const styles = stylex.create({
   row: {
     display: 'grid',
     gap: unit.x3,
-    gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+    // One column on mobile, three across from the medium breakpoint up.
+    gridTemplateColumns: {
+      default: 'minmax(0, 1fr)',
+      [breakpoints.medium]: 'repeat(3, minmax(0, 1fr))'
+    },
     width: '100%'
   },
   card: {

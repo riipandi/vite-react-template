@@ -7,13 +7,13 @@
  * HTML styles — follows light/dark themes through `themes.ts`.
  */
 
-import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import type { ChartBarStateStyle, ChartMarkState, ChartMotionDefinition } from '@tanstack/charts'
 import { stagger } from '@tanstack/charts/motion'
 import { scaleBand } from '@tanstack/charts/scales/band'
 import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { colors } from '#/styles/core/colors.stylex'
+import { breakpoints, container, unit } from '#/styles/core/tokens.stylex'
 import type { ChartConfig } from './chart.component'
 
 // ---------------------------------------------------------------------------
@@ -74,11 +74,12 @@ export function barHoverStates<TDatum>(): readonly ChartMarkState<
   TDatum,
   ChartBarStateStyle<TDatum>
 >[] {
-  // Hover runs faster than entrance — mirrors `duration.fast` (150ms).
+  // Hover runs faster than entrance (mirrors `duration.fast`, 150ms) and the
+  // recede stays gentle — 0.7 keeps unfocused bars readable.
   const hoverTransition = { type: 'tween', duration: 150, easing: 'ease-out' } as const
   return [
     { when: { focus: 'primary' }, style: { fillOpacity: 1 }, transition: hoverTransition },
-    { when: { focus: 'unmatched' }, style: { opacity: 0.4 }, transition: hoverTransition }
+    { when: { focus: 'unmatched' }, style: { opacity: 0.7 }, transition: hoverTransition }
   ]
 }
 
@@ -181,19 +182,24 @@ export const shelfStatuses: readonly AvailabilityStatus[] = Array.from({ length:
 })
 
 // ---------------------------------------------------------------------------
-// Story decorator — centers every visualization on a roomy canvas
+// Story decorator — centers every visualization on a roomy canvas. The 448px
+// floor (`container.xlarge`) only applies from the medium breakpoint up, so
+// stories shrink freely on mobile viewports.
 // ---------------------------------------------------------------------------
 
+const canvasStyle = stylex.create({
+  canvas: {
+    boxSizing: 'border-box',
+    display: 'flex',
+    justifyContent: 'center',
+    minWidth: { default: 0, [breakpoints.medium]: container.xlarge },
+    padding: { default: unit.x3, [breakpoints.medium]: unit.x5 },
+    width: '100%'
+  }
+})
+
 export const canvasDecorator = (Story: React.ComponentType) => (
-  <div
-    {...stylex.props(
-      atoms.display.flex,
-      atoms.justifyContent.center,
-      atoms.padding['20px'],
-      atoms.minWidth['448px'],
-      atoms.width['100%']
-    )}
-  >
+  <div {...stylex.props(canvasStyle.canvas)}>
     <Story />
   </div>
 )

@@ -2,7 +2,14 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
 import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Tooltip, TooltipContent, TooltipTrigger } from '#/components/base/tooltip'
-import { duration, easing, fontSize, unit } from '#/styles/core/tokens.stylex'
+import {
+  breakpoints,
+  container,
+  duration,
+  easing,
+  fontSize,
+  unit
+} from '#/styles/core/tokens.stylex'
 import {
   canvasDecorator,
   shelfStatuses,
@@ -32,7 +39,7 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: unit.x2,
-    minWidth: '24rem',
+    minWidth: { default: 0, [breakpoints.medium]: container.medium },
     width: '100%'
   },
   track: {
@@ -50,7 +57,7 @@ const styles = stylex.create({
     height: unit.x2,
     minWidth: 0,
     // Subtle feedback only — the segment colors carry the information.
-    opacity: { default: 1, ':hover': 0.6 },
+    opacity: { default: 1, ':hover': 0.75 },
     transitionDuration: duration.fast,
     transitionProperty: 'opacity',
     transitionTimingFunction: easing.decelerate

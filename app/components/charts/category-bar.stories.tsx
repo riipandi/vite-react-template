@@ -2,7 +2,14 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
 import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
-import { fontSize, fontWeight, radius, unit } from '#/styles/core/tokens.stylex'
+import {
+  breakpoints,
+  container,
+  fontSize,
+  fontWeight,
+  radius,
+  unit
+} from '#/styles/core/tokens.stylex'
 import { canvasDecorator, houses, houseConfig } from './chart.samples'
 
 const meta = {
@@ -28,7 +35,7 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: unit.x2,
-    minWidth: '24rem',
+    minWidth: { default: 0, [breakpoints.medium]: container.large },
     width: '100%'
   },
   markerTrack: {

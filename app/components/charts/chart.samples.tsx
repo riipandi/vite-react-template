@@ -2,34 +2,33 @@
  * Shared fixtures for the chart storybook: a public library tracking two
  * rival franchises — Dan Brown's Robert Langdon novels and Harry Potter.
  *
- * Series and chrome colors reference the categorical palette variables that
- * `chartStyles.chart` chains to the core theme tokens (see chart.stylex.ts).
- * The SVG renderer resolves var() in presentation attributes, so every paint
- * follows light/dark themes through `themes.ts`.
+ * Series and chrome colors reference core theme tokens directly (defineVars
+ * values are runtime var() strings), so every paint — SVG attributes and
+ * HTML styles — follows light/dark themes through `themes.ts`.
  */
 
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { scaleBand } from '@tanstack/charts/scales/band'
 import { scaleLinear } from '@tanstack/charts/scales/linear'
+import { colors } from '#/styles/core/colors.stylex'
 import type { ChartConfig } from './chart.component'
 
 // ---------------------------------------------------------------------------
 // Series palettes
 // ---------------------------------------------------------------------------
 
-// Series colors reference the categorical palette variables defined on the
-// chart container (see chartStyles.chart). They chain into core theme vars,
-// so marks, legend swatches, and tooltip rows stay theme-adaptive in dark
-// mode — the SVG renderer resolves var() in presentation attributes.
+// Series colors reference core theme tokens directly (defineVars values are
+// runtime var() strings), so every paint — SVG attributes and HTML styles —
+// follows light/dark themes through `themes.ts`.
 export const seriesColors = {
-  langdon: 'var(--ts-chart-1)', // brand blue
-  potter: 'var(--ts-chart-2)', // positive green
-  brand: 'var(--ts-chart-1)',
-  green: 'var(--ts-chart-2)',
-  amber: 'var(--ts-chart-3)',
-  red: 'var(--ts-chart-4)',
-  neutral: 'var(--chart-grid, currentColor)'
+  langdon: colors.backgroundPrimary, // brand blue
+  potter: colors.backgroundPositive, // positive green
+  brand: colors.backgroundPrimary,
+  green: colors.backgroundPositive,
+  amber: colors.backgroundWarning,
+  red: colors.backgroundCritical,
+  neutral: colors.backgroundNeutralHighlighted
 } as const
 
 /**
@@ -111,10 +110,10 @@ export const houses = [
 ]
 
 export const houseConfig: ChartConfig = {
-  gryffindor: { label: 'Gryffindor', color: 'var(--ts-chart-4)' },
-  slytherin: { label: 'Slytherin', color: 'var(--ts-chart-2)' },
-  ravenclaw: { label: 'Ravenclaw', color: 'var(--ts-chart-1)' },
-  hufflepuff: { label: 'Hufflepuff', color: 'var(--ts-chart-3)' }
+  gryffindor: { label: 'Gryffindor', color: colors.backgroundCritical },
+  slytherin: { label: 'Slytherin', color: colors.backgroundPositive },
+  ravenclaw: { label: 'Ravenclaw', color: colors.backgroundPrimary },
+  hufflepuff: { label: 'Hufflepuff', color: colors.backgroundWarning }
 }
 
 /** Weekly Quidditch pitch availability for the tracker stories. */
@@ -128,10 +127,10 @@ export const statusLabels: Record<AvailabilityStatus, string> = {
 }
 
 export const statusColors: Record<AvailabilityStatus, string> = {
-  available: 'var(--ts-chart-2)',
-  low: 'var(--ts-chart-3)',
-  checkedOut: 'var(--ts-chart-1)',
-  overdue: 'var(--ts-chart-4)'
+  available: colors.backgroundPositive,
+  low: colors.backgroundWarning,
+  checkedOut: colors.backgroundPrimary,
+  overdue: colors.backgroundCritical
 }
 
 /** Four weeks of shelf status for a single popular title. */

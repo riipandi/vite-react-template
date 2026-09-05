@@ -2,7 +2,6 @@ import { useDirection } from '@base-ui/react/direction-provider'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
 import { addDays } from 'date-fns'
-import { Clock2Icon } from 'lucide-react'
 import * as React from 'react'
 import type { DayButton } from 'react-day-picker'
 import type { DateRange } from 'react-day-picker'
@@ -10,9 +9,9 @@ import { arSA } from 'react-day-picker/locale'
 import { Button } from '#/components/base/button/button.component'
 import { Field, FieldGroup, FieldLabel } from '#/components/base/field/field.component'
 import { Card, CardContent, CardFooter } from '#/components/extra/card/card.component'
-import { InputGroup, InputGroupAddon, InputGroupInput } from '#/components/extra/input-group'
+import { InputGroup, InputGroupInput } from '#/components/extra/input-group'
 import { colors } from '#/styles/core/colors.stylex'
-import { unit } from '#/styles/core/tokens.stylex'
+import { stroke, unit } from '#/styles/core/tokens.stylex'
 import { Calendar } from './calendar.component'
 import { calendarStyles } from './calendar.stylex'
 
@@ -27,17 +26,25 @@ const storyStyles = stylex.create({
   },
   timeFooter: {
     display: 'grid',
+    gap: unit.x4,
     gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-    gap: unit.x2
+    width: '100%'
+  },
+  timeFooterSurface: {
+    backgroundColor: colors.backgroundElevationBase,
+    borderTopColor: colors.borderNeutralFaded,
+    borderTopStyle: 'solid',
+    borderTopWidth: stroke.ring1,
+    paddingBlock: unit.x4
   },
   timeInput: {
-    appearance: 'none'
-  },
-  clockIcon: {
-    color: colors.foregroundNeutralFaded,
-    height: '1rem',
-    pointerEvents: 'none',
-    width: '1rem'
+    appearance: 'none',
+    paddingInline: unit.x3,
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
+    },
+    outlineOffset: `calc(-1 * ${stroke.ring1})`
   },
   dayCustom: {
     fontSize: '0.8125rem',
@@ -178,7 +185,7 @@ export const DateAndTime: Story = {
         <CardContent>
           <Calendar mode='single' selected={date} onSelect={setDate} />
         </CardContent>
-        <CardFooter>
+        <CardFooter style={storyStyles.timeFooterSurface}>
           <FieldGroup style={storyStyles.timeFooter}>
             <Field>
               <FieldLabel htmlFor='time-from'>Start Time</FieldLabel>
@@ -190,9 +197,6 @@ export const DateAndTime: Story = {
                   defaultValue='10:30:00'
                   style={storyStyles.timeInput}
                 />
-                <InputGroupAddon align='inline-end'>
-                  <Clock2Icon {...stylex.props(storyStyles.clockIcon)} />
-                </InputGroupAddon>
               </InputGroup>
             </Field>
             <Field>
@@ -205,9 +209,6 @@ export const DateAndTime: Story = {
                   defaultValue='12:30:00'
                   style={storyStyles.timeInput}
                 />
-                <InputGroupAddon align='inline-end'>
-                  <Clock2Icon {...stylex.props(storyStyles.clockIcon)} />
-                </InputGroupAddon>
               </InputGroup>
             </Field>
           </FieldGroup>
@@ -354,8 +355,4 @@ export const Direction: Story = {
       />
     )
   }
-}
-
-export const SixMonths: Story = {
-  render: () => <Calendar mode='single' numberOfMonths={6} />
 }

@@ -261,9 +261,9 @@ export function Calendar({
         ...classNames
       }}
       components={{
+        Root: CalendarRoot,
         Chevron: CalendarChevron,
         DayButton: CalendarDayButtonWrapper,
-        Root: CalendarRoot,
         WeekNumber: CalendarWeekNumber,
         ...components
       }}

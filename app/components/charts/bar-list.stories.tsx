@@ -50,11 +50,15 @@ const styles = stylex.create({
   },
   barFill: {
     backgroundColor: colors.backgroundPrimary,
+    borderBottomRightRadius: radius.small,
+    borderTopRightRadius: radius.small,
     height: '100%',
     width: 'var(--bar-width, 100%)'
   },
   barFillMuted: {
     backgroundColor: colors.backgroundNeutralHighlighted,
+    borderBottomRightRadius: radius.small,
+    borderTopRightRadius: radius.small,
     height: '100%',
     width: 'var(--bar-width, 100%)'
   },

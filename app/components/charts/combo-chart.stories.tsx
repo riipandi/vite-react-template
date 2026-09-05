@@ -3,6 +3,7 @@ import { barY, crosshair, defineChart, lineY, ruleY } from '@tanstack/charts'
 import { tooltip } from '@tanstack/charts/tooltip'
 import { portal } from '@tanstack/charts/tooltip/portal'
 import { expect } from 'storybook/test'
+import { colors } from '#/styles/core/colors.stylex'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
   barHoverStates,
@@ -60,7 +61,8 @@ export const BarsWithTrendLine: Story = {
           points: true
         }),
         crosshair({ x: { label: true }, y: false, marker: true }),
-        ruleY([0])
+        // Covers the baseline rounding so only the bar tips read as rounded.
+        ruleY([0], { stroke: colors.backgroundPage, strokeWidth: 6 })
       ],
       scales: checkoutScales,
       theme: chartTheme,

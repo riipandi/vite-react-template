@@ -107,6 +107,7 @@ function Tracker() {
         {shelfStatuses.map((status: AvailabilityStatus, day) => (
           <Tooltip key={day}>
             <TooltipTrigger
+              delay={10}
               data-status={status}
               render={<div />}
               {...stylex.props(styles.segment)}

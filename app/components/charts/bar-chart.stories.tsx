@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
-import { barY, defineChart, fold, group, ruleX, ruleY, stack } from '@tanstack/charts'
+import { barY, defineChart, fold, group, ruleX, ruleY } from '@tanstack/charts'
 import { barX } from '@tanstack/charts/bar'
 import { scaleBand } from '@tanstack/charts/scales/band'
 import { scaleLinear } from '@tanstack/charts/scales/linear'
@@ -126,21 +126,29 @@ export const Horizontal: Story = {
 export const Stacked: Story = {
   name: 'Stacked',
   render: () => {
-    // Rename folded series keys to their display labels so focus state,
-    // tooltips, and the color scale all speak the same names.
-    const rows = fold(checkouts, {
-      fields: ['langdon', 'potter'],
-      as: { key: 'series', value: 'checkouts' }
-    }).map((row) => ({ ...row, series: checkoutConfig[row.series]?.label ?? row.series }))
+    // Rounded stack tips without junction notches: the top series paints
+    // first with all-corner rounding, then the square bottom series paints
+    // over it and hides the rounded lower corners. The overlap is invisible,
+    // so the visible junction stays at the true cumulative value.
+    const overlap = 24 // data units — clears the 4px radius at every plot height
     const definition = defineChart({
       marks: [
-        barY(rows, {
-          id: 'stacked-bars',
+        barY(checkouts, {
+          id: 'stacked-potter',
           x: 'month',
-          y: 'checkouts',
-          z: 'series',
-          color: 'series',
-          layout: stack(),
+          y1: (d) => d.langdon - overlap,
+          y2: (d) => d.langdon + d.potter,
+          z: () => 'Harry Potter',
+          fill: seriesColors.potter,
+          radius: barRadius,
+          states: barHoverStates()
+        }),
+        barY(checkouts, {
+          id: 'stacked-langdon',
+          x: 'month',
+          y: 'langdon',
+          z: () => 'Robert Langdon',
+          fill: seriesColors.langdon,
           states: barHoverStates()
         })
       ],

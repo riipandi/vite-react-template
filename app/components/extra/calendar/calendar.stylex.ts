@@ -81,8 +81,8 @@ export const calendarStyles = stylex.create({
     zIndex: 10
   },
   dayBtnFocused: {
-    outline: `${stroke.ring2} solid ${colors.foregroundPrimary}`,
-    outlineOffset: stroke.ring2,
+    outline: `${stroke.ring1} solid ${colors.foregroundPrimary}`,
+    outlineOffset: stroke.ring1,
     position: 'relative',
     zIndex: 10
   },

@@ -1,13 +1,18 @@
 import { useDirection } from '@base-ui/react/direction-provider'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
-import { addDays } from 'date-fns'
+import { addDays, format } from 'date-fns'
 import * as React from 'react'
 import type { DayButton } from 'react-day-picker'
 import type { DateRange } from 'react-day-picker'
 import { arSA } from 'react-day-picker/locale'
 import { Button } from '#/components/base/button/button.component'
 import { Field, FieldGroup, FieldLabel } from '#/components/base/field/field.component'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from '#/components/base/popover/popover.component'
 import { Card, CardContent, CardFooter } from '#/components/extra/card/card.component'
 import { InputGroup, InputGroupInput } from '#/components/extra/input-group'
 import { colors } from '#/styles/core/colors.stylex'
@@ -23,6 +28,19 @@ const storyStyles = stylex.create({
   },
   buttonGroupButton: {
     flex: 1
+  },
+  pickerContent: {
+    padding: 0,
+    width: 'max-content'
+  },
+  pickerForm: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: unit.x3,
+    padding: unit.x4
+  },
+  pickerTrigger: {
+    minWidth: '12rem'
   },
   timeFooter: {
     display: 'grid',
@@ -90,6 +108,109 @@ export const Controlled: Story = {
   }
 }
 
+export const DatePickerSingle: Story = {
+  render: () => {
+    const [date, setDate] = React.useState<Date | undefined>(new Date())
+    const [open, setOpen] = React.useState(false)
+
+    return (
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger render={<Button variant='outline' style={storyStyles.pickerTrigger} />}>
+          {date ? format(date, 'PPP') : 'Pick a date'}
+        </PopoverTrigger>
+        <PopoverContent align='start' style={storyStyles.pickerContent}>
+          <Calendar
+            mode='single'
+            selected={date}
+            onSelect={(nextDate) => {
+              setDate(nextDate)
+              setOpen(false)
+            }}
+          />
+        </PopoverContent>
+      </Popover>
+    )
+  }
+}
+
+export const DatePickerRange: Story = {
+  render: () => {
+    const [range, setRange] = React.useState<DateRange | undefined>({
+      from: new Date(),
+      to: addDays(new Date(), 5)
+    })
+    const [open, setOpen] = React.useState(false)
+
+    return (
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger render={<Button variant='outline' style={storyStyles.pickerTrigger} />}>
+          {range?.from
+            ? range.to
+              ? `${format(range.from, 'LLL d, y')} – ${format(range.to, 'LLL d, y')}`
+              : format(range.from, 'LLL d, y')
+            : 'Pick a date range'}
+        </PopoverTrigger>
+        <PopoverContent align='start' style={storyStyles.pickerContent}>
+          <Calendar
+            mode='range'
+            numberOfMonths={2}
+            defaultMonth={range?.from}
+            selected={range}
+            onSelect={setRange}
+          />
+        </PopoverContent>
+      </Popover>
+    )
+  }
+}
+
+export const DateTimePicker: Story = {
+  render: () => {
+    const [date, setDate] = React.useState<Date | undefined>(new Date())
+    const [open, setOpen] = React.useState(false)
+
+    return (
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger render={<Button variant='outline' style={storyStyles.pickerTrigger} />}>
+          {date ? format(date, 'PPP p') : 'Pick date and time'}
+        </PopoverTrigger>
+        <PopoverContent align='start' style={storyStyles.pickerContent}>
+          <div {...stylex.props(storyStyles.pickerForm)}>
+            <Calendar
+              mode='single'
+              selected={date}
+              onSelect={(nextDate) => {
+                if (nextDate) {
+                  const currentTime = date ?? new Date()
+                  nextDate.setHours(currentTime.getHours(), currentTime.getMinutes())
+                }
+                setDate(nextDate)
+              }}
+            />
+            <Field>
+              <FieldLabel htmlFor='calendar-date-time'>Time</FieldLabel>
+              <InputGroup>
+                <InputGroupInput
+                  id='calendar-date-time'
+                  type='time'
+                  step={60}
+                  value={date ? format(date, 'HH:mm') : ''}
+                  onChange={(event) => {
+                    if (!date) return
+                    const [hours = 0, minutes = 0] = event.target.value.split(':').map(Number)
+                    const nextDate = new Date(date)
+                    nextDate.setHours(hours, minutes)
+                    setDate(nextDate)
+                  }}
+                />
+              </InputGroup>
+            </Field>
+          </div>
+        </PopoverContent>
+      </Popover>
+    )
+  }
+}
 export const Range: Story = {
   render: () => {
     const [dateRange, setDateRange] = React.useState<DateRange | undefined>({

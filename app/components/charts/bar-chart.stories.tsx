@@ -7,6 +7,7 @@ import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { tooltip } from '@tanstack/charts/tooltip'
 import { portal } from '@tanstack/charts/tooltip/portal'
 import { expect } from 'storybook/test'
+import { colors } from '#/styles/core/colors.stylex'
 import { Chart, ChartContainer, ChartLegend } from './chart.component'
 import {
   barHoverStates,
@@ -129,7 +130,10 @@ export const Stacked: Story = {
     })
     const definition = defineChart({
       marks: [
-        whenFocused(bandX(rows, { x: 'month' }), { match: 'x' }),
+        // Column highlight behind the hovered month — neutral token wash.
+        whenFocused(bandX(rows, { x: 'month', fill: colors.backgroundNeutral }), {
+          match: 'x'
+        }),
         barY(rows, {
           id: 'stacked-bars',
           x: 'month',
@@ -137,7 +141,6 @@ export const Stacked: Story = {
           z: 'series',
           color: 'series',
           layout: stack(),
-          radius: barRadius,
           states: barHoverStates()
         })
       ],
@@ -177,7 +180,9 @@ export const Grouped: Story = {
     })
     const definition = defineChart({
       marks: [
-        whenFocused(bandX(rows, { x: 'month' }), { match: 'x' }),
+        whenFocused(bandX(rows, { x: 'month', fill: colors.backgroundNeutral }), {
+          match: 'x'
+        }),
         barY(rows, {
           id: 'grouped-bars',
           x: 'month',

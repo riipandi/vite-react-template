@@ -103,3 +103,15 @@
     --scroll-area-fade-inline-end: 0px;
   }
 }
+
+/* TanStack chart tooltip — collapse the swatch column on row groups without
+   any colored indicator, so labels start flush left. Rows keep the native
+   three-column grid (swatch / label / value) when a swatch exists.
+   `!important` is required: the native rows set their grid inline. */
+.ts-chart-tooltip .ts-chart-tooltip__rows > div {
+  grid-template-columns: minmax(0, 1fr) auto !important;
+}
+
+.ts-chart-tooltip .ts-chart-tooltip__rows:has(> div > .ts-chart-tooltip__swatch) > div {
+  grid-template-columns: 0.55rem minmax(0, 1fr) auto !important;
+}

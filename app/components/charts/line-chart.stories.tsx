@@ -36,7 +36,7 @@ const interaction = {
   marks: [crosshair({ x: { label: true }, y: false, marker: true })]
 }
 
-const groupedTooltip = {
+const groupedTooltipOptions = {
   use: tooltip,
   portal,
   anchor: 'group-center',
@@ -50,14 +50,14 @@ export const Multiple: Story = {
     const definition = defineChart({
       marks: [
         lineY(checkouts, {
-          id: 'langdon',
+          id: 'Robert Langdon',
           x: 'month',
           y: 'langdon',
           stroke: seriesColors.langdon,
           strokeWidth: 2
         }),
         lineY(checkouts, {
-          id: 'potter',
+          id: 'Harry Potter',
           x: 'month',
           y: 'potter',
           stroke: seriesColors.potter,
@@ -69,7 +69,7 @@ export const Multiple: Story = {
       theme: chartTheme,
       motion: chartMotion,
       focus: interaction.focus,
-      tooltip: { use: tooltip, items: [{ channel: 'y', label: 'Checkouts' }] as const }
+      tooltip: groupedTooltipOptions
     })
 
     return (
@@ -92,7 +92,7 @@ export const WithDots: Story = {
     const definition = defineChart({
       marks: [
         lineY(checkouts, {
-          id: 'langdon',
+          id: 'Robert Langdon',
           x: 'month',
           y: 'langdon',
           stroke: seriesColors.langdon,
@@ -100,7 +100,7 @@ export const WithDots: Story = {
           points: true
         }),
         lineY(checkouts, {
-          id: 'potter',
+          id: 'Harry Potter',
           x: 'month',
           y: 'potter',
           stroke: seriesColors.potter,
@@ -113,7 +113,7 @@ export const WithDots: Story = {
       theme: chartTheme,
       motion: chartMotion,
       focus: interaction.focus,
-      tooltip: { ...groupedTooltip, items: [{ channel: 'y', label: 'Checkouts' }] as const }
+      tooltip: groupedTooltipOptions
     })
 
     return (

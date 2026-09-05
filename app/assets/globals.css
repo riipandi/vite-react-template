@@ -103,3 +103,19 @@
     --scroll-area-fade-inline-end: 0px;
   }
 }
+
+/* TanStack chart tooltip — rows without a colored indicator render an
+   invisible swatch span; hide it and collapse the row to label + value.
+   Rows with a swatch keep the native three-column grid. `!important` is
+   required: the native rows set their grid inline. */
+.ts-chart-tooltip .ts-chart-tooltip__row > span:first-child:not(.ts-chart-tooltip__swatch):empty {
+  display: none;
+}
+
+.ts-chart-tooltip .ts-chart-tooltip__row:not(:has(> .ts-chart-tooltip__swatch)) {
+  grid-template-columns: minmax(0, 1fr) auto !important;
+}
+
+.ts-chart-tooltip .ts-chart-tooltip__row:has(> .ts-chart-tooltip__swatch) {
+  grid-template-columns: 0.55rem minmax(0, 1fr) auto !important;
+}

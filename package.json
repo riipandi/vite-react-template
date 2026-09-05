@@ -14,10 +14,10 @@
     "scripts": {
         "dev": "vite",
         "build": "tsr generate && tsc -b && vite build",
-        "start": "pnpm dlx serve dist -l 3000 -s -n -C",
+        "start": "pnpm dlx node-http-server --root dist --host 0.0.0.0 --port 3000 --spa --no-cache ",
         "storybook": "storybook dev -p 6006 --no-open",
         "storybook:build": "storybook build -o .output/storybook",
-        "storybook:start": "pnpm dlx serve .output/storybook -l 6006 -n -C",
+        "storybook:start": "pnpm dlx node-http-server --root .output/storybook --host 0.0.0.0 --port 6006 --no-cache",
         "cleanup": "pnpm --silent cleanup:dist && pnpm --silent cleanup:deps",
         "cleanup:dist": "pnpm dlx del-cli dist storybook-static e2e-result app/routes.gen.ts",
         "cleanup:deps": "pnpm dlx del-cli .{output,tanstack,wrangler} pnpm-lock.yaml node_modules",
@@ -33,7 +33,7 @@
         "e2e-report": "playwright show-report e2e-result",
         "e2e-ui": "playwright test --ui",
         "e2e": "playwright test",
-        "test:report": "pnpm dlx serve .output/tests-results -l 8000 -s -n -C",
+        "test:report": "pnpm dlx node-http-server --root .output/tests-results --host 0.0.0.0 --port 8000 --spa --no-cache",
         "test:coverage": "vitest run --coverage --project unit",
         "test:ui": "vitest --ui",
         "test": "vitest --run --project unit",
@@ -45,6 +45,7 @@
     },
     "dependencies": {
         "@base-ui/react": "^1.8.0",
+        "@date-fns/tz": "^1.5.0",
         "@stylexjs/atoms": "^0.19.0",
         "@stylexjs/stylex": "^0.19.0",
         "@tanstack/charts": "^0.16.0",
@@ -52,9 +53,11 @@
         "@tanstack/react-query": "^5.102.8",
         "@tanstack/react-router": "^1.170.32",
         "@tanstack/react-store": "^0.11.1",
+        "date-fns": "^4.4.0",
         "lucide-react": "^1.41.0",
         "ofetch": "^1.5.1",
         "react": "^19.2.8",
+        "react-day-picker": "^10.0.1",
         "react-dom": "^19.2.8",
         "zod": "^4.5.4"
     },
@@ -88,7 +91,7 @@
         "npm-check-updates": "^23.1.0",
         "oxfmt": "^0.66.0",
         "oxlint": "^1.81.0",
-        "playwright": "^1.62.1",
+        "playwright": "^1.63.0",
         "remark-gfm": "^4.0.1",
         "storybook": "10.6.0",
         "typescript": "^7.0.2",
@@ -98,5 +101,5 @@
     "engines": {
         "node": ">=24.12.0"
     },
-    "packageManager": "pnpm@11.25.0"
+    "packageManager": "pnpm@12.3.4"
 }

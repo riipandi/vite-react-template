@@ -1,0 +1,479 @@
+import { useDirection } from '@base-ui/react/direction-provider'
+import type { Meta, StoryObj } from '@storybook/tanstack-react'
+import * as stylex from '@stylexjs/stylex'
+import { addDays, format } from 'date-fns'
+import * as React from 'react'
+import type { DayButton } from 'react-day-picker'
+import type { DateRange } from 'react-day-picker'
+import { arSA } from 'react-day-picker/locale'
+import { Button } from '#/components/base/button/button.component'
+import { Field, FieldGroup, FieldLabel } from '#/components/base/field/field.component'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from '#/components/base/popover/popover.component'
+import { Card, CardContent, CardFooter } from '#/components/extra/card/card.component'
+import { InputGroup, InputGroupInput } from '#/components/extra/input-group'
+import { colors } from '#/styles/core/colors.stylex'
+import { stroke, unit } from '#/styles/core/tokens.stylex'
+import { Calendar } from './calendar.component'
+import { calendarStyles } from './calendar.stylex'
+
+const storyStyles = stylex.create({
+  buttonGroup: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: unit.x2
+  },
+  buttonGroupButton: {
+    flex: 1
+  },
+  pickerContent: {
+    padding: 0,
+    width: 'max-content'
+  },
+  pickerForm: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: unit.x3,
+    padding: unit.x4
+  },
+  pickerTrigger: {
+    minWidth: '12rem'
+  },
+  timeFooter: {
+    display: 'grid',
+    gap: unit.x4,
+    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+    width: '100%'
+  },
+  timeFooterSurface: {
+    backgroundColor: colors.backgroundElevationBase,
+    borderTopColor: colors.borderNeutralFaded,
+    borderTopStyle: 'solid',
+    borderTopWidth: stroke.ring1,
+    paddingBlock: unit.x4
+  },
+  timeInput: {
+    appearance: 'none',
+    paddingInline: unit.x3,
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
+    },
+    outlineOffset: `calc(-1 * ${stroke.ring1})`
+  },
+  dayCustom: {
+    fontSize: '0.8125rem',
+    gap: unit.x0_5
+  },
+  dayCustomOutside: {
+    opacity: 0.4
+  },
+  dayPrice: {
+    fontSize: '0.625rem',
+    lineHeight: 1
+  },
+  dayPriceMuted: {
+    color: colors.foregroundNeutralFaded
+  },
+  dayPriceSelected: {
+    color: colors.onBrand,
+    opacity: 0.8
+  }
+})
+
+type DayButtonProps = Omit<React.ComponentProps<typeof DayButton>, 'style'>
+
+const meta: Meta<typeof Calendar> = {
+  title: 'Extra Components/Calendar',
+  component: Calendar,
+  parameters: {
+    layout: 'centered'
+  }
+}
+
+export default meta
+type Story = StoryObj<typeof Calendar>
+
+export const Basic: Story = {
+  render: () => <Calendar mode='single' />
+}
+
+export const Controlled: Story = {
+  render: () => {
+    const [date, setDate] = React.useState<Date | undefined>(new Date())
+    return <Calendar mode='single' selected={date} onSelect={setDate} />
+  }
+}
+
+export const DatePickerSingle: Story = {
+  render: () => {
+    const [date, setDate] = React.useState<Date | undefined>(new Date())
+    const [open, setOpen] = React.useState(false)
+
+    return (
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger render={<Button variant='outline' style={storyStyles.pickerTrigger} />}>
+          {date ? format(date, 'PPP') : 'Pick a date'}
+        </PopoverTrigger>
+        <PopoverContent align='start' style={storyStyles.pickerContent}>
+          <Calendar
+            mode='single'
+            selected={date}
+            onSelect={(nextDate) => {
+              setDate(nextDate)
+              setOpen(false)
+            }}
+          />
+        </PopoverContent>
+      </Popover>
+    )
+  }
+}
+
+export const DatePickerRange: Story = {
+  render: () => {
+    const [range, setRange] = React.useState<DateRange | undefined>({
+      from: new Date(),
+      to: addDays(new Date(), 5)
+    })
+    const [open, setOpen] = React.useState(false)
+
+    return (
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger render={<Button variant='outline' style={storyStyles.pickerTrigger} />}>
+          {range?.from
+            ? range.to
+              ? `${format(range.from, 'LLL d, y')} – ${format(range.to, 'LLL d, y')}`
+              : format(range.from, 'LLL d, y')
+            : 'Pick a date range'}
+        </PopoverTrigger>
+        <PopoverContent align='start' style={storyStyles.pickerContent}>
+          <Calendar
+            mode='range'
+            numberOfMonths={2}
+            defaultMonth={range?.from}
+            selected={range}
+            onSelect={setRange}
+          />
+        </PopoverContent>
+      </Popover>
+    )
+  }
+}
+
+export const DateTimePicker: Story = {
+  render: () => {
+    const [date, setDate] = React.useState<Date | undefined>(new Date())
+    const [open, setOpen] = React.useState(false)
+
+    return (
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger render={<Button variant='outline' style={storyStyles.pickerTrigger} />}>
+          {date ? format(date, 'PPP p') : 'Pick date and time'}
+        </PopoverTrigger>
+        <PopoverContent align='start' style={storyStyles.pickerContent}>
+          <div {...stylex.props(storyStyles.pickerForm)}>
+            <Calendar
+              mode='single'
+              selected={date}
+              onSelect={(nextDate) => {
+                if (nextDate) {
+                  const currentTime = date ?? new Date()
+                  nextDate.setHours(currentTime.getHours(), currentTime.getMinutes())
+                }
+                setDate(nextDate)
+              }}
+            />
+            <Field>
+              <FieldLabel htmlFor='calendar-date-time'>Time</FieldLabel>
+              <InputGroup>
+                <InputGroupInput
+                  id='calendar-date-time'
+                  type='time'
+                  step={60}
+                  value={date ? format(date, 'HH:mm') : ''}
+                  onChange={(event) => {
+                    if (!date) return
+                    const [hours = 0, minutes = 0] = event.target.value.split(':').map(Number)
+                    const nextDate = new Date(date)
+                    nextDate.setHours(hours, minutes)
+                    setDate(nextDate)
+                  }}
+                />
+              </InputGroup>
+            </Field>
+          </div>
+        </PopoverContent>
+      </Popover>
+    )
+  }
+}
+export const Range: Story = {
+  render: () => {
+    const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
+      from: new Date(new Date().getFullYear(), 0, 12),
+      to: addDays(new Date(new Date().getFullYear(), 0, 12), 30)
+    })
+    return (
+      <Calendar
+        mode='range'
+        defaultMonth={dateRange?.from}
+        selected={dateRange}
+        onSelect={setDateRange}
+        numberOfMonths={2}
+      />
+    )
+  }
+}
+
+export const MultipleMonths: Story = {
+  render: () => {
+    const [dates, setDates] = React.useState<Date[] | undefined>([
+      new Date(new Date().getFullYear(), 0, 12),
+      new Date(new Date().getFullYear(), 0, 15),
+      new Date(new Date().getFullYear(), 0, 20)
+    ])
+    return <Calendar mode='multiple' selected={dates} onSelect={setDates} numberOfMonths={3} />
+  }
+}
+
+export const WithDropdowns: Story = {
+  render: () => <Calendar mode='single' captionLayout='dropdown' />
+}
+
+export const WithPresets: Story = {
+  render: () => {
+    const [date, setDate] = React.useState<Date | undefined>(
+      new Date(new Date().getFullYear(), 1, 12)
+    )
+    const [currentMonth, setCurrentMonth] = React.useState<Date>(
+      new Date(new Date().getFullYear(), new Date().getMonth(), 1)
+    )
+
+    return (
+      <Card size='sm'>
+        <CardContent>
+          <Calendar
+            mode='single'
+            selected={date}
+            onSelect={setDate}
+            month={currentMonth}
+            onMonthChange={setCurrentMonth}
+            fixedWeeks
+          />
+        </CardContent>
+        <CardFooter>
+          <div {...stylex.props(storyStyles.buttonGroup)}>
+            {[
+              { label: 'Today', value: 0 },
+              { label: 'Tomorrow', value: 1 },
+              { label: 'In 3 days', value: 3 },
+              { label: 'In a week', value: 7 },
+              { label: 'In 2 weeks', value: 14 }
+            ].map((preset) => (
+              <Button
+                key={preset.value}
+                variant='outline'
+                size='sm'
+                style={storyStyles.buttonGroupButton}
+                onClick={() => {
+                  const newDate = addDays(new Date(), preset.value)
+                  setDate(newDate)
+                  setCurrentMonth(new Date(newDate.getFullYear(), newDate.getMonth(), 1))
+                }}
+              >
+                {preset.label}
+              </Button>
+            ))}
+          </div>
+        </CardFooter>
+      </Card>
+    )
+  }
+}
+
+export const DateAndTime: Story = {
+  render: () => {
+    const [date, setDate] = React.useState<Date | undefined>(
+      new Date(new Date().getFullYear(), new Date().getMonth(), 12)
+    )
+
+    return (
+      <Card size='sm'>
+        <CardContent>
+          <Calendar mode='single' selected={date} onSelect={setDate} />
+        </CardContent>
+        <CardFooter style={storyStyles.timeFooterSurface}>
+          <FieldGroup style={storyStyles.timeFooter}>
+            <Field>
+              <FieldLabel htmlFor='time-from'>Start Time</FieldLabel>
+              <InputGroup>
+                <InputGroupInput
+                  id='time-from'
+                  type='time'
+                  step={1}
+                  defaultValue='10:30:00'
+                  style={storyStyles.timeInput}
+                />
+              </InputGroup>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor='time-to'>End Time</FieldLabel>
+              <InputGroup>
+                <InputGroupInput
+                  id='time-to'
+                  type='time'
+                  step={1}
+                  defaultValue='12:30:00'
+                  style={storyStyles.timeInput}
+                />
+              </InputGroup>
+            </Field>
+          </FieldGroup>
+        </CardFooter>
+      </Card>
+    )
+  }
+}
+
+export const BookedDates: Story = {
+  render: () => {
+    const [date, setDate] = React.useState<Date | undefined>(
+      new Date(new Date().getFullYear(), 0, 6)
+    )
+    const bookedDays = Array.from(
+      { length: 15 },
+      (_, i) => new Date(new Date().getFullYear(), 0, 12 + i)
+    )
+
+    return (
+      <Card size='sm'>
+        <CardContent>
+          <Calendar
+            mode='single'
+            defaultMonth={date}
+            selected={date}
+            onSelect={setDate}
+            disabled={bookedDays}
+            modifiers={{ booked: bookedDays }}
+            modifiersClassNames={{ booked: 'line-through opacity-100' }}
+          />
+        </CardContent>
+      </Card>
+    )
+  }
+}
+
+export const CustomDays: Story = {
+  render: () => {
+    const [range, setRange] = React.useState<DateRange | undefined>({
+      from: new Date(new Date().getFullYear(), 11, 8),
+      to: addDays(new Date(new Date().getFullYear(), 11, 8), 10)
+    })
+
+    return (
+      <Card size='sm'>
+        <CardContent>
+          <Calendar
+            mode='range'
+            defaultMonth={range?.from}
+            selected={range}
+            onSelect={setRange}
+            numberOfMonths={1}
+            captionLayout='dropdown'
+            formatters={{
+              formatMonthDropdown: (calendarDate) =>
+                calendarDate.toLocaleString('default', { month: 'long' })
+            }}
+            components={{
+              // Example-level custom day button with a weekend price badge.
+              DayButton: ({ children, modifiers, day, ...dayBtnProps }: DayButtonProps) => {
+                const isWeekend = day.date.getDay() === 0 || day.date.getDay() === 6
+                const isSelectedSingle =
+                  modifiers.selected &&
+                  !modifiers.range_start &&
+                  !modifiers.range_end &&
+                  !modifiers.range_middle
+
+                return (
+                  <button
+                    type='button'
+                    data-day={day.date.toLocaleDateString()}
+                    data-selected-single={isSelectedSingle}
+                    data-range-start={modifiers.range_start}
+                    data-range-end={modifiers.range_end}
+                    data-range-middle={modifiers.range_middle}
+                    {...stylex.props(
+                      calendarStyles.dayBtnBase,
+                      calendarStyles.dayBtnSelected && isSelectedSingle,
+                      modifiers.focused && calendarStyles.dayBtnFocused,
+                      modifiers.range_start && calendarStyles.dayBtnRangeStart,
+                      modifiers.range_end && calendarStyles.dayBtnRangeEnd,
+                      modifiers.range_middle && calendarStyles.dayBtnRangeMiddle,
+                      storyStyles.dayCustom,
+                      modifiers.outside && storyStyles.dayCustomOutside
+                    )}
+                    {...dayBtnProps}
+                  >
+                    {children}
+                    {!modifiers.outside && (
+                      <span
+                        {...stylex.props(
+                          storyStyles.dayPrice,
+                          modifiers.selected
+                            ? storyStyles.dayPriceSelected
+                            : storyStyles.dayPriceMuted
+                        )}
+                      >
+                        {isWeekend ? '$120' : '$100'}
+                      </span>
+                    )}
+                  </button>
+                )
+              }
+            }}
+          />
+        </CardContent>
+      </Card>
+    )
+  }
+}
+
+export const WeekNumbers: Story = {
+  render: () => {
+    const [date, setDate] = React.useState<Date | undefined>(
+      new Date(new Date().getFullYear(), 0, 12)
+    )
+
+    return (
+      <Card size='sm'>
+        <CardContent>
+          <Calendar
+            mode='single'
+            defaultMonth={date}
+            selected={date}
+            onSelect={setDate}
+            showWeekNumber
+          />
+        </CardContent>
+      </Card>
+    )
+  }
+}
+
+export const Direction: Story = {
+  render: () => {
+    const direction = useDirection()
+
+    return (
+      <Calendar
+        mode='single'
+        captionLayout='dropdown'
+        locale={direction === 'rtl' ? arSA : undefined}
+      />
+    )
+  }
+}

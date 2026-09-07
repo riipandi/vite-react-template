@@ -1,18 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
-import { FileTextIcon, GripVerticalIcon, ImageIcon, MusicIcon, VideoIcon } from 'lucide-react'
+import {
+  ChevronRightIcon,
+  FileTextIcon,
+  GripVerticalIcon,
+  ImageIcon,
+  MusicIcon,
+  VideoIcon
+} from 'lucide-react'
 import { useState } from 'react'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '#/components/base/collapsible'
 import { Switch } from '#/components/base/switch'
 import { toast } from '#/components/base/toast'
 import { Badge } from '#/components/extra/badge'
 import { Card, CardDescription, CardHeader, CardTitle } from '#/components/extra/card'
 import { Sortable, SortableItem, SortableItemHandle } from '#/components/extra/sortable'
-import { SortableItemContext } from '#/components/extra/sortable'
 import type { SortableCommitMeta } from '#/components/extra/sortable'
-import { useContext } from 'react'
-import { colors } from '#/styles/core/colors.stylex'
-import { radius, stroke, unit } from '#/styles/core/tokens.stylex'
-import { fontFamily, fontSize, fontLineHeight, fontWeight } from '#/styles/core/tokens.stylex'
+import { colors, shadow } from '#/styles/core/colors.stylex'
+import {
+  fontFamily,
+  fontSize,
+  fontLineHeight,
+  fontWeight,
+  radius,
+  stroke,
+  unit,
+  duration,
+  easing,
+  zIndex
+} from '#/styles/core/tokens.stylex'
 
 const meta = {
   title: 'Extra Components/Sortable',
@@ -170,6 +186,85 @@ const styles = stylex.create({
     height: unit.x6,
     justifyContent: 'center',
     width: unit.x6
+  },
+  // Nested groups (collapsible)
+  listCompact: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: unit.x2
+  },
+  groupContainer: {
+    width: '100%'
+  },
+  groupHeader: {
+    alignItems: 'center',
+    backgroundColor: colors.backgroundElevationBase,
+    borderColor: colors.borderNeutralFaded,
+    borderRadius: radius.medium,
+    borderStyle: 'solid',
+    borderWidth: stroke.ring1,
+    boxSizing: 'border-box',
+    cursor: 'pointer',
+    display: 'flex',
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.body2,
+    gap: unit.x3,
+    justifyContent: 'space-between',
+    lineHeight: fontLineHeight.body2,
+    paddingBlock: unit.x3,
+    paddingInline: unit.x3,
+    userSelect: 'none',
+    width: '100%',
+    transitionDuration: duration.fast,
+    transitionProperty: 'background-color, border-color, box-shadow',
+    transitionTimingFunction: easing.standard,
+    ':hover': {
+      backgroundColor: colors.backgroundNeutralHighlightedFaded,
+      borderColor: colors.borderNeutral,
+      boxShadow: shadow.outline
+    }
+  },
+  groupHeaderOpen: {
+    borderColor: colors.borderNeutral,
+    boxShadow: shadow.outline
+  },
+  groupTitle: {
+    fontWeight: fontWeight.medium
+  },
+  groupHeaderRight: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: unit.x2
+  },
+  groupBadge: {
+    fontSize: fontSize.caption1,
+    fontWeight: fontWeight.medium
+  },
+  groupChevron: {
+    color: colors.foregroundNeutral,
+    transitionDuration: duration.medium,
+    transitionProperty: 'transform',
+    transitionTimingFunction: easing.decelerate,
+    transform: 'rotate(0deg)'
+  },
+  groupChevronOpen: {
+    transform: 'rotate(90deg)'
+  },
+  groupPanel: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: unit.x1,
+    paddingBlockStart: unit.x2,
+    paddingInline: unit.x1
+  },
+  rowCompact: {
+    paddingBlock: unit.x2,
+    paddingInline: unit.x3
+  },
+  textCaption: {
+    color: colors.foregroundNeutralFaded,
+    fontSize: fontSize.caption1,
+    lineHeight: fontLineHeight.caption1
   }
 })
 
@@ -456,37 +551,62 @@ export const NestedGroups: Story = {
           onValueChange={setOptionGroups}
           getItemValue={(group) => group.id}
           strategy='vertical'
-          style={styles.list}
+          style={styles.listCompact}
         >
           {optionGroups.map((group) => (
             <SortableItem key={group.id} value={group.id}>
-              <Card style={styles.card}>
-                <CardHeader>
-                  <div {...stylex.props(styles.metaRow)}>
-                    <Handle />
-                    <CardTitle>{group.name}</CardTitle>
-                  </div>
-                  <Badge variant='outline'>{group.values.length} options</Badge>
-                </CardHeader>
-                <div {...stylex.props(styles.cardBody)}>
-                  <Sortable
-                    value={group.values}
-                    onValueChange={(newValues) => handleChildReorder(group.id, newValues)}
-                    getItemValue={(value) => value.id}
-                    strategy='vertical'
-                    style={styles.listTight}
-                  >
-                    {group.values.map((value) => (
-                      <SortableItem key={value.id} value={value.id}>
-                        <div {...stylex.props(styles.row, styles.rowMuted)}>
+              <div style={styles.groupContainer}>
+                <Collapsible defaultOpen>
+                  <CollapsibleTrigger
+                    render={(props, state) => (
+                      <button
+                        type='button'
+                        {...props}
+                        {...stylex.props(styles.groupHeader, state.open && styles.groupHeaderOpen)}
+                      >
+                        <div {...stylex.props(styles.metaRow)}>
                           <Handle />
-                          <span>{value.value}</span>
+                          <span {...stylex.props(styles.groupTitle)}>{group.name}</span>
                         </div>
-                      </SortableItem>
-                    ))}
-                  </Sortable>
-                </div>
-              </Card>
+                        <div {...stylex.props(styles.groupHeaderRight)}>
+                          <Badge variant='outline' style={styles.groupBadge}>
+                            {group.values.length}
+                          </Badge>
+                          <ChevronRightIcon
+                            size={14}
+                            {...stylex.props(
+                              styles.groupChevron,
+                              state.open && styles.groupChevronOpen
+                            )}
+                          />
+                        </div>
+                      </button>
+                    )}
+                  />
+                  <CollapsibleContent>
+                    <div {...stylex.props(styles.groupPanel)}>
+                      <Sortable
+                        value={group.values}
+                        onValueChange={(newValues) => handleChildReorder(group.id, newValues)}
+                        getItemValue={(value) => value.id}
+                        strategy='vertical'
+                        style={styles.listTight}
+                      >
+                        {group.values.map((value) => (
+                          <SortableItem key={value.id} value={value.id}>
+                            <div {...stylex.props(styles.row, styles.rowMuted, styles.rowCompact)}>
+                              <Handle />
+                              <span {...stylex.props(styles.rowTitle, styles.textCaption)}>
+                                {value.value}
+                              </span>
+                            </div>
+                          </SortableItem>
+                        ))}
+                      </Sortable>
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
+              </div>
             </SortableItem>
           ))}
         </Sortable>
@@ -739,34 +859,83 @@ const mediaStyles = stylex.create({
     display: 'block',
     objectFit: 'cover',
     position: 'relative',
-    width: '100%'
+    width: '100%',
+    transitionDuration: duration.medium,
+    transitionProperty: 'transform, filter',
+    transitionTimingFunction: easing.decelerate,
+    transform: {
+      default: 'scale(1)',
+      ':hover': 'scale(1.02)'
+    },
+    filter: {
+      default: 'brightness(1)',
+      ':hover': 'brightness(1.05)'
+    }
   },
   handleWrapper: {
     margin: 0,
     position: 'relative',
     width: '100%'
   },
+  imageHandleOverlay: {
+    backgroundColor: 'transparent',
+    borderRadius: 0,
+    bottom: 0,
+    boxShadow: 'none',
+    cursor: 'grab',
+    left: 0,
+    padding: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    display: 'block',
+    height: '100%',
+    opacity: 1,
+    width: '100%',
+    touchAction: 'none',
+    zIndex: zIndex.absolute
+  },
+  imageHandleIcon: {
+    position: 'absolute',
+    right: unit.x2,
+    top: unit.x2,
+    opacity: 0,
+    transform: 'translateY(-4px)',
+    transitionDuration: duration.medium,
+    transitionProperty: 'opacity, transform',
+    transitionTimingFunction: easing.decelerate,
+    [stylex.when.ancestor(':hover')]: {
+      opacity: 0.9,
+      transform: 'translateY(0)'
+    }
+  },
   caption: {
     display: 'flex',
     flexDirection: 'column',
-    gap: unit.x0_5,
+    gap: unit.x1,
     paddingBlock: unit.x2,
-    paddingInline: unit.x3,
-    fontSize: fontSize.body2
+    paddingInline: unit.x3
+  },
+  captionTitle: {
+    fontSize: fontSize.body2,
+    fontWeight: fontWeight.medium,
+    lineHeight: fontLineHeight.body2
+  },
+  captionMeta: {
+    color: colors.foregroundNeutralFaded,
+    fontSize: fontSize.caption1,
+    lineHeight: fontLineHeight.caption1
   }
 })
 
-// Custom handle that uses the entire image as the drag target for media items.
-function MediaImageHandle({ children, style }: { children: React.ReactNode; style?: stylex.StyleXStyles }) {
-  const { listeners } = useContext(SortableItemContext)
-
+// Compact handle for media grid — icon-only, appears on cell hover.
+function MediaHandle() {
   return (
-    <div
-      {...stylex.props(style)}
-      {...listeners as React.ComponentPropsWithRef<'div'>}
-    >
-      {children}
-    </div>
+    <SortableItemHandle style={mediaStyles.imageHandleOverlay}>
+      <span {...stylex.props(mediaStyles.imageHandleIcon)}>
+        <GripVerticalIcon size={14} />
+      </span>
+    </SortableItemHandle>
   )
 }
 
@@ -795,16 +964,18 @@ export const MediaLibrary: Story = {
               {images.map((image) => (
                 <SortableItem key={image.id} value={image.id}>
                   <figure {...stylex.props(mediaStyles.cell)}>
-                    <MediaImageHandle style={mediaStyles.handleWrapper}>
+                    <div {...stylex.props(mediaStyles.handleWrapper)}>
+                      <MediaHandle />
                       <img
                         src={`https://images.unsplash.com/${image.photo}?w=600&dpr=2&q=80`}
                         alt={image.alt}
                         loading='lazy'
                         {...stylex.props(mediaStyles.thumb)}
                       />
-                    </MediaImageHandle>
+                    </div>
                     <figcaption {...stylex.props(mediaStyles.caption)}>
-                      <span {...stylex.props(styles.rowTitle)}>{image.name}</span>
+                      <span {...stylex.props(mediaStyles.captionTitle)}>{image.name}</span>
+                      <span {...stylex.props(mediaStyles.captionMeta)}>{image.alt}</span>
                     </figcaption>
                   </figure>
                 </SortableItem>

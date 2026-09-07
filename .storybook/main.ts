@@ -25,6 +25,7 @@ const config: StorybookConfig = {
   ],
   framework: '@storybook/tanstack-react',
   core: {
+    allowedHosts: true,
     disableTelemetry: true,
     disableWhatsNewNotifications: true,
     enableCrashReports: false

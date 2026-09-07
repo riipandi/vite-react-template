@@ -15,7 +15,7 @@
         "dev": "vite",
         "build": "tsr generate && tsc -b && vite build",
         "start": "pnpm dlx node-http-server --root dist --host 0.0.0.0 --port 3000 --spa --no-cache ",
-        "storybook": "storybook dev -p 6006 --no-open",
+        "storybook": "storybook dev -p 6006 --host 0.0.0.0 --no-open",
         "storybook:build": "storybook build -o .output/storybook",
         "storybook:start": "pnpm dlx node-http-server --root .output/storybook --host 0.0.0.0 --port 6006 --no-cache",
         "cleanup": "pnpm --silent cleanup:dist && pnpm --silent cleanup:deps",

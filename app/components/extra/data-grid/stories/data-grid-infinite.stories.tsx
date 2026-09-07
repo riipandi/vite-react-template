@@ -54,7 +54,7 @@ const infiniteStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 0,
-    padding: 0,
+    paddingBlock: 0,
     width: '100%'
   },
   cardOverflow: {
@@ -62,16 +62,17 @@ const infiniteStyles = stylex.create({
     flexDirection: 'column',
     gap: 12,
     overflow: 'hidden',
-    padding: 0
+    paddingBlock: 0
   },
   header: {
     alignItems: 'center',
     display: 'flex',
     gap: 8,
     justifyContent: 'space-between',
-    padding: 12
+    paddingBlock: 12,
+    paddingInline: 24
   },
-  cardBody: { padding: 0 }
+  cardBody: { paddingBlock: 0 }
 })
 
 /**
@@ -135,8 +136,13 @@ function useColumns() {
               <AvatarFallback>
                 {row.original.title
                   .split(' ')
-                  .map((n) => n[0])
-                  .join('')}
+                  .filter(
+                    (word) => !['the', 'and', 'of', 'a', 'an', '&'].includes(word.toLowerCase())
+                  )
+                  .map((word) => word[0])
+                  .slice(0, 2)
+                  .join('')
+                  .toUpperCase()}
               </AvatarFallback>
             </Avatar>
             <span {...stylex.props(s.strong)}>{row.original.title}</span>
@@ -378,7 +384,7 @@ export const ColumnVirtualization: Story = {
         // Full pinning state: table-core 9.2 reads `start`/`end` as arrays
         // (row_getCenterVisibleCells spreads both), so a partial `{ start }`
         // crashes with "end is not iterable".
-        columnPinning: { start: ['name'], end: [] }
+        columnPinning: { start: ['title'], end: [] }
       } as never,
       onSortingChange: setSorting
     })

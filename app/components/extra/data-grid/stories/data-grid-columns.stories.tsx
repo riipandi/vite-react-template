@@ -101,6 +101,7 @@ function bookColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IBook>[] {
         ),
       cell: ({ row }) => <AvatarCell row={row.original} />,
       size: 200,
+      meta: { autoSize: true },
       enableSorting: true,
       enableHiding: false
     },
@@ -436,17 +437,15 @@ export const ColumnVisibilityControls: Story = {
           enableHiding: false
         },
         {
-          accessorKey: 'role',
-          id: 'role',
+          accessorKey: 'genre',
+          id: 'genre',
           header: ({ column }) => <DataGridColumnHeader title='Genre' visibility column={column} />,
           size: 150
         },
         {
           accessorKey: 'price',
           id: 'price',
-          header: ({ column }) => (
-            <DataGridColumnHeader title='Balance' visibility column={column} />
-          ),
+          header: ({ column }) => <DataGridColumnHeader title='Price' visibility column={column} />,
           size: 120
         }
       ],

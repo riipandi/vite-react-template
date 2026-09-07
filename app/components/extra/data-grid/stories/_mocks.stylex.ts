@@ -71,7 +71,6 @@ export const stackStyles = stylex.create({
     textAlign: 'end'
   },
   cardFlush: {
-    paddingBlock: 0,
-    padding: 0
+    paddingBlock: 0
   }
 })

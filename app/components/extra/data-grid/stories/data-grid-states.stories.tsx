@@ -50,7 +50,7 @@ const statesStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 12,
-    padding: 0,
+    paddingBlock: 0,
     width: '100%'
   },
   cardOverflow: {
@@ -58,16 +58,17 @@ const statesStyles = stylex.create({
     flexDirection: 'column',
     gap: 12,
     overflow: 'hidden',
-    padding: 0
+    paddingBlock: 0
   },
   header: {
     alignItems: 'center',
     display: 'flex',
     gap: 10,
     justifyContent: 'space-between',
-    padding: 12
+    paddingBlock: 12,
+    paddingInline: 24
   },
-  cardBody: { padding: 0 },
+  cardBody: { paddingBlock: 0 },
   muted: {
     color: s.muted.color as unknown as string
   },
@@ -248,7 +249,7 @@ export const CardContainer: Story = {
       >
         <Card style={statesStyles.card}>
           <CardHeader style={statesStyles.header}>
-            <CardTitle>Users</CardTitle>
+            <CardTitle>Books</CardTitle>
             <Button size='sm' variant='outline'>
               <PlusIcon style={{ height: 16, width: 16 }} />
               Add book

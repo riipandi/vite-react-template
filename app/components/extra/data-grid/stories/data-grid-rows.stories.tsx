@@ -76,24 +76,25 @@ const statusStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 0,
-    padding: 0,
+    paddingBlock: 0,
     width: '100%'
   },
   cardHeader: {
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'space-between',
-    padding: 12
+    paddingBlock: 12,
+    paddingInline: 24
   },
   cardBody: {
-    padding: 0
+    paddingBlock: 0
   },
   cardFooter: {
-    padding: 12
+    paddingBlock: 12
   },
   cardOverflow: {
     overflow: 'hidden',
-    padding: 0
+    paddingBlock: 0
   }
 })
 

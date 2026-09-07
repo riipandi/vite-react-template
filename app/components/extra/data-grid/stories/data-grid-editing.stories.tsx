@@ -51,11 +51,11 @@ const editingStyles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'space-between',
-    paddingBlock: 8,
-    paddingInline: 14
+    paddingBlock: 12,
+    paddingInline: 24
   },
   searchGroup: { width: 192 },
-  cardBody: { padding: 0 },
+  cardBody: { paddingBlock: 0 },
   // Breathing room against the container edges (edgeCell: first
   // ps-4 / last pe-4; a symmetric inline padding reads the same on fixed
   // columns and stays within StyleXStyles' static-only shape).
@@ -70,6 +70,7 @@ const editingStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 12,
+    paddingBlock: 0,
     width: '100%'
   },
   frameHeader: {
@@ -78,10 +79,21 @@ const editingStyles = stylex.create({
     flexWrap: 'wrap',
     gap: 12,
     justifyContent: 'space-between',
-    padding: 12
+    paddingBlock: 12,
+    paddingInline: 24
   },
-  frameBody: { padding: 0 },
-  frameFooter: { padding: 12 },
+  frameFooter: { paddingBlock: 12 },
+  // Spreadsheet card chrome: the hint (header) and pagination (footer) are
+  // stack children of a full-bleed table, so their inline padding matches
+  // the grid's edgeCell inset.
+  hint: {
+    paddingBlockStart: 12,
+    paddingInline: 16
+  },
+  bar: {
+    paddingBlockEnd: 12,
+    paddingInline: 16
+  },
   statusCell: { fontWeight: 500 }
 })
 
@@ -445,7 +457,7 @@ export const SpreadsheetEditing: Story = {
         <DataGridCellSelection />
         <Card style={editingStyles.frame}>
           <div {...stylex.props(s.stack)}>
-            <span {...stylex.props(s.muted)}>
+            <span {...stylex.props(s.muted, editingStyles.hint)}>
               Drag, Shift+arrows or Ctrl/Cmd+A to select · type to edit · paste from a spreadsheet
             </span>
             <DataGridContainer>
@@ -453,7 +465,7 @@ export const SpreadsheetEditing: Story = {
                 <DataGridTable />
               </DataGridScrollArea>
             </DataGridContainer>
-            <DataGridPagination />
+            <DataGridPagination style={editingStyles.bar} />
           </div>
         </Card>
       </DataGrid>

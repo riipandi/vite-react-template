@@ -53,16 +53,17 @@ const footerStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 0,
-    padding: 0,
+    paddingBlock: 0,
     width: '100%'
   },
   cardHeader: {
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'space-between',
-    padding: 12
+    paddingBlock: 12,
+    paddingInline: 24
   },
-  cardBody: { padding: 0 },
+  cardBody: { paddingBlock: 0 },
   total: { fontWeight: 700, fontVariantNumeric: 'tabular-nums' },
   numeric: { fontVariantNumeric: 'tabular-nums' }
 })

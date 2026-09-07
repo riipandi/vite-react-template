@@ -32,8 +32,6 @@ export const inputPhoneStyles = stylex.create({
     transitionProperty: 'border-color, outline-color',
     width: '100%'
   },
-  // The digits sit right of the country selector inside the group. Neutralize
-  // inner borders, outline, and corner radius so the outer container owns them.
   control: {
     backgroundColor: 'transparent',
     borderColor: 'transparent',
@@ -63,8 +61,6 @@ export const inputPhoneStyles = stylex.create({
     width: '100%',
     '::placeholder': { color: colors.foregroundNeutralFaded }
   },
-  // Country trigger shown inside the group, left of the digits. Sized to
-  // content, no border/radius of its own, with caret hidden.
   countryTrigger: {
     alignItems: 'center',
     alignSelf: 'stretch',
@@ -98,7 +94,6 @@ export const inputPhoneStyles = stylex.create({
     paddingInline: unit.x3,
     position: 'relative',
     userSelect: 'none',
-    // Visually separate the selector from the digits with a divider.
     '::after': {
       backgroundColor: colors.borderNeutralFaded,
       content: '""',
@@ -112,10 +107,10 @@ export const inputPhoneStyles = stylex.create({
     alignItems: 'center',
     borderRadius: radius.small,
     display: 'flex',
-    height: unit.x4,
+    height: unit.x5,
     justifyContent: 'center',
     overflow: 'hidden',
-    width: unit.x5
+    width: unit.x6
   },
   flagFallback: {
     height: unit.x4,
@@ -128,14 +123,53 @@ export const inputPhoneStyles = stylex.create({
   countryCode: {
     color: colors.foregroundNeutralFaded
   },
-  // Popup width follows the input container width via var(--anchor-width).
   popup: {
     minWidth: container.xxsmall,
     width: 'var(--anchor-width)'
   },
-  // Popup search input — full width of the popup, sits above the list.
-  countrySearch: {
+  searchWrap: {
+    alignItems: 'center',
+    borderBottomColor: colors.borderNeutralFaded,
+    borderBottomStyle: 'solid',
+    borderBottomWidth: stroke.ring1,
+    boxSizing: 'border-box',
+    display: 'flex',
+    gap: unit.x2,
     paddingBlock: unit.x1_5,
+    paddingInline: unit.x3,
+    position: 'relative',
     width: '100%'
+  },
+  searchIcon: {
+    color: colors.foregroundNeutralFaded,
+    flexShrink: 0,
+    height: unit.x4,
+    width: unit.x4
+  },
+  countrySearchWrap: {
+    flex: 1,
+    minWidth: 0,
+    width: '100%'
+  },
+  countrySearchInput: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    borderRadius: radius.none,
+    borderStyle: 'none',
+    borderWidth: 0,
+    color: colors.foregroundNeutral,
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.body2,
+    height: unit.x8,
+    opacity: 1,
+    outline: {
+      default: 'none',
+      ':focus': 'none',
+      ':focus-visible': 'none'
+    },
+    outlineOffset: 0,
+    paddingInline: 0,
+    width: '100%',
+    '::placeholder': { color: colors.foregroundNeutralFaded }
   }
 })

@@ -7,6 +7,7 @@
 
 import { Input as BaseInput } from '@base-ui/react/input'
 import * as stylex from '@stylexjs/stylex'
+import { SearchIcon } from 'lucide-react'
 import * as React from 'react'
 import * as BasePhoneInput from 'react-phone-number-input'
 import type { Country, Value } from 'react-phone-number-input'
@@ -14,7 +15,6 @@ import flags from 'react-phone-number-input/flags'
 import { comboboxCreateItems } from '#/components/base/combobox'
 import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput } from '#/components/base/combobox'
 import { ComboboxItem, ComboboxList, ComboboxTrigger } from '#/components/base/combobox'
-import { ComboboxSeparator } from '#/components/base/combobox'
 import { inputPhoneStyles as s } from './input-phone.stylex'
 
 type LibraryPhoneInputProps = React.ComponentPropsWithoutRef<typeof BasePhoneInput.default>
@@ -109,13 +109,16 @@ function CountrySelect({
         <FlagComponent country={selectedCountry} countryName={selectedCountry} />
       </ComboboxTrigger>
       <ComboboxContent anchor={containerRef ?? undefined} style={s.popup}>
-        <ComboboxInput
-          placeholder='Search country…'
-          showTrigger={false}
-          showClear={false}
-          style={s.countrySearch}
-        />
-        <ComboboxSeparator />
+        <div {...stylex.props(s.searchWrap)}>
+          <SearchIcon {...stylex.props(s.searchIcon)} />
+          <ComboboxInput
+            placeholder='Search country…'
+            showTrigger={false}
+            showClear={false}
+            style={s.countrySearchWrap}
+            inputStyle={s.countrySearchInput}
+          />
+        </div>
         <ComboboxEmpty>No country found.</ComboboxEmpty>
         <ComboboxList>
           {(item: CountryEntry) =>

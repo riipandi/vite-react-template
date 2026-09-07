@@ -91,11 +91,14 @@ export function ComboboxTrigger({
 
 export function ComboboxInput({
   style,
+  inputStyle,
   showTrigger = true,
   showClear = false,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.Input>, 'className' | 'style'> &
   StyleProp & {
+    /** Style applied directly to the inner input element. */
+    inputStyle?: stylex.StyleXStyles
     /** Render the built-in dropdown trigger button. Set `false` when the
      * input is placed inside `ComboboxContent` and a `ComboboxTrigger`
      * elsewhere anchors the popup. */
@@ -113,7 +116,8 @@ export function ComboboxInput({
             ? s.inputPaddingButtons2
             : showTrigger || showClear
               ? s.inputPaddingButtons1
-              : s.inputPaddingNone
+              : s.inputPaddingNone,
+          inputStyle
         )}
       />
       {showClear && (

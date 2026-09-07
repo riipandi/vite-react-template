@@ -31,8 +31,8 @@ export const stackStyles = stylex.create({
   },
   flag: {
     borderRadius: '999px',
+    flexShrink: 0,
     height: 16,
-    objectFit: 'cover',
     width: 16
   },
   // Common cell layouts.

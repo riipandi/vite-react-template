@@ -22,7 +22,7 @@ import {
   type DataGridFeatures,
   type DataGridI18nOverrides
 } from '../'
-import { demoData, type IData } from './_mocks'
+import { CountryFlag, demoData, type IData } from './_mocks'
 import { stackStyles as s } from './_mocks.stylex'
 
 const meta = {
@@ -74,8 +74,8 @@ const statesStyles = stylex.create({
   numeric: { fontVariantNumeric: 'tabular-nums' },
   flag: {
     borderRadius: '999px',
+    flexShrink: 0,
     height: 16,
-    objectFit: 'cover',
     width: 16
   },
   // Breathing room against the container edges (edgeCell: px-5).
@@ -200,13 +200,10 @@ export const CardContainer: Story = {
           ),
           cell: ({ row }) => (
             <div {...stylex.props(s.cellFlex)}>
-              <img
-                src={`https://flagcdn.com/${row.original.flag.toLowerCase()}.svg`}
-                alt={row.original.location}
-                width={16}
-                height={16}
-                loading='lazy'
-                {...stylex.props(statesStyles.flag)}
+              <CountryFlag
+                code={row.original.flag}
+                title={row.original.location}
+                style={statesStyles.flag}
               />
               <span {...stylex.props(s.strong)}>{row.original.location}</span>
             </div>

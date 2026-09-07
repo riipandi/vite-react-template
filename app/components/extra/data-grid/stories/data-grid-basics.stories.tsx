@@ -21,7 +21,7 @@ import {
   dataGridFeatures,
   type DataGridFeatures
 } from '../'
-import { demoData, type IData } from './_mocks'
+import { CountryFlag, demoData, type IData } from './_mocks'
 import { stackStyles as s } from './_mocks.stylex'
 
 const meta = {
@@ -128,11 +128,7 @@ export const Pagination: Story = {
           header: 'Location',
           cell: ({ row }) => (
             <div {...stylex.props(s.cellFlex)}>
-              <img
-                src={`https://flagcdn.com/${row.original.flag.toLowerCase()}.svg`}
-                alt={row.original.flag}
-                {...stylex.props(s.flag)}
-              />
+              <CountryFlag code={row.original.flag} title={row.original.location} style={s.flag} />
               <div>{row.original.location}</div>
             </div>
           ),

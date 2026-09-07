@@ -1,4 +1,8 @@
 /** Shared mock dataset for the data-grid stories. */
+import * as stylex from '@stylexjs/stylex'
+import type { StyleXStyles } from '@stylexjs/stylex'
+import { AU, CA, DE, ES, FR, GB, IT, JP, MY, US } from 'country-flag-icons/react/1x1'
+
 export interface IData {
   id: string
   name: string
@@ -6,7 +10,7 @@ export interface IData {
   avatar: string
   initials: string
   status: 'active' | 'inactive'
-  flag: string // Emoji flags
+  flag: string // Lowercase ISO 3166-1 alpha-2 code
   email: string
   company: string
   role: string
@@ -115,6 +119,22 @@ export const demoData: IData[] = users.map((user, index) => ({
   )[index % 10]!,
   balance: 5143.03 + index * 100
 }))
+
+/** Named flag components for the mock dataset (no barrel namespace import). */
+const FLAGS = { US, GB, CA, AU, DE, MY, ES, JP, FR, IT } as const
+
+interface CountryFlagProps {
+  code: IData['flag']
+  title: string
+  style?: StyleXStyles
+}
+
+/** Circular 16px country flag rendered inline from the ISO code (no CDN). */
+export function CountryFlag({ code, title, style }: CountryFlagProps) {
+  const Flag = FLAGS[code.toUpperCase() as keyof typeof FLAGS]
+  if (!Flag) return null
+  return <Flag title={title} {...stylex.props(style)} />
+}
 
 /** Avatar status dot colors (availability). */
 export const statusColors: Record<string, string> = {

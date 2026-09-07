@@ -6,6 +6,7 @@ import type { ColumnDef, PaginationState, SortingState } from '@tanstack/react-t
 import { useMemo, useState } from 'react'
 import { Badge } from '#/components/extra/badge'
 import { Card, CardContent } from '#/components/extra/card'
+import { unit } from '#/styles/core/tokens.stylex'
 import {
   DataGrid,
   DataGridContainer,
@@ -47,7 +48,7 @@ const footerStyles = stylex.create({
   stack: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 2
+    gap: unit.x0_5
   },
   card: {
     display: 'flex',
@@ -60,8 +61,8 @@ const footerStyles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'space-between',
-    paddingBlock: 12,
-    paddingInline: 24
+    paddingBlock: unit.x3,
+    paddingInline: unit.x5
   },
   cardBody: { paddingBlock: 0 },
   total: { fontWeight: 700, fontVariantNumeric: 'tabular-nums' },
@@ -164,7 +165,7 @@ export const ColumnTotalsFooter: Story = {
       >
         <Card style={footerStyles.card}>
           <div {...stylex.props(footerStyles.cardHeader)}>
-            <span {...stylex.props(s.strong)}>Employee Balances</span>
+            <span {...stylex.props(s.strong)}>Book Prices</span>
           </div>
           <CardContent style={footerStyles.cardBody}>
             <DataGridContainer>
@@ -238,7 +239,7 @@ export const SummaryStatsFooter: Story = {
       >
         <Card style={footerStyles.card}>
           <div {...stylex.props(footerStyles.cardHeader)}>
-            <span {...stylex.props(s.strong)}>Balance Statistics</span>
+            <span {...stylex.props(s.strong)}>Price Statistics</span>
           </div>
           <CardContent style={footerStyles.cardBody}>
             <DataGridContainer>

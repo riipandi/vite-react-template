@@ -1,5 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
+import { unit } from '#/styles/core/tokens.stylex'
 
 /**
  * Shared StyleX styles for the data-grid stories. StyleX requires styles that
@@ -9,7 +10,7 @@ export const stackStyles = stylex.create({
   stack: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '10px',
+    gap: unit.x2,
     width: '100%'
   },
   link: {

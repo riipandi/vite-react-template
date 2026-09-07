@@ -11,6 +11,7 @@ import { Badge } from '#/components/extra/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/extra/card'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '#/components/extra/input-group'
 import { Skeleton } from '#/components/extra/skeleton'
+import { unit } from '#/styles/core/tokens.stylex'
 import {
   DataGrid,
   DataGridColumnHeader,
@@ -49,24 +50,24 @@ const statesStyles = stylex.create({
   card: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 12,
+    gap: 0,
     paddingBlock: 0,
     width: '100%'
   },
   cardOverflow: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 12,
+    gap: 0,
     overflow: 'hidden',
     paddingBlock: 0
   },
   header: {
     alignItems: 'center',
     display: 'flex',
-    gap: 10,
+    gap: unit.x2,
     justifyContent: 'space-between',
-    paddingBlock: 12,
-    paddingInline: 24
+    paddingBlock: unit.x3,
+    paddingInline: unit.x5
   },
   cardBody: { paddingBlock: 0 },
   muted: {

@@ -8,6 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Card, CardContent } from '#/components/extra/card'
+import { unit } from '#/styles/core/tokens.stylex'
 import {
   DataGrid,
   DataGridColumnHeader,
@@ -60,17 +61,17 @@ const infiniteStyles = stylex.create({
   cardOverflow: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 12,
+    gap: 0,
     overflow: 'hidden',
     paddingBlock: 0
   },
   header: {
     alignItems: 'center',
     display: 'flex',
-    gap: 8,
+    gap: unit.x2,
     justifyContent: 'space-between',
-    paddingBlock: 12,
-    paddingInline: 24
+    paddingBlock: unit.x3,
+    paddingInline: unit.x5
   },
   cardBody: { paddingBlock: 0 }
 })

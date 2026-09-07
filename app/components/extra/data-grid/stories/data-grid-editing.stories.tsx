@@ -6,10 +6,10 @@ import type { ColumnDef, PaginationState, SortingState } from '@tanstack/react-t
 import { PlusIcon, SearchIcon } from 'lucide-react'
 import { useMemo, useRef, useState } from 'react'
 import { Button } from '#/components/base/button'
-import { Input } from '#/components/base/input'
 import { Badge } from '#/components/extra/badge'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '#/components/extra/card'
-import { InputGroup, InputGroupAddon } from '#/components/extra/input-group'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '#/components/extra/input-group'
+import { unit } from '#/styles/core/tokens.stylex'
 import {
   DataGrid,
   DataGridCellSelection,
@@ -51,15 +51,15 @@ const editingStyles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'space-between',
-    paddingBlock: 12,
-    paddingInline: 24
+    paddingBlock: unit.x3,
+    paddingInline: unit.x5
   },
   searchGroup: { width: 192 },
   cardBody: { paddingBlock: 0 },
   // Breathing room against the container edges (edgeCell: first
   // ps-4 / last pe-4; a symmetric inline padding reads the same on fixed
   // columns and stays within StyleXStyles' static-only shape).
-  edgeCell: { paddingInline: 16 },
+  edgeCell: { paddingInline: unit.x4 },
   right: {
     display: 'block',
     fontVariantNumeric: 'tabular-nums',
@@ -69,7 +69,7 @@ const editingStyles = stylex.create({
   frame: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 12,
+    gap: 0,
     paddingBlock: 0,
     width: '100%'
   },
@@ -77,22 +77,22 @@ const editingStyles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     flexWrap: 'wrap',
-    gap: 12,
+    gap: unit.x3,
     justifyContent: 'space-between',
-    paddingBlock: 12,
-    paddingInline: 24
+    paddingBlock: unit.x3,
+    paddingInline: unit.x5
   },
-  frameFooter: { paddingBlock: 12 },
+  frameFooter: { paddingBlock: unit.x3 },
   // Spreadsheet card chrome: the hint (header) and pagination (footer) are
   // stack children of a full-bleed table, so their inline padding matches
   // the grid's edgeCell inset.
   hint: {
-    paddingBlockStart: 12,
-    paddingInline: 16
+    paddingBlockStart: unit.x3,
+    paddingInline: unit.x4
   },
   bar: {
-    paddingBlockEnd: 12,
-    paddingInline: 16
+    paddingBlockEnd: unit.x3,
+    paddingInline: unit.x4
   },
   statusCell: { fontWeight: 500 }
 })
@@ -184,7 +184,7 @@ export const CrudFeatures: Story = {
               <InputGroupAddon align='inline-start'>
                 <SearchIcon style={{ height: 16, width: 16 }} />
               </InputGroupAddon>
-              <Input
+              <InputGroupInput
                 placeholder='Search novels...'
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}

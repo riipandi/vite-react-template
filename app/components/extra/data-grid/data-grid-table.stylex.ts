@@ -129,16 +129,13 @@ export const dataGridTableStyles = stylex.create({
     },
     textAlign: 'start',
     verticalAlign: 'middle',
-    // Row separator, driven by the row's own --dg-row-border-b var.
+    // Row separator, driven by the row's own --dg-row-border-b var. Every
+    // cell of a bordered row carries it (the row-level logic decides which
+    // ROWS border, matching ReUI's `[&:not(:last-child)>td]:border-b` —
+    // the :last-child there is a ROW, not a cell).
     borderBottomColor: colors.borderNeutralFaded,
-    borderBottomStyle: {
-      default: 'solid',
-      ':last-child': 'none'
-    },
-    borderBottomWidth: {
-      default: 'var(--dg-row-border-b, 0px)',
-      ':last-child': 0
-    }
+    borderBottomStyle: 'solid',
+    borderBottomWidth: 'var(--dg-row-border-b, 0px)'
   },
   tdPinned: {
     backgroundColor: colors.backgroundPage,

@@ -10,12 +10,13 @@ import type {
   RowSelectionState,
   SortingState
 } from '@tanstack/react-table'
-import { RefreshCwIcon } from 'lucide-react'
+import { ChevronDownIcon, ChevronUpIcon, RefreshCwIcon } from 'lucide-react'
 import { Fragment, useMemo, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Badge } from '#/components/extra/badge'
 import { Card, CardContent, CardFooter, CardHeader } from '#/components/extra/card'
+import { unit } from '#/styles/core/tokens.stylex'
 import {
   DataGrid,
   DataGridColumnHeader,
@@ -58,6 +59,13 @@ export default meta
 const statusStyles = stylex.create({
   muted: {
     color: s.muted.color as unknown as string
+  },
+  expanderButton: {
+    marginInlineStart: `calc(-1 * ${unit.x2})`
+  },
+  expanderIcon: {
+    height: 16,
+    width: 16
   },
   expandedContent: {
     paddingBlock: 12,
@@ -188,6 +196,35 @@ const detailData: IDetail[] = demoData.slice(0, 5).map((row, index) => ({
 function ExpandableColumns(): ColumnDef<DataGridFeatures, IDetail>[] {
   return [
     {
+      id: 'expander',
+      header: () => null,
+      cell: ({ row }) =>
+        row.getCanExpand() ? (
+          <Button
+            variant='ghost'
+            size='icon'
+            style={statusStyles.expanderButton}
+            onClick={row.getToggleExpandedHandler()}
+            aria-label={row.getIsExpanded() ? 'Collapse row' : 'Expand row'}
+          >
+            {row.getIsExpanded() ? (
+              <ChevronUpIcon aria-hidden='true' {...stylex.props(statusStyles.expanderIcon)} />
+            ) : (
+              <ChevronDownIcon aria-hidden='true' {...stylex.props(statusStyles.expanderIcon)} />
+            )}
+          </Button>
+        ) : null,
+      size: 48,
+      meta: {
+        // Receives `row.original` (ReUI contract), not the TanStack row.
+        expandedContent: (row) => (
+          <div {...stylex.props(statusStyles.muted, statusStyles.expandedContent)}>
+            {row.details}
+          </div>
+        )
+      }
+    },
+    {
       accessorKey: 'name',
       header: 'Name',
       size: 180
@@ -206,14 +243,7 @@ function ExpandableColumns(): ColumnDef<DataGridFeatures, IDetail>[] {
       id: 'details',
       header: 'Access',
       cell: ({ row }) => <span {...stylex.props(s.muted)}>{row.original.details}</span>,
-      size: 320,
-      meta: {
-        expandedContent: (row) => (
-          <div {...stylex.props(statusStyles.muted, statusStyles.expandedContent)}>
-            {row.original.details}
-          </div>
-        )
-      }
+      size: 320
     }
   ]
 }

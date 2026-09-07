@@ -2,12 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useTable } from '@tanstack/react-table'
-import type {
-  ColumnDef,
-  PaginationState,
-  RowSelectionState,
-  SortingState
-} from '@tanstack/react-table'
+import type { ColumnDef, PaginationState, SortingState } from '@tanstack/react-table'
 import { PlusIcon, SearchIcon } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
@@ -145,33 +140,8 @@ function usePagedTable(columns: ColumnDef<DataGridFeatures, IData>[]) {
 export const CardContainer: Story = {
   name: 'Card container',
   render: () => {
-    const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
     const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
       () => [
-        {
-          id: 'select',
-          size: 40,
-          header: () => (
-            <input type='checkbox' aria-label='Select all' style={{ accentColor: 'auto' }} />
-          ),
-          cell: ({ row }) => (
-            <input
-              type='checkbox'
-              aria-label={`Select ${row.original.name}`}
-              checked={!!rowSelection[row.id]}
-              onChange={(event) =>
-                setRowSelection(
-                  (old) =>
-                    ({
-                      ...old,
-                      [row.id]: event.target.checked
-                    }) as RowSelectionState
-                )
-              }
-              style={{ accentColor: 'auto' }}
-            />
-          )
-        },
         {
           accessorKey: 'name',
           id: 'name',
@@ -200,7 +170,7 @@ export const CardContainer: Story = {
           size: 130
         }
       ],
-      [rowSelection]
+      []
     )
     const table = usePagedTable(columns)
 

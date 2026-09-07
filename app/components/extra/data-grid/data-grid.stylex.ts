@@ -129,9 +129,16 @@ export const dataGridCellSelectionStyles = stylex.create({
   fillTargetPinned: {
     backgroundColor: `color-mix(in oklab, ${colors.backgroundPrimary} 4%, ${colors.backgroundPage})`
   },
-  // The overlay: one absolute ::before per cell, primary by default.
+  // The overlay: one absolute ::before per cell, primary by default. Every
+  // side's WIDTH starts at 0 — Tailwind's preflight zeroes border widths
+  // globally, which StyleX cannot assume, and an unstyled side would fall
+  // back to `medium` (3px) instead of resting unpainted.
   beforeOverlay: {
     '::before': {
+      borderBottomWidth: 0,
+      borderInlineEndWidth: 0,
+      borderInlineStartWidth: 0,
+      borderTopWidth: 0,
       borderStyle: 'solid',
       borderColor: colors.backgroundPrimary,
       bottom: 'var(--data-grid-overlay-bottom, -1px)',

@@ -141,3 +141,26 @@
   field-sizing: content;
   overflow: hidden;
 }
+
+/* Data grid last-row separator — when a pagination bar directly follows the
+   grid container, the final body row keeps its bottom border (ReUI's
+   `[data-grid]+[data-grid-pagination]` sibling selector with an ancestor
+   `:has()`, which StyleX cannot compile). */
+[data-slot='data-grid']:has(+ [data-slot='data-grid-pagination']) tbody tr:last-child > td {
+  border-bottom-width: 1px;
+}
+
+/* Data grid header icons — lucide svgs ship at their 24px attribute size,
+   and the project Button carries no descendant-svg sizing rule (shadcn's
+   `[&_svg]:size-4` / label's `[&_svg]:size-3.5`), so header chrome sizes
+   descendant svgs here. Element selectors lose to StyleX classes, so icons
+   with explicit sizes (sort 13px, pin 14px, menu 14px) keep theirs. */
+[data-slot='data-grid'] thead button svg {
+  width: 16px;
+  height: 16px;
+}
+
+[data-slot='data-grid'] thead span svg {
+  width: 14px;
+  height: 14px;
+}

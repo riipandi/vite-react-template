@@ -43,13 +43,17 @@ const meta = {
 type Story = StoryObj<typeof meta>
 export default meta
 
-function useDemoTable(columns: ColumnDef<DataGridFeatures, IData>[], pageSize = 5) {
+function useDemoTable(
+  columns: ColumnDef<DataGridFeatures, IData>[],
+  pageSize = 5,
+  initialColumnOrder: string[] = []
+) {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize
   })
   const [sorting, setSorting] = useState<SortingState>([{ id: 'name', desc: true }])
-  const [columnOrder, setColumnOrder] = useState<ColumnOrderState>([])
+  const [columnOrder, setColumnOrder] = useState<ColumnOrderState>(initialColumnOrder)
 
   return useTable({
     features: dataGridFeatures,
@@ -235,7 +239,11 @@ export const DraggableColumns: Story = {
         })),
       []
     )
-    const table = useDemoTable(columns)
+    const table = useDemoTable(
+      columns,
+      5,
+      columns.map((column) => column.id as string)
+    )
     const handleDragEnd = (event: DragEndEvent) => {
       const { active, over } = event
       if (active && over && active.id !== over.id) {
@@ -361,8 +369,9 @@ export const StickyHeader: Story = {
         tableLayout={{ headerSticky: true }}
       >
         <div {...stylex.props(s.stack)}>
+          {/* Fixed viewport height: sticky needs vertical overflow to scroll. */}
           <DataGridContainer>
-            <DataGridScrollArea>
+            <DataGridScrollArea style={atoms.height['384px']}>
               <DataGridTable />
             </DataGridScrollArea>
           </DataGridContainer>

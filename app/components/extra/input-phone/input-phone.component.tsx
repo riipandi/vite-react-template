@@ -60,6 +60,10 @@ interface CountrySelectProps {
   onChange: (country: Country) => void
 }
 
+const PhoneContainerRefContext = React.createContext<React.RefObject<HTMLDivElement | null> | null>(
+  null
+)
+
 /** Flag SVG from the library's bundled flags (no external requests). */
 function FlagComponent({ country, countryName }: BasePhoneInput.FlagProps) {
   const Flag = country ? flags[country] : undefined
@@ -78,6 +82,7 @@ function CountrySelect({
   options: countryList,
   onChange
 }: CountrySelectProps) {
+  const containerRef = React.useContext(PhoneContainerRefContext)
   const collection = React.useMemo(
     () =>
       comboboxCreateItems(countryList as CountryEntry[], {
@@ -103,7 +108,7 @@ function CountrySelect({
       >
         <FlagComponent country={selectedCountry} countryName={selectedCountry} />
       </ComboboxTrigger>
-      <ComboboxContent style={s.popup}>
+      <ComboboxContent anchor={containerRef ?? undefined} style={s.popup}>
         <ComboboxInput
           placeholder='Search country…'
           showTrigger={false}
@@ -143,7 +148,8 @@ function PhoneInputContainer({
 }: Omit<React.ComponentPropsWithoutRef<'div'>, 'className' | 'style'> & {
   style?: stylex.StyleXStyles
 }) {
-  return <div role='group' {...props} {...stylex.props(s.root, style)} />
+  const containerRef = React.useContext(PhoneContainerRefContext)
+  return <div ref={containerRef} role='group' {...props} {...stylex.props(s.root, style)} />
 }
 
 function PhoneInput({
@@ -168,28 +174,29 @@ export function InputPhone({
   onChange = () => {},
   ...props
 }: InputPhoneProps) {
+  const containerRef = React.useRef<HTMLDivElement | null>(null)
+
   return (
-    <BasePhoneInput.default
-      {...props}
-      disabled={disabled}
-      readOnly={readOnly}
-      className={undefined}
-      containerComponent={PhoneInputContainer}
-      containerComponentProps={{
-        style,
-        'data-invalid': invalid || undefined
-      }}
-      inputComponent={PhoneInput}
-      countrySelectComponent={withCountrySelect ? CountrySelect : NoCountrySelect}
-      flagComponent={FlagComponent}
-      smartCaret={false}
-      defaultCountry={defaultCountry}
-      countries={countries}
-      onCountryChange={onCountryChange}
-      addInternationalOption={addInternationalOption}
-      value={props.value || undefined}
-      onChange={(next) => onChange(next || ('' as Value))}
-    />
+    <PhoneContainerRefContext.Provider value={containerRef}>
+      <BasePhoneInput.default
+        {...props}
+        disabled={disabled}
+        readOnly={readOnly}
+        className={undefined}
+        containerComponent={PhoneInputContainer}
+        containerComponentProps={{ style, 'data-invalid': invalid || undefined }}
+        inputComponent={PhoneInput}
+        countrySelectComponent={withCountrySelect ? CountrySelect : NoCountrySelect}
+        flagComponent={FlagComponent}
+        smartCaret={false}
+        defaultCountry={defaultCountry}
+        countries={countries}
+        onCountryChange={onCountryChange}
+        addInternationalOption={addInternationalOption}
+        value={props.value || undefined}
+        onChange={(next) => onChange(next || ('' as Value))}
+      />
+    </PhoneContainerRefContext.Provider>
   )
 }
 

@@ -128,10 +128,10 @@ export const inputPhoneStyles = stylex.create({
   countryCode: {
     color: colors.foregroundNeutralFaded
   },
-  // Popup width follows the container token (not the anchor trigger, which is
-  // only as wide as the flag).
+  // Popup width follows the input container width via var(--anchor-width).
   popup: {
-    width: container.xsmall
+    minWidth: container.xxsmall,
+    width: 'var(--anchor-width)'
   },
   // Popup search input — full width of the popup, sits above the list.
   countrySearch: {

@@ -131,6 +131,13 @@ export const dataGridColumnFilterStyles = stylex.create({
       ':hover': `color-mix(in srgb, ${colors.backgroundNeutralHighlightedFaded} 100%, transparent)`,
       ':focus-visible': `color-mix(in srgb, ${colors.backgroundNeutralHighlightedFaded} 100%, transparent)`
     },
+    // Native <button> reset: the rows are real buttons (keyboard + a11y for
+    // free) styled back to the row look.
+    appearance: 'none',
+    borderColor: 'transparent',
+    borderStyle: 'none',
+    borderWidth: 0,
+    fontFamily: 'inherit',
     borderRadius: radius.small,
     color: colors.foregroundNeutral,
     cursor: 'pointer',
@@ -146,7 +153,9 @@ export const dataGridColumnFilterStyles = stylex.create({
     paddingBlock: unit.x1_5,
     paddingInline: unit.x2,
     position: 'relative',
-    userSelect: 'none'
+    textAlign: 'start',
+    userSelect: 'none',
+    width: '100%'
   },
   clearRow: { justifyContent: 'center' },
   optionBox: {

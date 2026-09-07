@@ -651,6 +651,10 @@ function DataGridTableBase({ children }: { children: ReactNode }) {
   const columnSizeVars = useMemo(() => {
     if (!props.tableLayout?.columnsResizable) return undefined
     const headers = table.getFlatHeaders()
+    // `table` is a per-state-change wrapper (v9), so the memo recomputes on
+    // every sizing, visibility, order, pinning or column-def change - exactly
+    // the events that can move the CSS variables. No narrower re-key is
+    // possible: getFlatHeaders() reads through the current instance.
     // A meta.fillWidth column absorbs the filler strip: its size variable
     // carries the unitless fill amount, so every consumer of
     // calc(var(--col-X-size) * 1px) stretches with the container while the
@@ -668,26 +672,7 @@ function DataGridTableBase({ children }: { children: ReactNode }) {
           : header.column.getSize()
     }
     return colSizes
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    props.tableLayout?.columnsResizable,
-    // Visibility/order/pinning change the flat header set, so a column shown
-    // after mount must get its size variable even though sizing is untouched.
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
-    table.state.columnSizing,
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
-    table.state.columnVisibility,
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
-    table.state.columnOrder,
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
-    table.state.columnPinning,
-    // A def swap can change a column's `size` without touching sizing
-    // STATE; without this dep the CSS variables keep the old widths. For a
-    // consumer defining columns inline the memo degrades to per-render
-    // recompute, which is the safe direction.
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
-    table.options.columns
-  ])
+  }, [props.tableLayout?.columnsResizable, table])
 
   // With cell selection on, the table announces as a grid so the tds compute
   // as gridcells and aria-selected applies; existing grids keep their plain
@@ -1419,7 +1404,7 @@ function DataGridTableBodyRow<TData extends object>({
   /** Whether this row paints a bottom border on its tds. */
   wantsBorder?: boolean
 }) {
-  const { props, table } = useDataGrid()
+  const { props, table } = useDataGrid<TData>()
   const isRowPinned = row.getIsPinned()
   const rowStatus = props.getRowStatus?.(row.original)
 
@@ -1476,7 +1461,7 @@ function DataGridTableBodyRowExpandded<TData extends object>({
 }: {
   row: Row<DataGridFeatures, TData>
 }) {
-  const { props, table } = useDataGrid()
+  const { props, table } = useDataGrid<TData>()
   const expandedContent = table
     .getAllColumns()
     .find((column) => column.columnDef.meta?.expandedContent)?.columnDef.meta?.expandedContent
@@ -1547,7 +1532,7 @@ function DataGridTableBodyRowCell<TData extends object>({
   rowSelected?: boolean
   rowStatus?: DataGridRowStatus | undefined
 }) {
-  const { props, table, gridId } = useDataGrid()
+  const { props, table, gridId } = useDataGrid<TData>()
 
   const { column, row } = cell
   const isPinned = column.getIsPinned()
@@ -1782,7 +1767,7 @@ function DataGridTableRenderedRow<TData extends object>({
    */
   centerWindow?: { start: number; end: number }
 }) {
-  const { props, table } = useDataGrid()
+  const { props, table } = useDataGrid<TData>()
   const startVisibleCells = row.getStartVisibleCells()
   const centerVisibleCells = row.getCenterVisibleCells()
   const endVisibleCells = row.getEndVisibleCells()
@@ -2118,9 +2103,12 @@ function DataGridTableBodyRows<TData extends object>({
 
     return (
       <>
-        {Array.from({ length: pagination.pageSize }).map((_, rowIndex) => (
+        {Array.from(
+          { length: pagination.pageSize },
+          (_, rowIndex) => `skeleton-row-${rowIndex}`
+        ).map((rowKey, rowIndex) => (
           <DataGridTableBodyRowSkeleton
-            key={rowIndex}
+            key={rowKey}
             wantsBorder={props.tableLayout?.rowBorder && rowIndex < pagination.pageSize - 1}
           >
             {[...leftVisibleColumns, ...centerVisibleColumns].map((column) => (
@@ -2197,8 +2185,7 @@ function DataGridTableBodyRows<TData extends object>({
  */
 const MemoizedDataGridTableBodyRows = memo(
   DataGridTableBodyRows,
-  (_prev, next) =>
-    !!next.table.state.columnResizing.isResizingColumn || next.table._isSelectingCells === true
+  (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
 ) as typeof DataGridTableBodyRows
 
 function DataGridTableHeader() {

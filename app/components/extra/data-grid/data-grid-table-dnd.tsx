@@ -190,15 +190,16 @@ function DataGridTableDndBodyRows<TData extends object>({
   if (props.loadingMode === 'skeleton' && isLoading && pagination?.pageSize) {
     return (
       <>
-        {Array.from({ length: pagination.pageSize }).map((_, rowIndex) => (
-          <DataGridTableBodyRowSkeleton key={rowIndex} wantsBorder>
-            {table.getVisibleFlatColumns().map((column, colIndex) => {
-              return (
-                <DataGridTableBodyRowSkeletonCell column={column} key={colIndex}>
-                  {column.columnDef.meta?.skeleton}
-                </DataGridTableBodyRowSkeletonCell>
-              )
-            })}
+        {Array.from(
+          { length: pagination.pageSize },
+          (_, rowIndex) => `skeleton-row-${rowIndex}`
+        ).map((rowKey) => (
+          <DataGridTableBodyRowSkeleton key={rowKey} wantsBorder>
+            {table.getVisibleFlatColumns().map((column) => (
+              <DataGridTableBodyRowSkeletonCell column={column} key={column.id}>
+                {column.columnDef.meta?.skeleton}
+              </DataGridTableBodyRowSkeletonCell>
+            ))}
             <DataGridTableFillBodyCell />
           </DataGridTableBodyRowSkeleton>
         ))}
@@ -249,7 +250,7 @@ function DataGridTableDnd<TData extends object>({
   handleDragEnd: (event: DragEndEvent) => void
   footerContent?: ReactNode
 }) {
-  const { table, props } = useDataGrid()
+  const { table, props } = useDataGrid<TData>()
   const containerRef = useRef<HTMLDivElement>(null)
   const [isDraggingColumn, setIsDraggingColumn] = useState(false)
 
@@ -321,23 +322,21 @@ function DataGridTableDnd<TData extends object>({
       >
         <DataGridTableBase>
           <DataGridTableHead>
-            {table
-              .getHeaderGroups()
-              .map((headerGroup: HeaderGroup<DataGridFeatures, TData>, index) => {
-                return (
-                  <DataGridTableHeadRow key={index} rowId={headerGroup.id}>
-                    <SortableContext
-                      items={table.state.columnOrder}
-                      strategy={horizontalListSortingStrategy}
-                    >
-                      {headerGroup.headers.map((header) => (
-                        <DataGridTableDndHeader header={header} key={header.id} />
-                      ))}
-                    </SortableContext>
-                    <DataGridTableFillHeadCell />
-                  </DataGridTableHeadRow>
-                )
-              })}
+            {table.getHeaderGroups().map((headerGroup: HeaderGroup<DataGridFeatures, TData>) => {
+              return (
+                <DataGridTableHeadRow key={headerGroup.id} rowId={headerGroup.id}>
+                  <SortableContext
+                    items={table.state.columnOrder}
+                    strategy={horizontalListSortingStrategy}
+                  >
+                    {headerGroup.headers.map((header) => (
+                      <DataGridTableDndHeader header={header} key={header.id} />
+                    ))}
+                  </SortableContext>
+                  <DataGridTableFillHeadCell />
+                </DataGridTableHeadRow>
+              )
+            })}
           </DataGridTableHead>
 
           {(props.tableLayout?.stripped || !props.tableLayout?.rowBorder) && (
@@ -450,7 +449,7 @@ function DataGridTableDndRow<TData extends object>({
     isOver,
     attributes,
     listeners,
-    index,
+    index: sortableIndex,
     activeIndex,
     overIndex
   } = useSortable({
@@ -466,7 +465,7 @@ function DataGridTableDndRow<TData extends object>({
   // Dragging down it lands after the target, dragging up before it, so the
   // edge follows the direction of travel.
   const dropEdge =
-    dropIndicator && activeIndex !== -1 && index === overIndex && !isDragging
+    dropIndicator && activeIndex !== -1 && sortableIndex === overIndex && !isDragging
       ? activeIndex < overIndex
         ? 'bottom'
         : 'top'
@@ -560,15 +559,16 @@ function DataGridTableDndRowsBody<TData extends object>({
   if (props.loadingMode === 'skeleton' && isLoading && pagination?.pageSize) {
     return (
       <>
-        {Array.from({ length: pagination.pageSize }).map((_, rowIndex) => (
-          <DataGridTableBodyRowSkeleton key={rowIndex} wantsBorder>
-            {table.getVisibleFlatColumns().map((column, colIndex) => {
-              return (
-                <DataGridTableBodyRowSkeletonCell column={column} key={colIndex}>
-                  {column.columnDef.meta?.skeleton}
-                </DataGridTableBodyRowSkeletonCell>
-              )
-            })}
+        {Array.from(
+          { length: pagination.pageSize },
+          (_, rowIndex) => `skeleton-row-${rowIndex}`
+        ).map((rowKey) => (
+          <DataGridTableBodyRowSkeleton key={rowKey} wantsBorder>
+            {table.getVisibleFlatColumns().map((column) => (
+              <DataGridTableBodyRowSkeletonCell column={column} key={column.id}>
+                {column.columnDef.meta?.skeleton}
+              </DataGridTableBodyRowSkeletonCell>
+            ))}
             <DataGridTableFillBodyCell />
           </DataGridTableBodyRowSkeleton>
         ))}
@@ -665,14 +665,12 @@ function DataGridTableDndRows<TData extends object>({
   // lands offset by that ancestor's own top/left, and the container clamp
   // below mis-clamps too, because its rects are measured in viewport space.
   //
-  // Resolved in an effect rather than read at render so the server and the
-  // first client render agree. A drag cannot start before hydration, so the
-  // overlay being absent for one frame costs nothing.
-  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null)
-
-  useEffect(() => {
-    setPortalTarget(document.body)
-  }, [])
+  // Resolved lazily so the server render and the first client render agree
+  // (server: no document, no portal). A drag cannot start before hydration,
+  // so the overlay being absent for one frame costs nothing.
+  const [portalTarget] = useState<HTMLElement | null>(() =>
+    typeof document === 'undefined' ? null : document.body
+  )
   // The row being carried, plus the column widths measured off the header the
   // moment the drag starts. The clone lives outside the table, so it has no
   // columns of its own and has to be told what they are.
@@ -683,44 +681,40 @@ function DataGridTableDndRows<TData extends object>({
     columns: number[]
   } | null>(null)
 
-  const pickUpRow = useCallback(
-    (id: UniqueIdentifier) => {
-      const container = tableContainerRef.current
-      const head = container?.querySelector('thead tr')
-      if (!container || !head) {
-        setCarried(null)
-        return
-      }
+  const pickUpRow = useCallback((id: UniqueIdentifier) => {
+    const container = tableContainerRef.current
+    const head = container?.querySelector('thead tr')
+    if (!container || !head) {
+      setCarried(null)
+      return
+    }
 
-      // The clone has to be exactly as tall as the row it was lifted from.
-      // A fixed height reads as the grid growing under the pointer the moment
-      // you pick a row up, and it is wrong in both directions: rows whose
-      // content wraps are taller than any constant, and dense rows are shorter.
-      const source = Array.from(
-        container.querySelectorAll<HTMLElement>('tbody tr[data-row-id]')
-      ).find((candidate) => candidate.dataset.rowId === String(id))
-      const height = source?.getBoundingClientRect().height ?? 0
+    // The clone has to be exactly as tall as the row it was lifted from.
+    // A fixed height reads as the grid growing under the pointer the moment
+    // you pick a row up, and it is wrong in both directions: rows whose
+    // content wraps are taller than any constant, and dense rows are shorter.
+    const source = Array.from(
+      container.querySelectorAll<HTMLElement>('tbody tr[data-row-id]')
+    ).find((candidate) => candidate.dataset.rowId === String(id))
+    const height = source?.getBoundingClientRect().height ?? 0
 
-      // The fill cell is a header-only spacer that soaks up the surplus a column
-      // resize leaves behind, and the clone renders data cells only. Measuring it
-      // in would make the clone's table wider than the cells it actually holds,
-      // and `table-fixed` hands that orphaned width back out across every column
-      // -- the carried row comes out visibly wider than the row it was lifted
-      // from. So the width is the sum of what we render, never the header's own.
-      const columns = Array.from(head.children)
-        .filter((cell) => cell.getAttribute('data-slot') !== 'data-grid-table-fill-head-cell')
-        .map((cell) => cell.getBoundingClientRect().width)
+    // The fill cell is a header-only spacer that soaks up the surplus a column
+    // resize leaves behind, and the clone renders data cells only. Measuring it
+    // in would make the clone's table wider than the cells it actually holds,
+    // and `table-fixed` hands that orphaned width back out across every column
+    // -- the carried row comes out visibly wider than the row it was lifted
+    // from. So the width is the sum of what we render, never the header's own.
+    const columns = Array.from(head.children)
+      .filter((cell) => cell.getAttribute('data-slot') !== 'data-grid-table-fill-head-cell')
+      .map((cell) => cell.getBoundingClientRect().width)
 
-      setCarried({
-        id,
-        width: columns.reduce((total, width) => total + width, 0),
-        height,
-        columns
-      })
-    },
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
-    []
-  )
+    setCarried({
+      id,
+      width: columns.reduce((total, width) => total + width, 0),
+      height,
+      columns
+    })
+  }, [])
 
   const carriedRow = carried
     ? table.getRowModel().rows.find((row: Row<DataGridFeatures, TData>) => row.id === carried.id)
@@ -815,29 +809,27 @@ function DataGridTableDndRows<TData extends object>({
       >
         <DataGridTableBase>
           <DataGridTableHead>
-            {table
-              .getHeaderGroups()
-              .map((headerGroup: HeaderGroup<DataGridFeatures, TData>, index) => {
-                return (
-                  <DataGridTableHeadRow key={index} rowId={headerGroup.id}>
-                    {headerGroup.headers.map((header, index) => {
-                      const { column } = header
+            {table.getHeaderGroups().map((headerGroup: HeaderGroup<DataGridFeatures, TData>) => {
+              return (
+                <DataGridTableHeadRow key={headerGroup.id} rowId={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    const { column } = header
 
-                      return (
-                        <DataGridTableHeadRowCell header={header} key={index}>
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(header.column.columnDef.header, header.getContext())}
-                          {props.tableLayout?.columnsResizable && column.getCanResize() && (
-                            <DataGridTableHeadRowCellResize header={header} />
-                          )}
-                        </DataGridTableHeadRowCell>
-                      )
-                    })}
-                    <DataGridTableFillHeadCell />
-                  </DataGridTableHeadRow>
-                )
-              })}
+                    return (
+                      <DataGridTableHeadRowCell header={header} key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(header.column.columnDef.header, header.getContext())}
+                        {props.tableLayout?.columnsResizable && column.getCanResize() && (
+                          <DataGridTableHeadRowCellResize header={header} />
+                        )}
+                      </DataGridTableHeadRowCell>
+                    )
+                  })}
+                  <DataGridTableFillHeadCell />
+                </DataGridTableHeadRow>
+              )
+            })}
           </DataGridTableHead>
 
           {(props.tableLayout?.stripped || !props.tableLayout?.rowBorder) && (

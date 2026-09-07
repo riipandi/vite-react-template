@@ -992,6 +992,26 @@ function isDataGridInteractiveKeyTarget(target: EventTarget | null): boolean {
   )
 }
 
+/** Swallows the click that follows a completed cell-range drag, so the drag's
+ * terminating click never toggles or focuses whatever it landed on. */
+function squelchRangeDragClick(clickEvent: MouseEvent) {
+  clickEvent.stopPropagation()
+  clickEvent.preventDefault()
+}
+
+/**
+ * Focuses the in-cell editor and puts the caret at the END of the value (the
+ * Excel F2 convention); a textarea would otherwise open with it at position
+ * 0. Used as the editor's ref callback, so both happen on mount without the
+ * a11y-hostile `autoFocus` attribute.
+ */
+function focusDataGridCellEditor(element: HTMLInputElement | HTMLTextAreaElement | null) {
+  if (!element) return
+  element.focus()
+  const end = element.value.length
+  element.setSelectionRange?.(end, end)
+}
+
 /**
  * Headless spreadsheet controller: keyboard navigation, clipboard, clear and
  * the fill-handle drag. Mount once inside `<DataGrid>`, next to the table.
@@ -1024,8 +1044,21 @@ function DataGridCellSelection<TData extends object>({
   // editor overlay portals into it so it scrolls with the cells.
   const [viewportEl, setViewportEl] = useState<HTMLElement | null>(null)
   const [editorSession, setEditorSession] = useState<DataGridEditorSession | null>(null)
-  const { table } = context
-  const enabled = !!context.props.tableLayout?.cellSelection && table.atoms.cellSelection != null
+  // The wiring effect below re-keys on the table's store, so the instance it
+  // captures here stays current for as long as the listeners live.
+  const gridTable = context.table
+  const enabled =
+    !!context.props.tableLayout?.cellSelection && gridTable.atoms.cellSelection != null
+
+  // The wiring effect reads config through this ref: the context object serves
+  // fresh props/table through its own getters, and re-wiring the listeners
+  // whenever a callback prop changes identity would tear down an active cell
+  // selection mid-drag. Written during render on purpose - the value must be
+  // current for every consumer read within the same commit.
+  const wiringRef = useRef({ context, apiRef })
+  useEffect(() => {
+    wiringRef.current = { context, apiRef }
+  })
 
   useEffect(() => {
     if (!enabled) return
@@ -1045,10 +1078,12 @@ function DataGridCellSelection<TData extends object>({
       viewports[0]
     if (!viewport) return
 
-    const getTable = () => context.table
-    const getOnCellsChange = () => context.props.onCellsChange ?? null
+    const { apiRef: apiRefTarget } = wiringRef.current
+    const getTable = () => wiringRef.current.context.table
+    const getOnCellsChange = () => wiringRef.current.context.props.onCellsChange ?? null
     // "single" collapses every grow gesture to the focused cell.
-    const isRangeSelectionEnabled = () => context.props.tableLayout?.cellSelectionMode !== 'single'
+    const isRangeSelectionEnabled = () =>
+      wiringRef.current.context.props.tableLayout?.cellSelectionMode !== 'single'
 
     // The focusable element of the container-focus model. The table carries
     // role="grid", so putting DOM focus (and aria-activedescendant) on it is
@@ -1145,7 +1180,7 @@ function DataGridCellSelection<TData extends object>({
         })
         return true
       }
-      const onCellEditRequest = context.props.onCellEditRequest
+      const onCellEditRequest = wiringRef.current.context.props.onCellEditRequest
       if (cellEdit && onCellEditRequest) {
         onCellEditRequest({
           rowId: cell.row.id,
@@ -1236,7 +1271,7 @@ function DataGridCellSelection<TData extends object>({
       )
     }
 
-    if (apiRef) apiRef.current = { focusCell, clearSelection, scrollToCell }
+    if (apiRefTarget) apiRefTarget.current = { focusCell, clearSelection, scrollToCell }
 
     // Resolves jump targets (Home, End, Ctrl+Arrows, PageUp/PageDown) in the
     // feature's display-index space and lands them through the range API:
@@ -1486,7 +1521,7 @@ function DataGridCellSelection<TData extends object>({
           event.preventDefault()
           void writeSelectionToClipboard().then((written) => {
             if (!written) return
-            context.props.onCellsCopy?.({ ...written, cut: isCut })
+            wiringRef.current.context.props.onCellsCopy?.({ ...written, cut: isCut })
             if (!isCut) return
             const onCellsChange = getOnCellsChange()
             if (!onCellsChange) return
@@ -1738,7 +1773,7 @@ function DataGridCellSelection<TData extends object>({
       const text = serializeDataGridClipboardText(grid)
       event.clipboardData.setData('text/plain', text)
       event.clipboardData.setData('text/html', renderDataGridClipboardHtml(grid))
-      context.props.onCellsCopy?.({ text, grid, cut })
+      wiringRef.current.context.props.onCellsCopy?.({ text, grid, cut })
       return true
     }
 
@@ -1807,7 +1842,7 @@ function DataGridCellSelection<TData extends object>({
       pressedUnfocusedControl = false
       if (event.button !== 0) return
       if (event.shiftKey || event.ctrlKey || event.metaKey) return
-      if (context.props.tableLayout?.cellEditMode === 'click') return
+      if (wiringRef.current.context.props.tableLayout?.cellEditMode === 'click') return
       const control = getTwoStepControl(event.target)
       const cell = control?.closest('td[data-col-id]')
       if (!control || !cell || !viewport.contains(cell)) return
@@ -1879,12 +1914,8 @@ function DataGridCellSelection<TData extends object>({
       dragStartedOnCell = false
       viewport.removeAttribute('data-cell-selecting')
       if (!wasDrag) return
-      const squelch = (clickEvent: MouseEvent) => {
-        clickEvent.stopPropagation()
-        clickEvent.preventDefault()
-      }
-      viewport.addEventListener('click', squelch, { capture: true })
-      setTimeout(() => viewport.removeEventListener('click', squelch, true), 0)
+      viewport.addEventListener('click', squelchRangeDragClick, { capture: true })
+      setTimeout(() => viewport.removeEventListener('click', squelchRangeDragClick, true), 0)
     }
 
     const handleMouseDown = (event: MouseEvent) => {
@@ -1934,7 +1965,7 @@ function DataGridCellSelection<TData extends object>({
     // squelched in capture before this bubble listener, and modifier
     // clicks are selection gestures.
     const handleClickToEdit = (event: MouseEvent) => {
-      if (context.props.tableLayout?.cellEditMode !== 'click') return
+      if (wiringRef.current.context.props.tableLayout?.cellEditMode !== 'click') return
       if (event.shiftKey || event.ctrlKey || event.metaKey) return
       if (isDataGridInteractiveKeyTarget(event.target)) return
       const cell = (event.target as HTMLElement | null)?.closest?.('td')
@@ -1989,8 +2020,8 @@ function DataGridCellSelection<TData extends object>({
       minColumnIndex: bound.minColumnIndex,
       maxColumnIndex: bound.maxColumnIndex
     })
-    const selectionSubscription = table.atoms.cellSelection?.subscribe(() => {
-      const onCellSelectionChange = context.props.onCellSelectionChange
+    const selectionSubscription = gridTable.atoms.cellSelection?.subscribe(() => {
+      const onCellSelectionChange = wiringRef.current.context.props.onCellSelectionChange
       if (!onCellSelectionChange) return
       const tableNow = getTable()
       const focusedCell = tableNow.getFocusedCell()
@@ -2029,15 +2060,15 @@ function DataGridCellSelection<TData extends object>({
       viewport.removeAttribute('data-cell-selecting')
       selectionSubscription?.unsubscribe()
       clearTimeout(focusRetryTimer)
-      if (apiRef) apiRef.current = null
+      if (apiRefTarget) apiRefTarget.current = null
       setViewportEl(null)
       setEditorSession(null)
     }
     // Context getters serve fresh table/props inside every handler, so the
-    // effect re-runs only when the table itself is replaced. apiRef is only
+    // effect re-runs only when the table itself is replaced. apiRef (via wiringRef) is only
     // read and written here: keeping it out of the deps means an inline ref
     // object cannot tear the listeners down every render.
-  }, [enabled, keyboard, clipboard, table.store])
+  }, [enabled, keyboard, clipboard, gridTable.atoms.cellSelection])
 
   // The editor overlay covers the cell but not the fill handle's
   // straddling half, which would poke out beneath it; the viewport flags
@@ -2226,15 +2257,6 @@ function DataGridCellEditorOverlay({
   )
   const finishedRef = useRef(false)
 
-  // The caret belongs at the END of the value (the Excel F2 convention);
-  // a textarea would otherwise open with it at position 0. Set on mount,
-  // before autoFocus lands, so the stored selection is already right.
-  const placeCaretAtEnd = (element: HTMLInputElement | HTMLTextAreaElement | null) => {
-    if (!element) return
-    const end = element.value.length
-    element.setSelectionRange?.(end, end)
-  }
-
   useEffect(() => {
     if (!metrics) onCancel()
   }, [metrics, onCancel])
@@ -2300,8 +2322,7 @@ function DataGridCellEditorOverlay({
       <textarea
         data-slot='data-grid-cell-editor'
         data-multiline='true'
-        ref={placeCaretAtEnd}
-        autoFocus
+        ref={focusDataGridCellEditor}
         aria-label={session.label}
         defaultValue={session.initialValue}
         rows={1}
@@ -2312,8 +2333,7 @@ function DataGridCellEditorOverlay({
     ) : (
       <input
         data-slot='data-grid-cell-editor'
-        ref={placeCaretAtEnd}
-        autoFocus
+        ref={focusDataGridCellEditor}
         aria-label={session.label}
         defaultValue={session.initialValue}
         {...editorProps}

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useTable } from '@tanstack/react-table'
-import type { ColumnDef, SortingState } from '@tanstack/react-table'
+import type { ColumnDef, HeaderContext, SortingState } from '@tanstack/react-table'
 import { RefreshCwIcon } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
@@ -354,8 +354,7 @@ function matrixColumns(): ColumnDef<DataGridFeatures, IRow>[] {
         id: `metric-${metric + 1}`,
         // Matrix headers are uniform; the loose context typing keeps the
         // generated columns simple.
-        // oxlint-disable-next-line @typescript-eslint/no-explicit-any
-        header: (context: any) => (
+        header: (context: HeaderContext<DataGridFeatures, IRow>) => (
           <DataGridColumnHeader
             title={`M${String(metric + 1).padStart(2, '0')}`}
             column={context.column}

@@ -605,8 +605,7 @@ function DataGridTableVirtualBody<TData extends object>({
  */
 const MemoizedVirtualBody = memo(
   DataGridTableVirtualBody,
-  (_prev, next) =>
-    !!next.table.state.columnResizing.isResizingColumn || next.table._isSelectingCells === true
+  (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
 ) as typeof DataGridTableVirtualBody
 
 function DataGridTableVirtual<TData extends object>({
@@ -749,17 +748,12 @@ function DataGridTableVirtual<TData extends object>({
   // virtualizer's cached sizes by hand.
   useEffect(() => {
     if (columnVirtualizationActive) columnVirtualizer.measure()
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [
     columnVirtualizationActive,
     columnVirtualizer,
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
     table.state.columnSizing,
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
     table.state.columnVisibility,
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
     table.state.columnOrder,
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
     table.state.columnPinning
   ])
 
@@ -774,6 +768,11 @@ function DataGridTableVirtual<TData extends object>({
           end: virtualColumns[virtualColumns.length - 1]!.index
         }
       : undefined
+  // Primitive bounds for the header memo below: the derived object churns
+  // identity every render, these numbers move only when the window moves.
+  const centerWindowStart = centerColumnWindow ? centerColumnWindow.start : -1
+  const centerWindowEnd = centerColumnWindow ? centerColumnWindow.end : -1
+  const centerColumnCount = centerVisibleColumns.length
 
   const virtualItems = isVirtualizationEnabled ? virtualizer.getVirtualItems() : []
   const totalSize = isVirtualizationEnabled ? virtualizer.getTotalSize() : 0
@@ -944,17 +943,22 @@ function DataGridTableVirtual<TData extends object>({
     viewportElements.containerElement
   ])
 
+  // The last rendered row index as a primitive: `virtualItems` churns identity
+  // every render (the virtualizer returns a fresh array), the index moves only
+  // when the scroll window actually moves, which is the event that matters.
+  const lastVirtualIndex =
+    virtualItems.length > 0 ? virtualItems[virtualItems.length - 1]!.index : -1
+
   useEffect(() => {
     if (!isVirtualizationEnabled || !isInfiniteMode || hasMore === false || isFetchingMore) {
       return
     }
 
-    const lastItem = virtualItems[virtualItems.length - 1]
-    if (!lastItem) return
+    if (lastVirtualIndex < 0) return
 
     if (fetchMoreFiredAtCountRef.current === centerRows.length) return
 
-    if (lastItem.index >= centerRows.length - 1 - resolvedFetchMoreOffset) {
+    if (lastVirtualIndex >= centerRows.length - 1 - resolvedFetchMoreOffset) {
       fetchMoreFiredAtCountRef.current = centerRows.length
       onFetchMore?.()
     }
@@ -964,94 +968,77 @@ function DataGridTableVirtual<TData extends object>({
     isFetchingMore,
     isInfiniteMode,
     isVirtualizationEnabled,
+    lastVirtualIndex,
     onFetchMore,
-    resolvedFetchMoreOffset,
-    virtualItems
+    resolvedFetchMoreOffset
   ])
 
   // The header re-renders only when its real inputs move: the table
   // wrapper (any table state change recreates it), the layout props, and
   // the column window. A scroll frame changes none of them, so the whole
   // sortable-header subtree is reused instead of rebuilt per frame.
-  // oxlint-disable-next-line react-hooks/exhaustive-deps
-  const headerNode = useMemo(
-    () =>
-      renderHeader && (
-        <DataGridTableHead>
-          {mergedHeaderGroups.map((headerGroup) => (
-            <DataGridTableHeadRow key={headerGroup.id} rowId={headerGroup.id}>
-              {/* Under an active column window the single ungrouped header
+  const headerNode = useMemo(() => {
+    if (!renderHeader) return null
+    // Rebuilt from the primitive bounds; the outer object churns identity
+    // every render and cannot be a dependency.
+    const activeWindow =
+      centerWindowStart >= 0 ? { start: centerWindowStart, end: centerWindowEnd } : undefined
+    return (
+      <DataGridTableHead>
+        {mergedHeaderGroups.map((headerGroup) => (
+          <DataGridTableHeadRow key={headerGroup.id} rowId={headerGroup.id}>
+            {/* Under an active column window the single ungrouped header
                         row is bucketed start / windowed center / end, with each
                         off-window flank one colSpan spacer sized by the intact
                         colgroup - the same shape the body rows take. */}
-              {centerColumnWindow
-                ? headerGroup.headers
-                    .filter((header) => header.column.getIsPinned() === 'start')
-                    .map((header) => (
-                      <DataGridTableHeadRowCell header={header} key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(header.column.columnDef.header, header.getContext())}
-                        {props.tableLayout?.columnsResizable && header.column.getCanResize() && (
-                          <DataGridTableHeadRowCellResize header={header} />
-                        )}
-                      </DataGridTableHeadRowCell>
-                    ))
-                : null}
-              {centerColumnWindow && centerColumnWindow.start > 0 ? (
-                <th
-                  aria-hidden='true'
-                  data-slot='data-grid-table-virtual-col-spacer'
-                  colSpan={centerColumnWindow.start}
-                  {...stylex.props(s3.placeholderCell)}
-                />
-              ) : null}
-              {centerColumnWindow
-                ? headerGroup.headers
-                    .filter((header) => !header.column.getIsPinned())
-                    .slice(centerColumnWindow.start, centerColumnWindow.end + 1)
-                    .map((header) => (
-                      <DataGridTableHeadRowCell header={header} key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(header.column.columnDef.header, header.getContext())}
-                        {props.tableLayout?.columnsResizable && header.column.getCanResize() && (
-                          <DataGridTableHeadRowCellResize header={header} />
-                        )}
-                      </DataGridTableHeadRowCell>
-                    ))
-                : null}
-              {centerColumnWindow &&
-              centerVisibleColumns.length - 1 - centerColumnWindow.end > 0 ? (
-                <th
-                  aria-hidden='true'
-                  data-slot='data-grid-table-virtual-col-spacer'
-                  colSpan={centerVisibleColumns.length - 1 - centerColumnWindow.end}
-                  {...stylex.props(s3.placeholderCell)}
-                />
-              ) : null}
-              {!centerColumnWindow &&
-                headerGroup.headers
-                  .filter((header) => header.column.getIsPinned() !== 'end')
-                  .map((header) => {
-                    const { column } = header
-
-                    return (
-                      <DataGridTableHeadRowCell header={header} key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(header.column.columnDef.header, header.getContext())}
-                        {props.tableLayout?.columnsResizable && column.getCanResize() && (
-                          <DataGridTableHeadRowCellResize header={header} />
-                        )}
-                      </DataGridTableHeadRowCell>
-                    )
-                  })}
-              {props.tableLayout?.columnsResizable && hasRightPinnedColumns ? (
-                <DataGridTableFillHeadCell />
-              ) : null}
-              {headerGroup.headers
-                .filter((header) => header.column.getIsPinned() === 'end')
+            {activeWindow
+              ? headerGroup.headers
+                  .filter((header) => header.column.getIsPinned() === 'start')
+                  .map((header) => (
+                    <DataGridTableHeadRowCell header={header} key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(header.column.columnDef.header, header.getContext())}
+                      {props.tableLayout?.columnsResizable && header.column.getCanResize() && (
+                        <DataGridTableHeadRowCellResize header={header} />
+                      )}
+                    </DataGridTableHeadRowCell>
+                  ))
+              : null}
+            {activeWindow && activeWindow.start > 0 ? (
+              <th
+                aria-hidden='true'
+                data-slot='data-grid-table-virtual-col-spacer'
+                colSpan={activeWindow.start}
+                {...stylex.props(s3.placeholderCell)}
+              />
+            ) : null}
+            {activeWindow
+              ? headerGroup.headers
+                  .filter((header) => !header.column.getIsPinned())
+                  .slice(activeWindow.start, activeWindow.end + 1)
+                  .map((header) => (
+                    <DataGridTableHeadRowCell header={header} key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(header.column.columnDef.header, header.getContext())}
+                      {props.tableLayout?.columnsResizable && header.column.getCanResize() && (
+                        <DataGridTableHeadRowCellResize header={header} />
+                      )}
+                    </DataGridTableHeadRowCell>
+                  ))
+              : null}
+            {activeWindow && centerColumnCount - 1 - activeWindow.end > 0 ? (
+              <th
+                aria-hidden='true'
+                data-slot='data-grid-table-virtual-col-spacer'
+                colSpan={centerColumnCount - 1 - activeWindow.end}
+                {...stylex.props(s3.placeholderCell)}
+              />
+            ) : null}
+            {!activeWindow &&
+              headerGroup.headers
+                .filter((header) => header.column.getIsPinned() !== 'end')
                 .map((header) => {
                   const { column } = header
 
@@ -1066,16 +1053,41 @@ function DataGridTableVirtual<TData extends object>({
                     </DataGridTableHeadRowCell>
                   )
                 })}
-              {props.tableLayout?.columnsResizable && !hasRightPinnedColumns ? (
-                <DataGridTableFillHeadCell />
-              ) : null}
-            </DataGridTableHeadRow>
-          ))}
-        </DataGridTableHead>
-      ),
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
-    [renderHeader, table, props.tableLayout, centerColumnWindow, hasRightPinnedColumns]
-  )
+            {props.tableLayout?.columnsResizable && hasRightPinnedColumns ? (
+              <DataGridTableFillHeadCell />
+            ) : null}
+            {headerGroup.headers
+              .filter((header) => header.column.getIsPinned() === 'end')
+              .map((header) => {
+                const { column } = header
+
+                return (
+                  <DataGridTableHeadRowCell header={header} key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(header.column.columnDef.header, header.getContext())}
+                    {props.tableLayout?.columnsResizable && column.getCanResize() && (
+                      <DataGridTableHeadRowCellResize header={header} />
+                    )}
+                  </DataGridTableHeadRowCell>
+                )
+              })}
+            {props.tableLayout?.columnsResizable && !hasRightPinnedColumns ? (
+              <DataGridTableFillHeadCell />
+            ) : null}
+          </DataGridTableHeadRow>
+        ))}
+      </DataGridTableHead>
+    )
+  }, [
+    renderHeader,
+    mergedHeaderGroups,
+    centerWindowStart,
+    centerWindowEnd,
+    centerColumnCount,
+    props.tableLayout,
+    hasRightPinnedColumns
+  ])
 
   return (
     <DataGridTableViewport

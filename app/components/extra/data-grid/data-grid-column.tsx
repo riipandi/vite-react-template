@@ -35,12 +35,12 @@ import { Input } from '#/components/base/input'
 import { Popover, PopoverContent, PopoverTrigger } from '#/components/base/popover'
 import { Separator } from '#/components/base/separator'
 import { Badge } from '#/components/extra/badge'
-import { getColumnHeaderLabel, useDataGrid } from './data-grid'
+import { getColumnHeaderLabel, rekey, useDataGrid } from './data-grid'
 import type { DataGridFeatures } from './data-grid'
 import {
-  dataGridColumnFilterStyles,
-  dataGridColumnHeaderStyles,
-  dataGridColumnVisibilityStyles
+  dataGridColumnFilterStyles as sFilter,
+  dataGridColumnHeaderStyles as sHeader,
+  dataGridColumnVisibilityStyles as sVisibility
 } from './data-grid-column.stylex'
 
 interface DataGridColumnFilterProps<TData extends object, TValue> {
@@ -53,7 +53,7 @@ interface DataGridColumnFilterProps<TData extends object, TValue> {
   }[]
 }
 
-const OPTION_ICON_PROPS = stylex.props(dataGridColumnFilterStyles.optionIcon) as {
+const OPTION_ICON_PROPS = stylex.props(sFilter.optionIcon) as {
   className?: string
 }
 
@@ -62,7 +62,6 @@ function DataGridColumnFilter<TData extends object, TValue>({
   title,
   options
 }: DataGridColumnFilterProps<TData, TValue>) {
-  const s = dataGridColumnFilterStyles
   const { i18n } = useDataGrid()
   const facets = column?.getFacetedUniqueValues()
   const filterValue = column?.getFilterValue()
@@ -81,24 +80,24 @@ function DataGridColumnFilter<TData extends object, TValue>({
       <PopoverTrigger
         render={
           <Button variant='outline' size='sm'>
-            <CirclePlusIcon {...stylex.props(s.triggerIcon)} />
+            <CirclePlusIcon {...stylex.props(sFilter.triggerIcon)} />
             {title}
             {selectedValues?.size > 0 && (
               <>
-                <Separator orientation='vertical' style={s.verticalSeparator} />
-                <Badge variant='secondary' style={s.countBadge}>
+                <Separator orientation='vertical' style={sFilter.verticalSeparator} />
+                <Badge variant='secondary' style={sFilter.countBadge}>
                   {selectedValues.size}
                 </Badge>
-                <div {...stylex.props(s.badgeList)}>
+                <div {...stylex.props(sFilter.badgeList)}>
                   {selectedValues.size > 2 ? (
-                    <Badge variant='secondary' style={s.countBadge}>
+                    <Badge variant='secondary' style={sFilter.countBadge}>
                       {i18n.labels.filterSelectedCount(selectedValues.size)}
                     </Badge>
                   ) : (
                     options
                       .filter((option) => selectedValues.has(option.value))
                       .map((option) => (
-                        <Badge variant='secondary' key={option.value} style={s.countBadge}>
+                        <Badge variant='secondary' key={option.value} style={sFilter.countBadge}>
                           {option.label}
                         </Badge>
                       ))
@@ -109,20 +108,20 @@ function DataGridColumnFilter<TData extends object, TValue>({
           </Button>
         }
       />
-      <PopoverContent align='start' style={s.content}>
-        <div {...stylex.props(s.searchArea)}>
+      <PopoverContent align='start' style={sFilter.content}>
+        <div {...stylex.props(sFilter.searchArea)}>
           <Input
             placeholder={title}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            style={s.searchInput}
+            style={sFilter.searchInput}
           />
         </div>
-        <div {...stylex.props(s.optionsScroll)}>
+        <div {...stylex.props(sFilter.optionsScroll)}>
           {filteredOptions.length === 0 ? (
-            <div {...stylex.props(s.empty)}>{i18n.labels.filterNoResults}</div>
+            <div {...stylex.props(sFilter.empty)}>{i18n.labels.filterNoResults}</div>
           ) : (
-            <div {...stylex.props(s.listArea)}>
+            <div {...stylex.props(sFilter.listArea)}>
               {filteredOptions.map((option) => {
                 const isSelected = selectedValues.has(option.value)
                 const facetCount = facets?.get(option.value)
@@ -136,58 +135,47 @@ function DataGridColumnFilter<TData extends object, TValue>({
                   column?.setFilterValue(filterValues.length ? filterValues : undefined)
                 }
                 return (
-                  <div
+                  <button
                     key={option.value}
-                    role='button'
-                    tabIndex={0}
+                    type='button'
                     aria-pressed={isSelected}
                     onClick={toggleOption}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
-                        toggleOption()
-                      }
-                    }}
-                    {...stylex.props(s.optionRow)}
+                    {...stylex.props(sFilter.optionRow)}
                   >
                     <div
                       {...stylex.props(
-                        s.optionBox,
-                        isSelected ? s.optionBoxSelected : s.optionBoxUnchecked
+                        sFilter.optionBox,
+                        isSelected ? sFilter.optionBoxSelected : sFilter.optionBoxUnchecked
                       )}
                     >
                       <CheckIcon
-                        {...stylex.props(s.optionCheckIcon, !isSelected && s.iconHidden)}
+                        {...stylex.props(
+                          sFilter.optionCheckIcon,
+                          !isSelected && sFilter.iconHidden
+                        )}
                       />
                     </div>
                     {option.icon && <option.icon {...OPTION_ICON_PROPS} />}
                     <span>{option.label}</span>
                     {facetCount !== undefined && (
-                      <span {...stylex.props(s.facetCount)}>{facetCount}</span>
+                      <span {...stylex.props(sFilter.facetCount)}>{facetCount}</span>
                     )}
-                  </div>
+                  </button>
                 )
               })}
             </div>
           )}
           {selectedValues.size > 0 && (
             <>
-              <div {...stylex.props(s.divider)} />
-              <div {...stylex.props(s.listArea)}>
-                <div
-                  role='button'
-                  tabIndex={0}
+              <div {...stylex.props(sFilter.divider)} />
+              <div {...stylex.props(sFilter.listArea)}>
+                <button
+                  type='button'
                   onClick={() => column?.setFilterValue(undefined)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      column?.setFilterValue(undefined)
-                    }
-                  }}
-                  {...stylex.props(s.optionRow, s.clearRow)}
+                  {...stylex.props(sFilter.optionRow, sFilter.clearRow)}
                 >
                   {i18n.labels.filterClear}
-                </div>
+                </button>
               </div>
             </>
           )}
@@ -222,7 +210,6 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
   filter,
   visibility = false
 }: DataGridColumnHeaderProps<TData, TValue>) {
-  const s = dataGridColumnHeaderStyles
   const { i18n, isLoading, table, props } = useDataGrid()
   const resolvedTitle = title ?? getColumnHeaderLabel(column)
 
@@ -260,11 +247,14 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
   const sortIcon =
     canSort &&
     (isSorted === 'desc' ? (
-      <ArrowDownIcon aria-hidden='true' {...stylex.props(s.sortIcon)} />
+      <ArrowDownIcon aria-hidden='true' {...stylex.props(sHeader.sortIcon)} />
     ) : isSorted === 'asc' ? (
-      <ArrowUpIcon aria-hidden='true' {...stylex.props(s.sortIcon)} />
+      <ArrowUpIcon aria-hidden='true' {...stylex.props(sHeader.sortIcon)} />
     ) : (
-      <ChevronsUpDownIcon aria-hidden='true' {...stylex.props(s.sortIcon, s.sortIconIdle)} />
+      <ChevronsUpDownIcon
+        aria-hidden='true'
+        {...stylex.props(sHeader.sortIcon, sHeader.sortIconIdle)}
+      />
     ))
 
   const hasControls =
@@ -304,9 +294,9 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
           }}
           disabled={!canSort}
         >
-          <ArrowUpIcon {...stylex.props(s.menuIcon)} />
-          <span {...stylex.props(s.menuItemLabel)}>{i18n.labels.sortAscending}</span>
-          {isSorted === 'asc' && <CheckIcon {...stylex.props(s.menuCheckIcon)} />}
+          <ArrowUpIcon {...stylex.props(sHeader.menuIcon)} />
+          <span {...stylex.props(sHeader.menuItemLabel)}>{i18n.labels.sortAscending}</span>
+          {isSorted === 'asc' && <CheckIcon {...stylex.props(sHeader.menuCheckIcon)} />}
         </DropdownMenuItem>,
         <DropdownMenuItem
           key='sort-desc'
@@ -319,9 +309,9 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
           }}
           disabled={!canSort}
         >
-          <ArrowDownIcon {...stylex.props(s.menuIcon)} />
-          <span {...stylex.props(s.menuItemLabel)}>{i18n.labels.sortDescending}</span>
-          {isSorted === 'desc' && <CheckIcon {...stylex.props(s.menuCheckIcon)} />}
+          <ArrowDownIcon {...stylex.props(sHeader.menuIcon)} />
+          <span {...stylex.props(sHeader.menuItemLabel)}>{i18n.labels.sortDescending}</span>
+          {isSorted === 'desc' && <CheckIcon {...stylex.props(sHeader.menuCheckIcon)} />}
         </DropdownMenuItem>
       )
       hasPreviousSection = true
@@ -337,17 +327,17 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
           key='pin-left'
           onClick={() => column.pin(isPinned === 'start' ? false : 'start')}
         >
-          <ArrowLeftToLineIcon aria-hidden='true' {...stylex.props(s.menuIcon)} />
-          <span {...stylex.props(s.menuItemLabel)}>{i18n.labels.pinColumnStart}</span>
-          {isPinned === 'start' && <CheckIcon {...stylex.props(s.menuCheckIcon)} />}
+          <ArrowLeftToLineIcon aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
+          <span {...stylex.props(sHeader.menuItemLabel)}>{i18n.labels.pinColumnStart}</span>
+          {isPinned === 'start' && <CheckIcon {...stylex.props(sHeader.menuCheckIcon)} />}
         </DropdownMenuItem>,
         <DropdownMenuItem
           key='pin-right'
           onClick={() => column.pin(isPinned === 'end' ? false : 'end')}
         >
-          <ArrowRightToLineIcon aria-hidden='true' {...stylex.props(s.menuIcon)} />
-          <span {...stylex.props(s.menuItemLabel)}>{i18n.labels.pinColumnEnd}</span>
-          {isPinned === 'end' && <CheckIcon {...stylex.props(s.menuCheckIcon)} />}
+          <ArrowRightToLineIcon aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
+          <span {...stylex.props(sHeader.menuItemLabel)}>{i18n.labels.pinColumnEnd}</span>
+          {isPinned === 'end' && <CheckIcon {...stylex.props(sHeader.menuCheckIcon)} />}
         </DropdownMenuItem>
       )
       hasPreviousSection = true
@@ -373,7 +363,7 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
           }}
           disabled={!canMoveLeft || isPinned !== false}
         >
-          <ArrowLeftIcon aria-hidden='true' {...stylex.props(s.menuIcon)} />
+          <ArrowLeftIcon aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
           <span>{i18n.labels.moveColumnStart}</span>
         </DropdownMenuItem>,
         <DropdownMenuItem
@@ -390,7 +380,7 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
           }}
           disabled={!canMoveRight || isPinned !== false}
         >
-          <ArrowRightIcon aria-hidden='true' {...stylex.props(s.menuIcon)} />
+          <ArrowRightIcon aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
           <span>{i18n.labels.moveColumnEnd}</span>
         </DropdownMenuItem>
       )
@@ -405,7 +395,7 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
       items.push(
         <DropdownMenuSub key='visibility'>
           <DropdownMenuSubTrigger>
-            <Settings2Icon {...stylex.props(s.menuIcon)} />
+            <Settings2Icon {...stylex.props(sHeader.menuIcon)} />
             <span>{i18n.labels.columnsMenu}</span>
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent side='right'>
@@ -418,7 +408,7 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
                   checked={col.getIsVisible()}
                   onSelect={(event) => event.preventDefault()}
                   onCheckedChange={(value) => col.toggleVisibility(!!value)}
-                  style={s.capitalize}
+                  style={sHeader.capitalize}
                 >
                   {getColumnHeaderLabel(col)}
                 </DropdownMenuCheckboxItem>
@@ -428,8 +418,10 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
       )
     }
 
+    // columnVisibilityKey re-keys the memo when visibility state changes:
+    // the checkbox ticks read the live column, not a dep-tracked value.
+    rekey(columnVisibilityKey)
     return items
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [
     filter,
     canSort,
@@ -446,24 +438,24 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
     table,
     columnIndex,
     columnOrder,
-    columnVisibilityKey, // Needed to update checkbox states when visibility changes
+    columnVisibilityKey,
     i18n
   ])
 
   if (hasControls) {
     return (
-      <div {...stylex.props(s.controlsRow)}>
+      <div {...stylex.props(sHeader.controlsRow)}>
         <DropdownMenu>
           <DropdownMenuTrigger
             render={
-              <Button variant='ghost' style={[s.triggerButton, style]} disabled={isLoading}>
-                {icon && icon}
+              <Button variant='ghost' style={[sHeader.triggerButton, style]} disabled={isLoading}>
+                {icon}
                 {resolvedTitle}
                 {sortIcon}
               </Button>
             }
           />
-          <DropdownMenuContent align='start' style={s.menuContent}>
+          <DropdownMenuContent align='start' style={sHeader.menuContent}>
             {menuItems}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -471,12 +463,12 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
           <Button
             size='iconXs'
             variant='ghost'
-            style={s.unpinButton}
+            style={sHeader.unpinButton}
             onClick={() => column.pin(false)}
             aria-label={i18n.labels.unpinColumn(resolvedTitle)}
             title={i18n.labels.unpinColumn(resolvedTitle)}
           >
-            <PinOffIcon aria-hidden='true' {...stylex.props(s.unpinIcon)} />
+            <PinOffIcon aria-hidden='true' {...stylex.props(sHeader.unpinIcon)} />
           </Button>
         )}
       </div>
@@ -485,14 +477,14 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
 
   if (canSort || (props.tableLayout?.columnsResizable && canResize)) {
     return (
-      <div {...stylex.props(s.sortRow)}>
+      <div {...stylex.props(sHeader.sortRow)}>
         <Button
           variant='ghost'
-          style={[s.triggerButton, style]}
+          style={[sHeader.triggerButton, style]}
           disabled={isLoading}
           onClick={handleSort}
         >
-          {icon && icon}
+          {icon}
           {resolvedTitle}
           {sortIcon}
         </Button>
@@ -501,8 +493,8 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
   }
 
   return (
-    <div {...stylex.props(s.label, style)}>
-      {icon && <span {...stylex.props(s.labelIcon)}>{icon}</span>}
+    <div {...stylex.props(sHeader.label, style)}>
+      {icon && <span {...stylex.props(sHeader.labelIcon)}>{icon}</span>}
       {resolvedTitle}
     </div>
   )
@@ -555,13 +547,12 @@ function DataGridColumnVisibility<TData extends object>({
   table: Table<DataGridFeatures, TData>
   trigger: ReactElement<Record<string, unknown>>
 }) {
-  const s = dataGridColumnVisibilityStyles
   const { i18n } = useDataGrid()
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger render={trigger} />
-      <DropdownMenuContent align='end' style={s.content}>
+      <DropdownMenuContent align='end' style={sVisibility.content}>
         <DropdownMenuGroup>
           <DropdownMenuLabel>{i18n.labels.toggleColumns}</DropdownMenuLabel>
           {table
@@ -571,7 +562,7 @@ function DataGridColumnVisibility<TData extends object>({
               return (
                 <DropdownMenuCheckboxItem
                   key={column.id}
-                  style={s.item}
+                  style={sVisibility.item}
                   checked={column.getIsVisible()}
                   onSelect={(event) => event.preventDefault()}
                   onCheckedChange={(value) => column.toggleVisibility(!!value)}

@@ -89,7 +89,7 @@ const AvatarLinkCell = ({ row }: { row: IData & { initials: string } }) => (
       <AvatarImage src={row.avatar} alt={row.name} />
       <AvatarFallback>{row.initials}</AvatarFallback>
     </Avatar>
-    <a href='#' {...stylex.props(s.link, s.strong)}>
+    <a href={`#${row.id}`} {...stylex.props(s.link, s.strong)}>
       {row.name}
     </a>
   </div>

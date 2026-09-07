@@ -1,9 +1,10 @@
-import type { UniqueIdentifier, DragEndEvent } from '@dnd-kit/core'
+import type { UniqueIdentifier } from '@dnd-kit/core'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useTable } from '@tanstack/react-table'
 import type {
+  Column,
   ColumnDef,
   ExpandedState,
   PaginationState,
@@ -217,11 +218,15 @@ function ExpandableColumns(): ColumnDef<DataGridFeatures, IDetail>[] {
       size: 48,
       meta: {
         // Receives `row.original` (source contract), not the TanStack row.
-        expandedContent: (row) => (
-          <div {...stylex.props(statusStyles.muted, statusStyles.expandedContent)}>
-            {row.details}
-          </div>
-        )
+        // The features bundle erases TData, so narrow here.
+        expandedContent: (rawRow) => {
+          const row = rawRow as IDetail
+          return (
+            <div {...stylex.props(statusStyles.muted, statusStyles.expandedContent)}>
+              {row.details}
+            </div>
+          )
+        }
       }
     },
     {
@@ -325,6 +330,15 @@ const orderData: IOrder[] = [
   }
 ]
 
+/** Price cell shared by the order-line tables (currency, two decimals). */
+const priceCell = (info: { getValue: () => unknown }) => (
+  <>${(info.getValue() as number).toFixed(2)}</>
+)
+
+/** The demo owns no data writes — the drag itself is the visible reorder;
+ * persisting the new order is the consumer's concern. */
+function demoRowDragEnd() {}
+
 function SubTable({ items }: { items: IOrder['lines'] }) {
   const columns = useMemo<ColumnDef<DataGridFeatures, IOrder['lines'][number]>[]>(
     () => [
@@ -334,7 +348,7 @@ function SubTable({ items }: { items: IOrder['lines'] }) {
       {
         accessorKey: 'price',
         header: 'Price ($)',
-        cell: (info) => <>${(info.getValue() as number).toFixed(2)}</>,
+        cell: priceCell,
         size: 120
       }
     ],
@@ -387,7 +401,8 @@ export const SubTableStory: Story = {
           cell: (info) => <>${(info.getValue() as number).toFixed(2)}</>,
           size: 120,
           meta: {
-            expandedContent: (row) => <SubTable items={row.lines} />
+            // The features bundle erases TData, so narrow here.
+            expandedContent: (rawRow) => <SubTable items={(rawRow as IOrder).lines} />
           }
         }
       ],
@@ -470,22 +485,13 @@ export const DraggableRows: Story = {
       () => table.getRowModel().rows.map((row) => row.id),
       [table]
     )
-    const handleDragEnd = (event: DragEndEvent) => {
-      const { active, over } = event
-      if (active && over && active.id !== over.id) {
-        // Reordering a paginated slice is the consumer's concern; the demo
-        // reports the move so the interaction is observable.
-        // oxlint-disable-next-line no-console
-        console.debug('reorder', { from: active.id, to: over.id })
-      }
-    }
 
     return (
       <DataGrid table={table} recordCount={demoData.length}>
         <div {...stylex.props(s.stack)}>
           <DataGridContainer>
             <DataGridScrollArea>
-              <DataGridTableDndRows handleDragEnd={handleDragEnd} dataIds={dataIds} />
+              <DataGridTableDndRows handleDragEnd={demoRowDragEnd} dataIds={dataIds} />
             </DataGridScrollArea>
           </DataGridContainer>
           <DataGridPagination />
@@ -709,7 +715,7 @@ export const TreeRows: Story = {
                           .join('')}
                       </AvatarFallback>
                     </Avatar>
-                    <a href='#' {...stylex.props(s.link, s.strong)}>
+                    <a href={`#${item.id}`} {...stylex.props(s.link, s.strong)}>
                       {item.name}
                     </a>
                   </Fragment>
@@ -790,9 +796,7 @@ function DataGridColumnHeaderInline({
   column
 }: {
   title: string
-  // oxlint-disable-next-line @typescript-eslint/no-explicit-any
-  column: any
+  column: Column<DataGridFeatures, ITreeNode>
 }) {
-  // oxlint-disable-next-line @typescript-eslint/no-explicit-any
-  return <DataGridColumnHeader title={title} column={column as any} />
+  return <DataGridColumnHeader title={title} column={column} />
 }

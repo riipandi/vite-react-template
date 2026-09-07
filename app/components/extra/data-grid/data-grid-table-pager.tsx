@@ -408,8 +408,10 @@ function DataGridScrollArea({
     if (!container || !viewport) return
 
     if (!usesCustomVerticalScrollbar) {
-      resetMetrics()
-      return
+      // Scheduled on the next frame: the reset is a settled-state cleanup,
+      // and a synchronous setState here would chain a render off this effect.
+      const resetFrame = window.requestAnimationFrame(resetMetrics)
+      return () => cancelAnimationFrame(resetFrame)
     }
 
     let frame = 0

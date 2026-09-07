@@ -569,7 +569,7 @@ async function fetchServerPage(params: {
   const sort = params.sorting[0]
   if (sort) {
     const direction = sort.desc ? -1 : 1
-    rows = [...rows].sort((a, b) => {
+    rows = rows.toSorted((a, b) => {
       const left = a[sort.id as keyof IData]
       const right = b[sort.id as keyof IData]
       if (typeof left === 'number' && typeof right === 'number') {

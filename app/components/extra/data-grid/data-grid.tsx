@@ -177,13 +177,22 @@ export const dataGridFeatures = tableFeatures({
     text: sortFn_text,
     textCaseSensitive: sortFn_textCaseSensitive
   },
-  // oxlint-disable-next-line @typescript-eslint/no-explicit-any
-  columnMeta: metaHelper<DataGridColumnMeta<any>>()
+  columnMeta: metaHelper<DataGridColumnMeta<unknown>>()
 })
 
 /** The feature set `dataGridFeatures` registers. */
 export type DataGridFeatures = typeof dataGridFeatures
 
+/**
+ * Marks values as intentional memo/effect re-keys. The React Compiler-era
+ * dependency rules require every dependency to be referenced by the callback;
+ * some memos legitimately re-key on values they do not read (state slices
+ * that change the shape of what the callback computes indirectly). Calling
+ * this with those values keeps the re-key machine-checkable and documents it.
+ */
+export function rekey(...keys: unknown[]) {
+  void keys
+}
 /**
  * The grid's internal view of the table.
  *
@@ -727,10 +736,7 @@ export interface DataGridProps<TFeatures extends TableFeatures, TData extends ob
   tableStyles?: DataGridTableStyleSlots
 }
 
-const DataGridContext = createContext<
-  // oxlint-disable-next-line @typescript-eslint/no-explicit-any
-  DataGridContextProps<any> | undefined
->(undefined)
+const DataGridContext = createContext<DataGridContextProps<never> | undefined>(undefined)
 
 /**
  * Reads the grid context. Pass `TData` from the calling component when the
@@ -739,8 +745,9 @@ const DataGridContext = createContext<
  * unifies with a concrete row type the way it did on v8.
  */
 function useDataGrid<
-  // oxlint-disable-next-line @typescript-eslint/no-explicit-any
-  TData extends object = any
+  // `Record<string, unknown>` keeps untyped call sites compiling (row data is
+  // only readable through an explicit generic) without falling back to `any`.
+  TData extends object = Record<string, unknown>
 >(): DataGridContextProps<TData> {
   const context = useContext(DataGridContext) as DataGridContextProps<TData> | undefined
   if (!context) {
@@ -816,18 +823,21 @@ function DataGridProvider<TData extends object>({
     previousPageKeyRef.current = pageKey
     if (!cellSelectionOn || table.atoms.cellSelection == null) return
     tableRef.current.resetCellSelection(true)
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageKey, cellSelectionOn])
+    // Re-runs between page changes are no-ops: the pageKey guard above exits
+    // before touching the selection, so listing `table` costs nothing and
+    // keeps the hook honest about what it reads.
+  }, [pageKey, cellSelectionOn, table])
 
   // One autoSize coordinator per table instance so split header/body viewports
   // cannot apply the growth twice. Keyed on `table.store`, which v9 keeps
   // stable for the life of the table, rather than on `table` itself: the
   // wrapper is re-created on every state change, and re-creating the
   // controller with it would reset its applied-once bookkeeping mid-drag.
-  const autoSize = useMemo(
-    () => createDataGridAutoSizeController<TData>(() => tableRef.current),
-    [table.store]
-  )
+  const autoSize = useMemo(() => {
+    // Identity key only — see the comment above.
+    rekey(table.store)
+    return createDataGridAutoSizeController<TData>(() => tableRef.current)
+  }, [table.store])
 
   const tableState = table.state
 
@@ -840,8 +850,33 @@ function DataGridProvider<TData extends object>({
   // `cellSelection` state is excluded on purpose too: a drag writes it once
   // per cell crossed, and nothing reads it through context - cells and the
   // selection bar subscribe to `table.atoms.cellSelection` directly.
-  const value = useMemo(
-    () => ({
+  // The two serialized keys re-key the value when the object-shaped layout
+  // props change identity OR contents (inline literals change identity every
+  // render, so contents are what the consumer can actually observe).
+  const tableLayoutKey = JSON.stringify(props.tableLayout)
+  const tableStylesKey = JSON.stringify(props.tableStyles)
+  const value = useMemo(() => {
+    // Identity re-keys: these deps republish the context when they change even
+    // though the getters below never read them directly (the getters serve
+    // fresh values through the provider refs). Listed explicitly so the
+    // dependency rules can verify the re-key contract.
+    rekey(
+      props.loadingMode,
+      props.style,
+      tableLayoutKey,
+      tableStylesKey,
+      tableState.sorting,
+      tableState.pagination,
+      tableState.columnFilters,
+      tableState.rowSelection,
+      tableState.rowPinning,
+      tableState.expanded,
+      tableState.columnVisibility,
+      tableState.columnOrder,
+      tableState.columnPinning,
+      tableState.globalFilter
+    )
+    return {
       get props() {
         return propsRef.current
       },
@@ -855,37 +890,35 @@ function DataGridProvider<TData extends object>({
       isLoading: props.isLoading || false,
       gridId,
       autoSize
-    }),
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
-    [
-      autoSize,
-      props.recordCount,
-      props.isLoading,
-      props.loadingMode,
-      props.style,
-      // oxlint-disable-next-line react-hooks/exhaustive-deps
-      JSON.stringify(props.tableLayout),
-      // oxlint-disable-next-line react-hooks/exhaustive-deps
-      JSON.stringify(props.tableStyles),
-      tableState.sorting,
-      tableState.pagination,
-      tableState.columnFilters,
-      tableState.rowSelection,
-      tableState.rowPinning,
-      tableState.expanded,
-      tableState.columnVisibility,
-      tableState.columnOrder,
-      tableState.columnPinning,
-      tableState.globalFilter
-    ]
-  )
+    }
+  }, [
+    autoSize,
+    gridId,
+    props.recordCount,
+    props.isLoading,
+    props.loadingMode,
+    props.style,
+    tableLayoutKey,
+    tableStylesKey,
+    tableState.sorting,
+    tableState.pagination,
+    tableState.columnFilters,
+    tableState.rowSelection,
+    tableState.rowPinning,
+    tableState.expanded,
+    tableState.columnVisibility,
+    tableState.columnOrder,
+    tableState.columnPinning,
+    tableState.globalFilter
+  ])
 
   return (
     // One React context serves every TData, but v9 declares both TFeatures and
-    // TData invariant, so a `DataGridContextProps<any>` context cannot accept a
-    // `DataGridContextProps<TData>` value structurally. The erasure happens
-    // here and is undone by the TData generic on each consumer component.
-    <DataGridContext.Provider value={value as unknown as DataGridContextProps<TData>}>
+    // TData invariant, so a `DataGridContextProps<TData>` context cannot accept a
+    // `DataGridContextProps<TData>` value from a differently-typed provider
+    // instance. The erasure happens here and is undone by the TData generic on
+    // each consumer component.
+    <DataGridContext.Provider value={value as unknown as DataGridContextProps<never>}>
       {children}
     </DataGridContext.Provider>
   )

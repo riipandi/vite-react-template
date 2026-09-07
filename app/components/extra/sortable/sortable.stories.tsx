@@ -1,13 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
-import {
-  ChevronRightIcon,
-  FileTextIcon,
-  GripVerticalIcon,
-  ImageIcon,
-  MusicIcon,
-  VideoIcon
-} from 'lucide-react'
+import { ImageIcon, MusicIcon, VideoIcon } from 'lucide-react'
+import { ChevronRightIcon, FileTextIcon, GripVerticalIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '#/components/base/collapsible'
 import { Switch } from '#/components/base/switch'
@@ -17,18 +11,8 @@ import { Card, CardDescription, CardHeader, CardTitle } from '#/components/extra
 import { Sortable, SortableItem, SortableItemHandle } from '#/components/extra/sortable'
 import type { SortableCommitMeta } from '#/components/extra/sortable'
 import { colors, shadow } from '#/styles/core/colors.stylex'
-import {
-  fontFamily,
-  fontSize,
-  fontLineHeight,
-  fontWeight,
-  radius,
-  stroke,
-  unit,
-  duration,
-  easing,
-  zIndex
-} from '#/styles/core/tokens.stylex'
+import { stroke, unit, duration, easing, radius, zIndex } from '#/styles/core/tokens.stylex'
+import { fontFamily, fontSize, fontLineHeight, fontWeight } from '#/styles/core/tokens.stylex'
 
 const meta = {
   title: 'Extra Components/Sortable',
@@ -95,7 +79,21 @@ const styles = stylex.create({
     lineHeight: fontLineHeight.body2,
     paddingBlock: unit.x3,
     paddingInline: unit.x3,
-    width: '100%'
+    width: '100%',
+    transitionDuration: duration.medium,
+    transitionProperty: 'background-color, border-color, box-shadow, transform',
+    transitionTimingFunction: easing.decelerate,
+    transform: 'translateY(0)',
+    ':hover': {
+      backgroundColor: colors.backgroundNeutralHighlightedFaded,
+      borderColor: colors.borderNeutral,
+      boxShadow: shadow.outline,
+      transform: 'translateY(-1px)'
+    },
+    ':active': {
+      transform: 'translateY(0)',
+      backgroundColor: colors.backgroundNeutralFaded
+    }
   },
   rowMuted: {
     backgroundColor: colors.backgroundNeutralFaded
@@ -127,9 +125,9 @@ const styles = stylex.create({
     color: colors.foregroundPrimary,
     display: 'flex',
     flexShrink: 0,
-    height: unit.x9,
+    height: unit.x8,
     justifyContent: 'center',
-    width: unit.x9
+    width: unit.x8
   },
   featuredCell: {
     gridColumn: {
@@ -208,33 +206,42 @@ const styles = stylex.create({
     display: 'flex',
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
-    gap: unit.x3,
+    gap: unit.x2,
     justifyContent: 'space-between',
     lineHeight: fontLineHeight.body2,
-    paddingBlock: unit.x3,
-    paddingInline: unit.x3,
+    paddingBlock: unit.x2,
+    paddingInline: unit.x2,
     userSelect: 'none',
     width: '100%',
-    transitionDuration: duration.fast,
-    transitionProperty: 'background-color, border-color, box-shadow',
-    transitionTimingFunction: easing.standard,
+    transitionDuration: duration.medium,
+    transitionProperty: 'background-color, border-color, box-shadow, transform',
+    transitionTimingFunction: easing.decelerate,
+    transform: 'translateY(0)',
     ':hover': {
       backgroundColor: colors.backgroundNeutralHighlightedFaded,
       borderColor: colors.borderNeutral,
-      boxShadow: shadow.outline
+      boxShadow: shadow.outline,
+      transform: 'translateY(-1px)'
+    },
+    ':active': {
+      transform: 'translateY(0)',
+      backgroundColor: colors.backgroundNeutralFaded
     }
   },
   groupHeaderOpen: {
+    backgroundColor: colors.backgroundNeutralHighlightedFaded,
     borderColor: colors.borderNeutral,
     boxShadow: shadow.outline
   },
   groupTitle: {
-    fontWeight: fontWeight.medium
+    fontSize: fontSize.body2,
+    fontWeight: fontWeight.medium,
+    lineHeight: fontLineHeight.body2
   },
   groupHeaderRight: {
     alignItems: 'center',
     display: 'flex',
-    gap: unit.x2
+    gap: unit.x1
   },
   groupBadge: {
     fontSize: fontSize.caption1,
@@ -259,7 +266,7 @@ const styles = stylex.create({
   },
   rowCompact: {
     paddingBlock: unit.x2,
-    paddingInline: unit.x3
+    paddingInline: unit.x2
   },
   textCaption: {
     color: colors.foregroundNeutralFaded,
@@ -556,7 +563,7 @@ export const NestedGroups: Story = {
           {optionGroups.map((group) => (
             <SortableItem key={group.id} value={group.id}>
               <div style={styles.groupContainer}>
-                <Collapsible defaultOpen>
+                <Collapsible defaultOpen={group.id === '1'}>
                   <CollapsibleTrigger
                     render={(props, state) => (
                       <button
@@ -904,10 +911,7 @@ const mediaStyles = stylex.create({
     transitionDuration: duration.medium,
     transitionProperty: 'opacity, transform',
     transitionTimingFunction: easing.decelerate,
-    [stylex.when.ancestor(':hover')]: {
-      opacity: 0.9,
-      transform: 'translateY(0)'
-    }
+    [stylex.when.ancestor(':hover')]: { opacity: 0 }
   },
   caption: {
     display: 'flex',

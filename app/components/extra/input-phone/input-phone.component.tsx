@@ -1,17 +1,8 @@
 /**
- * A phone number input with a country selector, composed from the design
- * system's Combobox (Base UI) and `react-phone-number-input`.
+ * A phone number input with a searchable country selector.
  *
  * @see: https://www.npmjs.com/package/react-phone-number-input
  * @see: https://base-ui.com/react/components/combobox
- * @see: https://github.com/keenthemes/reui — phone-input recipe
- *
- * The library's "with country select" entry drives all state (value, country,
- * formatting). We override `countrySelectComponent` with a custom component
- * that renders the design system's Combobox over the library-provided
- * `options` (`{ label, value: Country | undefined }`), and `inputComponent`
- * with the bare `Input` so the digits inherit standard field styling inside
- * the InputGroup (passed via `containerComponent`).
  */
 
 import * as stylex from '@stylexjs/stylex'
@@ -19,8 +10,10 @@ import * as React from 'react'
 import * as BasePhoneInput from 'react-phone-number-input'
 import type { Country, Value } from 'react-phone-number-input'
 import flags from 'react-phone-number-input/flags'
-import { Combobox, ComboboxContent, ComboboxEmpty } from '#/components/base/combobox'
+import { comboboxCreateItems } from '#/components/base/combobox'
+import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput } from '#/components/base/combobox'
 import { ComboboxItem, ComboboxList, ComboboxTrigger } from '#/components/base/combobox'
+import { ComboboxSeparator } from '#/components/base/combobox'
 import { Input } from '#/components/base/input'
 import { InputGroup, inputGroupStyles } from '#/components/extra/input-group'
 import { inputPhoneStyles as s } from './input-phone.stylex'
@@ -29,13 +22,13 @@ type LibraryPhoneInputProps = React.ComponentPropsWithoutRef<typeof BasePhoneInp
 
 export interface InputPhoneProps extends Omit<
   LibraryPhoneInputProps,
-  'onChange' | 'value' | 'defaultValue' | 'style' | 'className'
+  'onChange' | 'value' | 'style' | 'className'
 > {
   style?: stylex.StyleXStyles
-  /** E.164 phone value, e.g. `+12135551234`. */
+  /** E.164 phone value, e.g. `+12135551234`. Use for a controlled field. */
   value?: Value
-  /** Called with the E.164 value (or `undefined` when cleared). */
-  onChange?: (value: Value | undefined) => void
+  /** Called with the E.164 value (or `''` when cleared). */
+  onChange?: (value: Value) => void
   /** Country shown initially. Defaults to `US`. */
   defaultCountry?: Country
   /** Restrict the country dropdown to these countries. */
@@ -44,6 +37,9 @@ export interface InputPhoneProps extends Omit<
   onCountryChange?: (country: Country | undefined) => void
   /** Show the "International" entry in the dropdown. Defaults to `true`. */
   addInternationalOption?: boolean
+  /** Render the country selector. Set `false` for a digits-only field.
+   * Defaults to `true`. */
+  withCountrySelect?: boolean
   /** Marks the field visually as invalid. */
   invalid?: boolean
 }
@@ -63,16 +59,9 @@ interface CountrySelectProps {
 /** Flag SVG from the library's bundled flags (no external requests). */
 function FlagComponent({ country, countryName }: BasePhoneInput.FlagProps) {
   const Flag = country ? flags[country] : undefined
-  if (Flag) {
-    return (
-      <span {...stylex.props(s.flag)}>
-        <Flag title={countryName} />
-      </span>
-    )
-  }
   return (
-    <span {...stylex.props(s.flag)} title={countryName} aria-hidden>
-      🌐
+    <span {...stylex.props(s.flag)}>
+      {Flag ? <Flag title={countryName} /> : <GlobeIcon {...stylex.props(s.flagFallback)} />}
     </span>
   )
 }
@@ -84,25 +73,46 @@ function CountrySelect({
   options: countryList,
   onChange
 }: CountrySelectProps) {
+  const collection = React.useMemo(
+    () =>
+      comboboxCreateItems(countryList as CountryEntry[], {
+        getValue: (entry) => entry.value ?? '',
+        getLabel: (entry) => entry.label
+      }),
+    [countryList]
+  )
+
   return (
     <Combobox
-      items={countryList}
-      value={selectedCountry}
+      items={collection}
+      value={selectedCountry ?? null}
       onValueChange={(next) => {
         if (next) onChange(next)
       }}
     >
-      <ComboboxTrigger disabled={disabled} aria-label='Select country' style={s.countryTrigger}>
+      <ComboboxTrigger
+        disabled={disabled}
+        aria-label='Select country'
+        showChevron={false}
+        style={s.countryTrigger}
+      >
         <FlagComponent country={selectedCountry} countryName={selectedCountry} />
       </ComboboxTrigger>
-      <ComboboxContent>
+      <ComboboxContent style={s.popup}>
+        <ComboboxInput
+          placeholder='Search country…'
+          showTrigger={false}
+          showClear={false}
+          style={s.countrySearch}
+        />
+        <ComboboxSeparator />
         <ComboboxEmpty>No country found.</ComboboxEmpty>
         <ComboboxList>
           {(item: CountryEntry) =>
             item.value ? (
               <ComboboxItem key={item.value} value={item.value}>
                 <FlagComponent country={item.value} countryName={item.label} />
-                <span>{item.label}</span>
+                <span {...stylex.props(s.countryLabel)}>{item.label}</span>
                 <span {...stylex.props(s.countryCode)}>
                   +{BasePhoneInput.getCountryCallingCode(item.value)}
                 </span>
@@ -115,12 +125,20 @@ function CountrySelect({
   )
 }
 
+/** Hidden select stub for `withCountrySelect={false}` — the library always
+ * renders its `countrySelectComponent`, so we give it a null placeholder and
+ * let the digits span the whole group. */
+function NoCountrySelect() {
+  return null
+}
+
 export function InputPhone({
   style,
   defaultCountry = 'US',
   countries,
   onCountryChange,
   addInternationalOption = true,
+  withCountrySelect = true,
   invalid = false,
   onChange = () => {},
   ...props
@@ -130,12 +148,15 @@ export function InputPhone({
       {...props}
       className={undefined}
       containerComponent={InputGroup}
-      containerComponentProps={{ ...stylex.props(inputGroupStyles.root, style) }}
+      containerComponentProps={{
+        ...stylex.props(inputGroupStyles.root, style),
+        'data-invalid': invalid || undefined
+      }}
       inputComponent={Input}
       numberInputProps={{
-        ...stylex.props(inputGroupStyles.control, s.control, invalid && s.invalid)
+        ...stylex.props(inputGroupStyles.control, s.control)
       }}
-      countrySelectComponent={CountrySelect}
+      countrySelectComponent={withCountrySelect ? CountrySelect : NoCountrySelect}
       flagComponent={FlagComponent}
       smartCaret={false}
       defaultCountry={defaultCountry}
@@ -143,8 +164,28 @@ export function InputPhone({
       onCountryChange={onCountryChange}
       addInternationalOption={addInternationalOption}
       value={props.value || undefined}
-      onChange={(next) => onChange(next || undefined)}
+      onChange={(next) => onChange(next || ('' as Value))}
     />
+  )
+}
+
+function GlobeIcon(props: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      width='16'
+      height='16'
+      viewBox='0 0 16 16'
+      fill='none'
+      stroke='currentColor'
+      strokeWidth='1.5'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      aria-hidden
+      {...props}
+    >
+      <circle cx='8' cy='8' r='6.5' />
+      <path d='M1.5 8h13M8 1.5c2 2 2.5 4 2.5 6.5s-.5 4.5-2.5 6.5M8 1.5C6 3.5 5.5 6 5.5 8s.5 4.5 2.5 6.5' />
+    </svg>
   )
 }
 

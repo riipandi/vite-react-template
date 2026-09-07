@@ -1408,8 +1408,8 @@ function DataGridTableBodyRow<TData extends object>({
   dataIndex?: number
   /**
    * Striping parity under `tableLayout.stripped`: true paints the alternating
-   * tint (ReUI's `odd:` rows), false/undefined keeps the row clear. Computed
-   * from a React-known index so virtual rows stripe by absolute position.
+   * tint, false/undefined keeps the row clear. Computed from a React-known
+   * index so virtual rows stripe by absolute position.
    */
   stripe?: boolean
   /** Whether this row paints a bottom border on its tds. */
@@ -1453,8 +1453,7 @@ function DataGridTableBodyRow<TData extends object>({
         rowStatus === 'dirty' && s.rowStatusDirty,
         rowStatus === 'new' && s.rowStatusNew,
         // Striped rows: the tinted rows keep a solid hover, the clear rows
-        // drop the base hover entirely (ReUI: odd:bg-muted/90
-        // odd:hover:bg-muted hover:bg-transparent). Pinned tint wins.
+        // drop the base hover entirely. Pinned tint wins.
         props.tableLayout?.stripped && (stripe ? s.cellStripedOddHover : s.rowStriped),
         props.tableLayout?.rowsPinnable && isRowPinned && s.rowPinnedTint,
         props.tableStyles?.bodyRow,
@@ -1770,9 +1769,8 @@ function DataGridTableRenderedRow<TData extends object>({
   /** Virtualized list index, rendered as data-index for measureElement. */
   rowIndex?: number
   /**
-   * Striping parity override. When omitted, a virtualized row derives it from
-   * the absolute `rowIndex` (ReUI stripes virtual rows by data index, since
-   * CSS :nth-child parity flips as spacer rows resize while scrolling).
+   * Striping parity override. When omitted, a virtualized row derives
+   * it from the absolute `rowIndex`.
    */
   stripe?: boolean
   /** Whether this row paints a bottom border on its tds. */

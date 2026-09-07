@@ -121,6 +121,41 @@ export const Disabled: Story = {
   }
 }
 
+export const WithoutCountry: Story = {
+  name: 'Without country',
+  render: () => (
+    <Field style={styles.field}>
+      <FieldLabel htmlFor='phone-no-country'>Ministry hotline</FieldLabel>
+      <InputPhone id='phone-no-country' withCountrySelect={false} placeholder='(555) 123-4567' />
+    </Field>
+  ),
+  play: async ({ canvas }) => {
+    // No flag button rendered; the digits span the whole group.
+    expect(canvas.queryByRole('combobox')).toBeNull()
+  }
+}
+
+export const ReadOnly: Story = {
+  name: 'Read only',
+  render: () => (
+    <Field style={styles.field}>
+      <FieldLabel htmlFor='phone-readonly'>Registered owl line</FieldLabel>
+      <InputPhone
+        id='phone-readonly'
+        defaultCountry='US'
+        value='+12135551234'
+        onChange={() => {}}
+        readOnly
+      />
+    </Field>
+  ),
+  play: async ({ canvas }) => {
+    const el = canvas.getByRole('textbox')
+    expect(el).toHaveAttribute('readonly')
+    expect(el).toHaveValue('+1 213 555 1234')
+  }
+}
+
 export const Interaction: Story = {
   render: () => (
     <div {...stylex.props(styles.wrap)}>

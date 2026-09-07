@@ -24,8 +24,16 @@ import {
   SortableItemHandle,
   type SortableCommitMeta
 } from '#/components/extra/sortable'
-import { colors } from '#/styles/core/colors.stylex'
-import { radius, unit } from '#/styles/core/tokens.stylex'
+import { colors, shadow } from '#/styles/core/colors.stylex'
+import {
+  fontFamily,
+  fontSize,
+  fontLineHeight,
+  fontWeight,
+  radius,
+  stroke,
+  unit
+} from '#/styles/core/tokens.stylex'
 
 const meta = {
   title: 'Extra Components/Sortable',
@@ -71,11 +79,10 @@ const styles = stylex.create({
   },
   grid: {
     display: 'grid',
-    gap: unit.x2,
-    gridTemplateColumns: {
-      default: 'repeat(2, minmax(0, 1fr))',
-      '@media (min-width: 660px)': 'repeat(3, minmax(0, 1fr))'
-    }
+    gap: unit.x3,
+    gridAutoFlow: 'dense',
+    gridAutoRows: '1fr',
+    gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
   },
   row: {
     alignItems: 'center',
@@ -83,9 +90,14 @@ const styles = stylex.create({
     borderColor: colors.borderNeutralFaded,
     borderRadius: radius.medium,
     borderStyle: 'solid',
-    borderWidth: 1,
+    borderWidth: stroke.ring1,
+    boxSizing: 'border-box',
     display: 'flex',
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.body2,
     gap: unit.x3,
+    height: '100%',
+    lineHeight: fontLineHeight.body2,
     paddingBlock: unit.x3,
     paddingInline: unit.x3,
     width: '100%'
@@ -101,11 +113,12 @@ const styles = stylex.create({
     minWidth: 0
   },
   rowTitle: {
-    fontWeight: 500
+    fontWeight: fontWeight.medium
   },
   rowMeta: {
     color: colors.foregroundNeutralFaded,
-    fontSize: '0.8125rem'
+    fontSize: fontSize.caption1,
+    lineHeight: fontLineHeight.caption1
   },
   metaRow: {
     alignItems: 'center',
@@ -123,9 +136,44 @@ const styles = stylex.create({
     justifyContent: 'center',
     width: unit.x9
   },
-  galleryCell: {
-    alignItems: 'flex-start',
-    flexDirection: 'column'
+  featuredCell: {
+    gridColumn: {
+      default: 'span 2',
+      '@media (min-width: 660px)': 'span 2'
+    },
+    gridRow: 'span 2'
+  },
+  // Grid cells (ReUI c-sortable-2): left-aligned column, drag handle pinned
+  // top-right, badge row pinned bottom, min height so cells read as tiles.
+  gridCell: {
+    flexDirection: 'column',
+    gap: unit.x2,
+    justifyContent: 'space-between',
+    minHeight: unit.x20
+  },
+  gridHandle: {
+    height: 'fit-content',
+    opacity: {
+      default: 0,
+      ':hover': 1,
+      ':focus-visible': 1,
+      ':active': 1,
+      '@media (pointer: coarse)': 1
+    },
+    position: 'absolute',
+    width: 'fit-content'
+  },
+  gridFooter: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: unit.x2,
+    justifyContent: 'space-between'
+  },
+  // Media library: fixed 3×2 image grid.
+  mediaGrid: {
+    display: 'grid',
+    gap: unit.x3,
+    gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
   },
   orderNumber: {
     alignItems: 'center',
@@ -134,8 +182,8 @@ const styles = stylex.create({
     color: colors.foregroundNeutral,
     display: 'flex',
     flexShrink: 0,
-    fontSize: '0.75rem',
-    fontWeight: 600,
+    fontSize: fontSize.caption1,
+    fontWeight: fontWeight.semibold,
     height: unit.x6,
     justifyContent: 'center',
     width: unit.x6
@@ -145,9 +193,9 @@ const styles = stylex.create({
   }
 })
 
-function Handle() {
+function Handle({ style }: { style?: stylex.StyleXStyles }) {
   return (
-    <SortableItemHandle aria-label='Drag to reorder'>
+    <SortableItemHandle aria-label='Drag to reorder' style={style}>
       <GripVerticalIcon size={16} />
     </SortableItemHandle>
   )
@@ -341,20 +389,17 @@ export const GridLayout: Story = {
               <div
                 {...stylex.props(
                   styles.row,
+                  styles.gridCell,
                   item.type === 'featured' && styles.rowMuted,
-                  item.type === 'featured' &&
-                    ({
-                      gridColumn: 'span 2',
-                      gridRow: 'span 2'
-                    } as stylex.StyleXStyles)
+                  item.type === 'featured' && styles.featuredCell
                 )}
               >
-                <Handle />
+                <Handle style={styles.gridHandle} />
                 <div {...stylex.props(styles.rowBody)}>
                   <span {...stylex.props(styles.rowTitle)}>{item.title}</span>
                   <span {...stylex.props(styles.rowMeta)}>{item.description}</span>
                 </div>
-                <div {...stylex.props(styles.metaRow)}>
+                <div {...stylex.props(styles.gridFooter)}>
                   <Badge variant='secondary'>{item.type}</Badge>
                   {item.type !== 'featured' && (
                     <span {...stylex.props(styles.rowMeta)}>{item.size}</span>
@@ -703,18 +748,99 @@ export const SidebarNavigation: Story = {
 interface GalleryImage {
   id: string
   name: string
-  dimensions: string
-  size: string
+  alt: string
+  /** Unsplash photo id used to build the thumbnail URL. */
+  photo: string
 }
 
 const defaultImages: GalleryImage[] = [
-  { id: '1', name: 'hero-banner.jpg', dimensions: '1920×1080', size: '2.4 MB' },
-  { id: '2', name: 'product-shot.png', dimensions: '800×600', size: '1.8 MB' },
-  { id: '3', name: 'team-photo.jpg', dimensions: '1200×800', size: '3.2 MB' },
-  { id: '4', name: 'logo-dark.svg', dimensions: '240×60', size: '12 KB' },
-  { id: '5', name: 'og-image.png', dimensions: '1200×630', size: '890 KB' },
-  { id: '6', name: 'favicon.ico', dimensions: '32×32', size: '4 KB' }
+  {
+    id: '1',
+    name: 'hero-banner.jpg',
+    alt: 'Mountain lake at dawn',
+    photo: 'photo-1506905925346-21bda4d32df4'
+  },
+  {
+    id: '2',
+    name: 'product-shot.png',
+    alt: 'Minimal workspace desk',
+    photo: 'photo-1499951360447-b19be8fe80f5'
+  },
+  {
+    id: '3',
+    name: 'team-photo.jpg',
+    alt: 'City skyline at night',
+    photo: 'photo-1477959858617-67f85cf4f1df'
+  },
+  {
+    id: '4',
+    name: 'forest-walk.jpg',
+    alt: 'Foggy forest path',
+    photo: 'photo-1441974231531-c6227db76b6e'
+  },
+  {
+    id: '5',
+    name: 'og-image.png',
+    alt: 'Desert dunes at sunset',
+    photo: 'photo-1509316785289-025f5b846b35'
+  },
+  {
+    id: '6',
+    name: 'favicon.jpg',
+    alt: 'Northern lights',
+    photo: 'photo-1483347756197-71ef80e95f73'
+  }
 ]
+
+// Media cells: image fills the tile, overlay handle top-right, caption below.
+const mediaStyles = stylex.create({
+  cell: {
+    backgroundColor: colors.backgroundNeutralFaded,
+    borderRadius: radius.medium,
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    overflow: 'hidden',
+    width: '100%'
+  },
+  thumb: {
+    aspectRatio: '4 / 3',
+    backgroundColor: colors.backgroundNeutral,
+    display: 'block',
+    objectFit: 'cover',
+    position: 'relative',
+    width: '100%'
+  },
+  handle: {
+    backgroundColor: colors.backgroundElevationBase,
+    borderRadius: radius.small,
+    boxShadow: shadow.outline,
+    height: 'fit-content',
+    opacity: {
+      default: 0,
+      ':hover': 1,
+      ':focus-visible': 1,
+      ':active': 1,
+      '@media (pointer: coarse)': 1
+    },
+    padding: unit.x1,
+    position: 'absolute',
+    top: unit.x2,
+    width: 'fit-content'
+  },
+  handleWrapper: {
+    margin: 0,
+    position: 'relative',
+    width: '100%'
+  },
+  caption: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: unit.x0_5,
+    paddingBlock: unit.x2,
+    paddingInline: unit.x3
+  }
+})
 
 export const MediaLibrary: Story = {
   name: 'Media library',
@@ -736,20 +862,24 @@ export const MediaLibrary: Story = {
               onValueChange={setImages}
               getItemValue={(image) => image.id}
               strategy='grid'
-              style={styles.grid}
+              style={styles.mediaGrid}
             >
               {images.map((image) => (
                 <SortableItem key={image.id} value={image.id}>
-                  <div {...stylex.props(styles.row, styles.rowMuted, styles.galleryCell)}>
-                    <Handle />
-                    <ImageIcon size={16} />
-                    <div {...stylex.props(styles.rowBody)}>
-                      <span {...stylex.props(styles.rowTitle)}>{image.name}</span>
-                      <span {...stylex.props(styles.rowMeta)}>
-                        {image.dimensions} · {image.size}
-                      </span>
+                  <figure {...stylex.props(mediaStyles.cell)}>
+                    <div {...stylex.props(mediaStyles.handleWrapper)}>
+                      <img
+                        src={`https://images.unsplash.com/${image.photo}?w=600&dpr=2&q=80`}
+                        alt={image.alt}
+                        loading='lazy'
+                        {...stylex.props(mediaStyles.thumb)}
+                      />
+                      <Handle style={mediaStyles.handle} />
                     </div>
-                  </div>
+                    <figcaption {...stylex.props(mediaStyles.caption)}>
+                      <span {...stylex.props(styles.rowTitle)}>{image.name}</span>
+                    </figcaption>
+                  </figure>
                 </SortableItem>
               ))}
             </Sortable>

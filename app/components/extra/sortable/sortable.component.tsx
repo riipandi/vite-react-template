@@ -273,9 +273,11 @@ function Sortable<T>({
     render,
     props: mergeProps<'div'>(
       {
-        ...stylex.props(s.root, activeId !== null && s.rootDragging, style),
+        // `defaultMarker` powers the `stylex.when.ancestor` rules that fade
+        // sibling items while a drag is in flight (see `itemFaded`).
+        ...stylex.props(stylex.defaultMarker(), s.root, activeId !== null && s.rootDragging, style),
         'data-slot': 'sortable',
-        'data-dragging': activeId !== null,
+        'data-dragging': activeId !== null ? 'true' : undefined,
         children
       } as React.ComponentPropsWithRef<'div'>,
       props
@@ -325,7 +327,8 @@ function SortableItem({ value, style, render, disabled, ...props }: SortableItem
     transition,
     attributes,
     listeners,
-    isDragging: isSortableDragging
+    isDragging: isSortableDragging,
+    isOver
   } = useSortable({
     id: value,
     disabled: disabled || isOverlay,
@@ -345,7 +348,9 @@ function SortableItem({ value, style, render, disabled, ...props }: SortableItem
         props: mergeProps<'div'>(
           stylex.props(
             s.item,
+            s.itemFaded,
             !isOverlay && isSortableDragging && s.itemDragging,
+            !isOverlay && isOver && !isSortableDragging && s.itemOver,
             disabled && s.itemDisabled,
             style
           ),

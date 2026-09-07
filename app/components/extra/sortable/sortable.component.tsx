@@ -87,7 +87,9 @@ const IsOverlayContext = createContext(false)
 const SortableInternalContext = createContext<{
   activeId: UniqueIdentifier | null
   modifiers?: Modifiers
-}>({ activeId: null, modifiers: undefined })
+  activeWidth: number | undefined
+  setActiveWidth: (width: number | undefined) => void
+}>({ activeId: null, modifiers: undefined, activeWidth: undefined, setActiveWidth: () => {} })
 
 // ---------------------------------------------------------------------------
 // dnd-kit configuration
@@ -176,7 +178,13 @@ function Sortable<T>({
   ...props
 }: SortableRootProps<T>) {
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
+  const [activeWidth, setActiveWidth] = useState<number | undefined>(undefined)
   const mounted = useSyncExternalStore(subscribeToNothing, getIsMounted, getIsMountedOnServer)
+
+  const contextValue = useMemo(
+    () => ({ activeId, modifiers, activeWidth, setActiveWidth }),
+    [activeId, modifiers, activeWidth, setActiveWidth]
+  )
 
   const sensors = useSensors(
     useSensor(MouseSensor, MOUSE_SENSOR_CONFIG),
@@ -251,8 +259,6 @@ function Sortable<T>({
     return ids
   }, [value, getItemValue])
 
-  const contextValue = useMemo(() => ({ activeId, modifiers }), [activeId, modifiers])
-
   // Find the active child for the overlay
   const overlayContent = useMemo(() => {
     if (!activeId) return null
@@ -260,13 +266,20 @@ function Sortable<T>({
     let result: ReactNode = null
     Children.forEach(children, (child) => {
       if (isValidElement(child) && (child.props as { value?: string }).value === activeId) {
+        const childStyle = (child.props as { style?: stylex.StyleXStyles }).style
         result = cloneElement(child as ReactElement<{ style?: stylex.StyleXStyles }>, {
-          style: [s.overlayContent, style] as stylex.StyleXStyles
+          // Match the dragged item's measured width so the overlay doesn't
+          // collapse or grow differently than its grid slot.
+          style: [
+            s.overlayContent,
+            activeWidth != null ? { width: activeWidth } : { width: 'fit-content' },
+            childStyle
+          ] as stylex.StyleXStyles
         })
       }
     })
     return result
-  }, [activeId, children, style])
+  }, [activeId, activeWidth, children])
 
   const rendered = useRender({
     defaultTagName: 'div',
@@ -320,6 +333,7 @@ export interface SortableItemProps extends DivRenderProps {
 
 function SortableItem({ value, style, render, disabled, ...props }: SortableItemProps) {
   const isOverlay = useContext(IsOverlayContext)
+  const { setActiveWidth } = useContext(SortableInternalContext)
 
   const {
     setNodeRef,
@@ -335,10 +349,40 @@ function SortableItem({ value, style, render, disabled, ...props }: SortableItem
     animateLayoutChanges
   })
 
+  // Translate only: `rectSortingStrategy` (grid/horizontal) also returns
+  // scaleX/scaleY ratios that condense the dragged tile when cells differ in
+  // size — the overlay clone shows the drag, so the source needs no scaling.
   const runtimeStyle = {
     transition,
-    transform: CSS.Transform.toString(transform)
+    transform: CSS.Translate.toString(transform)
   } as CSSProperties
+
+  // Measure the dragged item's width so the portal overlay can match it.
+  React.useLayoutEffect(() => {
+    if (!isSortableDragging) {
+      setActiveWidth(undefined)
+      return
+    }
+
+    const el = document.querySelector(
+      `[data-slot="sortable-item"][data-value="${value}"][data-dragging="true"]`
+    ) as HTMLElement | null
+
+    if (!el) return
+
+    setActiveWidth(el.offsetWidth)
+
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === el) {
+          setActiveWidth(entry.contentBoxSize?.[0]?.inlineSize ?? el.offsetWidth)
+        }
+      }
+    })
+
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [isSortableDragging, setActiveWidth, value])
 
   return (
     <SortableItemContext.Provider value={{ listeners, isDragging: isSortableDragging, disabled }}>

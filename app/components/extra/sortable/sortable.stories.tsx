@@ -6,22 +6,11 @@ import { Switch } from '#/components/base/switch'
 import { toast } from '#/components/base/toast'
 import { Badge } from '#/components/extra/badge'
 import { Card, CardDescription, CardHeader, CardTitle } from '#/components/extra/card'
-import {
-  Sortable,
-  SortableItem,
-  SortableItemHandle,
-  type SortableCommitMeta
-} from '#/components/extra/sortable'
+import { Sortable, SortableItem, SortableItemHandle } from '#/components/extra/sortable'
+import type { SortableCommitMeta } from '#/components/extra/sortable'
 import { colors, shadow } from '#/styles/core/colors.stylex'
-import {
-  fontFamily,
-  fontSize,
-  fontLineHeight,
-  fontWeight,
-  radius,
-  stroke,
-  unit
-} from '#/styles/core/tokens.stylex'
+import { radius, stroke, unit } from '#/styles/core/tokens.stylex'
+import { fontFamily, fontSize, fontLineHeight, fontWeight } from '#/styles/core/tokens.stylex'
 
 const meta = {
   title: 'Extra Components/Sortable',
@@ -132,10 +121,12 @@ const styles = stylex.create({
     gridRow: 'span 2'
   },
   gridCell: {
+    alignItems: 'flex-start',
     flexDirection: 'column',
     gap: unit.x2,
     justifyContent: 'space-between',
-    minHeight: unit.x20
+    minHeight: unit.x20,
+    width: '100%'
   },
   gridHandle: {
     height: 'fit-content',
@@ -148,15 +139,16 @@ const styles = stylex.create({
       '@media (pointer: coarse)': 1
     },
     position: 'absolute',
-    right: unit.x2,
-    top: unit.x2,
+    right: unit.x3,
+    top: unit.x3,
     width: 'fit-content'
   },
   gridFooter: {
     alignItems: 'center',
     display: 'flex',
     gap: unit.x2,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    width: '100%'
   },
   // Media library: fixed 3×2 image grid.
   mediaGrid: {
@@ -731,13 +723,17 @@ const mediaStyles = stylex.create({
     borderRadius: radius.medium,
     display: 'flex',
     flexDirection: 'column',
+    gap: unit.x2,
     height: '100%',
     overflow: 'hidden',
+    paddingBlock: unit.x2,
+    paddingInline: unit.x3,
     width: '100%'
   },
   thumb: {
     aspectRatio: '4 / 3',
     backgroundColor: colors.backgroundNeutral,
+    borderRadius: radius.small,
     display: 'block',
     objectFit: 'cover',
     position: 'relative',

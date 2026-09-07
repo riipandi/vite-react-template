@@ -7,10 +7,9 @@ import { PlusIcon, SearchIcon } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
-import { Input } from '#/components/base/input'
 import { Badge } from '#/components/extra/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/extra/card'
-import { InputGroup, InputGroupAddon } from '#/components/extra/input-group'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '#/components/extra/input-group'
 import { Skeleton } from '#/components/extra/skeleton'
 import {
   DataGrid,
@@ -73,6 +72,14 @@ const statesStyles = stylex.create({
     color: s.muted.color as unknown as string
   },
   numeric: { fontVariantNumeric: 'tabular-nums' },
+  flag: {
+    borderRadius: '999px',
+    height: 16,
+    objectFit: 'cover',
+    width: 16
+  },
+  // Breathing room against the container edges (ReUI c-19 edgeCell: px-5).
+  edgeCell: { paddingInline: 20 },
   searchGroup: { width: 192 }
 })
 
@@ -145,29 +152,55 @@ export const CardContainer: Story = {
         {
           accessorKey: 'name',
           id: 'name',
-          header: 'User',
+          header: ({ column }) => <DataGridColumnHeader title='User' visibility column={column} />,
           cell: avatarCell32,
-          size: 230
+          minSize: 200,
+          // Absorbs the free card width so the table follows the card.
+          meta: { autoSize: true },
+          enableSorting: true,
+          enableHiding: false,
+          enableResizing: true
         },
         {
-          accessorKey: 'company',
-          header: 'Company',
-          size: 130
-        },
-        {
-          accessorKey: 'role',
-          header: 'Occupation',
-          size: 160
-        },
-        {
-          accessorKey: 'balance',
-          header: 'Balance ($)',
-          cell: (info) => (
-            <span {...stylex.props(statesStyles.numeric)}>
-              ${(info.getValue() as number).toFixed(2)}
-            </span>
+          accessorKey: 'location',
+          id: 'location',
+          header: ({ column }) => (
+            <DataGridColumnHeader title='Location' visibility column={column} />
           ),
-          size: 130
+          cell: ({ row }) => (
+            <div {...stylex.props(s.cellFlex)}>
+              <img
+                src={`https://flagcdn.com/${row.original.flag.toLowerCase()}.svg`}
+                alt={row.original.location}
+                width={16}
+                height={16}
+                loading='lazy'
+                {...stylex.props(statesStyles.flag)}
+              />
+              <span {...stylex.props(s.strong)}>{row.original.location}</span>
+            </div>
+          ),
+          size: 200,
+          enableSorting: true,
+          enableHiding: true,
+          enableResizing: true
+        },
+        {
+          accessorKey: 'status',
+          id: 'status',
+          header: ({ column }) => (
+            <DataGridColumnHeader title='Status' visibility column={column} />
+          ),
+          cell: ({ row }) =>
+            row.original.status === 'active' ? (
+              <Badge variant='primary'>Approved</Badge>
+            ) : (
+              <Badge variant='destructive'>Pending</Badge>
+            ),
+          size: 200,
+          enableSorting: true,
+          enableHiding: true,
+          enableResizing: false
         }
       ],
       []
@@ -178,6 +211,7 @@ export const CardContainer: Story = {
       <DataGrid
         table={table}
         recordCount={demoData.length}
+        tableStyles={{ edgeCell: statesStyles.edgeCell }}
         tableLayout={{
           columnsPinnable: true,
           columnsResizable: true,
@@ -619,7 +653,7 @@ export const ServerSidePagination: Story = {
                 <InputGroupAddon align='inline-start'>
                   <SearchIcon style={{ height: 16, width: 16 }} />
                 </InputGroupAddon>
-                <Input
+                <InputGroupInput
                   placeholder='Search...'
                   value={query}
                   onChange={(event) => {

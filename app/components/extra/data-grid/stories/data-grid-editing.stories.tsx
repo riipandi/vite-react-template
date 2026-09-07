@@ -56,6 +56,16 @@ const editingStyles = stylex.create({
   },
   searchGroup: { width: 192 },
   cardBody: { padding: 0 },
+  // Breathing room against the container edges (ReUI c-31 edgeCell: first
+  // ps-4 / last pe-4; a symmetric inline padding reads the same on fixed
+  // columns and stays within StyleXStyles' static-only shape).
+  edgeCell: { paddingInline: 16 },
+  right: {
+    display: 'block',
+    fontVariantNumeric: 'tabular-nums',
+    textAlign: 'end',
+    width: '100%'
+  },
   frame: {
     display: 'flex',
     flexDirection: 'column',
@@ -318,6 +328,13 @@ export const SpreadsheetEditing: Story = {
     const columns = useMemo<ColumnDef<DataGridFeatures, IProduct>[]>(
       () => [
         {
+          accessorKey: 'id',
+          header: 'SKU',
+          cell: (info) => <span {...stylex.props(s.muted)}>{info.getValue() as string}</span>,
+          enableSorting: false,
+          size: 90
+        },
+        {
           accessorKey: 'name',
           header: 'Product',
           size: 200,
@@ -337,6 +354,11 @@ export const SpreadsheetEditing: Story = {
           accessorKey: 'price',
           header: 'Price ($)',
           size: 140,
+          cell: (info) => (
+            <span {...stylex.props(editingStyles.right)}>
+              {(info.getValue() as number).toFixed(2)}
+            </span>
+          ),
           meta: {
             cellEdit: {
               parse: (raw) => {
@@ -350,6 +372,9 @@ export const SpreadsheetEditing: Story = {
           accessorKey: 'stock',
           header: 'Stock',
           size: 140,
+          cell: (info) => (
+            <span {...stylex.props(editingStyles.right)}>{info.getValue() as number}</span>
+          ),
           meta: {
             cellEdit: {
               parse: (raw) => {
@@ -358,18 +383,6 @@ export const SpreadsheetEditing: Story = {
               }
             }
           }
-        },
-        {
-          accessorKey: 'stock',
-          id: 'stock-status',
-          header: 'Availability',
-          size: 140,
-          cell: ({ row }) =>
-            row.original.stock > 40 ? (
-              <span {...stylex.props(s.strong)}>In stock</span>
-            ) : (
-              <span {...stylex.props(s.muted)}>Low</span>
-            )
         }
       ],
       []
@@ -414,6 +427,7 @@ export const SpreadsheetEditing: Story = {
         onCellsChange={handleCellsChange}
         getRowStatus={(row) => rowMeta[row.id]}
         getCellStatus={getCellStatus}
+        tableStyles={{ edgeCell: editingStyles.edgeCell }}
         tableLayout={{
           dense: true,
           cellSelection: true,

@@ -118,4 +118,3 @@ export type {
   DataGridTableVirtualScrollElements,
   DataGridTableVirtualizerOptions
 } from './data-grid-table-virtual'
-export { useCopyToClipboard } from './use-copy-to-clipboard'

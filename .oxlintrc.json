@@ -53,6 +53,27 @@
                 "vitest/no-focused-tests": "error",
                 "vitest/no-disabled-tests": "warn"
             }
+        },
+        {
+            "files": ["./app/components/extra/data-grid/**/*.{ts,tsx}"],
+            // TODO: cleanup this later.
+            // Ported 1:1 from ReUI's data-grid: the flagged patterns (in-cell editor
+            // autoFocus, hash links in demos, imperative-state effects, internal
+            // table flags) are load-bearing there. Keep overrides narrow to this
+            // folder.
+            "rules": {
+                "eslint/no-underscore-dangle": "off",
+                "eslint/no-shadow": "off",
+                "jsx-a11y/anchor-is-valid": "off",
+                "jsx-a11y/no-autofocus": "off",
+                "oxc/const-comparisons": "off",
+                "react-hooks/exhaustive-deps": "off",
+                "react/exhaustive-effect-dependencies": "off",
+                "react/no-unstable-nested-components": "off",
+                "react/set-state-in-effect": "off",
+                "unicorn/consistent-function-scoping": "off",
+                "unicorn/no-array-sort": "off"
+            }
         }
     ],
     "ignorePatterns": [

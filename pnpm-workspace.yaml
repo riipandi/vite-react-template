@@ -13,6 +13,12 @@ minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - '@base-ui/react'
   - '@base-ui/utils'
+  - '@tanstack/history'
+  - '@tanstack/react-router'
+  - '@tanstack/router-cli'
+  - '@tanstack/router-core'
+  - '@tanstack/router-generator'
+  - '@tanstack/router-plugin'
   - '@types/react-dom'
   - '@vitest/browser'
   - '@vitest/browser-playwright'

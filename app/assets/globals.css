@@ -119,3 +119,25 @@
 .ts-chart-tooltip .ts-chart-tooltip__row:has(> .ts-chart-tooltip__swatch) {
   grid-template-columns: 0.55rem minmax(0, 1fr) auto !important;
 }
+
+/* Data grid cell selection — imperative viewport state. The fill drag and
+   the built-in cell editor toggle `data-cell-filling` / `data-cell-editing`
+   on the grid viewport outside React (pointermove-rate writes), so StyleX
+   cannot key the affected cells' styles off React props. While either is
+   live, the source cells' own ::before chrome rests: the fill-drag preview
+   outline or the editor outline is the ONE border, otherwise its lines
+   double against the region border at every shared edge. */
+[data-cell-filling] [data-cell-selected]::before,
+[data-cell-filling] [data-cell-focused]::before,
+[data-cell-editing] [data-cell-focused]::before {
+  display: none;
+}
+
+/* Data grid built-in cell editor — the textarea control grows downward over
+   the rows below as the text wraps (the Sheets model). `field-sizing` is not
+   yet a StyleX-validated property, so it ships as raw CSS keyed on the
+   editor's multiline attribute. */
+[data-slot='data-grid-cell-editor'][data-multiline='true'] {
+  field-sizing: content;
+  overflow: hidden;
+}

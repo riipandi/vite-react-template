@@ -55,7 +55,7 @@ const infiniteStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 0,
-    paddingBlock: 0,
+    paddingBlock: unit.x3,
     width: '100%'
   },
   cardOverflow: {
@@ -63,7 +63,7 @@ const infiniteStyles = stylex.create({
     flexDirection: 'column',
     gap: 0,
     overflow: 'hidden',
-    paddingBlock: 0
+    paddingBlock: unit.x3
   },
   header: {
     alignItems: 'center',
@@ -73,7 +73,7 @@ const infiniteStyles = stylex.create({
     paddingBlock: unit.x3,
     paddingInline: unit.x5
   },
-  cardBody: { paddingBlock: 0 }
+  cardBody: { padding: 0 }
 })
 
 /**

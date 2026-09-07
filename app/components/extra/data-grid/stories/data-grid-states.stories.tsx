@@ -51,7 +51,7 @@ const statesStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 0,
-    paddingBlock: 0,
+    paddingBlock: unit.x3,
     width: '100%'
   },
   cardOverflow: {
@@ -59,7 +59,7 @@ const statesStyles = stylex.create({
     flexDirection: 'column',
     gap: 0,
     overflow: 'hidden',
-    paddingBlock: 0
+    paddingBlock: unit.x3
   },
   header: {
     alignItems: 'center',
@@ -69,7 +69,7 @@ const statesStyles = stylex.create({
     paddingBlock: unit.x3,
     paddingInline: unit.x5
   },
-  cardBody: { paddingBlock: 0 },
+  cardBody: { padding: 0 },
   muted: {
     color: s.muted.color as unknown as string
   },
@@ -80,8 +80,10 @@ const statesStyles = stylex.create({
     height: 16,
     width: 16
   },
-  // Breathing room against the container edges (edgeCell: px-5).
-  edgeCell: { paddingInline: 20 },
+  // Breathing room against the container edges (edgeCell: first
+  // ps-5 / last pe-5; a symmetric inline padding reads the same on fixed
+  // columns and stays within StyleXStyles' static-only shape).
+  edgeCell: { paddingInline: unit.x5 },
   searchGroup: { width: 192 }
 })
 

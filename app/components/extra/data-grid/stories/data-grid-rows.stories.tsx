@@ -76,7 +76,7 @@ const statusStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 0,
-    paddingBlock: 0,
+    paddingBlock: unit.x3,
     width: '100%'
   },
   cardHeader: {
@@ -87,14 +87,15 @@ const statusStyles = stylex.create({
     paddingInline: unit.x5
   },
   cardBody: {
-    paddingBlock: 0
+    padding: 0
   },
+  edgeCell: { paddingInline: unit.x5 },
   cardFooter: {
     paddingBlock: unit.x3
   },
   cardOverflow: {
     overflow: 'hidden',
-    paddingBlock: 0
+    paddingBlock: unit.x3
   }
 })
 
@@ -274,6 +275,7 @@ export const ExpandableRows: Story = {
         table={table}
         recordCount={detailData.length}
         tableLayout={{ headerBackground: false }}
+        tableStyles={{ edgeCell: s.edgeCell }}
       >
         <DataGridContainer>
           <DataGridScrollArea>
@@ -569,6 +571,7 @@ export const RowPinningSupport: Story = {
         table={table}
         recordCount={demoData.length}
         tableLayout={{ rowsPinnable: true, columnsResizable: true }}
+        tableStyles={{ edgeCell: s.edgeCell }}
       >
         <Card style={statusStyles.card}>
           <CardHeader style={statusStyles.cardHeader}>

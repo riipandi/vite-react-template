@@ -55,11 +55,11 @@ const editingStyles = stylex.create({
     paddingInline: unit.x5
   },
   searchGroup: { width: 192 },
-  cardBody: { paddingBlock: 0 },
+  cardBody: { padding: 0 },
   // Breathing room against the container edges (edgeCell: first
   // ps-4 / last pe-4; a symmetric inline padding reads the same on fixed
   // columns and stays within StyleXStyles' static-only shape).
-  edgeCell: { paddingInline: unit.x4 },
+  edgeCell: { paddingInline: unit.x5 },
   right: {
     display: 'block',
     fontVariantNumeric: 'tabular-nums',
@@ -70,7 +70,7 @@ const editingStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 0,
-    paddingBlock: 0,
+    paddingBlock: unit.x3,
     width: '100%'
   },
   frameHeader: {
@@ -88,11 +88,11 @@ const editingStyles = stylex.create({
   // the grid's edgeCell inset.
   hint: {
     paddingBlockStart: unit.x3,
-    paddingInline: unit.x4
+    paddingInline: unit.x5
   },
   bar: {
     paddingBlockEnd: unit.x3,
-    paddingInline: unit.x4
+    paddingInline: unit.x5
   },
   statusCell: { fontWeight: 500 }
 })
@@ -146,7 +146,13 @@ export const CrudFeatures: Story = {
       ],
       []
     )
-    const filtered = demoData.filter((row) => row.title.toLowerCase().includes(query.toLowerCase()))
+    const filtered = useMemo(
+      () =>
+        (draft ? [...demoData, draft] : demoData).filter((row) =>
+          row.title.toLowerCase().includes(query.toLowerCase())
+        ),
+      [query, draft]
+    )
     const [pagination, setPagination] = useState<PaginationState>({
       pageIndex: 0,
       pageSize: 5
@@ -155,7 +161,7 @@ export const CrudFeatures: Story = {
     const table = useTable({
       features: dataGridFeatures,
       columns,
-      data: draft ? [...filtered, draft] : filtered,
+      data: filtered,
       pageCount: Math.ceil(filtered.length / pagination.pageSize),
       getRowId: (row: IBook) => row.id,
       state: { pagination, sorting },
@@ -167,6 +173,7 @@ export const CrudFeatures: Story = {
       <DataGrid
         table={table}
         recordCount={filtered.length}
+        tableStyles={{ edgeCell: editingStyles.edgeCell }}
         onRowCreate={() => {
           const id = String(rowIdRef.current++)
           setDraft({
@@ -278,6 +285,7 @@ export const CrudInFrameContainer: Story = {
       <DataGrid
         table={table}
         recordCount={rows.length}
+        tableStyles={{ edgeCell: editingStyles.edgeCell }}
         onRowCreate={() => {
           setRows((old) => [...old, { ...old[0]!, id: String(Date.now()), title: 'New novel' }])
         }}

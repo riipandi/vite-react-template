@@ -208,6 +208,7 @@ export const CellBorder: Story = {
       <DataGrid
         table={table}
         recordCount={demoData?.length || 0}
+        tableStyles={{ edgeCell: s.edgeCell }}
         tableLayout={{ cellBorder: true }}
       >
         <div {...stylex.props(s.stack)}>
@@ -321,6 +322,7 @@ export const WithoutTableBorders: Story = {
       <DataGrid
         table={table}
         recordCount={demoData?.length || 0}
+        tableStyles={{ edgeCell: s.edgeCell }}
         tableLayout={{
           headerBackground: false,
           rowBorder: false,

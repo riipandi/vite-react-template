@@ -54,7 +54,7 @@ const footerStyles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 0,
-    paddingBlock: 0,
+    paddingBlock: unit.x3,
     width: '100%'
   },
   cardHeader: {
@@ -64,7 +64,7 @@ const footerStyles = stylex.create({
     paddingBlock: unit.x3,
     paddingInline: unit.x5
   },
-  cardBody: { paddingBlock: 0 },
+  cardBody: { padding: 0 },
   total: { fontWeight: 700, fontVariantNumeric: 'tabular-nums' },
   numeric: { fontVariantNumeric: 'tabular-nums' }
 })
@@ -161,6 +161,7 @@ export const ColumnTotalsFooter: Story = {
       <DataGrid
         table={table}
         recordCount={demoData.length}
+        tableStyles={{ edgeCell: s.edgeCell }}
         tableLayout={{ columnsPinnable: true, columnsResizable: true, columnsVisibility: true }}
       >
         <Card style={footerStyles.card}>
@@ -235,6 +236,7 @@ export const SummaryStatsFooter: Story = {
       <DataGrid
         table={table}
         recordCount={demoData.length}
+        tableStyles={{ edgeCell: s.edgeCell }}
         tableLayout={{ columnsPinnable: true, columnsResizable: true }}
       >
         <Card style={footerStyles.card}>
@@ -295,6 +297,7 @@ export const PerColumnAggregateFooter: Story = {
       <DataGrid
         table={table}
         recordCount={demoData.length}
+        tableStyles={{ edgeCell: s.edgeCell }}
         tableLayout={{ columnsPinnable: true, columnsResizable: true, columnsVisibility: true }}
       >
         <Card style={footerStyles.card}>

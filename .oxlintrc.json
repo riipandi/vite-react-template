@@ -46,15 +46,6 @@
             }
         },
         {
-            "files": ["**/*.test.ts", "**/*.spec.ts"],
-            "plugins": ["vitest"],
-            "rules": {
-                "no-console": "off",
-                "vitest/no-focused-tests": "error",
-                "vitest/no-disabled-tests": "warn"
-            }
-        },
-        {
             "files": ["./app/components/extra/data-grid/*.tsx"],
             "rules": {
                 // The context value is a stable object whose properties are getters
@@ -68,6 +59,15 @@
                 // identities by design; the rule only matters when compiling with
                 // React Compiler, which this template does not use.
                 "react/incompatible-library": "off"
+            }
+        },
+        {
+            "files": ["**/*.test.ts", "**/*.spec.ts"],
+            "plugins": ["vitest"],
+            "rules": {
+                "no-console": "off",
+                "vitest/no-focused-tests": "error",
+                "vitest/no-disabled-tests": "warn"
             }
         }
     ],

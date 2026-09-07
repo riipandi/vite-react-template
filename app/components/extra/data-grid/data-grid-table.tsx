@@ -1304,10 +1304,13 @@ function DataGridTableFootRowCell({
 function DataGridTableBodyRowSkeleton({
   children,
   wantsBorder,
+  stripe,
   style
 }: {
   children: ReactNode
   wantsBorder?: boolean
+  /** Striping parity under `tableLayout.stripped` (see DataGridTableBodyRow). */
+  stripe?: boolean
   style?: StyleXStyles
 }) {
   const { props } = useDataGrid()
@@ -1320,6 +1323,7 @@ function DataGridTableBodyRowSkeleton({
         s.row,
         props.onRowClick && s.rowHoverCursor,
         props.tableLayout?.cellBorder && s.cellBorder,
+        props.tableLayout?.stripped && (stripe ? s.cellStripedOddHover : s.rowStriped),
         props.tableStyles?.bodyRow,
         style
       )}
@@ -1392,6 +1396,7 @@ function DataGridTableBodyRow<TData extends object>({
   dndRef,
   dndStyle,
   dataIndex,
+  stripe,
   wantsBorder
 }: {
   children: ReactNode
@@ -1401,6 +1406,12 @@ function DataGridTableBodyRow<TData extends object>({
   dndRef?: Ref<HTMLTableRowElement>
   dndStyle?: StyleXStyles
   dataIndex?: number
+  /**
+   * Striping parity under `tableLayout.stripped`: true paints the alternating
+   * tint (ReUI's `odd:` rows), false/undefined keeps the row clear. Computed
+   * from a React-known index so virtual rows stripe by absolute position.
+   */
+  stripe?: boolean
   /** Whether this row paints a bottom border on its tds. */
   wantsBorder?: boolean
 }) {
@@ -1441,6 +1452,10 @@ function DataGridTableBodyRow<TData extends object>({
         rowStatus === 'deleted' && s.rowStatusDeleted,
         rowStatus === 'dirty' && s.rowStatusDirty,
         rowStatus === 'new' && s.rowStatusNew,
+        // Striped rows: the tinted rows keep a solid hover, the clear rows
+        // drop the base hover entirely (ReUI: odd:bg-muted/90
+        // odd:hover:bg-muted hover:bg-transparent). Pinned tint wins.
+        props.tableLayout?.stripped && (stripe ? s.cellStripedOddHover : s.rowStriped),
         props.tableLayout?.rowsPinnable && isRowPinned && s.rowPinnedTint,
         props.tableStyles?.bodyRow,
         rowStatus === 'new' && props.tableStyles?.rowNew,
@@ -1743,6 +1758,7 @@ function DataGridTableRenderedRow<TData extends object>({
   pinnedBoundary,
   rowRef,
   rowIndex,
+  stripe,
   wantsBorder,
   isFirstRow,
   isLastRow,
@@ -1753,6 +1769,12 @@ function DataGridTableRenderedRow<TData extends object>({
   rowRef?: Ref<HTMLTableRowElement>
   /** Virtualized list index, rendered as data-index for measureElement. */
   rowIndex?: number
+  /**
+   * Striping parity override. When omitted, a virtualized row derives it from
+   * the absolute `rowIndex` (ReUI stripes virtual rows by data index, since
+   * CSS :nth-child parity flips as spacer rows resize while scrolling).
+   */
+  stripe?: boolean
   /** Whether this row paints a bottom border on its tds. */
   wantsBorder?: boolean
   /** Cell-selection overlay clamps: this row's DOM position. */
@@ -1806,6 +1828,7 @@ function DataGridTableRenderedRow<TData extends object>({
         pinnedBoundary={pinnedBoundary}
         rowRef={rowRef}
         dataIndex={rowIndex}
+        stripe={stripe ?? (typeof rowIndex === 'number' ? rowIndex % 2 === 0 : undefined)}
         wantsBorder={wantsBorder}
       >
         {startVisibleCells.map((cell: Cell<DataGridFeatures, TData, unknown>, index) => (
@@ -2109,6 +2132,7 @@ function DataGridTableBodyRows<TData extends object>({
         ).map((rowKey, rowIndex) => (
           <DataGridTableBodyRowSkeleton
             key={rowKey}
+            stripe={rowIndex % 2 === 0}
             wantsBorder={props.tableLayout?.rowBorder && rowIndex < pagination.pageSize - 1}
           >
             {[...leftVisibleColumns, ...centerVisibleColumns].map((column) => (
@@ -2164,6 +2188,7 @@ function DataGridTableBodyRows<TData extends object>({
           key={row.id}
           row={row}
           pinnedBoundary={pinnedBoundary}
+          stripe={props.tableLayout?.stripped ? index % 2 === 0 : undefined}
           wantsBorder={
             !!props.tableLayout?.rowBorder &&
             !props.tableLayout?.stripped &&

@@ -193,8 +193,8 @@ function DataGridTableDndBodyRows<TData extends object>({
         {Array.from(
           { length: pagination.pageSize },
           (_, rowIndex) => `skeleton-row-${rowIndex}`
-        ).map((rowKey) => (
-          <DataGridTableBodyRowSkeleton key={rowKey} wantsBorder>
+        ).map((rowKey, rowIndex) => (
+          <DataGridTableBodyRowSkeleton key={rowKey} stripe={rowIndex % 2 === 0} wantsBorder>
             {table.getVisibleFlatColumns().map((column) => (
               <DataGridTableBodyRowSkeletonCell column={column} key={column.id}>
                 {column.columnDef.meta?.skeleton}
@@ -211,10 +211,10 @@ function DataGridTableDndBodyRows<TData extends object>({
 
   return (
     <>
-      {table.getRowModel().rows.map((row: Row<DataGridFeatures, TData>) => {
+      {table.getRowModel().rows.map((row: Row<DataGridFeatures, TData>, rowIndex) => {
         return (
           <Fragment key={row.id}>
-            <DataGridTableBodyRow row={row}>
+            <DataGridTableBodyRow row={row} stripe={rowIndex % 2 === 0}>
               <SortableContext
                 items={table.state.columnOrder}
                 strategy={horizontalListSortingStrategy}
@@ -428,10 +428,13 @@ const holdRowsInPlaceStrategy: SortingStrategy = () => null
 
 function DataGridTableDndRow<TData extends object>({
   row,
+  stripe,
   renderRowDecoration,
   dropIndicator = true
 }: {
   row: Row<DataGridFeatures, TData>
+  /** Striping parity under `tableLayout.stripped` (see DataGridTableBodyRow). */
+  stripe?: boolean
   renderRowDecoration?: DataGridTableDndRowDecoration<TData>
   dropIndicator?: boolean
 }) {
@@ -477,6 +480,7 @@ function DataGridTableDndRow<TData extends object>({
     <SortableRowContext.Provider value={{ attributes, listeners }}>
       <DataGridTableBodyRow
         row={row}
+        stripe={stripe}
         dndRef={setNodeRef}
         dndStyle={dndRowDragStyle(isDragging, CSS.Transform.toString(transform))}
       >
@@ -562,8 +566,8 @@ function DataGridTableDndRowsBody<TData extends object>({
         {Array.from(
           { length: pagination.pageSize },
           (_, rowIndex) => `skeleton-row-${rowIndex}`
-        ).map((rowKey) => (
-          <DataGridTableBodyRowSkeleton key={rowKey} wantsBorder>
+        ).map((rowKey, rowIndex) => (
+          <DataGridTableBodyRowSkeleton key={rowKey} stripe={rowIndex % 2 === 0} wantsBorder>
             {table.getVisibleFlatColumns().map((column) => (
               <DataGridTableBodyRowSkeletonCell column={column} key={column.id}>
                 {column.columnDef.meta?.skeleton}
@@ -580,10 +584,11 @@ function DataGridTableDndRowsBody<TData extends object>({
 
   return (
     <SortableContext items={dataIds} strategy={sortingStrategy}>
-      {table.getRowModel().rows.map((row: Row<DataGridFeatures, TData>) => {
+      {table.getRowModel().rows.map((row: Row<DataGridFeatures, TData>, rowIndex) => {
         return (
           <DataGridTableDndRow
             row={row}
+            stripe={rowIndex % 2 === 0}
             renderRowDecoration={renderRowDecoration}
             dropIndicator={dropIndicator}
             key={row.id}

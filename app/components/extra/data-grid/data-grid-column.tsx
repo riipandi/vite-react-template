@@ -41,7 +41,7 @@ import {
   dataGridColumnFilterStyles as sFilter,
   dataGridColumnHeaderStyles as sHeader,
   dataGridColumnVisibilityStyles as sVisibility
-} from './data-grid-column.stylex'
+} from './data-grid.stylex'
 
 interface DataGridColumnFilterProps<TData extends object, TValue> {
   column?: Column<DataGridFeatures, TData, TValue>

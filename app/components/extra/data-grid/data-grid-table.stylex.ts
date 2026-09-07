@@ -1,6 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors, shadow } from '#/styles/core/colors.stylex'
 import {
+  duration,
   fontFamily,
   fontSize,
   fontLineHeight,
@@ -373,7 +374,8 @@ export const dataGridTableStyles = stylex.create({
     opacity: 0.6,
     width: unit.x5
   },
-  // Row pin toggle.
+  // Row pin toggle. Focus ring follows the standalone-control convention
+  // (outside outline, stroke.ring2) like the base Button.
   rowPinButton: {
     alignItems: 'center',
     borderRadius: radius.medium,
@@ -386,7 +388,12 @@ export const dataGridTableStyles = stylex.create({
     display: 'inline-flex',
     height: unit.x7,
     justifyContent: 'center',
-    transitionDuration: '150ms',
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
+    },
+    outlineOffset: stroke.ring2,
+    transitionDuration: duration.fast,
     transitionProperty: 'color, background-color, border-color',
     width: unit.x7
   },
@@ -412,7 +419,12 @@ export const dataGridTableStyles = stylex.create({
       '[data-dense]': unit.x6
     },
     justifyContent: 'center',
-    transitionDuration: '150ms',
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
+    },
+    outlineOffset: stroke.ring2,
+    transitionDuration: duration.fast,
     transitionProperty: 'color, background-color, border-color',
     width: {
       default: unit.x7,
@@ -425,7 +437,7 @@ export const dataGridTableStyles = stylex.create({
       default: 'rotate(0deg)',
       ':dir(rtl)': 'rotate(0deg)'
     },
-    transitionDuration: '200ms',
+    transitionDuration: duration.medium,
     transitionProperty: 'transform',
     width: unit.x4
   },
@@ -508,9 +520,9 @@ export const dataGridTableStyles = stylex.create({
   },
   resizeHandleActiveLine: {
     '::before': {
-      backgroundColor: colors.backgroundPrimary,
+      backgroundColor: colors.foregroundPrimary,
       display: 'block',
-      inlineSize: 2
+      inlineSize: stroke.ring2
     }
   },
   resizeHandleActiveLineEnd: {
@@ -527,7 +539,7 @@ export const dataGridTableStyles = stylex.create({
     zIndex: 50
   },
   resizeIndicatorBar: {
-    backgroundColor: `color-mix(in srgb, ${colors.backgroundPrimary} 85%, transparent)`,
+    backgroundColor: `color-mix(in srgb, ${colors.foregroundPrimary} 85%, transparent)`,
     insetBlock: 0,
     left: 0,
     position: 'absolute',
@@ -535,7 +547,7 @@ export const dataGridTableStyles = stylex.create({
     width: stroke.ring1
   },
   resizeIndicatorHead: {
-    backgroundColor: colors.backgroundPrimary,
+    backgroundColor: colors.foregroundPrimary,
     borderBottomLeftRadius: radius.small,
     borderBottomRightRadius: radius.small,
     boxShadow: shadow.outline,
@@ -587,7 +599,7 @@ export const dataGridTableStyles = stylex.create({
   },
   fillHandleRing: {
     backgroundColor: colors.backgroundPage,
-    borderColor: colors.backgroundPrimary,
+    borderColor: colors.foregroundPrimary,
     borderRadius: radius.full,
     borderStyle: 'solid',
     borderWidth: 2,
@@ -727,7 +739,7 @@ export const dataGridTableDndRowsStyles = stylex.create({
     insetBlock: 0,
     insetInlineStart: 0,
     position: 'absolute',
-    width: 2
+    width: stroke.ring2
   },
   // DragOverlay clone.
   overlayTable: {
@@ -791,9 +803,9 @@ export const dataGridPaginationStyles = stylex.create({
     flexDirection: 'column',
     flexGrow: 1,
     flexWrap: 'wrap',
-    gap: '10px',
+    gap: unit.x2,
     justifyContent: 'space-between',
-    paddingBlock: '10px',
+    paddingBlock: unit.x2,
     '@media (min-width: 660px)': {
       flexDirection: 'row',
       paddingBlock: 0
@@ -803,9 +815,9 @@ export const dataGridPaginationStyles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '10px',
+    gap: unit.x2,
     order: 2,
-    paddingBlockEnd: '10px',
+    paddingBlockEnd: unit.x2,
     '@media (min-width: 660px)': {
       order: 1,
       paddingBlockEnd: 0
@@ -830,10 +842,10 @@ export const dataGridPaginationStyles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    gap: '10px',
+    gap: unit.x2,
     justifyContent: 'center',
     order: 1,
-    paddingBlockStart: '10px',
+    paddingBlockStart: unit.x2,
     '@media (min-width: 660px)': {
       flexDirection: 'row',
       justifyContent: 'flex-end',

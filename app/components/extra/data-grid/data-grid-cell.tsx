@@ -15,11 +15,12 @@ import type {
 } from './data-grid'
 import {
   dataGridCellEditorStyles,
+  dataGridFillTargetClassName,
+  dataGridFillTargetPinnedClassName,
   dataGridGestureOutlineClassName,
   dataGridSelectionBarStyles
-} from './data-grid-cell.stylex'
-import type { DataGridCellEditorMetrics } from './data-grid-cell.stylex'
-import { dataGridFillTargetClassName, dataGridFillTargetPinnedClassName } from './data-grid.stylex'
+} from './data-grid.stylex'
+import type { DataGridCellEditorMetrics } from './data-grid.stylex'
 
 /** Fill-drag tint classes, toggled imperatively alongside the attribute. */
 const dataGridFillTargetClassNames = {

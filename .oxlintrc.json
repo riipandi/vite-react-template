@@ -46,6 +46,22 @@
             }
         },
         {
+            "files": ["./app/components/extra/data-grid/*.tsx"],
+            "rules": {
+                // The context value is a stable object whose properties are getters
+                // over latest-value refs (propsRef/tableRef/i18nRef). Writing those
+                // refs during render is load-bearing: the table wrapper from
+                // TanStack Table v9 snapshots `state` per render, so a ref written
+                // in an effect would hand consumers a one-commit-stale `table.state`
+                // (pagination and selection UI would lag a frame).
+                "react/refs": "off",
+                // TanStack Virtual's `useVirtualizer()` returns unstable function
+                // identities by design; the rule only matters when compiling with
+                // React Compiler, which this template does not use.
+                "react/incompatible-library": "off"
+            }
+        },
+        {
             "files": ["**/*.test.ts", "**/*.spec.ts"],
             "plugins": ["vitest"],
             "rules": {

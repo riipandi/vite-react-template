@@ -12,7 +12,7 @@ import {
   spellingDays,
   spellingTotal,
   type ReadingDay
-} from './chart.samples'
+} from '../chart.samples'
 
 const meta = {
   title: 'Visualizations/Heatmap',

@@ -119,6 +119,7 @@ to contribute something to the open-source community. Your work means the world!
 
 - [MadeUI](https://madeui.com/) — the Base UI + StyleX components in this template are based on its components.
 - [Reshaped](https://www.reshaped.so/) — the design system in this template is built on its design system.
+- [ReUI](https://reui.io) — the [Data Grid](https://reui.io/data-grid) component is a StyleX port of ReUI (originally built with Tailwind CSS).
 
 ## License
 

@@ -4,7 +4,7 @@ import { tooltip } from '@tanstack/charts/tooltip'
 import { portal } from '@tanstack/charts/tooltip/portal'
 import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
-import { Chart, ChartContainer, ChartLegend } from './chart.component'
+import { Chart, ChartContainer, ChartLegend } from '../chart.component'
 import {
   barHoverStates,
   barMotion,
@@ -15,7 +15,7 @@ import {
   checkoutConfig,
   checkoutScales,
   seriesColors
-} from './chart.samples'
+} from '../chart.samples'
 
 const meta = {
   title: 'Visualizations/ComboChart',

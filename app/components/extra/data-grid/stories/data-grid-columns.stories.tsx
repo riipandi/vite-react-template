@@ -287,6 +287,7 @@ export const ColumnResizing: Story = {
           cell: ({ row }) => <AvatarCell row={row.original} />,
           size: 400,
           minSize: 300,
+          meta: { autoSize: true },
           enableSorting: true,
           enableHiding: false,
           enableResizing: true

@@ -102,7 +102,8 @@ export const CrudFeatures: Story = {
           accessorKey: 'name',
           header: 'Name',
           cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.name}</span>,
-          size: 180
+          size: 180,
+          meta: { autoSize: true }
         },
         {
           accessorKey: 'email',
@@ -225,7 +226,8 @@ export const CrudInFrameContainer: Story = {
           accessorKey: 'name',
           header: 'Name',
           cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.name}</span>,
-          size: 180
+          size: 180,
+          meta: { autoSize: true }
         },
         {
           accessorKey: 'email',
@@ -339,7 +341,8 @@ export const SpreadsheetEditing: Story = {
           header: 'Product',
           size: 200,
           meta: {
-            cellEdit: { control: 'text' }
+            cellEdit: { control: 'text' },
+            autoSize: true
           }
         },
         {

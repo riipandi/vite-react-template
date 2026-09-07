@@ -94,7 +94,8 @@ function baseColumns(): ColumnDef<DataGridFeatures, IData>[] {
       accessorKey: 'name',
       header: 'Name',
       cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.name}</span>,
-      size: 170
+      size: 170,
+      meta: { autoSize: true }
     },
     {
       accessorKey: 'email',

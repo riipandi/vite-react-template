@@ -527,6 +527,7 @@ export const RowPinningSupport: Story = {
         {
           accessorKey: 'name',
           header: 'Team Members',
+          meta: { autoSize: true },
           cell: ({ row }) => (
             <div {...stylex.props(s.cellFlex)}>
               <Avatar style={s.avatar24}>

@@ -26,7 +26,6 @@ import {
   type InputGroupButtonSize,
   InputGroupInput
 } from '#/components/extra/input-group'
-import { inputPasswordStyles as s } from './input-password.stylex'
 
 export interface InputPasswordProps extends Omit<
   React.ComponentPropsWithoutRef<typeof InputGroupInput>,
@@ -95,7 +94,7 @@ export function InputPassword({
   const hideIconNode = hideIcon ?? defaultHideIcon
 
   return (
-    <InputGroup {...stylex.props(s.root, style)}>
+    <InputGroup {...stylex.props(style)}>
       <InputGroupInput
         type={visible ? 'text' : 'password'}
         autoComplete='new-password'
@@ -109,7 +108,6 @@ export function InputPassword({
           aria-pressed={visible}
           aria-label={visible ? hideAriaLabel : showAriaLabel}
           onClick={toggle}
-          style={s.toggle}
         >
           {visible ? hideIconNode : showIconNode}
         </InputGroupButton>

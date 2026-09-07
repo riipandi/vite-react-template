@@ -5,8 +5,8 @@ import { scalePoint } from '@tanstack/charts/scales/point'
 import { tooltip } from '@tanstack/charts/tooltip'
 import { portal } from '@tanstack/charts/tooltip/portal'
 import { expect } from 'storybook/test'
-import { Chart, ChartContainer, ChartLegend } from './chart.component'
-import { canvasDecorator, chartTheme, seriesColors } from './chart.samples'
+import { Chart, ChartContainer, ChartLegend } from '../chart.component'
+import { canvasDecorator, chartTheme, seriesColors } from '../chart.samples'
 
 const meta = {
   title: 'Visualizations/Slopegraph',

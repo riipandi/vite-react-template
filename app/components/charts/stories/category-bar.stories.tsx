@@ -5,7 +5,7 @@ import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Tooltip, TooltipContent, TooltipTrigger } from '#/components/base/tooltip'
 import { colors } from '#/styles/core/colors.stylex'
 import { fontSize, fontWeight, radius, unit } from '#/styles/core/tokens.stylex'
-import { houses, houseConfig } from './chart.samples'
+import { houses, houseConfig } from '../chart.samples'
 
 const meta = {
   title: 'Visualizations/CategoryBar',

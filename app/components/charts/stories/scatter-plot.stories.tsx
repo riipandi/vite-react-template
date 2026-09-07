@@ -4,8 +4,8 @@ import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { tooltip } from '@tanstack/charts/tooltip'
 import { portal } from '@tanstack/charts/tooltip/portal'
 import { expect } from 'storybook/test'
-import { Chart, ChartContainer, ChartLegend } from './chart.component'
-import { canvasDecorator, chartTheme, mulberry32, seriesColors } from './chart.samples'
+import { Chart, ChartContainer, ChartLegend } from '../chart.component'
+import { canvasDecorator, chartTheme, mulberry32, seriesColors } from '../chart.samples'
 
 const meta = {
   title: 'Visualizations/ScatterPlot',

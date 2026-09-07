@@ -6,8 +6,8 @@ import { scaleLinear } from '@tanstack/charts/scales/linear'
 import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import { breakpoints, fontSize, fontWeight, radius, unit } from '#/styles/core/tokens.stylex'
-import { Chart } from './chart.component'
-import { canvasDecorator, checkouts, seriesColors } from './chart.samples'
+import { Chart } from '../chart.component'
+import { canvasDecorator, checkouts, seriesColors } from '../chart.samples'
 
 const meta = {
   title: 'Visualizations/SparkChart',

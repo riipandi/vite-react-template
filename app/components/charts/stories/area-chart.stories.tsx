@@ -3,7 +3,7 @@ import { areaY, defineChart, fold, stack } from '@tanstack/charts'
 import { tooltip } from '@tanstack/charts/tooltip'
 import { portal } from '@tanstack/charts/tooltip/portal'
 import { expect } from 'storybook/test'
-import { Chart, ChartContainer, ChartLegend } from './chart.component'
+import { Chart, ChartContainer, ChartLegend } from '../chart.component'
 import {
   canvasDecorator,
   chartMotion,
@@ -12,7 +12,7 @@ import {
   checkoutConfig,
   checkoutScales,
   seriesColors
-} from './chart.samples'
+} from '../chart.samples'
 
 const meta = {
   title: 'Visualizations/AreaChart',

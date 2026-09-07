@@ -7,8 +7,8 @@ import { portal } from '@tanstack/charts/tooltip/portal'
 import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import { fontSize, fontWeight, unit } from '#/styles/core/tokens.stylex'
-import { Chart, ChartContainer, ChartLegend } from './chart.component'
-import { canvasDecorator, chartMotion, chartTheme, houses, houseConfig } from './chart.samples'
+import { Chart, ChartContainer, ChartLegend } from '../chart.component'
+import { canvasDecorator, chartMotion, chartTheme, houses, houseConfig } from '../chart.samples'
 
 const meta = {
   title: 'Visualizations/DonutChart',

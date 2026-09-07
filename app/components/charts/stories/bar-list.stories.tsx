@@ -3,7 +3,7 @@ import * as stylex from '@stylexjs/stylex'
 import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import { container, fontLineHeight, radius, unit } from '#/styles/core/tokens.stylex'
-import { canvasDecorator, hpBooks } from './chart.samples'
+import { canvasDecorator, hpBooks } from '../chart.samples'
 
 const meta = {
   title: 'Visualizations/BarList',

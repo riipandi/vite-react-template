@@ -53,7 +53,7 @@ type Story = StoryObj<typeof meta>
 export default meta
 
 /* ------------------------------------------------------------------ */
-/* Shared module-scope styles                                          */
+/* Shared module-scope styles */
 /* ------------------------------------------------------------------ */
 
 const statusStyles = stylex.create({
@@ -97,7 +97,7 @@ const statusStyles = stylex.create({
 })
 
 /* ------------------------------------------------------------------ */
-/* Row selection (ReUI c-data-grid-7)                                  */
+/* Row selection */
 /* ------------------------------------------------------------------ */
 
 function selectionColumns(): ColumnDef<DataGridFeatures, IData>[] {
@@ -178,7 +178,7 @@ export const RowSelection: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Expandable rows (ReUI c-data-grid-8)                                */
+/* Expandable rows */
 /* ------------------------------------------------------------------ */
 
 interface IDetail extends IData {
@@ -216,7 +216,7 @@ function ExpandableColumns(): ColumnDef<DataGridFeatures, IDetail>[] {
         ) : null,
       size: 48,
       meta: {
-        // Receives `row.original` (ReUI contract), not the TanStack row.
+        // Receives `row.original` (source contract), not the TanStack row.
         expandedContent: (row) => (
           <div {...stylex.props(statusStyles.muted, statusStyles.expandedContent)}>
             {row.details}
@@ -280,7 +280,7 @@ export const ExpandableRows: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Sub table (ReUI c-data-grid-9, condensed)                           */
+/* Sub table (condensed) */
 /* ------------------------------------------------------------------ */
 
 interface IOrder {
@@ -416,7 +416,7 @@ export const SubTableStory: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Draggable rows (ReUI c-data-grid-14)                                */
+/* Draggable rows */
 /* ------------------------------------------------------------------ */
 
 export const DraggableRows: Story = {
@@ -496,7 +496,7 @@ export const DraggableRows: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Row pinning (ReUI c-data-grid-29)                                   */
+/* Row pinning */
 /* ------------------------------------------------------------------ */
 
 export const RowPinningSupport: Story = {
@@ -600,7 +600,7 @@ export const RowPinningSupport: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Tree rows (ReUI c-data-grid-30, condensed)                          */
+/* Tree rows (condensed) */
 /* ------------------------------------------------------------------ */
 
 interface ITreeNode {

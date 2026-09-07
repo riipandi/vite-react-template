@@ -130,7 +130,7 @@ function baseColumns(): ColumnDef<DataGridFeatures, IData>[] {
   ]
 }
 
-/** Column totals footer (ReUI c-data-grid-24). */
+/** Column totals footer. */
 export const ColumnTotalsFooter: Story = {
   name: 'Column totals footer',
   render: () => {
@@ -177,7 +177,7 @@ export const ColumnTotalsFooter: Story = {
   }
 }
 
-/** Summary stats footer (ReUI c-data-grid-25). */
+/** Summary stats footer. */
 export const SummaryStatsFooter: Story = {
   name: 'Summary stats footer',
   render: () => {
@@ -251,7 +251,7 @@ export const SummaryStatsFooter: Story = {
   }
 }
 
-/** Per-column aggregate footer (ReUI c-data-grid-26). */
+/** Per-column aggregate footer. */
 export const PerColumnAggregateFooter: Story = {
   name: 'Per-column aggregate footer',
   render: () => {

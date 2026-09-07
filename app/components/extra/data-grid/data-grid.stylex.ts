@@ -5,7 +5,7 @@ import { radius, stroke, unit } from '#/styles/core/tokens.stylex'
 /**
  * Shared data-grid chrome: the container slot and the scroll-area viewport /
  * scrollbar pieces. Feature-specific styles live next to their components
- * (e.g. `data-grid-table.stylex.ts`, `data-grid-cell-selection.stylex.ts`).
+ * (e.g. `data-grid-table.stylex.ts`, `data-grid-cell.stylex.ts`).
  */
 export const dataGridStyles = stylex.create({
   container: {
@@ -83,7 +83,7 @@ export const dataGridScrollAreaStyles = stylex.create({
 })
 
 /**
- * Selection chrome for a body td in cell-selection mode, replacing ReUI's
+ * Selection chrome for a body td in cell-selection mode, replacing the source's
  * `dataGridCellSelectionCellClasses` Tailwind string. States are applied as
  * conditional stylex.props arguments computed in React (selected, focused,
  * edges, pinned) instead of data-attribute selectors.
@@ -233,7 +233,7 @@ export const dataGridCellSelectionStyles = stylex.create({
  * Compiled class name for the imperatively toggled fill-drag preview tint
  * (`data-cell-fill-target` is written outside React). The imperative code
  * adds/removes this class plus `dataGridFillTargetPinnedClassName` on the
- * preview cells, mirroring ReUI's `data-[cell-fill-target]:bg-primary/4`
+ * preview cells, mirroring the source's `data-[cell-fill-target]:bg-primary/4`
  * and its pinned variant.
  */
 export const dataGridFillTargetClassName =

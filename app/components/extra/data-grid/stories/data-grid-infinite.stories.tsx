@@ -188,7 +188,7 @@ function useColumns() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Local infinite scroll (ReUI c-data-grid-27)                         */
+/* Local infinite scroll */
 /* ------------------------------------------------------------------ */
 
 const LOCAL_TOTAL = 200
@@ -243,7 +243,7 @@ export const LocalInfiniteScroll: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Remote infinite scroll (ReUI c-data-grid-28)                        */
+/* Remote infinite scroll */
 /* ------------------------------------------------------------------ */
 
 const REMOTE_TOTAL = 200
@@ -327,7 +327,7 @@ export const RemoteInfiniteScroll: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Column virtualization (ReUI c-data-grid-32)                         */
+/* Column virtualization */
 /* ------------------------------------------------------------------ */
 
 const METRIC_COLUMN_COUNT = 36
@@ -455,5 +455,5 @@ export const ColumnVirtualization: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Shared bits                                                         */
+/* Shared bits */
 /* ------------------------------------------------------------------ */

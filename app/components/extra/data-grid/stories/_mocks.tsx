@@ -1,4 +1,4 @@
-/** Shared mock dataset for the data-grid stories (ported from ReUI examples). */
+/** Shared mock dataset for the data-grid stories. */
 export interface IData {
   id: string
   name: string

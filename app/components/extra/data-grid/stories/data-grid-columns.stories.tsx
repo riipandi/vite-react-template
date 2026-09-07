@@ -157,7 +157,7 @@ function staffColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IData>[] 
   ]
 }
 
-/** Column icons (ReUI c-data-grid-10). */
+/** Column icons. */
 export const ColumnIcons: Story = {
   name: 'Column icons',
   render: () => {
@@ -179,7 +179,7 @@ export const ColumnIcons: Story = {
   }
 }
 
-/** Sortable columns (ReUI c-data-grid-11). */
+/** Sortable columns. */
 export const SortableColumns: Story = {
   name: 'Sortable columns',
   render: () => {
@@ -201,7 +201,7 @@ export const SortableColumns: Story = {
   }
 }
 
-/** Movable columns via the header menu (ReUI c-data-grid-12). */
+/** Movable columns via the header menu. */
 export const MovableColumns: Story = {
   name: 'Movable columns',
   render: () => {
@@ -227,7 +227,7 @@ export const MovableColumns: Story = {
   }
 }
 
-/** Draggable columns via dnd-kit (ReUI c-data-grid-13). */
+/** Draggable columns via dnd-kit. */
 export const DraggableColumns: Story = {
   name: 'Draggable columns',
   render: () => {
@@ -274,7 +274,7 @@ export const DraggableColumns: Story = {
   }
 }
 
-/** Column resizing (ReUI c-data-grid-15). */
+/** Column resizing. */
 export const ColumnResizing: Story = {
   name: 'Column resizing',
   render: () => {
@@ -329,7 +329,7 @@ export const ColumnResizing: Story = {
   }
 }
 
-/** Pinnable columns (ReUI c-data-grid-16). */
+/** Pinnable columns. */
 export const PinnableColumns: Story = {
   name: 'Pinnable columns',
   render: () => {
@@ -355,7 +355,7 @@ export const PinnableColumns: Story = {
   }
 }
 
-/** Sticky header (ReUI c-data-grid-17). */
+/** Sticky header. */
 export const StickyHeader: Story = {
   name: 'Sticky header',
   render: () => {
@@ -382,7 +382,7 @@ export const StickyHeader: Story = {
   }
 }
 
-/** Column controls (ReUI c-data-grid-18). */
+/** Column controls. */
 export const ColumnControls: Story = {
   name: 'Column controls',
   render: () => {
@@ -413,7 +413,7 @@ export const ColumnControls: Story = {
   }
 }
 
-/** Column visibility controls (ReUI c-data-grid-20). */
+/** Column visibility controls. */
 export const ColumnVisibilityControls: Story = {
   name: 'Column visibility controls',
   render: () => {

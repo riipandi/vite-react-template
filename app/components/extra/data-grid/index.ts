@@ -38,11 +38,11 @@ export type {
   DataGridI18nLabels,
   DataGridI18nOverrides
 } from './data-grid-i18n'
-export { DataGridScrollArea } from './data-grid-scroll-area'
+export { DataGridScrollArea } from './data-grid-table-pager'
 export type {
   DataGridScrollAreaOrientation,
   DataGridScrollAreaProps
-} from './data-grid-scroll-area'
+} from './data-grid-table-pager'
 export {
   DataGridTable,
   DataGridTableAddRow,
@@ -92,25 +92,28 @@ export {
   parseDataGridClipboardText,
   serializeDataGridClipboardText,
   tileDataGridClipboardBlock
-} from './data-grid-cell-selection'
+} from './data-grid-cell'
 export type {
   DataGridCellSelectionApi,
   DataGridFocusCellOptions,
   DataGridPasteTarget
-} from './data-grid-cell-selection'
-export { DataGridColumnFilter } from './data-grid-column-filter'
-export type { DataGridColumnFilterProps } from './data-grid-column-filter'
-export { DataGridColumnHeader } from './data-grid-column-header'
-export type { DataGridColumnHeaderProps } from './data-grid-column-header'
-export { DataGridColumnVisibility } from './data-grid-column-visibility'
-export { DataGridPagination } from './data-grid-pagination'
-export type { DataGridPaginationProps } from './data-grid-pagination'
-export { DataGridTableDnd } from './data-grid-table-dnd'
-export { DataGridTableDndRowHandle, DataGridTableDndRows } from './data-grid-table-dnd-rows'
-export type {
-  DataGridTableDndRowData,
-  DataGridTableDndRowDecoration
-} from './data-grid-table-dnd-rows'
+} from './data-grid-cell'
+export {
+  DataGridColumnFilter,
+  DataGridColumnHeader,
+  DataGridColumnVisibility,
+  type DataGridColumnFilterProps,
+  type DataGridColumnHeaderProps
+} from './data-grid-column'
+export { DataGridPagination } from './data-grid-table-pager'
+export type { DataGridPaginationProps } from './data-grid-table-pager'
+export {
+  DataGridTableDnd,
+  DataGridTableDndRowHandle,
+  DataGridTableDndRows,
+  type DataGridTableDndRowData,
+  type DataGridTableDndRowDecoration
+} from './data-grid-table-dnd'
 export { DataGridTableVirtual } from './data-grid-table-virtual'
 export type {
   DataGridTableVirtualProps,

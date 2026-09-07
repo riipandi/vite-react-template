@@ -17,8 +17,8 @@ import {
   dataGridCellEditorStyles,
   dataGridGestureOutlineClassName,
   dataGridSelectionBarStyles
-} from './data-grid-cell-selection.stylex'
-import type { DataGridCellEditorMetrics } from './data-grid-cell-selection.stylex'
+} from './data-grid-cell.stylex'
+import type { DataGridCellEditorMetrics } from './data-grid-cell.stylex'
 import { dataGridFillTargetClassName, dataGridFillTargetPinnedClassName } from './data-grid.stylex'
 
 /** Fill-drag tint classes, toggled imperatively alongside the attribute. */
@@ -820,7 +820,7 @@ function startDataGridFillSession<TData extends object>(options: {
         const cellElement = rowElement.querySelector(`td[data-col-id="${CSS.escape(column.id)}"]`)
         if (!cellElement) continue
         cellElement.setAttribute('data-cell-fill-target', 'true')
-        // StyleX counterpart of ReUI's `data-[cell-fill-target]:bg-primary/4`
+        // StyleX counterpart of the source's `data-[cell-fill-target]:bg-primary/4`
         // and its pinned variant: the tint classes are toggled alongside the
         // attribute, which is written outside React.
         cellElement.classList.add(dataGridFillTargetClassNames.base)

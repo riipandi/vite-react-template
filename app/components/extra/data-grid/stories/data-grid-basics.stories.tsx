@@ -99,7 +99,7 @@ const balanceCell = (info: { getValue: () => unknown }) => (
   <>${(info.getValue() as number).toFixed(2)}</>
 )
 
-/** Pagination (ReUI c-data-grid-1). */
+/** Pagination. */
 export const Pagination: Story = {
   name: 'Pagination',
   render: () => {
@@ -168,7 +168,7 @@ export const Pagination: Story = {
   }
 }
 
-/** Cell border (ReUI c-data-grid-2). */
+/** Cell border. */
 export const CellBorder: Story = {
   name: 'Cell border',
   render: () => {
@@ -231,7 +231,7 @@ export const CellBorder: Story = {
   }
 }
 
-/** Dense layout (ReUI c-data-grid-3). */
+/** Dense layout. */
 export const DenseLayout: Story = {
   name: 'Dense layout',
   render: () => {
@@ -287,7 +287,7 @@ export const DenseLayout: Story = {
   }
 }
 
-/** Without table borders (ReUI c-data-grid-4). */
+/** Without table borders. */
 export const WithoutTableBorders: Story = {
   name: 'Without table borders',
   render: () => {
@@ -348,7 +348,7 @@ export const WithoutTableBorders: Story = {
   }
 }
 
-/** Striped rows (ReUI c-data-grid-5). */
+/** Striped rows. */
 export const StripedRows: Story = {
   name: 'Striped rows',
   render: () => {
@@ -408,7 +408,7 @@ export const StripedRows: Story = {
   }
 }
 
-/** Auto width table layout (ReUI c-data-grid-6). */
+/** Auto width table layout. */
 export const AutoWidthTableLayout: Story = {
   name: 'Auto width table layout',
   render: () => {

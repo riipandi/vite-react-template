@@ -15,7 +15,7 @@ import {
  * visibility styles are small enough to share this file: they render inside
  * the same header cells and popups as the header trigger.
  *
- * ReUI's per-theme radius lists collapse to the project radius token.
+ * the source's per-theme radius lists collapse to the project radius token.
  */
 export const dataGridColumnHeaderStyles = stylex.create({
   // "-ms-2 flex h-full items-center justify-between gap-1.5" — the negative
@@ -36,7 +36,7 @@ export const dataGridColumnHeaderStyles = stylex.create({
     marginInlineStart: `calc(-1 * ${unit.x2})`
   },
   // The ghost trigger: muted at rest, full foreground on hover/open, with
-  // ReUI's `bg-secondary` hover tint (muted background, stronger than the
+  // the source's `bg-secondary` hover tint (muted background, stronger than the
   // ghost variant's default faded hover). Values go through color-mix so a
   // themed variable can ride a conditional key (raw defineVar values under a
   // conditional produce broken CSS in stylex 0.19).
@@ -69,7 +69,7 @@ export const dataGridColumnHeaderStyles = stylex.create({
     height: '100%',
     lineHeight: 1.3846
   },
-  // Consumer-provided icon node: ReUI sized svg descendants via a
+  // Consumer-provided icon node: the source sized svg descendants via a
   // [&_svg] rule, which StyleX cannot express — the wrapper keeps the
   // muted opacity and alignment; callers own the size.
   labelIcon: {

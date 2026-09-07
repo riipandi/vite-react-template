@@ -29,7 +29,7 @@ import {
   getPinningStyles,
   hasDataGridTableRightPinnedColumns
 } from './data-grid-table'
-import { dataGridTableVirtualStyles as s3 } from './data-grid-table-virtual.stylex'
+import { dataGridTableVirtualStyles as s3 } from './data-grid-table.stylex'
 
 interface DataGridTableVirtualScrollElements {
   containerElement: HTMLDivElement | null

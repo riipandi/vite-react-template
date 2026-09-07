@@ -23,7 +23,7 @@ import { dataGridCellSelectionStyles } from './data-grid.stylex'
 type DataGridCellSelectionAttrs = ReturnType<typeof getDataGridCellSelectionCellAttrs>
 
 /**
- * StyleX counterpart of ReUI's `dataGridCellSelectionCellClasses` Tailwind
+ * StyleX counterpart of the source's `dataGridCellSelectionCellClasses` Tailwind
  * string: selection chrome for a body td, applied as conditional
  * stylex.props arguments. All inputs are React-known (the cell selection
  * attrs plus geometry flags), so no data-attribute selectors are needed

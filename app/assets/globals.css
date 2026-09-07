@@ -143,7 +143,7 @@
 }
 
 /* Data grid last-row separator — when a pagination bar directly follows the
-   grid container, the final body row keeps its bottom border (ReUI's
+   grid container, the final body row keeps its bottom border (the source's
    `[data-grid]+[data-grid-pagination]` sibling selector with an ancestor
    `:has()`, which StyleX cannot compile). */
 [data-slot='data-grid']:has(+ [data-slot='data-grid-pagination']) tbody tr:last-child > td {

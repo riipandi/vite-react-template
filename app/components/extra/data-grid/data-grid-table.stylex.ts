@@ -50,7 +50,7 @@ export const dataGridTableStyles = stylex.create({
   tableAuto: {
     tableLayout: 'auto'
   },
-  // ReUI headerSticky default slot: sticky top-0 z-40 bg-background/90
+  // Source headerSticky default slot: sticky top-0 z-40 bg-background/90
   // backdrop-blur-xs. z-40 keeps it above pinned body cells (zIndex 30).
   headerSticky: {
     backdropFilter: 'blur(2px)',
@@ -131,7 +131,7 @@ export const dataGridTableStyles = stylex.create({
     verticalAlign: 'middle',
     // Row separator, driven by the row's own --dg-row-border-b var. Every
     // cell of a bordered row carries it (the row-level logic decides which
-    // ROWS border, matching ReUI's `[&:not(:last-child)>td]:border-b` —
+    // ROWS border, matching the source's `[&:not(:last-child)>td]:border-b` —
     // the :last-child there is a ROW, not a cell).
     borderBottomColor: colors.borderNeutralFaded,
     borderBottomStyle: 'solid',
@@ -610,5 +610,333 @@ export const dataGridTableViewportStyles = stylex.create({
     minWidth: '100%',
     position: 'relative',
     verticalAlign: 'top'
+  }
+})
+
+/**
+ * Draggable-columns chrome. Drag geometry (transform/transition/opacity) is
+ * applied through dynamic styles; the grip button and its hairline spacing
+ * are static.
+ */
+export const dataGridTableDndStyles = stylex.create({
+  headerControls: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: unit.x0_5,
+    justifyContent: 'flex-start'
+  },
+  grip: {
+    display: 'inline-flex',
+    height: unit.x4,
+    marginInlineStart: `calc(-1 * ${unit.x2})`,
+    opacity: {
+      default: 0.6,
+      ':hover': 1
+    },
+    width: unit.x4
+  },
+  gripButton: (isDragging: boolean) => ({
+    cursor: isDragging ? 'grabbing' : 'grab',
+    height: unit.x6,
+    marginInlineStart: `calc(-1 * ${unit.x2})`,
+    width: unit.x6
+  }),
+  headerLabel: {
+    flexGrow: 1
+  },
+  // Dynamic drag geometry for the sortable th/td.
+  sortableCell: (style: {
+    opacity: number
+    transform: string | null
+    transition: string | null
+    isDragging: boolean
+  }) => ({
+    cursor: style.isDragging ? 'grabbing' : null,
+    opacity: style.opacity,
+    position: 'relative',
+    transform: style.transform,
+    transitionProperty: style.transition,
+    zIndex: style.isDragging ? 1 : 0
+  }),
+  viewportDragging: {
+    cursor: 'grabbing'
+  }
+})
+
+/**
+ * Applies the dnd-kit drag state to a sortable th/td. `width` stays on the
+ * element's inline style (it rides the CSS-variable resize system).
+ */
+export function dndCellDragStyle(
+  isDragging: boolean,
+  transform: string | undefined,
+  transition: string | undefined
+) {
+  return dataGridTableDndStyles.sortableCell({
+    opacity: isDragging ? 0.8 : 1,
+    transform: transform ?? null,
+    transition: transition ?? null,
+    isDragging
+  })
+}
+
+export const dndGripCursorStyles = {
+  dragging: dataGridTableDndStyles.gripButton(true),
+  idle: dataGridTableDndStyles.gripButton(false)
+}
+
+/** Draggable-rows chrome. */
+export const dataGridTableDndRowsStyles = stylex.create({
+  // The grip button: 28px, grab cursor, muted at rest.
+  gripButton: {
+    blockSize: unit.x7,
+    cursor: 'grab',
+    inlineSize: unit.x7,
+    opacity: {
+      default: 0.7,
+      ':hover': 1,
+      ':active': 1
+    }
+  },
+  gripButtonActive: {
+    cursor: 'grabbing'
+  },
+  gripDisabled: {
+    cursor: 'not-allowed'
+  },
+  gripIcon: {
+    blockSize: unit.x4,
+    inlineSize: unit.x4
+  },
+  // Decoration / drop-indicator wrappers ride the ROW as the nearest
+  // positioned ancestor, spanning the full width without adding a column.
+  rowDecoration: {
+    inset: 0,
+    pointerEvents: 'none',
+    position: 'absolute'
+  },
+  dropIndicator: {
+    inset: 0,
+    pointerEvents: 'none',
+    position: 'absolute',
+    zIndex: 20
+  },
+  // Two solid pixels down the leading edge — the bar is the whole indicator.
+  dropIndicatorBar: {
+    backgroundColor: colors.backgroundPrimary,
+    insetBlock: 0,
+    insetInlineStart: 0,
+    position: 'absolute',
+    width: 2
+  },
+  // DragOverlay clone.
+  overlayTable: {
+    backgroundColor: colors.backgroundPage,
+    borderColor: colors.borderNeutralFaded,
+    borderStyle: 'solid',
+    borderWidth: stroke.ring1,
+    borderRadius: radius.medium,
+    boxShadow: shadow.raised,
+    cursor: 'grabbing',
+    pointerEvents: 'none'
+  },
+  overlayCell: {
+    padding: 0,
+    verticalAlign: 'middle'
+  },
+  overlayCellInner: {
+    overflow: 'hidden',
+    paddingInline: unit.x3,
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap'
+  },
+  // Dynamic drag state for the sortable tr.
+  rowDrag: (state: { isDragging: boolean; transform: string | null }) => ({
+    cursor: state.isDragging ? 'grabbing' : null,
+    opacity: state.isDragging ? 0.4 : null,
+    // Inset so the dashes sit inside the row box and cannot be clipped by
+    // the neighbouring row's border.
+    outlineColor: state.isDragging ? colors.borderNeutralFaded : null,
+    outlineOffset: state.isDragging ? -1 : null,
+    outlineStyle: state.isDragging ? 'dashed' : null,
+    outlineWidth: state.isDragging ? 1 : null,
+    position: 'relative',
+    transform: state.transform,
+    zIndex: state.isDragging ? 1 : 0
+  })
+})
+
+/**
+ * Row drag state for the sortable tr: transform from dnd-kit, and the
+ * held-row treatment (dimmed, dashed inset outline) so the slot left behind
+ * reads as the space being moved out of. dnd-kit's own transition is dropped:
+ * a transform transition on a `tr` stops the transform applying at all in
+ * Chrome, and displacement must land in one step anyway.
+ */
+export function dndRowDragStyle(isDragging: boolean, transform: string | undefined) {
+  return dataGridTableDndRowsStyles.rowDrag({
+    isDragging,
+    transform: transform ?? null
+  })
+}
+
+/**
+ * Pagination chrome. Tailwind `sm:` (640px) aligns to the project's first
+ * token breakpoint (660px).
+ */
+export const dataGridPaginationStyles = stylex.create({
+  root: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    flexWrap: 'wrap',
+    gap: '10px',
+    justifyContent: 'space-between',
+    paddingBlock: '10px',
+    '@media (min-width: 660px)': {
+      flexDirection: 'row',
+      paddingBlock: 0
+    }
+  },
+  sizes: {
+    alignItems: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '10px',
+    order: 2,
+    paddingBlockEnd: '10px',
+    '@media (min-width: 660px)': {
+      order: 1,
+      paddingBlockEnd: 0
+    }
+  },
+  mutedText: {
+    color: colors.foregroundNeutralFaded,
+    fontSize: fontSize.body2,
+    lineHeight: fontLineHeight.body2
+  },
+  // w-fit with a min, never a fixed width: a fixed w-16 clipped the value
+  // "100" by 1px at nova's paddings, while fit-content grows the trigger for
+  // 3-digit sizes and the min keeps the 1-2 digit ones from collapsing
+  // narrower than 64px.
+  pageSizeTrigger: {
+    height: unit.x8,
+    minWidth: unit.x16,
+    width: 'fit-content'
+  },
+  pageSizeContent: { minWidth: 'var(--anchor-width)' },
+  info: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+    justifyContent: 'center',
+    order: 1,
+    paddingBlockStart: '10px',
+    '@media (min-width: 660px)': {
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      order: 2,
+      paddingBlockStart: 0
+    }
+  },
+  infoText: {
+    color: colors.foregroundNeutralFaded,
+    fontSize: fontSize.body2,
+    lineHeight: fontLineHeight.body2,
+    order: 2,
+    whiteSpace: 'nowrap',
+    '@media (min-width: 660px)': {
+      order: 1
+    }
+  },
+  pages: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: unit.x1,
+    order: 1
+  },
+  pageButton: {
+    fontSize: fontSize.body2,
+    lineHeight: fontLineHeight.body2,
+    padding: 0
+  },
+  pageButtonMuted: { color: colors.foregroundNeutralFaded },
+  pageButtonActive: {
+    backgroundColor: colors.backgroundNeutralHighlightedFaded,
+    color: colors.foregroundNeutral
+  },
+  arrowButton: {
+    fontSize: fontSize.body2,
+    lineHeight: fontLineHeight.body2,
+    padding: 0,
+    ':dir(rtl)': { transform: 'rotate(180deg)' }
+  },
+  arrowIcon: { height: unit.x4, width: unit.x4 },
+  sizesSkeleton: { height: unit.x8, width: 176 },
+  infoSkeleton: { height: unit.x8, width: 240 },
+  srOnly: {
+    borderStyle: 'solid',
+    borderWidth: 0,
+    clipPath: 'inset(50%)',
+    height: 1,
+    margin: -1,
+    overflow: 'hidden',
+    padding: 0,
+    position: 'absolute',
+    whiteSpace: 'nowrap',
+    width: 1
+  }
+})
+
+/** Virtual table chrome: placeholder cells, spacers, status rows. */
+export const dataGridTableVirtualStyles = stylex.create({
+  placeholderCell: {
+    padding: 0
+  },
+  // Mirrors the table's cell border + pinned-cell chrome for placeholders.
+  cellBorder: {
+    borderInlineEndColor: colors.borderNeutralFaded,
+    borderInlineEndStyle: 'solid',
+    borderInlineEndWidth: stroke.ring1
+  },
+  pinnedCell: {
+    backgroundColor: colors.backgroundPage,
+    isolation: 'isolate'
+  },
+  pinnedDividerStart: {
+    boxShadow: `inset -1px 0 0 0 ${colors.borderNeutralFaded}`
+  },
+  pinnedDividerEnd: {
+    boxShadow: `inset 1px 0 0 0 ${colors.borderNeutralFaded}`
+  },
+  utilityCenterCell: {
+    padding: 0
+  },
+  statusCell: {
+    color: colors.foregroundNeutralFaded,
+    fontSize: fontSize.body2,
+    lineHeight: fontLineHeight.body2,
+    paddingBlock: unit.x4,
+    textAlign: 'center'
+  },
+  statusCellCompact: {
+    fontSize: fontSize.caption1,
+    paddingBlock: unit.x3
+  },
+  statusInner: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: unit.x2,
+    justifyContent: 'center'
+  },
+  spinner: {
+    height: unit.x4,
+    opacity: 0.6,
+    width: unit.x4
+  },
+  viewportBlock: {
+    display: 'block'
   }
 })

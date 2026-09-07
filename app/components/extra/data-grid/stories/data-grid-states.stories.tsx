@@ -42,7 +42,7 @@ type Story = StoryObj<typeof meta>
 export default meta
 
 /* ------------------------------------------------------------------ */
-/* Shared bits                                                         */
+/* Shared bits */
 /* ------------------------------------------------------------------ */
 
 const statesStyles = stylex.create({
@@ -78,7 +78,7 @@ const statesStyles = stylex.create({
     objectFit: 'cover',
     width: 16
   },
-  // Breathing room against the container edges (ReUI c-19 edgeCell: px-5).
+  // Breathing room against the container edges (edgeCell: px-5).
   edgeCell: { paddingInline: 20 },
   searchGroup: { width: 192 }
 })
@@ -172,7 +172,7 @@ function usePagedTable(columns: ColumnDef<DataGridFeatures, IData>[]) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Card container (ReUI c-data-grid-19)                                */
+/* Card container */
 /* ------------------------------------------------------------------ */
 
 export const CardContainer: Story = {
@@ -272,7 +272,7 @@ export const CardContainer: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Loading skeleton (ReUI c-data-grid-21)                              */
+/* Loading skeleton */
 /* ------------------------------------------------------------------ */
 
 export const LoadingSkeleton: Story = {
@@ -356,7 +356,7 @@ function AvatarCell32(row: IData) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Localized labels (ReUI c-data-grid-33)                              */
+/* Localized labels */
 /* ------------------------------------------------------------------ */
 
 const LOCALES: Record<
@@ -536,7 +536,7 @@ export const LocalizedLabels: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Server side pagination (ReUI c-data-grid-34)                        */
+/* Server side pagination */
 /* ------------------------------------------------------------------ */
 
 const serverRecords: IData[] = demoData

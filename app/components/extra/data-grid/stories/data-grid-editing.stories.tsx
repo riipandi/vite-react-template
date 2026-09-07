@@ -43,7 +43,7 @@ type Story = StoryObj<typeof meta>
 export default meta
 
 /* ------------------------------------------------------------------ */
-/* Shared styles                                                       */
+/* Shared styles */
 /* ------------------------------------------------------------------ */
 
 const editingStyles = stylex.create({
@@ -56,7 +56,7 @@ const editingStyles = stylex.create({
   },
   searchGroup: { width: 192 },
   cardBody: { padding: 0 },
-  // Breathing room against the container edges (ReUI c-31 edgeCell: first
+  // Breathing room against the container edges (edgeCell: first
   // ps-4 / last pe-4; a symmetric inline padding reads the same on fixed
   // columns and stays within StyleXStyles' static-only shape).
   edgeCell: { paddingInline: 16 },
@@ -86,7 +86,7 @@ const editingStyles = stylex.create({
 })
 
 /* ------------------------------------------------------------------ */
-/* CRUD features (ReUI c-data-grid-22)                                 */
+/* CRUD features */
 /* ------------------------------------------------------------------ */
 
 export const CrudFeatures: Story = {
@@ -211,7 +211,7 @@ export const CrudFeatures: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* CRUD in frame container (ReUI c-data-grid-23)                       */
+/* CRUD in frame container */
 /* ------------------------------------------------------------------ */
 
 export const CrudInFrameContainer: Story = {
@@ -268,7 +268,7 @@ export const CrudInFrameContainer: Story = {
           setRows((old) => [...old, { ...old[0]!, id: String(Date.now()), name: 'New member' }])
         }}
       >
-        {/* ReUI renders this inside its Frame component; a muted card frame
+        {/* The source renders this inside its Frame component; a muted card frame
             carries the same header/content/footer intent here. */}
         <Card style={editingStyles.frame}>
           <CardHeader style={editingStyles.frameHeader}>
@@ -295,7 +295,7 @@ export const CrudInFrameContainer: Story = {
 }
 
 /* ------------------------------------------------------------------ */
-/* Spreadsheet editing (ReUI c-data-grid-31)                           */
+/* Spreadsheet editing */
 /* ------------------------------------------------------------------ */
 
 interface IProduct {

@@ -109,7 +109,7 @@ export interface DataGridColumnMeta<TData> {
 }
 
 /**
- * The batteries-included feature bundle every ReUI data-grid example builds
+ * The batteries-included feature bundle every data-grid example builds
  * on. v9 requires each table to declare its features up front, and the grid's
  * render path needs the ones registered here: `columnVisibilityFeature` alone
  * gates `row.getVisibleCells()`, so even a grid that never hides a column
@@ -581,7 +581,7 @@ export interface DataGridCellsChangeDetails<TData> {
 }
 
 /**
- * StyleX style slots replacing ReUI's `tableClassNames` (string) slots.
+ * StyleX style slots replacing the source's `tableClassNames` (string) slots.
  * Each slot merges over the grid's built-in styles for that part.
  */
 export interface DataGridTableStyleSlots {
@@ -723,7 +723,7 @@ export interface DataGridProps<TFeatures extends TableFeatures, TData extends ob
      */
     cellFillHandleVariant?: 'dot' | 'ring' | 'square'
   }
-  /** StyleX style slots for the table parts (ReUI's `tableClassNames`). */
+  /** StyleX style slots for the table parts (the source's `tableClassNames`). */
   tableStyles?: DataGridTableStyleSlots
 }
 

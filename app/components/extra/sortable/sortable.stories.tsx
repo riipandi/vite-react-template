@@ -1,19 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
-import {
-  CalendarIcon,
-  ChartColumnIcon,
-  FileTextIcon,
-  FolderIcon,
-  GripVerticalIcon,
-  InboxIcon,
-  ImageIcon,
-  MusicIcon,
-  SettingsIcon,
-  VideoIcon
-} from 'lucide-react'
+import { FileTextIcon, GripVerticalIcon, ImageIcon, MusicIcon, VideoIcon } from 'lucide-react'
 import { useState } from 'react'
-import type { ReactNode } from 'react'
 import { Switch } from '#/components/base/switch'
 import { toast } from '#/components/base/toast'
 import { Badge } from '#/components/extra/badge'
@@ -143,8 +131,6 @@ const styles = stylex.create({
     },
     gridRow: 'span 2'
   },
-  // Grid cells (ReUI c-sortable-2): left-aligned column, drag handle pinned
-  // top-right, badge row pinned bottom, min height so cells read as tiles.
   gridCell: {
     flexDirection: 'column',
     gap: unit.x2,
@@ -158,9 +144,12 @@ const styles = stylex.create({
       ':hover': 1,
       ':focus-visible': 1,
       ':active': 1,
+      [stylex.when.ancestor(':hover')]: 1,
       '@media (pointer: coarse)': 1
     },
     position: 'absolute',
+    right: unit.x2,
+    top: unit.x2,
     width: 'fit-content'
   },
   gridFooter: {
@@ -187,9 +176,6 @@ const styles = stylex.create({
     height: unit.x6,
     justifyContent: 'center',
     width: unit.x6
-  },
-  spacer: {
-    flex: 1
   }
 })
 
@@ -689,60 +675,6 @@ export const SettingsPriority: Story = {
   }
 }
 
-// -- c-sortable-6: sidebar navigation ---------------------------------------
-
-interface NavEntry {
-  id: string
-  label: string
-  icon: ReactNode
-  count?: number
-}
-
-export const SidebarNavigation: Story = {
-  name: 'Sidebar navigation',
-  render: () => {
-    const [items, setItems] = useState<NavEntry[]>([
-      { id: '1', label: 'Dashboard', icon: <FolderIcon size={16} /> },
-      { id: '2', label: 'Inbox', icon: <InboxIcon size={16} />, count: 5 },
-      { id: '3', label: 'Projects', icon: <FileTextIcon size={16} />, count: 12 },
-      { id: '4', label: 'Calendar', icon: <CalendarIcon size={16} /> },
-      { id: '5', label: 'Analytics', icon: <ChartColumnIcon size={16} /> },
-      { id: '6', label: 'Settings', icon: <SettingsIcon size={16} /> }
-    ])
-
-    return (
-      <div {...stylex.props(styles.page)}>
-        <Card style={styles.card}>
-          <CardHeader>
-            <CardTitle>Navigation</CardTitle>
-          </CardHeader>
-          <div {...stylex.props(styles.cardBody)}>
-            <Sortable
-              value={items}
-              onValueChange={setItems}
-              getItemValue={(item) => item.id}
-              strategy='vertical'
-              style={styles.listTight}
-            >
-              {items.map((item) => (
-                <SortableItem key={item.id} value={item.id}>
-                  <div {...stylex.props(styles.row, styles.rowMuted)}>
-                    <Handle />
-                    <span {...stylex.props(styles.iconTile)}>{item.icon}</span>
-                    <span {...stylex.props(styles.rowTitle)}>{item.label}</span>
-                    <span {...stylex.props(styles.spacer)} />
-                    {item.count !== undefined && <Badge variant='secondary'>{item.count}</Badge>}
-                  </div>
-                </SortableItem>
-              ))}
-            </Sortable>
-          </div>
-        </Card>
-      </div>
-    )
-  }
-}
-
 // -- c-sortable-7: image gallery grid ---------------------------------------
 
 interface GalleryImage {
@@ -821,10 +753,12 @@ const mediaStyles = stylex.create({
       ':hover': 1,
       ':focus-visible': 1,
       ':active': 1,
+      [stylex.when.ancestor(':hover')]: 1,
       '@media (pointer: coarse)': 1
     },
     padding: unit.x1,
     position: 'absolute',
+    right: unit.x2,
     top: unit.x2,
     width: 'fit-content'
   },

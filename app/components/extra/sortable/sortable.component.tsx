@@ -381,6 +381,7 @@ export interface SortableItemHandleProps extends DivRenderProps {
 
 function SortableItemHandle({ style, render, cursor = true, ...props }: SortableItemHandleProps) {
   const { listeners, isDragging, disabled } = useContext(SortableItemContext)
+  const { activeId } = useContext(SortableInternalContext)
 
   return useRender({
     defaultTagName: 'div',
@@ -390,6 +391,8 @@ function SortableItemHandle({ style, render, cursor = true, ...props }: Sortable
         ...stylex.props(
           s.handle,
           cursor && isDragging && s.handleDragging,
+          // Handles on non-dragged items hide while a drag is in flight.
+          activeId !== null && !isDragging && s.handleHiddenDuringDrag,
           disabled && s.handleDisabled,
           style
         ),

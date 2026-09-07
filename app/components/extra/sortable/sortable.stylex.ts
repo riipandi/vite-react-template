@@ -91,6 +91,17 @@ export const sortableStyles = stylex.create({
     cursor: 'grabbing',
     opacity: 1
   },
+  // While a drag is in flight, handles on non-dragged items hide — only the
+  // dragged item (and its overlay clone) keeps its handle visible.
+  handleHiddenDuringDrag: {
+    opacity: {
+      default: 0,
+      ':hover': 0,
+      ':focus-visible': 0,
+      ':active': 0,
+      '@media (pointer: coarse)': 0
+    }
+  },
   handleDisabled: {
     color: colors.foregroundDisabled,
     cursor: 'not-allowed',

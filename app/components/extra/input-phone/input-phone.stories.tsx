@@ -52,7 +52,9 @@ export const Playground: Story = {
   ),
   argTypes: {
     disabled: { control: 'boolean' },
-    invalid: { control: 'boolean' }
+    invalid: { control: 'boolean' },
+    readOnly: { control: 'boolean' },
+    withCountrySelect: { control: 'boolean' }
   }
 }
 

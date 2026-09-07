@@ -5,6 +5,7 @@
  * @see: https://base-ui.com/react/components/combobox
  */
 
+import { Input as BaseInput } from '@base-ui/react/input'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import * as BasePhoneInput from 'react-phone-number-input'
@@ -14,8 +15,6 @@ import { comboboxCreateItems } from '#/components/base/combobox'
 import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput } from '#/components/base/combobox'
 import { ComboboxItem, ComboboxList, ComboboxTrigger } from '#/components/base/combobox'
 import { ComboboxSeparator } from '#/components/base/combobox'
-import { Input } from '#/components/base/input'
-import { InputGroup, inputGroupStyles } from '#/components/extra/input-group'
 import { inputPhoneStyles as s } from './input-phone.stylex'
 
 type LibraryPhoneInputProps = React.ComponentPropsWithoutRef<typeof BasePhoneInput.default>
@@ -42,6 +41,10 @@ export interface InputPhoneProps extends Omit<
   withCountrySelect?: boolean
   /** Marks the field visually as invalid. */
   invalid?: boolean
+  /** Disables the entire component (input and country selector). */
+  disabled?: boolean
+  /** Sets the field into read-only mode. */
+  readOnly?: boolean
 }
 
 interface CountryEntry {
@@ -51,6 +54,7 @@ interface CountryEntry {
 
 interface CountrySelectProps {
   disabled?: boolean
+  readOnly?: boolean
   value: Country
   options: CountryEntry[]
   onChange: (country: Country) => void
@@ -69,6 +73,7 @@ function FlagComponent({ country, countryName }: BasePhoneInput.FlagProps) {
 /** Library-provided country select, rendered as the design system's Combobox. */
 function CountrySelect({
   disabled,
+  readOnly,
   value: selectedCountry,
   options: countryList,
   onChange
@@ -91,7 +96,7 @@ function CountrySelect({
       }}
     >
       <ComboboxTrigger
-        disabled={disabled}
+        disabled={disabled || readOnly}
         aria-label='Select country'
         showChevron={false}
         style={s.countryTrigger}
@@ -132,6 +137,24 @@ function NoCountrySelect() {
   return null
 }
 
+function PhoneInputContainer({
+  style,
+  ...props
+}: Omit<React.ComponentPropsWithoutRef<'div'>, 'className' | 'style'> & {
+  style?: stylex.StyleXStyles
+}) {
+  return <div role='group' {...props} {...stylex.props(s.root, style)} />
+}
+
+function PhoneInput({
+  style,
+  ...props
+}: Omit<React.ComponentPropsWithRef<typeof BaseInput>, 'className' | 'style'> & {
+  style?: stylex.StyleXStyles
+}) {
+  return <BaseInput {...props} {...stylex.props(s.control, style)} />
+}
+
 export function InputPhone({
   style,
   defaultCountry = 'US',
@@ -140,22 +163,23 @@ export function InputPhone({
   addInternationalOption = true,
   withCountrySelect = true,
   invalid = false,
+  disabled,
+  readOnly,
   onChange = () => {},
   ...props
 }: InputPhoneProps) {
   return (
     <BasePhoneInput.default
       {...props}
+      disabled={disabled}
+      readOnly={readOnly}
       className={undefined}
-      containerComponent={InputGroup}
+      containerComponent={PhoneInputContainer}
       containerComponentProps={{
-        ...stylex.props(inputGroupStyles.root, style),
+        style,
         'data-invalid': invalid || undefined
       }}
-      inputComponent={Input}
-      numberInputProps={{
-        ...stylex.props(inputGroupStyles.control, s.control)
-      }}
+      inputComponent={PhoneInput}
       countrySelectComponent={withCountrySelect ? CountrySelect : NoCountrySelect}
       flagComponent={FlagComponent}
       smartCaret={false}

@@ -56,8 +56,7 @@
         },
         {
             "files": ["./app/components/extra/data-grid/**/*.{ts,tsx}"],
-            // TODO: cleanup this later.
-            // Ported 1:1 from ReUI's data-grid: the flagged patterns (in-cell editor
+            // TODO: cleanup this later. The flagged patterns (in-cell editor
             // autoFocus, hash links in demos, imperative-state effects, internal
             // table flags) are load-bearing there. Keep overrides narrow to this
             // folder.

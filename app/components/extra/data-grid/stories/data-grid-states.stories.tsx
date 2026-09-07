@@ -89,6 +89,37 @@ const skeletonStyles = stylex.create({
     height: 32,
     width: 32
   },
+  // Server-side pagination skeleton (c-34 shapes).
+  avatarSm: {
+    borderRadius: '999px',
+    height: 28,
+    width: 28
+  },
+  nameStack: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 6
+  },
+  line: {
+    height: 14,
+    width: 96
+  },
+  lineSub: {
+    height: 12,
+    width: 144
+  },
+  bar: {
+    height: 16,
+    width: 80
+  },
+  chip: {
+    height: 20,
+    width: 64
+  },
+  num: {
+    height: 16,
+    width: 96
+  },
   lineWide: {
     height: 12,
     width: 120
@@ -600,12 +631,24 @@ export const ServerSidePagination: Story = {
           id: 'name',
           header: ({ column }) => <DataGridColumnHeader title='User' column={column} />,
           cell: ({ row }) => <AvatarCell32 {...row.original} />,
-          size: 230
+          size: 230,
+          meta: {
+            skeleton: (
+              <div {...stylex.props(s.cellFlex)}>
+                <Skeleton style={skeletonStyles.avatarSm} />
+                <div {...stylex.props(skeletonStyles.nameStack)}>
+                  <Skeleton style={skeletonStyles.line} />
+                  <Skeleton style={skeletonStyles.lineSub} />
+                </div>
+              </div>
+            )
+          }
         },
         {
           accessorKey: 'company',
           header: ({ column }) => <DataGridColumnHeader title='Company' column={column} />,
-          size: 140
+          size: 140,
+          meta: { skeleton: <Skeleton style={skeletonStyles.bar} /> }
         },
         {
           accessorKey: 'status',
@@ -616,7 +659,8 @@ export const ServerSidePagination: Story = {
             ) : (
               <Badge variant='destructive'>Inactive</Badge>
             ),
-          size: 130
+          size: 130,
+          meta: { skeleton: <Skeleton style={skeletonStyles.chip} /> }
         },
         {
           accessorKey: 'balance',
@@ -626,7 +670,8 @@ export const ServerSidePagination: Story = {
               ${(info.getValue() as number).toFixed(2)}
             </span>
           ),
-          size: 130
+          size: 130,
+          meta: { skeleton: <Skeleton style={skeletonStyles.num} /> }
         }
       ],
       []

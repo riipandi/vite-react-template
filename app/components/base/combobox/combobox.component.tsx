@@ -25,7 +25,10 @@
  * </Combobox.Root>
  */
 
-import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
+import {
+  Combobox as BaseCombobox,
+  Combobox as BaseComboboxNamespace
+} from '@base-ui/react/combobox'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { shadow } from '#/styles/core/colors.stylex'
@@ -40,6 +43,7 @@ interface StyleProp {
 export const Combobox = BaseCombobox.Root
 export const ComboboxValue = BaseCombobox.Value
 export const ComboboxCollection = BaseCombobox.Collection
+export const comboboxCreateItems = BaseComboboxNamespace.createItems
 
 function TriggerChevron() {
   return (
@@ -65,26 +69,36 @@ function TriggerChevron() {
 export function ComboboxTrigger({
   style,
   children,
+  showChevron = true,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.Trigger>, 'className' | 'style'> &
-  StyleProp) {
+  StyleProp & {
+    /** Render the chevron icon. Set `false` for icon-only triggers (e.g. the
+     * InputPhone country flag). Defaults to `true`. */
+    showChevron?: boolean
+  }) {
   return (
     <BaseCombobox.Trigger {...props} {...stylex.props(s.trigger, style)}>
       {children}
-      <BaseCombobox.Icon {...stylex.props(s.triggerIcon)}>
-        <TriggerChevron />
-      </BaseCombobox.Icon>
+      {showChevron ? (
+        <BaseCombobox.Icon {...stylex.props(s.triggerIcon)}>
+          <TriggerChevron />
+        </BaseCombobox.Icon>
+      ) : null}
     </BaseCombobox.Trigger>
   )
 }
 
 export function ComboboxInput({
   style,
+  inputStyle,
   showTrigger = true,
   showClear = false,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.Input>, 'className' | 'style'> &
   StyleProp & {
+    /** Style applied directly to the inner input element. */
+    inputStyle?: stylex.StyleXStyles
     /** Render the built-in dropdown trigger button. Set `false` when the
      * input is placed inside `ComboboxContent` and a `ComboboxTrigger`
      * elsewhere anchors the popup. */
@@ -102,7 +116,8 @@ export function ComboboxInput({
             ? s.inputPaddingButtons2
             : showTrigger || showClear
               ? s.inputPaddingButtons1
-              : s.inputPaddingNone
+              : s.inputPaddingNone,
+          inputStyle
         )}
       />
       {showClear && (

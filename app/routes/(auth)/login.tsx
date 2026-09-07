@@ -13,6 +13,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/comp
 import { Alert, AlertDescription, AlertTitle } from '#/components/extra/alert'
 import { ButtonGroup } from '#/components/extra/button-group'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '#/components/extra/card'
+import { InputPassword } from '#/components/extra/input-password'
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '#/components/extra/item'
 import { Kbd } from '#/components/extra/kbd'
 import { LoaderText } from '#/components/extra/loader-text'
@@ -143,10 +144,9 @@ function RouteComponent() {
                 return (
                   <Field id='field-password' invalid={!!error}>
                     <FieldLabel htmlFor='password'>Password</FieldLabel>
-                    <Input
+                    <InputPassword
                       id='password'
                       name='password'
-                      type='password'
                       placeholder='••••••••'
                       autoComplete='current-password'
                       value={field.state.value}

@@ -26,7 +26,7 @@
         "strict": true,
         "strictPropertyInitialization": true,
         "target": "esnext",
-        "tsBuildInfoFile": ".tanstack/tsbuildinfo",
+        "tsBuildInfoFile": ".output/tsbuildinfo",
         "types": ["vite/client", "vitest/config"],
         "useDefineForClassFields": true,
         "verbatimModuleSyntax": true,

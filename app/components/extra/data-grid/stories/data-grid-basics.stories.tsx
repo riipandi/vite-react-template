@@ -10,7 +10,7 @@ import type {
   SortingState
 } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
+import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Card } from '#/components/extra/card'
 import {
   DataGrid,
@@ -21,7 +21,7 @@ import {
   dataGridFeatures,
   type DataGridFeatures
 } from '../'
-import { CountryFlag, demoData, type IData } from './_mocks'
+import { CountryFlag, demoData, type IBook } from './_mocks'
 import { stackStyles as s } from './_mocks.stylex'
 
 const meta = {
@@ -41,7 +41,7 @@ type Story = StoryObj<typeof meta>
 export default meta
 
 function useDemoTable(
-  columns: ColumnDef<DataGridFeatures, IData>[],
+  columns: ColumnDef<DataGridFeatures, IBook>[],
   columnOrderState?: {
     columnOrder?: ColumnOrderState
     onColumnOrderChange?: OnChangeFn<ColumnOrderState>
@@ -51,14 +51,14 @@ function useDemoTable(
     pageIndex: 0,
     pageSize: 5
   })
-  const [sorting, setSorting] = useState<SortingState>([{ id: 'name', desc: true }])
+  const [sorting, setSorting] = useState<SortingState>([{ id: 'title', desc: true }])
 
   return useTable({
     features: dataGridFeatures,
     columns,
     data: demoData,
     pageCount: Math.ceil((demoData?.length || 0) / pagination.pageSize),
-    getRowId: (row: IData) => row.id,
+    getRowId: (row: IBook) => row.id,
     state: {
       pagination,
       sorting,
@@ -70,27 +70,25 @@ function useDemoTable(
   })
 }
 
-const AvatarCell = ({ row }: { row: IData & { initials: string } }) => (
+const AvatarCell = ({ row }: { row: IBook & { initials: string } }) => (
   <div {...stylex.props(s.cellFlexWide)}>
     <Avatar style={s.avatar32}>
-      <AvatarImage src={row.avatar} alt={row.name} />
       <AvatarFallback>{row.initials}</AvatarFallback>
     </Avatar>
     <div {...stylex.props(s.nameStack)}>
-      <div {...stylex.props(s.strong)}>{row.name}</div>
-      <div {...stylex.props(s.muted)}>{row.email}</div>
+      <div {...stylex.props(s.strong)}>{row.title}</div>
+      <div {...stylex.props(s.muted)}>{row.author}</div>
     </div>
   </div>
 )
 
-const AvatarLinkCell = ({ row }: { row: IData & { initials: string } }) => (
+const AvatarLinkCell = ({ row }: { row: IBook & { initials: string } }) => (
   <div {...stylex.props(s.cellFlex)}>
     <Avatar style={s.avatar24}>
-      <AvatarImage src={row.avatar} alt={row.name} />
       <AvatarFallback>{row.initials}</AvatarFallback>
     </Avatar>
     <a href={`#${row.id}`} {...stylex.props(s.link, s.strong)}>
-      {row.name}
+      {row.title}
     </a>
   </div>
 )
@@ -103,17 +101,17 @@ const balanceCell = (info: { getValue: () => unknown }) => (
 export const Pagination: Story = {
   name: 'Pagination',
   render: () => {
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
-          accessorKey: 'name',
-          header: 'Name',
+          accessorKey: 'title',
+          header: 'Title',
           cell: (info) => <>{info.getValue() as string}</>,
           size: 150
         },
         {
-          accessorKey: 'email',
-          header: 'Email',
+          accessorKey: 'author',
+          header: 'Author',
           cell: (info) => (
             <div {...stylex.props(s.truncate)}>
               <a href={`mailto:${info.getValue()}`} {...stylex.props(s.link, s.truncate)}>
@@ -124,19 +122,19 @@ export const Pagination: Story = {
           size: 150
         },
         {
-          accessorKey: 'location',
-          header: 'Location',
+          accessorKey: 'country',
+          header: 'Country',
           cell: ({ row }) => (
             <div {...stylex.props(s.cellFlex)}>
-              <CountryFlag code={row.original.flag} title={row.original.location} style={s.flag} />
-              <div>{row.original.location}</div>
+              <CountryFlag code={row.original.flag} title={row.original.country} style={s.flag} />
+              <div>{row.original.country}</div>
             </div>
           ),
           size: 175
         },
         {
-          accessorKey: 'balance',
-          header: 'Balance ($)',
+          accessorKey: 'price',
+          header: 'Price ($)',
           cell: balanceCell,
           size: 100,
           meta: {
@@ -168,30 +166,30 @@ export const Pagination: Story = {
 export const CellBorder: Story = {
   name: 'Cell border',
   render: () => {
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
-          accessorKey: 'name',
-          id: 'name',
-          header: 'Name',
+          accessorKey: 'title',
+          id: 'title',
+          header: 'Title',
           cell: ({ row }) => <AvatarCell row={row.original} />,
           size: 250,
           enableSorting: true,
           enableHiding: false
         },
         {
-          accessorKey: 'company',
-          header: 'Company',
+          accessorKey: 'publisher',
+          header: 'Publisher',
           size: 100
         },
         {
           accessorKey: 'role',
-          header: 'Occupation',
+          header: 'Genre',
           size: 100
         },
         {
-          accessorKey: 'balance',
-          header: 'Salary',
+          accessorKey: 'price',
+          header: 'Price',
           cell: (info) => (
             <span {...stylex.props(s.salary)}>${(info.getValue() as number).toFixed(2)}</span>
           ),
@@ -231,20 +229,20 @@ export const CellBorder: Story = {
 export const DenseLayout: Story = {
   name: 'Dense layout',
   render: () => {
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
-          accessorKey: 'name',
-          id: 'name',
-          header: 'Name',
+          accessorKey: 'title',
+          id: 'title',
+          header: 'Title',
           cell: ({ row }) => <AvatarLinkCell row={row.original} />,
           size: 200,
           enableSorting: true,
           enableHiding: false
         },
         {
-          accessorKey: 'email',
-          header: 'Email',
+          accessorKey: 'author',
+          header: 'Author',
           cell: (info) => (
             <a href={`mailto:${info.getValue()}`} {...stylex.props(s.link)}>
               {info.getValue() as string}
@@ -253,13 +251,13 @@ export const DenseLayout: Story = {
           size: 175
         },
         {
-          accessorKey: 'location',
-          header: 'Location',
+          accessorKey: 'country',
+          header: 'Country',
           size: 150
         },
         {
-          accessorKey: 'balance',
-          header: 'Balance ($)',
+          accessorKey: 'price',
+          header: 'Price ($)',
           cell: balanceCell,
           size: 100
         }
@@ -287,30 +285,30 @@ export const DenseLayout: Story = {
 export const WithoutTableBorders: Story = {
   name: 'Without table borders',
   render: () => {
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
-          accessorKey: 'name',
-          id: 'name',
-          header: 'Name',
+          accessorKey: 'title',
+          id: 'title',
+          header: 'Title',
           cell: ({ row }) => <AvatarCell row={row.original} />,
           size: 225,
           enableSorting: true,
           enableHiding: false
         },
         {
-          accessorKey: 'location',
-          header: 'Location',
+          accessorKey: 'country',
+          header: 'Country',
           size: 175
         },
         {
           accessorKey: 'role',
-          header: 'Occupation',
+          header: 'Genre',
           size: 150
         },
         {
-          accessorKey: 'balance',
-          header: 'Balance ($)',
+          accessorKey: 'price',
+          header: 'Price ($)',
           cell: balanceCell,
           size: 100
         }
@@ -348,20 +346,20 @@ export const WithoutTableBorders: Story = {
 export const StripedRows: Story = {
   name: 'Striped rows',
   render: () => {
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
-          accessorKey: 'name',
-          id: 'name',
-          header: 'Name',
+          accessorKey: 'title',
+          id: 'title',
+          header: 'Title',
           cell: ({ row }) => <AvatarLinkCell row={row.original} />,
           size: 175,
           enableSorting: true,
           enableHiding: false
         },
         {
-          accessorKey: 'email',
-          header: 'Email',
+          accessorKey: 'author',
+          header: 'Author',
           cell: (info) => (
             <a href={`mailto:${info.getValue()}`} {...stylex.props(s.link)}>
               {info.getValue() as string}
@@ -370,13 +368,13 @@ export const StripedRows: Story = {
           size: 180
         },
         {
-          accessorKey: 'location',
-          header: 'Location',
+          accessorKey: 'country',
+          header: 'Country',
           size: 160
         },
         {
-          accessorKey: 'balance',
-          header: 'Balance ($)',
+          accessorKey: 'price',
+          header: 'Price ($)',
           cell: balanceCell,
           size: 100
         }
@@ -408,20 +406,20 @@ export const StripedRows: Story = {
 export const AutoWidthTableLayout: Story = {
   name: 'Auto width table layout',
   render: () => {
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
-          accessorKey: 'name',
-          id: 'name',
-          header: 'Name',
+          accessorKey: 'title',
+          id: 'title',
+          header: 'Title',
           cell: ({ row }) => <AvatarLinkCell row={row.original} />,
           size: 225,
           enableSorting: true,
           enableHiding: false
         },
         {
-          accessorKey: 'email',
-          header: 'Email',
+          accessorKey: 'author',
+          header: 'Author',
           cell: (info) => (
             <a href={`mailto:${info.getValue()}`} {...stylex.props(s.link)}>
               {info.getValue() as string}
@@ -430,13 +428,13 @@ export const AutoWidthTableLayout: Story = {
           size: 200
         },
         {
-          accessorKey: 'joined',
-          header: 'Joined',
+          accessorKey: 'published',
+          header: 'Published',
           size: 120
         },
         {
-          accessorKey: 'balance',
-          header: 'Balance ($)',
+          accessorKey: 'price',
+          header: 'Price ($)',
           cell: balanceCell,
           size: 120
         }

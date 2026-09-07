@@ -13,7 +13,7 @@ import type {
 } from '@tanstack/react-table'
 import { ChevronDownIcon, ChevronUpIcon, RefreshCwIcon } from 'lucide-react'
 import { Fragment, useMemo, useState } from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
+import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Badge } from '#/components/extra/badge'
 import { Card, CardContent, CardFooter, CardHeader } from '#/components/extra/card'
@@ -34,7 +34,7 @@ import {
   dataGridFeatures,
   type DataGridFeatures
 } from '../'
-import { demoData, type IData } from './_mocks'
+import { demoData, type IBook } from './_mocks'
 import { stackStyles as s } from './_mocks.stylex'
 
 const meta = {
@@ -101,7 +101,7 @@ const statusStyles = stylex.create({
 /* Row selection */
 /* ------------------------------------------------------------------ */
 
-function selectionColumns(): ColumnDef<DataGridFeatures, IData>[] {
+function selectionColumns(): ColumnDef<DataGridFeatures, IBook>[] {
   return [
     {
       id: 'select',
@@ -111,24 +111,24 @@ function selectionColumns(): ColumnDef<DataGridFeatures, IData>[] {
       cell: ({ row }) => <DataGridTableRowSelect row={row} />
     },
     {
-      accessorKey: 'name',
-      header: 'Name',
+      accessorKey: 'title',
+      header: 'Title',
       cell: (info) => <span {...stylex.props(s.strong)}>{info.getValue() as string}</span>,
       size: 160
     },
     {
-      accessorKey: 'email',
-      header: 'Email',
+      accessorKey: 'author',
+      header: 'Author',
       size: 200
     },
     {
-      accessorKey: 'location',
-      header: 'Location',
+      accessorKey: 'country',
+      header: 'Country',
       size: 150
     },
     {
-      accessorKey: 'balance',
-      header: 'Balance ($)',
+      accessorKey: 'price',
+      header: 'Price ($)',
       cell: (info) => <>${(info.getValue() as number).toFixed(2)}</>,
       size: 120
     }
@@ -143,7 +143,7 @@ export const RowSelection: Story = {
       pageIndex: 0,
       pageSize: 5
     })
-    const [sorting, setSorting] = useState<SortingState>([{ id: 'name', desc: true }])
+    const [sorting, setSorting] = useState<SortingState>([{ id: 'title', desc: true }])
     const columns = useMemo(() => selectionColumns(), [])
     const selectedCount = Object.keys(rowSelection).length
 
@@ -152,7 +152,7 @@ export const RowSelection: Story = {
       columns,
       data: demoData,
       pageCount: Math.ceil(demoData.length / pagination.pageSize),
-      getRowId: (row: IData) => row.id,
+      getRowId: (row: IBook) => row.id,
       state: { pagination, sorting, rowSelection },
       enableRowSelection: true,
       onRowSelectionChange: setRowSelection,
@@ -182,7 +182,7 @@ export const RowSelection: Story = {
 /* Expandable rows */
 /* ------------------------------------------------------------------ */
 
-interface IDetail extends IData {
+interface IDetail extends IBook {
   details: string
 }
 
@@ -190,8 +190,8 @@ const detailData: IDetail[] = demoData.slice(0, 5).map((row, index) => ({
   ...row,
   details:
     index % 2 === 0
-      ? 'Full access to billing, members and security settings.'
-      : 'Read-only access; cannot invite members.'
+      ? 'Includes the illustrated edition, author notes and a reading guide.'
+      : 'Preview copy; chapters after 12 are locked.'
 }))
 
 function ExpandableColumns(): ColumnDef<DataGridFeatures, IDetail>[] {
@@ -230,23 +230,23 @@ function ExpandableColumns(): ColumnDef<DataGridFeatures, IDetail>[] {
       }
     },
     {
-      accessorKey: 'name',
-      header: 'Name',
+      accessorKey: 'title',
+      header: 'Title',
       size: 180
     },
     {
-      accessorKey: 'email',
-      header: 'Email',
+      accessorKey: 'author',
+      header: 'Author',
       size: 200
     },
     {
       accessorKey: 'role',
-      header: 'Role',
+      header: 'Genre',
       size: 150
     },
     {
       id: 'details',
-      header: 'Access',
+      header: 'Notes',
       cell: ({ row }) => <span {...stylex.props(s.muted)}>{row.original.details}</span>,
       size: 320
     }
@@ -343,7 +343,7 @@ function SubTable({ items }: { items: IOrder['lines'] }) {
   const columns = useMemo<ColumnDef<DataGridFeatures, IOrder['lines'][number]>[]>(
     () => [
       { accessorKey: 'sku', header: 'SKU', size: 120 },
-      { accessorKey: 'name', header: 'Item', size: 240 },
+      { accessorKey: 'title', header: 'Item', size: 240 },
       { accessorKey: 'qty', header: 'Qty', size: 80 },
       {
         accessorKey: 'price',
@@ -441,7 +441,7 @@ export const DraggableRows: Story = {
       pageIndex: 0,
       pageSize: 8
     })
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
           id: 'drag',
@@ -449,24 +449,24 @@ export const DraggableRows: Story = {
           cell: () => <DataGridTableDndRowHandle />
         },
         {
-          accessorKey: 'name',
-          header: 'Name',
-          cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.name}</span>,
+          accessorKey: 'title',
+          header: 'Title',
+          cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.title}</span>,
           size: 160
         },
         {
           accessorKey: 'role',
-          header: 'Occupation',
+          header: 'Genre',
           size: 160
         },
         {
-          accessorKey: 'location',
-          header: 'Location',
+          accessorKey: 'country',
+          header: 'Country',
           size: 160
         },
         {
-          accessorKey: 'balance',
-          header: 'Balance ($)',
+          accessorKey: 'price',
+          header: 'Price ($)',
           cell: (info) => <>${(info.getValue() as number).toFixed(2)}</>,
           size: 120
         }
@@ -477,7 +477,7 @@ export const DraggableRows: Story = {
       features: dataGridFeatures,
       columns,
       data: demoData,
-      getRowId: (row: IData) => row.id,
+      getRowId: (row: IBook) => row.id,
       state: { pagination },
       onPaginationChange: setPagination
     })
@@ -516,7 +516,7 @@ export const RowPinningSupport: Story = {
       pageIndex: 0,
       pageSize: 8
     })
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
           id: 'pin',
@@ -525,28 +525,27 @@ export const RowPinningSupport: Story = {
           cell: ({ row }) => <DataGridTableRowPin row={row} />
         },
         {
-          accessorKey: 'name',
-          header: 'Team Members',
+          accessorKey: 'title',
+          header: 'Catalog',
           meta: { autoSize: true },
           cell: ({ row }) => (
             <div {...stylex.props(s.cellFlex)}>
               <Avatar style={s.avatar24}>
-                <AvatarImage src={row.original.avatar} alt={row.original.name} />
                 <AvatarFallback>{row.original.initials}</AvatarFallback>
               </Avatar>
-              <span {...stylex.props(s.strong)}>{row.original.name}</span>
+              <span {...stylex.props(s.strong)}>{row.original.title}</span>
             </div>
           ),
           size: 200
         },
         {
           accessorKey: 'role',
-          header: 'Role',
+          header: 'Genre',
           size: 180
         },
         {
-          accessorKey: 'location',
-          header: 'Location',
+          accessorKey: 'country',
+          header: 'Country',
           size: 160
         }
       ],
@@ -556,7 +555,7 @@ export const RowPinningSupport: Story = {
       features: dataGridFeatures,
       columns,
       data: demoData,
-      getRowId: (row: IData) => row.id,
+      getRowId: (row: IBook) => row.id,
       state: { pagination, rowPinning },
       onRowPinningChange: setRowPinning,
       onPaginationChange: setPagination,
@@ -573,7 +572,7 @@ export const RowPinningSupport: Story = {
         <Card style={statusStyles.card}>
           <CardHeader style={statusStyles.cardHeader}>
             <div {...stylex.props(s.cellFlex)}>
-              <span {...stylex.props(s.strong)}>Team Members</span>
+              <span {...stylex.props(s.strong)}>Catalog</span>
               {pinnedCount > 0 ? <Badge variant='primary'>{pinnedCount} pinned</Badge> : null}
             </div>
             {pinnedCount > 0 ? (
@@ -613,75 +612,70 @@ export const RowPinningSupport: Story = {
 interface ITreeNode {
   id: string
   name: string
-  type: 'department' | 'team' | 'member'
-  role?: string
-  avatar?: string
-  status: 'active' | 'inactive'
+  type: 'author' | 'series' | 'book'
+  genre?: string
+  status: 'inPrint' | 'outOfPrint'
   children?: ITreeNode[]
 }
 
 const treeData: ITreeNode[] = [
   {
-    id: 'eng',
-    name: 'Engineering',
-    type: 'department',
-    status: 'active',
+    id: 'brown',
+    name: 'Dan Brown',
+    type: 'author',
+    status: 'inPrint',
     children: [
       {
-        id: 'eng-platform',
-        name: 'Platform',
-        type: 'team',
-        status: 'active',
+        id: 'brown-langdon',
+        name: 'Robert Langdon series',
+        type: 'series',
+        status: 'inPrint',
         children: [
           {
-            id: 'eng-platform-1',
-            name: 'Alex Johnson',
-            type: 'member',
-            role: 'Developer',
-            avatar: demoData[0]?.avatar,
-            status: 'active'
+            id: 'brown-langdon-1',
+            name: 'Angels & Demons',
+            type: 'book',
+            genre: 'Thriller',
+            status: 'inPrint'
           },
           {
-            id: 'eng-platform-2',
-            name: 'Sarah Chen',
-            type: 'member',
-            role: 'Data Scientist',
-            avatar: demoData[1]?.avatar,
-            status: 'active'
+            id: 'brown-langdon-2',
+            name: 'The Da Vinci Code',
+            type: 'book',
+            genre: 'Thriller',
+            status: 'inPrint'
           }
         ]
       },
       {
-        id: 'eng-mobile',
-        name: 'Mobile',
-        type: 'team',
-        status: 'active',
+        id: 'brown-standalone',
+        name: 'Standalone novels',
+        type: 'series',
+        status: 'inPrint',
         children: [
           {
-            id: 'eng-mobile-1',
-            name: 'Emma Wilson',
-            type: 'member',
-            role: 'Designer',
-            avatar: demoData[3]?.avatar,
-            status: 'inactive'
+            id: 'brown-standalone-1',
+            name: 'Digital Fortress',
+            type: 'book',
+            genre: 'Techno-thriller',
+            status: 'outOfPrint'
           }
         ]
       }
     ]
   },
   {
-    id: 'design',
-    name: 'Design',
-    type: 'department',
-    status: 'active',
+    id: 'rowling',
+    name: 'J.K. Rowling',
+    type: 'author',
+    status: 'inPrint',
     children: [
       {
-        id: 'design-1',
-        name: 'Maria Garcia',
-        type: 'member',
-        role: 'Director',
-        avatar: demoData[7]?.avatar,
-        status: 'active'
+        id: 'rowling-1',
+        name: "Harry Potter and the Philosopher's Stone",
+        type: 'book',
+        genre: 'Fantasy',
+        status: 'inPrint'
       }
     ]
   }
@@ -697,22 +691,23 @@ export const TreeRows: Story = {
     const columns = useMemo<ColumnDef<DataGridFeatures, ITreeNode>[]>(
       () => [
         {
-          accessorKey: 'name',
-          id: 'name',
-          header: ({ column }) => <DataGridColumnHeaderInline title='Name' column={column} />,
+          accessorKey: 'title',
+          id: 'title',
+          header: ({ column }) => <DataGridColumnHeaderInline title='Title' column={column} />,
           cell: ({ row }) => {
             const item = row.original
             return (
               <div {...stylex.props(s.cellFlex)}>
                 <DataGridTableRowExpand row={row} />
-                {item.type === 'member' ? (
+                {item.type === 'book' ? (
                   <Fragment>
                     <Avatar style={s.avatar24}>
-                      <AvatarImage src={item.avatar} alt={item.name} />
                       <AvatarFallback>
                         {item.name
                           .split(' ')
+                          .filter((n) => n.length > 2 && n !== 'the' && n !== 'and')
                           .map((n) => n[0])
+                          .slice(0, 2)
                           .join('')}
                       </AvatarFallback>
                     </Avatar>
@@ -732,11 +727,11 @@ export const TreeRows: Story = {
           meta: { autoSize: true }
         },
         {
-          accessorKey: 'role',
-          header: 'Role',
+          accessorKey: 'genre',
+          header: 'Genre',
           cell: ({ row }) => (
             <span {...stylex.props(s.muted)}>
-              {row.original.role ?? (row.original.type === 'department' ? 'Department' : 'Team')}
+              {row.original.genre ?? (row.original.type === 'author' ? 'Author' : 'Series')}
             </span>
           ),
           size: 180
@@ -745,10 +740,10 @@ export const TreeRows: Story = {
           accessorKey: 'status',
           header: 'Status',
           cell: ({ row }) =>
-            row.original.status === 'active' ? (
-              <Badge variant='secondary'>Active</Badge>
+            row.original.status === 'inPrint' ? (
+              <Badge variant='secondary'>In print</Badge>
             ) : (
-              <Badge variant='destructive'>Inactive</Badge>
+              <Badge variant='destructive'>Out of print</Badge>
             ),
           size: 130
         }

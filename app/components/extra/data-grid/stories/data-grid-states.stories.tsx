@@ -5,7 +5,7 @@ import { useTable } from '@tanstack/react-table'
 import type { ColumnDef, PaginationState, SortingState } from '@tanstack/react-table'
 import { PlusIcon, SearchIcon } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
+import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Badge } from '#/components/extra/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '#/components/extra/card'
@@ -22,7 +22,7 @@ import {
   type DataGridFeatures,
   type DataGridI18nOverrides
 } from '../'
-import { CountryFlag, demoData, type IData } from './_mocks'
+import { CountryFlag, demoData, type IBook } from './_mocks'
 import { stackStyles as s } from './_mocks.stylex'
 
 const meta = {
@@ -138,33 +138,32 @@ const skeletonStyles = stylex.create({
   }
 })
 
-function avatarCell32({ row }: { row: { original: IData } }) {
+function avatarCell32({ row }: { row: { original: IBook } }) {
   return (
     <div {...stylex.props(s.cellFlexWide)}>
       <Avatar style={s.avatar32}>
-        <AvatarImage src={row.original.avatar} alt={row.original.name} />
         <AvatarFallback>{row.original.initials}</AvatarFallback>
       </Avatar>
       <div {...stylex.props(s.nameStack)}>
-        <div {...stylex.props(s.strong)}>{row.original.name}</div>
-        <div {...stylex.props(s.muted)}>{row.original.email}</div>
+        <div {...stylex.props(s.strong)}>{row.original.title}</div>
+        <div {...stylex.props(s.muted)}>{row.original.author}</div>
       </div>
     </div>
   )
 }
 
-function usePagedTable(columns: ColumnDef<DataGridFeatures, IData>[]) {
+function usePagedTable(columns: ColumnDef<DataGridFeatures, IBook>[]) {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 5
   })
-  const [sorting, setSorting] = useState<SortingState>([{ id: 'name', desc: true }])
+  const [sorting, setSorting] = useState<SortingState>([{ id: 'title', desc: true }])
   return useTable({
     features: dataGridFeatures,
     columns,
     data: demoData,
     pageCount: Math.ceil(demoData.length / pagination.pageSize),
-    getRowId: (row: IData) => row.id,
+    getRowId: (row: IBook) => row.id,
     state: { pagination, sorting },
     onPaginationChange: setPagination,
     onSortingChange: setSorting
@@ -178,12 +177,12 @@ function usePagedTable(columns: ColumnDef<DataGridFeatures, IData>[]) {
 export const CardContainer: Story = {
   name: 'Card container',
   render: () => {
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
-          accessorKey: 'name',
-          id: 'name',
-          header: ({ column }) => <DataGridColumnHeader title='User' visibility column={column} />,
+          accessorKey: 'title',
+          id: 'title',
+          header: ({ column }) => <DataGridColumnHeader title='Title' visibility column={column} />,
           cell: avatarCell32,
           minSize: 200,
           // Absorbs the free card width so the table follows the card.
@@ -193,19 +192,19 @@ export const CardContainer: Story = {
           enableResizing: true
         },
         {
-          accessorKey: 'location',
-          id: 'location',
+          accessorKey: 'country',
+          id: 'country',
           header: ({ column }) => (
-            <DataGridColumnHeader title='Location' visibility column={column} />
+            <DataGridColumnHeader title='Country' visibility column={column} />
           ),
           cell: ({ row }) => (
             <div {...stylex.props(s.cellFlex)}>
               <CountryFlag
                 code={row.original.flag}
-                title={row.original.location}
+                title={row.original.country}
                 style={statesStyles.flag}
               />
-              <span {...stylex.props(s.strong)}>{row.original.location}</span>
+              <span {...stylex.props(s.strong)}>{row.original.country}</span>
             </div>
           ),
           size: 200,
@@ -220,10 +219,10 @@ export const CardContainer: Story = {
             <DataGridColumnHeader title='Status' visibility column={column} />
           ),
           cell: ({ row }) =>
-            row.original.status === 'active' ? (
-              <Badge variant='primary'>Approved</Badge>
+            row.original.status === 'inPrint' ? (
+              <Badge variant='primary'>In print</Badge>
             ) : (
-              <Badge variant='destructive'>Pending</Badge>
+              <Badge variant='destructive'>Out of print</Badge>
             ),
           size: 200,
           enableSorting: true,
@@ -252,7 +251,7 @@ export const CardContainer: Story = {
             <CardTitle>Users</CardTitle>
             <Button size='sm' variant='outline'>
               <PlusIcon style={{ height: 16, width: 16 }} />
-              Add member
+              Add book
             </Button>
           </CardHeader>
           <CardContent style={statesStyles.cardBody}>
@@ -276,12 +275,12 @@ export const LoadingSkeleton: Story = {
   name: 'Loading skeleton',
   render: () => {
     const [isLoading, setIsLoading] = useState(true)
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
-          accessorKey: 'name',
-          id: 'name',
-          header: 'Name',
+          accessorKey: 'title',
+          id: 'title',
+          header: 'Title',
           cell: ({ row }) => <AvatarCell32 {...row.original} />,
           size: 220,
           meta: {
@@ -298,19 +297,19 @@ export const LoadingSkeleton: Story = {
         },
         {
           accessorKey: 'role',
-          header: 'Occupation',
+          header: 'Genre',
           size: 160,
           meta: { skeleton: <Skeleton style={skeletonStyles.cell} /> }
         },
         {
-          accessorKey: 'location',
-          header: 'Location',
+          accessorKey: 'country',
+          header: 'Country',
           size: 150,
           meta: { skeleton: <Skeleton style={skeletonStyles.small} /> }
         },
         {
-          accessorKey: 'balance',
-          header: 'Balance ($)',
+          accessorKey: 'price',
+          header: 'Price ($)',
           size: 130,
           meta: { skeleton: <Skeleton style={skeletonStyles.cell} /> }
         }
@@ -337,16 +336,15 @@ export const LoadingSkeleton: Story = {
   }
 }
 
-function AvatarCell32(row: IData) {
+function AvatarCell32(row: IBook) {
   return (
     <div {...stylex.props(s.cellFlexWide)}>
       <Avatar style={s.avatar32}>
-        <AvatarImage src={row.avatar} alt={row.name} />
         <AvatarFallback>{row.initials}</AvatarFallback>
       </Avatar>
       <div {...stylex.props(s.nameStack)}>
-        <div {...stylex.props(s.strong)}>{row.name}</div>
-        <div {...stylex.props(s.muted)}>{row.email}</div>
+        <div {...stylex.props(s.strong)}>{row.title}</div>
+        <div {...stylex.props(s.muted)}>{row.author}</div>
       </div>
     </div>
   )
@@ -370,7 +368,7 @@ const LOCALES: Record<
     label: 'EN',
     columns: {
       reference: 'Order',
-      customer: 'Customer',
+      item: 'Book',
       city: 'City',
       status: 'Status',
       total: 'Total'
@@ -383,7 +381,7 @@ const LOCALES: Record<
     label: 'DE',
     columns: {
       reference: 'Bestellung',
-      customer: 'Kunde',
+      item: 'Buch',
       city: 'Stadt',
       status: 'Status',
       total: 'Gesamt'
@@ -408,7 +406,7 @@ const LOCALES: Record<
     label: 'ID',
     columns: {
       reference: 'Pesanan',
-      customer: 'Pelanggan',
+      item: 'Buku',
       city: 'Kota',
       status: 'Status',
       total: 'Total'
@@ -434,7 +432,7 @@ const LOCALES: Record<
 interface IOrderRow {
   id: string
   reference: string
-  customer: string
+  item: string
   city: string
   status: 'shipped' | 'processing'
   total: number
@@ -443,8 +441,8 @@ interface IOrderRow {
 const localizedOrders: IOrderRow[] = demoData.slice(0, 6).map((row, index) => ({
   id: row.id,
   reference: `ORD-${2041 + index}`,
-  customer: row.name,
-  city: row.location,
+  item: row.title,
+  city: row.country,
   status: (index % 2 === 0 ? 'shipped' : 'processing') as 'shipped' | 'processing',
   total: 120.5 + index * 84.25
 }))
@@ -462,7 +460,7 @@ export const LocalizedLabels: Story = {
           size: 140
         },
         {
-          accessorKey: 'customer',
+          accessorKey: 'item',
           header: config.columns.customer,
           size: 180
         },
@@ -536,9 +534,12 @@ export const LocalizedLabels: Story = {
 /* Server side pagination */
 /* ------------------------------------------------------------------ */
 
-const serverRecords: IData[] = demoData
-const STATUSES = ['Active', 'Inactive', 'Pending'] as const
-type StatusFilter = 'all' | 'active' | 'inactive'
+const serverRecords: IBook[] = demoData
+const STATUS_FILTERS: { label: string; value: StatusFilter }[] = [
+  { label: 'In print', value: 'inPrint' },
+  { label: 'Out of print', value: 'outOfPrint' }
+]
+type StatusFilter = 'all' | 'inPrint' | 'outOfPrint'
 
 /** One page of rows plus the total AFTER filtering — the server contract. */
 async function fetchServerPage(params: {
@@ -547,7 +548,7 @@ async function fetchServerPage(params: {
   sorting: SortingState
   search: string
   status: StatusFilter
-}): Promise<{ rows: IData[]; total: number }> {
+}): Promise<{ rows: IBook[]; total: number }> {
   await new Promise((resolve) => setTimeout(resolve, 500))
 
   const search = params.search.toLowerCase()
@@ -557,7 +558,7 @@ async function fetchServerPage(params: {
   }
   if (search) {
     rows = rows.filter((record) =>
-      [record.name, record.email, record.company].some((value) =>
+      [record.title, record.author, record.publisher].some((value) =>
         value.toLowerCase().includes(search)
       )
     )
@@ -567,8 +568,8 @@ async function fetchServerPage(params: {
   if (sort) {
     const direction = sort.desc ? -1 : 1
     rows = rows.toSorted((a, b) => {
-      const left = a[sort.id as keyof IData]
-      const right = b[sort.id as keyof IData]
+      const left = a[sort.id as keyof IBook]
+      const right = b[sort.id as keyof IBook]
       if (typeof left === 'number' && typeof right === 'number') {
         return (left - right) * direction
       }
@@ -583,9 +584,6 @@ async function fetchServerPage(params: {
   }
 }
 
-const serverStatuses: IData['status'][] = ['active', 'inactive']
-void serverStatuses
-
 export const ServerSidePagination: Story = {
   name: 'Server side pagination',
   render: () => {
@@ -596,7 +594,7 @@ export const ServerSidePagination: Story = {
       pageSize: 5
     })
     const [sorting, setSorting] = useState<SortingState>([])
-    const [rows, setRows] = useState<IData[]>([])
+    const [rows, setRows] = useState<IBook[]>([])
     const [total, setTotal] = useState(0)
     const [isFetching, setIsFetching] = useState(true)
 
@@ -621,12 +619,12 @@ export const ServerSidePagination: Story = {
       }
     }, [pagination, sorting, query, status])
 
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
-          accessorKey: 'name',
-          id: 'name',
-          header: ({ column }) => <DataGridColumnHeader title='User' column={column} />,
+          accessorKey: 'title',
+          id: 'title',
+          header: ({ column }) => <DataGridColumnHeader title='Title' column={column} />,
           cell: ({ row }) => <AvatarCell32 {...row.original} />,
           size: 230,
           meta: {
@@ -642,8 +640,8 @@ export const ServerSidePagination: Story = {
           }
         },
         {
-          accessorKey: 'company',
-          header: ({ column }) => <DataGridColumnHeader title='Company' column={column} />,
+          accessorKey: 'publisher',
+          header: ({ column }) => <DataGridColumnHeader title='Publisher' column={column} />,
           size: 140,
           meta: { skeleton: <Skeleton style={skeletonStyles.bar} /> }
         },
@@ -651,17 +649,17 @@ export const ServerSidePagination: Story = {
           accessorKey: 'status',
           header: ({ column }) => <DataGridColumnHeader title='Status' column={column} />,
           cell: ({ row }) =>
-            row.original.status === 'active' ? (
-              <Badge variant='secondary'>Active</Badge>
+            row.original.status === 'inPrint' ? (
+              <Badge variant='secondary'>In print</Badge>
             ) : (
-              <Badge variant='destructive'>Inactive</Badge>
+              <Badge variant='destructive'>Out of print</Badge>
             ),
           size: 130,
           meta: { skeleton: <Skeleton style={skeletonStyles.chip} /> }
         },
         {
-          accessorKey: 'balance',
-          header: ({ column }) => <DataGridColumnHeader title='Balance ($)' column={column} />,
+          accessorKey: 'price',
+          header: ({ column }) => <DataGridColumnHeader title='Price ($)' column={column} />,
           cell: (info) => (
             <span {...stylex.props(statesStyles.numeric)}>
               ${(info.getValue() as number).toFixed(2)}
@@ -678,7 +676,7 @@ export const ServerSidePagination: Story = {
       columns,
       data: rows,
       pageCount: Math.max(1, Math.ceil(total / pagination.pageSize)),
-      getRowId: (row: IData) => row.id,
+      getRowId: (row: IBook) => row.id,
       state: { pagination, sorting },
       onPaginationChange: setPagination,
       onSortingChange: setSorting,
@@ -705,17 +703,17 @@ export const ServerSidePagination: Story = {
                 />
               </InputGroup>
               <div {...stylex.props(s.cellFlex)}>
-                {(['all', ...STATUSES] as StatusFilter[]).map((key) => (
+                {STATUS_FILTERS.map(({ label, value }) => (
                   <Button
-                    key={key}
+                    key={value}
                     size='sm'
-                    variant={status === key ? 'primary' : 'outline'}
+                    variant={status === value ? 'primary' : 'outline'}
                     onClick={() => {
                       setPagination((old) => ({ ...old, pageIndex: 0 }))
-                      setStatus(key)
+                      setStatus(value)
                     }}
                   >
-                    {key === 'all' ? 'All' : key}
+                    {label}
                   </Button>
                 ))}
               </div>

@@ -23,7 +23,7 @@ import {
   type DataGridFeatures,
   type DataGridRowStatus
 } from '../'
-import { demoData, type IData } from './_mocks'
+import { demoData, type IBook } from './_mocks'
 import { stackStyles as s } from './_mocks.stylex'
 
 const meta = {
@@ -93,59 +93,59 @@ export const CrudFeatures: Story = {
   name: 'CRUD features',
   render: () => {
     const [query, setQuery] = useState('')
-    const [draft, setDraft] = useState<IData | null>(null)
+    const [draft, setDraft] = useState<IBook | null>(null)
     const rowIdRef = useRef(demoData.length + 1)
 
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
-          accessorKey: 'name',
-          header: 'Name',
-          cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.name}</span>,
+          accessorKey: 'title',
+          header: 'Title',
+          cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.title}</span>,
           size: 180,
           meta: { autoSize: true }
         },
         {
-          accessorKey: 'email',
-          header: 'Email',
+          accessorKey: 'author',
+          header: 'Author',
           size: 200
         },
         {
-          accessorKey: 'role',
-          header: 'Occupation',
+          accessorKey: 'genre',
+          header: 'Genre',
           size: 160
         },
         {
-          accessorKey: 'location',
-          header: 'Location',
+          accessorKey: 'country',
+          header: 'Country',
           size: 160
         },
         {
           accessorKey: 'status',
           header: 'Status',
           cell: ({ row }) =>
-            row.original.status === 'active' ? (
-              <Badge variant='secondary'>Active</Badge>
+            row.original.status === 'inPrint' ? (
+              <Badge variant='secondary'>In print</Badge>
             ) : (
-              <Badge variant='destructive'>Inactive</Badge>
+              <Badge variant='destructive'>Out of print</Badge>
             ),
           size: 120
         }
       ],
       []
     )
-    const filtered = demoData.filter((row) => row.name.toLowerCase().includes(query.toLowerCase()))
+    const filtered = demoData.filter((row) => row.title.toLowerCase().includes(query.toLowerCase()))
     const [pagination, setPagination] = useState<PaginationState>({
       pageIndex: 0,
       pageSize: 5
     })
-    const [sorting, setSorting] = useState<SortingState>([{ id: 'name', desc: true }])
+    const [sorting, setSorting] = useState<SortingState>([{ id: 'title', desc: true }])
     const table = useTable({
       features: dataGridFeatures,
       columns,
       data: draft ? [...filtered, draft] : filtered,
       pageCount: Math.ceil(filtered.length / pagination.pageSize),
-      getRowId: (row: IData) => row.id,
+      getRowId: (row: IBook) => row.id,
       state: { pagination, sorting },
       onPaginationChange: setPagination,
       onSortingChange: setSorting
@@ -160,8 +160,8 @@ export const CrudFeatures: Story = {
           setDraft({
             ...demoData[0]!,
             id,
-            name: 'New member',
-            email: 'new@example.com'
+            title: 'New novel',
+            author: 'Unknown'
           })
         }}
         rowCreateLabel='Add row'
@@ -173,7 +173,7 @@ export const CrudFeatures: Story = {
                 <SearchIcon style={{ height: 16, width: 16 }} />
               </InputGroupAddon>
               <Input
-                placeholder='Search members...'
+                placeholder='Search novels...'
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
               />
@@ -186,8 +186,8 @@ export const CrudFeatures: Story = {
                 setDraft({
                   ...demoData[0]!,
                   id,
-                  name: 'New member',
-                  email: 'new@example.com'
+                  title: 'New novel',
+                  author: 'Unknown'
                 })
               }}
             >
@@ -220,28 +220,28 @@ export const CrudInFrameContainer: Story = {
   render: () => {
     const [rows, setRows] = useState(demoData)
 
-    const columns = useMemo<ColumnDef<DataGridFeatures, IData>[]>(
+    const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
-          accessorKey: 'name',
-          header: 'Name',
-          cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.name}</span>,
+          accessorKey: 'title',
+          header: 'Title',
+          cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.title}</span>,
           size: 180,
           meta: { autoSize: true }
         },
         {
-          accessorKey: 'email',
-          header: 'Email',
+          accessorKey: 'author',
+          header: 'Author',
           size: 200
         },
         {
-          accessorKey: 'role',
-          header: 'Occupation',
+          accessorKey: 'genre',
+          header: 'Genre',
           size: 160
         },
         {
-          accessorKey: 'balance',
-          header: 'Balance ($)',
+          accessorKey: 'price',
+          header: 'Price ($)',
           cell: (info) => <>${(info.getValue() as number).toFixed(2)}</>,
           size: 120
         }
@@ -257,7 +257,7 @@ export const CrudInFrameContainer: Story = {
       columns,
       data: rows,
       pageCount: Math.ceil(rows.length / pagination.pageSize),
-      getRowId: (row: IData) => row.id,
+      getRowId: (row: IBook) => row.id,
       state: { pagination },
       onPaginationChange: setPagination
     })
@@ -267,17 +267,17 @@ export const CrudInFrameContainer: Story = {
         table={table}
         recordCount={rows.length}
         onRowCreate={() => {
-          setRows((old) => [...old, { ...old[0]!, id: String(Date.now()), name: 'New member' }])
+          setRows((old) => [...old, { ...old[0]!, id: String(Date.now()), title: 'New novel' }])
         }}
       >
         {/* The source renders this inside its Frame component; a muted card frame
             carries the same header/content/footer intent here. */}
         <Card style={editingStyles.frame}>
           <CardHeader style={editingStyles.frameHeader}>
-            <CardTitle>Team members</CardTitle>
+            <CardTitle>Catalog</CardTitle>
             <Button size='sm' variant='outline'>
               <PlusIcon style={{ height: 16, width: 16 }} />
-              New member
+              New novel
             </Button>
           </CardHeader>
           <CardContent style={editingStyles.cardBody}>
@@ -310,8 +310,8 @@ interface IProduct {
 
 const productData: IProduct[] = demoData.slice(0, 8).map((row, index) => ({
   id: row.id,
-  name: `${row.company} ${index + 1}`,
-  category: row.role,
+  name: `${row.title} — ${row.publisher}`,
+  category: row.genre,
   price: 49.99 + index * 15,
   stock: 12 + index * 7
 }))
@@ -337,7 +337,7 @@ export const SpreadsheetEditing: Story = {
           size: 90
         },
         {
-          accessorKey: 'name',
+          accessorKey: 'title',
           header: 'Product',
           size: 200,
           meta: {

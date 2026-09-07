@@ -1,130 +1,172 @@
-/** Shared mock dataset for the data-grid stories. */
+/** Shared mock dataset for the data-grid stories: novels by Dan Brown and J.K. Rowling. */
 import * as stylex from '@stylexjs/stylex'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import { AU, CA, DE, ES, FR, GB, IT, JP, MY, US } from 'country-flag-icons/react/1x1'
 
-export interface IData {
+export interface IBook {
   id: string
-  name: string
-  availability: 'online' | 'away' | 'busy' | 'offline'
-  avatar: string
-  initials: string
-  status: 'active' | 'inactive'
+  title: string
+  author: string
+  publisher: string
+  genre: string
+  country: string
   flag: string // Lowercase ISO 3166-1 alpha-2 code
-  email: string
-  company: string
-  role: string
-  joined: string
-  location: string
-  balance: number
+  price: number
+  published: string
+  status: 'inPrint' | 'outOfPrint'
+  availability: 'available' | 'low stock' | 'reserved' | 'archived'
+  initials: string
 }
 
-const AVATARS = [
-  'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1584308972272-9e4e7685e80f?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1485893086445-ed75865251e0?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1543299750-19d1d6297053?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1620075225255-8c2051b6c015?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1485206412256-701ccc5b93ca?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1542595913-85d69b0edbaf?w=96&h=96&dpr=2&q=80'
+/** Novels from Dan Brown's Robert Langdon series and the Harry Potter series. */
+export const demoData: IBook[] = [
+  {
+    id: '1',
+    title: 'Angels & Demons',
+    author: 'Dan Brown',
+    publisher: 'Pocket Books',
+    genre: 'Thriller',
+    country: 'United States',
+    flag: 'us',
+    price: 9.99,
+    published: 'Apr, 2000',
+    status: 'inPrint',
+    availability: 'available',
+    initials: 'AD'
+  },
+  {
+    id: '2',
+    title: 'The Da Vinci Code',
+    author: 'Dan Brown',
+    publisher: 'Doubleday',
+    genre: 'Thriller',
+    country: 'United States',
+    flag: 'us',
+    price: 12.99,
+    published: 'Sep, 2003',
+    status: 'inPrint',
+    availability: 'low stock',
+    initials: 'DC'
+  },
+  {
+    id: '3',
+    title: 'The Lost Symbol',
+    author: 'Dan Brown',
+    publisher: 'Doubleday',
+    genre: 'Thriller',
+    country: 'United States',
+    flag: 'us',
+    price: 11.99,
+    published: 'Sep, 2009',
+    status: 'outOfPrint',
+    availability: 'reserved',
+    initials: 'LS'
+  },
+  {
+    id: '4',
+    title: 'Inferno',
+    author: 'Dan Brown',
+    publisher: 'Doubleday',
+    genre: 'Thriller',
+    country: 'United States',
+    flag: 'us',
+    price: 10.99,
+    published: 'May, 2013',
+    status: 'inPrint',
+    availability: 'archived',
+    initials: 'IN'
+  },
+  {
+    id: '5',
+    title: 'Origin',
+    author: 'Dan Brown',
+    publisher: 'Doubleday',
+    genre: 'Thriller',
+    country: 'United States',
+    flag: 'us',
+    price: 13.99,
+    published: 'Oct, 2017',
+    status: 'inPrint',
+    availability: 'available',
+    initials: 'OR'
+  },
+  {
+    id: '6',
+    title: "Harry Potter and the Philosopher's Stone",
+    author: 'J.K. Rowling',
+    publisher: 'Bloomsbury',
+    genre: 'Fantasy',
+    country: 'United Kingdom',
+    flag: 'gb',
+    price: 8.99,
+    published: 'Jun, 1997',
+    status: 'inPrint',
+    availability: 'low stock',
+    initials: 'PS'
+  },
+  {
+    id: '7',
+    title: 'Harry Potter and the Chamber of Secrets',
+    author: 'J.K. Rowling',
+    publisher: 'Bloomsbury',
+    genre: 'Fantasy',
+    country: 'United Kingdom',
+    flag: 'gb',
+    price: 9.99,
+    published: 'Jul, 1998',
+    status: 'inPrint',
+    availability: 'reserved',
+    initials: 'CS'
+  },
+  {
+    id: '8',
+    title: 'Harry Potter and the Prisoner of Azkaban',
+    author: 'J.K. Rowling',
+    publisher: 'Bloomsbury',
+    genre: 'Fantasy',
+    country: 'United Kingdom',
+    flag: 'gb',
+    price: 10.99,
+    published: 'Jul, 1999',
+    status: 'outOfPrint',
+    availability: 'archived',
+    initials: 'PA'
+  },
+  {
+    id: '9',
+    title: 'Harry Potter and the Goblet of Fire',
+    author: 'J.K. Rowling',
+    publisher: 'Bloomsbury',
+    genre: 'Fantasy',
+    country: 'United Kingdom',
+    flag: 'gb',
+    price: 11.99,
+    published: 'Jul, 2000',
+    status: 'inPrint',
+    availability: 'available',
+    initials: 'GF'
+  },
+  {
+    id: '10',
+    title: 'Harry Potter and the Order of the Phoenix',
+    author: 'J.K. Rowling',
+    publisher: 'Bloomsbury',
+    genre: 'Fantasy',
+    country: 'United Kingdom',
+    flag: 'gb',
+    price: 12.99,
+    published: 'Jun, 2003',
+    status: 'inPrint',
+    availability: 'low stock',
+    initials: 'OP'
+  }
 ]
-
-const NAMES = [
-  'Alex Johnson',
-  'Sarah Chen',
-  'Michael Rodriguez',
-  'Emma Wilson',
-  'David Kim',
-  'Aron Thompson',
-  'James Brown',
-  'Maria Garcia',
-  'Nick Johnson',
-  'Liam Thompson'
-]
-
-const EMAILS = [
-  'alex@example.com',
-  'sarah@example.com',
-  'michael@example.com',
-  'emma@example.com',
-  'david@example.com',
-  'aron@example.com',
-  'james@example.com',
-  'maria@example.com',
-  'nick@example.com',
-  'liam@example.com'
-]
-
-export const users = NAMES.map((name, index) => ({
-  id: String(index + 1),
-  name,
-  email: EMAILS[index]!,
-  avatar: AVATARS[index]!,
-  initials: name
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-}))
-
-export const demoData: IData[] = users.map((user, index) => ({
-  ...user,
-  availability: (['online', 'away', 'busy', 'offline'] as const)[index % 4]!,
-  status: (index % 2 === 0 ? 'active' : 'inactive') as 'active' | 'inactive',
-  flag: (['us', 'gb', 'ca', 'au', 'de', 'my', 'es', 'jp', 'fr', 'it'] as const)[index % 10]!,
-  company: (
-    [
-      'Apple',
-      'OpenAI',
-      'Meta',
-      'Tesla',
-      'SAP',
-      'Keenthemes',
-      'BBVA',
-      'Sony',
-      'LVMH',
-      'ENI'
-    ] as const
-  )[index % 10]!,
-  role: (
-    [
-      'CEO',
-      'CTO',
-      'Designer',
-      'Developer',
-      'Lawyer',
-      'Director',
-      'Product Manager',
-      'Marketing Lead',
-      'Data Scientist',
-      'Engineer'
-    ] as const
-  )[index % 10]!,
-  joined: 'Jan, 2024',
-  location: (
-    [
-      'United States',
-      'United Kingdom',
-      'Canada',
-      'Australia',
-      'Germany',
-      'Malaysia',
-      'Spain',
-      'Japan',
-      'France',
-      'Italy'
-    ] as const
-  )[index % 10]!,
-  balance: 5143.03 + index * 100
-}))
 
 /** Named flag components for the mock dataset (no barrel namespace import). */
 const FLAGS = { US, GB, CA, AU, DE, MY, ES, JP, FR, IT } as const
 
 interface CountryFlagProps {
-  code: IData['flag']
+  code: string
   title: string
   style?: StyleXStyles
 }
@@ -136,10 +178,10 @@ export function CountryFlag({ code, title, style }: CountryFlagProps) {
   return <Flag title={title} {...stylex.props(style)} />
 }
 
-/** Avatar status dot colors (availability). */
+/** Availability status dot colors. */
 export const statusColors: Record<string, string> = {
-  online: 'oklch(0.55 0.13 151.8)',
-  away: 'oklch(0.82 0.22 80)',
-  busy: 'oklch(0.59 0.205 20.28)',
-  offline: 'oklch(0 0 89.88 / 0.3)'
+  available: 'oklch(0.55 0.13 151.8)',
+  'low stock': 'oklch(0.82 0.22 80)',
+  reserved: 'oklch(0.59 0.205 20.28)',
+  archived: 'oklch(0 0 89.88 / 0.3)'
 }

@@ -16,7 +16,7 @@ import {
   dataGridFeatures,
   type DataGridFeatures
 } from '../'
-import { demoData, type IData } from './_mocks'
+import { demoData, type IBook } from './_mocks'
 import { stackStyles as s } from './_mocks.stylex'
 
 const meta = {
@@ -69,58 +69,58 @@ const footerStyles = stylex.create({
 
 const fmt = (value: number) => value.toLocaleString('en-US', { minimumFractionDigits: 2 })
 
-function useDemoTable(columns: ColumnDef<DataGridFeatures, IData>[]) {
+function useDemoTable(columns: ColumnDef<DataGridFeatures, IBook>[]) {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 5
   })
-  const [sorting, setSorting] = useState<SortingState>([{ id: 'name', desc: true }])
+  const [sorting, setSorting] = useState<SortingState>([{ id: 'title', desc: true }])
 
   return useTable({
     features: dataGridFeatures,
     columns,
     data: demoData,
     pageCount: Math.ceil(demoData.length / pagination.pageSize),
-    getRowId: (row: IData) => row.id,
+    getRowId: (row: IBook) => row.id,
     state: { pagination, sorting },
     onPaginationChange: setPagination,
     onSortingChange: setSorting
   })
 }
 
-function baseColumns(): ColumnDef<DataGridFeatures, IData>[] {
+function baseColumns(): ColumnDef<DataGridFeatures, IBook>[] {
   return [
     {
-      accessorKey: 'name',
-      header: 'Name',
-      cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.name}</span>,
+      accessorKey: 'title',
+      header: 'Title',
+      cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.title}</span>,
       size: 170,
       meta: { autoSize: true }
     },
     {
-      accessorKey: 'email',
-      header: 'Email',
+      accessorKey: 'author',
+      header: 'Author',
       size: 190
     },
     {
       accessorKey: 'role',
-      header: 'Occupation',
+      header: 'Genre',
       size: 150
     },
     {
       accessorKey: 'status',
       header: 'Status',
       cell: ({ row }) =>
-        row.original.status === 'active' ? (
-          <Badge variant='secondary'>Active</Badge>
+        row.original.status === 'inPrint' ? (
+          <Badge variant='secondary'>In print</Badge>
         ) : (
-          <Badge variant='destructive'>Inactive</Badge>
+          <Badge variant='destructive'>Out of print</Badge>
         ),
       size: 110
     },
     {
-      accessorKey: 'balance',
-      header: 'Balance ($)',
+      accessorKey: 'price',
+      header: 'Price ($)',
       cell: (info) => (
         <span {...stylex.props(footerStyles.numeric)}>
           ${(info.getValue() as number).toFixed(2)}
@@ -138,17 +138,17 @@ export const ColumnTotalsFooter: Story = {
     const columns = useMemo(() => baseColumns(), [])
     const table = useDemoTable(columns)
     const visibleCount = table.getVisibleLeafColumns().length
-    const totalBalance = demoData.reduce((total, row) => total + row.balance, 0)
+    const totalPrice = demoData.reduce((total, row) => total + row.price, 0)
 
     const footer = (
       <DataGridTableFootRow>
-        {/* Label spans checkbox + user + role + status */}
+        {/* Label spans checkbox + title + genre + status */}
         <DataGridTableFootRowCell colSpan={visibleCount - 2}>
           <span {...stylex.props(footerStyles.muted)}>Total balance</span>
         </DataGridTableFootRowCell>
-        {/* Balance total */}
+        {/* Price total */}
         <DataGridTableFootRowCell style={footerStyles.total}>
-          ${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+          ${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}
         </DataGridTableFootRowCell>
         {/* Actions column - empty */}
         <DataGridTableFootRowCell />
@@ -185,12 +185,12 @@ export const SummaryStatsFooter: Story = {
     const columns = useMemo(() => baseColumns(), [])
     const table = useDemoTable(columns)
     const visibleCount = table.getVisibleLeafColumns().length
-    const balances = demoData.map((row) => row.balance)
+    const prices = demoData.map((row) => row.price)
     const stats = {
-      minBalance: Math.min(...balances),
-      maxBalance: Math.max(...balances),
-      avgBalance: balances.reduce((total, value) => total + value, 0) / balances.length,
-      activeCount: demoData.filter((row) => row.status === 'active').length
+      minPrice: Math.min(...prices),
+      maxPrice: Math.max(...prices),
+      avgPrice: prices.reduce((total, value) => total + value, 0) / prices.length,
+      inPrintCount: demoData.filter((row) => row.status === 'inPrint').length
     }
 
     const footer = (
@@ -201,13 +201,13 @@ export const SummaryStatsFooter: Story = {
           <DataGridTableFootRowCell>
             <div {...stylex.props(footerStyles.stack)}>
               <span {...stylex.props(footerStyles.muted)}>Min</span>
-              <span {...stylex.props(footerStyles.numeric)}>{fmt(stats.minBalance)}</span>
+              <span {...stylex.props(footerStyles.numeric)}>{fmt(stats.minPrice)}</span>
             </div>
           </DataGridTableFootRowCell>
           <DataGridTableFootRowCell>
             <div {...stylex.props(footerStyles.stack)}>
               <span {...stylex.props(footerStyles.muted)}>Max</span>
-              <span {...stylex.props(footerStyles.numeric)}>{fmt(stats.maxBalance)}</span>
+              <span {...stylex.props(footerStyles.numeric)}>{fmt(stats.maxPrice)}</span>
             </div>
           </DataGridTableFootRowCell>
         </DataGridTableFootRow>
@@ -216,13 +216,13 @@ export const SummaryStatsFooter: Story = {
           <DataGridTableFootRowCell colSpan={visibleCount - 2}>
             <div {...stylex.props(s.cellFlex)}>
               <span {...stylex.props(footerStyles.muted)}>Avg balance</span>
-              <span {...stylex.props(footerStyles.numeric)}>{fmt(stats.avgBalance)}</span>
+              <span {...stylex.props(footerStyles.numeric)}>{fmt(stats.avgPrice)}</span>
             </div>
           </DataGridTableFootRowCell>
           <DataGridTableFootRowCell colSpan={2}>
             <div {...stylex.props(s.cellFlex)}>
-              <span {...stylex.props(footerStyles.muted)}>Active</span>
-              <Badge variant='secondary'>{stats.activeCount}</Badge>
+              <span {...stylex.props(footerStyles.muted)}>In print</span>
+              <Badge variant='secondary'>{stats.inPrintCount}</Badge>
             </div>
           </DataGridTableFootRowCell>
         </DataGridTableFootRow>
@@ -258,11 +258,11 @@ export const PerColumnAggregateFooter: Story = {
   render: () => {
     const columns = useMemo(() => baseColumns(), [])
     const table = useDemoTable(columns)
-    const balances = demoData.map((row) => row.balance)
+    const prices = demoData.map((row) => row.price)
     const aggregates = {
-      avgBalance: balances.reduce((total, value) => total + value, 0) / balances.length,
-      minBalance: Math.min(...balances),
-      maxBalance: Math.max(...balances)
+      avgPrice: prices.reduce((total, value) => total + value, 0) / prices.length,
+      minPrice: Math.min(...prices),
+      maxPrice: Math.max(...prices)
     }
 
     const footer = (
@@ -270,18 +270,18 @@ export const PerColumnAggregateFooter: Story = {
         <DataGridTableFootRowCell colSpan={2}>
           <div {...stylex.props(footerStyles.stack)}>
             <span {...stylex.props(footerStyles.muted)}>Summary</span>
-            <span {...stylex.props(footerStyles.strong)}>Across all members</span>
+            <span {...stylex.props(footerStyles.strong)}>Across all books</span>
             <span {...stylex.props(footerStyles.muted, footerStyles.numeric)}>
-              {demoData.length} members
+              {demoData.length} books
             </span>
           </div>
         </DataGridTableFootRowCell>
         <DataGridTableFootRowCell>
           <div {...stylex.props(footerStyles.stack)}>
             <span {...stylex.props(footerStyles.muted)}>Avg</span>
-            <span {...stylex.props(footerStyles.numeric)}>{fmt(aggregates.avgBalance)}</span>
+            <span {...stylex.props(footerStyles.numeric)}>{fmt(aggregates.avgPrice)}</span>
             <span {...stylex.props(footerStyles.muted, footerStyles.numeric)}>
-              {fmt(aggregates.minBalance)} - {fmt(aggregates.maxBalance)}
+              {fmt(aggregates.minPrice)} - {fmt(aggregates.maxPrice)}
             </span>
           </div>
         </DataGridTableFootRowCell>

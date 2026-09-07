@@ -101,19 +101,17 @@ export type {
 export {
   DataGridColumnFilter,
   DataGridColumnHeader,
-  DataGridColumnVisibility,
-  type DataGridColumnFilterProps,
-  type DataGridColumnHeaderProps
+  DataGridColumnVisibility
 } from './data-grid-column'
+export type { DataGridColumnFilterProps, DataGridColumnHeaderProps } from './data-grid-column'
 export { DataGridPagination } from './data-grid-table-pager'
 export type { DataGridPaginationProps } from './data-grid-table-pager'
 export {
   DataGridTableDnd,
   DataGridTableDndRowHandle,
-  DataGridTableDndRows,
-  type DataGridTableDndRowData,
-  type DataGridTableDndRowDecoration
+  DataGridTableDndRows
 } from './data-grid-table-dnd'
+export type { DataGridTableDndRowData, DataGridTableDndRowDecoration } from './data-grid-table-dnd'
 export { DataGridTableVirtual } from './data-grid-table-virtual'
 export type {
   DataGridTableVirtualProps,

@@ -5,7 +5,7 @@ import { useTable } from '@tanstack/react-table'
 import type { ColumnDef, HeaderContext, SortingState } from '@tanstack/react-table'
 import { RefreshCwIcon } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
+import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Card, CardContent } from '#/components/extra/card'
 import {
@@ -36,11 +36,10 @@ export default meta
 
 interface IRow {
   id: string
-  name: string
-  avatar: string
-  email: string
-  status: 'Active' | 'Inactive' | 'Pending'
-  balance: number
+  title: string
+  author: string
+  status: 'In print' | 'Out of print' | 'Pre-order'
+  price: number
 }
 
 const infiniteStyles = stylex.create({
@@ -84,36 +83,28 @@ function DataGridScrollAreaProxy({ children }: { children: React.ReactNode }) {
   return <div style={{ width: '100%' }}>{children}</div>
 }
 
-const NAMES = [
-  'Alex Johnson',
-  'Sarah Chen',
-  'Michael Rodriguez',
-  'Emma Wilson',
-  'David Kim',
-  'Aron Thompson',
-  'James Brown',
-  'Maria Garcia',
-  'Nick Johnson',
-  'Liam Thompson'
+const TITLES = [
+  'Angels & Demons',
+  'The Da Vinci Code',
+  'The Lost Symbol',
+  'Inferno',
+  'Origin',
+  "Harry Potter and the Philosopher's Stone",
+  'Harry Potter and the Chamber of Secrets',
+  'Harry Potter and the Prisoner of Azkaban',
+  'Harry Potter and the Goblet of Fire',
+  'Harry Potter and the Order of the Phoenix'
 ]
 
-const AVATARS = [
-  'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1584308972272-9e4e7685e80f?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1485893086445-ed75865251e0?w=96&h=96&dpr=2&q=80',
-  'https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=96&h=96&dpr=2&q=80'
-]
+const AUTHORS = ['Dan Brown', 'J.K. Rowling']
 
 function simulateRow(index: number): IRow {
-  const name = NAMES[index % NAMES.length]!
   return {
     id: String(index + 1),
-    name,
-    avatar: AVATARS[index % AVATARS.length]!,
-    email: `${name.toLowerCase().replace(' ', '.')}${index}@company.com`,
-    status: (['Active', 'Inactive', 'Pending'] as const)[index % 3]!,
-    balance: Math.round((Math.random() * 9000 + 1000) * 100) / 100
+    title: TITLES[index % TITLES.length]!,
+    author: AUTHORS[index % 2]!,
+    status: (['In print', 'Out of print', 'Pre-order'] as const)[index % 3]!,
+    price: Math.round((Math.random() * 10 + 8) * 100) / 100
   }
 }
 
@@ -135,21 +126,20 @@ function useColumns() {
         enableSorting: false
       },
       {
-        accessorKey: 'name',
-        id: 'name',
-        header: ({ column }) => <DataGridColumnHeader title='User' column={column} />,
+        accessorKey: 'title',
+        id: 'title',
+        header: ({ column }) => <DataGridColumnHeader title='Title' column={column} />,
         cell: ({ row }) => (
           <div {...stylex.props(s.cellFlexWide)}>
             <Avatar style={s.avatar24}>
-              <AvatarImage src={row.original.avatar} alt={row.original.name} />
               <AvatarFallback>
-                {row.original.name
+                {row.original.title
                   .split(' ')
                   .map((n) => n[0])
                   .join('')}
               </AvatarFallback>
             </Avatar>
-            <span {...stylex.props(s.strong)}>{row.original.name}</span>
+            <span {...stylex.props(s.strong)}>{row.original.title}</span>
           </div>
         ),
         minSize: 150,
@@ -157,9 +147,9 @@ function useColumns() {
         enableSorting: true
       },
       {
-        accessorKey: 'email',
-        id: 'email',
-        header: ({ column }) => <DataGridColumnHeader title='Email' column={column} />,
+        accessorKey: 'author',
+        id: 'author',
+        header: ({ column }) => <DataGridColumnHeader title='Author' column={column} />,
         size: 200,
         enableSorting: true
       },
@@ -171,9 +161,9 @@ function useColumns() {
         enableSorting: true
       },
       {
-        accessorKey: 'balance',
-        id: 'balance',
-        header: ({ column }) => <DataGridColumnHeader title='Balance ($)' column={column} />,
+        accessorKey: 'price',
+        id: 'price',
+        header: ({ column }) => <DataGridColumnHeader title='Price ($)' column={column} />,
         cell: (info) => (
           <span {...stylex.props(infiniteStyles.numeric)}>
             ${(info.getValue() as number).toFixed(2)}
@@ -340,17 +330,17 @@ const columnVirtualizerOptions = { enabled: true, overscan: 3 }
 function matrixColumns(): ColumnDef<DataGridFeatures, IRow>[] {
   return [
     {
-      accessorKey: 'name',
-      id: 'name',
-      header: ({ column }) => <DataGridColumnHeader title='Name' column={column} />,
-      cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.name}</span>,
+      accessorKey: 'title',
+      id: 'title',
+      header: ({ column }) => <DataGridColumnHeader title='Title' column={column} />,
+      cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.title}</span>,
       size: 180,
       enablePinning: true,
       enableResizing: true
     },
     ...Array.from({ length: METRIC_COLUMN_COUNT }, (_, metric) => {
       return {
-        accessorKey: 'balance',
+        accessorKey: 'price',
         id: `metric-${metric + 1}`,
         // Matrix headers are uniform; the loose context typing keeps the
         // generated columns simple.

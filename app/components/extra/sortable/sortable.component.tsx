@@ -75,7 +75,7 @@ type DivRenderProps = Omit<useRender.ComponentProps<'div'>, 'className' | 'style
 // ---------------------------------------------------------------------------
 
 /** Per-item drag plumbing shared between `SortableItem` and its handle. */
-const SortableItemContext = createContext<{
+export const SortableItemContext = createContext<{
   listeners: DraggableSyntheticListeners | undefined
   isDragging?: boolean
   disabled?: boolean

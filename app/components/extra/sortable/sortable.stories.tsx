@@ -7,8 +7,10 @@ import { toast } from '#/components/base/toast'
 import { Badge } from '#/components/extra/badge'
 import { Card, CardDescription, CardHeader, CardTitle } from '#/components/extra/card'
 import { Sortable, SortableItem, SortableItemHandle } from '#/components/extra/sortable'
+import { SortableItemContext } from '#/components/extra/sortable'
 import type { SortableCommitMeta } from '#/components/extra/sortable'
-import { colors, shadow } from '#/styles/core/colors.stylex'
+import { useContext } from 'react'
+import { colors } from '#/styles/core/colors.stylex'
 import { radius, stroke, unit } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight, fontWeight } from '#/styles/core/tokens.stylex'
 
@@ -739,25 +741,6 @@ const mediaStyles = stylex.create({
     position: 'relative',
     width: '100%'
   },
-  handle: {
-    backgroundColor: colors.backgroundElevationBase,
-    borderRadius: radius.small,
-    boxShadow: shadow.outline,
-    height: 'fit-content',
-    opacity: {
-      default: 0,
-      ':hover': 1,
-      ':focus-visible': 1,
-      ':active': 1,
-      [stylex.when.ancestor(':hover')]: 1,
-      '@media (pointer: coarse)': 1
-    },
-    padding: unit.x1,
-    position: 'absolute',
-    right: unit.x2,
-    top: unit.x2,
-    width: 'fit-content'
-  },
   handleWrapper: {
     margin: 0,
     position: 'relative',
@@ -768,9 +751,24 @@ const mediaStyles = stylex.create({
     flexDirection: 'column',
     gap: unit.x0_5,
     paddingBlock: unit.x2,
-    paddingInline: unit.x3
+    paddingInline: unit.x3,
+    fontSize: fontSize.body2
   }
 })
+
+// Custom handle that uses the entire image as the drag target for media items.
+function MediaImageHandle({ children, style }: { children: React.ReactNode; style?: stylex.StyleXStyles }) {
+  const { listeners } = useContext(SortableItemContext)
+
+  return (
+    <div
+      {...stylex.props(style)}
+      {...listeners as React.ComponentPropsWithRef<'div'>}
+    >
+      {children}
+    </div>
+  )
+}
 
 export const MediaLibrary: Story = {
   name: 'Media library',
@@ -797,15 +795,14 @@ export const MediaLibrary: Story = {
               {images.map((image) => (
                 <SortableItem key={image.id} value={image.id}>
                   <figure {...stylex.props(mediaStyles.cell)}>
-                    <div {...stylex.props(mediaStyles.handleWrapper)}>
+                    <MediaImageHandle style={mediaStyles.handleWrapper}>
                       <img
                         src={`https://images.unsplash.com/${image.photo}?w=600&dpr=2&q=80`}
                         alt={image.alt}
                         loading='lazy'
                         {...stylex.props(mediaStyles.thumb)}
                       />
-                      <Handle style={mediaStyles.handle} />
-                    </div>
+                    </MediaImageHandle>
                     <figcaption {...stylex.props(mediaStyles.caption)}>
                       <span {...stylex.props(styles.rowTitle)}>{image.name}</span>
                     </figcaption>

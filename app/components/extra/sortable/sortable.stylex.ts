@@ -59,7 +59,7 @@ export const sortableStyles = stylex.create({
     height: unit.x6,
     justifyContent: 'center',
     opacity: {
-      default: 0.6,
+      default: 0.8,
       ':hover': 1,
       ':focus-visible': 1,
       ':active': 1,
@@ -70,9 +70,9 @@ export const sortableStyles = stylex.create({
       ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
     },
     touchAction: 'none',
-    transitionDuration: duration.fast,
+    transitionDuration: duration.medium,
     transitionProperty: 'color, opacity',
-    transitionTimingFunction: easing.standard,
+    transitionTimingFunction: easing.decelerate,
     width: unit.x6
   },
   handleDragging: {
@@ -97,6 +97,7 @@ export const sortableStyles = stylex.create({
   overlayContent: {
     boxShadow: shadow.raised,
     cursor: 'grabbing',
+    opacity: 0.85,
     minWidth: 0,
     pointerEvents: 'none',
     transitionDuration: {

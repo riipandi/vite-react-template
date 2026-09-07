@@ -207,7 +207,7 @@ export interface ComboboxContentProps
     Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.Popup>, 'className' | 'style'>,
     Pick<
       React.ComponentPropsWithoutRef<typeof BaseCombobox.Positioner>,
-      'align' | 'alignOffset' | 'side' | 'sideOffset' | 'anchor'
+      'align' | 'alignOffset' | 'side' | 'sideOffset' | 'anchor' | 'collisionAvoidance'
     >,
     StyleProp {}
 
@@ -218,6 +218,7 @@ export function ComboboxContent({
   align = 'start',
   alignOffset = 0,
   anchor,
+  collisionAvoidance,
   ...props
 }: ComboboxContentProps) {
   return (
@@ -228,6 +229,7 @@ export function ComboboxContent({
         side={side}
         sideOffset={sideOffset}
         anchor={anchor}
+        collisionAvoidance={collisionAvoidance}
         {...stylex.props(popupFx.positioner)}
       >
         <BaseCombobox.Popup

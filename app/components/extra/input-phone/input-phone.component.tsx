@@ -108,7 +108,11 @@ function CountrySelect({
       >
         <FlagComponent country={selectedCountry} countryName={selectedCountry} />
       </ComboboxTrigger>
-      <ComboboxContent anchor={containerRef ?? undefined} style={s.popup}>
+      <ComboboxContent
+        anchor={containerRef ?? undefined}
+        collisionAvoidance={{ side: 'none', align: 'shift' }}
+        style={s.popup}
+      >
         <div {...stylex.props(s.searchWrap)}>
           <SearchIcon {...stylex.props(s.searchIcon)} />
           <ComboboxInput

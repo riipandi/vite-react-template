@@ -107,10 +107,10 @@ export const inputPhoneStyles = stylex.create({
     alignItems: 'center',
     borderRadius: radius.small,
     display: 'flex',
-    height: unit.x5,
+    height: unit.x4,
     justifyContent: 'center',
     overflow: 'hidden',
-    width: unit.x6
+    width: unit.x5
   },
   flagFallback: {
     height: unit.x4,

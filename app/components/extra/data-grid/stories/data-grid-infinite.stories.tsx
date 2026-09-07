@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
+import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useTable } from '@tanstack/react-table'
 import type { ColumnDef, SortingState } from '@tanstack/react-table'
@@ -20,7 +21,14 @@ import { stackStyles as s } from './_mocks.stylex'
 const meta = {
   title: 'Data Grid/Infinite',
   parameters: { layout: 'fullscreen' },
-  tags: []
+  tags: [], // ['autodocs']
+  decorators: [
+    (Story) => (
+      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+        <Story />
+      </div>
+    )
+  ]
 } satisfies Meta
 
 type Story = StoryObj<typeof meta>
@@ -322,8 +330,11 @@ export const RemoteInfiniteScroll: Story = {
 /* Column virtualization (ReUI c-data-grid-32)                         */
 /* ------------------------------------------------------------------ */
 
-const METRIC_COLUMN_COUNT = 60
-const matrixRows = generateData(50)
+const METRIC_COLUMN_COUNT = 36
+// Same scale as the source pattern: enough columns to prove windowing.
+const ROW_COUNT = 1000
+const COLUMN_JUMP_SIZE = 8
+const matrixRows = generateData(ROW_COUNT)
 const columnVirtualizerOptions = { enabled: true, overscan: 3 }
 
 function matrixColumns(): ColumnDef<DataGridFeatures, IRow>[] {
@@ -375,7 +386,10 @@ export const ColumnVirtualization: Story = {
       getRowId: (row: IRow) => row.id,
       state: {
         sorting,
-        columnPinning: { start: ['name'] }
+        // Full pinning state: table-core 9.2 reads `start`/`end` as arrays
+        // (row_getCenterVisibleCells spreads both), so a partial `{ start }`
+        // crashes with "end is not iterable".
+        columnPinning: { start: ['name'], end: [] }
       } as never,
       onSortingChange: setSorting
     })
@@ -402,7 +416,7 @@ export const ColumnVirtualization: Story = {
               <Button
                 variant='outline'
                 size='sm'
-                onClick={() => setTargetColumnIndex((old) => Math.max(0, old - 1))}
+                onClick={() => setTargetColumnIndex((old) => Math.max(0, old - COLUMN_JUMP_SIZE))}
               >
                 Prev
               </Button>
@@ -410,7 +424,9 @@ export const ColumnVirtualization: Story = {
                 variant='outline'
                 size='sm'
                 onClick={() =>
-                  setTargetColumnIndex((old) => Math.min(METRIC_COLUMN_COUNT - 1, old + 1))
+                  setTargetColumnIndex((old) =>
+                    Math.min(METRIC_COLUMN_COUNT - 1, old + COLUMN_JUMP_SIZE)
+                  )
                 }
               >
                 Next
@@ -423,8 +439,10 @@ export const ColumnVirtualization: Story = {
                 <DataGridTableVirtual
                   estimateSize={41}
                   height={420}
+                  overscan={8}
+                  scrollBehavior='smooth'
                   scrollToColumnIndex={targetColumnIndex}
-                  scrollToColumnAlign='start'
+                  scrollToColumnAlign='center'
                   columnVirtualizerOptions={columnVirtualizerOptions}
                 />
               </DataGridScrollAreaProxy>

@@ -1,5 +1,6 @@
 import type { UniqueIdentifier, DragEndEvent } from '@dnd-kit/core'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
+import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useTable } from '@tanstack/react-table'
 import type {
@@ -37,7 +38,14 @@ import { stackStyles as s } from './_mocks.stylex'
 const meta = {
   title: 'Data Grid/Rows',
   parameters: { layout: 'fullscreen' },
-  tags: []
+  tags: [], // ['autodocs']
+  decorators: [
+    (Story) => (
+      <div {...stylex.props(atoms.padding['20px'], atoms.minWidth['448px'], atoms.width['100%'])}>
+        <Story />
+      </div>
+    )
+  ]
 } satisfies Meta
 
 type Story = StoryObj<typeof meta>

@@ -76,7 +76,7 @@ type DivRenderProps = Omit<useRender.ComponentProps<'div'>, 'className' | 'style
 
 /** Per-item drag plumbing shared between `SortableItem` and its handle. */
 export const SortableItemContext = createContext<{
-  listeners: DraggableSyntheticListeners | undefined
+  listeners?: DraggableSyntheticListeners | undefined
   isDragging?: boolean
   disabled?: boolean
 }>({ listeners: undefined, isDragging: false, disabled: false })
@@ -406,6 +406,7 @@ function SortableItem({ value, style, render, disabled, ...props }: SortableItem
             'data-disabled': isOverlay ? undefined : disabled,
             ref: isOverlay ? undefined : setNodeRef,
             ...(!isOverlay ? attributes : {}),
+            ...(!isOverlay ? listeners : {}),
             children: props.children
           } as React.ComponentPropsWithRef<'div'>,
           props
@@ -424,7 +425,7 @@ export interface SortableItemHandleProps extends DivRenderProps {
 }
 
 function SortableItemHandle({ style, render, cursor = true, ...props }: SortableItemHandleProps) {
-  const { listeners, isDragging, disabled } = useContext(SortableItemContext)
+  const { isDragging, disabled } = useContext(SortableItemContext)
   const { activeId } = useContext(SortableInternalContext)
 
   return useRender({
@@ -443,7 +444,7 @@ function SortableItemHandle({ style, render, cursor = true, ...props }: Sortable
         'data-slot': 'sortable-item-handle',
         'data-dragging': isDragging,
         'data-disabled': disabled,
-        ...listeners
+        children: props.children
       } as React.ComponentPropsWithRef<'div'>,
       props
     )

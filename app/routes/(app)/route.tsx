@@ -12,11 +12,12 @@ import { SideNavbar } from './-sidebar'
 
 export const Route = createFileRoute('/(app)')({
   component: RouteComponent,
-  beforeLoad: async () => {
+  beforeLoad: async ({ location }) => {
     // Wait for the silent cookie-session bootstrap before deciding.
     await ensureSessionLoaded()
     if (!isAuthenticated()) {
-      throw redirect({ to: '/login' })
+      // Send the visitor back to the attempted path after signing in.
+      throw redirect({ to: '/login', search: { return_to: location.href } })
     }
   },
   staticData: {

@@ -24,7 +24,8 @@ import { socialStyles, styles } from '#/styles/pages/login.stylex'
 export const Route = createFileRoute('/(auth)/login')({
   component: RouteComponent,
   validateSearch: z.object({
-    loggedOut: z.coerce.boolean().optional()
+    loggedOut: z.coerce.boolean().optional(),
+    return_to: z.string().optional()
   }),
   staticData: {
     pageTitle: 'Sign In'
@@ -32,9 +33,9 @@ export const Route = createFileRoute('/(auth)/login')({
 })
 
 function RouteComponent() {
-  const { login } = useAuthentication()
   const navigate = useNavigate()
-  const { loggedOut } = useSearch({ from: Route.id })
+  const { login } = useAuthentication()
+  const { loggedOut, return_to } = useSearch({ from: Route.id })
   const [failed, setFailed] = useState<string | null>(null)
   const [remember, setRemember] = useState(false)
   const [dismissed, setDismissed] = useState(false)
@@ -62,7 +63,7 @@ function RouteComponent() {
     onSubmit: async ({ value }) => {
       setFailed(null)
       try {
-        await login(value, { rememberMe: remember })
+        await login(value, { rememberMe: remember, redirectTo: return_to })
       } catch (error: unknown) {
         setFailed(getErrorMessage(error))
       }

@@ -1,4 +1,4 @@
-import { useNavigate } from '@tanstack/react-router'
+import { useNavigate, useRouter } from '@tanstack/react-router'
 import { useSelector } from '@tanstack/react-store'
 import { createContext, useContext, useEffect } from 'react'
 import type { LoginCredentials } from '#/schemas/auth.schema'
@@ -6,6 +6,7 @@ import type { User } from '#/schemas/user.schema'
 import type { AuthLoginOptions } from './auth-engine'
 import { ensureSessionLoaded, refreshIfExpiring } from './auth-session'
 import { authStore, clearAuth, setAuthUser, type AuthState } from './auth-store'
+import { safeReturnTo } from './auth-utils'
 import { authWorker } from './auth-worker-client'
 
 /** Subscribe to the session state (selector-based, minimal re-renders). */
@@ -13,11 +14,17 @@ export function useAuth(): AuthState {
   return useSelector(authStore, (state) => state)
 }
 
+/** Worker login options plus the post-login redirect target. */
+interface AuthLoginContextOptions extends AuthLoginOptions {
+  /** Path (with optional query) captured by the auth guard — see `(app)/route.tsx`. */
+  redirectTo?: string
+}
+
 interface AuthContext {
   user: User | null
   loggedIn: boolean
   isLoading: boolean
-  login: (credentials: LoginCredentials, options?: AuthLoginOptions) => Promise<void>
+  login: (credentials: LoginCredentials, options?: AuthLoginContextOptions) => Promise<void>
   logout: () => void
 }
 
@@ -36,6 +43,7 @@ const REFRESH_ON_VISIBLE_WITHIN_MS = 5 * 60_000
 
 export function AuthProvider({ children }: React.PropsWithChildren) {
   const navigate = useNavigate()
+  const router = useRouter()
   const { user, isLoading } = useAuth()
   const loggedIn = user !== null
 
@@ -45,8 +53,8 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     void ensureSessionLoaded()
   }, [])
 
-  // The worker's proactive timer is throttled in background tabs — refresh
-  // on tab focus when the session is about to expire.
+  // The worker's proactive timer is throttled in background tabs,
+  // refresh on tab focus when the session is about to expire.
   useEffect(() => {
     const onVisibilityChange = () => {
       if (document.visibilityState !== 'visible') return
@@ -56,11 +64,17 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     return () => document.removeEventListener('visibilitychange', onVisibilityChange)
   }, [])
 
-  const handleLogin = async (credentials: LoginCredentials, options?: AuthLoginOptions) => {
-    // The worker establishes the cookie session; tokens never reach JS.
-    const profile = await authWorker().login(credentials, options)
+  // The worker establishes the cookie session; tokens never reach JS.
+  const handleLogin = async (credentials: LoginCredentials, options?: AuthLoginContextOptions) => {
+    const { redirectTo, ...workerOptions } = options ?? {}
+    const profile = await authWorker().login(credentials, workerOptions)
     setAuthUser(profile)
-    navigate({ to: '/overview' })
+    const target = safeReturnTo(redirectTo)
+    if (target) {
+      router.history.push(target)
+    } else {
+      navigate({ to: '/overview' })
+    }
   }
 
   const handleLogout = () => {

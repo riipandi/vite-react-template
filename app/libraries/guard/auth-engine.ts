@@ -20,7 +20,7 @@ const PROACTIVE_MARGIN_MS = 60_000
 const REFRESH_COOLDOWN_MS = 5_000
 
 /**
- * Transport-agnostic auth engine. Runs inside the Comlink worker (default) or
+ * Transport-agnostic authn engine. Runs inside the Comlink worker (default) or
  * on the main thread as a fallback (SSR, tests, CSP-restricted environments).
  *
  * The session lives in HttpOnly cookies set by the backend — no token ever
@@ -45,6 +45,8 @@ export function createAuthEngine(baseURL: string = API_BASE_URL): AuthEngineApi 
   let refreshInFlight: Promise<boolean> | null = null
   let lastFailedRefreshAt = 0
   let refreshTimer: ReturnType<typeof setTimeout> | null = null
+  /** Session generation — bumped by login/logout to discard stale in-flight refreshes. */
+  let sessionEpoch = 0
 
   function clearTimer() {
     if (refreshTimer) {
@@ -63,15 +65,20 @@ export function createAuthEngine(baseURL: string = API_BASE_URL): AuthEngineApi 
   }
 
   async function doRefresh(): Promise<boolean> {
+    // Snapshot the generation: if logout (or a fresh login) happens while the
+    // request is in flight, its result must not resurrect the old session.
+    const epoch = sessionEpoch
     try {
       await request('/auth/refresh', {
         method: 'POST',
         body: { expiresInMins: SESSION_TTL_MINS }
       })
+      if (epoch !== sessionEpoch) return false
       expiresAt = Date.now() + SESSION_TTL_MINS * 60_000
       scheduleProactiveRefresh()
       return true
     } catch {
+      if (epoch !== sessionEpoch) return false
       expiresAt = 0
       lastFailedRefreshAt = Date.now()
       clearTimer()
@@ -81,6 +88,8 @@ export function createAuthEngine(baseURL: string = API_BASE_URL): AuthEngineApi 
 
   const api: AuthEngineApi = {
     async login(credentials) {
+      // A new session supersedes any in-flight refresh from the previous one.
+      sessionEpoch++
       // Tokens arrive as HttpOnly cookies and are intentionally stripped —
       // only the user profile crosses back to the main thread.
       const response = await request<LoginResponse>('/auth/login', {
@@ -109,6 +118,9 @@ export function createAuthEngine(baseURL: string = API_BASE_URL): AuthEngineApi 
     },
 
     async logout() {
+      // Invalidate any in-flight refresh first — its result must not land
+      // after the session is gone.
+      sessionEpoch++
       clearTimer()
       expiresAt = 0
       try {

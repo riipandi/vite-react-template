@@ -1,11 +1,16 @@
 import { useNavigate } from '@tanstack/react-router'
+import { useSelector } from '@tanstack/react-store'
 import { createContext, useContext, useEffect } from 'react'
-import { clearAuth, setAuthUser } from '#/libraries/auth.store'
-import { useAuth } from '#/libraries/guard/auth-hooks'
-import { ensureSessionLoaded, refreshIfExpiring } from '#/libraries/guard/auth-session'
-import { authWorker } from '#/libraries/guard/auth-worker-client'
 import type { LoginCredentials } from '#/schemas/auth.schema'
 import type { User } from '#/schemas/user.schema'
+import { ensureSessionLoaded, refreshIfExpiring } from './auth-session'
+import { authStore, clearAuth, setAuthUser, type AuthState } from './auth-store'
+import { authWorker } from './auth-worker-client'
+
+/** Subscribe to the session state (selector-based, minimal re-renders). */
+export function useAuth(): AuthState {
+  return useSelector(authStore, (state) => state)
+}
 
 interface AuthContext {
   user: User | null
@@ -16,7 +21,7 @@ interface AuthContext {
   logout: () => void
 }
 
-export const DefaultUserContext: AuthContext = {
+const DefaultAuthContext: AuthContext = {
   user: null,
   loggedIn: false,
   isLoading: false,
@@ -24,7 +29,7 @@ export const DefaultUserContext: AuthContext = {
   logout: () => {}
 }
 
-export const UserContext = createContext(DefaultUserContext)
+const AuthContextReact = createContext(DefaultAuthContext)
 
 /** Refresh when the session expires within this window after the tab refocuses. */
 const REFRESH_ON_VISIBLE_WITHIN_MS = 5 * 60_000
@@ -75,9 +80,9 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     logout: handleLogout
   } satisfies AuthContext
 
-  return <UserContext.Provider value={context}>{children}</UserContext.Provider>
+  return <AuthContextReact.Provider value={context}>{children}</AuthContextReact.Provider>
 }
 
 export function useAuthentication() {
-  return useContext(UserContext)
+  return useContext(AuthContextReact)
 }

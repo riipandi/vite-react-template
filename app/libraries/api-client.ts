@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query'
 import { ofetch } from 'ofetch'
-import { clearAuth } from '#/libraries/auth.store'
 import { API_BASE_URL } from '#/libraries/guard/auth-engine'
+import { clearAuth } from '#/libraries/guard/auth-store'
 import { authWorker } from '#/libraries/guard/auth-worker-client'
 
 export const queryClient = new QueryClient({

@@ -27,6 +27,13 @@ export function authWorker(): AuthWorkerClient {
       const worker = new Worker(new URL('./auth-token.worker.ts', import.meta.url), {
         type: 'module'
       })
+
+      // If the worker dies mid-session (script error, extension interference),
+      // swap in the main-thread engine so later calls still succeed.
+      worker.addEventListener('error', () => {
+        client = createMainThreadEngine()
+      })
+
       client = Comlink.wrap<AuthEngineApi>(worker)
       return client
     } catch {
@@ -34,8 +41,13 @@ export function authWorker(): AuthWorkerClient {
     }
   }
 
-  // The engine methods are already async, so the plain object is structurally
-  // compatible with its Comlink remote proxy type.
-  client = createAuthEngine(API_BASE_URL) as unknown as AuthWorkerClient
-  return client
+  return createMainThreadEngine()
+}
+
+/**
+ * The engine methods are already async, so the plain object is structurally
+ * compatible with its Comlink remote proxy type.
+ */
+function createMainThreadEngine(): AuthWorkerClient {
+  return createAuthEngine(API_BASE_URL) as unknown as AuthWorkerClient
 }

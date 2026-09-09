@@ -3,8 +3,8 @@ import * as stylex from '@stylexjs/stylex'
 import { Link, createFileRoute, redirect } from '@tanstack/react-router'
 import { Text } from '#/components/extra/text'
 import { ThemeSwitcher } from '#/components/theme'
-import { isAuthenticated } from '#/libraries/auth.store'
 import { ensureSessionLoaded } from '#/libraries/guard/auth-session'
+import { isAuthenticated } from '#/libraries/guard/auth-store'
 import { homeStyles as s } from '#/styles/pages/home.stylex'
 
 export const Route = createFileRoute('/')({

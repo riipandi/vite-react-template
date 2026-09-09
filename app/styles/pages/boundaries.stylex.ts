@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
 import { fontSize, fontWeight } from '#/styles/core/tokens.stylex'
-import { radius, unit } from '#/styles/core/tokens.stylex'
+import { duration, easing, radius, unit } from '#/styles/core/tokens.stylex'
 
 // Mirrors the token viewports (660/900) from `#/styles/core/tokens.stylex` as
 // mobile-first `min-width` queries. @stylexjs/babel-plugin only inlines
@@ -56,6 +56,10 @@ export const styles = stylex.create({
     justifyContent: 'center'
   },
   backLink: {
+    color: {
+      default: colors.foregroundPrimary,
+      ':hover': `color-mix(in srgb, ${colors.foregroundPrimary} 76%, ${colors.foregroundNeutral})`
+    },
     display: 'inline-flex',
     alignItems: 'center',
     gap: unit.x2,
@@ -66,13 +70,9 @@ export const styles = stylex.create({
     paddingBottom: unit.x2,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.semibold,
-    color: colors.foregroundPrimary,
-    textDecoration: 'none',
-    transitionProperty: 'all',
-    transitionDuration: '150ms',
-    ':hover': {
-      textDecoration: 'underline'
-    },
+    transitionDuration: duration.fast,
+    transitionProperty: 'color',
+    transitionTimingFunction: easing.standard,
     ':focus-visible': {
       outlineWidth: 1,
       outlineStyle: 'solid',

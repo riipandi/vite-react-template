@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
 import { fontSize, fontWeight } from '#/styles/core/tokens.stylex'
-import { unit, radius } from '#/styles/core/tokens.stylex'
+import { duration, easing, radius, stroke, unit } from '#/styles/core/tokens.stylex'
 
 export const styles = stylex.create({
   page: {
@@ -53,10 +53,19 @@ export const styles = stylex.create({
     width: '100%'
   },
   forgotLink: {
-    color: colors.foregroundPrimary,
+    color: {
+      default: colors.foregroundPrimary,
+      ':hover': `color-mix(in srgb, ${colors.foregroundPrimary} 76%, ${colors.foregroundNeutral})`
+    },
     fontSize: fontSize.body2,
-    textDecoration: 'none',
-    ':hover': { textDecoration: 'underline' }
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
+    },
+    outlineOffset: stroke.ring2,
+    transitionDuration: duration.fast,
+    transitionProperty: 'color',
+    transitionTimingFunction: easing.standard
   },
   rememberField: {
     alignItems: 'center',
@@ -77,10 +86,19 @@ export const styles = stylex.create({
     gap: unit.x3
   },
   backLink: {
-    color: colors.foregroundPrimary,
+    color: {
+      default: colors.foregroundPrimary,
+      ':hover': `color-mix(in srgb, ${colors.foregroundPrimary} 76%, ${colors.foregroundNeutral})`
+    },
     fontWeight: fontWeight.medium,
-    textDecoration: 'none',
-    ':hover': { textDecoration: 'underline' }
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
+    },
+    outlineOffset: stroke.ring2,
+    transitionDuration: duration.fast,
+    transitionProperty: 'color',
+    transitionTimingFunction: easing.standard
   }
 })
 

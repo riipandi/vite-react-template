@@ -161,7 +161,7 @@ const styles = stylex.create({
     borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.ring1,
-    boxShadow: shadow.raised,
+    boxShadow: shadow.overlay,
     boxSizing: 'border-box',
     color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
@@ -177,7 +177,7 @@ const styles = stylex.create({
     borderRadius: radius.large,
     borderStyle: 'solid',
     borderWidth: stroke.ring1,
-    boxShadow: shadow.raised,
+    boxShadow: shadow.overlay,
     boxSizing: 'border-box',
     color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
@@ -242,7 +242,6 @@ const styles = stylex.create({
     borderStyle: 'dashed'
   },
   ghostOverlay: {
-    boxShadow: 'none',
     opacity: 1
   },
   ghostBox: {

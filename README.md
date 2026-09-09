@@ -42,6 +42,10 @@ Browse the component library live in [Storybook](https://reactivite-storybook.ne
 - [x] [TanStack Form](https://tanstack.com/form) - Headless, type-safe form state management.
 - [x] [TanStack Query](https://tanstack.com/query) - Powerful asynchronous state management.
 - [x] [TanStack Store](https://tanstack.com/store) - Lightweight, type-safe state management.
+- [x] [TanStack Table](https://tanstack.com/table) - A powerful engine for building Data Grids.
+- [x] [TanStack Virtual](https://tanstack.com/virtual) - A headless UI utility for virtualizing long lists of elements.
+- [x] [TanStack Hotkeys](https://tanstack.com/hotkeys) - A type-safe, framework-agnostic library for handling keyboard shortcuts.
+- [x] [TanStack Chart](https://tanstack.com/charts) - A typed, tree-shakable chart grammar for SVG and Canvas.
 - [x] [React Testing Library](https://testing-library.com/) - Light-weight solution for testing React components.
 - [x] [Vitest](https://vitest.dev/) - Blazing Fast Unit Test Framework.
 - [x] [Oxlint](https://oxc.rs/docs/guide/usage/linter) - High-performance JavaScript linter.
@@ -119,7 +123,7 @@ to contribute something to the open-source community. Your work means the world!
 
 - [MadeUI](https://madeui.com/) — the Base UI + StyleX components in this template are based on its components.
 - [Reshaped](https://www.reshaped.so/) — the design system in this template is built on its design system.
-- [ReUI](https://reui.io) — the [Data Grid](https://reui.io/data-grid) component is a StyleX port of ReUI (originally built with Tailwind CSS).
+- [ReUI](https://reui.io) — the Data Grid, Input Phone, Sortable, and Kanban components are ports of ReUI.
 
 ## License
 

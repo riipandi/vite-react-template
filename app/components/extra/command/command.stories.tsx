@@ -1,22 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
+import { detectPlatform, formatForDisplay, useHotkey } from '@tanstack/react-hotkeys'
 import * as React from 'react'
 import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Kbd, KbdGroup } from '#/components/extra/kbd'
 import { container } from '#/styles/core/tokens.stylex'
-import {
-  Command,
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut
-} from './command.component'
+import { Command, CommandDialog, CommandEmpty } from './command.component'
+import { CommandList, CommandSeparator, CommandShortcut } from './command.component'
+import { CommandGroup, CommandInput, CommandItem } from './command.component'
 
 const meta = {
   title: 'Extra Components/Command',
@@ -214,13 +207,15 @@ export const DialogHotkey: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false)
 
+    // Toggle the dialog with Mod+J — Cmd on macOS, Ctrl on Windows/Linux.
+    useHotkey('Mod+J', () => setOpen((prev) => !prev))
+
     return (
       <>
         <Button variant='outline' onClick={() => setOpen(true)}>
           Open the Marauder's Map
           <KbdGroup>
-            <Kbd>⌘</Kbd>
-            <Kbd>K</Kbd>
+            <Kbd>{formatForDisplay('Mod+J')}</Kbd>
           </KbdGroup>
         </Button>
         <CommandDialog open={open} onOpenChange={setOpen}>
@@ -241,6 +236,13 @@ export const DialogHotkey: Story = {
   },
   play: async ({ canvas }) => {
     const body = within(document.body)
+    const modKey = detectPlatform() === 'mac' ? 'Meta' : 'Control'
+
+    // The Mod+J hotkey toggles the dialog.
+    await userEvent.keyboard(`{${modKey}>}j{/${modKey}}`)
+    await body.findByRole('dialog')
+    await userEvent.keyboard(`{${modKey}>}j{/${modKey}}`)
+    await waitFor(() => expect(body.queryByRole('dialog')).toBeNull())
 
     // Opening via the button mounts the command dialog.
     await userEvent.click(canvas.getByRole('button', { name: /marauder's map/i }))

@@ -1,9 +1,9 @@
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { createFileRoute, Outlet, redirect, useRouterState } from '@tanstack/react-router'
+import { createFileRoute, Outlet, redirect, useRouter } from '@tanstack/react-router'
 import { MenuIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { useSidebarOpen, useSidebarCollapsed } from '#/libraries/app.store'
+import { closeSidebar, useSidebarOpen, useSidebarCollapsed } from '#/libraries/app.store'
 import { toggleSidebar, toggleSidebarCollapsed } from '#/libraries/app.store'
 import { isAuthenticated } from '#/libraries/auth.store'
 import { styles } from '#/styles/element/root-layout.stylex'
@@ -22,9 +22,9 @@ export const Route = createFileRoute('/(app)')({
 })
 
 function RouteComponent() {
+  const router = useRouter()
   const sidebarOpen = useSidebarOpen()
   const collapsed = useSidebarCollapsed()
-  const pathname = useRouterState({ select: (s) => s.location.pathname })
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 659px)').matches)
 
   useEffect(() => {
@@ -36,11 +36,9 @@ function RouteComponent() {
     return () => mq.removeEventListener('change', handler)
   }, [])
 
-  // Close sidebar on route change (mobile)
-  useEffect(() => {
-    if (sidebarOpen) toggleSidebar()
-    // oxlint-disable-next-line react-hooks/exhaustive-deps -- sidebarOpen read is intentional; adding it re-triggers the effect
-  }, [pathname])
+  // Close sidebar on route change (mobile). `onResolved` fires after every
+  // navigation; closing an already-closed sidebar is a no-op state write.
+  useEffect(() => router.subscribe('onResolved', closeSidebar), [router])
 
   return (
     <main {...stylex.props(styles.layout)}>

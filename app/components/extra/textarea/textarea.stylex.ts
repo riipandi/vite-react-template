@@ -34,5 +34,10 @@ export const textareaStyles = stylex.create({
     transitionProperty: 'border-color, outline-color',
     width: '100%',
     '::placeholder': { color: colors.foregroundNeutralFaded }
+  },
+  autoResize: {
+    height: 'auto',
+    overflow: 'hidden',
+    resize: 'none'
   }
 })

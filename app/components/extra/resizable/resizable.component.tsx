@@ -42,16 +42,22 @@ export function ResizablePanelGroup({
 }
 
 /**
- * A resizable panel. Styles are applied to an inner element, so they never
- * interfere with the flex layout managed by the parent group. Content that
- * exceeds the panel size is clipped by default; pass `overflow` via the style
- * prop to opt into scrolling.
+ * A resizable panel. Consumer styles and children are rendered on an inner
+ * element of our own, beneath the scroll container the library creates — so
+ * padding never prevents a panel from shrinking to zero, and content is fully
+ * hidden when the panel is collapsed. Pass `overflow` via the style prop to
+ * opt into scrolling within the panel.
  */
 export function ResizablePanel({
+  children,
   style,
   ...props
 }: Omit<React.ComponentProps<typeof PanelPrimitive>, 'className' | 'style'> & StyleProp) {
-  return <PanelPrimitive {...props} {...stylex.props(s.panel, style)} />
+  return (
+    <PanelPrimitive {...props}>
+      <div {...stylex.props(s.panel, style)}>{children}</div>
+    </PanelPrimitive>
+  )
 }
 
 export function ResizableHandle({

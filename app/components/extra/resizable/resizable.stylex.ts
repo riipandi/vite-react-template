@@ -17,6 +17,7 @@ export const resizableStyles = stylex.create({
   },
   panel: {
     boxSizing: 'border-box',
+    height: '100%',
     minHeight: 0,
     minWidth: 0,
     overflow: 'hidden'

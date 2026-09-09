@@ -8,6 +8,7 @@ import { developmentPlugins } from './vite.plugins.ts'
 
 const isTestOrCI = process.env.CI || process.env.VITEST
 const isStorybook = process.env.STORYBOOK === 'true'
+const isVitest = process.env.VITEST
 
 const apiProxy = {
   '/api': {
@@ -23,7 +24,9 @@ export default defineConfig({
       useCSSLayers: true,
       aliases: { '#/*': resolve('./app/*') }
     }),
-    !isTestOrCI && !isStorybook && devtools(),
+    // Run on every non-test build: during build it strips @tanstack/*-devtools
+    // imports from the bundle (removeDevtoolsOnBuild).
+    !isVitest && !isStorybook && devtools(),
     !isTestOrCI &&
       !isStorybook &&
       tanstackRouter({

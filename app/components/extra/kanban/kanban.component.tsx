@@ -25,6 +25,7 @@ import {
   pointerWithin,
   rectIntersection,
   TouchSensor,
+  useDndContext,
   useSensor,
   useSensors,
   type CollisionDetection,
@@ -816,6 +817,7 @@ export interface KanbanOverlayProps {
 
 function KanbanOverlay({ children, style, ...props }: KanbanOverlayProps) {
   const { activeId, isColumn, modifiers } = useContext(KanbanContext)
+  const { activeNodeRect } = useDndContext()
   const mounted = useSyncExternalStore(subscribeToNothing, getIsMounted, getIsMountedOnServer)
 
   const variant = activeId ? (isColumn(activeId) ? 'column' : 'item') : 'item'
@@ -828,10 +830,20 @@ function KanbanOverlay({ children, style, ...props }: KanbanOverlayProps) {
 
   if (!mounted) return null
 
+  // Pin the ghost to the dragged element's measured size — DragOverlay would
+  // otherwise size to its content, so the ghost does not match the column or
+  // item being dragged.
+  const ghostProps = stylex.props(kanbanStyles.overlayContent, style)
+  const ghostSize = activeNodeRect
+    ? { height: activeNodeRect.height, width: activeNodeRect.width }
+    : undefined
+
   return createPortal(
     <DragOverlay dropAnimation={dropAnimationConfig} modifiers={modifiers} {...props}>
       <IsOverlayContext.Provider value={true}>
-        <div {...stylex.props(kanbanStyles.overlayContent, style)}>{content}</div>
+        <div {...ghostProps} style={{ ...ghostProps.style, ...ghostSize } as CSSProperties}>
+          {content}
+        </div>
       </IsOverlayContext.Provider>
     </DragOverlay>,
     document.body

@@ -162,11 +162,14 @@ const styles = stylex.create({
     borderStyle: 'solid',
     borderWidth: stroke.ring1,
     boxShadow: shadow.raised,
+    boxSizing: 'border-box',
     color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
+    height: '100%',
     lineHeight: fontLineHeight.body2,
-    padding: unit.x3
+    padding: unit.x3,
+    width: '100%'
   },
   overlayColumnCard: {
     backgroundColor: colors.backgroundElevationBase,
@@ -175,13 +178,14 @@ const styles = stylex.create({
     borderStyle: 'solid',
     borderWidth: stroke.ring1,
     boxShadow: shadow.raised,
+    boxSizing: 'border-box',
     color: colors.foregroundNeutral,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
+    height: '100%',
     lineHeight: fontLineHeight.body2,
-    maxWidth: container.xxlarge,
-    minWidth: container.small,
-    padding: unit.x4
+    padding: unit.x4,
+    width: '100%'
   },
   overlayTitle: {
     color: colors.foregroundNeutral,
@@ -236,6 +240,28 @@ const styles = stylex.create({
   },
   overlayDashed: {
     borderStyle: 'dashed'
+  },
+  ghostOverlay: {
+    boxShadow: 'none',
+    opacity: 1
+  },
+  ghostBox: {
+    backgroundColor: colors.backgroundNeutralHighlightedFaded,
+    boxSizing: 'border-box',
+    height: '100%',
+    width: '100%'
+  },
+  ghostColumn: {
+    borderColor: colors.borderNeutral,
+    borderRadius: radius.large,
+    borderStyle: 'solid',
+    borderWidth: stroke.ring1
+  },
+  ghostItem: {
+    borderColor: colors.borderNeutral,
+    borderRadius: radius.medium,
+    borderStyle: 'solid',
+    borderWidth: stroke.ring1
   }
 })
 
@@ -416,20 +442,15 @@ export const PlaceholderOverlay: Story = {
               </KanbanColumn>
             ))}
           </KanbanBoard>
-          <KanbanOverlay>
-            {({ value: activeId, variant }) => {
-              if (variant === 'column') {
-                const column = columns.find((col) => col.id === activeId)
-                return column ? columnOverlayPlaceholder(column) : null
-              }
-              const task = columns.flatMap((col) => col.tasks).find((t) => t.id === activeId)
-              if (!task) return null
-              return (
-                <div {...stylex.props(styles.overlayCard)}>
-                  <span {...stylex.props(styles.overlayTitle)}>{task.title}</span>
-                </div>
-              )
-            }}
+          <KanbanOverlay style={styles.ghostOverlay}>
+            {({ variant }) => (
+              <div
+                {...stylex.props(
+                  styles.ghostBox,
+                  variant === 'column' ? styles.ghostColumn : styles.ghostItem
+                )}
+              />
+            )}
           </KanbanOverlay>
         </Kanban>
       </div>

@@ -1,6 +1,7 @@
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Link, createFileRoute, redirect } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
+import { Suspense, use } from 'react'
 import { Text } from '#/components/extra/text'
 import { ThemeSwitcher } from '#/components/theme'
 import { ensureSessionLoaded } from '#/libraries/guard/auth-session'
@@ -9,12 +10,9 @@ import { homeStyles as s } from '#/styles/pages/home.stylex'
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
-  beforeLoad: async () => {
-    await ensureSessionLoaded()
-    if (isAuthenticated()) {
-      throw redirect({ to: '/overview' })
-    }
-  },
+  loader: () => ({
+    sessionReady: ensureSessionLoaded()
+  }),
   staticData: {
     pageTitle: 'Home'
   }
@@ -72,17 +70,17 @@ function RouteComponent() {
             you need to build from scratch.
           </Text>
           <div {...stylex.props(s.heroActions)}>
-            <Link to='/overview' {...stylex.props(s.pill, s.pillPrimary)}>
-              Open Dashboard
-            </Link>
-            <a
-              href='https://github.com/riipandi/vite-react-template'
-              target='_blank'
-              rel='noreferrer'
-              {...stylex.props(s.pill, s.pillNeutral)}
-            >
-              Get Source Code
-            </a>
+            <Suspense fallback={<ActionButtonFallback />}>
+              <PrimaryAction />
+              <a
+                href='https://github.com/riipandi/vite-react-template'
+                target='_blank'
+                rel='noreferrer'
+                {...stylex.props(s.pill, s.pillNeutral)}
+              >
+                Get Source Code
+              </a>
+            </Suspense>
           </div>
         </section>
 
@@ -143,5 +141,30 @@ function RouteComponent() {
         </div>
       </footer>
     </div>
+  )
+}
+
+function ActionButtonFallback() {
+  return (
+    <span aria-hidden {...stylex.props(s.pill, s.pillSkeleton)}>
+      Open Dashboard
+    </span>
+  )
+}
+
+function PrimaryAction() {
+  // Deferred by the loader (unawaited promise) — suspends here only.
+  const { sessionReady } = Route.useLoaderData()
+  use(sessionReady)
+
+  // The bootstrap settled — the auth store now holds the final state.
+  return isAuthenticated() ? (
+    <Link to='/overview' {...stylex.props(s.pill, s.pillPrimary)}>
+      Open Dashboard
+    </Link>
+  ) : (
+    <Link to='/login' {...stylex.props(s.pill, s.pillPrimary)}>
+      Demo sign in
+    </Link>
   )
 }

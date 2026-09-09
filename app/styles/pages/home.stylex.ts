@@ -3,10 +3,9 @@ import { colors, shadow } from '#/styles/core/colors.stylex'
 import { fontFamily, fontSize, fontWeight } from '#/styles/core/tokens.stylex'
 import { unit, radius, duration, easing } from '#/styles/core/tokens.stylex'
 
-// Mirror of `breakpoints` from `#/styles/core/tokens.stylex` (medium/large/
-// xlarge). @stylexjs/babel-plugin 0.19 only inlines `defineConsts` media keys
-// declared in the SAME file, so these cannot be imported cross-file yet —
-// keep the values in sync.
+// Mirror of `breakpoints` from `#/styles/core/tokens.stylex` (medium/large/xlarge).
+// @stylexjs/babel-plugin 0.19 only inlines `defineConsts` media keys declared in
+// the SAME file, so these cannot be imported cross-file yet — keep the values in sync.
 export const breakpoints = stylex.defineConsts({
   medium: '@media (min-width: 660px) and (max-width: 899px)',
   large: '@media (min-width: 900px) and (max-width: 1279px)',
@@ -14,8 +13,13 @@ export const breakpoints = stylex.defineConsts({
 })
 
 const entrance = stylex.keyframes({
-  from: { opacity: 0, transform: 'translateY(12px)' },
-  to: { opacity: 1, transform: 'translateY(0)' }
+  from: { transform: 'translateY(12px)' },
+  to: { transform: 'translateY(0)' }
+})
+
+const pulse = stylex.keyframes({
+  '0%, 100%': { opacity: 1 },
+  '50%': { opacity: 0.55 }
 })
 
 export const homeStyles = stylex.create({
@@ -167,8 +171,19 @@ export const homeStyles = stylex.create({
       transform: 'translateY(-2px)'
     }
   },
-
-  // Feature cards.
+  pillSkeleton: {
+    animationDelay: '0s',
+    animationDuration: '1.4s',
+    animationIterationCount: 'infinite',
+    animationName: pulse,
+    animationTimingFunction: 'ease-in-out',
+    backgroundColor: colors.backgroundPrimaryFaded,
+    borderColor: 'transparent',
+    color: 'transparent',
+    '@media (prefers-reduced-motion: reduce)': {
+      animationName: null
+    }
+  },
   features: {
     display: 'grid',
     gap: unit.x4,

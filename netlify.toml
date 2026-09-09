@@ -1,5 +1,5 @@
 [build.environment]
-NODE_VERSION = "24.20.0"
+NODE_VERSION = "24.21.0"
 NPM_VERSION = "11.19.0"
 PNPM_VERSION = "12.3.4"
 TZ = "Asia/Jakarta"

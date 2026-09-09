@@ -173,7 +173,7 @@ export const Scrollable: Story = {
       <SelectTrigger>
         <SelectValue placeholder='Select a city' />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent alignItemWithTrigger>
         {timezones.map(({ label, value }) => (
           <SelectItem key={value} value={value}>
             {label}

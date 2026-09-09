@@ -88,10 +88,6 @@ export interface SelectContentProps
     >,
     StyleProp {}
 
-// alignItemWithTrigger defaults on (the popup
-// overlays the trigger with the selected item aligned to it; the popup itself
-// scrolls, with scroll arrows). Pass alignItemWithTrigger={false} for a
-// plain anchored dropdown.
 export function SelectContent({
   style,
   children,
@@ -99,7 +95,7 @@ export function SelectContent({
   sideOffset = 4,
   align = 'center',
   alignOffset = 0,
-  alignItemWithTrigger = true,
+  alignItemWithTrigger = false,
   ...props
 }: SelectContentProps) {
   return (

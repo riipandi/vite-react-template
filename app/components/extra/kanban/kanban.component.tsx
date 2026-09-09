@@ -53,8 +53,6 @@ import {
   useSyncExternalStore
 } from 'react'
 import { createPortal } from 'react-dom'
-import { useIsMobile } from '#/hooks/use-media-query'
-import { unit } from '#/styles/core/tokens.stylex'
 import { kanbanStyles } from './kanban.stylex'
 
 // ---------------------------------------------------------------------------
@@ -418,10 +416,13 @@ function Kanban<T>({
         dragOriginRef.current = null
         return
       }
-      if (isColumn(active.id) && isColumn(over.id)) {
+      if (isColumn(active.id)) {
+        // The drop target may be an item inside another column — resolve it
+        // back to its container column so reordering works over items too.
+        const overColumnId = isColumn(over.id) ? (over.id as string) : findContainer(over.id)
         const activeIndex = columnIds.indexOf(active.id as string)
-        const overIndex = columnIds.indexOf(over.id as string)
-        if (activeIndex !== overIndex) {
+        const overIndex = overColumnId ? columnIds.indexOf(overColumnId) : -1
+        if (activeIndex !== -1 && overIndex !== -1 && activeIndex !== overIndex) {
           const newOrder = arrayMove(Object.keys(columns), activeIndex, overIndex)
           const newColumns: Record<string, T[]> = {}
           newOrder.forEach((key) => {
@@ -433,10 +434,6 @@ function Kanban<T>({
           setColumns(newColumns)
           commitChange(newColumns, event, 'column')
         }
-        dragOriginRef.current = null
-        return
-      }
-      if (isColumn(active.id)) {
         dragOriginRef.current = null
         return
       }
@@ -537,17 +534,6 @@ export type KanbanBoardProps = useRender.ComponentProps<'div'> & {
 
 function KanbanBoard({ style, render, ...props }: KanbanBoardProps) {
   const { columnIds } = useContext(KanbanContext)
-  const isMobile = useIsMobile()
-
-  const boardStyle = [
-    kanbanStyles.board,
-    isMobile &&
-      ({
-        gridAutoFlow: 'row',
-        gridTemplateColumns: '1fr'
-      } as stylex.StyleXStyles),
-    style
-  ]
 
   return (
     <SortableContext items={columnIds} strategy={rectSortingStrategy}>
@@ -557,7 +543,7 @@ function KanbanBoard({ style, render, ...props }: KanbanBoardProps) {
         props: mergeProps<'div'>(
           {
             // @ts-ignore - stylex.props return type is not recognized by TS in this context
-            ...stylex.props(stylex.defaultMarker(), ...boardStyle),
+            ...stylex.props(stylex.defaultMarker(), kanbanStyles.board, style),
             'data-slot': 'kanban-board',
             children: props.children
           } as React.ComponentPropsWithRef<'div'>,
@@ -579,14 +565,14 @@ export interface KanbanColumnProps extends DivRenderProps {
 
 function KanbanColumn({ value, style, render, disabled, ...props }: KanbanColumnProps) {
   const isOverlay = useContext(IsOverlayContext)
-  const isMobile = useIsMobile()
   const {
     setNodeRef,
     transform,
     transition,
     attributes,
     listeners,
-    isDragging: isSortableDragging
+    isDragging: isSortableDragging,
+    isOver
   } = useSortable({
     id: value,
     disabled: disabled || isOverlay,
@@ -600,14 +586,6 @@ function KanbanColumn({ value, style, render, disabled, ...props }: KanbanColumn
     transition,
     transform: CSS.Transform.toString(transform)
   }
-
-  const columnStyle = [
-    kanbanStyles.column,
-    isSortableDragging && kanbanStyles.columnDragging,
-    disabled && kanbanStyles.columnDisabled,
-    isMobile && { minWidth: 0, maxWidth: '100%' },
-    style
-  ]
 
   return (
     <ColumnContext.Provider
@@ -628,7 +606,14 @@ function KanbanColumn({ value, style, render, disabled, ...props }: KanbanColumn
         props: mergeProps<'div'>(
           {
             // @ts-ignore - stylex.props return type is not recognized by TS in this context
-            ...stylex.props(stylex.defaultMarker(), ...columnStyle),
+            ...stylex.props(
+              stylex.defaultMarker(),
+              kanbanStyles.column,
+              !isOverlay && isSortableDragging && kanbanStyles.columnDragging,
+              !isOverlay && isOver && !isSortableDragging && kanbanStyles.columnOver,
+              disabled && kanbanStyles.columnDisabled,
+              style
+            ),
             'data-slot': 'kanban-column',
             'data-value': value,
             'data-dragging': isOverlay ? true : isSortableDragging,
@@ -665,6 +650,7 @@ function KanbanColumnHandle({ style, render, cursor = true, ...props }: KanbanCo
           kanbanStyles.columnHandle,
           cursor &&
             (isDragging ? kanbanStyles.columnHandleDragging : kanbanStyles.columnHandleGrab),
+          disabled && kanbanStyles.columnHandleDisabled,
           style
         ),
         'data-slot': 'kanban-column-handle',
@@ -696,7 +682,8 @@ function KanbanItem({ value, style, render, disabled, ...props }: KanbanItemProp
     transition,
     attributes,
     listeners,
-    isDragging: isSortableDragging
+    isDragging: isSortableDragging,
+    isOver
   } = useSortable({
     id: value,
     disabled: disabled || isOverlay,
@@ -728,7 +715,8 @@ function KanbanItem({ value, style, render, disabled, ...props }: KanbanItemProp
             ...stylex.props(
               stylex.defaultMarker(),
               kanbanStyles.item,
-              isSortableDragging && kanbanStyles.itemDragging,
+              !isOverlay && isSortableDragging && kanbanStyles.itemDragging,
+              !isOverlay && isOver && !isSortableDragging && kanbanStyles.itemOver,
               disabled && kanbanStyles.itemDisabled,
               style
             ),
@@ -767,6 +755,7 @@ function KanbanItemHandle({ style, render, cursor = true, ...props }: KanbanItem
           stylex.defaultMarker(),
           kanbanStyles.itemHandle,
           cursor && (isDragging ? kanbanStyles.itemHandleDragging : kanbanStyles.itemHandleGrab),
+          disabled && kanbanStyles.itemHandleDisabled,
           style
         ),
         'data-slot': 'kanban-item-handle',
@@ -790,7 +779,6 @@ export interface KanbanColumnContentProps extends DivRenderProps {
 
 function KanbanColumnContent({ value, style, render, ...props }: KanbanColumnContentProps) {
   const { columns, getItemId } = useContext(KanbanContext)
-  const isMobile = useIsMobile()
 
   const itemIds = useMemo(() => {
     const items = columns[value]
@@ -803,8 +791,6 @@ function KanbanColumnContent({ value, style, render, ...props }: KanbanColumnCon
     return items.map(getItemId)
   }, [columns, getItemId, value])
 
-  const contentStyle = [kanbanStyles.columnContent, isMobile && { gap: unit.x1 }, style]
-
   return (
     <SortableContext items={itemIds} strategy={verticalListSortingStrategy}>
       {useRender({
@@ -813,7 +799,7 @@ function KanbanColumnContent({ value, style, render, ...props }: KanbanColumnCon
         props: mergeProps<'div'>(
           {
             // @ts-ignore - stylex.props return type is not recognized by TS in this context
-            ...stylex.props(stylex.defaultMarker(), ...contentStyle),
+            ...stylex.props(stylex.defaultMarker(), kanbanStyles.columnContent, style),
             'data-slot': 'kanban-column-content',
             children: props.children
           } as React.ComponentPropsWithRef<'div'>,

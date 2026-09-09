@@ -1,11 +1,21 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors, shadow } from '#/styles/core/colors.stylex'
-import { easing, stroke, unit, zIndex } from '#/styles/core/tokens.stylex'
-import { container, duration, radius } from '#/styles/core/tokens.stylex'
+import {
+  container,
+  duration,
+  easing,
+  radius,
+  stroke,
+  unit,
+  zIndex
+} from '#/styles/core/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
 
 /**
  * Styles for the Kanban primitive set (dnd-kit based).
+ *
+ * Mirrors `sortable.stylex.ts` for shared drag affordances (handles, drop
+ * feedback, overlay) so both primitives feel identical.
  */
 export const kanbanStyles = stylex.create({
   root: {
@@ -27,8 +37,8 @@ export const kanbanStyles = stylex.create({
   },
   column: {
     backgroundColor: colors.backgroundElevationBase,
-    borderRadius: radius.large,
     borderColor: colors.borderNeutralFaded,
+    borderRadius: radius.large,
     borderStyle: 'solid',
     borderWidth: stroke.ring1,
     boxShadow: shadow.outline,
@@ -39,7 +49,7 @@ export const kanbanStyles = stylex.create({
     fontSize: fontSize.body2,
     gap: unit.x2,
     lineHeight: fontLineHeight.body2,
-    maxWidth: container.xlarge,
+    maxWidth: container.xxlarge,
     minWidth: container.small,
     outline: {
       default: 'none',
@@ -48,12 +58,15 @@ export const kanbanStyles = stylex.create({
     outlineOffset: stroke.ring2,
     paddingBlock: unit.x3,
     paddingInline: unit.x3,
-    transitionDuration: duration.medium,
+    touchAction: 'manipulation',
+    transitionDuration: {
+      default: duration.medium,
+      '@media (prefers-reduced-motion: reduce)': '0ms'
+    },
     transitionProperty: 'background-color, border-color, box-shadow, transform, opacity',
     transitionTimingFunction: easing.decelerate,
     transform: 'translateY(0)',
     '@media (max-width: 659px)': {
-      fontSize: fontSize.body2,
       maxWidth: '100%',
       minWidth: 0,
       paddingBlock: unit.x2,
@@ -83,16 +96,24 @@ export const kanbanStyles = stylex.create({
     flexShrink: 0,
     height: unit.x6,
     justifyContent: 'center',
-    opacity: 0,
+    opacity: {
+      default: 0.8,
+      ':hover': 1,
+      ':active': 1,
+      '@media (pointer: coarse)': 1
+    },
     outline: 'none',
     padding: unit.x1,
-    transitionDuration: duration.medium,
+    touchAction: 'none',
+    transitionDuration: {
+      default: duration.medium,
+      '@media (prefers-reduced-motion: reduce)': '0ms'
+    },
     transitionProperty: 'color, opacity, transform',
     transitionTimingFunction: easing.decelerate,
     width: unit.x6,
     transform: 'scale(1)',
     ':hover': {
-      opacity: 1,
       transform: 'scale(1.05)'
     },
     ':active': {
@@ -107,12 +128,32 @@ export const kanbanStyles = stylex.create({
     cursor: 'grab'
   },
   columnHandleDragging: {
-    cursor: 'grabbing'
+    color: colors.foregroundPrimary,
+    cursor: 'grabbing',
+    opacity: 1,
+    transform: 'scale(1.1)'
+  },
+  columnHandleDisabled: {
+    color: colors.foregroundDisabled,
+    cursor: 'not-allowed',
+    opacity: 0.5,
+    transform: 'scale(1)'
+  },
+  columnContent: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    gap: unit.x2,
+    minHeight: unit.x12,
+    overflowY: 'auto',
+    '@media (max-width: 659px)': {
+      gap: unit.x1
+    }
   },
   item: {
     backgroundColor: colors.backgroundPage,
-    borderRadius: radius.medium,
     borderColor: colors.borderNeutralFaded,
+    borderRadius: radius.medium,
     borderStyle: 'solid',
     borderWidth: stroke.ring1,
     color: colors.foregroundNeutral,
@@ -126,7 +167,11 @@ export const kanbanStyles = stylex.create({
     outlineOffset: stroke.ring2,
     paddingBlock: unit.x3,
     paddingInline: unit.x3,
-    transitionDuration: duration.medium,
+    touchAction: 'manipulation',
+    transitionDuration: {
+      default: duration.medium,
+      '@media (prefers-reduced-motion: reduce)': '0ms'
+    },
     transitionProperty: 'background-color, border-color, box-shadow, transform, opacity',
     transitionTimingFunction: easing.decelerate,
     transform: 'translateY(0)',
@@ -149,6 +194,10 @@ export const kanbanStyles = stylex.create({
     opacity: 0.5,
     zIndex: zIndex.absolute
   },
+  itemOver: {
+    backgroundColor: colors.backgroundPrimaryFaded,
+    borderColor: colors.borderPrimary
+  },
   itemDisabled: {
     opacity: 0.5
   },
@@ -168,9 +217,19 @@ export const kanbanStyles = stylex.create({
     flexShrink: 0,
     height: unit.x6,
     justifyContent: 'center',
+    opacity: {
+      default: 0.8,
+      ':hover': 1,
+      ':active': 1,
+      '@media (pointer: coarse)': 1
+    },
     outline: 'none',
     padding: unit.x1,
-    transitionDuration: duration.medium,
+    touchAction: 'none',
+    transitionDuration: {
+      default: duration.medium,
+      '@media (prefers-reduced-motion: reduce)': '0ms'
+    },
     transitionProperty: 'color, opacity, transform',
     transitionTimingFunction: easing.decelerate,
     width: unit.x6,
@@ -190,31 +249,28 @@ export const kanbanStyles = stylex.create({
     cursor: 'grab'
   },
   itemHandleDragging: {
-    cursor: 'grabbing'
+    color: colors.foregroundPrimary,
+    cursor: 'grabbing',
+    opacity: 1,
+    transform: 'scale(1.1)'
   },
-  columnContent: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    gap: unit.x2,
-    minHeight: 0,
-    overflowY: 'auto',
-    '@media (max-width: 659px)': {
-      gap: unit.x1
-    }
+  itemHandleDisabled: {
+    color: colors.foregroundDisabled,
+    cursor: 'not-allowed',
+    opacity: 0.5,
+    transform: 'scale(1)'
   },
   overlayContent: {
     boxShadow: shadow.raised,
     cursor: 'grabbing',
     opacity: 0.85,
     pointerEvents: 'none',
-    transitionDuration: duration.medium,
+    transitionDuration: {
+      default: duration.medium,
+      '@media (prefers-reduced-motion: reduce)': '0ms'
+    },
     transitionProperty: 'transform, box-shadow',
     transitionTimingFunction: easing.decelerate,
-    transform: 'scale(1.02)',
-    '@media (max-width: 659px)': {
-      opacity: 0.9,
-      transform: 'scale(1.01)'
-    }
+    transform: 'scale(1.02)'
   }
 })

@@ -15,8 +15,8 @@ import {
   KanbanOverlay
 } from '#/components/extra/kanban'
 import { colors, shadow } from '#/styles/core/colors.stylex'
-import { radius, stroke, unit } from '#/styles/core/tokens.stylex'
-import { fontSize, fontLineHeight, fontWeight } from '#/styles/core/tokens.stylex'
+import { container, radius, stroke, unit } from '#/styles/core/tokens.stylex'
+import { fontFamily, fontSize, fontLineHeight, fontWeight } from '#/styles/core/tokens.stylex'
 
 const meta = {
   title: 'Extra Components/Kanban',
@@ -39,53 +39,103 @@ const styles = stylex.create({
     paddingBlock: unit.x6,
     paddingInline: unit.x5
   },
-  columnHeader: {
+  fillWidth: {
+    width: '100%'
+  },
+  boardNarrow: {
+    maxWidth: container.xlarge,
+    width: '100%'
+  },
+  boardTwoColumns: {
+    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
+  },
+  toolbar: {
     alignItems: 'center',
     display: 'flex',
-    gap: unit.x2,
-    marginBlockEnd: unit.x2,
-    paddingBlockEnd: unit.x2,
-    borderBottom: `${stroke.ring1} solid ${colors.borderNeutralFaded}`
+    gap: unit.x3,
+    marginBlockEnd: unit.x3
   },
-  columnTitle: {
+  toolbarEnd: {
+    marginInlineStart: 'auto'
+  },
+  toolbarTitle: {
+    color: colors.foregroundNeutral,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.semibold,
-    lineHeight: fontLineHeight.body2,
-    flex: 1
+    lineHeight: fontLineHeight.body2
   },
-  columnCount: {
+  toolbarStatus: {
     color: colors.foregroundNeutralFaded,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,
     lineHeight: fontLineHeight.caption1
   },
+  columnHeader: {
+    alignItems: 'center',
+    borderBottom: `${stroke.ring1} solid ${colors.borderNeutralFaded}`,
+    display: 'flex',
+    gap: unit.x2,
+    marginBlockEnd: unit.x2,
+    paddingBlockEnd: unit.x2
+  },
+  columnTitle: {
+    color: colors.foregroundNeutral,
+    flex: 1,
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.body2,
+    fontWeight: fontWeight.semibold,
+    lineHeight: fontLineHeight.body2
+  },
+  columnCount: {
+    color: colors.foregroundNeutralFaded,
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.caption1,
+    lineHeight: fontLineHeight.caption1
+  },
+  colorDot: (color: string) => ({
+    backgroundColor: color,
+    borderRadius: radius.small,
+    flexShrink: 0,
+    height: unit.x3,
+    width: unit.x3
+  }),
+  statusDot: (color: string) => ({
+    backgroundColor: color,
+    borderRadius: radius.full,
+    flexShrink: 0,
+    height: unit.x2,
+    width: unit.x2
+  }),
+  itemBody: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: unit.x1
+  },
+  itemTitleRow: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: unit.x2
+  },
   itemTitle: {
+    color: colors.foregroundNeutral,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.medium,
     lineHeight: fontLineHeight.body2
   },
   itemDescription: {
     color: colors.foregroundNeutralFaded,
+    fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,
-    lineHeight: fontLineHeight.caption1,
-    marginBlockStart: unit.x0_5
-  },
-  progressBar: {
-    backgroundColor: colors.backgroundNeutralFaded,
-    borderRadius: radius.full,
-    height: unit.x1,
-    marginBlockStart: unit.x2,
-    overflow: 'hidden',
-    width: '100%'
-  },
-  progressFill: {
-    backgroundColor: colors.backgroundPrimary,
-    borderRadius: radius.full,
-    height: '100%'
+    lineHeight: fontLineHeight.caption1
   },
   priority: {
     alignItems: 'center',
+    alignSelf: 'flex-start',
     borderRadius: radius.small,
     display: 'inline-flex',
+    fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,
     fontWeight: fontWeight.medium,
     lineHeight: fontLineHeight.caption1,
@@ -103,6 +153,99 @@ const styles = stylex.create({
   priorityLow: {
     backgroundColor: colors.backgroundPositiveFaded,
     color: colors.foregroundPositive
+  },
+  progressBar: {
+    backgroundColor: colors.backgroundNeutralFaded,
+    borderRadius: radius.full,
+    height: unit.x1,
+    marginBlockStart: unit.x2,
+    overflow: 'hidden',
+    width: '100%'
+  },
+  progressFill: (progress: number) => ({
+    backgroundColor: colors.backgroundPrimary,
+    borderRadius: radius.full,
+    height: '100%',
+    width: `${progress}%`
+  }),
+  overlayCard: {
+    backgroundColor: colors.backgroundElevationBase,
+    borderColor: colors.borderNeutralFaded,
+    borderRadius: radius.medium,
+    borderStyle: 'solid',
+    borderWidth: stroke.ring1,
+    boxShadow: shadow.raised,
+    color: colors.foregroundNeutral,
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.body2,
+    lineHeight: fontLineHeight.body2,
+    padding: unit.x3
+  },
+  overlayColumnCard: {
+    backgroundColor: colors.backgroundElevationBase,
+    borderColor: colors.borderNeutralFaded,
+    borderRadius: radius.large,
+    borderStyle: 'solid',
+    borderWidth: stroke.ring1,
+    boxShadow: shadow.raised,
+    color: colors.foregroundNeutral,
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.body2,
+    lineHeight: fontLineHeight.body2,
+    maxWidth: container.xxlarge,
+    minWidth: container.small,
+    padding: unit.x4
+  },
+  overlayTitle: {
+    color: colors.foregroundNeutral,
+    display: 'block',
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.body2,
+    fontWeight: fontWeight.medium,
+    lineHeight: fontLineHeight.body2
+  },
+  overlayColumnTitle: {
+    color: colors.foregroundNeutral,
+    display: 'block',
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.body2,
+    fontWeight: fontWeight.semibold,
+    lineHeight: fontLineHeight.body2
+  },
+  overlayDescription: {
+    color: colors.foregroundNeutralFaded,
+    display: 'block',
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.caption1,
+    lineHeight: fontLineHeight.caption1,
+    marginBlockStart: unit.x1
+  },
+  overlayCount: {
+    color: colors.foregroundNeutralFaded,
+    display: 'block',
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.caption1,
+    lineHeight: fontLineHeight.caption1,
+    marginBlockStart: unit.x1
+  },
+  overlayProgress: {
+    marginBlockStart: unit.x2
+  },
+  overlayProgressMeta: {
+    color: colors.foregroundNeutralFaded,
+    display: 'flex',
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.caption1,
+    justifyContent: 'space-between',
+    lineHeight: fontLineHeight.caption1,
+    marginBlockEnd: unit.x1
+  },
+  overlayProgressBar: {
+    backgroundColor: colors.backgroundNeutralFaded,
+    borderRadius: radius.full,
+    height: unit.x1,
+    overflow: 'hidden',
+    width: '100%'
   }
 })
 
@@ -173,6 +316,15 @@ function getColumnsValue(columns: Column[]) {
   return value
 }
 
+function priorityChip(priority: NonNullable<Task['priority']>) {
+  return stylex.props(
+    styles.priority,
+    priority === 'high' && styles.priorityHigh,
+    priority === 'medium' && styles.priorityMedium,
+    priority === 'low' && styles.priorityLow
+  )
+}
+
 // ---------------------------------------------------------------------------
 // Story 1: Kanban board with placeholder overlay
 // ---------------------------------------------------------------------------
@@ -183,11 +335,14 @@ export const PlaceholderOverlay: Story = {
     const value = getColumnsValue(columns)
 
     const handleValueChange = (newValue: Record<string, Task[]>) => {
+      // The record's key order carries the column order — follow it.
       setColumns((prev) =>
-        prev.map((col) => ({
-          ...col,
-          tasks: newValue[col.id] ?? col.tasks
-        }))
+        Object.keys(newValue).map((id) => {
+          const existing = prev.find((col) => col.id === id)
+          return existing
+            ? { ...existing, tasks: newValue[id] ?? existing.tasks }
+            : { id, title: id, tasks: newValue[id] ?? [] }
+        })
       )
     }
 
@@ -203,7 +358,7 @@ export const PlaceholderOverlay: Story = {
           onValueChange={handleValueChange}
           getItemValue={(task) => task.id}
           onValueCommit={handleValueCommit}
-          style={{ width: '100%' } as unknown as stylex.StyleXStyles}
+          style={styles.fillWidth}
         >
           <KanbanBoard>
             {columns.map((column) => (
@@ -218,24 +373,8 @@ export const PlaceholderOverlay: Story = {
                 <KanbanColumnContent value={column.id}>
                   {column.tasks.map((task) => (
                     <KanbanItem key={task.id} value={task.id}>
-                      <div
-                        style={
-                          {
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: unit.x1
-                          } as unknown as stylex.StyleXStyles
-                        }
-                      >
-                        <div
-                          style={
-                            {
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: unit.x2
-                            } as unknown as stylex.StyleXStyles
-                          }
-                        >
+                      <div {...stylex.props(styles.itemBody)}>
+                        <div {...stylex.props(styles.itemTitleRow)}>
                           <KanbanItemHandle>
                             <GripVerticalIcon size={14} />
                           </KanbanItemHandle>
@@ -256,22 +395,8 @@ export const PlaceholderOverlay: Story = {
               const task = columns.flatMap((col) => col.tasks).find((t) => t.id === activeId)
               if (!task || variant !== 'item') return null
               return (
-                <div
-                  style={
-                    {
-                      backgroundColor: colors.backgroundElevationBase,
-                      borderRadius: radius.medium,
-                      border: `${stroke.ring1} solid ${colors.borderNeutralFaded}`,
-                      boxShadow: shadow.raised,
-                      padding: unit.x3,
-                      width: 'fit-content',
-                      maxWidth: '48rem'
-                    } as unknown as unknown as stylex.StyleXStyles
-                  }
-                >
-                  <span style={{ fontSize: fontSize.body2, fontWeight: fontWeight.medium }}>
-                    {task.title}
-                  </span>
+                <div {...stylex.props(styles.overlayCard)}>
+                  <span {...stylex.props(styles.overlayTitle)}>{task.title}</span>
                 </div>
               )
             }}
@@ -292,11 +417,14 @@ export const DynamicOverlay: Story = {
     const value = getColumnsValue(columns)
 
     const handleValueChange = (newValue: Record<string, Task[]>) => {
+      // The record's key order carries the column order — follow it.
       setColumns((prev) =>
-        prev.map((col) => ({
-          ...col,
-          tasks: newValue[col.id] ?? col.tasks
-        }))
+        Object.keys(newValue).map((id) => {
+          const existing = prev.find((col) => col.id === id)
+          return existing
+            ? { ...existing, tasks: newValue[id] ?? existing.tasks }
+            : { id, title: id, tasks: newValue[id] ?? [] }
+        })
       )
     }
 
@@ -306,7 +434,7 @@ export const DynamicOverlay: Story = {
           value={value}
           onValueChange={handleValueChange}
           getItemValue={(task) => task.id}
-          style={{ width: '100%' } as unknown as stylex.StyleXStyles}
+          style={styles.fillWidth}
         >
           <KanbanBoard>
             {columns.map((column) => (
@@ -321,40 +449,15 @@ export const DynamicOverlay: Story = {
                 <KanbanColumnContent value={column.id}>
                   {column.tasks.map((task) => (
                     <KanbanItem key={task.id} value={task.id}>
-                      <div
-                        style={
-                          {
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: unit.x1
-                          } as unknown as stylex.StyleXStyles
-                        }
-                      >
-                        <div
-                          style={
-                            {
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: unit.x2
-                            } as unknown as stylex.StyleXStyles
-                          }
-                        >
+                      <div {...stylex.props(styles.itemBody)}>
+                        <div {...stylex.props(styles.itemTitleRow)}>
                           <KanbanItemHandle>
                             <GripVerticalIcon size={14} />
                           </KanbanItemHandle>
                           <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
                         </div>
                         {task.priority && (
-                          <span
-                            {...stylex.props(
-                              styles.priority,
-                              task.priority === 'high' && styles.priorityHigh,
-                              task.priority === 'medium' && styles.priorityMedium,
-                              task.priority === 'low' && styles.priorityLow
-                            )}
-                          >
-                            {task.priority}
-                          </span>
+                          <span {...priorityChip(task.priority)}>{task.priority}</span>
                         )}
                       </div>
                     </KanbanItem>
@@ -365,81 +468,22 @@ export const DynamicOverlay: Story = {
           </KanbanBoard>
           <KanbanOverlay>
             {({ value: activeId, variant }) => {
-              const task = columns.flatMap((col) => col.tasks).find((t) => t.id === activeId)
-              if (!task) return null
               if (variant === 'column') {
                 const column = columns.find((col) => col.id === activeId)
                 if (!column) return null
                 return (
-                  <div
-                    style={
-                      {
-                        backgroundColor: colors.backgroundElevationBase,
-                        borderRadius: radius.large,
-                        border: `${stroke.ring1} solid ${colors.borderNeutralFaded}`,
-                        boxShadow: shadow.raised,
-                        padding: unit.x4,
-                        minWidth: '18rem',
-                        maxWidth: '32rem'
-                      } as unknown as unknown as stylex.StyleXStyles
-                    }
-                  >
-                    <span style={{ fontSize: fontSize.body2, fontWeight: fontWeight.semibold }}>
-                      {column.title}
-                    </span>
-                    <span
-                      style={{ color: colors.foregroundNeutralFaded, fontSize: fontSize.caption1 }}
-                    >
-                      {column.tasks.length} tasks
-                    </span>
+                  <div {...stylex.props(styles.overlayColumnCard)}>
+                    <span {...stylex.props(styles.overlayColumnTitle)}>{column.title}</span>
+                    <span {...stylex.props(styles.overlayCount)}>{column.tasks.length} tasks</span>
                   </div>
                 )
               }
+              const task = columns.flatMap((col) => col.tasks).find((t) => t.id === activeId)
+              if (!task) return null
               return (
-                <div
-                  style={
-                    {
-                      backgroundColor: colors.backgroundElevationBase,
-                      borderRadius: radius.medium,
-                      border: `${stroke.ring1} solid ${colors.borderNeutralFaded}`,
-                      boxShadow: shadow.raised,
-                      padding: unit.x3,
-                      maxWidth: '48rem'
-                    } as unknown as unknown as stylex.StyleXStyles
-                  }
-                >
-                  <span style={{ fontSize: fontSize.body2, fontWeight: fontWeight.medium }}>
-                    {task.title}
-                  </span>
-                  {task.priority && (
-                    <span
-                      style={
-                        {
-                          display: 'inline-block',
-                          marginBlockStart: unit.x2,
-                          paddingBlock: unit.x0_5,
-                          paddingInline: unit.x1,
-                          borderRadius: radius.small,
-                          fontSize: fontSize.caption1,
-                          fontWeight: fontWeight.medium,
-                          backgroundColor:
-                            task.priority === 'high'
-                              ? colors.backgroundCriticalFaded
-                              : task.priority === 'medium'
-                                ? colors.backgroundWarningFaded
-                                : colors.backgroundPositiveFaded,
-                          color:
-                            task.priority === 'high'
-                              ? colors.foregroundCritical
-                              : task.priority === 'medium'
-                                ? colors.foregroundWarning
-                                : colors.foregroundPositive
-                        } as unknown as unknown as stylex.StyleXStyles
-                      }
-                    >
-                      {task.priority}
-                    </span>
-                  )}
+                <div {...stylex.props(styles.overlayCard)}>
+                  <span {...stylex.props(styles.overlayTitle)}>{task.title}</span>
+                  {task.priority && <span {...priorityChip(task.priority)}>{task.priority}</span>}
                 </div>
               )
             }}
@@ -460,11 +504,14 @@ export const FrameColumns: Story = {
     const value = getColumnsValue(columns)
 
     const handleValueChange = (newValue: Record<string, Task[]>) => {
+      // The record's key order carries the column order — follow it.
       setColumns((prev) =>
-        prev.map((col) => ({
-          ...col,
-          tasks: newValue[col.id] ?? col.tasks
-        }))
+        Object.keys(newValue).map((id) => {
+          const existing = prev.find((col) => col.id === id)
+          return existing
+            ? { ...existing, tasks: newValue[id] ?? existing.tasks }
+            : { id, title: id, tasks: newValue[id] ?? [] }
+        })
       )
     }
 
@@ -474,96 +521,36 @@ export const FrameColumns: Story = {
           value={value}
           onValueChange={handleValueChange}
           getItemValue={(task) => task.id}
-          style={{ width: '100%' } as unknown as stylex.StyleXStyles}
+          style={styles.fillWidth}
         >
           <KanbanBoard>
             {columns.map((column) => (
               <KanbanColumn key={column.id} value={column.id}>
-                <div
-                  style={
-                    {
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: unit.x2,
-                      marginBlockEnd: unit.x3,
-                      paddingBlockEnd: unit.x3,
-                      borderBottom: `${stroke.ring1} solid ${colors.borderNeutralFaded}`
-                    } as unknown as unknown as stylex.StyleXStyles
-                  }
-                >
+                <div {...stylex.props(styles.columnHeader)}>
                   <div
-                    style={
-                      {
-                        width: unit.x3,
-                        height: unit.x3,
-                        borderRadius: radius.small,
-                        backgroundColor: column.color ?? colors.foregroundNeutralFaded
-                      } as unknown as unknown as stylex.StyleXStyles
-                    }
+                    {...stylex.props(
+                      styles.colorDot(column.color ?? colors.foregroundNeutralFaded)
+                    )}
                   />
-                  <span
-                    style={
-                      { flex: 1, fontWeight: fontWeight.semibold } as unknown as stylex.StyleXStyles
-                    }
-                  >
-                    {column.title}
-                  </span>
-                  <span
-                    style={
-                      {
-                        marginInlineStart: 'auto',
-                        color: colors.foregroundNeutralFaded,
-                        fontSize: fontSize.caption1
-                      } as unknown as unknown as stylex.StyleXStyles
-                    }
-                  >
-                    {column.tasks.length}
-                  </span>
+                  <span {...stylex.props(styles.columnTitle)}>{column.title}</span>
+                  <span {...stylex.props(styles.columnCount)}>{column.tasks.length}</span>
                 </div>
                 <KanbanColumnContent value={column.id}>
                   {column.tasks.map((task) => (
                     <KanbanItem key={task.id} value={task.id}>
-                      <div
-                        style={
-                          {
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: unit.x1
-                          } as unknown as stylex.StyleXStyles
-                        }
-                      >
+                      <div {...stylex.props(styles.itemTitleRow)}>
                         <div
-                          style={
-                            {
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: unit.x2
-                            } as unknown as stylex.StyleXStyles
-                          }
-                        >
-                          <div
-                            style={
-                              {
-                                width: unit.x2,
-                                height: unit.x2,
-                                borderRadius: radius.full,
-                                backgroundColor:
-                                  task.priority === 'high'
-                                    ? colors.backgroundCritical
-                                    : task.priority === 'medium'
-                                      ? colors.backgroundWarning
-                                      : colors.backgroundPositive
-                              } as unknown as unknown as stylex.StyleXStyles
-                            }
-                          />
-                          <span
-                            style={
-                              { fontWeight: fontWeight.medium } as unknown as stylex.StyleXStyles
-                            }
-                          >
-                            {task.title}
-                          </span>
-                        </div>
+                          {...stylex.props(
+                            styles.statusDot(
+                              task.priority === 'high'
+                                ? colors.backgroundCritical
+                                : task.priority === 'medium'
+                                  ? colors.backgroundWarning
+                                  : colors.backgroundPositive
+                            )
+                          )}
+                        />
+                        <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
                       </div>
                     </KanbanItem>
                   ))}
@@ -576,20 +563,8 @@ export const FrameColumns: Story = {
               const task = columns.flatMap((col) => col.tasks).find((t) => t.id === activeId)
               if (!task || variant !== 'item') return null
               return (
-                <div
-                  style={
-                    {
-                      backgroundColor: colors.backgroundElevationBase,
-                      borderRadius: radius.medium,
-                      border: `${stroke.ring1} solid ${colors.borderNeutralFaded}`,
-                      boxShadow: shadow.raised,
-                      padding: unit.x3
-                    } as unknown as unknown as stylex.StyleXStyles
-                  }
-                >
-                  <span style={{ fontWeight: fontWeight.medium } as unknown as stylex.StyleXStyles}>
-                    {task.title}
-                  </span>
+                <div {...stylex.props(styles.overlayCard)}>
+                  <span {...stylex.props(styles.overlayTitle)}>{task.title}</span>
                 </div>
               )
             }}
@@ -642,86 +617,31 @@ export const StackedFrame: Story = {
           value={value}
           onValueChange={handleValueChange}
           getItemValue={(task) => task.id}
-          style={{ width: '100%', maxWidth: '40rem' } as unknown as stylex.StyleXStyles}
+          style={styles.boardNarrow}
         >
-          <KanbanBoard
-            style={
-              {
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-                gap: unit.x4
-              } as unknown as stylex.StyleXStyles
-            }
-          >
+          <KanbanBoard style={styles.boardTwoColumns}>
             {columns.map((column) => (
               <KanbanColumn key={column.id} value={column.id}>
-                <div
-                  style={
-                    {
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: unit.x2,
-                      marginBlockEnd: unit.x2,
-                      paddingBlockEnd: unit.x2,
-                      borderBottom: `${stroke.ring1} solid ${colors.borderNeutralFaded}`
-                    } as unknown as unknown as stylex.StyleXStyles
-                  }
-                >
-                  <span
-                    style={
-                      {
-                        fontSize: fontSize.body2,
-                        fontWeight: fontWeight.semibold
-                      } as unknown as stylex.StyleXStyles
-                    }
-                  >
-                    {column.title}
-                  </span>
-                  <span
-                    style={
-                      {
-                        marginInlineStart: 'auto',
-                        color: colors.foregroundNeutralFaded,
-                        fontSize: fontSize.caption1
-                      } as unknown as unknown as stylex.StyleXStyles
-                    }
-                  >
-                    {column.tasks.length}
-                  </span>
+                <div {...stylex.props(styles.columnHeader)}>
+                  <span {...stylex.props(styles.columnTitle)}>{column.title}</span>
+                  <span {...stylex.props(styles.columnCount)}>{column.tasks.length}</span>
                 </div>
                 <KanbanColumnContent value={column.id}>
                   {column.tasks.map((task) => (
                     <KanbanItem key={task.id} value={task.id}>
-                      <div
-                        style={
-                          {
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: unit.x2,
-                            padding: unit.x2
-                          } as unknown as unknown as stylex.StyleXStyles
-                        }
-                      >
+                      <div {...stylex.props(styles.itemTitleRow)}>
                         <div
-                          style={
-                            {
-                              width: unit.x2,
-                              height: unit.x2,
-                              borderRadius: radius.full,
-                              backgroundColor:
-                                task.priority === 'high'
-                                  ? colors.backgroundCritical
-                                  : task.priority === 'medium'
-                                    ? colors.backgroundWarning
-                                    : colors.backgroundPositive
-                            } as unknown as unknown as stylex.StyleXStyles
-                          }
+                          {...stylex.props(
+                            styles.statusDot(
+                              task.priority === 'high'
+                                ? colors.backgroundCritical
+                                : task.priority === 'medium'
+                                  ? colors.backgroundWarning
+                                  : colors.backgroundPositive
+                            )
+                          )}
                         />
-                        <span
-                          style={{ fontSize: fontSize.body2 } as unknown as stylex.StyleXStyles}
-                        >
-                          {task.title}
-                        </span>
+                        <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
                       </div>
                     </KanbanItem>
                   ))}
@@ -811,11 +731,14 @@ export const FeatureRoadmap: Story = {
     const value = getColumnsValue(columns)
 
     const handleValueChange = (newValue: Record<string, Task[]>) => {
+      // The record's key order carries the column order — follow it.
       setColumns((prev) =>
-        prev.map((col) => ({
-          ...col,
-          tasks: newValue[col.id] ?? col.tasks
-        }))
+        Object.keys(newValue).map((id) => {
+          const existing = prev.find((col) => col.id === id)
+          return existing
+            ? { ...existing, tasks: newValue[id] ?? existing.tasks }
+            : { id, title: id, tasks: newValue[id] ?? [] }
+        })
       )
     }
 
@@ -825,7 +748,7 @@ export const FeatureRoadmap: Story = {
           value={value}
           onValueChange={handleValueChange}
           getItemValue={(task) => task.id}
-          style={{ width: '100%' } as unknown as stylex.StyleXStyles}
+          style={styles.fillWidth}
         >
           <KanbanBoard>
             {columns.map((column) => (
@@ -840,24 +763,8 @@ export const FeatureRoadmap: Story = {
                 <KanbanColumnContent value={column.id}>
                   {column.tasks.map((task) => (
                     <KanbanItem key={task.id} value={task.id}>
-                      <div
-                        style={
-                          {
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: unit.x1
-                          } as unknown as stylex.StyleXStyles
-                        }
-                      >
-                        <div
-                          style={
-                            {
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: unit.x2
-                            } as unknown as stylex.StyleXStyles
-                          }
-                        >
+                      <div {...stylex.props(styles.itemBody)}>
+                        <div {...stylex.props(styles.itemTitleRow)}>
                           <KanbanItemHandle>
                             <GripVerticalIcon size={14} />
                           </KanbanItemHandle>
@@ -866,16 +773,9 @@ export const FeatureRoadmap: Story = {
                         {task.description && (
                           <span {...stylex.props(styles.itemDescription)}>{task.description}</span>
                         )}
-                        {task.progress !== undefined && task.progress > 0 && (
+                        {task.progress != null && task.progress > 0 && (
                           <div {...stylex.props(styles.progressBar)}>
-                            <div
-                              style={
-                                {
-                                  width: `${task.progress}%`,
-                                  ...stylex.props(styles.progressFill)
-                                } as unknown as unknown as stylex.StyleXStyles
-                              }
-                            />
+                            <div {...stylex.props(styles.progressFill(task.progress))} />
                           </div>
                         )}
                       </div>
@@ -890,72 +790,19 @@ export const FeatureRoadmap: Story = {
               const task = columns.flatMap((col) => col.tasks).find((t) => t.id === activeId)
               if (!task || variant !== 'item') return null
               return (
-                <div
-                  style={
-                    {
-                      backgroundColor: colors.backgroundElevationBase,
-                      borderRadius: radius.medium,
-                      border: `${stroke.ring1} solid ${colors.borderNeutralFaded}`,
-                      boxShadow: shadow.raised,
-                      padding: unit.x3,
-                      width: '36rem'
-                    } as unknown as unknown as stylex.StyleXStyles
-                  }
-                >
-                  <span
-                    style={{ fontWeight: fontWeight.semibold } as unknown as stylex.StyleXStyles}
-                  >
-                    {task.title}
-                  </span>
+                <div {...stylex.props(styles.overlayCard)}>
+                  <span {...stylex.props(styles.overlayColumnTitle)}>{task.title}</span>
                   {task.description && (
-                    <span
-                      style={
-                        {
-                          display: 'block',
-                          marginBlockStart: unit.x1,
-                          color: colors.foregroundNeutralFaded,
-                          fontSize: fontSize.caption1
-                        } as unknown as unknown as stylex.StyleXStyles
-                      }
-                    >
-                      {task.description}
-                    </span>
+                    <span {...stylex.props(styles.overlayDescription)}>{task.description}</span>
                   )}
-                  {task.progress !== undefined && (
-                    <div style={{ marginBlockStart: unit.x2 } as unknown as stylex.StyleXStyles}>
-                      <div
-                        style={
-                          {
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            fontSize: fontSize.caption1,
-                            marginBlockEnd: unit.x1
-                          } as unknown as unknown as stylex.StyleXStyles
-                        }
-                      >
+                  {task.progress != null && (
+                    <div {...stylex.props(styles.overlayProgress)}>
+                      <div {...stylex.props(styles.overlayProgressMeta)}>
                         <span>Progress</span>
                         <span>{task.progress}%</span>
                       </div>
-                      <div
-                        style={
-                          {
-                            backgroundColor: colors.backgroundNeutralFaded,
-                            borderRadius: radius.full,
-                            height: unit.x1,
-                            overflow: 'hidden'
-                          } as unknown as unknown as stylex.StyleXStyles
-                        }
-                      >
-                        <div
-                          style={
-                            {
-                              width: `${task.progress}%`,
-                              height: '100%',
-                              backgroundColor: colors.backgroundPrimary,
-                              borderRadius: radius.full
-                            } as unknown as unknown as stylex.StyleXStyles
-                          }
-                        />
+                      <div {...stylex.props(styles.overlayProgressBar)}>
+                        <div {...stylex.props(styles.progressFill(task.progress))} />
                       </div>
                     </div>
                   )}
@@ -1008,42 +855,13 @@ export const PersistedToBackend: Story = {
 
     return (
       <div {...stylex.props(styles.page)}>
-        <div
-          style={
-            {
-              display: 'flex',
-              alignItems: 'center',
-              gap: unit.x3,
-              marginBlockEnd: unit.x3
-            } as unknown as unknown as stylex.StyleXStyles
-          }
-        >
-          <span
-            style={
-              {
-                fontSize: fontSize.body2,
-                fontWeight: fontWeight.semibold
-              } as unknown as stylex.StyleXStyles
-            }
-          >
-            Kanban Board
-          </span>
-          {isSaving && (
-            <span
-              style={
-                {
-                  color: colors.foregroundNeutralFaded,
-                  fontSize: fontSize.caption1
-                } as unknown as stylex.StyleXStyles
-              }
-            >
-              Saving...
-            </span>
-          )}
+        <div {...stylex.props(styles.toolbar)}>
+          <span {...stylex.props(styles.toolbarTitle)}>Kanban Board</span>
+          {isSaving && <span {...stylex.props(styles.toolbarStatus)}>Saving...</span>}
           <Button
             variant='outline'
             size='sm'
-            style={{ marginInlineStart: 'auto' } as unknown as stylex.StyleXStyles}
+            style={styles.toolbarEnd}
             onClick={() => {
               toast.success('Changes synced')
             }}
@@ -1056,7 +874,7 @@ export const PersistedToBackend: Story = {
           onValueChange={handleValueChange}
           getItemValue={(task) => task.id}
           onValueCommit={handleValueCommit}
-          style={{ width: '100%' } as unknown as stylex.StyleXStyles}
+          style={styles.fillWidth}
         >
           <KanbanBoard>
             {Object.keys(columns).map((columnId) => (
@@ -1078,23 +896,11 @@ export const PersistedToBackend: Story = {
                 <KanbanColumnContent value={columnId}>
                   {columns[columnId]?.map((task) => (
                     <KanbanItem key={task.id} value={task.id}>
-                      <div
-                        style={
-                          {
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: unit.x2
-                          } as unknown as stylex.StyleXStyles
-                        }
-                      >
+                      <div {...stylex.props(styles.itemTitleRow)}>
                         <KanbanItemHandle>
                           <GripVerticalIcon size={14} />
                         </KanbanItemHandle>
-                        <span
-                          style={{ fontSize: fontSize.body2 } as unknown as stylex.StyleXStyles}
-                        >
-                          {task.title}
-                        </span>
+                        <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
                       </div>
                     </KanbanItem>
                   ))}
@@ -1109,20 +915,8 @@ export const PersistedToBackend: Story = {
                 .find((t) => t.id === activeId)
               if (!task) return null
               return (
-                <div
-                  style={
-                    {
-                      backgroundColor: colors.backgroundElevationBase,
-                      borderRadius: radius.medium,
-                      border: `${stroke.ring1} solid ${colors.borderNeutralFaded}`,
-                      boxShadow: shadow.raised,
-                      padding: unit.x3
-                    } as unknown as unknown as stylex.StyleXStyles
-                  }
-                >
-                  <span style={{ fontWeight: fontWeight.medium } as unknown as stylex.StyleXStyles}>
-                    {task.title}
-                  </span>
+                <div {...stylex.props(styles.overlayCard)}>
+                  <span {...stylex.props(styles.overlayTitle)}>{task.title}</span>
                 </div>
               )
             }}

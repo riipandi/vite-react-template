@@ -7,7 +7,6 @@ import { duration } from '#/styles/core/tokens.stylex'
 
 export const inputGroupStyles = stylex.create({
   root: {
-    // Block-aligned addons (textarea groups) stack the group vertically.
     alignItems: {
       default: 'center',
       ':has([data-align^="block"])': 'stretch'
@@ -15,7 +14,8 @@ export const inputGroupStyles = stylex.create({
     backgroundColor: colors.backgroundPage,
     borderColor: {
       default: colors.borderNeutralFaded,
-      ':focus-within': colors.foregroundPrimary
+      ':focus-within': colors.foregroundPrimary,
+      ':has([data-invalid])': colors.borderCritical
     },
     borderRadius: radius.medium,
     borderStyle: 'solid',
@@ -55,7 +55,6 @@ export const inputGroupStyles = stylex.create({
     fontSize: fontSize.body2,
     gap: unit.x2
   },
-  // The group draws the border and focus ring; the control inside goes bare.
   control: {
     backgroundColor: 'transparent',
     borderStyle: 'none',

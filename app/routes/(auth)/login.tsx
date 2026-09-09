@@ -1,21 +1,17 @@
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useForm } from '@tanstack/react-form'
-import { createFileRoute, Link, useSearch } from '@tanstack/react-router'
-import { CircleHelpIcon, KeyRoundIcon } from 'lucide-react'
-import { useState } from 'react'
+import { createFileRoute, Link, useNavigate, useSearch } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
 import { z } from 'zod'
 import { Button } from '#/components/base/button'
 import { Checkbox } from '#/components/base/checkbox'
 import { Field, FieldError, FieldLabel, FieldSeparator } from '#/components/base/field'
 import { Input } from '#/components/base/input'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/components/base/tooltip'
 import { Alert, AlertDescription, AlertTitle } from '#/components/extra/alert'
 import { ButtonGroup } from '#/components/extra/button-group'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '#/components/extra/card'
 import { InputPassword } from '#/components/extra/input-password'
-import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '#/components/extra/item'
-import { Kbd } from '#/components/extra/kbd'
 import { LoaderText } from '#/components/extra/loader-text'
 import { Spinner } from '#/components/extra/spinner'
 import { Text } from '#/components/extra/text'
@@ -37,24 +33,36 @@ export const Route = createFileRoute('/(auth)/login')({
 
 function RouteComponent() {
   const { login } = useAuthentication()
+  const navigate = useNavigate()
   const { loggedOut } = useSearch({ from: Route.id })
   const [failed, setFailed] = useState<string | null>(null)
   const [remember, setRemember] = useState(false)
+  const [dismissed, setDismissed] = useState(false)
 
-  const clearAlerts = () => setFailed(null)
+  // The goodbye alert belongs to the logout action that redirected here —
+  // capture it once (initializer runs at mount only) so a refresh or
+  // back-navigation never replays it.
+  const [arrivedLoggedOut] = useState(loggedOut)
+  const showGoodbye = Boolean(arrivedLoggedOut) && !dismissed && !failed
+
+  // Consume the `loggedOut` search param so the browser history stays clean.
+  useEffect(() => {
+    if (!loggedOut) return
+    void navigate({ to: '/login', search: {}, replace: true })
+  }, [loggedOut, navigate])
+
+  const clearAlerts = () => {
+    setFailed(null)
+    setDismissed(true)
+  }
 
   const form = useForm({
-    defaultValues: {
-      username: '',
-      password: ''
-    },
-    validators: {
-      onChange: loginSchema
-    },
+    defaultValues: { username: '', password: '' },
+    validators: { onSubmit: loginSchema },
     onSubmit: async ({ value }) => {
       setFailed(null)
       try {
-        await login(value)
+        await login(value, { rememberMe: remember })
       } catch (error: unknown) {
         setFailed(getErrorMessage(error))
       }
@@ -81,7 +89,7 @@ function RouteComponent() {
               <AlertDescription>{failed}</AlertDescription>
             </Alert>
           )}
-          {loggedOut && !failed && (
+          {showGoodbye && (
             <Alert id='login-alert-goodbye'>
               <AlertTitle>Goodbye!</AlertTitle>
               <AlertDescription>Your session has been terminated.</AlertDescription>
@@ -185,35 +193,6 @@ function RouteComponent() {
             />
           </div>
         </form>
-
-        <TooltipProvider>
-          <Item variant='muted' size='sm' style={styles.demoItem}>
-            <ItemMedia variant='icon'>
-              <KeyRoundIcon size={14} />
-            </ItemMedia>
-            <ItemContent>
-              <ItemTitle>
-                Demo credentials
-                <Tooltip>
-                  <TooltipTrigger
-                    render={
-                      <span {...stylex.props(styles.hintIcon)} aria-label='About demo credentials'>
-                        <CircleHelpIcon size={13} />
-                      </span>
-                    }
-                    tabIndex={0}
-                  />
-                  <TooltipContent>
-                    Any valid DummyJSON account works with this template.
-                  </TooltipContent>
-                </Tooltip>
-              </ItemTitle>
-              <ItemDescription>
-                Try <Kbd>emilys</Kbd> / <Kbd>emilyspass</Kbd> for demo account.
-              </ItemDescription>
-            </ItemContent>
-          </Item>
-        </TooltipProvider>
       </CardContent>
 
       <CardFooter style={atoms.justifyContent.center}>

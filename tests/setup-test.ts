@@ -60,3 +60,10 @@ vi.mock('#/routes/-devtools', () => ({
 vi.mock('@tanstack/router-core/isServer', () => ({
   isServer: false
 }))
+
+// The session bootstrap performs real network calls (silent cookie refresh +
+// `me()`). Skip it in unit tests — no backend is running here.
+vi.mock('#/libraries/guard/auth-session', () => ({
+  ensureSessionLoaded: async () => {},
+  refreshIfExpiring: async () => {}
+}))

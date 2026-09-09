@@ -3,6 +3,7 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { CopyIcon, SearchIcon } from 'lucide-react'
 import { expect, userEvent } from 'storybook/test'
+import { Field } from '#/components/base/field'
 import { Kbd } from '#/components/extra/kbd'
 import { Spinner } from '#/components/extra/spinner'
 import { container } from '#/styles/core/tokens.stylex'
@@ -136,5 +137,24 @@ export const Textarea: Story = {
     const textarea = canvas.getByPlaceholderText('Write to Sirius…')
     await userEvent.type(textarea, 'Padfoot, the map is a fake.')
     expect(textarea).toHaveValue('Padfoot, the map is a fake.')
+  }
+}
+
+export const Invalid: Story = {
+  name: 'Invalid',
+  render: () => (
+    <Field invalid>
+      <InputGroup style={styles.group}>
+        <InputGroupInput placeholder='Search the restricted stacks…' />
+        <InputGroupAddon align='inline-end'>
+          <InputGroupButton>Expecto</InputGroupButton>
+        </InputGroupAddon>
+      </InputGroup>
+    </Field>
+  ),
+  play: async ({ canvas }) => {
+    // Base UI marks the inner control; the group root mirrors it via `:has()`.
+    const input = canvas.getByPlaceholderText('Search the restricted stacks…')
+    await expect(input).toHaveAttribute('data-invalid')
   }
 }

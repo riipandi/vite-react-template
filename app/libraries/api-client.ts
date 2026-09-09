@@ -1,8 +1,8 @@
 import { QueryClient } from '@tanstack/react-query'
 import { ofetch } from 'ofetch'
-import { authStore, getAccessToken, setAuthTokens, clearAuth } from '#/libraries/auth.store'
-
-export const API_BASE_URL = import.meta.env.PUBLIC_API_URL ?? 'https://dummyjson.com'
+import { API_BASE_URL } from '#/libraries/guard/auth-engine'
+import { clearAuth } from '#/libraries/guard/auth-store'
+import { authWorker } from '#/libraries/guard/auth-worker-client'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,53 +18,26 @@ export const queryClient = new QueryClient({
 })
 
 /**
- * Try to refresh the access token using the stored refresh token.
- * Inlined here to avoid circular dependency with auth-api.ts.
- */
-async function tryRefreshToken(): Promise<boolean> {
-  const storedRefreshToken = authStore.state.refreshToken
-  if (!storedRefreshToken) return false
-
-  try {
-    const result = await ofetch<{ accessToken: string; refreshToken: string }>(
-      `${API_BASE_URL}/auth/refresh`,
-      {
-        method: 'POST',
-        body: { refreshToken: storedRefreshToken, expiresInMins: 30 }
-      }
-    )
-    setAuthTokens(result.accessToken, result.refreshToken)
-    return true
-  } catch {
-    return false
-  }
-}
-
-/**
- * - Attaches `Authorization: Bearer <token>` from auth store automatically.
- * - On 401, attempts silent token refresh and retries the request.
- * - Base URL from `PUBLIC_API_URL` env var (defaults to dummyjson for demos).
+ * - Sends the HttpOnly cookie session with every request (`credentials: 'include'`).
+ * - On 401, performs a single-flight silent refresh via the auth worker and
+ *   retries the request (the browser attaches the fresh cookie automatically).
+ * - Base URL from `PUBLIC_API_URL` env var (defaults to `/api` — the same-origin
+ *   dev proxy to the demo backend; see `vite.config.ts`).
  *
  * All backend API calls should import `api` from here.
  */
 export const api = ofetch.create({
   baseURL: API_BASE_URL,
-  onRequest({ options }) {
-    const token = getAccessToken()
-    if (!token) return
-    const headers = new Headers(options.headers)
-    headers.set('Authorization', `Bearer ${token}`)
-    options.headers = headers
-  },
+  credentials: 'include',
+  retry: 1,
+  retryStatusCodes: [401],
   async onResponseError({ response }) {
-    // Silently refresh the token on 401, then retry with the new token.
-    // If refresh fails, clear auth — the route beforeLoad guard redirects to login.
+    // Silent refresh on 401, then ofetch retries the request. If the refresh
+    // fails, clear auth — the route beforeLoad guard redirects to login.
     if (response.status !== 401) return
-    const refreshed = await tryRefreshToken()
+    const refreshed = await authWorker().refresh()
     if (!refreshed) {
       clearAuth()
     }
-  },
-  retry: 1,
-  retryStatusCodes: [401]
+  }
 })

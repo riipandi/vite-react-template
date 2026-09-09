@@ -6,7 +6,7 @@ interface DivProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'classNam
   style?: stylex.StyleXStyles
 }
 
-export type CardSize = 'md' | 'sm'
+export type CardSize = 'sm' | 'md'
 
 export function Card({ size = 'md', style, ...props }: DivProps & { size?: CardSize }) {
   return <div {...props} {...stylex.props(s.root, sizes[size], style)} />

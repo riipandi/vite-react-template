@@ -14,7 +14,7 @@
     "scripts": {
         "dev": "vite",
         "build": "tsr generate && tsc -b && vite build",
-        "start": "pnpm dlx node-http-server --root dist --host 0.0.0.0 --port 3000 --spa --no-cache ",
+        "start": "vite preview --port 3000 --host 0.0.0.0",
         "storybook": "storybook dev -p 6006 --host 0.0.0.0 --no-open",
         "storybook:build": "storybook build -o .output/storybook",
         "storybook:start": "pnpm dlx node-http-server --root .output/storybook --host 0.0.0.0 --port 6006 --no-cache",
@@ -60,6 +60,7 @@
         "@tanstack/react-store": "^0.11.1",
         "@tanstack/react-table": "^9.2.4",
         "@tanstack/react-virtual": "^3.14.11",
+        "comlink": "^4.4.2",
         "country-flag-icons": "^1.6.20",
         "date-fns": "^4.4.0",
         "lucide-react": "^1.43.0",

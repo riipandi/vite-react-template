@@ -43,7 +43,7 @@ export function AlertDialogOverlay({
   return <BaseAlertDialog.Backdrop {...props} {...stylex.props(s.overlay, style)} />
 }
 
-export type AlertDialogSize = 'md' | 'sm'
+export type AlertDialogSize = 'sm' | 'md'
 
 export function AlertDialogContent({
   style,

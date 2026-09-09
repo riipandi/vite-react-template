@@ -100,6 +100,41 @@ const styles = stylex.create({
     height: unit.x3,
     width: unit.x3
   }),
+  // "Frame columns" look (ReUI c-kanban-3): the column is a flat muted frame,
+  // items live in a white panel card nested inside it.
+  frameColumn: {
+    backgroundColor: colors.backgroundNeutralFaded,
+    boxShadow: 'none',
+    gap: unit.x1,
+    padding: unit.x2
+  },
+  frameHeader: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: unit.x2,
+    paddingBlock: unit.x1,
+    paddingInline: unit.x2
+  },
+  framePanel: {
+    backgroundColor: colors.backgroundPage,
+    borderColor: colors.borderNeutralFaded,
+    borderRadius: radius.medium,
+    borderStyle: 'solid',
+    borderWidth: stroke.ring1,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: unit.x1
+  },
+  frameContent: {
+    gap: unit.x1
+  },
+  frameItem: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent'
+  },
+  frameItemTitle: {
+    flex: 1
+  },
   statusDot: (color: string) => ({
     backgroundColor: color,
     borderRadius: radius.full,
@@ -570,8 +605,8 @@ export const FrameColumns: Story = {
         >
           <KanbanBoard>
             {columns.map((column) => (
-              <KanbanColumn key={column.id} value={column.id}>
-                <div {...stylex.props(styles.columnHeader)}>
+              <KanbanColumn key={column.id} value={column.id} style={styles.frameColumn}>
+                <div {...stylex.props(styles.frameHeader)}>
                   <div
                     {...stylex.props(
                       styles.colorDot(column.color ?? colors.foregroundNeutralFaded)
@@ -585,26 +620,20 @@ export const FrameColumns: Story = {
                     <GripVerticalIcon size={16} />
                   </KanbanColumnHandle>
                 </div>
-                <KanbanColumnContent value={column.id}>
-                  {column.tasks.map((task) => (
-                    <KanbanItem key={task.id} value={task.id}>
-                      <div {...stylex.props(styles.itemTitleRow)}>
-                        <div
-                          {...stylex.props(
-                            styles.statusDot(
-                              task.priority === 'high'
-                                ? colors.backgroundCritical
-                                : task.priority === 'medium'
-                                  ? colors.backgroundWarning
-                                  : colors.backgroundPositive
-                            )
-                          )}
-                        />
-                        <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
-                      </div>
-                    </KanbanItem>
-                  ))}
-                </KanbanColumnContent>
+                <div {...stylex.props(styles.framePanel)}>
+                  <KanbanColumnContent value={column.id} style={styles.frameContent}>
+                    {column.tasks.map((task) => (
+                      <KanbanItem key={task.id} value={task.id} style={styles.frameItem}>
+                        <div {...stylex.props(styles.itemTitleRow)}>
+                          <span {...stylex.props(styles.itemTitle, styles.frameItemTitle)}>
+                            {task.title}
+                          </span>
+                          {task.priority && <PriorityBadge priority={task.priority} />}
+                        </div>
+                      </KanbanItem>
+                    ))}
+                  </KanbanColumnContent>
+                </div>
               </KanbanColumn>
             ))}
           </KanbanBoard>

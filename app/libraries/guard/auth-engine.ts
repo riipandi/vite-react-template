@@ -22,6 +22,9 @@ const PROACTIVE_MARGIN_MS = 60_000
 /** Skip repeated refresh attempts within this window after a failure. */
 const REFRESH_COOLDOWN_MS = 5_000
 
+/** setTimeout ceiling — delays above 2^31-1 ms overflow to ~0 in browsers. */
+const MAX_TIMER_DELAY_MS = 2_147_483_647
+
 /** Options for {@link AuthEngineApi.login}. */
 export interface AuthLoginOptions {
   /**
@@ -72,7 +75,11 @@ export function createAuthEngine(baseURL: string = API_BASE_URL): AuthEngineApi 
 
   function scheduleProactiveRefresh() {
     clearTimer()
-    const delay = Math.max(expiresAt - PROACTIVE_MARGIN_MS - Date.now(), 0)
+    // Remember-me sessions (30 days) overflow the 32-bit setTimeout ceiling —
+    // browsers wrap delays above 2^31-1 ms to ~0, firing the refresh at once.
+    // Clamp instead; the timer simply re-fires and reschedules.
+    const rawDelay = expiresAt - PROACTIVE_MARGIN_MS - Date.now()
+    const delay = Math.min(Math.max(rawDelay, 0), MAX_TIMER_DELAY_MS)
     refreshTimer = setTimeout(() => {
       refreshTimer = null
       void api.refresh()

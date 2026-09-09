@@ -101,6 +101,7 @@
         "knip": "^6.35.1",
         "lefthook": "^2.1.12",
         "npm-check-updates": "^23.1.0",
+        "oxc-transform-react": "^0.149.0",
         "oxfmt": "^0.67.0",
         "oxlint": "^1.82.0",
         "playwright": "^1.63.0",

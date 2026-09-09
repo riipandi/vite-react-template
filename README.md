@@ -155,6 +155,10 @@ to contribute something to the open-source community. Your work means the world!
 - [Reshaped](https://www.reshaped.so/) — the design system in this template is built on its design system.
 - [ReUI](https://reui.io) — the Data Grid, Input Phone, Sortable, and Kanban components are ports of ReUI.
 
+## Notice
+
+Why using web workers for auth? [Keep React Responsive with Web Workers and useRef](https://reactdevelopment.substack.com/p/keep-react-responsive-with-web-workers)
+
 ## License
 
 Licensed under either of [Apache License 2.0][license-apache] or [MIT license][license-mit] at your option.

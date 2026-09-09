@@ -4,7 +4,8 @@ import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { expect, userEvent } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
-import { fontSize, fontWeight, radius, stroke, unit } from '#/styles/core/tokens.stylex'
+import { container, radius, stroke, unit } from '#/styles/core/tokens.stylex'
+import { fontLineHeight, fontSize, fontWeight } from '#/styles/core/tokens.stylex'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './resizable.component'
 
 const meta = {
@@ -27,7 +28,7 @@ type Story = StoryObj<typeof meta>
 
 const styles = stylex.create({
   canvas: {
-    height: '320px',
+    height: container.medium,
     padding: unit.x6
   },
   frame: {
@@ -46,6 +47,7 @@ const styles = stylex.create({
     fontWeight: fontWeight.semibold,
     height: '100%',
     justifyContent: 'center',
+    lineHeight: fontLineHeight.body2,
     overflow: 'auto',
     padding: unit.x6
   },
@@ -70,7 +72,6 @@ export const Horizontal: Story = {
     const handle = canvas.getByRole('separator', { name: 'Resize sidebar' })
     const panel = document.body.querySelector<HTMLElement>('[data-testid="sidebar"]')
     expect(panel).not.toBeNull()
-
     // Keyboard focus shows the glow hugging the bar and resizes the panel.
     // (Hover styles rely on CSS :hover, which synthetic test events cannot
     // trigger — verified separately against a real browser session.)

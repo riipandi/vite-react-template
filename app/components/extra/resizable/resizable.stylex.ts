@@ -25,7 +25,7 @@ export const resizableStyles = stylex.create({
   handle: {
     alignItems: 'center',
     backgroundColor: {
-      default: colors.borderNeutral,
+      default: colors.borderNeutralFaded,
       ':hover': colors.foregroundNeutralFaded,
       ':active': colors.foregroundPrimary,
       ':focus-visible': colors.foregroundPrimary
@@ -38,6 +38,7 @@ export const resizableStyles = stylex.create({
     cursor: 'col-resize',
     display: 'flex',
     justifyContent: 'center',
+    opacity: { default: 1, '[data-disabled]': 0.5 },
     outline: 'none',
     position: 'relative',
     transitionDuration: duration.medium,

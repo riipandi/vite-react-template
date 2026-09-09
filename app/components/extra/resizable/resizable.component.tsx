@@ -1,10 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import {
-  Group as GroupPrimitive,
-  Panel as PanelPrimitive,
-  Separator as SeparatorPrimitive
-} from 'react-resizable-panels'
+import { Group as GroupPrimitive, Panel as PanelPrimitive } from 'react-resizable-panels'
+import { Separator as SeparatorPrimitive } from 'react-resizable-panels'
 import { resizableStyles as s } from './resizable.stylex'
 
 type Orientation = 'horizontal' | 'vertical'
@@ -55,11 +52,6 @@ export function ResizablePanel({
   return <PanelPrimitive {...props} {...stylex.props(style)} />
 }
 
-/**
- * The drag/keyboard handle between two panels. Set `withHandle` to render an
- * animated indicator on top of the divider; `variant` picks its look
- * (ReUI c5/c6/c7: `pill`, `spring`, `capsule`).
- */
 export function ResizableHandle({
   children,
   variant = 'pill',
@@ -83,6 +75,13 @@ export function ResizableHandle({
         style
       )}
     >
+      <div
+        aria-hidden='true'
+        {...stylex.props(
+          s.handleHitArea,
+          isVertical ? s.handleHitAreaVerticalGroup : s.handleHitAreaHorizontalGroup
+        )}
+      />
       {children}
       {withHandle && <div {...stylex.props(s.handleIndicator, indicatorStyle)} />}
     </SeparatorPrimitive>

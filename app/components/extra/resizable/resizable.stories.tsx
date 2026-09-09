@@ -7,11 +7,6 @@ import { colors } from '#/styles/core/colors.stylex'
 import { fontSize, fontWeight, radius, stroke, unit } from '#/styles/core/tokens.stylex'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './resizable.component'
 
-/**
- * Ported from ReUI's resizable examples (c-resizable-1 … c-resizable-10).
- * Stories are named after the panel flow direction: "Horizontal" renders
- * panels side by side (`orientation="horizontal"`), "Vertical" stacks them.
- */
 const meta = {
   title: 'Extra Components/Resizable',
   component: ResizablePanelGroup,
@@ -55,14 +50,13 @@ const styles = stylex.create({
     padding: unit.x6
   },
   contentAlt: {
-    backgroundColor: colors.backgroundNeutral
+    backgroundColor: colors.backgroundNeutralFaded
   },
   nested: {
     height: '100%'
   }
 })
 
-// ReUI c-resizable-2 — panels side by side.
 export const Horizontal: Story = {
   render: () => (
     <ResizablePanelGroup style={styles.frame}>
@@ -80,14 +74,17 @@ export const Horizontal: Story = {
     const panel = document.body.querySelector<HTMLElement>('[data-testid="sidebar"]')
     expect(panel).not.toBeNull()
 
+    // Keyboard focus shows the glow hugging the bar and resizes the panel.
+    // (Hover styles rely on CSS :hover, which synthetic test events cannot
+    // trigger — verified separately against a real browser session.)
     const before = panel?.getBoundingClientRect().width ?? 0
     handle.focus()
     await userEvent.keyboard('{ArrowRight}')
+    expect(getComputedStyle(handle).boxShadow).not.toBe('none')
     expect(panel?.getBoundingClientRect().width ?? 0).toBeGreaterThan(before)
   }
 }
 
-// ReUI c-resizable-1 — panels stacked vertically.
 export const Vertical: Story = {
   render: () => (
     <ResizablePanelGroup orientation='vertical' style={styles.frame}>
@@ -102,7 +99,6 @@ export const Vertical: Story = {
   )
 }
 
-// ReUI c-resizable-3 — nested mixed-direction resizable layout.
 export const NestedMixed: Story = {
   render: () => (
     <ResizablePanelGroup style={styles.frame}>
@@ -125,7 +121,6 @@ export const NestedMixed: Story = {
   )
 }
 
-// ReUI c-resizable-4 — nested resizable with grip handles.
 export const Nested: Story = {
   render: () => (
     <ResizablePanelGroup style={styles.frame}>
@@ -148,7 +143,6 @@ export const Nested: Story = {
   )
 }
 
-// ReUI c-resizable-5 — handle with animated pill indicator.
 export const PillIndicator: Story = {
   render: () => (
     <ResizablePanelGroup style={styles.frame}>
@@ -163,7 +157,6 @@ export const PillIndicator: Story = {
   )
 }
 
-// ReUI c-resizable-6 — handle pill with spring scale on drag.
 export const PillSpring: Story = {
   render: () => (
     <ResizablePanelGroup style={styles.frame}>
@@ -178,7 +171,6 @@ export const PillSpring: Story = {
   )
 }
 
-// ReUI c-resizable-7 — handle with large capsule expansion on drag.
 export const CapsuleExpansion: Story = {
   render: () => (
     <ResizablePanelGroup style={styles.frame}>
@@ -193,7 +185,6 @@ export const CapsuleExpansion: Story = {
   )
 }
 
-// ReUI c-resizable-8 — nested layout with animated pill handles.
 export const NestedPills: Story = {
   render: () => (
     <ResizablePanelGroup style={styles.frame}>
@@ -216,7 +207,6 @@ export const NestedPills: Story = {
   )
 }
 
-// ReUI c-resizable-9 — three-panel layout with animated pill handles.
 export const ThreePanels: Story = {
   render: () => (
     <ResizablePanelGroup style={styles.frame}>
@@ -235,7 +225,6 @@ export const ThreePanels: Story = {
   )
 }
 
-// ReUI c-resizable-10 — state-tracked resizable layout.
 export const StateTracked: Story = {
   render: () => {
     const [sizes, setSizes] = React.useState<Record<string, number>>({

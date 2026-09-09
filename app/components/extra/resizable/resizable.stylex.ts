@@ -20,19 +20,22 @@ export const resizableStyles = stylex.create({
     backgroundColor: {
       default: colors.borderNeutral,
       ':hover': colors.foregroundNeutralFaded,
-      ':active': colors.foregroundPrimary
+      ':active': colors.foregroundPrimary,
+      ':focus-visible': colors.foregroundPrimary
+    },
+    borderRadius: radius.full,
+    boxShadow: {
+      default: 'none',
+      ':focus-visible': `0 0 0 ${stroke.ring3} color-mix(in srgb, ${colors.foregroundPrimary} 50%, transparent)`
     },
     cursor: 'col-resize',
     display: 'flex',
     justifyContent: 'center',
-    outline: {
-      default: 'none',
-      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
-    },
-    outlineOffset: stroke.ring2,
+    outline: 'none',
     position: 'relative',
-    transitionDuration: duration.fast,
-    transitionProperty: 'background-color',
+    transitionDuration: duration.medium,
+    transitionProperty: 'background-color, box-shadow',
+    transitionTimingFunction: easing.decelerate,
     userSelect: 'none',
     width: stroke.ring1
   },
@@ -40,6 +43,25 @@ export const resizableStyles = stylex.create({
     cursor: 'row-resize',
     height: stroke.ring1,
     width: '100%'
+  },
+  handleHitArea: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    zIndex: zIndex.relative
+  },
+  handleHitAreaHorizontalGroup: {
+    bottom: 0,
+    left: '50%',
+    top: 0,
+    transform: 'translateX(-50%)',
+    width: unit.x2
+  },
+  handleHitAreaVerticalGroup: {
+    height: unit.x2,
+    left: 0,
+    right: 0,
+    top: '50%',
+    transform: 'translateY(-50%)'
   },
   handleCapsule: {
     backgroundColor: {
@@ -51,7 +73,8 @@ export const resizableStyles = stylex.create({
     backgroundColor: {
       default: colors.borderNeutral,
       [stylex.when.ancestor(':hover')]: colors.foregroundNeutralFaded,
-      [stylex.when.ancestor(':active')]: colors.foregroundPrimary
+      [stylex.when.ancestor(':active')]: colors.foregroundPrimary,
+      [stylex.when.ancestor(':focus-visible')]: colors.foregroundPrimary
     },
     borderRadius: radius.full,
     flexShrink: 0,
@@ -60,7 +83,6 @@ export const resizableStyles = stylex.create({
     transitionTimingFunction: easing.standard,
     zIndex: zIndex.relative
   },
-  // ReUI c5 — animated pill indicator.
   pillHorizontalGroup: {
     height: {
       default: unit.x6,
@@ -83,7 +105,6 @@ export const resizableStyles = stylex.create({
       [stylex.when.ancestor(':active')]: unit.x12
     }
   },
-  // ReUI c6 — pill with spring scale on drag.
   springHorizontalGroup: {
     height: {
       default: unit.x8,
@@ -114,7 +135,6 @@ export const resizableStyles = stylex.create({
       [stylex.when.ancestor(':active')]: unit.x14
     }
   },
-  // ReUI c7 — large capsule expansion on drag.
   capsuleHorizontalGroup: {
     height: {
       default: unit.x6,

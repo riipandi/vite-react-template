@@ -17,7 +17,7 @@ import {
 } from '#/components/extra/card'
 import { Text } from '#/components/extra/text'
 import { ThemeSwitcher } from '#/components/theme'
-import { useAuthentication } from '#/libraries/guard/auth-provider'
+import { useAuthentication, useAuthUser } from '#/libraries/guard/auth-provider'
 import { pageStyles } from '#/styles/pages/page.stylex'
 import { styles } from '#/styles/pages/settings.stylex'
 
@@ -29,7 +29,8 @@ export const Route = createFileRoute('/(app)/settings')({
 })
 
 function RouteComponent() {
-  const { user, logout } = useAuthentication()
+  const user = useAuthUser()
+  const { logout } = useAuthentication()
   const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(' ') || 'Guest'
   const initials =
     [user?.firstName?.[0], user?.lastName?.[0]].filter(Boolean).join('').toUpperCase() || 'G'

@@ -2,7 +2,7 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect, useRouter } from '@tanstack/react-router'
 import { MenuIcon } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useSyncExternalStore } from 'react'
 import { closeSidebar, useSidebarOpen, useSidebarCollapsed } from '#/libraries/app.store'
 import { toggleSidebar, toggleSidebarCollapsed } from '#/libraries/app.store'
 import { ensureSessionLoaded } from '#/libraries/guard/auth-session'
@@ -25,20 +25,24 @@ export const Route = createFileRoute('/(app)')({
   }
 })
 
+// Token breakpoint: 660px — keep in sync with the media queries in the root-layout/sidebar stylex files.
+const mobileQuery = '(max-width: 659px)'
+const mobileMq = window.matchMedia(mobileQuery)
+
+function subscribeMobile(onChange: () => void) {
+  mobileMq.addEventListener('change', onChange)
+  return () => mobileMq.removeEventListener('change', onChange)
+}
+
+function getMobileSnapshot(): boolean {
+  return mobileMq.matches
+}
+
 function RouteComponent() {
   const router = useRouter()
   const sidebarOpen = useSidebarOpen()
   const collapsed = useSidebarCollapsed()
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 659px)').matches)
-
-  useEffect(() => {
-    // Keep in sync with the `breakpoints.small` media queries in
-    // root-layout/sidebar stylex files (token breakpoint: 660px).
-    const mq = window.matchMedia('(max-width: 659px)')
-    const handler = (event: MediaQueryListEvent) => setIsMobile(event.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
+  const isMobile = useSyncExternalStore(subscribeMobile, getMobileSnapshot, () => false)
 
   // Close sidebar on route change (mobile). `onResolved` fires after every
   // navigation; closing an already-closed sidebar is a no-op state write.

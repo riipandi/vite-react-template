@@ -1,6 +1,6 @@
 import { useNavigate, useRouter } from '@tanstack/react-router'
 import { useSelector } from '@tanstack/react-store'
-import { createContext, useContext, useEffect } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo } from 'react'
 import type { LoginCredentials } from '#/schemas/auth.schema'
 import type { User } from '#/schemas/user.schema'
 import type { AuthLoginOptions } from './auth-engine'
@@ -12,6 +12,14 @@ import { authWorker } from './auth-worker-client'
 /** Subscribe to the session state (selector-based, minimal re-renders). */
 export function useAuth(): AuthState {
   return useSelector(authStore, (state) => state)
+}
+
+/**
+ * Subscribe to just the user profile — components that only render user
+ * data skip re-renders triggered by `isLoading` flips.
+ */
+export function useAuthUser(): User | null {
+  return useSelector(authStore, (state) => state.user)
 }
 
 /** Worker login options plus the post-login redirect target. */
@@ -65,34 +73,34 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
   }, [])
 
   // The worker establishes the cookie session; tokens never reach JS.
-  const handleLogin = async (credentials: LoginCredentials, options?: AuthLoginContextOptions) => {
-    const { redirectTo, ...workerOptions } = options ?? {}
-    const profile = await authWorker().login(credentials, workerOptions)
-    setAuthUser(profile)
-    const target = safeReturnTo(redirectTo)
-    if (target) {
-      router.history.push(target)
-    } else {
-      navigate({ to: '/overview' })
-    }
-  }
+  const handleLogin = useCallback(
+    async (credentials: LoginCredentials, options?: AuthLoginContextOptions) => {
+      const { redirectTo, ...workerOptions } = options ?? {}
+      const profile = await authWorker().login(credentials, workerOptions)
+      setAuthUser(profile)
+      const target = safeReturnTo(redirectTo)
+      if (target) {
+        router.history.push(target)
+      } else {
+        navigate({ to: '/overview' })
+      }
+    },
+    [navigate, router]
+  )
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     void authWorker()
       .logout()
       .finally(() => {
         clearAuth()
         navigate({ to: '/login', search: { loggedOut: true } })
       })
-  }
+  }, [navigate])
 
-  const context = {
-    user,
-    loggedIn,
-    isLoading,
-    login: handleLogin,
-    logout: handleLogout
-  } satisfies AuthContext
+  const context = useMemo(
+    () => ({ user, loggedIn, isLoading, login: handleLogin, logout: handleLogout }),
+    [user, loggedIn, isLoading, handleLogin, handleLogout]
+  )
 
   return <AuthContextReact.Provider value={context}>{children}</AuthContextReact.Provider>
 }

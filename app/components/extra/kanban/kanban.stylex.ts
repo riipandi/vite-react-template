@@ -148,6 +148,9 @@ export const kanbanStyles = stylex.create({
       gap: unit.x1
     }
   },
+  columnContentEmpty: {
+    minHeight: 0
+  },
   item: {
     backgroundColor: colors.backgroundPage,
     borderColor: colors.borderNeutralFaded,
@@ -196,9 +199,6 @@ export const kanbanStyles = stylex.create({
   itemDisabled: {
     opacity: 0.5
   },
-  // Size is pinned by KanbanOverlay to the dragged element's rect. No shadow
-  // here: the wrapper is square-cornered, so its shadow would read as a
-  // sharp border under the rounded card — elevation belongs to the content.
   overlayContent: {
     cursor: 'grabbing',
     opacity: 0.85,

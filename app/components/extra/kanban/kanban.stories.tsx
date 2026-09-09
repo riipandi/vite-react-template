@@ -2,20 +2,16 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
 import { GripVerticalIcon } from 'lucide-react'
 import { useState } from 'react'
+import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
+import { Meter } from '#/components/base/meter'
+import { Progress } from '#/components/base/progress'
 import { toast } from '#/components/base/toast'
 import { Badge } from '#/components/extra/badge'
-import {
-  Kanban,
-  KanbanBoard,
-  KanbanColumn,
-  KanbanColumnContent,
-  KanbanColumnHandle,
-  KanbanItem,
-  KanbanOverlay
-} from '#/components/extra/kanban'
+import { Kanban, KanbanBoard, KanbanItem, KanbanOverlay } from '#/components/extra/kanban'
+import { KanbanColumn, KanbanColumnContent, KanbanColumnHandle } from '#/components/extra/kanban'
 import { colors, shadow } from '#/styles/core/colors.stylex'
-import { container, radius, stroke, unit } from '#/styles/core/tokens.stylex'
+import { radius, stroke, unit } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight, fontWeight } from '#/styles/core/tokens.stylex'
 
 const meta = {
@@ -41,13 +37,6 @@ const styles = stylex.create({
   },
   fillWidth: {
     width: '100%'
-  },
-  boardNarrow: {
-    maxWidth: container.xlarge,
-    width: '100%'
-  },
-  boardTwoColumns: {
-    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
   },
   toolbar: {
     alignItems: 'center',
@@ -100,8 +89,6 @@ const styles = stylex.create({
     height: unit.x3,
     width: unit.x3
   }),
-  // "Frame columns" look (ReUI c-kanban-3): the column is a flat muted frame,
-  // items live in a white panel card nested inside it.
   frameColumn: {
     backgroundColor: colors.backgroundNeutralFaded,
     boxShadow: 'none',
@@ -125,6 +112,11 @@ const styles = stylex.create({
     flexDirection: 'column',
     padding: unit.x1
   },
+  framePanelEmpty: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    padding: 0
+  },
   frameContent: {
     gap: unit.x1
   },
@@ -134,6 +126,41 @@ const styles = stylex.create({
   },
   frameItemTitle: {
     flex: 1
+  },
+  frameDescription: {
+    color: colors.foregroundNeutralFaded,
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.caption1,
+    lineHeight: fontLineHeight.caption1,
+    paddingInline: unit.x2
+  },
+  assigneeRow: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: unit.x1_5
+  },
+  assigneeName: {
+    color: colors.foregroundNeutralFaded,
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.caption1,
+    lineHeight: fontLineHeight.caption1
+  },
+  taskProgressRow: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: unit.x2,
+    marginBlockStart: unit.x1
+  },
+  taskProgress: {
+    flex: 1,
+    minWidth: 0
+  },
+  taskProgressValue: {
+    color: colors.foregroundNeutralFaded,
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.caption1,
+    fontVariantNumeric: 'tabular-nums',
+    lineHeight: fontLineHeight.caption1
   },
   statusDot: (color: string) => ({
     backgroundColor: color,
@@ -176,20 +203,6 @@ const styles = stylex.create({
     backgroundColor: colors.backgroundPositiveFaded,
     color: colors.foregroundPositive
   },
-  progressBar: {
-    backgroundColor: colors.backgroundNeutralFaded,
-    borderRadius: radius.full,
-    height: unit.x1,
-    marginBlockStart: unit.x2,
-    overflow: 'hidden',
-    width: '100%'
-  },
-  progressFill: (progress: number) => ({
-    backgroundColor: colors.backgroundPrimary,
-    borderRadius: radius.full,
-    height: '100%',
-    width: `${progress}%`
-  }),
   overlayCard: {
     backgroundColor: colors.backgroundElevationBase,
     borderColor: colors.borderNeutralFaded,
@@ -266,13 +279,6 @@ const styles = stylex.create({
     lineHeight: fontLineHeight.caption1,
     marginBlockEnd: unit.x1
   },
-  overlayProgressBar: {
-    backgroundColor: colors.backgroundNeutralFaded,
-    borderRadius: radius.full,
-    height: unit.x1,
-    overflow: 'hidden',
-    width: '100%'
-  },
   overlayDashed: {
     borderStyle: 'dashed'
   },
@@ -309,11 +315,14 @@ interface Task {
   description?: string
   priority?: 'high' | 'medium' | 'low'
   progress?: number
+  assignee?: string
+  assigneeAvatar?: string
 }
 
 interface Column {
   id: string
   title: string
+  description?: string
   color?: string
   tasks: Task[]
 }
@@ -620,7 +629,12 @@ export const FrameColumns: Story = {
                     <GripVerticalIcon size={16} />
                   </KanbanColumnHandle>
                 </div>
-                <div {...stylex.props(styles.framePanel)}>
+                <div
+                  {...stylex.props(
+                    styles.framePanel,
+                    column.tasks.length === 0 && styles.framePanelEmpty
+                  )}
+                >
                   <KanbanColumnContent value={column.id} style={styles.frameContent}>
                     {column.tasks.map((task) => (
                       <KanbanItem key={task.id} value={task.id} style={styles.frameItem}>
@@ -666,20 +680,56 @@ export const StackedFrame: Story = {
   render: () => {
     const [columns, setColumns] = useState<Column[]>([
       {
-        id: 'backlog',
-        title: 'Backlog',
+        id: 'planning',
+        title: 'Planning',
+        description: 'Tasks being scoped',
         tasks: [
-          { id: 'task-1', title: 'Setup repository', priority: 'low' },
-          { id: 'task-2', title: 'Define requirements', priority: 'medium' }
+          {
+            id: 'task-1',
+            title: 'Research competitors',
+            assignee: 'Alex J.',
+            assigneeAvatar:
+              'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=96&h=96&dpr=2&q=80',
+            progress: 20
+          }
         ]
       },
       {
-        id: 'sprint',
-        title: 'Sprint',
+        id: 'active',
+        title: 'Active',
+        description: 'Currently in development',
         tasks: [
-          { id: 'task-3', title: 'Build kanban board', priority: 'high' },
-          { id: 'task-4', title: 'Add drag and drop', priority: 'high' },
-          { id: 'task-5', title: 'Write tests', priority: 'medium' }
+          {
+            id: 'task-2',
+            title: 'Build dashboard',
+            assignee: 'Sarah C.',
+            assigneeAvatar:
+              'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=96&h=96&dpr=2&q=80',
+            progress: 65
+          },
+          {
+            id: 'task-3',
+            title: 'API integration',
+            assignee: 'David K.',
+            assigneeAvatar:
+              'https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=96&h=96&dpr=2&q=80',
+            progress: 40
+          }
+        ]
+      },
+      {
+        id: 'completed',
+        title: 'Completed',
+        description: 'Finished and deployed',
+        tasks: [
+          {
+            id: 'task-4',
+            title: 'Setup repository',
+            assignee: 'Emma W.',
+            assigneeAvatar:
+              'https://images.unsplash.com/photo-1485893086445-ed75865251e0?w=96&h=96&dpr=2&q=80',
+            progress: 100
+          }
         ]
       }
     ])
@@ -703,12 +753,12 @@ export const StackedFrame: Story = {
           value={value}
           onValueChange={handleValueChange}
           getItemValue={(task) => task.id}
-          style={styles.boardNarrow}
+          style={styles.fillWidth}
         >
-          <KanbanBoard style={styles.boardTwoColumns}>
+          <KanbanBoard>
             {columns.map((column) => (
-              <KanbanColumn key={column.id} value={column.id}>
-                <div {...stylex.props(styles.columnHeader)}>
+              <KanbanColumn key={column.id} value={column.id} style={styles.frameColumn}>
+                <div {...stylex.props(styles.frameHeader)}>
                   <span {...stylex.props(styles.columnTitle)}>{column.title}</span>
                   <Badge variant='outline' style={styles.columnCount}>
                     {column.tasks.length}
@@ -717,26 +767,38 @@ export const StackedFrame: Story = {
                     <GripVerticalIcon size={16} />
                   </KanbanColumnHandle>
                 </div>
-                <KanbanColumnContent value={column.id}>
-                  {column.tasks.map((task) => (
-                    <KanbanItem key={task.id} value={task.id}>
-                      <div {...stylex.props(styles.itemTitleRow)}>
-                        <div
-                          {...stylex.props(
-                            styles.statusDot(
-                              task.priority === 'high'
-                                ? colors.backgroundCritical
-                                : task.priority === 'medium'
-                                  ? colors.backgroundWarning
-                                  : colors.backgroundPositive
-                            )
-                          )}
-                        />
-                        <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
-                      </div>
-                    </KanbanItem>
-                  ))}
-                </KanbanColumnContent>
+                {column.description && (
+                  <span {...stylex.props(styles.frameDescription)}>{column.description}</span>
+                )}
+                <div
+                  {...stylex.props(
+                    styles.framePanel,
+                    column.tasks.length === 0 && styles.framePanelEmpty
+                  )}
+                >
+                  <KanbanColumnContent value={column.id} style={styles.frameContent}>
+                    {column.tasks.map((task) => (
+                      <KanbanItem key={task.id} value={task.id} style={styles.frameItem}>
+                        <div {...stylex.props(styles.itemBody)}>
+                          <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
+                          <div {...stylex.props(styles.assigneeRow)}>
+                            <Avatar size='sm'>
+                              <AvatarImage src={task.assigneeAvatar} alt={task.assignee} />
+                              <AvatarFallback>{task.assignee?.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <span {...stylex.props(styles.assigneeName)}>{task.assignee}</span>
+                          </div>
+                          <div {...stylex.props(styles.taskProgressRow)}>
+                            <Progress value={task.progress ?? 0} style={styles.taskProgress} />
+                            <span {...stylex.props(styles.taskProgressValue)}>
+                              {task.progress}%
+                            </span>
+                          </div>
+                        </div>
+                      </KanbanItem>
+                    ))}
+                  </KanbanColumnContent>
+                </div>
               </KanbanColumn>
             ))}
           </KanbanBoard>
@@ -862,8 +924,11 @@ export const FeatureRoadmap: Story = {
                           <span {...stylex.props(styles.itemDescription)}>{task.description}</span>
                         )}
                         {task.progress != null && task.progress > 0 && (
-                          <div {...stylex.props(styles.progressBar)}>
-                            <div {...stylex.props(styles.progressFill(task.progress))} />
+                          <div {...stylex.props(styles.taskProgressRow)}>
+                            <Progress value={task.progress} style={styles.taskProgress} />
+                            <span {...stylex.props(styles.taskProgressValue)}>
+                              {task.progress}%
+                            </span>
                           </div>
                         )}
                       </div>
@@ -893,9 +958,7 @@ export const FeatureRoadmap: Story = {
                         <span>Progress</span>
                         <span>{task.progress}%</span>
                       </div>
-                      <div {...stylex.props(styles.overlayProgressBar)}>
-                        <div {...stylex.props(styles.progressFill(task.progress))} />
-                      </div>
+                      <Meter value={task.progress} />
                     </div>
                   )}
                 </div>

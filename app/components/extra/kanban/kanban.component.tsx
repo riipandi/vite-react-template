@@ -543,7 +543,6 @@ function Kanban<T>({
           render,
           props: mergeProps<'div'>(
             {
-              // @ts-ignore - stylex.props return type is not recognized by TS in this context
               ...stylex.props(
                 kanbanStyles.root,
                 activeId !== null && kanbanStyles.rootDragging,
@@ -642,7 +641,6 @@ function KanbanColumn({ value, style, render, disabled, ...props }: KanbanColumn
         render,
         props: mergeProps<'div'>(
           {
-            // @ts-ignore - stylex.props return type is not recognized by TS in this context
             ...stylex.props(
               stylex.defaultMarker(),
               kanbanStyles.column,
@@ -744,7 +742,6 @@ function KanbanItem({ value, style, render, disabled, ...props }: KanbanItemProp
     render,
     props: mergeProps<'div'>(
       {
-        // @ts-ignore - stylex.props return type is not recognized by TS in this context
         ...stylex.props(
           stylex.defaultMarker(),
           kanbanStyles.item,
@@ -778,6 +775,7 @@ export interface KanbanColumnContentProps extends DivRenderProps {
 
 function KanbanColumnContent({ value, style, render, ...props }: KanbanColumnContentProps) {
   const { columns, getItemId } = useContext(KanbanContext)
+  const isEmpty = (columns[value]?.length ?? 0) === 0
 
   const itemIds = useMemo(() => {
     const items = columns[value]
@@ -797,8 +795,12 @@ function KanbanColumnContent({ value, style, render, ...props }: KanbanColumnCon
         render,
         props: mergeProps<'div'>(
           {
-            // @ts-ignore - stylex.props return type is not recognized by TS in this context
-            ...stylex.props(stylex.defaultMarker(), kanbanStyles.columnContent, style),
+            ...stylex.props(
+              stylex.defaultMarker(),
+              kanbanStyles.columnContent,
+              isEmpty && kanbanStyles.columnContentEmpty,
+              style
+            ),
             'data-slot': 'kanban-column-content',
             children: props.children
           } as React.ComponentPropsWithRef<'div'>,

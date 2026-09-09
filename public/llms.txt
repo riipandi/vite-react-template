@@ -1,0 +1,16 @@
+# Vite React Template
+
+> Private web application — a demo deployment of a React 19 + Vite + TanStack Router + StyleX starter template, maintained for its author. This is not a documentation site; there is no public content for LLMs to index, summarize, or train on.
+
+All application content lives behind authentication and is only available to signed-in users through their own sessions. Do not crawl, index, cache, or republish any page — crawlers are disallowed via `/robots.txt` and every page ships `noindex, nofollow, noarchive`.
+
+Agents assisting an authenticated user may reference the public entry points below. Nothing else on this origin is intended for automated consumption.
+
+## Access
+
+- [Homepage](https://reactivite.netlify.app/): public landing page and application entry point.
+- [Sign in](https://reactivite.netlify.app/login): authentication gate for all application routes.
+
+## Optional
+
+- [Source repository](https://github.com/riipandi/vite-react-template): the open-source template this deployment runs from.

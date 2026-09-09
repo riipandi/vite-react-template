@@ -16,6 +16,15 @@ TZ = "Asia/Jakarta"
   to = "/index.html"
   status = 200
 
+# Default for every served path — documents and SPA deep links always
+# revalidate (Netlify purges its CDN on each deploy, so this only costs a
+# cheap conditional request and guarantees fresh asset references). Later
+# matching rules below override this for content-addressed assets.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
 [[headers]]
   for = "/assets/*"
   [headers.values]

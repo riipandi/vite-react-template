@@ -1,17 +1,12 @@
-import { ScrollArea as ScrollAreaPrimitive } from '@base-ui/react/scroll-area'
+import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area'
 import * as stylex from '@stylexjs/stylex'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { JSX, PointerEvent, ReactNode } from 'react'
 import { Button } from '#/components/base/button'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '#/components/base/select'
+import { SelectContent, SelectTrigger, SelectValue } from '#/components/base/select'
+import { Select, SelectItem } from '#/components/base/select'
 import { Skeleton } from '#/components/extra/skeleton'
 import { useDataGrid } from './data-grid'
 import { dataGridPaginationStyles } from './data-grid-table.stylex'
@@ -48,7 +43,7 @@ interface ObservedElements {
 }
 
 type DataGridScrollAreaProps = Omit<
-  ScrollAreaPrimitive.Root.Props,
+  BaseScrollArea.Root.Props,
   'children' | 'className' | 'style'
 > & {
   children: ReactNode
@@ -560,7 +555,7 @@ function DataGridScrollArea({
 
   return (
     <div ref={containerRef} {...stylex.props(s.root)}>
-      <ScrollAreaPrimitive.Root
+      <BaseScrollArea.Root
         data-slot='data-grid-scroll-area'
         // Styling hook: present while the sticky-header scroll mode detects
         // vertical overflow, so consumers can style scrollable vs short
@@ -569,18 +564,18 @@ function DataGridScrollArea({
         {...props}
         {...stylex.props(s.root, style)}
       >
-        <ScrollAreaPrimitive.Viewport
+        <BaseScrollArea.Viewport
           ref={viewportRef}
           data-slot='scroll-area-viewport'
           {...stylex.props(s.viewport)}
         >
-          <ScrollAreaPrimitive.Content data-slot='scroll-area-content'>
+          <BaseScrollArea.Content data-slot='scroll-area-content'>
             {children}
-          </ScrollAreaPrimitive.Content>
-        </ScrollAreaPrimitive.Viewport>
+          </BaseScrollArea.Content>
+        </BaseScrollArea.Viewport>
 
         {showHorizontal && (
-          <ScrollAreaPrimitive.Scrollbar
+          <BaseScrollArea.Scrollbar
             data-slot='data-grid-scrollbar'
             data-orientation='horizontal'
             orientation='horizontal'
@@ -591,21 +586,21 @@ function DataGridScrollArea({
                 scrollbarInset.inset(scrollbarInsetStart, scrollbarInsetEnd)
             )}
           >
-            <ScrollAreaPrimitive.Thumb data-slot='data-grid-thumb' {...stylex.props(s.thumb)} />
-          </ScrollAreaPrimitive.Scrollbar>
+            <BaseScrollArea.Thumb data-slot='data-grid-thumb' {...stylex.props(s.thumb)} />
+          </BaseScrollArea.Scrollbar>
         )}
 
         {showVertical && !usesCustomVerticalScrollbar && (
-          <ScrollAreaPrimitive.Scrollbar
+          <BaseScrollArea.Scrollbar
             data-slot='data-grid-scrollbar'
             data-orientation='vertical'
             orientation='vertical'
             {...stylex.props(s.scrollbar, s.scrollbarVertical)}
           >
-            <ScrollAreaPrimitive.Thumb data-slot='data-grid-thumb' {...stylex.props(s.thumb)} />
-          </ScrollAreaPrimitive.Scrollbar>
+            <BaseScrollArea.Thumb data-slot='data-grid-thumb' {...stylex.props(s.thumb)} />
+          </BaseScrollArea.Scrollbar>
         )}
-      </ScrollAreaPrimitive.Root>
+      </BaseScrollArea.Root>
 
       {usesCustomVerticalScrollbar && hasCustomVerticalOverflow && (
         <div ref={setOverlayRef} aria-hidden='true' {...stylex.props(s.overlay)}>

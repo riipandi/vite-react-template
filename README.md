@@ -86,11 +86,14 @@ using HttpOnly cookie sessions. Use any valid [DummyJSON user](https://dummyjson
 
 Tick **Remember me** to extend the session lifetime to 30 days.
 
+> [!IMPORTANT]
+> Cookie auth needs a same-origin API. `pnpm dev`, `pnpm preview`, and `pnpm start`
+> all ship with the same-origin proxy (`start`/`preview` serve the production
+> build via Vite). See [Deploying the SPA](#deploying-the-spa).
+
 ## Deploy your own
 
-You'll want to fork this repository and deploy your own Next.js website. Once you have an
-image generator that sparks joy, you can setup [automatic GitHub](https://vercel.com/github)
-deployments so that pushing to master will deploy to production! 🚀
+Fork this repository, connect it to Netlify, and pushing to master will deploy to production! 🚀
 
 <p>
   <a href="https://vercel.com/new/clone?repository-url=https://github.com/riipandi/vite-react-template&project-name=vite-react-template&repo-name=my-vite-react-app&env=PUBLIC_SITE_URL">
@@ -103,6 +106,20 @@ deployments so that pushing to master will deploy to production! 🚀
     <img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare" height="32" />
   </a>
 </p>
+
+### Deploying the SPA
+
+The build output is a static SPA (`dist/`). Cookie-based auth requires a **same-site API** —
+browsers do not send `SameSite=Lax` cookies on cross-site requests. Pick one:
+
+- **Netlify** — works out of the box: [`netlify.toml`](./netlify.toml) proxies `/api` to the
+  demo backend (same-origin) and `netlify/functions` serves the session probe and logout.
+- **Own backend** (recommended for production) — set `PUBLIC_API_URL` to your API on the same
+  parent domain (e.g. `https://api.example.com`) and implement the auth endpoints
+  (`POST /auth/login`, `GET /auth/me`, `POST /auth/refresh`, `POST /auth/logout`,
+  `GET /auth/session`).
+- **Reverse proxy** — map `/api` to your backend server-side (nginx, Caddy, …) and keep
+  `PUBLIC_API_URL=/api`.
 
 ### Cloudflare Deployment
 

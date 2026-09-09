@@ -14,19 +14,31 @@ export async function me(): Promise<User> {
 }
 
 /**
- * Cheap session presence probe — always responds 200 (demo middleware or the
- * real backend), so anonymous visitors never trigger a 401 console error.
+ * Cheap session presence probe — responds 200 (demo middleware or the real
+ * backend), so anonymous visitors never trigger a 401 console error.
  *
- * Returns `true` when the probe endpoint is unavailable (e.g. a backend that
- * doesn't implement it yet) — the caller then falls back to `me()` directly.
+ * The endpoint is part of the production backend contract. When it is not
+ * reachable (e.g. a purely static deployment without a same-site API), warn
+ * once and treat the visitor as logged out.
  */
+let probeWarned = false
 async function hasSessionCookie(): Promise<boolean> {
   try {
     const response = await fetch(`${API_BASE_URL}/auth/session`)
-    if (!response.ok) return true
+    if (!response.ok) {
+      throw new Error(`unexpected status ${response.status}`)
+    }
     const data = (await response.json()) as { authenticated?: boolean }
     return data.authenticated === true
   } catch {
+    if (!probeWarned) {
+      probeWarned = true
+      console.warn(
+        '[auth] GET /auth/session unreachable — treat as logged out. ' +
+          'Cookie auth requires a same-site API: set PUBLIC_API_URL to your backend ' +
+          '(same parent domain) or proxy /api server-side. See README "Deploying the SPA".'
+      )
+    }
     return false
   }
 }

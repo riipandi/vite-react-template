@@ -328,7 +328,7 @@ const canvasStyle = stylex.create({
     boxSizing: 'border-box',
     display: 'flex',
     justifyContent: 'center',
-    minWidth: { default: 0, [breakpoints.medium]: container.xlarge },
+    minWidth: { default: 0, [breakpoints.xlarge]: container.xlarge },
     padding: { default: unit.x3, [breakpoints.medium]: unit.x5 },
     width: '100%'
   }

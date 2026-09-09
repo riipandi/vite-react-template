@@ -43,7 +43,7 @@ interface HeatmapProps {
   summary: string
 }
 
-export function Heatmap({ days, label, summary }: HeatmapProps) {
+function Heatmap({ days, label, summary }: HeatmapProps) {
   const weeks = Math.max(...days.map((day) => day.week)) + 1
 
   // One label per week column, merged while the month stays the same. Columns

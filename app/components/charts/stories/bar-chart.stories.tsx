@@ -25,7 +25,7 @@ import {
 const meta = {
   title: 'Visualizations/BarChart',
   component: undefined,
-  parameters: { layout: 'centered' },
+  parameters: { layout: 'padded' },
   tags: [], // ['autodocs']
   decorators: [canvasDecorator]
 } satisfies Meta

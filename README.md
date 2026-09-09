@@ -25,7 +25,7 @@ with [absolute import](https://jsdev.org/env/nodejs/absolute-path-imports/), [Ta
 and [other goodies](./package.json). Authentication is implemented using [DummyJSON](https://dummyjson.com) API
 with [ofetch](https://github.com/unjs/ofetch), easily replaceable with your own backend.
 
-Browse the component library live in [Storybook](https://reactivite-storybook.netlify.app/).
+Browse the component library live in [Storybook](https://reactivite.netlify.app/storybook/).
 
 > [!NOTE]
 > This project just a template that I use for my personal use, so you may encounter bugs.
@@ -114,7 +114,8 @@ browsers do not send `SameSite=Lax` cookies on cross-site requests. Pick one:
 
 - **Netlify** — works out of the box: [`netlify/functions/api.ts`](./netlify/functions/api.ts)
   transparently proxies every `/api/*` request (all HTTP methods) to the demo backend on the
-  site's own origin, so the HttpOnly session cookies stick.
+  site's own origin, so the HttpOnly session cookies stick. The deploy also publishes
+  Storybook under `/storybook/` (relative asset URLs, no extra base config needed).
 - **Own backend** (recommended for production) — set `PUBLIC_API_URL` to your API on the same
   parent domain (e.g. `https://api.example.com`) and implement the auth endpoints
   (`POST /auth/login`, `GET /auth/me`, `POST /auth/refresh`, `POST /auth/logout`,

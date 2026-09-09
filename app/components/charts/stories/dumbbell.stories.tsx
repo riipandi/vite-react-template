@@ -11,7 +11,7 @@ import { canvasDecorator, chartTheme, seriesColors } from '../chart.samples'
 const meta = {
   title: 'Visualizations/Dumbbell',
   component: undefined,
-  parameters: { layout: 'centered' },
+  parameters: { layout: 'padded' },
   tags: [], // ['autodocs']
   decorators: [canvasDecorator]
 } satisfies Meta

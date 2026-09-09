@@ -20,7 +20,7 @@ import {
 const meta = {
   title: 'Visualizations/ComboChart',
   component: undefined,
-  parameters: { layout: 'centered' },
+  parameters: { layout: 'padded' },
   tags: [], // ['autodocs']
   decorators: [canvasDecorator]
 } satisfies Meta

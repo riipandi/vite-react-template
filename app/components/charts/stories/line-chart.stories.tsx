@@ -19,7 +19,7 @@ import {
 const meta = {
   title: 'Visualizations/LineChart',
   component: undefined,
-  parameters: { layout: 'centered' },
+  parameters: { layout: 'padded' },
   tags: [], // ['autodocs']
   decorators: [canvasDecorator]
 } satisfies Meta

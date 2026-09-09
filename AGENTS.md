@@ -17,6 +17,8 @@ Run these with pnpm:
 
 - `pnpm dev` — dev server on port 3000 (strict port; fails if busy).
 - `pnpm build` — `tsr generate && tsc -b && vite build`; output to `dist/`.
+- `pnpm build:storybook` — Storybook build copied into `dist/storybook/` (run after `pnpm build`).
+- `pnpm build:all` — both builds in one go (what Netlify deploys).
 - `pnpm test` — unit tests (Vitest, project `unit`).
 - `pnpm test:storybook` — Storybook interaction tests (project `storybook`, real Chromium via Playwright).
 - `pnpm test:coverage` — unit tests with coverage (thresholds in `vitest.config.ts`).

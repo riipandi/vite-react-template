@@ -7,7 +7,9 @@
 # fallback.
 
 [build]
-  command = "pnpm build"
+  # Since Storybook 10, the build emits relative asset URLs, so subpath
+  # deployments work out of the box — no base/config override needed.
+  command = "pnpm run build"
   publish = "dist"
 
 # SPA fallback (existing assets and the /api/* function are served first).

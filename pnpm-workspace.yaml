@@ -51,6 +51,7 @@ minimumReleaseAgeExclude:
   - '@oxlint/binding-win32-arm64-msvc'
   - '@oxlint/binding-win32-ia32-msvc'
   - '@oxlint/binding-win32-x64-msvc'
+  - '@tanstack/charts'
   - '@tanstack/history'
   - '@tanstack/react-router'
   - '@tanstack/react-virtual'
@@ -60,6 +61,7 @@ minimumReleaseAgeExclude:
   - '@tanstack/router-plugin'
   - '@tanstack/virtual-core'
   - '@types/node'
+  - '@types/react'
   - '@types/react-dom'
   - '@vitest/browser'
   - '@vitest/browser-playwright'
@@ -75,4 +77,3 @@ minimumReleaseAgeExclude:
   - oxfmt
   - oxlint
   - vitest
-  - '@tanstack/charts@0.16.2'

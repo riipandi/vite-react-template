@@ -3,6 +3,7 @@ import { useSelector } from '@tanstack/react-store'
 import { createContext, useContext, useEffect } from 'react'
 import type { LoginCredentials } from '#/schemas/auth.schema'
 import type { User } from '#/schemas/user.schema'
+import type { AuthLoginOptions } from './auth-engine'
 import { ensureSessionLoaded, refreshIfExpiring } from './auth-session'
 import { authStore, clearAuth, setAuthUser, type AuthState } from './auth-store'
 import { authWorker } from './auth-worker-client'
@@ -15,9 +16,8 @@ export function useAuth(): AuthState {
 interface AuthContext {
   user: User | null
   loggedIn: boolean
-  /** True while the initial session bootstrap is running. */
   isLoading: boolean
-  login: (credentials: LoginCredentials) => Promise<void>
+  login: (credentials: LoginCredentials, options?: AuthLoginOptions) => Promise<void>
   logout: () => void
 }
 
@@ -56,9 +56,9 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     return () => document.removeEventListener('visibilitychange', onVisibilityChange)
   }, [])
 
-  const handleLogin = async (credentials: LoginCredentials) => {
+  const handleLogin = async (credentials: LoginCredentials, options?: AuthLoginOptions) => {
     // The worker establishes the cookie session; tokens never reach JS.
-    const profile = await authWorker().login(credentials)
+    const profile = await authWorker().login(credentials, options)
     setAuthUser(profile)
     navigate({ to: '/overview' })
   }

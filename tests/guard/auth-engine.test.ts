@@ -20,10 +20,10 @@ const profile = {
 }
 
 describe('auth engine', () => {
-  let fetchMock: ReturnType<typeof vi.fn<(input: unknown, init?: unknown) => Promise<Response>>>
+  let fetchMock: ReturnType<typeof vi.fn<typeof fetch>>
 
   beforeEach(() => {
-    fetchMock = vi.fn<(input: unknown, init?: unknown) => Promise<Response>>()
+    fetchMock = vi.fn<typeof fetch>()
     vi.stubGlobal('fetch', fetchMock)
   })
 
@@ -86,6 +86,21 @@ describe('auth engine', () => {
     })
     expect(user).not.toHaveProperty('accessToken')
     expect(user).not.toHaveProperty('refreshToken')
+  })
+
+  it('sends the remember-me flag and matching TTL to the backend', async () => {
+    // Fresh Response per call — a Response body can only be consumed once.
+    fetchMock.mockImplementation(async () => jsonResponse(profile))
+    const engine = createAuthEngine('http://test.local')
+
+    await engine.login({ username: 'emilys', password: 'emilyspass' }, { rememberMe: true })
+    const rememberedBody = JSON.parse(String(fetchMock.mock.calls[0]?.[1]?.body))
+
+    await engine.login({ username: 'emilys', password: 'emilyspass' })
+    const plainBody = JSON.parse(String(fetchMock.mock.calls[1]?.[1]?.body))
+
+    expect(rememberedBody).toMatchObject({ rememberMe: true, expiresInMins: 60 * 24 * 30 })
+    expect(plainBody).toMatchObject({ rememberMe: false, expiresInMins: 60 })
   })
 
   it('skips the network in maybeRefresh while the session is still fresh', async () => {

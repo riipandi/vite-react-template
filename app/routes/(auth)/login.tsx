@@ -54,7 +54,7 @@ function RouteComponent() {
     onSubmit: async ({ value }) => {
       setFailed(null)
       try {
-        await login(value)
+        await login(value, { rememberMe: remember })
       } catch (error: unknown) {
         setFailed(getErrorMessage(error))
       }

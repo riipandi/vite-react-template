@@ -4,7 +4,7 @@ import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { expect, userEvent } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
-import { fontSize } from '#/styles/core/tokens.stylex'
+import { fontSize, radius } from '#/styles/core/tokens.stylex'
 import { OTPField, OTPFieldGroup, OTPFieldSeparator, OTPFieldSlot } from './otp-field.component'
 
 const meta = {
@@ -45,12 +45,34 @@ const styles = stylex.create({
   value: {
     color: colors.foregroundNeutralFaded,
     fontSize: fontSize.body2
+  },
+  standalone: {
+    borderBottomLeftRadius: { default: radius.medium, ':first-child': radius.medium },
+    borderBottomRightRadius: { default: radius.medium, ':last-child': radius.medium },
+    borderTopLeftRadius: { default: radius.medium, ':first-child': radius.medium },
+    borderTopRightRadius: { default: radius.medium, ':last-child': radius.medium },
+    marginLeft: { default: 0, ':first-child': 0 }
   }
 })
 
 export default meta
 
 export const Playground: Story = {
+  args: { length: 6 },
+  render: (args) => (
+    <OTPField {...args}>
+      <OTPFieldSlot style={styles.standalone} />
+      <OTPFieldSlot style={styles.standalone} />
+      <OTPFieldSlot style={styles.standalone} />
+      <OTPFieldSlot style={styles.standalone} />
+      <OTPFieldSlot style={styles.standalone} />
+      <OTPFieldSlot style={styles.standalone} />
+    </OTPField>
+  )
+}
+
+export const Joined: Story = {
+  name: 'Joined slots',
   args: { length: 6 },
   render: (args) => (
     <OTPField {...args}>

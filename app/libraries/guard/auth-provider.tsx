@@ -1,17 +1,18 @@
 import { useNavigate } from '@tanstack/react-router'
 import { createContext, useContext, useEffect } from 'react'
-import { authStore, setAuthTokens, setAuthUser, setAuthLoading } from '#/libraries/auth.store'
-import { clearAuth } from '#/libraries/auth.store'
-import { login, me, tryRefresh } from '#/libraries/guard/auth-api'
+import { clearAuth, setAuthUser } from '#/libraries/auth.store'
 import { useAuth } from '#/libraries/guard/auth-hooks'
+import { ensureSessionLoaded, refreshIfExpiring } from '#/libraries/guard/auth-session'
+import { authWorker } from '#/libraries/guard/auth-worker-client'
+import type { LoginCredentials } from '#/schemas/auth.schema'
 import type { User } from '#/schemas/user.schema'
 
 interface AuthContext {
   user: User | null
   loggedIn: boolean
-  /** True while validating a stored token on initial load. */
+  /** True while the initial session bootstrap is running. */
   isLoading: boolean
-  login: (credentials: { username: string; password: string }) => Promise<void>
+  login: (credentials: LoginCredentials) => Promise<void>
   logout: () => void
 }
 
@@ -25,63 +26,45 @@ export const DefaultUserContext: AuthContext = {
 
 export const UserContext = createContext(DefaultUserContext)
 
+/** Refresh when the session expires within this window after the tab refocuses. */
+const REFRESH_ON_VISIBLE_WITHIN_MS = 5 * 60_000
+
 export function AuthProvider({ children }: React.PropsWithChildren) {
   const navigate = useNavigate()
   const { user, isLoading } = useAuth()
   const loggedIn = user !== null
 
-  // On mount, validate stored token by fetching the user profile.
-  // If the stored token is stale, attempt a refresh before giving up.
+  // Kick off the silent session bootstrap. Route guards await the same
+  // promise, so navigation never races the refresh.
   useEffect(() => {
-    let cancelled = false
-    const token = authStore.state.accessToken
-    if (!token) {
-      setAuthLoading(false)
-      return
-    }
-
-    async function validate() {
-      try {
-        const profile = await me()
-        if (!cancelled) setAuthUser(profile)
-      } catch {
-        const refreshed = await tryRefresh()
-        if (!cancelled && refreshed) {
-          try {
-            const profile = await me()
-            if (!cancelled) setAuthUser(profile)
-          } catch {
-            if (!cancelled) clearAuth()
-          }
-        } else if (!cancelled) {
-          clearAuth()
-        }
-      } finally {
-        if (!cancelled) setAuthLoading(false)
-      }
-    }
-
-    validate()
-    return () => {
-      cancelled = true
-    }
+    void ensureSessionLoaded()
   }, [])
 
-  const handleLogin = async (credentials: { username: string; password: string }) => {
-    const { accessToken, refreshToken, ...profile } = await login(credentials)
-    setAuthTokens(accessToken, refreshToken)
+  // The worker's proactive timer is throttled in background tabs — refresh
+  // on tab focus when the session is about to expire.
+  useEffect(() => {
+    const onVisibilityChange = () => {
+      if (document.visibilityState !== 'visible') return
+      void refreshIfExpiring(REFRESH_ON_VISIBLE_WITHIN_MS)
+    }
+    document.addEventListener('visibilitychange', onVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', onVisibilityChange)
+  }, [])
+
+  const handleLogin = async (credentials: LoginCredentials) => {
+    // The worker establishes the cookie session; tokens never reach JS.
+    const profile = await authWorker().login(credentials)
     setAuthUser(profile)
     navigate({ to: '/overview' })
   }
 
   const handleLogout = () => {
-    clearAuth()
-    navigate({
-      to: '/login',
-      search: {
-        loggedOut: true
-      }
-    })
+    void authWorker()
+      .logout()
+      .finally(() => {
+        clearAuth()
+        navigate({ to: '/login', search: { loggedOut: true } })
+      })
   }
 
   const context = {

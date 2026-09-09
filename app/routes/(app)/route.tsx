@@ -6,12 +6,15 @@ import { useEffect, useState } from 'react'
 import { closeSidebar, useSidebarOpen, useSidebarCollapsed } from '#/libraries/app.store'
 import { toggleSidebar, toggleSidebarCollapsed } from '#/libraries/app.store'
 import { isAuthenticated } from '#/libraries/auth.store'
+import { ensureSessionLoaded } from '#/libraries/guard/auth-session'
 import { styles } from '#/styles/element/root-layout.stylex'
 import { SideNavbar } from './-sidebar'
 
 export const Route = createFileRoute('/(app)')({
   component: RouteComponent,
-  beforeLoad: () => {
+  beforeLoad: async () => {
+    // Wait for the silent cookie-session bootstrap before deciding.
+    await ensureSessionLoaded()
     if (!isAuthenticated()) {
       throw redirect({ to: '/login' })
     }

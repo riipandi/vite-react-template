@@ -7,7 +7,7 @@ export function useAuth(): AuthState {
 }
 
 export function useLoggedIn(): boolean {
-  return useSelector(authStore, (state) => state.accessToken !== null && state.user !== null)
+  return useSelector(authStore, (state) => state.user !== null)
 }
 
 export function useAuthLoading(): boolean {

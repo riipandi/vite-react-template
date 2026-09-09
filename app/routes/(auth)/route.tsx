@@ -3,11 +3,13 @@ import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import { ThemeSwitcher } from '#/components/theme'
 import { isAuthenticated } from '#/libraries/auth.store'
+import { ensureSessionLoaded } from '#/libraries/guard/auth-session'
 import { styles } from '#/styles/element/auth-layout.stylex'
 
 export const Route = createFileRoute('/(auth)')({
   component: RouteComponent,
-  beforeLoad: () => {
+  beforeLoad: async () => {
+    await ensureSessionLoaded()
     if (isAuthenticated()) {
       throw redirect({ to: '/overview' })
     }

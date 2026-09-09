@@ -4,11 +4,13 @@ import { Link, createFileRoute, redirect } from '@tanstack/react-router'
 import { Text } from '#/components/extra/text'
 import { ThemeSwitcher } from '#/components/theme'
 import { isAuthenticated } from '#/libraries/auth.store'
+import { ensureSessionLoaded } from '#/libraries/guard/auth-session'
 import { homeStyles as s } from '#/styles/pages/home.stylex'
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
-  beforeLoad: () => {
+  beforeLoad: async () => {
+    await ensureSessionLoaded()
     if (isAuthenticated()) {
       throw redirect({ to: '/overview' })
     }

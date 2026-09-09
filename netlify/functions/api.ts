@@ -27,6 +27,14 @@ export default async (request: Request): Promise<Response> => {
     return Response.json({ authenticated }, { headers: { 'cache-control': 'no-store' } })
   }
 
+  // Function health check.
+  if (path === '/hello') {
+    return Response.json({
+      message: 'Hello from Netlify Functions!',
+      timestamp: new Date().toISOString()
+    })
+  }
+
   if (path === '/auth/logout') {
     const headers = new Headers()
     headers.append('Set-Cookie', 'accessToken=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax')

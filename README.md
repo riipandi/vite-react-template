@@ -75,6 +75,17 @@ Application will run at `http://localhost:3000`
 
 For detailed explanation on how things work, check out [Vite documentation](https://vitejs.dev/guide).
 
+### Demo Account
+
+Authentication hits the [DummyJSON](https://dummyjson.com) API through a same-origin proxy,
+using HttpOnly cookie sessions. Use any valid [DummyJSON user](https://dummyjson.com/users) to sign in, e.g.:
+
+| Username | Password      |
+|----------|---------------|
+| `emilys` | `emilyspass`  |
+
+Tick **Remember me** to extend the session lifetime to 30 days.
+
 ## Deploy your own
 
 You'll want to fork this repository and deploy your own Next.js website. Once you have an

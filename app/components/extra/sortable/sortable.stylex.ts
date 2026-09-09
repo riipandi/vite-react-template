@@ -36,8 +36,7 @@ export const sortableStyles = stylex.create({
   },
   itemOver: {
     backgroundColor: colors.backgroundPrimaryFaded,
-    borderColor: colors.borderPrimary,
-    transform: 'scale(1.01)'
+    borderColor: colors.borderPrimary
   },
   itemDisabled: {
     opacity: 0.5
@@ -67,22 +66,14 @@ export const sortableStyles = stylex.create({
     outline: 'none',
     touchAction: 'none',
     transitionDuration: duration.medium,
-    transitionProperty: 'color, opacity, transform',
+    transitionProperty: 'color, opacity',
     transitionTimingFunction: easing.decelerate,
-    width: unit.x6,
-    transform: 'scale(1)',
-    ':hover': {
-      transform: 'scale(1.05)'
-    },
-    ':active': {
-      transform: 'scale(0.95)'
-    }
+    width: unit.x6
   },
   handleDragging: {
     color: colors.foregroundPrimary,
     cursor: 'grabbing',
-    opacity: 1,
-    transform: 'scale(1.1)'
+    opacity: 1
   },
   handleHiddenDuringDrag: {
     opacity: {
@@ -91,27 +82,18 @@ export const sortableStyles = stylex.create({
       ':focus-visible': 0,
       ':active': 0,
       '@media (pointer: coarse)': 0
-    },
-    transform: 'scale(0.8)'
+    }
   },
   handleDisabled: {
     color: colors.foregroundDisabled,
     cursor: 'not-allowed',
-    opacity: 0.5,
-    transform: 'scale(1)'
+    opacity: 0.5
   },
   overlayContent: {
     boxShadow: shadow.raised,
     cursor: 'grabbing',
     opacity: 0.85,
     minWidth: 0,
-    pointerEvents: 'none',
-    transitionDuration: {
-      default: duration.medium,
-      '@media (prefers-reduced-motion: reduce)': '0ms'
-    },
-    transitionProperty: 'transform, box-shadow',
-    transitionTimingFunction: easing.decelerate,
-    transform: 'scale(1.02)'
+    pointerEvents: 'none'
   }
 })

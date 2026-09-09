@@ -4,7 +4,6 @@ export {
   KanbanColumn,
   KanbanColumnHandle,
   KanbanItem,
-  KanbanItemHandle,
   KanbanColumnContent,
   KanbanOverlay
 } from './kanban.component'
@@ -14,7 +13,6 @@ export type {
   KanbanColumnHandleProps,
   KanbanColumnProps,
   KanbanCommitMeta,
-  KanbanItemHandleProps,
   KanbanItemProps,
   KanbanMoveEvent,
   KanbanOverlayProps,

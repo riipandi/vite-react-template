@@ -4,6 +4,7 @@ import { GripVerticalIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '#/components/base/button'
 import { toast } from '#/components/base/toast'
+import { Badge } from '#/components/extra/badge'
 import {
   Kanban,
   KanbanBoard,
@@ -11,7 +12,6 @@ import {
   KanbanColumnContent,
   KanbanColumnHandle,
   KanbanItem,
-  KanbanItemHandle,
   KanbanOverlay
 } from '#/components/extra/kanban'
 import { colors, shadow } from '#/styles/core/colors.stylex'
@@ -81,17 +81,17 @@ const styles = stylex.create({
   },
   columnTitle: {
     color: colors.foregroundNeutral,
-    flex: 1,
     fontFamily: fontFamily.body,
     fontSize: fontSize.body2,
     fontWeight: fontWeight.semibold,
     lineHeight: fontLineHeight.body2
   },
   columnCount: {
-    color: colors.foregroundNeutralFaded,
-    fontFamily: fontFamily.body,
     fontSize: fontSize.caption1,
-    lineHeight: fontLineHeight.caption1
+    fontWeight: fontWeight.medium
+  },
+  handleEnd: {
+    marginInlineStart: 'auto'
   },
   colorDot: (color: string) => ({
     backgroundColor: color,
@@ -130,27 +130,14 @@ const styles = stylex.create({
     fontSize: fontSize.caption1,
     lineHeight: fontLineHeight.caption1
   },
-  priority: {
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    borderRadius: radius.small,
-    display: 'inline-flex',
-    fontFamily: fontFamily.body,
-    fontSize: fontSize.caption1,
-    fontWeight: fontWeight.medium,
-    lineHeight: fontLineHeight.caption1,
-    paddingBlock: unit.x0_5,
-    paddingInline: unit.x1
+  badgePriority: {
+    alignSelf: 'flex-start'
   },
-  priorityHigh: {
-    backgroundColor: colors.backgroundCriticalFaded,
-    color: colors.foregroundCritical
-  },
-  priorityMedium: {
+  badgeWarning: {
     backgroundColor: colors.backgroundWarningFaded,
     color: colors.foregroundWarning
   },
-  priorityLow: {
+  badgePositive: {
     backgroundColor: colors.backgroundPositiveFaded,
     color: colors.foregroundPositive
   },
@@ -246,6 +233,9 @@ const styles = stylex.create({
     height: unit.x1,
     overflow: 'hidden',
     width: '100%'
+  },
+  overlayDashed: {
+    borderStyle: 'dashed'
   }
 })
 
@@ -316,13 +306,52 @@ function getColumnsValue(columns: Column[]) {
   return value
 }
 
-function priorityChip(priority: NonNullable<Task['priority']>) {
-  return stylex.props(
-    styles.priority,
-    priority === 'high' && styles.priorityHigh,
-    priority === 'medium' && styles.priorityMedium,
-    priority === 'low' && styles.priorityLow
+function PriorityBadge({ priority }: { priority: NonNullable<Task['priority']> }) {
+  // `alignSelf` keeps the badge at its intrinsic width inside the flex-column
+  // item body, which would otherwise stretch it full width.
+  if (priority === 'high') {
+    return (
+      <Badge variant='destructive' style={styles.badgePriority}>
+        {priority}
+      </Badge>
+    )
+  }
+  if (priority === 'medium') {
+    return (
+      <Badge variant='ghost' style={[styles.badgePriority, styles.badgeWarning]}>
+        {priority}
+      </Badge>
+    )
+  }
+  return (
+    <Badge variant='ghost' style={[styles.badgePriority, styles.badgePositive]}>
+      {priority}
+    </Badge>
   )
+}
+
+/**
+ * DragOverlay owns the movement while dragging (the source stops following
+ * the pointer once the overlay mounts), so column drags must render visible
+ * overlay content or the board appears frozen.
+ */
+function columnOverlayPlaceholder(column: Column) {
+  return (
+    <div {...stylex.props(styles.overlayColumnCard, styles.overlayDashed)}>
+      <span {...stylex.props(styles.overlayColumnTitle)}>{column.title}</span>
+      <span {...stylex.props(styles.overlayCount)}>{column.tasks.length} tasks</span>
+    </div>
+  )
+}
+
+function columnLabel(id: string) {
+  return id === 'todo'
+    ? 'To Do'
+    : id === 'in-progress'
+      ? 'In Progress'
+      : id === 'done'
+        ? 'Done'
+        : id
 }
 
 // ---------------------------------------------------------------------------
@@ -364,22 +393,19 @@ export const PlaceholderOverlay: Story = {
             {columns.map((column) => (
               <KanbanColumn key={column.id} value={column.id}>
                 <div {...stylex.props(styles.columnHeader)}>
-                  <KanbanColumnHandle>
+                  <span {...stylex.props(styles.columnTitle)}>{column.title}</span>
+                  <Badge variant='outline' style={styles.columnCount}>
+                    {column.tasks.length}
+                  </Badge>
+                  <KanbanColumnHandle style={styles.handleEnd}>
                     <GripVerticalIcon size={16} />
                   </KanbanColumnHandle>
-                  <span {...stylex.props(styles.columnTitle)}>{column.title}</span>
-                  <span {...stylex.props(styles.columnCount)}>{column.tasks.length}</span>
                 </div>
                 <KanbanColumnContent value={column.id}>
                   {column.tasks.map((task) => (
                     <KanbanItem key={task.id} value={task.id}>
                       <div {...stylex.props(styles.itemBody)}>
-                        <div {...stylex.props(styles.itemTitleRow)}>
-                          <KanbanItemHandle>
-                            <GripVerticalIcon size={14} />
-                          </KanbanItemHandle>
-                          <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
-                        </div>
+                        <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
                         {task.description && (
                           <span {...stylex.props(styles.itemDescription)}>{task.description}</span>
                         )}
@@ -392,8 +418,12 @@ export const PlaceholderOverlay: Story = {
           </KanbanBoard>
           <KanbanOverlay>
             {({ value: activeId, variant }) => {
+              if (variant === 'column') {
+                const column = columns.find((col) => col.id === activeId)
+                return column ? columnOverlayPlaceholder(column) : null
+              }
               const task = columns.flatMap((col) => col.tasks).find((t) => t.id === activeId)
-              if (!task || variant !== 'item') return null
+              if (!task) return null
               return (
                 <div {...stylex.props(styles.overlayCard)}>
                   <span {...stylex.props(styles.overlayTitle)}>{task.title}</span>
@@ -440,25 +470,20 @@ export const DynamicOverlay: Story = {
             {columns.map((column) => (
               <KanbanColumn key={column.id} value={column.id}>
                 <div {...stylex.props(styles.columnHeader)}>
-                  <KanbanColumnHandle>
+                  <span {...stylex.props(styles.columnTitle)}>{column.title}</span>
+                  <Badge variant='outline' style={styles.columnCount}>
+                    {column.tasks.length}
+                  </Badge>
+                  <KanbanColumnHandle style={styles.handleEnd}>
                     <GripVerticalIcon size={16} />
                   </KanbanColumnHandle>
-                  <span {...stylex.props(styles.columnTitle)}>{column.title}</span>
-                  <span {...stylex.props(styles.columnCount)}>{column.tasks.length}</span>
                 </div>
                 <KanbanColumnContent value={column.id}>
                   {column.tasks.map((task) => (
                     <KanbanItem key={task.id} value={task.id}>
                       <div {...stylex.props(styles.itemBody)}>
-                        <div {...stylex.props(styles.itemTitleRow)}>
-                          <KanbanItemHandle>
-                            <GripVerticalIcon size={14} />
-                          </KanbanItemHandle>
-                          <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
-                        </div>
-                        {task.priority && (
-                          <span {...priorityChip(task.priority)}>{task.priority}</span>
-                        )}
+                        <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
+                        {task.priority && <PriorityBadge priority={task.priority} />}
                       </div>
                     </KanbanItem>
                   ))}
@@ -483,7 +508,7 @@ export const DynamicOverlay: Story = {
               return (
                 <div {...stylex.props(styles.overlayCard)}>
                   <span {...stylex.props(styles.overlayTitle)}>{task.title}</span>
-                  {task.priority && <span {...priorityChip(task.priority)}>{task.priority}</span>}
+                  {task.priority && <PriorityBadge priority={task.priority} />}
                 </div>
               )
             }}
@@ -533,7 +558,12 @@ export const FrameColumns: Story = {
                     )}
                   />
                   <span {...stylex.props(styles.columnTitle)}>{column.title}</span>
-                  <span {...stylex.props(styles.columnCount)}>{column.tasks.length}</span>
+                  <Badge variant='outline' style={styles.columnCount}>
+                    {column.tasks.length}
+                  </Badge>
+                  <KanbanColumnHandle style={styles.handleEnd}>
+                    <GripVerticalIcon size={16} />
+                  </KanbanColumnHandle>
                 </div>
                 <KanbanColumnContent value={column.id}>
                   {column.tasks.map((task) => (
@@ -560,8 +590,12 @@ export const FrameColumns: Story = {
           </KanbanBoard>
           <KanbanOverlay>
             {({ value: activeId, variant }) => {
+              if (variant === 'column') {
+                const column = columns.find((col) => col.id === activeId)
+                return column ? columnOverlayPlaceholder(column) : null
+              }
               const task = columns.flatMap((col) => col.tasks).find((t) => t.id === activeId)
-              if (!task || variant !== 'item') return null
+              if (!task) return null
               return (
                 <div {...stylex.props(styles.overlayCard)}>
                   <span {...stylex.props(styles.overlayTitle)}>{task.title}</span>
@@ -603,11 +637,14 @@ export const StackedFrame: Story = {
     const value = getColumnsValue(columns)
 
     const handleValueChange = (newValue: Record<string, Task[]>) => {
+      // The record's key order carries the column order — follow it.
       setColumns((prev) =>
-        prev.map((col) => ({
-          ...col,
-          tasks: newValue[col.id] ?? col.tasks
-        }))
+        Object.keys(newValue).map((id) => {
+          const existing = prev.find((col) => col.id === id)
+          return existing
+            ? { ...existing, tasks: newValue[id] ?? existing.tasks }
+            : { id, title: id, tasks: newValue[id] ?? [] }
+        })
       )
     }
 
@@ -624,7 +661,12 @@ export const StackedFrame: Story = {
               <KanbanColumn key={column.id} value={column.id}>
                 <div {...stylex.props(styles.columnHeader)}>
                   <span {...stylex.props(styles.columnTitle)}>{column.title}</span>
-                  <span {...stylex.props(styles.columnCount)}>{column.tasks.length}</span>
+                  <Badge variant='outline' style={styles.columnCount}>
+                    {column.tasks.length}
+                  </Badge>
+                  <KanbanColumnHandle style={styles.handleEnd}>
+                    <GripVerticalIcon size={16} />
+                  </KanbanColumnHandle>
                 </div>
                 <KanbanColumnContent value={column.id}>
                   {column.tasks.map((task) => (
@@ -754,22 +796,19 @@ export const FeatureRoadmap: Story = {
             {columns.map((column) => (
               <KanbanColumn key={column.id} value={column.id}>
                 <div {...stylex.props(styles.columnHeader)}>
-                  <KanbanColumnHandle>
+                  <span {...stylex.props(styles.columnTitle)}>{column.title}</span>
+                  <Badge variant='outline' style={styles.columnCount}>
+                    {column.tasks.length}
+                  </Badge>
+                  <KanbanColumnHandle style={styles.handleEnd}>
                     <GripVerticalIcon size={16} />
                   </KanbanColumnHandle>
-                  <span {...stylex.props(styles.columnTitle)}>{column.title}</span>
-                  <span {...stylex.props(styles.columnCount)}>{column.tasks.length}</span>
                 </div>
                 <KanbanColumnContent value={column.id}>
                   {column.tasks.map((task) => (
                     <KanbanItem key={task.id} value={task.id}>
                       <div {...stylex.props(styles.itemBody)}>
-                        <div {...stylex.props(styles.itemTitleRow)}>
-                          <KanbanItemHandle>
-                            <GripVerticalIcon size={14} />
-                          </KanbanItemHandle>
-                          <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
-                        </div>
+                        <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
                         {task.description && (
                           <span {...stylex.props(styles.itemDescription)}>{task.description}</span>
                         )}
@@ -787,8 +826,12 @@ export const FeatureRoadmap: Story = {
           </KanbanBoard>
           <KanbanOverlay>
             {({ value: activeId, variant }) => {
+              if (variant === 'column') {
+                const column = columns.find((col) => col.id === activeId)
+                return column ? columnOverlayPlaceholder(column) : null
+              }
               const task = columns.flatMap((col) => col.tasks).find((t) => t.id === activeId)
-              if (!task || variant !== 'item') return null
+              if (!task) return null
               return (
                 <div {...stylex.props(styles.overlayCard)}>
                   <span {...stylex.props(styles.overlayColumnTitle)}>{task.title}</span>
@@ -880,28 +923,18 @@ export const PersistedToBackend: Story = {
             {Object.keys(columns).map((columnId) => (
               <KanbanColumn key={columnId} value={columnId}>
                 <div {...stylex.props(styles.columnHeader)}>
-                  <span {...stylex.props(styles.columnTitle)}>
-                    {columnId === 'todo'
-                      ? 'To Do'
-                      : columnId === 'in-progress'
-                        ? 'In Progress'
-                        : columnId === 'done'
-                          ? 'Done'
-                          : columnId}
-                  </span>
-                  <span {...stylex.props(styles.columnCount)}>
+                  <span {...stylex.props(styles.columnTitle)}>{columnLabel(columnId)}</span>
+                  <Badge variant='outline' style={styles.columnCount}>
                     {columns[columnId]?.length ?? 0}
-                  </span>
+                  </Badge>
+                  <KanbanColumnHandle style={styles.handleEnd}>
+                    <GripVerticalIcon size={16} />
+                  </KanbanColumnHandle>
                 </div>
                 <KanbanColumnContent value={columnId}>
                   {columns[columnId]?.map((task) => (
                     <KanbanItem key={task.id} value={task.id}>
-                      <div {...stylex.props(styles.itemTitleRow)}>
-                        <KanbanItemHandle>
-                          <GripVerticalIcon size={14} />
-                        </KanbanItemHandle>
-                        <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
-                      </div>
+                      <span {...stylex.props(styles.itemTitle)}>{task.title}</span>
                     </KanbanItem>
                   ))}
                 </KanbanColumnContent>
@@ -909,7 +942,19 @@ export const PersistedToBackend: Story = {
             ))}
           </KanbanBoard>
           <KanbanOverlay>
-            {({ value: activeId }) => {
+            {({ value: activeId, variant }) => {
+              if (variant === 'column') {
+                return (
+                  <div {...stylex.props(styles.overlayColumnCard, styles.overlayDashed)}>
+                    <span {...stylex.props(styles.overlayColumnTitle)}>
+                      {columnLabel(String(activeId))}
+                    </span>
+                    <span {...stylex.props(styles.overlayCount)}>
+                      {columns[activeId as string]?.length ?? 0} tasks
+                    </span>
+                  </div>
+                )
+              }
               const task = Object.values(columns)
                 .flat()
                 .find((t) => t.id === activeId)

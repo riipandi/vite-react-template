@@ -95,16 +95,6 @@ const ColumnContext = createContext<{
   disabled: false
 })
 
-const ItemContext = createContext<{
-  listeners: DraggableSyntheticListeners | undefined
-  isDragging?: boolean
-  disabled?: boolean
-}>({
-  listeners: undefined,
-  isDragging: false,
-  disabled: false
-})
-
 const IsOverlayContext = createContext(false)
 
 // ---------------------------------------------------------------------------
@@ -690,60 +680,10 @@ function KanbanItem({ value, style, render, disabled, ...props }: KanbanItemProp
     animateLayoutChanges
   })
 
-  const { activeId, isColumn } = useContext(KanbanContext)
-  const isItemDragging = activeId ? !isColumn(activeId) : false
-
   const runtimeStyle: CSSProperties = {
     transition,
     transform: CSS.Translate.toString(transform)
   }
-
-  return (
-    <ItemContext.Provider
-      value={
-        isOverlay
-          ? { listeners: undefined, isDragging: true, disabled: false }
-          : { listeners, isDragging: isItemDragging, disabled }
-      }
-    >
-      {useRender({
-        defaultTagName: 'div',
-        render,
-        props: mergeProps<'div'>(
-          {
-            // @ts-ignore - stylex.props return type is not recognized by TS in this context
-            ...stylex.props(
-              stylex.defaultMarker(),
-              kanbanStyles.item,
-              !isOverlay && isSortableDragging && kanbanStyles.itemDragging,
-              !isOverlay && isOver && !isSortableDragging && kanbanStyles.itemOver,
-              disabled && kanbanStyles.itemDisabled,
-              style
-            ),
-            'data-slot': 'kanban-item',
-            'data-value': value,
-            'data-dragging': isOverlay ? true : isSortableDragging,
-            'data-disabled': isOverlay ? undefined : disabled,
-            ...(!isOverlay ? { ref: setNodeRef, style: runtimeStyle, ...attributes } : {}),
-            children: props.children
-          } as React.ComponentPropsWithRef<'div'>,
-          props
-        )
-      })}
-    </ItemContext.Provider>
-  )
-}
-
-// ---------------------------------------------------------------------------
-// KanbanItemHandle
-// ---------------------------------------------------------------------------
-
-export interface KanbanItemHandleProps extends DivRenderProps {
-  cursor?: boolean
-}
-
-function KanbanItemHandle({ style, render, cursor = true, ...props }: KanbanItemHandleProps) {
-  const { listeners, isDragging, disabled } = useContext(ItemContext)
 
   return useRender({
     defaultTagName: 'div',
@@ -753,15 +693,20 @@ function KanbanItemHandle({ style, render, cursor = true, ...props }: KanbanItem
         // @ts-ignore - stylex.props return type is not recognized by TS in this context
         ...stylex.props(
           stylex.defaultMarker(),
-          kanbanStyles.itemHandle,
-          cursor && (isDragging ? kanbanStyles.itemHandleDragging : kanbanStyles.itemHandleGrab),
-          disabled && kanbanStyles.itemHandleDisabled,
+          kanbanStyles.item,
+          !isOverlay && isSortableDragging && kanbanStyles.itemDragging,
+          !isOverlay && isOver && !isSortableDragging && kanbanStyles.itemOver,
+          disabled && kanbanStyles.itemDisabled,
           style
         ),
-        'data-slot': 'kanban-item-handle',
-        'data-dragging': isDragging,
-        'data-disabled': disabled,
-        ...listeners,
+        'data-slot': 'kanban-item',
+        'data-value': value,
+        'data-dragging': isOverlay ? true : isSortableDragging,
+        'data-disabled': isOverlay ? undefined : disabled,
+        // The whole item is the drag surface — no separate handle affordance.
+        ...(!isOverlay
+          ? { ref: setNodeRef, style: runtimeStyle, ...attributes, ...listeners }
+          : {}),
         children: props.children
       } as React.ComponentPropsWithRef<'div'>,
       props
@@ -856,7 +801,6 @@ export {
   KanbanColumn,
   KanbanColumnHandle,
   KanbanItem,
-  KanbanItemHandle,
   KanbanColumnContent,
   KanbanOverlay
 }

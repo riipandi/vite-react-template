@@ -1,14 +1,7 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors, shadow } from '#/styles/core/colors.stylex'
-import {
-  container,
-  duration,
-  easing,
-  radius,
-  stroke,
-  unit,
-  zIndex
-} from '#/styles/core/tokens.stylex'
+import { easing, stroke, unit, zIndex } from '#/styles/core/tokens.stylex'
+import { container, duration, radius } from '#/styles/core/tokens.stylex'
 import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/tokens.stylex'
 
 /**
@@ -65,7 +58,6 @@ export const kanbanStyles = stylex.create({
     },
     transitionProperty: 'background-color, border-color, box-shadow, transform, opacity',
     transitionTimingFunction: easing.decelerate,
-    transform: 'translateY(0)',
     '@media (max-width: 659px)': {
       maxWidth: '100%',
       minWidth: 0,
@@ -76,6 +68,10 @@ export const kanbanStyles = stylex.create({
   columnDragging: {
     opacity: 0.5,
     zIndex: zIndex.absolute
+  },
+  columnOver: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent'
   },
   columnDisabled: {
     opacity: 0.5
@@ -109,16 +105,9 @@ export const kanbanStyles = stylex.create({
       default: duration.medium,
       '@media (prefers-reduced-motion: reduce)': '0ms'
     },
-    transitionProperty: 'color, opacity, transform',
+    transitionProperty: 'color, opacity',
     transitionTimingFunction: easing.decelerate,
     width: unit.x6,
-    transform: 'scale(1)',
-    ':hover': {
-      transform: 'scale(1.05)'
-    },
-    ':active': {
-      transform: 'scale(0.95)'
-    },
     '@media (max-width: 659px)': {
       height: unit.x7,
       width: unit.x7
@@ -130,14 +119,12 @@ export const kanbanStyles = stylex.create({
   columnHandleDragging: {
     color: colors.foregroundPrimary,
     cursor: 'grabbing',
-    opacity: 1,
-    transform: 'scale(1.1)'
+    opacity: 1
   },
   columnHandleDisabled: {
     color: colors.foregroundDisabled,
     cursor: 'not-allowed',
-    opacity: 0.5,
-    transform: 'scale(1)'
+    opacity: 0.5
   },
   columnContent: {
     display: 'flex',
@@ -174,15 +161,12 @@ export const kanbanStyles = stylex.create({
     },
     transitionProperty: 'background-color, border-color, box-shadow, transform, opacity',
     transitionTimingFunction: easing.decelerate,
-    transform: 'translateY(0)',
     ':hover': {
       backgroundColor: colors.backgroundNeutralHighlightedFaded,
       borderColor: colors.borderNeutral,
-      boxShadow: shadow.outline,
-      transform: 'translateY(-1px)'
+      boxShadow: shadow.outline
     },
     ':active': {
-      transform: 'translateY(0)',
       backgroundColor: colors.backgroundNeutralFaded
     },
     '@media (max-width: 659px)': {
@@ -195,82 +179,16 @@ export const kanbanStyles = stylex.create({
     zIndex: zIndex.absolute
   },
   itemOver: {
-    backgroundColor: colors.backgroundPrimaryFaded,
-    borderColor: colors.borderPrimary
+    backgroundColor: 'transparent',
+    borderColor: 'transparent'
   },
   itemDisabled: {
     opacity: 0.5
-  },
-  itemHandle: {
-    alignItems: 'center',
-    borderRadius: radius.small,
-    color: {
-      default: colors.foregroundNeutral,
-      ':hover': colors.foregroundPrimary,
-      ':active': colors.foregroundPrimary
-    },
-    cursor: {
-      default: 'grab',
-      ':active': 'grabbing'
-    },
-    display: 'flex',
-    flexShrink: 0,
-    height: unit.x6,
-    justifyContent: 'center',
-    opacity: {
-      default: 0.8,
-      ':hover': 1,
-      ':active': 1,
-      '@media (pointer: coarse)': 1
-    },
-    outline: 'none',
-    padding: unit.x1,
-    touchAction: 'none',
-    transitionDuration: {
-      default: duration.medium,
-      '@media (prefers-reduced-motion: reduce)': '0ms'
-    },
-    transitionProperty: 'color, opacity, transform',
-    transitionTimingFunction: easing.decelerate,
-    width: unit.x6,
-    transform: 'scale(1)',
-    ':hover': {
-      transform: 'scale(1.05)'
-    },
-    ':active': {
-      transform: 'scale(0.95)'
-    },
-    '@media (max-width: 659px)': {
-      height: unit.x7,
-      width: unit.x7
-    }
-  },
-  itemHandleGrab: {
-    cursor: 'grab'
-  },
-  itemHandleDragging: {
-    color: colors.foregroundPrimary,
-    cursor: 'grabbing',
-    opacity: 1,
-    transform: 'scale(1.1)'
-  },
-  itemHandleDisabled: {
-    color: colors.foregroundDisabled,
-    cursor: 'not-allowed',
-    opacity: 0.5,
-    transform: 'scale(1)'
   },
   overlayContent: {
     boxShadow: shadow.raised,
     cursor: 'grabbing',
     opacity: 0.85,
-    pointerEvents: 'none',
-    transitionDuration: {
-      default: duration.medium,
-      '@media (prefers-reduced-motion: reduce)': '0ms'
-    },
-    transitionProperty: 'transform, box-shadow',
-    transitionTimingFunction: easing.decelerate,
-    transform: 'scale(1.02)'
+    pointerEvents: 'none'
   }
 })

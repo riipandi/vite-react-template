@@ -75,3 +75,4 @@ minimumReleaseAgeExclude:
   - oxfmt
   - oxlint
   - vitest
+  - '@tanstack/charts@0.16.2'

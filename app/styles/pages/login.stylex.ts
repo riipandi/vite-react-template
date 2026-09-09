@@ -4,11 +4,17 @@ import { fontSize, fontWeight } from '#/styles/core/tokens.stylex'
 import { unit, radius } from '#/styles/core/tokens.stylex'
 
 export const styles = stylex.create({
+  page: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: unit.x4,
+    width: '100%'
+  },
   header: {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    gap: unit.x2,
+    gap: unit.x5,
     textAlign: 'center'
   },
   cardRoot: {
@@ -28,7 +34,6 @@ export const styles = stylex.create({
     width: '3.5rem'
   },
   socialGroup: {
-    marginTop: -14,
     marginBottom: unit.x4,
     width: '100%'
   },
@@ -41,11 +46,23 @@ export const styles = stylex.create({
     flexDirection: 'column',
     gap: unit.x5
   },
+  labelRow: {
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%'
+  },
+  forgotLink: {
+    color: colors.foregroundPrimary,
+    fontSize: fontSize.body2,
+    textDecoration: 'none',
+    ':hover': { textDecoration: 'underline' }
+  },
   rememberField: {
-    marginTop: unit.x4,
     alignItems: 'center',
     flexDirection: 'row',
-    gap: unit.x2
+    gap: unit.x2,
+    marginTop: unit.x5
   },
   submitWrapper: {
     display: 'grid',
@@ -57,8 +74,7 @@ export const styles = stylex.create({
   alerts: {
     display: 'flex',
     flexDirection: 'column',
-    gap: unit.x3,
-    marginBottom: unit.x5
+    gap: unit.x3
   },
   backLink: {
     color: colors.foregroundPrimary,

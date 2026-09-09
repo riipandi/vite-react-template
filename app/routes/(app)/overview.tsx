@@ -5,17 +5,10 @@ import { ChevronRightIcon, ExternalLinkIcon, LogOutIcon, SettingsIcon } from 'lu
 import { Button } from '#/components/base/button'
 import { Badge } from '#/components/extra/badge'
 import { Card, CardContent } from '#/components/extra/card'
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemGroup,
-  ItemMedia,
-  ItemTitle
-} from '#/components/extra/item'
+import { Item, ItemContent, ItemDescription } from '#/components/extra/item'
+import { ItemGroup, ItemActions, ItemMedia, ItemTitle } from '#/components/extra/item'
 import { Text } from '#/components/extra/text'
-import { useAuthentication } from '#/libraries/guard/auth-provider'
+import { useAuthentication, useAuthUser } from '#/libraries/guard/auth-provider'
 import { pageStyles } from '#/styles/pages/page.stylex'
 
 export const Route = createFileRoute('/(app)/overview')({
@@ -32,7 +25,8 @@ const STATS: Array<[value: string, label: string, description: string]> = [
 ]
 
 function RouteComponent() {
-  const { user, logout } = useAuthentication()
+  const user = useAuthUser()
+  const { logout } = useAuthentication()
   const displayName =
     user?.firstName?.trim() || user?.username?.trim() || user?.email?.split('@')[0] || 'Guest'
   const now = new Date()

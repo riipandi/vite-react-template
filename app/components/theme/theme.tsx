@@ -121,21 +121,17 @@ const Theme = ({
     ]
   )
 
-  const setTheme = useCallback(
-    (nextTheme: string | ((prev: string) => string)) => {
-      if (typeof nextTheme === 'function') {
-        setThemeState((prevTheme) => {
-          const newTheme = nextTheme(prevTheme)
-          storageAdapter.setItem(storageKey, newTheme)
-          return newTheme
-        })
-      } else {
-        setThemeState(nextTheme)
-        storageAdapter.setItem(storageKey, nextTheme)
-      }
-    },
-    [storageAdapter, storageKey]
-  )
+  const setTheme = useCallback((nextTheme: string | ((prev: string) => string)) => {
+    setThemeState((prevTheme) =>
+      typeof nextTheme === 'function' ? nextTheme(prevTheme) : nextTheme
+    )
+  }, [])
+
+  // Persist on every theme change — also covers values arriving through the
+  // cross-tab sync below. Writing the just-read value on mount is a no-op.
+  useEffect(() => {
+    storageAdapter.setItem(storageKey, theme)
+  }, [theme, storageAdapter, storageKey])
 
   const handleMediaQuery = useCallback(
     (e: MediaQueryListEvent | MediaQueryList) => {

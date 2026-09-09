@@ -25,6 +25,7 @@ export const Route = createFileRoute('/(auth)/login')({
   component: RouteComponent,
   validateSearch: z.object({
     loggedOut: z.coerce.boolean().optional(),
+    unauthenticated: z.coerce.boolean().optional(),
     return_to: z.string().optional()
   }),
   staticData: {
@@ -35,22 +36,24 @@ export const Route = createFileRoute('/(auth)/login')({
 function RouteComponent() {
   const navigate = useNavigate()
   const { login } = useAuthentication()
-  const { loggedOut, return_to } = useSearch({ from: Route.id })
+  const { unauthenticated, loggedOut, return_to } = useSearch({ from: Route.id })
   const [failed, setFailed] = useState<string | null>(null)
   const [remember, setRemember] = useState(false)
   const [dismissed, setDismissed] = useState(false)
 
-  // The goodbye alert belongs to the logout action that redirected here —
-  // capture it once (initializer runs at mount only) so a refresh or
-  // back-navigation never replays it.
+  // The goodbye and sign-in-required notices belong to the redirect that
+  // brought the visitor here — capture them once (initializers run at mount
+  // only) so a refresh or back-navigation never replays them.
   const [arrivedLoggedOut] = useState(loggedOut)
+  const [arrivedUnauthenticated] = useState(unauthenticated)
   const showGoodbye = Boolean(arrivedLoggedOut) && !dismissed && !failed
+  const showSignInPrompt = Boolean(arrivedUnauthenticated) && !dismissed && !failed
 
-  // Consume the `loggedOut` search param so the browser history stays clean.
+  // Consume the notice search params so the browser history stays clean.
   useEffect(() => {
-    if (!loggedOut) return
+    if (!loggedOut && !unauthenticated) return
     void navigate({ to: '/login', search: {}, replace: true })
-  }, [loggedOut, navigate])
+  }, [loggedOut, unauthenticated, navigate])
 
   const clearAlerts = () => {
     setFailed(null)
@@ -71,18 +74,9 @@ function RouteComponent() {
   })
 
   return (
-    <Card size='md' id='login-card' style={styles.cardRoot}>
-      <CardHeader style={styles.header}>
-        <div {...stylex.props(styles.logo)}>
-          <ViteIcon size={28} />
-        </div>
-        <Text render={<h1 />} variant='featured-5' weight='semibold'>
-          Sign in to your account
-        </Text>
-        <CardDescription>Welcome back! Please enter your credentials.</CardDescription>
-      </CardHeader>
-
-      <CardContent>
+    <div {...stylex.props(styles.page)}>
+      {/* Page-level notices live above the card, matching its width. */}
+      {(failed || showGoodbye || showSignInPrompt) && (
         <div {...stylex.props(styles.alerts)}>
           {failed && (
             <Alert variant='destructive' id='login-alert-error'>
@@ -96,114 +90,148 @@ function RouteComponent() {
               <AlertDescription>Your session has been terminated.</AlertDescription>
             </Alert>
           )}
+          {showSignInPrompt && (
+            <Alert id='login-alert-signin'>
+              <AlertTitle>Sign in required</AlertTitle>
+              <AlertDescription>You are unauthenticated. Sign in to continue.</AlertDescription>
+            </Alert>
+          )}
         </div>
+      )}
 
-        <ButtonGroup orientation='vertical' style={styles.socialGroup}>
-          <Button type='button' variant='outline' style={socialStyles.socialButton}>
-            <GoogleIcon size={16} />
-            Continue with Google
-          </Button>
-          <Button type='button' variant='outline' style={socialStyles.socialButton}>
-            <GitHubIcon size={16} />
-            Continue with GitHub
-          </Button>
-        </ButtonGroup>
-
-        <FieldSeparator style={styles.divider}>or continue with</FieldSeparator>
-
-        <form
-          id='login-form'
-          autoComplete='on'
-          onSubmit={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            form.handleSubmit()
-          }}
-        >
-          <div id='login-form-grid' {...stylex.props(styles.formGrid)}>
-            <form.Field
-              name='username'
-              children={(field) => {
-                const error = field.state.meta.errors?.[0]?.message
-                return (
-                  <Field id='field-username' invalid={!!error}>
-                    <FieldLabel htmlFor='username'>Username</FieldLabel>
-                    <Input
-                      id='username'
-                      name='username'
-                      placeholder='emilys'
-                      autoComplete='username'
-                      value={field.state.value}
-                      onChange={(e) => {
-                        clearAlerts()
-                        field.handleChange(e.target.value)
-                      }}
-                      onBlur={field.handleBlur}
-                    />
-                    <FieldError errors={error ? [{ message: error }] : undefined} />
-                  </Field>
-                )
-              }}
-            />
-
-            <form.Field
-              name='password'
-              children={(field) => {
-                const error = field.state.meta.errors?.[0]?.message
-                return (
-                  <Field id='field-password' invalid={!!error}>
-                    <FieldLabel htmlFor='password'>Password</FieldLabel>
-                    <InputPassword
-                      id='password'
-                      name='password'
-                      placeholder='••••••••'
-                      autoComplete='current-password'
-                      value={field.state.value}
-                      onChange={(e) => {
-                        clearAlerts()
-                        field.handleChange(e.target.value)
-                      }}
-                      onBlur={field.handleBlur}
-                    />
-                    <FieldError errors={error ? [{ message: error }] : undefined} />
-                  </Field>
-                )
-              }}
-            />
+      <Card size='md' id='login-card' style={styles.cardRoot}>
+        <CardHeader style={styles.header}>
+          <div {...stylex.props(styles.logo)}>
+            <ViteIcon size={28} />
           </div>
+          <Text render={<h1 />} variant='featured-5' weight='semibold'>
+            Sign in to your account
+          </Text>
+          <CardDescription>Welcome back! Please enter your credentials.</CardDescription>
+        </CardHeader>
 
-          <Field orientation='horizontal' style={styles.rememberField}>
-            <Checkbox
-              id='remember'
-              name='remember'
-              checked={remember}
-              onCheckedChange={(checked) => setRemember(checked === true)}
-            />
-            <FieldLabel htmlFor='remember'>Remember me on this device</FieldLabel>
-          </Field>
+        <CardContent>
+          <ButtonGroup orientation='vertical' style={styles.socialGroup}>
+            <Button type='button' variant='outline' style={socialStyles.socialButton}>
+              <GoogleIcon size={16} />
+              Continue with Google
+            </Button>
+            <Button type='button' variant='outline' style={socialStyles.socialButton}>
+              <GitHubIcon size={16} />
+              Continue with GitHub
+            </Button>
+          </ButtonGroup>
 
-          <div {...stylex.props(styles.submitWrapper)}>
-            <form.Subscribe
-              selector={(state) => [state.canSubmit, state.isSubmitting] as const}
-              children={([canSubmit, isSubmitting]) => (
-                <Button type='submit' variant='primary' disabled={!canSubmit} style={styles.submit}>
-                  {isSubmitting && <Spinner />}
-                  {isSubmitting ? <LoaderText variant='body-2'>Signing in…</LoaderText> : 'Sign in'}
-                </Button>
-              )}
-            />
-          </div>
-        </form>
-      </CardContent>
+          <FieldSeparator style={styles.divider}>or continue with</FieldSeparator>
 
-      <CardFooter style={atoms.justifyContent.center}>
-        <Text variant='body-2' color='neutral-faded'>
-          Back to{' '}
-          <Link to='/' {...stylex.props(styles.backLink)}>
-            homepage
-          </Link>
-        </Text>
-      </CardFooter>
-    </Card>
+          <form
+            id='login-form'
+            autoComplete='on'
+            onSubmit={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              form.handleSubmit()
+            }}
+          >
+            <div id='login-form-grid' {...stylex.props(styles.formGrid)}>
+              <form.Field
+                name='username'
+                children={(field) => {
+                  const error = field.state.meta.errors?.[0]?.message
+                  return (
+                    <Field id='field-username' invalid={!!error}>
+                      <FieldLabel htmlFor='username'>Username</FieldLabel>
+                      <Input
+                        id='username'
+                        name='username'
+                        placeholder='emilys'
+                        autoComplete='username'
+                        value={field.state.value}
+                        onChange={(e) => {
+                          clearAlerts()
+                          field.handleChange(e.target.value)
+                        }}
+                        onBlur={field.handleBlur}
+                      />
+                      <FieldError errors={error ? [{ message: error }] : undefined} />
+                    </Field>
+                  )
+                }}
+              />
+
+              <form.Field
+                name='password'
+                children={(field) => {
+                  const error = field.state.meta.errors?.[0]?.message
+                  return (
+                    <Field id='field-password' invalid={!!error}>
+                      <div {...stylex.props(styles.labelRow)}>
+                        <FieldLabel htmlFor='password'>Password</FieldLabel>
+                        <Link to='/forgot-password' {...stylex.props(styles.forgotLink)}>
+                          Forgot password?
+                        </Link>
+                      </div>
+                      <InputPassword
+                        id='password'
+                        name='password'
+                        placeholder='••••••••'
+                        autoComplete='current-password'
+                        value={field.state.value}
+                        onChange={(e) => {
+                          clearAlerts()
+                          field.handleChange(e.target.value)
+                        }}
+                        onBlur={field.handleBlur}
+                      />
+                      <FieldError errors={error ? [{ message: error }] : undefined} />
+                    </Field>
+                  )
+                }}
+              />
+            </div>
+
+            <Field orientation='horizontal' style={styles.rememberField}>
+              <Checkbox
+                id='remember'
+                name='remember'
+                checked={remember}
+                onCheckedChange={(checked) => setRemember(checked === true)}
+              />
+              <FieldLabel htmlFor='remember'>Remember me on this device</FieldLabel>
+            </Field>
+
+            <div {...stylex.props(styles.submitWrapper)}>
+              <form.Subscribe
+                selector={(state) => [state.canSubmit, state.isSubmitting] as const}
+                children={([canSubmit, isSubmitting]) => (
+                  <Button
+                    type='submit'
+                    variant='primary'
+                    disabled={!canSubmit}
+                    style={styles.submit}
+                  >
+                    {isSubmitting && <Spinner />}
+                    {isSubmitting ? (
+                      <LoaderText variant='body-2'>Signing in…</LoaderText>
+                    ) : (
+                      'Sign in'
+                    )}
+                  </Button>
+                )}
+              />
+            </div>
+          </form>
+        </CardContent>
+
+        <CardFooter style={atoms.justifyContent.center}>
+          <Text variant='body-2' color='neutral-faded'>
+            Back to{' '}
+            <Link to='/' {...stylex.props(styles.backLink)}>
+              homepage
+            </Link>
+          </Text>
+        </CardFooter>
+      </Card>
+    </div>
   )
 }

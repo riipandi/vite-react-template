@@ -3,14 +3,14 @@ import { devtools } from '@tanstack/devtools-vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'node:path'
-import { defineConfig } from 'vite'
+import { defineConfig, type ProxyOptions } from 'vite'
 import { developmentPlugins } from './vite.plugins.ts'
 
 const isTestOrCI = process.env.CI || process.env.VITEST
 const isStorybook = process.env.STORYBOOK === 'true'
 const isVitest = process.env.VITEST
 
-const apiProxy = {
+const apiProxy: Record<string, string | ProxyOptions> = {
   '/api': {
     target: 'https://dummyjson.com',
     changeOrigin: true,
@@ -35,7 +35,11 @@ export default defineConfig({
         autoCodeSplitting: true,
         target: 'react'
       }),
-    react(),
+    // React Compiler (native oxc path, requires `oxc-transform-react`).
+    // Defaults: compilationMode 'infer', panicThreshold 'none' (components
+    // that violate the Rules of React are skipped, never broken), target 19.
+    // Storybook compiles via its own framework plugins — uncompiled reference.
+    react({ compiler: true }),
     ...developmentPlugins
   ],
   envPrefix: ['VITE_', 'PUBLIC_'],

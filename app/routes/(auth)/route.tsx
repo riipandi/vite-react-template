@@ -4,14 +4,18 @@ import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import { ThemeSwitcher } from '#/components/theme'
 import { ensureSessionLoaded } from '#/libraries/guard/auth-session'
 import { isAuthenticated } from '#/libraries/guard/auth-store'
+import { safeReturnTo } from '#/libraries/guard/auth-utils'
 import { styles } from '#/styles/element/auth-layout.stylex'
 
 export const Route = createFileRoute('/(auth)')({
   component: RouteComponent,
-  beforeLoad: async () => {
+  beforeLoad: async ({ location }) => {
     await ensureSessionLoaded()
     if (isAuthenticated()) {
-      throw redirect({ to: '/overview' })
+      // A signed-in visitor opening /login (stale bookmark, saved link)
+      // goes straight to the originally requested path when present.
+      const search = location.search as { return_to?: string } | undefined
+      throw redirect({ href: safeReturnTo(search?.return_to) ?? '/overview' })
     }
   }
 })

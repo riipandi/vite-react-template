@@ -26,7 +26,11 @@ export const accordionStyles = stylex.create({
     backgroundColor: 'transparent',
     borderRadius: radius.large,
     borderStyle: 'none',
-    color: colors.foregroundNeutral,
+    color: {
+      default: colors.foregroundNeutral,
+      ':hover': colors.foregroundNeutral
+    },
+    opacity: { default: 1, ':hover': 0.85 },
     cursor: 'pointer',
     display: 'flex',
     flex: 1,
@@ -51,7 +55,8 @@ export const accordionStyles = stylex.create({
     paddingBlock: unit.x2,
     paddingInline: 0,
     textAlign: 'left',
-    textDecoration: { default: 'none', ':hover': 'underline' }
+    transitionDuration: duration.fast,
+    transitionProperty: 'background-color, color'
   },
   chevron: {
     color: colors.foregroundNeutralFaded,
@@ -87,6 +92,7 @@ export const accordionStyles = stylex.create({
     transitionTimingFunction: easing.decelerate
   },
   inner: {
+    color: colors.foregroundNeutralFaded,
     paddingBottom: unit.x1
   }
 })

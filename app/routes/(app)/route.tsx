@@ -2,7 +2,8 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect, useRouter } from '@tanstack/react-router'
 import { MenuIcon } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useIsMobile } from '#/hooks/use-media-query'
 import { closeSidebar, useSidebarOpen, useSidebarCollapsed } from '#/libraries/app.store'
 import { toggleSidebar, toggleSidebarCollapsed } from '#/libraries/app.store'
 import { ensureSessionLoaded } from '#/libraries/guard/auth-session'
@@ -16,8 +17,15 @@ export const Route = createFileRoute('/(app)')({
     // Wait for the silent cookie-session bootstrap before deciding.
     await ensureSessionLoaded()
     if (!isAuthenticated()) {
-      // Send the visitor back to the attempted path after signing in.
-      throw redirect({ to: '/login', search: { return_to: location.href } })
+      // Send the visitor back to the attempted path after signing in,
+      // and tell the login page why it was opened (shows a notice).
+      throw redirect({
+        to: '/login',
+        search: {
+          return_to: location.href,
+          unauthenticated: true
+        }
+      })
     }
   },
   staticData: {
@@ -29,16 +37,7 @@ function RouteComponent() {
   const router = useRouter()
   const sidebarOpen = useSidebarOpen()
   const collapsed = useSidebarCollapsed()
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 659px)').matches)
-
-  useEffect(() => {
-    // Keep in sync with the `breakpoints.small` media queries in
-    // root-layout/sidebar stylex files (token breakpoint: 660px).
-    const mq = window.matchMedia('(max-width: 659px)')
-    const handler = (event: MediaQueryListEvent) => setIsMobile(event.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
+  const isMobile = useIsMobile()
 
   // Close sidebar on route change (mobile). `onResolved` fires after every
   // navigation; closing an already-closed sidebar is a no-op state write.

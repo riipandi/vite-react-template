@@ -73,13 +73,26 @@ export interface MediaQueryInput {
   pointer?: 'coarse' | 'fine'
 }
 
+/** Cache MediaQueryList instances — `matchMedia` allocates a fresh object on every call. */
+const mqlCache = new Map<string, MediaQueryList>()
+
+function getMql(query: string): MediaQueryList | null {
+  if (typeof window === 'undefined') return null
+  let mql = mqlCache.get(query)
+  if (!mql) {
+    mql = window.matchMedia(query)
+    mqlCache.set(query, mql)
+  }
+  return mql
+}
+
 export function useMediaQuery(query: BreakpointQuery | MediaQueryInput | (string & {})): boolean {
   const mediaQuery = parseQuery(query)
 
   const subscribe = useCallback(
     (callback: () => void) => {
-      if (typeof window === 'undefined') return () => {}
-      const mql = window.matchMedia(mediaQuery)
+      const mql = getMql(mediaQuery)
+      if (!mql) return () => {}
       mql.addEventListener('change', callback)
       return () => mql.removeEventListener('change', callback)
     },
@@ -87,8 +100,7 @@ export function useMediaQuery(query: BreakpointQuery | MediaQueryInput | (string
   )
 
   const getSnapshot = useCallback(() => {
-    if (typeof window === 'undefined') return false
-    return window.matchMedia(mediaQuery).matches
+    return getMql(mediaQuery)?.matches ?? false
   }, [mediaQuery])
 
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)

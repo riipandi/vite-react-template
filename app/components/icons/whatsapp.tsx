@@ -1,10 +1,14 @@
+import { useId } from 'react'
 import type { SVGProps } from 'react'
 
 interface WhatsAppIconProps extends SVGProps<SVGSVGElement> {
   size?: number
 }
 
+// Unique gradient id — a duplicate DOM id (same icon rendered twice) makes
+// `url(#…)` resolve to the first instance in the document.
 export function WhatsAppIcon({ size = 24, ...props }: WhatsAppIconProps) {
+  const gradId = `wa-grad-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -29,7 +33,7 @@ export function WhatsAppIcon({ size = 24, ...props }: WhatsAppIconProps) {
         fill='none'
       />
       <linearGradient
-        id='wa-grad'
+        id={gradId}
         x1='254.666'
         x2='256.793'
         y1='446.637'
@@ -42,7 +46,7 @@ export function WhatsAppIcon({ size = 24, ...props }: WhatsAppIconProps) {
       </linearGradient>
       <path
         d='M255.8 42.6c-115.8 0-209.9 94.1-210 209.8 0 39.5 11.2 78.2 32.2 111.7l5 7.9-21.2 77.4 79.4-20.8 7.7 4.5c32.2 19.1 69.2 29.2 106.8 29.2h.1c115.7 0 209.8-94.1 209.9-209.8.2-55.7-21.9-109.1-61.4-148.4-39.3-39.4-92.8-61.6-148.5-61.5'
-        fill='url(#wa-grad)'
+        fill={`url(#${gradId})`}
       />
       <path
         fillRule='evenodd'

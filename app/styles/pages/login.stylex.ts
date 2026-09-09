@@ -1,14 +1,20 @@
 import * as stylex from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
 import { fontSize, fontWeight } from '#/styles/core/tokens.stylex'
-import { unit, radius } from '#/styles/core/tokens.stylex'
+import { duration, easing, radius, stroke, unit } from '#/styles/core/tokens.stylex'
 
 export const styles = stylex.create({
+  page: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: unit.x4,
+    width: '100%'
+  },
   header: {
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    gap: unit.x2,
+    gap: unit.x5,
     textAlign: 'center'
   },
   cardRoot: {
@@ -28,7 +34,6 @@ export const styles = stylex.create({
     width: '3.5rem'
   },
   socialGroup: {
-    marginTop: -14,
     marginBottom: unit.x4,
     width: '100%'
   },
@@ -41,11 +46,32 @@ export const styles = stylex.create({
     flexDirection: 'column',
     gap: unit.x5
   },
+  labelRow: {
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%'
+  },
+  forgotLink: {
+    color: {
+      default: colors.foregroundPrimary,
+      ':hover': `color-mix(in srgb, ${colors.foregroundPrimary} 76%, ${colors.foregroundNeutral})`
+    },
+    fontSize: fontSize.body2,
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
+    },
+    outlineOffset: stroke.ring2,
+    transitionDuration: duration.fast,
+    transitionProperty: 'color',
+    transitionTimingFunction: easing.standard
+  },
   rememberField: {
-    marginTop: unit.x4,
     alignItems: 'center',
     flexDirection: 'row',
-    gap: unit.x2
+    gap: unit.x2,
+    marginTop: unit.x5
   },
   submitWrapper: {
     display: 'grid',
@@ -57,14 +83,22 @@ export const styles = stylex.create({
   alerts: {
     display: 'flex',
     flexDirection: 'column',
-    gap: unit.x3,
-    marginBottom: unit.x5
+    gap: unit.x3
   },
   backLink: {
-    color: colors.foregroundPrimary,
+    color: {
+      default: colors.foregroundPrimary,
+      ':hover': `color-mix(in srgb, ${colors.foregroundPrimary} 76%, ${colors.foregroundNeutral})`
+    },
     fontWeight: fontWeight.medium,
-    textDecoration: 'none',
-    ':hover': { textDecoration: 'underline' }
+    outline: {
+      default: 'none',
+      ':focus-visible': `${stroke.ring2} solid ${colors.foregroundPrimary}`
+    },
+    outlineOffset: stroke.ring2,
+    transitionDuration: duration.fast,
+    transitionProperty: 'color',
+    transitionTimingFunction: easing.standard
   }
 })
 

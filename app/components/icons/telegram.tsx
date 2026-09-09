@@ -1,10 +1,14 @@
+import { useId } from 'react'
 import type { SVGProps } from 'react'
 
 interface TelegramIconProps extends SVGProps<SVGSVGElement> {
   size?: number
 }
 
+// Unique gradient id — a duplicate DOM id (same icon rendered twice) makes
+// `url(#…)` resolve to the first instance in the document.
 export function TelegramIcon({ size = 24, ...props }: TelegramIconProps) {
+  const gradId = `tg-grad-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -17,7 +21,7 @@ export function TelegramIcon({ size = 24, ...props }: TelegramIconProps) {
       {...props}
     >
       <linearGradient
-        id='tg-grad'
+        id={gradId}
         x1='256'
         x2='256'
         y1='2'
@@ -28,7 +32,7 @@ export function TelegramIcon({ size = 24, ...props }: TelegramIconProps) {
         <stop offset='0' stopColor='#1d93d2' />
         <stop offset='1' stopColor='#38b0e3' />
       </linearGradient>
-      <circle cx='256' cy='256' r='256' fill='url(#tg-grad)' />
+      <circle cx='256' cy='256' r='256' fill={`url(#${gradId})`} />
       <path
         d='m173.3 274.7 30.4 84.1s3.8 7.9 7.9 7.9 64.5-62.9 64.5-62.9l67.3-129.9-169 79.1z'
         fill='#c8daea'

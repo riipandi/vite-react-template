@@ -32,7 +32,7 @@ function RootComponent() {
       <title>{pageTitle ? `${pageTitle} - React Application` : 'React Application'}</title>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <ThemeProvider>
+          <ThemeProvider disableTransitionOnChange>
             <Outlet />
           </ThemeProvider>
         </AuthProvider>

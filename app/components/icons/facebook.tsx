@@ -1,10 +1,14 @@
+import { useId } from 'react'
 import type { SVGProps } from 'react'
 
 interface FacebookIconProps extends SVGProps<SVGSVGElement> {
   size?: number
 }
 
+// Unique gradient id — a duplicate DOM id (same icon rendered twice) makes
+// `url(#…)` resolve to the first instance in the document.
 export function FacebookIcon({ size = 24, ...props }: FacebookIconProps) {
+  const bgId = `fb-bg-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -17,7 +21,7 @@ export function FacebookIcon({ size = 24, ...props }: FacebookIconProps) {
       {...props}
     >
       <linearGradient
-        id='fb-bg'
+        id={bgId}
         x1='-319.25'
         x2='-319.25'
         y1='261.346'
@@ -30,7 +34,7 @@ export function FacebookIcon({ size = 24, ...props }: FacebookIconProps) {
       </linearGradient>
       <path
         d='M213.8 509.4C92.2 487.7 0 382.7 0 256 0 115.2 115.2 0 256 0s256 115.2 256 256c0 126.7-92.2 231.7-213.8 253.4l-14.1-11.5h-56.3z'
-        fill='url(#fb-bg)'
+        fill={`url(#${bgId})`}
       />
       <path
         d='m355.8 327.7 11.5-71.7h-67.8v-49.9c0-20.5 7.7-35.8 38.4-35.8h33.3V105c-17.9-2.6-38.4-5.1-56.3-5.1-58.9 0-99.8 35.8-99.8 99.8V256h-64v71.7h64v180.5c14.1 2.6 28.2 3.8 42.2 3.8 14.1 0 28.2-1.3 42.2-3.8V327.7z'

@@ -115,8 +115,7 @@ export function AutocompleteList({
 > &
   StyleProp & {
     /** Static items, or a render function over the filtered items. */
-    // oxlint-disable-next-line typescript/no-explicit-any
-    children?: React.ReactNode | ((item: any) => React.ReactNode)
+    children?: React.ComponentPropsWithoutRef<typeof BaseAutocomplete.List>['children']
   }) {
   return <BaseAutocomplete.List {...props} {...stylex.props(s.list, style)} />
 }

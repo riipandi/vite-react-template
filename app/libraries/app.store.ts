@@ -34,6 +34,10 @@ export const toggleSidebar = () => {
   appStore.setState((prev) => ({ ...prev, sidebarOpen: !prev.sidebarOpen }))
 }
 
+export const closeSidebar = () => {
+  appStore.setState((prev) => ({ ...prev, sidebarOpen: false }))
+}
+
 export const toggleSidebarCollapsed = () => {
   appStore.setState((prev) => {
     const next = !prev.sidebarCollapsed

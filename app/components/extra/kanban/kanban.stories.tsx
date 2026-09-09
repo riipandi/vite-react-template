@@ -327,6 +327,12 @@ interface Column {
   tasks: Task[]
 }
 
+interface BackendTask {
+  id: string
+  title: string
+  status: string
+}
+
 const initialColumns: Column[] = [
   {
     id: 'todo',
@@ -423,6 +429,19 @@ function columnLabel(id: string) {
         : id
 }
 
+/** Story 1 commit: no-op beyond the toast, so it lives at module scope. */
+function commitTaskMoved() {
+  toast.success('Task moved')
+}
+
+/** Story 6 fake persistence: latency + log + toast, no component state. */
+function fakePersistToBackend(value: Record<string, BackendTask[]>) {
+  return new Promise<void>((resolve) => setTimeout(resolve, 500)).then(() => {
+    console.log('Persisted to backend:', value)
+    toast.success('Changes saved')
+  })
+}
+
 // ---------------------------------------------------------------------------
 // Story 1: Kanban board with placeholder overlay
 // ---------------------------------------------------------------------------
@@ -444,18 +463,13 @@ export const PlaceholderOverlay: Story = {
       )
     }
 
-    // oxlint-disable-next-line no-unused-vars consistent-function-scoping
-    const handleValueCommit = (_value: Record<string, Task[]>, _meta: unknown) => {
-      toast.success('Task moved')
-    }
-
     return (
       <div {...stylex.props(styles.page)}>
         <Kanban
           value={value}
           onValueChange={handleValueChange}
           getItemValue={(task) => task.id}
-          onValueCommit={handleValueCommit}
+          onValueCommit={commitTaskMoved}
           style={styles.fillWidth}
         >
           <KanbanBoard>
@@ -977,12 +991,6 @@ export const FeatureRoadmap: Story = {
 
 export const PersistedToBackend: Story = {
   render: () => {
-    interface BackendTask {
-      id: string
-      title: string
-      status: string
-    }
-
     const initialBackendColumns: Record<string, BackendTask[]> = {
       todo: [
         { id: 'b-1', title: 'Design mockups', status: 'todo' },
@@ -999,13 +1007,9 @@ export const PersistedToBackend: Story = {
       setColumns(newValue)
     }
 
-    // oxlint-disable-next-line no-unused-vars consistent-function-scoping
-    const handleValueCommit = async (_value: Record<string, BackendTask[]>, _meta: unknown) => {
+    const handleValueCommit = (value: Record<string, BackendTask[]>) => {
       setIsSaving(true)
-      await new Promise((resolve) => setTimeout(resolve, 500))
-      console.log('Persisted to backend:', _value)
-      setIsSaving(false)
-      toast.success('Changes saved')
+      fakePersistToBackend(value).then(() => setIsSaving(false))
     }
 
     return (

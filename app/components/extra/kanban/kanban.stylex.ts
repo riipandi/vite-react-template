@@ -9,6 +9,10 @@ import { fontFamily, fontSize, fontLineHeight } from '#/styles/core/tokens.style
  *
  * Mirrors `sortable.stylex.ts` for shared drag affordances (handles, drop
  * feedback, overlay) so both primitives feel identical.
+ *
+ * The `defaultMarker` lives ONLY on `KanbanColumn` (and its handle) so the
+ * handle's `when.ancestor(':hover')` reveal fires per column — hovering
+ * another column or the board gaps must not reveal handles.
  */
 export const kanbanStyles = stylex.create({
   root: {
@@ -93,8 +97,13 @@ export const kanbanStyles = stylex.create({
     height: unit.x6,
     justifyContent: 'center',
     opacity: {
-      default: 0.8,
+      default: 0,
+      // Reveal while hovering the column (header and items alike, matching
+      // ReUI's `group-hover/kanban-column` reveal) — the marker lives only on
+      // the column element.
+      [stylex.when.ancestor(':hover')]: 1,
       ':hover': 1,
+      ':focus-visible': 1,
       ':active': 1,
       '@media (pointer: coarse)': 1
     },

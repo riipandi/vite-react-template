@@ -545,7 +545,6 @@ function Kanban<T>({
             {
               // @ts-ignore - stylex.props return type is not recognized by TS in this context
               ...stylex.props(
-                stylex.defaultMarker(),
                 kanbanStyles.root,
                 activeId !== null && kanbanStyles.rootDragging,
                 style
@@ -581,7 +580,7 @@ function KanbanBoard({ style, render, ...props }: KanbanBoardProps) {
         props: mergeProps<'div'>(
           {
             // @ts-ignore - stylex.props return type is not recognized by TS in this context
-            ...stylex.props(stylex.defaultMarker(), kanbanStyles.board, style),
+            ...stylex.props(kanbanStyles.board, style),
             'data-slot': 'kanban-board',
             children: props.children
           } as React.ComponentPropsWithRef<'div'>,

@@ -675,18 +675,25 @@ export interface KanbanColumnHandleProps extends DivRenderProps {
 
 function KanbanColumnHandle({ style, render, cursor = true, ...props }: KanbanColumnHandleProps) {
   const { attributes, listeners, isDragging, disabled } = useContext(ColumnContext)
+  const { activeId } = useContext(KanbanContext)
 
   return useRender({
     defaultTagName: 'div',
     render,
     props: mergeProps<'div'>(
       {
-        // @ts-ignore - stylex.props return type is not recognized by TS in this context
         ...stylex.props(
           stylex.defaultMarker(),
           kanbanStyles.columnHandle,
           cursor &&
             (isDragging ? kanbanStyles.columnHandleDragging : kanbanStyles.columnHandleGrab),
+          // Exactly one visibility state — non-dragged handles stay hidden
+          // for the whole drag, hover included.
+          isDragging
+            ? kanbanStyles.columnHandleDragging
+            : activeId !== null
+              ? kanbanStyles.columnHandleHiddenDuringDrag
+              : kanbanStyles.columnHandleVisible,
           disabled && kanbanStyles.columnHandleDisabled,
           style
         ),

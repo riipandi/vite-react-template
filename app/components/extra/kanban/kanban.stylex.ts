@@ -96,17 +96,6 @@ export const kanbanStyles = stylex.create({
     flexShrink: 0,
     height: unit.x6,
     justifyContent: 'center',
-    opacity: {
-      default: 0,
-      // Reveal while hovering the column (header and items alike, matching
-      // ReUI's `group-hover/kanban-column` reveal) — the marker lives only on
-      // the column element.
-      [stylex.when.ancestor(':hover')]: 1,
-      ':hover': 1,
-      ':focus-visible': 1,
-      ':active': 1,
-      '@media (pointer: coarse)': 1
-    },
     outline: 'none',
     padding: unit.x1,
     touchAction: 'none',
@@ -122,6 +111,16 @@ export const kanbanStyles = stylex.create({
       width: unit.x7
     }
   },
+  columnHandleVisible: {
+    opacity: {
+      default: 0,
+      [stylex.when.ancestor(':hover')]: 1,
+      ':hover': 1,
+      ':focus-visible': 1,
+      ':active': 1,
+      '@media (pointer: coarse)': 1
+    }
+  },
   columnHandleGrab: {
     cursor: 'grab'
   },
@@ -129,6 +128,9 @@ export const kanbanStyles = stylex.create({
     color: colors.foregroundPrimary,
     cursor: 'grabbing',
     opacity: 1
+  },
+  columnHandleHiddenDuringDrag: {
+    opacity: 0
   },
   columnHandleDisabled: {
     color: colors.foregroundDisabled,

@@ -112,8 +112,9 @@ Fork this repository, connect it to Netlify, and pushing to master will deploy t
 The build output is a static SPA (`dist/`). Cookie-based auth requires a **same-site API** —
 browsers do not send `SameSite=Lax` cookies on cross-site requests. Pick one:
 
-- **Netlify** — works out of the box: [`netlify.toml`](./netlify.toml) proxies `/api` to the
-  demo backend (same-origin) and `netlify/functions` serves the session probe and logout.
+- **Netlify** — works out of the box: [`netlify/functions/api.ts`](./netlify/functions/api.ts)
+  transparently proxies every `/api/*` request (all HTTP methods) to the demo backend on the
+  site's own origin, so the HttpOnly session cookies stick.
 - **Own backend** (recommended for production) — set `PUBLIC_API_URL` to your API on the same
   parent domain (e.g. `https://api.example.com`) and implement the auth endpoints
   (`POST /auth/login`, `GET /auth/me`, `POST /auth/refresh`, `POST /auth/logout`,

@@ -1,35 +1,37 @@
 # Netlify deployment for the demo (DummyJSON backend).
 #
-# Cookie-based auth requires a same-origin API: the force-200 rewrites below
-# make Netlify act as a same-origin reverse proxy, so the HttpOnly session
-# cookies land on the site's own domain. Session probe and logout need logic —
-# they are served by the Netlify Functions in ./netlify/functions.
+# Cookie-based auth requires a same-origin API. netlify/functions/api.ts is
+# routed to /api/* via its own config.path (no redirects involved — a
+# public/_redirects splat would take precedence over these rules anyway).
+# Caching: hashed build assets are immutable; HTML stays revalidated for SPA
+# fallback.
 
 [build]
   command = "pnpm build"
   publish = "dist"
 
-[[redirects]]
-  from = "/api/auth/session"
-  to = "/.netlify/functions/session"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/auth/logout"
-  to = "/.netlify/functions/logout"
-  status = 200
-  force = true
-
-# Same-origin proxy to the demo backend.
-[[redirects]]
-  from = "/api/*"
-  to = "https://dummyjson.com/:splat"
-  status = 200
-  force = true
-
-# SPA fallback (existing assets are served before this catch-all).
+# SPA fallback (existing assets and the /api/* function are served first).
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/favicon.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

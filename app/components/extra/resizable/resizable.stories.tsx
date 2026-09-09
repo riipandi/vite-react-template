@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { expect, userEvent } from 'storybook/test'
+import type { GroupImperativeHandle } from 'react-resizable-panels'
+import { expect, userEvent, waitFor } from 'storybook/test'
+import { Button } from '#/components/base/button'
 import { colors } from '#/styles/core/colors.stylex'
 import { container, radius, stroke, unit } from '#/styles/core/tokens.stylex'
 import { fontLineHeight, fontSize, fontWeight } from '#/styles/core/tokens.stylex'
@@ -53,6 +55,21 @@ const styles = stylex.create({
   },
   nested: {
     height: '100%'
+  },
+  outer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: unit.x4,
+    height: '100%'
+  },
+  fill: {
+    flexGrow: 1,
+    minHeight: 0
+  },
+  toolbar: {
+    display: 'flex',
+    gap: unit.x2,
+    justifyContent: 'center'
   }
 })
 
@@ -246,5 +263,62 @@ export const StateTracked: Story = {
         </ResizablePanel>
       </ResizablePanelGroup>
     )
+  }
+}
+
+// Controlled layout: state drives the panel size labels, presets apply a new
+// layout through the group's imperative `setLayout` API.
+export const Controlled: Story = {
+  render: () => {
+    const groupRef = React.useRef<GroupImperativeHandle | null>(null)
+    const [sizes, setSizes] = React.useState<Record<string, number>>({
+      left: 30,
+      right: 70
+    })
+
+    const applyLayout = (left: number) => {
+      groupRef.current?.setLayout({ left, right: 100 - left })
+    }
+
+    return (
+      <div {...stylex.props(styles.outer)}>
+        <div {...stylex.props(styles.toolbar)}>
+          <Button variant='outline' onClick={() => applyLayout(25)}>
+            25 / 75
+          </Button>
+          <Button variant='outline' onClick={() => applyLayout(50)}>
+            50 / 50
+          </Button>
+          <Button variant='outline' onClick={() => applyLayout(75)}>
+            75 / 25
+          </Button>
+        </div>
+        <ResizablePanelGroup
+          groupRef={groupRef}
+          style={[styles.frame, styles.fill]}
+          onLayoutChange={(layout) => {
+            setSizes(layout)
+          }}
+        >
+          <ResizablePanel id='left' defaultSize='30%' minSize='20%' style={styles.content}>
+            {Math.round(sizes.left ?? 30)}%
+          </ResizablePanel>
+          <ResizableHandle withHandle aria-label='Resize left panel' />
+          <ResizablePanel id='right' defaultSize='70%' minSize='30%' style={styles.content}>
+            {Math.round(sizes.right ?? 70)}%
+          </ResizablePanel>
+        </ResizablePanelGroup>
+      </div>
+    )
+  },
+  play: async ({ canvas }) => {
+    const panel = document.body.querySelector<HTMLElement>('[data-testid="left"]')
+    expect(panel).not.toBeNull()
+
+    // Applying a preset updates the layout programmatically.
+    const before = panel?.getBoundingClientRect().width ?? 0
+    await userEvent.click(canvas.getByRole('button', { name: '50 / 50' }))
+    await waitFor(() => expect(canvas.getAllByText('50%')).toHaveLength(2))
+    expect(panel?.getBoundingClientRect().width ?? 0).toBeGreaterThan(before)
   }
 }

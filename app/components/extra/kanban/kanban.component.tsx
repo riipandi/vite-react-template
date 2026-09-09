@@ -22,9 +22,12 @@ import {
   KeyboardSensor,
   MeasuringStrategy,
   MouseSensor,
+  pointerWithin,
+  rectIntersection,
   TouchSensor,
   useSensor,
   useSensors,
+  type CollisionDetection,
   type DraggableAttributes,
   type DraggableSyntheticListeners
 } from '@dnd-kit/core'
@@ -125,6 +128,19 @@ const MOUSE_SENSOR_OPTIONS = { activationConstraint: { distance: 10 } }
 const TOUCH_SENSOR_OPTIONS = { activationConstraint: { delay: 250, tolerance: 5 } }
 const KEYBOARD_SENSOR_OPTIONS = { coordinateGetter: sortableKeyboardCoordinates }
 const MEASURING_CONFIG = { droppable: { strategy: MeasuringStrategy.Always } }
+
+/**
+ * Pointer-first collision detection. The DragOverlay tracks the pointer while
+ * the source node stays in its column, so rect-based strategies (the dnd-kit
+ * default) keep resolving `over` to the source column — drops into empty
+ * columns and column padding never register. `pointerWithin` fixes that and
+ * prefers the smallest rect under the pointer (item over its column);
+ * `rectIntersection` only backs it up when the pointer leaves every droppable.
+ */
+const collisionDetectionStrategy: CollisionDetection = (args) => {
+  const pointerCollisions = pointerWithin(args)
+  return pointerCollisions.length > 0 ? pointerCollisions : rectIntersection(args)
+}
 
 interface StyleProp {
   style?: stylex.StyleXStyles
@@ -343,7 +359,11 @@ function Kanban<T>({
         const activeItems = columns[activeContainer] ?? []
         const overItems = columns[overContainer] ?? []
         const activeIndex = activeItems.findIndex((item: T) => getItemValue(item) === active.id)
-        const overIndex = overItems.findIndex((item: T) => getItemValue(item) === over.id)
+        // When `over` is the column itself (e.g. an empty column), append to
+        // the end of its item list.
+        const overIndex = isColumn(over.id)
+          ? overItems.length
+          : overItems.findIndex((item: T) => getItemValue(item) === over.id)
         if (activeIndex === -1 || overIndex === -1) return
         const newActiveItems = [...activeItems]
         const newOverItems = [...overItems]
@@ -445,6 +465,32 @@ function Kanban<T>({
         } else {
           commitChange(columns, event, 'item')
         }
+      } else if (activeContainer && overContainer) {
+        // Cross-column drop that dragOver did not already apply (e.g. an
+        // immediate release over an empty column).
+        const activeItems = columns[activeContainer] ?? []
+        const overItems = columns[overContainer] ?? []
+        const activeIndex = activeItems.findIndex((item: T) => getItemValue(item) === active.id)
+        const overIndex = isColumn(over.id)
+          ? overItems.length
+          : overItems.findIndex((item: T) => getItemValue(item) === over.id)
+        if (activeIndex !== -1 && overIndex !== -1) {
+          const newActiveItems = [...activeItems]
+          const newOverItems = [...overItems]
+          const movedItems = newActiveItems.splice(activeIndex, 1)
+          if (movedItems.length > 0) {
+            newOverItems.splice(overIndex, 0, movedItems[0] as T)
+          }
+          const newColumns = {
+            ...columns,
+            [activeContainer]: newActiveItems,
+            [overContainer]: newOverItems
+          }
+          setColumns(newColumns)
+          commitChange(newColumns, event, 'item')
+        } else {
+          commitChange(columns, event, 'item')
+        }
       } else {
         commitChange(columns, event, 'item')
       }
@@ -482,6 +528,7 @@ function Kanban<T>({
     <KanbanContext.Provider value={contextValue as KanbanContextProps<unknown>}>
       <DndContext
         sensors={sensors}
+        collisionDetection={collisionDetectionStrategy}
         modifiers={modifiers}
         accessibility={accessibility}
         measuring={MEASURING_CONFIG}

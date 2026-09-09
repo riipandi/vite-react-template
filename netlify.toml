@@ -1,14 +1,12 @@
-# Netlify deployment for the demo (DummyJSON backend).
-#
-# Cookie-based auth requires a same-origin API. netlify/functions/api.ts is
-# routed to /api/* via its own config.path (no redirects involved — a
-# public/_redirects splat would take precedence over these rules anyway).
-# Caching: hashed build assets are immutable; HTML stays revalidated for SPA
-# fallback.
+[build.environment]
+NODE_VERSION = "24.20.0"
+NPM_VERSION = "11.19.0"
+PNPM_VERSION = "12.3.4"
+TZ = "Asia/Jakarta"
 
+# Since Storybook 10, the build emits relative asset URLs, so subpath
+# deployments work out of the box — no base/config override needed.
 [build]
-  # Since Storybook 10, the build emits relative asset URLs, so subpath
-  # deployments work out of the box — no base/config override needed.
   command = "pnpm run build"
   publish = "dist"
 

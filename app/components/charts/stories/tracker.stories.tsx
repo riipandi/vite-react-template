@@ -4,12 +4,8 @@ import * as stylex from '@stylexjs/stylex'
 import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Tooltip, TooltipContent, TooltipTrigger } from '#/components/base/tooltip'
 import { duration, easing, fontSize, radius, unit } from '#/styles/core/tokens.stylex'
-import {
-  shelfStatuses,
-  statusColors,
-  statusLabels,
-  type AvailabilityStatus
-} from '../chart.samples'
+import { shelfStatuses, statusColors, statusLabels } from '../chart.samples'
+import type { AvailabilityStatus } from '../chart.samples'
 
 const meta = {
   title: 'Visualizations/Tracker',
@@ -86,12 +82,12 @@ const styles = stylex.create({
     transitionProperty: 'opacity',
     transitionTimingFunction: easing.decelerate
   },
-  bar: {
-    backgroundColor: 'var(--seg-color, currentColor)',
+  bar: (value: string) => ({
+    backgroundColor: value ?? 'currentColor',
     borderRadius: 1,
     height: '100%',
     width: '100%'
-  },
+  }),
   weekLabels: {
     display: 'flex',
     fontSize: fontSize.caption1,
@@ -116,9 +112,8 @@ function Tracker() {
               data-status={status}
               render={<div />}
               {...stylex.props(styles.segment)}
-              style={{ '--seg-color': statusColors[status] } as React.CSSProperties}
             >
-              <div {...stylex.props(styles.bar)} />
+              <div {...stylex.props(styles.bar(statusColors[status]))} />
             </TooltipTrigger>
             <TooltipContent>{`Day ${day + 1}: ${statusLabels[status]}`}</TooltipContent>
           </Tooltip>

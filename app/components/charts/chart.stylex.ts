@@ -72,12 +72,12 @@ export const chartStyles = stylex.create({
     display: 'flex',
     gap: unit.x1_5
   },
-  legendSwatch: {
-    backgroundColor: 'var(--swatch-color, currentColor)',
+  legendSwatch: (value: string) => ({
+    backgroundColor: value,
     borderRadius: radius.xsmall,
     display: 'block',
     flexShrink: 0,
     height: unit.x2,
     width: unit.x2
-  }
+  })
 })

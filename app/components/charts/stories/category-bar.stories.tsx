@@ -108,8 +108,6 @@ const styles = stylex.create({
     display: 'block',
     transform: 'translateX(50%)'
   },
-  // Tremor reference: relative h-2 row holding the pill bar and the
-  // absolutely positioned marker.
   barRow: {
     alignItems: 'center',
     display: 'flex',
@@ -126,29 +124,30 @@ const styles = stylex.create({
     height: '100%',
     overflow: 'hidden'
   },
-  segment: {
-    backgroundColor: 'var(--seg-bg, currentColor)',
+  segment: (bgColor: string, width: string) => ({
+    backgroundColor: bgColor,
+    width: `${width}%`,
     height: '100%'
-  },
-  marker: {
+  }),
+  marker: (value: string) => ({
     alignItems: 'center',
     cursor: 'default',
     display: 'flex',
     height: unit.x7,
     justifyContent: 'center',
-    left: 'var(--marker-left, 0%)',
+    left: `${value}%`,
     position: 'absolute',
     transform: 'translateX(-50%)',
     width: unit.x7
-  },
-  markerPin: {
-    backgroundColor: 'var(--pin-bg, currentColor)',
+  }),
+  markerPin: (bgColor: string | undefined) => ({
+    backgroundColor: bgColor ?? 'currentColor',
     borderRadius: radius.full,
     boxShadow: `0 0 0 2px ${colors.backgroundPage}`,
     display: 'block',
     height: unit.x4,
     width: unit.x1
-  }
+  })
 })
 
 export function CategoryBar() {
@@ -185,13 +184,9 @@ export function CategoryBar() {
             <div
               key={row.house}
               data-house={row.house.toLowerCase()}
-              {...stylex.props(styles.segment)}
-              style={
-                {
-                  '--seg-bg': houseColor(row.house),
-                  width: `${((row.points / total) * 100).toFixed(2)}%`
-                } as React.CSSProperties
-              }
+              {...stylex.props(
+                styles.segment(houseColor(row.house), ((row.points / total) * 100).toFixed(2))
+              )}
             />
           ))}
         </div>
@@ -201,13 +196,9 @@ export function CategoryBar() {
             delay={60}
             render={<div />}
             data-marker
-            {...stylex.props(styles.marker)}
-            style={{ '--marker-left': `${markerLeft.toFixed(2)}%` } as React.CSSProperties}
+            {...stylex.props(styles.marker(markerLeft.toFixed(2)))}
           >
-            <span
-              {...stylex.props(styles.markerPin)}
-              style={{ '--pin-bg': markerColorAt(markerValue) } as React.CSSProperties}
-            />
+            <span {...stylex.props(styles.markerPin(markerColorAt(markerValue)))} />
           </TooltipTrigger>
           <TooltipContent>{`${markerValue} points`}</TooltipContent>
         </Tooltip>

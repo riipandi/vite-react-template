@@ -94,15 +94,10 @@ function Heatmap({ days, label, summary }: HeatmapProps) {
                 aria-hidden='true'
                 {...stylex.props(
                   styles.cell,
-                  day.level === 0 ? styles.cellEmpty : styles.cellFilled
-                )}
-                style={
                   day.level === 0
-                    ? undefined
-                    : ({
-                        '--cell-bg': readingPalette[day.level as 1 | 2 | 3 | 4]
-                      } as React.CSSProperties)
-                }
+                    ? styles.cellEmpty
+                    : styles.cellFilled(readingPalette[day.level as 1 | 2 | 3 | 4])
+                )}
               />
               <TooltipContent>{cellLabel(day)}</TooltipContent>
             </Tooltip>
@@ -250,9 +245,9 @@ const styles = stylex.create({
   cellEmpty: {
     backgroundColor: colors.backgroundNeutralFaded
   },
-  cellFilled: {
-    backgroundColor: 'var(--cell-bg, currentColor)'
-  },
+  cellFilled: (value: string | undefined) => ({
+    backgroundColor: value ?? 'currentColor'
+  }),
   legend: {
     alignItems: 'center',
     display: 'flex',

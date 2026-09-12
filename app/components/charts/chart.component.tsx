@@ -169,10 +169,7 @@ export function ChartLegend({ config, hide, style, ...props }: ChartLegendProps)
             {Icon ? (
               <Icon height={12} width={12} color={item.color} />
             ) : (
-              <span
-                {...stylex.props(s.legendSwatch)}
-                style={{ '--swatch-color': item.color ?? 'currentColor' } as React.CSSProperties}
-              />
+              <span {...stylex.props(s.legendSwatch(item.color ?? 'currentColor'))} />
             )}
             {item.label ?? key}
           </div>

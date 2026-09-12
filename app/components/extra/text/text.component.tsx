@@ -1,7 +1,6 @@
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import * as stylex from '@stylexjs/stylex'
-import * as React from 'react'
 import {
   textAlignStyles,
   textAlignStylesLarge,
@@ -100,6 +99,7 @@ const TAG_MAP: Partial<Record<TextVariant, 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h
 }
 
 /**
+ * TODO: use StyleX dynamic values.
  * Resolves a mobile-first responsive value into one style per breakpoint.
  * `s` becomes the base style (all viewports); each wider breakpoint gets its
  * own media style only when its effective value (own value or inherited from
@@ -155,11 +155,6 @@ export function Text({
   const largestVariant =
     typeof variant === 'string' ? variant : (variant.xl ?? variant.l ?? variant.m ?? variant.s)
   const defaultTagName = (largestVariant && TAG_MAP[largestVariant]) || 'div'
-  // Consumed by the `clamp` style; only set when clamping is requested.
-  const runtimeStyle =
-    maxLines !== undefined
-      ? { style: { '--text-lines': maxLines } as React.CSSProperties }
-      : undefined
 
   return useRender({
     defaultTagName,
@@ -177,11 +172,10 @@ export function Text({
         wrap === 'nowrap' && textStyles.wrapNowrap,
         monospace && textStyles.monospace,
         numeric && textStyles.numeric,
-        maxLines !== undefined && textStyles.clamp,
+        maxLines !== undefined && textStyles.clamp(maxLines),
         maxLines === 1 && textStyles.breakAll,
         style
       ),
-      runtimeStyle,
       props
     )
   })

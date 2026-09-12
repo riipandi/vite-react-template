@@ -48,20 +48,20 @@ const styles = stylex.create({
     height: unit.x4,
     overflowX: 'hidden'
   },
-  barFill: {
+  barFill: (value: number) => ({
     backgroundColor: colors.backgroundPrimary,
     borderBottomRightRadius: radius.small,
     borderTopRightRadius: radius.small,
-    height: '100%',
-    width: 'var(--bar-width, 100%)'
-  },
-  barFillMuted: {
+    width: `${value}%`,
+    height: '100%'
+  }),
+  barFillMuted: (value: number) => ({
     backgroundColor: colors.backgroundNeutralHighlighted,
     borderBottomRightRadius: radius.small,
     borderTopRightRadius: radius.small,
-    height: '100%',
-    width: 'var(--bar-width, 100%)'
-  },
+    width: `${value}%`,
+    height: '100%'
+  }),
   value: {
     fontVariantNumeric: 'tabular-nums',
     minWidth: unit.x8,
@@ -76,7 +76,6 @@ interface BarListProps {
 
 function BarList({ rows, highlightFirst = true }: BarListProps) {
   const max = Math.max(...rows.map((row) => row.pages))
-
   return (
     <div role='list' aria-label='Most borrowed Harry Potter books' {...stylex.props(styles.list)}>
       {rows.map((row, index) => (
@@ -85,9 +84,10 @@ function BarList({ rows, highlightFirst = true }: BarListProps) {
           <div {...stylex.props(styles.bar)}>
             <div
               {...stylex.props(
-                highlightFirst && index === 0 ? styles.barFill : styles.barFillMuted
+                highlightFirst && index === 0
+                  ? styles.barFill((row.pages / max) * 100)
+                  : styles.barFillMuted((row.pages / max) * 100)
               )}
-              style={{ '--bar-width': `${(row.pages / max) * 100}%` } as React.CSSProperties}
             />
           </div>
           <span {...stylex.props(styles.value)}>{row.pages}</span>

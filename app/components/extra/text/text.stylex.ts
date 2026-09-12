@@ -237,12 +237,11 @@ export const textStyles = stylex.create({
   wrapNowrap: { whiteSpace: 'nowrap' },
   monospace: { fontFamily: fontFamily.monospace },
   numeric: { fontVariantNumeric: 'tabular-nums' },
-  clamp: {
+  clamp: (value: number) => ({
     display: '-webkit-box',
     overflow: 'hidden',
     WebkitBoxOrient: 'vertical',
-    // Line count comes from the runtime `--text-lines` custom property.
-    WebkitLineClamp: 'var(--text-lines)'
-  },
+    WebkitLineClamp: value
+  }),
   breakAll: { wordBreak: 'break-all' }
 })

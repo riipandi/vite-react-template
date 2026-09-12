@@ -1,15 +1,5 @@
-import {
-  ChartColumn,
-  FileText,
-  LayoutDashboard,
-  Power,
-  MessageSquare,
-  PanelLeftCloseDashed,
-  PanelLeft,
-  Search,
-  Settings,
-  ShoppingCart
-} from '@keyline-icons/react'
+import { ChartColumn, FileText, LayoutDashboard, Power, MessageSquare } from '@keyline-icons/react'
+import { PanelLeft, Search, Settings, ShoppingCart, PanelRight } from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import type { LinkProps } from '@tanstack/react-router'
@@ -146,7 +136,7 @@ export function SideNavbar({ collapsed = false, onToggleCollapse }: SideNavbarPr
               collapsed && sidebarStyles.collapseTriggerCollapsed
             )}
           >
-            {collapsed ? <PanelLeft size={16} /> : <PanelLeftCloseDashed size={16} />}
+            {collapsed ? <PanelRight size={16} /> : <PanelLeft size={16} />}
           </button>
         )}
       </div>

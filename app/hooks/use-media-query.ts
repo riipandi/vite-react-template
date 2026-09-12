@@ -1,4 +1,5 @@
-import { useCallback, useSyncExternalStore } from 'react'
+import { use, useCallback, useSyncExternalStore } from 'react'
+import { browser } from 'react-dom'
 
 /**
  * Viewport breakpoints, aligned with the design-system media-query consts in
@@ -77,7 +78,7 @@ export interface MediaQueryInput {
 const mqlCache = new Map<string, MediaQueryList>()
 
 function getMql(query: string): MediaQueryList | null {
-  if (typeof window === 'undefined') return null
+  use(browser()) // opt out of server-side rendering
   let mql = mqlCache.get(query)
   if (!mql) {
     mql = window.matchMedia(query)

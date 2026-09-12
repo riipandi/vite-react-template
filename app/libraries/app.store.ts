@@ -1,4 +1,6 @@
 import { createStore, useSelector } from '@tanstack/react-store'
+import { use } from 'react'
+import { browser } from 'react-dom'
 
 export interface AppState {
   /** Mobile drawer visibility. */
@@ -12,13 +14,13 @@ export interface AppState {
 const SIDEBAR_STORAGE_KEY = 'app.sidebarCollapsed'
 
 function getStoredSidebarCollapsed(): boolean {
-  if (typeof window === 'undefined') return false
+  use(browser()) // opt out of server-side rendering
   const stored = window.localStorage.getItem(SIDEBAR_STORAGE_KEY)
   return stored === 'true'
 }
 
 function persistSidebarCollapsed(collapsed: boolean) {
-  if (typeof window === 'undefined') return
+  use(browser()) // opt out of server-side rendering
   window.localStorage.setItem(SIDEBAR_STORAGE_KEY, String(collapsed))
 }
 

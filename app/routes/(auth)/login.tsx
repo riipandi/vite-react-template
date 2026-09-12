@@ -3,6 +3,7 @@ import * as stylex from '@stylexjs/stylex'
 import { useForm } from '@tanstack/react-form'
 import { createFileRoute, Link, useNavigate, useSearch } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
+import { ViewTransition } from 'react'
 import { z } from 'zod'
 import { Button } from '#/components/base/button'
 import { Checkbox } from '#/components/base/checkbox'
@@ -79,22 +80,28 @@ function RouteComponent() {
       {(failed || showGoodbye || showSignInPrompt) && (
         <div {...stylex.props(styles.alerts)}>
           {failed && (
-            <Alert variant='destructive' id='login-alert-error'>
-              <AlertTitle>Sign in failed</AlertTitle>
-              <AlertDescription>{failed}</AlertDescription>
-            </Alert>
+            <ViewTransition>
+              <Alert variant='destructive' id='login-alert-error'>
+                <AlertTitle>Sign in failed</AlertTitle>
+                <AlertDescription>{failed}</AlertDescription>
+              </Alert>
+            </ViewTransition>
           )}
           {showGoodbye && (
-            <Alert id='login-alert-goodbye'>
-              <AlertTitle>Goodbye!</AlertTitle>
-              <AlertDescription>Your session has been terminated.</AlertDescription>
-            </Alert>
+            <ViewTransition>
+              <Alert id='login-alert-goodbye'>
+                <AlertTitle>Goodbye!</AlertTitle>
+                <AlertDescription>Your session has been terminated.</AlertDescription>
+              </Alert>
+            </ViewTransition>
           )}
           {showSignInPrompt && (
-            <Alert id='login-alert-signin'>
-              <AlertTitle>Sign in required</AlertTitle>
-              <AlertDescription>You are unauthenticated. Sign in to continue.</AlertDescription>
-            </Alert>
+            <ViewTransition>
+              <Alert id='login-alert-signin'>
+                <AlertTitle>Sign in required</AlertTitle>
+                <AlertDescription>You are unauthenticated. Sign in to continue.</AlertDescription>
+              </Alert>
+            </ViewTransition>
           )}
         </div>
       )}

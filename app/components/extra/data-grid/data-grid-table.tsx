@@ -1787,6 +1787,7 @@ function DataGridTableRenderedRow<TData extends object>({
    */
   centerWindow?: { start: number; end: number }
 }) {
+  const fragmentRef = useRef(null)
   const { props, table } = useDataGrid<TData>()
   const startVisibleCells = row.getStartVisibleCells()
   const centerVisibleCells = row.getCenterVisibleCells()
@@ -1820,7 +1821,7 @@ function DataGridTableRenderedRow<TData extends object>({
   })
 
   return (
-    <Fragment>
+    <Fragment ref={fragmentRef}>
       <DataGridTableBodyRow
         row={row}
         pinnedBoundary={pinnedBoundary}

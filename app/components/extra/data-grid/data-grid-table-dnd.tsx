@@ -184,6 +184,7 @@ function DataGridTableDndBodyRows<TData extends object>({
 }: {
   table: DataGridTableInstance<TData>
 }) {
+  const fragmentRef = useRef(null)
   const { isLoading, props } = useDataGrid()
   const pagination = table.state.pagination
 
@@ -213,7 +214,7 @@ function DataGridTableDndBodyRows<TData extends object>({
     <>
       {table.getRowModel().rows.map((row: Row<DataGridFeatures, TData>, rowIndex) => {
         return (
-          <Fragment key={row.id}>
+          <Fragment key={row.id} ref={fragmentRef}>
             <DataGridTableBodyRow row={row} stripe={rowIndex % 2 === 0}>
               <SortableContext
                 items={table.state.columnOrder}

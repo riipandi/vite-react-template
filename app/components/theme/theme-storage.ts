@@ -1,3 +1,4 @@
+import { isServer } from './theme-utils'
 import type { BuiltInStorage, ThemeStorage } from './types'
 
 export const localStorageAdapter: ThemeStorage = {
@@ -32,8 +33,6 @@ export const localStorageAdapter: ThemeStorage = {
     return () => window.removeEventListener('storage', handler)
   }
 }
-
-const isServer = typeof window === 'undefined'
 
 export const cookieStorageAdapter: ThemeStorage = {
   getItem: (key) => {

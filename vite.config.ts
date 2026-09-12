@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => ({
     stylex({
       aliases: { '#/*': resolve('./app/*') },
       enableDevClassNames: mode === 'development',
-      useCSSLayers: true
+      useCSSLayers: { before: ['reset'], prefix: 'stylex' }
     }),
     devtools(),
     tanstackRouter({

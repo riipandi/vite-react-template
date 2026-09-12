@@ -1093,8 +1093,7 @@ function DataGridCellSelection<TData extends object>({
       viewport.querySelector<HTMLElement>('table[data-slot="data-grid-table"]') ?? viewport
 
     const scrollTdIntoView = (cell: Element | null) =>
-      // Optional call: jsdom and some embedded contexts ship elements
-      // without scrollIntoView.
+      // Optional call: jsdom and some embedded contexts ship elements without scrollIntoView.
       cell?.scrollIntoView?.({
         block: 'nearest',
         inline: 'nearest',

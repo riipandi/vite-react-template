@@ -13,8 +13,8 @@
     "type": "module",
     "scripts": {
         "dev": "pnpm prebuild && vite",
+        "start": "vite preview --host 0.0.0.0",
         "build": "pnpm prebuild && vite build && pnpm storybook:build",
-        "start": "vite preview --port 3000 --host 0.0.0.0",
         "storybook": "storybook dev -p 6006 --host 0.0.0.0 --no-open",
         "storybook:build": "storybook build -o dist/storybook",
         "storybook:start": "pnpm dlx node-http-server --root dist/storybook --host 0.0.0.0 --port 6006 --no-cache",

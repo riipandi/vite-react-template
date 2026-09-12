@@ -2,17 +2,36 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin'
 import stylex from '@stylexjs/unplugin/vite'
 import react from '@vitejs/plugin-react'
 import { playwright } from '@vitest/browser-playwright'
+import { EventEmitter } from 'node:events'
 import { resolve } from 'node:path'
+import type { Plugin, ViteDevServer } from 'vite'
 import { loadEnv } from 'vite'
 import { defineConfig } from 'vitest/config'
-import { vitestStylexCleanup } from './tests/stylex-cleanup.ts'
 
-// Storybook test project: renders stories in a real browser (Playwright) and
-// runs a11y checks via @storybook/addon-a11y. The Storybook vite config
-// (incl. StyleX/React plugins from .storybook/main.ts viteFinal) is provided by
-// the storybookTest plugin, so we don't re-apply the unit setup here. The
-// story files are indexed from the `stories` glob in .storybook/main.ts.
-const storybookPlugins = await storybookTest({ configDir: resolve('./.storybook') })
+/**
+ * StyleX starts a dev HMR interval in configureServer and only clears it on
+ * httpServer 'close'. Vitest's Vite server often has no httpServer, so the
+ * interval keeps the process alive after tests finish.
+ */
+function vitestStylexCleanup(): Plugin {
+  let server: ViteDevServer | undefined
+  const closeHttpServer = () => {
+    server?.httpServer?.emit('close')
+  }
+  return {
+    name: 'vitest-stylex-cleanup',
+    enforce: 'pre',
+    apply: 'serve',
+    configureServer(devServer) {
+      server = devServer
+      if (!devServer.httpServer) {
+        devServer.httpServer = new EventEmitter() as ViteDevServer['httpServer']
+      }
+    },
+    buildEnd: closeHttpServer,
+    closeWatcher: closeHttpServer
+  }
+}
 
 export default defineConfig({
   test: {
@@ -69,7 +88,12 @@ export default defineConfig({
         }
       },
       {
-        plugins: storybookPlugins,
+        // Storybook test project: renders stories in a real browser (Playwright) and
+        // runs a11y checks via @storybook/addon-a11y. The Storybook vite config
+        // (incl. StyleX/React plugins from .storybook/main.ts viteFinal) is provided by
+        // the storybookTest plugin, so we don't re-apply the unit setup here. The
+        // story files are indexed from the `stories` glob in .storybook/main.ts.
+        plugins: await storybookTest({ configDir: resolve('./.storybook') }),
         test: {
           name: 'storybook',
           exclude: ['./**/*.{test,spec}.{ts,tsx}', 'node_modules', 'tests-e2e'],

@@ -6,10 +6,6 @@ import { resolve } from 'node:path'
 import { defineConfig, type ProxyOptions } from 'vite'
 import { developmentPlugins } from './vite.plugins.ts'
 
-const isTestOrCI = process.env.CI || process.env.VITEST
-const isStorybook = process.env.STORYBOOK === 'true'
-const isVitest = process.env.VITEST
-
 const apiProxy: Record<string, string | ProxyOptions> = {
   '/api': {
     target: 'https://dummyjson.com',
@@ -18,23 +14,20 @@ const apiProxy: Record<string, string | ProxyOptions> = {
   }
 }
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     stylex({
-      useCSSLayers: true,
-      aliases: { '#/*': resolve('./app/*') }
+      aliases: { '#/*': resolve('./app/*') },
+      enableDevClassNames: mode === 'development',
+      useCSSLayers: true
     }),
-    // Run on every non-test build: during build it strips @tanstack/*-devtools
-    // imports from the bundle (removeDevtoolsOnBuild).
-    !isVitest && !isStorybook && devtools(),
-    !isTestOrCI &&
-      !isStorybook &&
-      tanstackRouter({
-        routesDirectory: resolve('./app/routes'),
-        generatedRouteTree: resolve('./app/routes.gen.ts'),
-        autoCodeSplitting: true,
-        target: 'react'
-      }),
+    devtools(),
+    tanstackRouter({
+      routesDirectory: resolve('./app/routes'),
+      generatedRouteTree: resolve('./app/routes.gen.ts'),
+      autoCodeSplitting: true,
+      target: 'react'
+    }),
     // React Compiler (native oxc path, requires `oxc-transform-react`).
     // Defaults: compilationMode 'infer', panicThreshold 'none' (components
     // that violate the Rules of React are skipped, never broken), target 19.
@@ -58,6 +51,6 @@ export default defineConfig({
   // Same-origin proxy to the demo auth backend. Required for the HttpOnly
   // cookie session: cookies default to SameSite=Lax, which is not sent on
   // cross-site fetches, and this keeps them first-party.
-  server: isStorybook ? undefined : { port: 3000, strictPort: true, proxy: apiProxy },
-  preview: { proxy: apiProxy }
-})
+  server: { port: 3000, strictPort: true, proxy: apiProxy },
+  preview: { port: 3000, strictPort: false, proxy: apiProxy }
+}))

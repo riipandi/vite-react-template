@@ -4,7 +4,7 @@ import { resolve } from 'node:path'
 import remarkGfm from 'remark-gfm'
 import { mergeConfig } from 'vite'
 
-const config: StorybookConfig = {
+export default {
   stories: ['./stories/**/*.mdx', '../app/**/*.stories.@(mdx|jsx|tsx)'],
   addons: [
     '@storybook/addon-a11y',
@@ -19,9 +19,9 @@ const config: StorybookConfig = {
       }
     },
     '@storybook/addon-links',
-    '@storybook/addon-mcp',
     '@storybook/addon-vitest',
-    '@github-ui/storybook-addon-performance-panel'
+    '@github-ui/storybook-addon-performance-panel',
+    '@storybook/addon-mcp'
   ],
   framework: '@storybook/tanstack-react',
   core: {
@@ -37,10 +37,7 @@ const config: StorybookConfig = {
   async viteFinal(viteConfig) {
     return mergeConfig(viteConfig, {
       plugins: [
-        stylex({
-          useCSSLayers: true,
-          aliases: { '#/*': resolve('./app/*') }
-        }),
+        stylex({ useCSSLayers: true, aliases: { '#/*': resolve('./app/*') } }),
         {
           // Mirror the `@layer reset;` prelude from index.html: the StyleX dev middleware
           // injects its priority layers into <head> before globals.css runs, so without
@@ -52,9 +49,8 @@ const config: StorybookConfig = {
         }
       ],
       resolve: { tsconfigPaths: true },
-      build: { chunkSizeWarningLimit: 1024 * 4 }
+      build: { chunkSizeWarningLimit: 1024 * 4 },
+      server: undefined
     })
   }
-}
-
-export default config
+} satisfies StorybookConfig

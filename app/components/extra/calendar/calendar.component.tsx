@@ -1,6 +1,6 @@
+import { ChevronDown, ChevronLeft, ChevronRight } from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
 import type { StyleXStyles } from '@stylexjs/stylex'
-import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import * as React from 'react'
 import { DayPicker, getDefaultClassNames } from 'react-day-picker'
 import type { DayButton, DropdownOption, Locale } from 'react-day-picker'
@@ -72,12 +72,12 @@ const CalendarChevron = ({
 }: { className?: string; orientation?: string } & React.ComponentProps<'svg'>) => {
   const chevronStyleProps = stylex.props(calendarStyles.chevron, customClassName(iconCn))
   if (orientation === 'left') {
-    return <ChevronLeftIcon {...chevronStyleProps} {...chevronProps} />
+    return <ChevronLeft {...chevronStyleProps} {...chevronProps} />
   }
   if (orientation === 'right') {
-    return <ChevronRightIcon {...chevronStyleProps} {...chevronProps} />
+    return <ChevronRight {...chevronStyleProps} {...chevronProps} />
   }
-  return <ChevronDownIcon {...chevronStyleProps} {...chevronProps} />
+  return <ChevronDown {...chevronStyleProps} {...chevronProps} />
 }
 
 const CalendarRoot = ({

@@ -1,7 +1,7 @@
+import { Menu } from '@keyline-icons/react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute, Outlet, redirect, useRouter } from '@tanstack/react-router'
-import { MenuIcon } from 'lucide-react'
 import { useEffect } from 'react'
 import { useIsMobile } from '#/hooks/use-media-query'
 import { closeSidebar, useSidebarOpen, useSidebarCollapsed } from '#/libraries/app.store'
@@ -53,7 +53,7 @@ function RouteComponent() {
           {...stylex.props(styles.hamburger)}
           aria-label='Toggle navigation'
         >
-          <MenuIcon size={20} strokeWidth={1.8} />
+          <Menu size={20} strokeWidth={1.8} />
         </button>
         <span {...stylex.props(styles.mobileHeaderTitle)}>Dashboard</span>
         <div {...stylex.props(atoms.width['2.25rem'])} />

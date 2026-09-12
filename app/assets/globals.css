@@ -150,7 +150,7 @@
   border-bottom-width: 1px;
 }
 
-/* Data grid header icons — lucide svgs ship at their 24px attribute size,
+/* Data grid header icons — Keyline svgs ship at their 24px attribute size,
    and the project Button carries no descendant-svg sizing rule (shadcn's
    `[&_svg]:size-4` / label's `[&_svg]:size-3.5`), so header chrome sizes
    descendant svgs here. Element selectors lose to StyleX classes, so icons

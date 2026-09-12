@@ -1,6 +1,6 @@
+import { Power } from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
 import { createFileRoute } from '@tanstack/react-router'
-import { LogOutIcon } from 'lucide-react'
 import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Field, FieldLabel } from '#/components/base/field'
@@ -132,7 +132,7 @@ function RouteComponent() {
                 </Text>
               </div>
               <Button variant='destructive' onClick={() => logout()}>
-                <LogOutIcon size={16} />
+                <Power size={16} />
                 Sign out
               </Button>
             </div>

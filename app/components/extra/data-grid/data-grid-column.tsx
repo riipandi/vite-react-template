@@ -1,20 +1,18 @@
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  Check,
+  ChevronsUpDown,
+  CirclePlus,
+  X,
+  Settings
+} from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import { Subscribe } from '@tanstack/react-table'
 import type { Column, Table } from '@tanstack/react-table'
-import {
-  ArrowDownIcon,
-  ArrowLeftIcon,
-  ArrowLeftToLineIcon,
-  ArrowRightIcon,
-  ArrowRightToLineIcon,
-  ArrowUpIcon,
-  CheckIcon,
-  ChevronsUpDownIcon,
-  CirclePlusIcon,
-  PinOffIcon,
-  Settings2Icon
-} from 'lucide-react'
 import { memo, useMemo, useState } from 'react'
 import type { ComponentType, HTMLAttributes, ReactElement, ReactNode } from 'react'
 import { Button } from '#/components/base/button'
@@ -80,7 +78,7 @@ function DataGridColumnFilter<TData extends object, TValue>({
       <PopoverTrigger
         render={
           <Button variant='outline' size='sm'>
-            <CirclePlusIcon {...stylex.props(sFilter.triggerIcon)} />
+            <CirclePlus {...stylex.props(sFilter.triggerIcon)} />
             {title}
             {selectedValues?.size > 0 && (
               <>
@@ -148,7 +146,7 @@ function DataGridColumnFilter<TData extends object, TValue>({
                         isSelected ? sFilter.optionBoxSelected : sFilter.optionBoxUnchecked
                       )}
                     >
-                      <CheckIcon
+                      <Check
                         {...stylex.props(
                           sFilter.optionCheckIcon,
                           !isSelected && sFilter.iconHidden
@@ -247,11 +245,11 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
   const sortIcon =
     canSort &&
     (isSorted === 'desc' ? (
-      <ArrowDownIcon aria-hidden='true' {...stylex.props(sHeader.sortIcon)} />
+      <ArrowDown aria-hidden='true' {...stylex.props(sHeader.sortIcon)} />
     ) : isSorted === 'asc' ? (
-      <ArrowUpIcon aria-hidden='true' {...stylex.props(sHeader.sortIcon)} />
+      <ArrowUp aria-hidden='true' {...stylex.props(sHeader.sortIcon)} />
     ) : (
-      <ChevronsUpDownIcon
+      <ChevronsUpDown
         aria-hidden='true'
         {...stylex.props(sHeader.sortIcon, sHeader.sortIconIdle)}
       />
@@ -294,9 +292,9 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
           }}
           disabled={!canSort}
         >
-          <ArrowUpIcon {...stylex.props(sHeader.menuIcon)} />
+          <ArrowUp {...stylex.props(sHeader.menuIcon)} />
           <span {...stylex.props(sHeader.menuItemLabel)}>{i18n.labels.sortAscending}</span>
-          {isSorted === 'asc' && <CheckIcon {...stylex.props(sHeader.menuCheckIcon)} />}
+          {isSorted === 'asc' && <Check {...stylex.props(sHeader.menuCheckIcon)} />}
         </DropdownMenuItem>,
         <DropdownMenuItem
           key='sort-desc'
@@ -309,9 +307,9 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
           }}
           disabled={!canSort}
         >
-          <ArrowDownIcon {...stylex.props(sHeader.menuIcon)} />
+          <ArrowDown {...stylex.props(sHeader.menuIcon)} />
           <span {...stylex.props(sHeader.menuItemLabel)}>{i18n.labels.sortDescending}</span>
-          {isSorted === 'desc' && <CheckIcon {...stylex.props(sHeader.menuCheckIcon)} />}
+          {isSorted === 'desc' && <Check {...stylex.props(sHeader.menuCheckIcon)} />}
         </DropdownMenuItem>
       )
       hasPreviousSection = true
@@ -327,17 +325,17 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
           key='pin-left'
           onClick={() => column.pin(isPinned === 'start' ? false : 'start')}
         >
-          <ArrowLeftToLineIcon aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
+          <ArrowLeft aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
           <span {...stylex.props(sHeader.menuItemLabel)}>{i18n.labels.pinColumnStart}</span>
-          {isPinned === 'start' && <CheckIcon {...stylex.props(sHeader.menuCheckIcon)} />}
+          {isPinned === 'start' && <Check {...stylex.props(sHeader.menuCheckIcon)} />}
         </DropdownMenuItem>,
         <DropdownMenuItem
           key='pin-right'
           onClick={() => column.pin(isPinned === 'end' ? false : 'end')}
         >
-          <ArrowRightToLineIcon aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
+          <ArrowRight aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
           <span {...stylex.props(sHeader.menuItemLabel)}>{i18n.labels.pinColumnEnd}</span>
-          {isPinned === 'end' && <CheckIcon {...stylex.props(sHeader.menuCheckIcon)} />}
+          {isPinned === 'end' && <Check {...stylex.props(sHeader.menuCheckIcon)} />}
         </DropdownMenuItem>
       )
       hasPreviousSection = true
@@ -363,7 +361,7 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
           }}
           disabled={!canMoveLeft || isPinned !== false}
         >
-          <ArrowLeftIcon aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
+          <ArrowLeft aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
           <span>{i18n.labels.moveColumnStart}</span>
         </DropdownMenuItem>,
         <DropdownMenuItem
@@ -380,7 +378,7 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
           }}
           disabled={!canMoveRight || isPinned !== false}
         >
-          <ArrowRightIcon aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
+          <ArrowRight aria-hidden='true' {...stylex.props(sHeader.menuIcon)} />
           <span>{i18n.labels.moveColumnEnd}</span>
         </DropdownMenuItem>
       )
@@ -395,7 +393,7 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
       items.push(
         <DropdownMenuSub key='visibility'>
           <DropdownMenuSubTrigger>
-            <Settings2Icon {...stylex.props(sHeader.menuIcon)} />
+            <Settings {...stylex.props(sHeader.menuIcon)} />
             <span>{i18n.labels.columnsMenu}</span>
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent side='right'>
@@ -468,7 +466,7 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
             aria-label={i18n.labels.unpinColumn(resolvedTitle)}
             title={i18n.labels.unpinColumn(resolvedTitle)}
           >
-            <PinOffIcon aria-hidden='true' {...stylex.props(sHeader.unpinIcon)} />
+            <X aria-hidden='true' {...stylex.props(sHeader.unpinIcon)} />
           </Button>
         )}
       </div>

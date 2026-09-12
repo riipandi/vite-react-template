@@ -1,7 +1,7 @@
+import { Check } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { CheckIcon } from 'lucide-react'
 import { expect } from 'storybook/test'
 import { Spinner } from '#/components/extra/spinner'
 import { Badge } from './badge.component'
@@ -68,7 +68,7 @@ export const Icon: Story = {
   name: 'With icon',
   render: () => (
     <Badge variant='secondary'>
-      <CheckIcon {...stylex.props(styles.icon)} />
+      <Check {...stylex.props(styles.icon)} />
       Ministry approved
     </Badge>
   )

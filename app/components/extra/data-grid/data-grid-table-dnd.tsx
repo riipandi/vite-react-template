@@ -25,11 +25,11 @@ import {
   type SortingStrategy
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { GripHorizontal, GripVertical } from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import { flexRender } from '@tanstack/react-table'
 import type { Cell, Header, HeaderGroup, Row } from '@tanstack/react-table'
-import { GripHorizontalIcon, GripVerticalIcon } from 'lucide-react'
 import {
   createContext,
   Fragment,
@@ -143,7 +143,7 @@ function DataGridTableDndHeader<TData extends object>({
             {...listeners}
             aria-label={i18n.labels.dragToReorder}
           >
-            <GripVerticalIcon aria-hidden='true' {...stylex.props(s2.grip)} />
+            <GripVertical aria-hidden='true' {...stylex.props(s2.grip)} />
           </Button>
         )}
         <div {...stylex.props(s2.headerLabel)}>
@@ -391,7 +391,7 @@ function DataGridTableDndRowHandle({
         title={disabled ? resolvedDisabledLabel : undefined}
         disabled
       >
-        <GripHorizontalIcon aria-hidden='true' {...stylex.props(rowStyles.gripIcon)} />
+        <GripHorizontal aria-hidden='true' {...stylex.props(rowStyles.gripIcon)} />
       </Button>
     )
   }
@@ -405,7 +405,7 @@ function DataGridTableDndRowHandle({
       {...context.attributes}
       {...context.listeners}
     >
-      <GripHorizontalIcon aria-hidden='true' {...stylex.props(rowStyles.gripIcon)} />
+      <GripHorizontal aria-hidden='true' {...stylex.props(rowStyles.gripIcon)} />
     </Button>
   )
 }

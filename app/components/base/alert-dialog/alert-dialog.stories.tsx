@@ -1,7 +1,7 @@
+import { Bin } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { Trash2Icon } from 'lucide-react'
 import * as React from 'react'
 import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Button } from '#/components/base/button'
@@ -100,7 +100,7 @@ export const Media: Story = {
       <AlertDialogContent size='sm'>
         <AlertDialogHeader>
           <AlertDialogMedia color='critical'>
-            <Icon svg={Trash2Icon} size={24} color='critical' />
+            <Icon svg={Bin} size={24} color='critical' />
           </AlertDialogMedia>
           <AlertDialogTitle>Empty the room?</AlertDialogTitle>
           <AlertDialogDescription>

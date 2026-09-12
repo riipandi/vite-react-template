@@ -1,7 +1,7 @@
+import { FileText, Package, Search } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { PackageIcon, SearchIcon, TextIcon } from 'lucide-react'
 import { expect, userEvent } from 'storybook/test'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
@@ -47,7 +47,7 @@ export const Playground: Story = {
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant='icon'>
-          <PackageIcon {...stylex.props(styles.icon)} />
+          <Package {...stylex.props(styles.icon)} />
         </EmptyMedia>
         <EmptyTitle>No potions brewed</EmptyTitle>
         <EmptyDescription>
@@ -66,7 +66,7 @@ export const Outline: Story = {
     <Empty style={styles.solidBorder}>
       <EmptyHeader>
         <EmptyMedia variant='icon'>
-          <TextIcon {...stylex.props(styles.icon)} />
+          <FileText {...stylex.props(styles.icon)} />
         </EmptyMedia>
         <EmptyTitle>No owls today</EmptyTitle>
         <EmptyDescription>No letters from Hogwarts. New post will show up here.</EmptyDescription>
@@ -107,7 +107,7 @@ export const WithInputGroup: Story = {
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant='icon'>
-          <SearchIcon {...stylex.props(styles.icon)} />
+          <Search {...stylex.props(styles.icon)} />
         </EmptyMedia>
         <EmptyTitle>No spells found</EmptyTitle>
         <EmptyDescription>Try a different incantation.</EmptyDescription>
@@ -116,7 +116,7 @@ export const WithInputGroup: Story = {
         <InputGroup>
           <InputGroupInput placeholder='Search spells…' />
           <InputGroupAddon>
-            <SearchIcon {...stylex.props(styles.smallIcon)} />
+            <Search {...stylex.props(styles.smallIcon)} />
           </InputGroupAddon>
         </InputGroup>
       </EmptyContent>

@@ -1,7 +1,7 @@
+import { Home, Info } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { HouseIcon, InfoIcon } from 'lucide-react'
 import * as React from 'react'
 import { expect, userEvent } from 'storybook/test'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
@@ -69,7 +69,7 @@ export const Playground: Story = {
       </Item>
       <Item variant='muted'>
         <ItemMedia variant='icon'>
-          <InfoIcon {...stylex.props(styles.icon)} />
+          <Info {...stylex.props(styles.icon)} />
         </ItemMedia>
         <ItemContent>
           <ItemTitle>Broom in stock</ItemTitle>
@@ -184,7 +184,7 @@ export const Link: Story = {
     // focus states apply to the anchor.
     <Item variant='outline' render={<a href='#dashboard' />}>
       <ItemMedia variant='icon'>
-        <HouseIcon {...stylex.props(styles.icon)} />
+        <Home {...stylex.props(styles.icon)} />
       </ItemMedia>
       <ItemContent>
         <ItemTitle>Marauder's Map</ItemTitle>

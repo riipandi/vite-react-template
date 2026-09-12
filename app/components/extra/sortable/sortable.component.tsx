@@ -5,7 +5,7 @@
  *   <Sortable value={items} onValueChange={setItems} getItemValue={(item) => item.id}>
  *     {items.map((item) => (
  *       <SortableItem key={item.id} value={item.id}>
- *         <SortableItemHandle><GripVerticalIcon /></SortableItemHandle>
+ *         <SortableItemHandle><GripVertical /></SortableItemHandle>
  *         {item.title}
  *       </SortableItem>
  *     ))}

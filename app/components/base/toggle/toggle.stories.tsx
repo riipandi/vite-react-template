@@ -1,7 +1,7 @@
+import { Bold, Italic } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { BoldIcon, ItalicIcon } from 'lucide-react'
 import { expect, userEvent } from 'storybook/test'
 import { Toggle } from './toggle.component'
 
@@ -48,7 +48,7 @@ export default meta
 export const Playground: Story = {
   render: () => (
     <Toggle aria-label='Toggle charm'>
-      <BoldIcon {...stylex.props(styles.icon)} />
+      <Bold {...stylex.props(styles.icon)} />
     </Toggle>
   ),
   play: async ({ canvas }) => {
@@ -76,7 +76,7 @@ export const WithText: Story = {
   name: 'With text',
   render: () => (
     <Toggle aria-label='Toggle hex'>
-      <ItalicIcon {...stylex.props(styles.icon)} />
+      <Italic {...stylex.props(styles.icon)} />
       Hex
     </Toggle>
   )

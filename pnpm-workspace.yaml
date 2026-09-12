@@ -13,6 +13,7 @@ minimumReleaseAge: 0
 minimumReleaseAgeExclude:
   - '@base-ui/react'
   - '@base-ui/utils'
+  - '@keyline-icons/react'
   - '@oxfmt/binding-android-arm-eabi'
   - '@oxfmt/binding-android-arm64'
   - '@oxfmt/binding-darwin-arm64'
@@ -61,10 +62,10 @@ minimumReleaseAgeExclude:
   - '@tanstack/router-plugin'
   - '@tanstack/virtual-core'
   - '@types/node'
-  - '@types/react'
   - '@types/react-dom'
-  - '@vitest/browser'
+  - '@types/react'
   - '@vitest/browser-playwright'
+  - '@vitest/browser'
   - '@vitest/coverage-v8'
   - '@vitest/mocker'
   - '@vitest/pretty-format'
@@ -73,7 +74,6 @@ minimumReleaseAgeExclude:
   - '@vitest/utils'
   - happy-dom
   - knip
-  - lucide-react
   - oxfmt
   - oxlint
   - react

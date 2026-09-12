@@ -1,8 +1,8 @@
+import { Plus } from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
 import type { StyleXStyles } from '@stylexjs/stylex'
 import { flexRender, Subscribe } from '@tanstack/react-table'
 import type { Cell, Column, Header, Row } from '@tanstack/react-table'
-import { PlusIcon } from 'lucide-react'
 import { Fragment, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import type {
   CSSProperties,
@@ -627,7 +627,7 @@ function DataGridTableAddRow() {
             }, 0)
           }}
         >
-          <PlusIcon aria-hidden='true' {...stylex.props(s.addRowIcon)} />
+          <Plus aria-hidden='true' {...stylex.props(s.addRowIcon)} />
           {props.rowCreateLabel ?? i18n.labels.rowCreate}
         </Button>
       </td>

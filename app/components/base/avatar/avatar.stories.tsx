@@ -1,7 +1,7 @@
+import { Check } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { CheckIcon } from 'lucide-react'
 import { expect, waitFor } from 'storybook/test'
 import {
   Avatar,
@@ -103,7 +103,7 @@ export const Badge: Story = {
         <AvatarImage src='https://github.com/github.png' alt='@hermione.granger' />
         <AvatarFallback>HG</AvatarFallback>
         <AvatarBadge>
-          <CheckIcon {...stylex.props(styles.badgeIcon)} />
+          <Check {...stylex.props(styles.badgeIcon)} />
         </AvatarBadge>
       </Avatar>
     </div>

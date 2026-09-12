@@ -36,7 +36,7 @@ Browse the component library live in [Storybook](https://reactivite.netlify.app/
 - [x] [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling.
 - [x] [React](https://reactjs.org) - A JavaScript library for building user interfaces.
 - [x] [StyleX](https://stylexjs.com) - The styling system for ambitious user interfaces.
-- [x] [Lucide Icons](https://lucide.dev) - Beautiful & consistent 1600+ vector icons.
+- [x] [Keyline Icons](https://github.com/keyline-icons/keyline-icons) - Consistent 24×24 stroke, duotone, and fill icons.
 - [x] [Typescript](https://www.typescriptlang.org) - Strongly typed programming language.
 - [x] [TanStack Router](https://tanstack.com/router) - Type-safe routing for React.
 - [x] [TanStack Form](https://tanstack.com/form) - Headless, type-safe form state management.

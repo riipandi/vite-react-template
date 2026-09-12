@@ -1,7 +1,7 @@
+import { Activity, Zap } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { ActivityIcon, ZapIcon } from 'lucide-react'
 import { expect } from 'storybook/test'
 import { colors } from '#/styles/core/colors.stylex'
 import { Icon } from './icon.component'
@@ -80,43 +80,43 @@ const styles = stylex.create({
 export default meta
 
 export const Playground: Story = {
-  args: { svg: ActivityIcon, size: 20 },
+  args: { svg: Activity, size: 20 },
   render: () => (
     <div {...stylex.props(styles.row)}>
-      <Icon svg={ActivityIcon} size={20} />
-      <Icon svg={ZapIcon} size={20} />
+      <Icon svg={Activity} size={20} />
+      <Icon svg={Zap} size={20} />
       <Icon svg={MicSvg} size={20} />
-      <Icon svg={ActivityIcon} color='primary' size={20} />
-      <Icon svg={ZapIcon} color='critical' size={20} />
+      <Icon svg={Activity} color='primary' size={20} />
+      <Icon svg={Zap} color='critical' size={20} />
     </div>
   )
 }
 
 export const Size: Story = {
   name: 'size',
-  args: { svg: ActivityIcon },
+  args: { svg: Activity },
   render: () => (
     <div {...stylex.props(styles.column)}>
       <div {...stylex.props(styles.row)}>
-        <Icon svg={ActivityIcon} size={12} />
-        <Icon svg={ActivityIcon} size={16} />
-        <Icon svg={ActivityIcon} size={20} />
-        <Icon svg={ActivityIcon} size={24} />
-        <Icon svg={ActivityIcon} size={32} />
+        <Icon svg={Activity} size={12} />
+        <Icon svg={Activity} size={16} />
+        <Icon svg={Activity} size={20} />
+        <Icon svg={Activity} size={24} />
+        <Icon svg={Activity} size={32} />
       </div>
       {/* Default: scales with the parent font size */}
       <div {...stylex.props(styles.row)}>
         <span {...stylex.props(atoms.fontSize['12px'])}>
-          <Icon svg={ActivityIcon} />
+          <Icon svg={Activity} />
         </span>
         <span {...stylex.props(atoms.fontSize['24px'])}>
-          <Icon svg={ActivityIcon} />
+          <Icon svg={Activity} />
         </span>
       </div>
       {/* Literal values: fill the parent box */}
       <div {...stylex.props(atoms.display.flex, atoms.gap['8px'])}>
         <div {...stylex.props(styles.sized)}>
-          <Icon svg={ActivityIcon} size='100%' />
+          <Icon svg={Activity} size='100%' />
         </div>
         <div {...stylex.props(styles.sized)}>
           <Icon svg={MicSvg} size='100%' />
@@ -128,22 +128,22 @@ export const Size: Story = {
 
 export const Color: Story = {
   name: 'color',
-  args: { svg: ZapIcon },
+  args: { svg: Zap },
   render: () => (
     <div {...stylex.props(styles.column)}>
       <div {...stylex.props(styles.row)}>
-        <Icon svg={ZapIcon} size={20} />
-        <Icon svg={ZapIcon} color='neutral' size={20} />
-        <Icon svg={ZapIcon} color='neutralFaded' size={20} />
-        <Icon svg={ZapIcon} color='primary' size={20} />
-        <Icon svg={ZapIcon} color='positive' size={20} />
-        <Icon svg={ZapIcon} color='warning' size={20} />
-        <Icon svg={ZapIcon} color='critical' size={20} />
-        <Icon svg={ZapIcon} color='disabled' size={20} />
+        <Icon svg={Zap} size={20} />
+        <Icon svg={Zap} color='neutral' size={20} />
+        <Icon svg={Zap} color='neutralFaded' size={20} />
+        <Icon svg={Zap} color='primary' size={20} />
+        <Icon svg={Zap} color='positive' size={20} />
+        <Icon svg={Zap} color='warning' size={20} />
+        <Icon svg={Zap} color='critical' size={20} />
+        <Icon svg={Zap} color='disabled' size={20} />
       </div>
       {/* Inherits the parent text color when no color is set */}
       <div {...stylex.props(styles.inherit)}>
-        <Icon svg={ZapIcon} size={20} />
+        <Icon svg={Zap} size={20} />
       </div>
     </div>
   )
@@ -157,12 +157,12 @@ export const AutoWidth: Story = {
       {/* Square bounding box keeps wide and narrow icons visually aligned */}
       <div {...stylex.props(styles.boxed)}>
         <Icon svg={MicSvg} size={24} />
-        <Icon svg={ZapIcon} size={24} />
+        <Icon svg={Zap} size={24} />
         <Icon svg={MicSvg} size={24} />
       </div>
       <div {...stylex.props(styles.boxed)}>
         <Icon svg={MicSvg} autoWidth size={24} />
-        <Icon svg={ZapIcon} autoWidth size={24} />
+        <Icon svg={Zap} autoWidth size={24} />
         <Icon svg={MicSvg} autoWidth size={24} />
       </div>
     </div>
@@ -171,10 +171,10 @@ export const AutoWidth: Story = {
 
 export const Attributes: Story = {
   name: 'attributes, test: forwarded props',
-  args: { svg: ZapIcon },
+  args: { svg: Zap },
   render: () => (
     <div data-testid='root'>
-      <Icon svg={ZapIcon} size={20} id='test-id' data-testid='icon' />
+      <Icon svg={Zap} size={20} id='test-id' data-testid='icon' />
     </div>
   ),
   play: async ({ canvas }) => {
@@ -185,13 +185,13 @@ export const Attributes: Story = {
 
 export const Render: Story = {
   name: 'render',
-  args: { svg: ZapIcon },
+  args: { svg: Zap },
   render: () => (
     <Icon
       render={
         <a href='https://reshaped.so' target='_blank' rel='noreferrer' aria-label='Reshaped' />
       }
-      svg={ZapIcon}
+      svg={Zap}
       size={20}
     />
   ),
@@ -203,10 +203,10 @@ export const Render: Story = {
 
 export const ScreenReader: Story = {
   name: 'test: hidden from screen readers',
-  args: { svg: ZapIcon },
+  args: { svg: Zap },
   render: () => (
     <div data-testid='root'>
-      <Icon svg={ZapIcon} size={20} data-testid='icon' />
+      <Icon svg={Zap} size={20} data-testid='icon' />
     </div>
   ),
   play: async ({ canvas }) => {

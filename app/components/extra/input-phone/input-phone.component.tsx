@@ -6,8 +6,8 @@
  */
 
 import { Input as BaseInput } from '@base-ui/react/input'
+import { Globe as GlobeIcon, Search } from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
-import { SearchIcon } from 'lucide-react'
 import * as React from 'react'
 import * as BasePhoneInput from 'react-phone-number-input'
 import type { Country, Value } from 'react-phone-number-input'
@@ -114,7 +114,7 @@ function CountrySelect({
         style={s.popup}
       >
         <div {...stylex.props(s.searchWrap)}>
-          <SearchIcon {...stylex.props(s.searchIcon)} />
+          <Search {...stylex.props(s.searchIcon)} />
           <ComboboxInput
             placeholder='Search country…'
             showTrigger={false}
@@ -204,26 +204,6 @@ export function InputPhone({
         onChange={(next) => onChange(next || ('' as Value))}
       />
     </PhoneContainerRefContext.Provider>
-  )
-}
-
-function GlobeIcon(props: React.ComponentProps<'svg'>) {
-  return (
-    <svg
-      width='16'
-      height='16'
-      viewBox='0 0 16 16'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='1.5'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      aria-hidden
-      {...props}
-    >
-      <circle cx='8' cy='8' r='6.5' />
-      <path d='M1.5 8h13M8 1.5c2 2 2.5 4 2.5 6.5s-.5 4.5-2.5 6.5M8 1.5C6 3.5 5.5 6 5.5 8s.5 4.5 2.5 6.5' />
-    </svg>
   )
 }
 

@@ -1,7 +1,7 @@
+import { AlignCenter, AlignLeft, AlignRight } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'lucide-react'
 import { expect, userEvent } from 'storybook/test'
 import { Button } from '#/components/base/button'
 import { Toggle } from '#/components/base/toggle'
@@ -67,13 +67,13 @@ export const WithToggleGroup: Story = {
     <Toolbar>
       <ToggleGroup variant='outline' spacing='joined' defaultValue={['left']}>
         <ToolbarButton render={<ToggleGroupItem value='left' aria-label='Align left' />}>
-          <AlignLeftIcon {...stylex.props(styles.icon)} />
+          <AlignLeft {...stylex.props(styles.icon)} />
         </ToolbarButton>
         <ToolbarButton render={<ToggleGroupItem value='center' aria-label='Align center' />}>
-          <AlignCenterIcon {...stylex.props(styles.icon)} />
+          <AlignCenter {...stylex.props(styles.icon)} />
         </ToolbarButton>
         <ToolbarButton render={<ToggleGroupItem value='right' aria-label='Align right' />}>
-          <AlignRightIcon {...stylex.props(styles.icon)} />
+          <AlignRight {...stylex.props(styles.icon)} />
         </ToolbarButton>
       </ToggleGroup>
       <ToolbarSeparator />

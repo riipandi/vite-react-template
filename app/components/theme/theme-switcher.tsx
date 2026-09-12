@@ -1,5 +1,5 @@
+import { Monitor, Moon, Sun } from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
-import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { colors } from '#/styles/core/colors.stylex'
 import { radius } from '#/styles/core/tokens.stylex'
 import { useTheme } from './theme'
@@ -49,9 +49,9 @@ export function ThemeSwitcher() {
         {...stylex.props(styles.base)}
         aria-label={labels[current]}
       >
-        {current === 'light' && <SunIcon {...stylex.props(styles.icon)} />}
-        {current === 'dark' && <MoonIcon {...stylex.props(styles.icon)} />}
-        {current === 'system' && <MonitorIcon {...stylex.props(styles.icon)} />}
+        {current === 'light' && <Sun {...stylex.props(styles.icon)} />}
+        {current === 'dark' && <Moon {...stylex.props(styles.icon)} />}
+        {current === 'system' && <Monitor {...stylex.props(styles.icon)} />}
       </button>
     </div>
   )

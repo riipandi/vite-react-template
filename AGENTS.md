@@ -6,7 +6,7 @@ You are helping maintain this template for its author.
 ## Tooling
 
 - React 19 (**React Compiler enabled**) + Vite 8 + TypeScript; Node >= 24.12 and pnpm 12 (`engines`/`packageManager`).
-- Styling: StyleX everywhere (+ `@stylexjs/atoms` for one-off utilities), Base UI headless primitives, Lucide icons, ofetch for HTTP.
+- Styling: StyleX everywhere (+ `@stylexjs/atoms` for one-off utilities), Base UI headless primitives, Keyline Icons, ofetch for HTTP.
 - Lint/format: Oxc tools (`oxlint`, `oxfmt`) — no ESLint/Prettier. Storybook 10 (`@storybook/tanstack-react`) with a11y, docs, links, mcp, vitest, performance addons.
 
 ## Commands (pnpm)
@@ -51,7 +51,7 @@ You are helping maintain this template for its author.
 
 - Everything is styled with StyleX — follow `llms/stylex-authoring.md` (authoring rules and antipatterns; setup in `llms/stylex-installation.md`). Compiled by `@stylexjs/unplugin` with `useCSSLayers: true`; tokens live in `app/styles/core/*.stylex.ts` (light defaults + a single dark `createTheme` in `themes.ts`; theme class on `documentElement`).
 - `@stylexjs/atoms` for one-off layout in stories/routes: static styles via property access (`atoms.display.flex`), dynamic values via bracket strings (`atoms.gap['8px']`) — numeric calls like `atoms.gap(8)` emit invalid unitless CSS.
-- **Lucide icons — never barrel-import.** Named imports with the `Icon` suffix only (`import { UploadIcon } from 'lucide-react'`); the barrel executes ~1.5k icon modules at runtime and has shipped to prod that way before. Type-only namespace imports are fine.
+- **Keyline Icons — use named imports from `@keyline-icons/react`.** Keep the existing local `Icon` suffix aliases where components expect them; do not barrel-import the package.
 - HTTP goes through the same-origin `/api` proxy (Vite dev proxies to `dummyjson.com`; Netlify routes `/api/*` to `netlify/functions/api.ts`). Cookie sessions depend on it — never call the backend host directly.
 - Use Zod schemas from `app/schemas/` for form validation, never inline. Reuse page-level shared styles from `app/styles/pages/page.stylex.ts`.
 - Surface conventions (keep components in sync): radius by role — tooltip/kbd/small chips `radius.small`; buttons/inputs/popups/menus `radius.medium`; cards/toolbars/empty states `radius.large`; modals/drawers/command dialog `radius.xlarge`. Title tiers — modal surfaces `fontSize.body1` + `semibold`; inline titled surfaces `fontSize.body2` + `medium`. Focus rings — form inputs draw an inset outline (`outlineOffset: calc(-1 * stroke.ring1)`), standalone controls outside (`stroke.ring2`), slider thumbs/OTP a `stroke.ring3` shadow; never `outline: 'none'` without a visible focus replacement. Disabled controls = `opacity: 0.5`, never a per-component value.

@@ -1,9 +1,9 @@
+import { Plus, Search } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useTable } from '@tanstack/react-table'
 import type { ColumnDef, PaginationState, SortingState } from '@tanstack/react-table'
-import { PlusIcon, SearchIcon } from 'lucide-react'
 import { useMemo, useRef, useState } from 'react'
 import { Button } from '#/components/base/button'
 import { Badge } from '#/components/extra/badge'
@@ -189,7 +189,7 @@ export const CrudFeatures: Story = {
           <CardHeader style={editingStyles.toolbar}>
             <InputGroup style={editingStyles.searchGroup}>
               <InputGroupAddon align='inline-start'>
-                <SearchIcon style={{ height: 16, width: 16 }} />
+                <Search style={{ height: 16, width: 16 }} />
               </InputGroupAddon>
               <InputGroupInput
                 placeholder='Search novels...'
@@ -210,7 +210,7 @@ export const CrudFeatures: Story = {
                 })
               }}
             >
-              <PlusIcon style={{ height: 16, width: 16 }} />
+              <Plus style={{ height: 16, width: 16 }} />
               Create
             </Button>
           </CardHeader>
@@ -296,7 +296,7 @@ export const CrudInFrameContainer: Story = {
           <CardHeader style={editingStyles.frameHeader}>
             <CardTitle>Catalog</CardTitle>
             <Button size='sm' variant='outline'>
-              <PlusIcon style={{ height: 16, width: 16 }} />
+              <Plus style={{ height: 16, width: 16 }} />
               New novel
             </Button>
           </CardHeader>

@@ -38,7 +38,7 @@ export interface IconProps extends Omit<
   useRender.ComponentProps<'span'>,
   'className' | 'style' | 'color'
 > {
-  /** Icon svg component (e.g. a Lucide icon) or a raw svg element. */
+  /** Icon svg component (e.g. a Keyline icon) or a raw svg element. */
   svg: React.ReactElement | React.ComponentType | null
   /** Icon size in pixels (number) or any CSS size (string). Defaults to `1em`. */
   size?: number | string

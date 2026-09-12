@@ -1,7 +1,7 @@
+import { FileText, Mic, Search, Sparkles } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { FileTextIcon, MicIcon, SearchIcon, SparklesIcon } from 'lucide-react'
 import * as React from 'react'
 import { expect, userEvent, waitFor } from 'storybook/test'
 import { Button } from '#/components/base/button'
@@ -57,7 +57,7 @@ export default meta
 
 export const Playground: Story = {
   args: {
-    icon: MicIcon,
+    icon: Mic,
     completed: false,
     completedText: 'Quill notes saved',
     children: 'Transcribing with the Quick-Quotes Quill'
@@ -78,7 +78,7 @@ export const Completed: Story = {
     return (
       <div {...stylex.props(styles.stack)}>
         <LoaderText completed>Deciphered 5 symbols</LoaderText>
-        <LoaderText icon={MicIcon} completed={completed} completedText='Quill notes saved'>
+        <LoaderText icon={Mic} completed={completed} completedText='Quill notes saved'>
           Transcribing with the Quick-Quotes Quill
         </LoaderText>
         <div>
@@ -117,13 +117,13 @@ export const Sequence: Story = {
         atoms.width('100%')
       )}
     >
-      <LoaderText icon={FileTextIcon} completed completedText='Read 3 articles'>
+      <LoaderText icon={FileText} completed completedText='Read 3 articles'>
         Reading the Daily Prophet archive
       </LoaderText>
-      <LoaderText icon={SearchIcon} completedText='Searched 128 footprints'>
+      <LoaderText icon={Search} completedText='Searched 128 footprints'>
         Consulting the Marauder&apos;s Map
       </LoaderText>
-      <LoaderText icon={SparklesIcon} completedText='Lecture notes ready'>
+      <LoaderText icon={Sparkles} completedText='Lecture notes ready'>
         Drafting the symbology lecture
       </LoaderText>
     </div>

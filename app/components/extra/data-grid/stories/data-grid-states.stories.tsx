@@ -1,9 +1,9 @@
+import { Plus, Search } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useTable } from '@tanstack/react-table'
 import type { ColumnDef, PaginationState, SortingState } from '@tanstack/react-table'
-import { PlusIcon, SearchIcon } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
@@ -254,7 +254,7 @@ export const CardContainer: Story = {
           <CardHeader style={statesStyles.header}>
             <CardTitle>Books</CardTitle>
             <Button size='sm' variant='outline'>
-              <PlusIcon style={{ height: 16, width: 16 }} />
+              <Plus style={{ height: 16, width: 16 }} />
               Add book
             </Button>
           </CardHeader>
@@ -695,7 +695,7 @@ export const ServerSidePagination: Story = {
             <CardHeader style={statesStyles.header}>
               <InputGroup style={statesStyles.searchGroup}>
                 <InputGroupAddon align='inline-start'>
-                  <SearchIcon style={{ height: 16, width: 16 }} />
+                  <Search style={{ height: 16, width: 16 }} />
                 </InputGroupAddon>
                 <InputGroupInput
                   placeholder='Search...'

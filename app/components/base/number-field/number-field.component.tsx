@@ -17,8 +17,13 @@
  */
 
 import { NumberField as BaseNumberField } from '@base-ui/react/number-field'
+import {
+  ChevronDown,
+  ChevronUp as ChevronUpIcon,
+  Minus,
+  Plus as PlusIcon
+} from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
-import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon } from 'lucide-react'
 import * as React from 'react'
 import { numberFieldStyles as s } from './number-field.stylex'
 
@@ -93,7 +98,7 @@ export function NumberFieldDecrement({
   }) {
   const stacked = controls === 'stacked'
   const preset = icon ?? (stacked ? 'chevron-down' : 'minus')
-  const Icon = preset === 'chevron-down' ? ChevronDownIcon : MinusIcon
+  const Icon = preset === 'chevron-down' ? ChevronDown : Minus
 
   return (
     <BaseNumberField.Decrement

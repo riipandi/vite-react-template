@@ -1,7 +1,7 @@
+import { Plus } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { PlusIcon } from 'lucide-react'
 import { expect, fn, userEvent } from 'storybook/test'
 import { Spinner } from '#/components/extra/spinner'
 import { radius } from '#/styles/core/tokens.stylex'
@@ -62,7 +62,7 @@ export const Playground: Story = {
   args: { variant: 'outline' },
   render: (args) => (
     <Button {...args}>
-      <PlusIcon {...stylex.props(styles.icon)} />
+      <Plus {...stylex.props(styles.icon)} />
       New lecture
     </Button>
   )
@@ -115,7 +115,7 @@ export const Sizes: Story = {
 export const Icon: Story = {
   render: () => (
     <Button size='icon' variant='outline' aria-label='Accio'>
-      <PlusIcon {...stylex.props(styles.icon)} />
+      <Plus {...stylex.props(styles.icon)} />
     </Button>
   )
 }
@@ -124,16 +124,16 @@ export const IconSizes: Story = {
   render: () => (
     <div {...stylex.props(styles.row)}>
       <Button size='iconXs' variant='outline' aria-label='Accio'>
-        <PlusIcon {...stylex.props(styles.icon)} />
+        <Plus {...stylex.props(styles.icon)} />
       </Button>
       <Button size='iconSm' variant='outline' aria-label='Accio'>
-        <PlusIcon {...stylex.props(styles.icon)} />
+        <Plus {...stylex.props(styles.icon)} />
       </Button>
       <Button size='icon' variant='outline' aria-label='Accio'>
-        <PlusIcon {...stylex.props(styles.icon)} />
+        <Plus {...stylex.props(styles.icon)} />
       </Button>
       <Button size='iconLg' variant='outline' aria-label='Accio'>
-        <PlusIcon {...stylex.props(styles.icon)} />
+        <Plus {...stylex.props(styles.icon)} />
       </Button>
     </div>
   )

@@ -1,7 +1,7 @@
+import { CircleMinus, CirclePlus } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { CircleMinusIcon, CirclePlusIcon } from 'lucide-react'
 import { colors } from '#/styles/core/colors.stylex'
 import { fontSize, fontWeight } from '#/styles/core/tokens.stylex'
 import { FacebookIcon, GitHubIcon, GoogleIcon, InstagramIcon } from './index'
@@ -131,11 +131,11 @@ export const Sizes: Story = {
           >
             {name}
           </span>
-          <CircleMinusIcon {...stylex.props(atoms.margin['0 1rem'])} />
+          <CircleMinus {...stylex.props(atoms.margin['0 1rem'])} />
           {sizeSteps.map((s) => (
             <Icon key={s} size={s} />
           ))}
-          <CirclePlusIcon {...stylex.props(atoms.margin['0 1rem'])} />
+          <CirclePlus {...stylex.props(atoms.margin['0 1rem'])} />
         </div>
       ))}
     </div>

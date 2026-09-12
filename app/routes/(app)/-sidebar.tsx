@@ -1,18 +1,18 @@
+import {
+  ChartColumn,
+  FileText,
+  LayoutDashboard,
+  Power,
+  MessageSquare,
+  PanelLeftCloseDashed,
+  PanelLeft,
+  Search,
+  Settings,
+  ShoppingCart
+} from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
 import { Link, useRouterState } from '@tanstack/react-router'
 import type { LinkProps } from '@tanstack/react-router'
-import {
-  ChartColumnIcon,
-  FileTextIcon,
-  LayoutDashboardIcon,
-  LogOutIcon,
-  MessageSquareIcon,
-  PanelLeftCloseIcon,
-  PanelLeftOpenIcon,
-  SearchIcon,
-  SettingsIcon,
-  ShoppingCartIcon
-} from 'lucide-react'
 import { useState } from 'react'
 import { ThemeSwitcher } from '#/components/theme'
 import { useAuthentication } from '#/libraries/guard/auth-provider'
@@ -26,16 +26,16 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { icon: LayoutDashboardIcon, label: 'Overview', href: '/overview' },
-  { icon: SearchIcon, label: 'Search', href: undefined },
-  { icon: ChartColumnIcon, label: 'Analytics', href: undefined },
-  { icon: FileTextIcon, label: 'Docs', href: undefined }
+  { icon: LayoutDashboard, label: 'Overview', href: '/overview' },
+  { icon: Search, label: 'Search', href: undefined },
+  { icon: ChartColumn, label: 'Analytics', href: undefined },
+  { icon: FileText, label: 'Docs', href: undefined }
 ]
 
 const secondaryItems: NavItem[] = [
-  { icon: ShoppingCartIcon, label: 'Products', href: undefined },
-  { icon: SettingsIcon, label: 'Settings', href: '/settings' },
-  { icon: MessageSquareIcon, label: 'Messages', href: undefined, badge: true }
+  { icon: ShoppingCart, label: 'Products', href: undefined },
+  { icon: Settings, label: 'Settings', href: '/settings' },
+  { icon: MessageSquare, label: 'Messages', href: undefined, badge: true }
 ]
 
 function LogoMark() {
@@ -146,7 +146,7 @@ export function SideNavbar({ collapsed = false, onToggleCollapse }: SideNavbarPr
               collapsed && sidebarStyles.collapseTriggerCollapsed
             )}
           >
-            {collapsed ? <PanelLeftOpenIcon size={16} /> : <PanelLeftCloseIcon size={16} />}
+            {collapsed ? <PanelLeft size={16} /> : <PanelLeftCloseDashed size={16} />}
           </button>
         )}
       </div>
@@ -184,7 +184,7 @@ export function SideNavbar({ collapsed = false, onToggleCollapse }: SideNavbarPr
               !collapsed && sidebarStyles.signOutButtonExpanded
             )}
           >
-            <LogOutIcon {...stylex.props(sidebarStyles.navIcon)} />
+            <Power {...stylex.props(sidebarStyles.navIcon)} />
             {!collapsed && <span {...stylex.props(sidebarStyles.navLabel)}>Sign Out</span>}
           </button>
           <div

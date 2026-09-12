@@ -1,7 +1,7 @@
+import { Copy, Search } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { CopyIcon, SearchIcon } from 'lucide-react'
 import { expect, userEvent } from 'storybook/test'
 import { Field } from '#/components/base/field'
 import { Kbd } from '#/components/extra/kbd'
@@ -78,7 +78,7 @@ export const Icon: Story = {
   render: () => (
     <InputGroup style={styles.group}>
       <InputGroupAddon>
-        <SearchIcon {...stylex.props(styles.icon)} />
+        <Search {...stylex.props(styles.icon)} />
       </InputGroupAddon>
       <InputGroupInput placeholder='Search the Restricted Section…' />
     </InputGroup>
@@ -91,7 +91,7 @@ export const Button: Story = {
       <InputGroupInput readOnly defaultValue='https://dailyprophet.co.uk/howlers' />
       <InputGroupAddon align='inline-end'>
         <InputGroupButton aria-label='Copy howler address'>
-          <CopyIcon {...stylex.props(styles.icon)} />
+          <Copy {...stylex.props(styles.icon)} />
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>

@@ -1,9 +1,9 @@
+import { RefreshCw } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useTable } from '@tanstack/react-table'
 import type { ColumnDef, HeaderContext, SortingState } from '@tanstack/react-table'
-import { RefreshCwIcon } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
@@ -301,7 +301,7 @@ export const RemoteInfiniteScroll: Story = {
                 setData(Array.from({ length: REMOTE_PAGE }, (_, index) => simulateRow(index)))
               }}
             >
-              <RefreshCwIcon style={{ height: 16, width: 16 }} />
+              <RefreshCw style={{ height: 16, width: 16 }} />
             </Button>
           </div>
           <CardContent style={infiniteStyles.cardBody}>

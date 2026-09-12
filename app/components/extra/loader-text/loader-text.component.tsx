@@ -1,5 +1,5 @@
+import type { IconProps } from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
-import type * as Lucide from 'lucide-react'
 import * as React from 'react'
 import { Text, type TextProps } from '#/components/extra/text'
 import { loaderTextStyles as styles } from './loader-text.stylex'
@@ -9,7 +9,7 @@ export interface LoaderTextProps extends Pick<
   'children' | 'variant' | 'weight' | 'color'
 > {
   /** Leading icon, sized relative to the text. */
-  icon?: Lucide.LucideIcon
+  icon?: React.ComponentType<IconProps>
   /** Text that cross-fades with the children once `completed` becomes true. */
   completedText?: React.ReactNode
   /** Mark the loader as completed, stopping the shimmer. */

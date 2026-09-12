@@ -1,7 +1,7 @@
+import { Image, MusicNote, Film } from '@keyline-icons/react'
+import { ChevronRight, FileText, GripVertical } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
-import { ImageIcon, MusicIcon, VideoIcon } from 'lucide-react'
-import { ChevronRightIcon, FileTextIcon, GripVerticalIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '#/components/base/collapsible'
 import { Switch } from '#/components/base/switch'
@@ -278,7 +278,7 @@ const styles = stylex.create({
 function Handle({ style }: { style?: stylex.StyleXStyles }) {
   return (
     <SortableItemHandle aria-label='Drag to reorder' style={style}>
-      <GripVerticalIcon size={16} />
+      <GripVertical size={16} />
     </SortableItemHandle>
   )
 }
@@ -333,13 +333,7 @@ const defaultFiles: FileEntry[] = [
 
 function FileTypeIcon({ type }: { type: FileEntry['type'] }) {
   const Icon =
-    type === 'image'
-      ? ImageIcon
-      : type === 'document'
-        ? FileTextIcon
-        : type === 'audio'
-          ? MusicIcon
-          : VideoIcon
+    type === 'image' ? Image : type === 'document' ? FileText : type === 'audio' ? MusicNote : Film
   return (
     <span {...stylex.props(styles.iconTile)}>
       <Icon size={16} />
@@ -579,7 +573,7 @@ export const NestedGroups: Story = {
                           <Badge variant='outline' style={styles.groupBadge}>
                             {group.values.length}
                           </Badge>
-                          <ChevronRightIcon
+                          <ChevronRight
                             size={14}
                             {...stylex.props(
                               styles.groupChevron,
@@ -937,7 +931,7 @@ function MediaHandle() {
   return (
     <SortableItemHandle style={mediaStyles.imageHandleOverlay}>
       <span {...stylex.props(mediaStyles.imageHandleIcon)}>
-        <GripVerticalIcon size={14} />
+        <GripVertical size={14} />
       </span>
     </SortableItemHandle>
   )

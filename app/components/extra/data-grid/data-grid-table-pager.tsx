@@ -1,7 +1,7 @@
 import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area'
+import { ChevronLeft, ChevronRight } from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
 import type { StyleXStyles } from '@stylexjs/stylex'
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { JSX, PointerEvent, ReactNode } from 'react'
 import { Button } from '#/components/base/button'
@@ -240,7 +240,7 @@ function DataGridPagination(props: DataGridPaginationProps): JSX.Element {
                   disabled={!table.getCanPreviousPage()}
                 >
                   <span {...stylex.props(s.srOnly)}>{mergedProps.previousPageLabel}</span>
-                  <ChevronLeftIcon {...stylex.props(s.arrowIcon)} />
+                  <ChevronLeft {...stylex.props(s.arrowIcon)} />
                 </Button>
 
                 {renderEllipsisPrevButton()}
@@ -257,7 +257,7 @@ function DataGridPagination(props: DataGridPaginationProps): JSX.Element {
                   disabled={!table.getCanNextPage()}
                 >
                   <span {...stylex.props(s.srOnly)}>{mergedProps.nextPageLabel}</span>
-                  <ChevronRightIcon {...stylex.props(s.arrowIcon)} />
+                  <ChevronRight {...stylex.props(s.arrowIcon)} />
                 </Button>
               </div>
             )}

@@ -1,6 +1,6 @@
+import { GripVertical } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
-import { GripVerticalIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
@@ -481,7 +481,7 @@ export const PlaceholderOverlay: Story = {
                     {column.tasks.length}
                   </Badge>
                   <KanbanColumnHandle style={styles.handleEnd}>
-                    <GripVerticalIcon size={16} />
+                    <GripVertical size={16} />
                   </KanbanColumnHandle>
                 </div>
                 <KanbanColumnContent value={column.id}>
@@ -553,7 +553,7 @@ export const DynamicOverlay: Story = {
                     {column.tasks.length}
                   </Badge>
                   <KanbanColumnHandle style={styles.handleEnd}>
-                    <GripVerticalIcon size={16} />
+                    <GripVertical size={16} />
                   </KanbanColumnHandle>
                 </div>
                 <KanbanColumnContent value={column.id}>
@@ -640,7 +640,7 @@ export const FrameColumns: Story = {
                     {column.tasks.length}
                   </Badge>
                   <KanbanColumnHandle style={styles.handleEnd}>
-                    <GripVerticalIcon size={16} />
+                    <GripVertical size={16} />
                   </KanbanColumnHandle>
                 </div>
                 <div
@@ -778,7 +778,7 @@ export const StackedFrame: Story = {
                     {column.tasks.length}
                   </Badge>
                   <KanbanColumnHandle style={styles.handleEnd}>
-                    <GripVerticalIcon size={16} />
+                    <GripVertical size={16} />
                   </KanbanColumnHandle>
                 </div>
                 {column.description && (
@@ -926,7 +926,7 @@ export const FeatureRoadmap: Story = {
                     {column.tasks.length}
                   </Badge>
                   <KanbanColumnHandle style={styles.handleEnd}>
-                    <GripVerticalIcon size={16} />
+                    <GripVertical size={16} />
                   </KanbanColumnHandle>
                 </div>
                 <KanbanColumnContent value={column.id}>
@@ -1044,7 +1044,7 @@ export const PersistedToBackend: Story = {
                     {columns[columnId]?.length ?? 0}
                   </Badge>
                   <KanbanColumnHandle style={styles.handleEnd}>
-                    <GripVerticalIcon size={16} />
+                    <GripVertical size={16} />
                   </KanbanColumnHandle>
                 </div>
                 <KanbanColumnContent value={columnId}>

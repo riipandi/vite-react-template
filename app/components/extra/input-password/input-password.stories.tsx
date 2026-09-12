@@ -1,7 +1,7 @@
+import { EyeOff, Eye } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { EyeClosedIcon, EyeIcon } from 'lucide-react'
 import * as React from 'react'
 import { expect, userEvent } from 'storybook/test'
 import { Field, FieldError, FieldLabel } from '#/components/base/field'
@@ -97,8 +97,8 @@ export const CustomIcons: Story = {
     <div {...stylex.props(styles.field)}>
       <InputPassword
         placeholder='Custom toggle icons...'
-        showIcon={<EyeIcon size={16} />}
-        hideIcon={<EyeClosedIcon size={16} />}
+        showIcon={<Eye size={16} />}
+        hideIcon={<EyeOff size={16} />}
       />
     </div>
   )

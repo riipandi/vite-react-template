@@ -1,7 +1,7 @@
+import { MoreVertical } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { EllipsisVerticalIcon } from 'lucide-react'
 import { Button } from '#/components/base/button'
 import {
   DropdownMenu,
@@ -162,7 +162,7 @@ export const Actions: Story = {
                   <DropdownMenuTrigger
                     render={<Button variant='ghost' size='icon' aria-label='Ledger actions' />}
                   >
-                    <EllipsisVerticalIcon {...stylex.props(styles.icon)} />
+                    <MoreVertical {...stylex.props(styles.icon)} />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align='end'>
                     <DropdownMenuItem>Edit title</DropdownMenuItem>

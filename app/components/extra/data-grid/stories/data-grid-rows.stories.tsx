@@ -1,4 +1,5 @@
 import type { UniqueIdentifier } from '@dnd-kit/core'
+import { ChevronDown, ChevronUp, RefreshCw } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
@@ -11,7 +12,6 @@ import type {
   RowSelectionState,
   SortingState
 } from '@tanstack/react-table'
-import { ChevronDownIcon, ChevronUpIcon, RefreshCwIcon } from 'lucide-react'
 import { Fragment, useMemo, useState } from 'react'
 import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
@@ -211,9 +211,9 @@ function ExpandableColumns(): ColumnDef<DataGridFeatures, IDetail>[] {
             aria-label={row.getIsExpanded() ? 'Collapse row' : 'Expand row'}
           >
             {row.getIsExpanded() ? (
-              <ChevronUpIcon aria-hidden='true' {...stylex.props(statusStyles.expanderIcon)} />
+              <ChevronUp aria-hidden='true' {...stylex.props(statusStyles.expanderIcon)} />
             ) : (
-              <ChevronDownIcon aria-hidden='true' {...stylex.props(statusStyles.expanderIcon)} />
+              <ChevronDown aria-hidden='true' {...stylex.props(statusStyles.expanderIcon)} />
             )}
           </Button>
         ) : null,
@@ -589,7 +589,7 @@ export const RowPinningSupport: Story = {
               </Button>
             ) : (
               <Button variant='ghost' size='iconSm' aria-label='Reset'>
-                <RefreshCwIcon style={undefined} {...stylex.props(s.flag)} />
+                <RefreshCw style={undefined} {...stylex.props(s.flag)} />
               </Button>
             )}
           </CardHeader>

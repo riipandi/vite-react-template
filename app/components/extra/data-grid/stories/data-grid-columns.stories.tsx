@@ -1,5 +1,6 @@
 import type { DragEndEvent } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
+import { Mail, MapPin, User, Wallet } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
@@ -10,7 +11,6 @@ import type {
   PaginationState,
   SortingState
 } from '@tanstack/react-table'
-import { MailIcon, MapPinIcon, UserIcon, WalletIcon } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import {
@@ -95,7 +95,7 @@ function bookColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IBook>[] {
       id: 'title',
       header: ({ column }) =>
         withIcons ? (
-          <DataGridColumnHeader title='Title' column={column} icon={icon(<UserIcon />)} />
+          <DataGridColumnHeader title='Title' column={column} icon={icon(<User />)} />
         ) : (
           <DataGridColumnHeader title='Title' column={column} />
         ),
@@ -110,7 +110,7 @@ function bookColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IBook>[] {
       id: 'author',
       header: ({ column }) =>
         withIcons ? (
-          <DataGridColumnHeader title='Author' column={column} icon={icon(<MailIcon />)} />
+          <DataGridColumnHeader title='Author' column={column} icon={icon(<Mail />)} />
         ) : (
           <DataGridColumnHeader title='Author' column={column} />
         ),
@@ -123,7 +123,7 @@ function bookColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IBook>[] {
       id: 'country',
       header: ({ column }) =>
         withIcons ? (
-          <DataGridColumnHeader title='Country' column={column} icon={icon(<MapPinIcon />)} />
+          <DataGridColumnHeader title='Country' column={column} icon={icon(<MapPin />)} />
         ) : (
           <DataGridColumnHeader title='Country' column={column} />
         ),
@@ -141,7 +141,7 @@ function bookColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IBook>[] {
       id: 'price',
       header: ({ column }) =>
         withIcons ? (
-          <DataGridColumnHeader title='Price' column={column} icon={icon(<WalletIcon />)} />
+          <DataGridColumnHeader title='Price' column={column} icon={icon(<Wallet />)} />
         ) : (
           <DataGridColumnHeader title='Price' column={column} />
         ),

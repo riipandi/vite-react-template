@@ -1,6 +1,6 @@
+import { Mic } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import * as stylex from '@stylexjs/stylex'
-import { MicIcon } from 'lucide-react'
 import * as React from 'react'
 import { expect, fn, userEvent } from 'storybook/test'
 import { Button } from '#/components/base/button'
@@ -75,7 +75,7 @@ export const Playground: Story = {
       <div {...stylex.props(styles.stack, styles.width)}>
         <FileUpload name='file' onChange={(args) => setFiles((prev) => [...prev, ...args.value])}>
           <div {...stylex.props(styles.col)}>
-            <MicIcon {...stylex.props(styles.icon)} strokeWidth={1.8} />
+            <Mic {...stylex.props(styles.icon)} strokeWidth={1.8} />
             Drop wand permits here
           </div>
         </FileUpload>
@@ -142,7 +142,7 @@ export const Height: Story = {
     <div {...stylex.props(styles.width)}>
       <FileUpload {...args}>
         <div {...stylex.props(styles.col)}>
-          <MicIcon {...stylex.props(styles.icon)} strokeWidth={1.8} />
+          <Mic {...stylex.props(styles.icon)} strokeWidth={1.8} />
           Drop wand permits here
         </div>
       </FileUpload>
@@ -188,7 +188,7 @@ export const Disabled: Story = {
     <div data-testid='root' {...stylex.props(styles.width)}>
       <FileUpload {...args}>
         <div {...stylex.props(styles.row)}>
-          <MicIcon {...stylex.props(styles.icon)} strokeWidth={1.8} />
+          <Mic {...stylex.props(styles.icon)} strokeWidth={1.8} />
           Drop wand permits here
         </div>
       </FileUpload>

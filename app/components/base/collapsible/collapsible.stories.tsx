@@ -1,7 +1,7 @@
+import { ChevronRight, File as FileIcon, Folder as FolderIcon } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
-import { ChevronRightIcon, FileIcon, FolderIcon } from 'lucide-react'
 import * as React from 'react'
 import { expect, userEvent } from 'storybook/test'
 import { Button } from '#/components/base/button'
@@ -129,7 +129,7 @@ function Folder({
   return (
     <Collapsible defaultOpen={defaultOpen}>
       <CollapsibleTrigger {...stylex.props(styles.row, indents.depth(depth))}>
-        <ChevronRightIcon {...stylex.props(styles.icon, styles.chevron)} />
+        <ChevronRight {...stylex.props(styles.icon, styles.chevron)} />
         <FolderIcon {...stylex.props(styles.icon)} />
         <span>{name}</span>
       </CollapsibleTrigger>

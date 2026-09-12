@@ -43,7 +43,7 @@ export default defineConfig(({ mode }) => ({
     emptyOutDir: true,
     chunkSizeWarningLimit: 1024,
     reportCompressedSize: false,
-    outDir: resolve('dist'),
+    outDir: resolve('.output/build'),
     rolldownOptions: {
       input: { app: resolve('index.html') }
     }

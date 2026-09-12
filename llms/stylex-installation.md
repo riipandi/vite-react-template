@@ -189,26 +189,26 @@ import './index.css';
 
 ### Babel plugin options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `dev` | boolean | false | Enable development mode with readable class names |
-| `runtimeInjection` | boolean | false | Inject styles at runtime (not recommended for production) |
-| `treeshakeCompensation` | boolean | false | Prevent tree-shaking from removing styles |
-| `aliases` | object | {} | Path aliases matching your bundler config |
-| `unstable_moduleResolution` | object | undefined | Module resolution strategy for theming APIs |
-| `classNamePrefix` | string | 'x' | Prefix for generated class names |
-| `importSources` | array | ['@stylexjs/stylex'] | Custom import sources for StyleX |
-| `styleResolution` | string | 'property-specificity' | Style merge strategy: 'application-order' (last style wins) or 'property-specificity' (more specific property wins) |
+| Option                      | Type    | Default                | Description                                                                                                         |
+|-----------------------------|---------|------------------------|---------------------------------------------------------------------------------------------------------------------|
+| `dev`                       | boolean | false                  | Enable development mode with readable class names                                                                   |
+| `runtimeInjection`          | boolean | false                  | Inject styles at runtime (not recommended for production)                                                           |
+| `treeshakeCompensation`     | boolean | false                  | Prevent tree-shaking from removing styles                                                                           |
+| `aliases`                   | object  | {}                     | Path aliases matching your bundler config                                                                           |
+| `unstable_moduleResolution` | object  | undefined              | Module resolution strategy for theming APIs                                                                         |
+| `classNamePrefix`           | string  | 'x'                    | Prefix for generated class names                                                                                    |
+| `importSources`             | array   | ['@stylexjs/stylex']   | Custom import sources for StyleX                                                                                    |
+| `styleResolution`           | string  | 'property-specificity' | Style merge strategy: 'application-order' (last style wins) or 'property-specificity' (more specific property wins) |
 
 ### Unplugin and PostCSS options
 
 These options are available for unplugin (Vite, Webpack, Rspack, esbuild, Rollup) and the PostCSS plugin:
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `useCSSLayers` | boolean | false | Wrap output in `@layer` for better cascade control |
-| `include` | string[] | ['**/*.{js,jsx,ts,tsx}'] | Files to process |
-| `exclude` | string[] | ['node_modules/**'] | Files to exclude |
+| Option         | Type     | Default                  | Description                                        |
+|----------------|----------|--------------------------|----------------------------------------------------|
+| `useCSSLayers` | boolean  | false                    | Wrap output in `@layer` for better cascade control |
+| `include`      | string[] | ['**/*.{js,jsx,ts,tsx}'] | Files to process                                   |
+| `exclude`      | string[] | ['node_modules/**']      | Files to exclude                                   |
 
 ## TypeScript setup
 

@@ -8,7 +8,7 @@ TZ = "Asia/Jakarta"
 # deployments work out of the box — no base/config override needed.
 [build]
   command = "pnpm run build"
-  publish = "dist"
+  publish = ".output/build"
 
 # SPA fallback (existing assets and the /api/* function are served first).
 [[redirects]]

@@ -12,8 +12,8 @@ You are helping maintain this template for its author.
 ## Commands (pnpm)
 
 - `pnpm dev` — prebuild typecheck + dev server, port 3000 (strict; fails if busy).
-- `pnpm build` — `tsr generate && tsc -b` + app build + Storybook build → `dist/` and `dist/storybook/` (what Netlify deploys, see `netlify.toml`).
-- `pnpm start` — serve `dist/` via `vite preview` (build first or you serve stale output).
+- `pnpm build` — `tsr generate && tsc -b` + app build + Storybook build → `.output/build/` and `.output/build/storybook/` (what Netlify deploys, see `netlify.toml`).
+- `pnpm start` — serve `.output/build/` via `vite preview` (build first or you serve stale output).
 - `pnpm test` — unit tests (Vitest, project `unit`); `pnpm test:storybook` — Storybook interaction tests (real Chromium via Playwright); `pnpm test:coverage` — with coverage (thresholds in `vitest.config.ts`); `pnpm test:ui` — open the tokened URL printed in the terminal.
 - `pnpm lint` / `pnpm format` — write fixes in place; `pnpm check` verifies formatting only.
 - `pnpm typecheck` — `tsc -b --noEmit`.

@@ -26,12 +26,12 @@
         "strict": true,
         "strictPropertyInitialization": true,
         "target": "esnext",
-        "tsBuildInfoFile": ".tanstack/tmp/tsbuildinfo",
+        "tsBuildInfoFile": ".output/tsbuildinfo",
         "types": ["vite/client", "vitest/config"],
         "useDefineForClassFields": true,
         "verbatimModuleSyntax": true,
         "paths": { "#/*": ["./app/*"] }
     },
     "include": ["**/*.ts", "**/*.tsx"],
-    "exclude": ["node_modules", ".output", ".tanstack", ".wrangler", "dist", "public", "temp"]
+    "exclude": [".output", ".tanstack", ".wrangler", "build", "dist", "public", "temp"]
 }

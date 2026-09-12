@@ -109,7 +109,7 @@ Fork this repository, connect it to Netlify, and pushing to master will deploy t
 
 ### Deploying the SPA
 
-The build output is a static SPA (`dist/`). Cookie-based auth requires a **same-site API** —
+The build output is a static SPA (`.output/build/`). Cookie-based auth requires a **same-site API** —
 browsers do not send `SameSite=Lax` cookies on cross-site requests. Pick one:
 
 - **Netlify** — works out of the box: [`netlify/functions/api.ts`](./netlify/functions/api.ts)

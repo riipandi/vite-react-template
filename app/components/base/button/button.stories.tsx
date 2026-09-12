@@ -114,7 +114,7 @@ export const Sizes: Story = {
 
 export const Icon: Story = {
   render: () => (
-    <Button size='icon' variant='outline' aria-label='Accio'>
+    <Button size='icon-md' variant='outline' aria-label='Accio'>
       <Plus {...stylex.props(styles.icon)} />
     </Button>
   )
@@ -123,16 +123,16 @@ export const Icon: Story = {
 export const IconSizes: Story = {
   render: () => (
     <div {...stylex.props(styles.row)}>
-      <Button size='iconXs' variant='outline' aria-label='Accio'>
+      <Button size='icon-xs' variant='outline' aria-label='Accio'>
         <Plus {...stylex.props(styles.icon)} />
       </Button>
-      <Button size='iconSm' variant='outline' aria-label='Accio'>
+      <Button size='icon-sm' variant='outline' aria-label='Accio'>
         <Plus {...stylex.props(styles.icon)} />
       </Button>
-      <Button size='icon' variant='outline' aria-label='Accio'>
+      <Button size='icon-md' variant='outline' aria-label='Accio'>
         <Plus {...stylex.props(styles.icon)} />
       </Button>
-      <Button size='iconLg' variant='outline' aria-label='Accio'>
+      <Button size='icon-lg' variant='outline' aria-label='Accio'>
         <Plus {...stylex.props(styles.icon)} />
       </Button>
     </div>

@@ -143,7 +143,7 @@ function DataGridPagination(props: DataGridPaginationProps): JSX.Element {
       buttons.push(
         <Button
           key={i}
-          size='iconSm'
+          size='icon-sm'
           variant='ghost'
           aria-label={i18n.labels.goToPage(i + 1)}
           aria-current={pageIndex === i ? 'page' : undefined}
@@ -166,7 +166,7 @@ function DataGridPagination(props: DataGridPaginationProps): JSX.Element {
     if (currentGroupStart > 0) {
       return (
         <Button
-          size='iconSm'
+          size='icon-sm'
           variant='ghost'
           style={s.pageButton}
           onClick={() => table.setPageIndex(currentGroupStart - 1)}
@@ -183,7 +183,7 @@ function DataGridPagination(props: DataGridPaginationProps): JSX.Element {
     if (currentGroupEnd < pageCount) {
       return (
         <Button
-          size='iconSm'
+          size='icon-sm'
           variant='ghost'
           style={s.pageButton}
           onClick={() => table.setPageIndex(currentGroupEnd)}
@@ -233,7 +233,7 @@ function DataGridPagination(props: DataGridPaginationProps): JSX.Element {
             {pageCount > 1 && (
               <div {...stylex.props(s.pages)}>
                 <Button
-                  size='iconSm'
+                  size='icon-sm'
                   variant='ghost'
                   style={s.arrowButton}
                   onClick={() => table.previousPage()}
@@ -250,7 +250,7 @@ function DataGridPagination(props: DataGridPaginationProps): JSX.Element {
                 {renderEllipsisNextButton()}
 
                 <Button
-                  size='iconSm'
+                  size='icon-sm'
                   variant='ghost'
                   style={s.arrowButton}
                   onClick={() => table.nextPage()}

@@ -12,16 +12,12 @@ import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
 import { buttonSizes, buttonStyles, buttonVariants } from './button.stylex'
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive'
-
-export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'icon' | 'iconXs' | 'iconSm' | 'iconLg'
-
 export interface ButtonProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BaseButton>,
   'className' | 'style'
 > {
-  variant?: ButtonVariant
-  size?: ButtonSize
+  variant?: keyof typeof buttonVariants
+  size?: keyof typeof buttonSizes
   style?: stylex.StyleXStyles
 }
 

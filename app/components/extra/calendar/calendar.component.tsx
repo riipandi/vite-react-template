@@ -4,8 +4,7 @@ import type { StyleXStyles } from '@stylexjs/stylex'
 import * as React from 'react'
 import { DayPicker, getDefaultClassNames } from 'react-day-picker'
 import type { DayButton, DropdownOption, Locale } from 'react-day-picker'
-import type { ButtonVariant } from '#/components/base/button/button.component'
-import { buttonStyles, buttonVariants } from '#/components/base/button/button.stylex'
+import { buttonStyles, buttonVariants } from '#/components/base/button'
 import { Select, SelectItem, SelectValue } from '#/components/base/select/select.component'
 import { SelectContent, SelectTrigger } from '#/components/base/select/select.component'
 import { customClassName } from '#/styles/core/utils.stylex'
@@ -158,7 +157,7 @@ const CalendarDayButtonWrapper = (
 }
 
 type CalendarProps = React.ComponentProps<typeof DayPicker> & {
-  buttonVariant?: ButtonVariant
+  buttonVariant?: keyof typeof buttonVariants
   className?: string
   style?: StyleXStyles
 }

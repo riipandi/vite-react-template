@@ -80,9 +80,9 @@ For detailed explanation on how things work, check out [Vite documentation](http
 Authentication hits the [DummyJSON](https://dummyjson.com) API through a same-origin proxy,
 using HttpOnly cookie sessions. Use any valid [DummyJSON user](https://dummyjson.com/users) to sign in, e.g.:
 
-| Username | Password      |
-|----------|---------------|
-| `emilys` | `emilyspass`  |
+| Username | Password     |
+|----------|--------------|
+| `emilys` | `emilyspass` |
 
 Tick **Remember me** to extend the session lifetime to 30 days.
 
@@ -154,6 +154,7 @@ to contribute something to the open-source community. Your work means the world!
 - [MadeUI](https://madeui.com/) — the Base UI + StyleX components in this template are based on its components.
 - [Reshaped](https://www.reshaped.so/) — the design system in this template is built on its design system.
 - [ReUI](https://reui.io) — the Data Grid, Input Phone, Sortable, and Kanban components are ports of ReUI.
+- [Flavio Copes](https://flaviocopes.com/stylex) - A deep dive into StyleX.
 
 ## Notice
 

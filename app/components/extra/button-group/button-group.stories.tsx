@@ -81,7 +81,11 @@ export const Split: Story = {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <Button size='icon' aria-label='More apparition options' style={styles.fusedTrigger} />
+            <Button
+              size='icon-md'
+              aria-label='More apparition options'
+              style={styles.fusedTrigger}
+            />
           }
         >
           <ChevronDown {...stylex.props(styles.icon)} />

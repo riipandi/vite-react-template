@@ -205,7 +205,7 @@ function ExpandableColumns(): ColumnDef<DataGridFeatures, IDetail>[] {
         row.getCanExpand() ? (
           <Button
             variant='ghost'
-            size='icon'
+            size='icon-md'
             style={statusStyles.expanderButton}
             onClick={row.getToggleExpandedHandler()}
             aria-label={row.getIsExpanded() ? 'Collapse row' : 'Expand row'}
@@ -588,7 +588,7 @@ export const RowPinningSupport: Story = {
                 Unpin all
               </Button>
             ) : (
-              <Button variant='ghost' size='iconSm' aria-label='Reset'>
+              <Button variant='ghost' size='icon-sm' aria-label='Reset'>
                 <RefreshCw style={undefined} {...stylex.props(s.flag)} />
               </Button>
             )}

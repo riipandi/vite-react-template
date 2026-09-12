@@ -459,7 +459,7 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
         </DropdownMenu>
         {props.tableLayout?.columnsPinnable && canPin && isPinned && (
           <Button
-            size='iconXs'
+            size='icon-xs'
             variant='ghost'
             style={sHeader.unpinButton}
             onClick={() => column.pin(false)}

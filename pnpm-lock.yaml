@@ -194,8 +194,8 @@ importers:
         specifier: ^0.19.0
         version: 0.19.0
       '@tanstack/charts':
-        specifier: ^0.17.0
-        version: 0.17.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(solid-js@1.9.15)
+        specifier: ^0.18.0
+        version: 0.18.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(solid-js@1.9.15)
       '@tanstack/react-form':
         specifier: ^1.33.5
         version: 1.33.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -2034,8 +2034,8 @@ packages:
     peerDependencies:
       unplugin: ^2.3.11
 
-  '@tanstack/charts@0.17.0':
-    resolution: {integrity: sha512-jUeJQu3bdcDr8J5A3MySrpevGN3TxYn0Z17Zf6m20Z2h6ON5Bhk5aU8Fz3T0TM7OicYPX3ZGWXhQy/7VyOMdWA==}
+  '@tanstack/charts@0.18.0':
+    resolution: {integrity: sha512-JzJ0nkdpZWPla1FPEo6YY6spMRkkVxvtpAF+zvwATV1DpwHegvW7N55Pyts6Gu+do+RmnCAtnOWIcQAwtNAOaw==}
     peerDependencies:
       '@angular/core': '>=19'
       '@angular/platform-browser': '>=19'
@@ -4097,9 +4097,6 @@ packages:
     resolution: {integrity: sha512-GZtjxm/J/4TSxuL3FNYjCmLktBTnIw/rVmKSIyKeYAZpmJB2ig9VauCC5xsa82GNKVKDAqpOn3KVzNt0zmrU0g==}
     engines: {node: '>=12'}
 
-  zod@4.6.0:
-    resolution: {integrity: sha512-iIvwyDnebKYpww2ta0DjaNOL8RnVLmPMhgWyOzlW9y0EIIxv5gl+H6Y0ONpt83HqjGqkk78uWp6xWtpxzZdPbw==}
-
   zod@4.6.2:
     resolution: {integrity: sha512-lh5RCAGFa1Cm2hjtNwLQhSs/AsqdWnTQaBER9fEwN/88pSh7KOtJavtBx/0VlkN/uFd61SwYmljLMDAsHlvzBQ==}
 
@@ -5252,7 +5249,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@tanstack/charts@0.17.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(solid-js@1.9.15)':
+  '@tanstack/charts@0.18.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(solid-js@1.9.15)':
     dependencies:
       '@types/d3-force': 3.0.10
       '@types/d3-geo': 3.1.1
@@ -5478,7 +5475,7 @@ snapshots:
       jiti: 2.7.0
       magic-string: 0.30.21
       prettier: 3.9.6
-      zod: 4.6.0
+      zod: 4.6.2
     transitivePeerDependencies:
       - supports-color
 
@@ -5492,7 +5489,7 @@ snapshots:
       '@tanstack/router-utils': 1.162.3
       chokidar: 5.0.0
       unplugin: 3.3.0(esbuild@0.28.2)(rolldown@1.2.8)(vite@8.3.0(@types/node@26.5.1)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.0))
-      zod: 4.6.0
+      zod: 4.6.2
     optionalDependencies:
       '@tanstack/react-router': 1.170.35(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       vite: 8.3.0(@types/node@26.5.1)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.0)
@@ -7487,8 +7484,6 @@ snapshots:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
-
-  zod@4.6.0: {}
 
   zod@4.6.2: {}
 

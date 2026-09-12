@@ -160,7 +160,7 @@ export const Actions: Story = {
               <TableCell style={styles.right}>
                 <DropdownMenu>
                   <DropdownMenuTrigger
-                    render={<Button variant='ghost' size='icon' aria-label='Ledger actions' />}
+                    render={<Button variant='ghost' size='icon-md' aria-label='Ledger actions' />}
                   >
                     <MoreVertical {...stylex.props(styles.icon)} />
                   </DropdownMenuTrigger>

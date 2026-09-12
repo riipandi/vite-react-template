@@ -136,7 +136,7 @@ function DataGridTableDndHeader<TData extends object>({
       <div data-dragging={isDragging ? '' : undefined} {...stylex.props(s2.headerControls)}>
         {canOrder && (
           <Button
-            size='iconSm'
+            size='icon-sm'
             variant='ghost'
             style={isDragging ? dndGripCursorStyles.dragging : dndGripCursorStyles.idle}
             {...attributes}
@@ -385,7 +385,7 @@ function DataGridTableDndRowHandle({
     return (
       <Button
         variant='ghost'
-        size='iconSm'
+        size='icon-sm'
         style={[rowStyles.gripButton, disabled && rowStyles.gripDisabled, style]}
         aria-label={disabled ? resolvedDisabledLabel : i18n.labels.dragToReorderRow}
         title={disabled ? resolvedDisabledLabel : undefined}
@@ -399,7 +399,7 @@ function DataGridTableDndRowHandle({
   return (
     <Button
       variant='ghost'
-      size='iconSm'
+      size='icon-sm'
       style={[rowStyles.gripButton, style]}
       aria-label={i18n.labels.dragToReorderRow}
       {...context.attributes}

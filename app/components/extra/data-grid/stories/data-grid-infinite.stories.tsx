@@ -295,7 +295,7 @@ export const RemoteInfiniteScroll: Story = {
             </span>
             <Button
               variant='ghost'
-              size='iconSm'
+              size='icon-sm'
               aria-label='Reset'
               onClick={() => {
                 setData(Array.from({ length: REMOTE_PAGE }, (_, index) => simulateRow(index)))

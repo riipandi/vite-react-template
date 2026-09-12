@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { Button, type ButtonSize } from '#/components/base/button'
+import { Button, buttonSizes } from '#/components/base/button'
 import { paginationStyles as s } from './pagination.stylex'
 
 interface StyleXStyleProps {
@@ -30,10 +30,15 @@ export function PaginationItem({ ...props }: React.ComponentPropsWithoutRef<'li'
 export interface PaginationLinkProps
   extends Omit<React.ComponentPropsWithoutRef<'a'>, 'className' | 'style'>, StyleXStyleProps {
   isActive?: boolean
-  size?: ButtonSize
+  size?: keyof typeof buttonSizes
 }
 
-export function PaginationLink({ isActive, size = 'icon', style, ...props }: PaginationLinkProps) {
+export function PaginationLink({
+  isActive,
+  size = 'icon-md',
+  style,
+  ...props
+}: PaginationLinkProps) {
   return (
     <Button
       variant={isActive ? 'outline' : 'ghost'}

@@ -17,7 +17,7 @@
 import { Eye, EyeOff } from '@keyline-icons/react'
 import * as stylex from '@stylexjs/stylex'
 import * as React from 'react'
-import { type ButtonVariant } from '#/components/base/button'
+import type { buttonVariants } from '#/components/base/button'
 import { Icon } from '#/components/extra/icon'
 import {
   InputGroup,
@@ -47,7 +47,7 @@ export interface InputPasswordProps extends Omit<
   /** Accessible label for the toggle when the password is visible. */
   hideAriaLabel?: string
   /** Toggle button variant. Defaults to `ghost`. */
-  toggleVariant?: ButtonVariant
+  toggleVariant?: keyof typeof buttonVariants
   /** Toggle button size. Defaults to `iconXs`. */
   toggleSize?: InputGroupButtonSize
 }

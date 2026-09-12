@@ -84,8 +84,8 @@ export const buttonSizes = stylex.create({
   sm: { height: unit.x8, paddingInline: unit.x3 },
   md: { height: unit.x9, paddingInline: unit.x4 },
   lg: { fontSize: fontSize.body1, height: unit.x10, paddingInline: unit.x6 },
-  icon: { height: unit.x9, paddingInline: 0, width: unit.x9 },
-  iconXs: { height: unit.x7, paddingInline: 0, width: unit.x7 },
-  iconSm: { height: unit.x8, paddingInline: 0, width: unit.x8 },
-  iconLg: { height: unit.x10, paddingInline: 0, width: unit.x10 }
+  'icon-xs': { height: unit.x7, paddingInline: 0, width: unit.x7 },
+  'icon-sm': { height: unit.x8, paddingInline: 0, width: unit.x8 },
+  'icon-md': { height: unit.x9, paddingInline: 0, width: unit.x9 },
+  'icon-lg': { height: unit.x10, paddingInline: 0, width: unit.x10 }
 })

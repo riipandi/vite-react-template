@@ -6,6 +6,10 @@
         "builtin": true,
         "vitest": true
     },
+    "options": {
+        "typeAware": true,
+        "typeCheck": false
+    },
     "categories": {
         "correctness": "error",
         "suspicious": "error"
@@ -28,6 +32,8 @@
         "sort-imports": "off",
         "typescript/consistent-type-definitions": ["error", "interface"],
         "typescript/no-explicit-any": "error",
+        "typescript/no-floating-promises": "error",
+        "typescript/no-misused-promises": "error",
         "typescript/no-unnecessary-type-constraint": "off",
         "typescript/triple-slash-reference": "allow"
     },

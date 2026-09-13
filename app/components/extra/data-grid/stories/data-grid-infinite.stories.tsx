@@ -380,13 +380,10 @@ export const ColumnVirtualization: Story = {
       columns,
       data: matrixRows,
       getRowId: (row: IRow) => row.id,
-      state: {
-        sorting,
-        // Full pinning state: table-core 9.2 reads `start`/`end` as arrays
-        // (row_getCenterVisibleCells spreads both), so a partial `{ start }`
-        // crashes with "end is not iterable".
-        columnPinning: { start: ['title'], end: [] }
-      } as never,
+      // Full pinning state: table-core 9.2 reads `start`/`end` as arrays
+      // (row_getCenterVisibleCells spreads both), so a partial `{ start }`
+      // crashes with "end is not iterable".
+      state: { sorting, columnPinning: { start: ['title'], end: [] } },
       onSortingChange: setSorting
     })
 

@@ -41,7 +41,7 @@
         "test:storybook": "vitest run --project storybook",
         "format": "oxfmt --write .",
         "lint": "oxlint --fix .",
-        "check": "oxfmt --check",
+        "check": "oxfmt --check && oxlint --type-aware",
         "typecheck": "tsc -b --noEmit"
     },
     "dependencies": {
@@ -71,7 +71,7 @@
         "react-dom": "^19.3.0",
         "react-phone-number-input": "^3.4.18",
         "react-resizable-panels": "^4.12.4",
-        "zod": "^4.6.2"
+        "zod": "^4.6.4"
     },
     "devDependencies": {
         "@github-ui/storybook-addon-performance-panel": "^1.2.0",
@@ -90,7 +90,7 @@
         "@tanstack/router-plugin": "^1.168.37",
         "@testing-library/jest-dom": "^7.0.1",
         "@testing-library/react": "^16.3.3",
-        "@types/node": "^26.5.0",
+        "@types/node": "^26.5.1",
         "@types/react": "^19.3.0",
         "@types/react-dom": "^19.3.0",
         "@vitejs/plugin-react": "^6.1.1",
@@ -104,6 +104,7 @@
         "oxc-transform-react": "^0.149.0",
         "oxfmt": "^0.67.0",
         "oxlint": "^1.82.0",
+        "oxlint-tsgolint": "^7.0.2001",
         "playwright": "^1.63.0",
         "remark-gfm": "^4.0.1",
         "storybook": "10.6.0",

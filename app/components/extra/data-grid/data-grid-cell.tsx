@@ -1066,8 +1066,7 @@ function DataGridCellSelection<TData extends object>({
     const anchor = anchorRef.current
     if (!anchor) return
 
-    const root = (anchor.closest('[data-slot="data-grid"]') ??
-      anchor.parentElement) as HTMLElement | null
+    const root = anchor.closest('[data-slot="data-grid"]') ?? anchor.parentElement
     if (!root) return
 
     // Split header/body grids render two viewports; the body one owns focus.

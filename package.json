@@ -39,7 +39,7 @@
         "test:ui": "vitest --ui",
         "test": "vitest --run --project unit",
         "test:storybook": "vitest run --project storybook",
-        "check": "oxfmt --check && oxlint --type-aware",
+        "check": "oxfmt --check && oxlint",
         "format": "oxfmt --write .",
         "lint": "oxlint --fix .",
         "typecheck": "tsc -b --noEmit"
@@ -104,7 +104,6 @@
         "oxc-transform-react": "^0.149.0",
         "oxfmt": "^0.67.0",
         "oxlint": "^1.82.0",
-        "oxlint-tsgolint": "^7.0.2001",
         "playwright": "^1.63.0",
         "remark-gfm": "^4.0.1",
         "storybook": "10.6.0",

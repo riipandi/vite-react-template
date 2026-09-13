@@ -338,9 +338,6 @@ importers:
       oxlint:
         specifier: ^1.82.0
         version: 1.82.0(oxlint-tsgolint@7.0.2001)
-      oxlint-tsgolint:
-        specifier: ^7.0.2001
-        version: 7.0.2001
       playwright:
         specifier: ^1.63.0
         version: 1.63.0
@@ -7026,6 +7023,7 @@ snapshots:
       '@oxlint-tsgolint/linux-x64': 7.0.2001
       '@oxlint-tsgolint/win32-arm64': 7.0.2001
       '@oxlint-tsgolint/win32-x64': 7.0.2001
+    optional: true
 
   oxlint@1.82.0(oxlint-tsgolint@7.0.2001):
     optionalDependencies:

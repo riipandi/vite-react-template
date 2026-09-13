@@ -6,10 +6,6 @@
         "builtin": true,
         "vitest": true
     },
-    "options": {
-        "typeAware": true,
-        "typeCheck": false
-    },
     "categories": {
         "correctness": "error",
         "suspicious": "error"

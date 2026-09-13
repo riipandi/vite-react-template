@@ -39,9 +39,9 @@
         "test:ui": "vitest --ui",
         "test": "vitest --run --project unit",
         "test:storybook": "vitest run --project storybook",
+        "check": "oxfmt --check && oxlint --type-aware",
         "format": "oxfmt --write .",
         "lint": "oxlint --fix .",
-        "check": "oxfmt --check && oxlint --type-aware",
         "typecheck": "tsc -b --noEmit"
     },
     "dependencies": {

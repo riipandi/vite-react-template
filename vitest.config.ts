@@ -83,6 +83,31 @@ export default defineConfig({
           environmentOptions: { happyDOM: { url: 'http://localhost:3000/' } },
           setupFiles: ['./tests/setup-test.ts'],
           include: ['./**/*.{test,spec}.{ts,tsx}'],
+          exclude: ['node_modules', 'tests-e2e', '**/*.browser.{test,spec}.{ts,tsx}'],
+          globals: true
+        }
+      },
+      {
+        // Browser project (vitest-browser-react) for @tests/ directory.
+        // Runs tests in a real browser (Playwright Chromium) using React Testing Library patterns.
+        plugins: [
+          vitestStylexCleanup(),
+          stylex({ useCSSLayers: true, aliases: { '#/*': resolve('./app/*') } }),
+          react()
+        ],
+        resolve: { tsconfigPaths: true },
+        envPrefix: ['VITE_', 'PUBLIC_'],
+        define: { 'import.meta.env.PUBLIC_APP_VERSION': '"test"' },
+        test: {
+          name: 'browser',
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright(),
+            instances: [{ browser: 'chromium' }]
+          },
+          setupFiles: ['./tests/setup-browser.ts'],
+          include: ['./tests/**/*.browser.{test,spec}.{ts,tsx}'],
           exclude: ['node_modules', 'tests-e2e'],
           globals: true
         }

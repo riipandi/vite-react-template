@@ -29,13 +29,13 @@ const sessionHandler: Connect.NextHandleFunction = (req, res) => {
   res.end(JSON.stringify({ authenticated }))
 }
 
-function demoAuthBackend(): Plugin {
-  function register(server: { middlewares: Connect.Server }) {
-    // Registered before Vite's internal middlewares, so these win over the `/api` proxy in vite.config.ts.
-    server.middlewares.use('/api/auth/logout', logoutHandler)
-    server.middlewares.use('/api/auth/session', sessionHandler)
-  }
+function register(server: { middlewares: Connect.Server }) {
+  // Registered before Vite's internal middlewares, so these win over the `/api` proxy in vite.config.ts.
+  server.middlewares.use('/api/auth/logout', logoutHandler)
+  server.middlewares.use('/api/auth/session', sessionHandler)
+}
 
+function demoAuthBackend(): Plugin {
   return {
     name: 'demo-auth-backend',
     configureServer: register,

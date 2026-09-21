@@ -57,6 +57,7 @@ vitest.config.*
 !vitest.config.ts
 vitest.workspace.*
 !vitest.workspace.ts
+.vitest/
 
 # Envars
 .env.*

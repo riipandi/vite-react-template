@@ -1,6 +1,8 @@
 import type { StorybookConfig } from '@storybook/tanstack-react'
 import remarkGfm from 'remark-gfm'
 import { mergeConfig } from 'vite'
+import stylex from '@stylexjs/unplugin/vite'
+import { resolve } from 'node:path'
 
 export default {
   stories: ['./stories/**/*.mdx', '../app/**/*.stories.@(mdx|jsx|tsx)'],
@@ -34,7 +36,13 @@ export default {
     return mergeConfig(viteConfig, {
       resolve: { tsconfigPaths: true },
       build: { chunkSizeWarningLimit: 1024 * 4 },
-      server: undefined
+      server: undefined,
+      plugins: [
+        stylex({
+          aliases: { '#/*': resolve('./app/*') },
+          useCSSLayers: true
+        })
+      ]
     })
   }
 } satisfies StorybookConfig

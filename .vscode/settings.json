@@ -10,7 +10,8 @@
         "wrangler.json": "jsonc"
     },
     "files.exclude": {
-        "**/.tanstack": true
+        "**/.tanstack": true,
+        "**/.vitest": true
     },
     "files.readonlyInclude": {
         "**/.output/**": true,
@@ -32,6 +33,7 @@
     },
     "search.exclude": {
         "**/.output/**": true,
+        "**/.vitest/**": true,
         "**/routeTree.gen.ts": true,
         "**/routes.gen.ts": true,
         "**/build/**": true,

@@ -18,6 +18,8 @@ export const Route = createFileRoute('/')({
   }
 })
 
+const currentYear = new Date().getFullYear()
+
 const FEATURES: Array<[title: string, description: string]> = [
   ['Type-Safe Routing', 'Routes and links stay in sync across every page.'],
   ['StyleX Tokens', 'Styling compiles at build time from reusable design tokens.'],
@@ -134,7 +136,7 @@ function RouteComponent() {
       <footer {...stylex.props(s.footer)}>
         <div {...stylex.props(s.footerInner)}>
           <Text render={<p />} variant='body-2' color='neutral-faded' style={s.footerText}>
-            &copy; {new Date().getFullYear()}
+            &copy; {currentYear}
             {' - '}
             <span {...stylex.props(s.footerSubText)}>v{import.meta.env.PUBLIC_APP_VERSION}</span>
           </Text>

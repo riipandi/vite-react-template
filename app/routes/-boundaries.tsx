@@ -3,6 +3,8 @@ import * as stylex from '@stylexjs/stylex'
 import { Link, type ErrorComponentProps } from '@tanstack/react-router'
 import { styles } from '#/styles/pages/boundaries.stylex'
 
+const currentYear = new Date().getFullYear()
+
 export function GlobalNotFound() {
   return (
     <div
@@ -45,9 +47,7 @@ export function GlobalNotFound() {
       </div>
       <footer {...stylex.props(styles.footer)}>
         <div {...stylex.props(styles.footerInner)}>
-          <p {...stylex.props(styles.footerText)}>
-            &copy; All Rights Reserved. {new Date().getFullYear()}
-          </p>
+          <p {...stylex.props(styles.footerText)}>&copy; All Rights Reserved. {currentYear}</p>
         </div>
       </footer>
     </div>
@@ -96,9 +96,7 @@ export function GlobalError({ error, reset }: ErrorComponentProps) {
       </div>
       <footer {...stylex.props(styles.footer)}>
         <div {...stylex.props(styles.footerInner)}>
-          <p {...stylex.props(styles.footerText)}>
-            &copy; All Rights Reserved. {new Date().getFullYear()}
-          </p>
+          <p {...stylex.props(styles.footerText)}>&copy; All Rights Reserved. {currentYear}</p>
         </div>
       </footer>
     </div>

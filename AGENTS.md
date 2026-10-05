@@ -72,6 +72,13 @@ You are helping maintain this template for its author.
 - Base UI: `CardTitle`/`CardDescription` have no `render` prop (use `Text render={<h1/>}` for headings); in a `render` prop, put content inside the render element itself, not the component's children, or oxlint flags an empty anchor/control.
 - Layout: `ButtonGroup` root is `width: fit-content` (full-width joined buttons need `width: '100%'` on the group and each child Button); `CardHeader` is a left-aligned `1fr/auto` grid (for a centered header use a flex column and pin `CardAction` with `position: absolute` + `position: relative` on the Card); `FieldSeparator`'s background must match its surrounding surface (`backgroundElevationBase` inside a Card), not `backgroundPage`.
 
+## Git
+
+- Stage explicit paths. Check `git status`. Never `git add -A` or `git add .`.
+- Message: `{feat,fix,docs,refactor,chore}[(scope)]: <concise message>`. Do not push.
+- Do not commit unless this turn asked for it. When the work is finished, recommend the one-line message and list the paths.
+- Never run `git reset --hard`, `git checkout .`, `git clean -fd`, `git stash`, `git commit --no-verify`, or `git push --force`.
+
 ## Related Docs
 
 - `llms/stylex-authoring.md` — read before writing styles. `llms/stylex-installation.md` — StyleX setup.

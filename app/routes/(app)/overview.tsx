@@ -24,14 +24,15 @@ const STATS: Array<[value: string, label: string, description: string]> = [
   ['72', 'Interaction tests', 'Vitest + Storybook run on every commit.']
 ]
 
+const currentHour = new Date().getHours()
+const greeting =
+  currentHour < 12 ? 'Good morning' : currentHour < 18 ? 'Good afternoon' : 'Good evening'
+
 function RouteComponent() {
   const user = useAuthUser()
   const { logout } = useAuthentication()
   const displayName =
     user?.firstName?.trim() || user?.username?.trim() || user?.email?.split('@')[0] || 'Guest'
-  const now = new Date()
-  const hour = now.getHours()
-  const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
 
   return (
     <div

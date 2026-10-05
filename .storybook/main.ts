@@ -1,8 +1,8 @@
 import type { StorybookConfig } from '@storybook/tanstack-react'
-import remarkGfm from 'remark-gfm'
-import { mergeConfig } from 'vite'
 import stylex from '@stylexjs/unplugin/vite'
 import { resolve } from 'node:path'
+import remarkGfm from 'remark-gfm'
+import { mergeConfig } from 'vite'
 
 export default {
   stories: ['./stories/**/*.mdx', '../app/**/*.stories.@(mdx|jsx|tsx)'],

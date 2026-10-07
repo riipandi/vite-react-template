@@ -49,7 +49,7 @@ You are helping maintain this template for its author.
 
 ## Conventions
 
-- Everything is styled with StyleX — follow `llms/stylex-authoring.md` (authoring rules and antipatterns; setup in `llms/stylex-installation.md`). Compiled by `@stylexjs/unplugin` with `useCSSLayers: true`; tokens live in `app/styles/core/*.stylex.ts` (light defaults + a single dark `createTheme` in `themes.ts`; theme class on `documentElement`).
+- Everything is styled with StyleX — follow `.llms/stylex-authoring.md` (authoring rules and antipatterns; setup in `.llms/stylex-installation.md`). Compiled by `@stylexjs/unplugin` with `useCSSLayers: true`; tokens live in `app/styles/core/*.stylex.ts` (light defaults + a single dark `createTheme` in `themes.ts`; theme class on `documentElement`).
 - `@stylexjs/atoms` for one-off layout in stories/routes: static styles via property access (`atoms.display.flex`), dynamic values via bracket strings (`atoms.gap['8px']`) — numeric calls like `atoms.gap(8)` emit invalid unitless CSS.
 - **Keyline Icons — use named imports from `@keyline-icons/react`.** Keep the existing local `Icon` suffix aliases where components expect them; do not barrel-import the package.
 - HTTP goes through the same-origin `/api` proxy (Vite dev proxies to `dummyjson.com`; Netlify routes `/api/*` to `netlify/functions/api.ts`). Cookie sessions depend on it — never call the backend host directly.
@@ -81,4 +81,4 @@ You are helping maintain this template for its author.
 
 ## Related Docs
 
-- `llms/stylex-authoring.md` — read before writing styles. `llms/stylex-installation.md` — StyleX setup.
+- `.llms/stylex-authoring.md` — read before writing styles. `.llms/stylex-installation.md` — StyleX setup.

@@ -4,14 +4,8 @@ import type { StyleXStyles } from '@stylexjs/stylex'
 import { flexRender, Subscribe } from '@tanstack/react-table'
 import type { Cell, Column, Header, Row } from '@tanstack/react-table'
 import { Fragment, memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react'
-import type {
-  CSSProperties,
-  MouseEvent as ReactMouseEvent,
-  ReactNode,
-  TouchEvent as ReactTouchEvent,
-  Ref,
-  RefObject
-} from 'react'
+import type { CSSProperties, ReactNode, Ref, RefObject } from 'react'
+import type { MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent } from 'react'
 import { Button } from '#/components/base/button'
 import { Checkbox } from '#/components/base/checkbox'
 import { Spinner } from '#/components/extra/spinner'
@@ -1543,6 +1537,31 @@ function DataGridTableBodyRowExpandded<TData extends object>({
 }
 
 /**
+ * Expanded detail row for a body row.
+ *
+ * Like the selection cell below, this reads a row method that hides its state
+ * dependency (`row.getIsExpanded()`) from the React Compiler. Rendered under
+ * `DataGridTableRenderedRow` it receives a *stable* row object, so without a
+ * visible dependency the compiler memoizes the whole `expanded && <…>` branch
+ * on row identity alone and an expansion click never inserts the detail row.
+ * Subscribing to the `expanded` atom gives the compiler (and React) a
+ * dependency that actually changes, re-running the branch on toggle.
+ */
+function DataGridTableBodyRowExpandedSlot<TData extends object>({
+  row,
+  table
+}: {
+  row: Row<DataGridFeatures, TData>
+  table: DataGridTableInstance<TData>
+}) {
+  return (
+    <Subscribe source={table.atoms.expanded}>
+      {() => (row.getIsExpanded() ? <DataGridTableBodyRowExpandded row={row} /> : null)}
+    </Subscribe>
+  )
+}
+
+/**
  * Interactive descendants keep their own mousedown semantics: a click on a
  * button, link, editor or checkbox inside a cell must never start or replace
  * a range. One selector also covers the row-dnd grip (a button), the expand
@@ -1941,7 +1960,7 @@ function DataGridTableRenderedRow<TData extends object>({
         ))}
         {resizableWithoutRightPinned ? <DataGridTableFillBodyCell table={table} /> : null}
       </DataGridTableBodyRow>
-      {row.getIsExpanded() && <DataGridTableBodyRowExpandded row={row} />}
+      <DataGridTableBodyRowExpandedSlot row={row} table={table} />
     </Fragment>
   )
 }
@@ -1978,55 +1997,77 @@ function DataGridTableLoader() {
   )
 }
 
-function DataGridTableRowPin<TData extends object>({ row }: { row: Row<DataGridFeatures, TData> }) {
+/**
+ * Row pin toggle.
+ *
+ * Same React Compiler trap as the expanded-row slot: `row.getIsPinned()`
+ * hides its state dependency from the compiler, and the stable row object
+ * lets it memoize the aria/icon branch forever (the pin click updates the
+ * state but the button never repaints). Subscribing to the row-pinning atom
+ * gives the branch a dependency that changes on pin/unpin.
+ */
+function DataGridTableRowPin<TData extends object>({
+  row,
+  table
+}: {
+  row: Row<DataGridFeatures, TData>
+  table: DataGridTableInstance<TData>
+}) {
   const { i18n } = useDataGrid()
-  const isPinned = row.getIsPinned()
 
   return (
-    <button
-      type='button'
-      aria-label={isPinned ? i18n.labels.unpinRow : i18n.labels.pinRow}
-      data-pinned={isPinned ? 'true' : undefined}
-      onClick={(event) => {
-        // Pinning must not bubble into the row's onRowClick handler.
-        event.stopPropagation()
+    <Subscribe source={table.atoms.rowPinning}>
+      {() => {
+        const isPinned = row.getIsPinned()
 
-        if (isPinned) {
-          row.pin(false)
-        } else {
-          row.pin('top')
-        }
+        return (
+          <button
+            type='button'
+            aria-label={isPinned ? i18n.labels.unpinRow : i18n.labels.pinRow}
+            data-pinned={isPinned ? 'true' : undefined}
+            onClick={(event) => {
+              // Pinning must not bubble into the row's onRowClick handler.
+              event.stopPropagation()
+
+              if (isPinned) {
+                row.pin(false)
+              } else {
+                row.pin('top')
+              }
+            }}
+            {...stylex.props(s.rowPinButton)}
+          >
+            {isPinned ? (
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='16'
+                height='16'
+                viewBox='0 0 24 24'
+                fill='currentColor'
+                stroke='none'
+              >
+                <path d='M16 2l4.585 4.586-2.122 2.121L17.05 7.293l-3.535 3.536 1.413 5.658-2.12 2.121-4.244-4.243L4.322 18.6l-1.414-1.41 4.242-4.244-4.243-4.243 2.122-2.121 5.656 1.414 3.536-3.536-1.414-1.414z' />
+              </svg>
+            ) : (
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='16'
+                height='16'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              >
+                <line x1='12' y1='17' x2='12' y2='22' />
+                <path d='M5 17h14v-1.76a2 2 0 00-1.11-1.79l-1.78-.9A2 2 0 0115 10.76V6h1a2 2 0 000-4H8a2 2 0 000 4h1v4.76a2 2 0 01-1.11 1.79l-1.78.9A2 2 0 005 15.24z' />
+              </svg>
+            )}
+          </button>
+        )
       }}
-      {...stylex.props(s.rowPinButton)}
-    >
-      {isPinned ? (
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='16'
-          height='16'
-          viewBox='0 0 24 24'
-          fill='currentColor'
-          stroke='none'
-        >
-          <path d='M16 2l4.585 4.586-2.122 2.121L17.05 7.293l-3.535 3.536 1.413 5.658-2.12 2.121-4.244-4.243L4.322 18.6l-1.414-1.41 4.242-4.244-4.243-4.243 2.122-2.121 5.656 1.414 3.536-3.536-1.414-1.414z' />
-        </svg>
-      ) : (
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='16'
-          height='16'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke='currentColor'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-        >
-          <line x1='12' y1='17' x2='12' y2='22' />
-          <path d='M5 17h14v-1.76a2 2 0 00-1.11-1.79l-1.78-.9A2 2 0 0115 10.76V6h1a2 2 0 000-4H8a2 2 0 000 4h1v4.76a2 2 0 01-1.11 1.79l-1.78.9A2 2 0 005 15.24z' />
-        </svg>
-      )}
-    </button>
+    </Subscribe>
   )
 }
 

@@ -348,6 +348,8 @@ export const ColumnResizing: Story = {
     )
     const table = useDemoTable(columns)
 
+    tableHolder.current = table
+
     return (
       <DataGrid
         table={table}
@@ -510,6 +512,8 @@ export const ColumnVisibilityControls: Story = {
       []
     )
     const table = useDemoTable(columns)
+
+    tableHolder.current = table
 
     return (
       <DataGrid

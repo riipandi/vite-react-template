@@ -9,15 +9,9 @@ import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Card, CardContent } from '#/components/extra/card'
 import { unit } from '#/styles/core/tokens.stylex'
-import {
-  DataGrid,
-  DataGridColumnHeader,
-  DataGridContainer,
-  DataGridTableVirtual,
-  dataGridFeatures,
-  type DataGridFeatures,
-  type DataGridTableInstance
-} from '../'
+import { DataGrid, DataGridColumnHeader, DataGridContainer, DataGridTableVirtual } from '../'
+import { dataGridFeatures } from '../'
+import type { DataGridFeatures, DataGridTableInstance } from '../'
 import { stackStyles as s } from './_mocks.stylex'
 
 const meta = {
@@ -420,6 +414,7 @@ export const ColumnVirtualization: Story = {
       state: { sorting, columnPinning: { start: ['title'], end: [] } },
       onSortingChange: setSorting
     })
+    tableHolder.current = table
 
     return (
       <DataGrid
@@ -481,7 +476,3 @@ export const ColumnVirtualization: Story = {
     )
   }
 }
-
-/* ------------------------------------------------------------------ */
-/* Shared bits */
-/* ------------------------------------------------------------------ */

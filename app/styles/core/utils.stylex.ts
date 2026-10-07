@@ -1,5 +1,4 @@
 import * as stylex from '@stylexjs/stylex'
-import type { StyleXStyles } from '@stylexjs/stylex'
 import { colors } from '#/styles/core/colors.stylex'
 import { stroke } from '#/styles/core/tokens.stylex'
 
@@ -34,7 +33,3 @@ export const ring = ({
   color = colors.borderNeutralFaded,
   shadow: drop = null
 }: RingOptions = {}) => recipes.boxShadow(`0 0 0 ${width} ${color}${drop ? `, ${drop}` : ''}`)
-
-export const customClassName = (className: string | undefined) => {
-  return className ? ({ [className]: className, $$css: true } as StyleXStyles) : null
-}

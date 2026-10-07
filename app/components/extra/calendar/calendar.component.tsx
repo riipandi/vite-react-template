@@ -7,7 +7,6 @@ import type { DayButton, DropdownOption, Locale } from 'react-day-picker'
 import { buttonStyles, buttonVariants } from '#/components/base/button'
 import { Select, SelectItem, SelectValue } from '#/components/base/select/select.component'
 import { SelectContent, SelectTrigger } from '#/components/base/select/select.component'
-import { customClassName } from '#/styles/core/utils.stylex'
 import { calendarStyles } from './calendar.stylex'
 
 type CalendarDayButtonProps = Omit<React.ComponentProps<typeof DayButton>, 'style'> & {
@@ -43,7 +42,6 @@ const CalendarDayButton = ({
     modifiers.range_start && calendarStyles.dayBtnRangeStart,
     modifiers.range_end && calendarStyles.dayBtnRangeEnd,
     modifiers.range_middle && calendarStyles.dayBtnRangeMiddle,
-    customClassName(className),
     style
   )
 
@@ -57,7 +55,9 @@ const CalendarDayButton = ({
       data-range-start={modifiers.range_start}
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
-      className={[dayBtnStyleProps.className, defaultClassNames.day].filter(Boolean).join(' ')}
+      className={[dayBtnStyleProps.className, defaultClassNames.day, className]
+        .filter(Boolean)
+        .join(' ')}
       style={dayBtnStyleProps.style}
       {...props}
     />
@@ -69,14 +69,15 @@ const CalendarChevron = ({
   orientation,
   ...chevronProps
 }: { className?: string; orientation?: string } & React.ComponentProps<'svg'>) => {
-  const chevronStyleProps = stylex.props(calendarStyles.chevron, customClassName(iconCn))
+  const chevronStyleProps = stylex.props(calendarStyles.chevron)
+  const chevronClassName = [chevronStyleProps.className, iconCn].filter(Boolean).join(' ')
   if (orientation === 'left') {
-    return <ChevronLeft {...chevronStyleProps} {...chevronProps} />
+    return <ChevronLeft {...chevronStyleProps} {...chevronProps} className={chevronClassName} />
   }
   if (orientation === 'right') {
-    return <ChevronRight {...chevronStyleProps} {...chevronProps} />
+    return <ChevronRight {...chevronStyleProps} {...chevronProps} className={chevronClassName} />
   }
-  return <ChevronDown {...chevronStyleProps} {...chevronProps} />
+  return <ChevronDown {...chevronStyleProps} {...chevronProps} className={chevronClassName} />
 }
 
 const CalendarRoot = ({
@@ -92,6 +93,35 @@ const CalendarWeekNumber = ({ children, ...weekNumProps }: React.ComponentProps<
     <div {...stylex.props(calendarStyles.weekNumberCell)}>{children}</div>
   </td>
 )
+
+/**
+ * react-day-picker's Dropdown contract hands `onChange` a native select's
+ * change event; Base UI's Select only gives us the value. A detached
+ * `<select>` element supplies the honest target the event shape requires,
+ * and the remaining fields describe the not-yet-dispatched event truthfully.
+ */
+function selectChangeEvent(value: string): React.ChangeEvent<HTMLSelectElement> {
+  const target = document.createElement('select')
+  target.value = value
+  const nativeEvent = new Event('change')
+  return {
+    nativeEvent,
+    currentTarget: target,
+    target,
+    bubbles: false,
+    cancelable: false,
+    defaultPrevented: false,
+    eventPhase: 0,
+    isTrusted: false,
+    preventDefault: () => {},
+    isDefaultPrevented: () => false,
+    stopPropagation: () => {},
+    isPropagationStopped: () => false,
+    persist: () => {},
+    timeStamp: nativeEvent.timeStamp,
+    type: 'change'
+  }
+}
 
 interface CalendarDropdownProps {
   options?: DropdownOption[]
@@ -120,10 +150,7 @@ const CalendarDropdown = ({
       value={selected ? String(selected.value) : null}
       onValueChange={(newValue) => {
         if (newValue == null) return
-        const syntheticEvent = {
-          target: { value: String(newValue) }
-        } as unknown as React.ChangeEvent<HTMLSelectElement>
-        onChange?.(syntheticEvent)
+        onChange?.(selectChangeEvent(newValue))
       }}
     >
       <SelectTrigger
@@ -178,11 +205,7 @@ export function Calendar({
 }: CalendarProps) {
   const defaultClassNames = getDefaultClassNames()
 
-  const rootStyleProps = stylex.props(
-    calendarStyles.root,
-    customClassName(className),
-    style as StyleXStyles
-  )
+  const rootStyleProps = stylex.props(calendarStyles.root, style as StyleXStyles)
 
   const prevBtnProps = stylex.props(
     buttonStyles.root,
@@ -199,7 +222,7 @@ export function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={rootStyleProps.className}
+      className={[rootStyleProps.className, className].filter(Boolean).join(' ')}
       style={rootStyleProps.style}
       captionLayout={captionLayout}
       locale={locale}

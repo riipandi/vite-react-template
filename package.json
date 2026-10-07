@@ -100,7 +100,7 @@
         "@vitest/coverage-v8": "^5.0.3",
         "@vitest/ui": "^5.0.3",
         "happy-dom": "^20.14.5",
-        "knip": "^6.39.0",
+        "knip": "^6.40.0",
         "lefthook": "^2.1.17",
         "npm-check-updates": "^23.1.0",
         "oxc-transform-react": "^0.153.0",
@@ -110,7 +110,7 @@
         "remark-gfm": "^4.0.1",
         "storybook": "10.6.1",
         "typescript": "^7.0.2",
-        "vite": "^8.3.2",
+        "vite": "^8.3.3",
         "vitest": "^5.0.3",
         "vitest-browser-react": "^2.3.0"
     },

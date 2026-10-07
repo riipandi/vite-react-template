@@ -1,6 +1,6 @@
 import { api } from '#/libraries/api-client'
+import { API_BASE_URL } from '#/libraries/constants'
 import type { User } from '#/schemas/user.schema'
-import { API_BASE_URL } from './auth-engine'
 import { authStore, clearAuth, setAuthLoading, setAuthUser } from './auth-store'
 import { authWorker } from './auth-worker-client'
 

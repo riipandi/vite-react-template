@@ -1,5 +1,6 @@
 import * as Comlink from 'comlink'
-import { API_BASE_URL, createAuthEngine, type AuthEngineApi } from './auth-engine'
+import { API_BASE_URL } from '#/libraries/constants'
+import { createAuthEngine, type AuthEngineApi } from './auth-engine'
 
 /** Comlink-backed handle to the auth engine. */
 export type AuthWorkerClient = Comlink.Remote<AuthEngineApi>

@@ -1,14 +1,7 @@
 import { ofetch } from 'ofetch'
+import { API_BASE_URL } from '#/libraries/constants'
 import type { LoginCredentials, LoginResponse } from '#/schemas/auth.schema'
 import type { User } from '#/schemas/user.schema'
-
-/**
- * Base URL for all auth requests. Defaults to `/api` — the same-origin Vite
- * dev proxy (see `vite.config.ts`) which forwards to the demo backend. In
- * production, point `PUBLIC_API_URL` at the real backend (same parent domain
- * so the HttpOnly session cookies are first-party).
- */
-export const API_BASE_URL = import.meta.env.PUBLIC_API_URL ?? '/api'
 
 /** Session TTL requested from the backend, in minutes. Cookie Max-Age follows this. */
 const SESSION_TTL_MINS = 60

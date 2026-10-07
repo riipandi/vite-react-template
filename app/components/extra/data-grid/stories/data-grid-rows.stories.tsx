@@ -32,7 +32,8 @@ import {
   DataGridTableDndRowHandle,
   DataGridTableDndRows,
   dataGridFeatures,
-  type DataGridFeatures
+  type DataGridFeatures,
+  type DataGridTableInstance
 } from '../'
 import { demoData, type IBook } from './_mocks'
 import { stackStyles as s } from './_mocks.stylex'
@@ -59,7 +60,7 @@ export default meta
 
 const statusStyles = stylex.create({
   muted: {
-    color: s.muted.color as unknown as string
+    color: s.muted.color
   },
   expanderButton: {
     marginInlineStart: `calc(-1 * ${unit.x2})`
@@ -103,19 +104,21 @@ const statusStyles = stylex.create({
 /* Row selection */
 /* ------------------------------------------------------------------ */
 
-function selectionColumns(): ColumnDef<DataGridFeatures, IBook>[] {
+function selectionColumns(
+  getTable: () => DataGridTableInstance<IBook>
+): ColumnDef<DataGridFeatures, IBook>[] {
   return [
     {
       id: 'select',
       meta: { headerTitle: 'Select all' },
       size: 40,
-      header: () => <DataGridTableRowSelectAll />,
+      header: () => <DataGridTableRowSelectAll table={getTable()} />,
       cell: ({ row }) => <DataGridTableRowSelect row={row} />
     },
     {
       accessorKey: 'title',
       header: 'Title',
-      cell: (info) => <span {...stylex.props(s.strong)}>{info.getValue() as string}</span>,
+      cell: (info) => <span {...stylex.props(s.strong)}>{String(info.getValue())}</span>,
       size: 160
     },
     {
@@ -131,7 +134,7 @@ function selectionColumns(): ColumnDef<DataGridFeatures, IBook>[] {
     {
       accessorKey: 'price',
       header: 'Price ($)',
-      cell: (info) => <>${(info.getValue() as number).toFixed(2)}</>,
+      cell: (info) => <>${Number(info.getValue()).toFixed(2)}</>,
       size: 120
     }
   ]
@@ -146,9 +149,17 @@ export const RowSelection: Story = {
       pageSize: 5
     })
     const [sorting, setSorting] = useState<SortingState>([{ id: 'title', desc: true }])
-    const columns = useMemo(() => selectionColumns(), [])
     const selectedCount = Object.keys(rowSelection).length
 
+    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
+    const columns = useMemo(
+      () =>
+        selectionColumns(() => {
+          if (!tableHolder.current) throw new Error('table not ready')
+          return tableHolder.current
+        }),
+      [tableHolder]
+    )
     const table = useTable({
       features: dataGridFeatures,
       columns,
@@ -161,6 +172,7 @@ export const RowSelection: Story = {
       onPaginationChange: setPagination,
       onSortingChange: setSorting
     })
+    tableHolder.current = table
 
     return (
       <DataGrid table={table} recordCount={demoData.length}>
@@ -169,11 +181,11 @@ export const RowSelection: Story = {
             {selectedCount} of {demoData.length} selected
           </span>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTable />
+            <DataGridScrollArea table={table}>
+              <DataGridTable table={table} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -187,6 +199,13 @@ export const RowSelection: Story = {
 interface IDetail extends IBook {
   details: string
 }
+
+// The features bundle erases TData, so expanded rows arrive as unknown.
+const isDetailRow = (row: unknown): row is IDetail =>
+  typeof row === 'object' && row !== null && 'details' in row
+
+const isOrderRow = (row: unknown): row is IOrder =>
+  typeof row === 'object' && row !== null && 'lines' in row
 
 const detailData: IDetail[] = demoData.slice(0, 5).map((row, index) => ({
   ...row,
@@ -221,14 +240,12 @@ function ExpandableColumns(): ColumnDef<DataGridFeatures, IDetail>[] {
       meta: {
         // Receives `row.original` (source contract), not the TanStack row.
         // The features bundle erases TData, so narrow here.
-        expandedContent: (rawRow) => {
-          const row = rawRow as IDetail
-          return (
+        expandedContent: (rawRow) =>
+          isDetailRow(rawRow) ? (
             <div {...stylex.props(statusStyles.muted, statusStyles.expandedContent)}>
-              {row.details}
+              {rawRow.details}
             </div>
-          )
-        }
+          ) : null
       }
     },
     {
@@ -278,8 +295,8 @@ export const ExpandableRows: Story = {
         tableStyles={{ edgeCell: s.edgeCell }}
       >
         <DataGridContainer>
-          <DataGridScrollArea>
-            <DataGridTable />
+          <DataGridScrollArea table={table}>
+            <DataGridTable table={table} />
           </DataGridScrollArea>
         </DataGridContainer>
       </DataGrid>
@@ -334,9 +351,7 @@ const orderData: IOrder[] = [
 ]
 
 /** Price cell shared by the order-line tables (currency, two decimals). */
-const priceCell = (info: { getValue: () => unknown }) => (
-  <>${(info.getValue() as number).toFixed(2)}</>
-)
+const priceCell = (info: { getValue: () => unknown }) => <>${Number(info.getValue()).toFixed(2)}</>
 
 /** The demo owns no data writes — the drag itself is the visible reorder;
  * persisting the new order is the consumer's concern. */
@@ -368,8 +383,8 @@ function SubTable({ items }: { items: IOrder['lines'] }) {
     <div style={{ paddingBlock: 8, paddingInline: 32 }}>
       <DataGrid table={table} recordCount={items.length}>
         <DataGridContainer>
-          <DataGridScrollArea>
-            <DataGridTable />
+          <DataGridScrollArea table={table}>
+            <DataGridTable table={table} />
           </DataGridScrollArea>
         </DataGridContainer>
       </DataGrid>
@@ -401,11 +416,12 @@ export const SubTableStory: Story = {
         {
           accessorKey: 'total',
           header: 'Total ($)',
-          cell: (info) => <>${(info.getValue() as number).toFixed(2)}</>,
+          cell: (info) => <>${Number(info.getValue()).toFixed(2)}</>,
           size: 120,
           meta: {
             // The features bundle erases TData, so narrow here.
-            expandedContent: (rawRow) => <SubTable items={(rawRow as IOrder).lines} />
+            expandedContent: (rawRow) =>
+              isOrderRow(rawRow) ? <SubTable items={rawRow.lines} /> : null
           }
         }
       ],
@@ -424,8 +440,8 @@ export const SubTableStory: Story = {
     return (
       <DataGrid table={table} recordCount={orderData.length}>
         <DataGridContainer>
-          <DataGridScrollArea>
-            <DataGridTable />
+          <DataGridScrollArea table={table}>
+            <DataGridTable table={table} />
           </DataGridScrollArea>
         </DataGridContainer>
       </DataGrid>
@@ -470,7 +486,7 @@ export const DraggableRows: Story = {
         {
           accessorKey: 'price',
           header: 'Price ($)',
-          cell: (info) => <>${(info.getValue() as number).toFixed(2)}</>,
+          cell: (info) => <>${Number(info.getValue()).toFixed(2)}</>,
           size: 120
         }
       ],
@@ -493,11 +509,15 @@ export const DraggableRows: Story = {
       <DataGrid table={table} recordCount={demoData.length}>
         <div {...stylex.props(s.stack)}>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTableDndRows handleDragEnd={demoRowDragEnd} dataIds={dataIds} />
+            <DataGridScrollArea table={table}>
+              <DataGridTableDndRows
+                table={table}
+                handleDragEnd={demoRowDragEnd}
+                dataIds={dataIds}
+              />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -595,13 +615,13 @@ export const RowPinningSupport: Story = {
           </CardHeader>
           <CardContent style={statusStyles.cardBody}>
             <DataGridContainer>
-              <DataGridScrollArea>
-                <DataGridTable />
+              <DataGridScrollArea table={table}>
+                <DataGridTable table={table} />
               </DataGridScrollArea>
             </DataGridContainer>
           </CardContent>
           <CardFooter style={statusStyles.cardFooter}>
-            <DataGridPagination />
+            <DataGridPagination table={table} />
           </CardFooter>
         </Card>
       </DataGrid>
@@ -692,12 +712,19 @@ export const TreeRows: Story = {
       eng: true,
       'eng-platform': true
     })
+    const tableHolder: { current?: DataGridTableInstance<ITreeNode> } = {}
     const columns = useMemo<ColumnDef<DataGridFeatures, ITreeNode>[]>(
       () => [
         {
           accessorKey: 'title',
           id: 'title',
-          header: ({ column }) => <DataGridColumnHeaderInline title='Title' column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeaderInline
+              table={tableHolder.current!}
+              title='Title'
+              column={column}
+            />
+          ),
           cell: ({ row }) => {
             const item = row.original
             return (
@@ -764,6 +791,7 @@ export const TreeRows: Story = {
       onExpandedChange: setExpanded,
       paginateExpandedRows: false
     })
+    tableHolder.current = table
 
     return (
       <DataGrid
@@ -778,12 +806,12 @@ export const TreeRows: Story = {
         <div {...stylex.props(s.stack)}>
           <Card style={statusStyles.cardOverflow}>
             <DataGridContainer>
-              <DataGridScrollArea>
-                <DataGridTable />
+              <DataGridScrollArea table={table}>
+                <DataGridTable table={table} />
               </DataGridScrollArea>
             </DataGridContainer>
           </Card>
-          <DataGridPagination sizes={[4, 8, 16]} />
+          <DataGridPagination table={table} sizes={[4, 8, 16]} />
         </div>
       </DataGrid>
     )
@@ -792,11 +820,13 @@ export const TreeRows: Story = {
 
 /** Tree story header uses the real column header component. */
 function DataGridColumnHeaderInline({
+  table,
   title,
   column
 }: {
+  table: DataGridTableInstance<ITreeNode>
   title: string
   column: Column<DataGridFeatures, ITreeNode>
 }) {
-  return <DataGridColumnHeader title={title} column={column} />
+  return <DataGridColumnHeader table={table} title={title} column={column} />
 }

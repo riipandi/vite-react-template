@@ -4,7 +4,7 @@ import type { Column, Row } from '@tanstack/react-table'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import type { VirtualItem, Virtualizer, VirtualizerOptions } from '@tanstack/react-virtual'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import type { CSSProperties, ReactNode } from 'react'
+import type { CSSProperties, ReactNode, Ref } from 'react'
 import { Spinner } from '#/components/extra/spinner'
 import { useDataGrid } from './data-grid'
 import type { DataGridFeatures, DataGridTableInstance } from './data-grid'
@@ -29,6 +29,7 @@ import {
   getPinningStyles,
   hasDataGridTableRightPinnedColumns
 } from './data-grid-table'
+import type { DataGridTablePinnedBoundary } from './data-grid-table'
 import { dataGridTableVirtualStyles as s3 } from './data-grid-table.stylex'
 
 interface DataGridTableVirtualScrollElements {
@@ -262,6 +263,7 @@ type DataGridTableVirtualizerOptions<TData extends object> = Omit<
 }
 
 interface DataGridTableVirtualProps<TData extends object> {
+  table: DataGridTableInstance<TData>
   height?: number | string
   estimateSize?: number
   overscan?: number
@@ -311,7 +313,7 @@ interface VirtualBodyProps<TData extends object> {
 function DataGridTableVirtualPinnedPlaceholderCell<TData extends object>({
   column
 }: {
-  column: Column<DataGridFeatures, TData, unknown>
+  column: Column<DataGridFeatures, TData>
 }) {
   const { props } = useDataGrid()
   const isPinned = column.getIsPinned()
@@ -380,13 +382,13 @@ function DataGridTableVirtualUtilityRow<TData extends object>({
         {children}
       </td>
       {props.tableLayout?.columnsResizable && hasRightPinnedColumns ? (
-        <DataGridTableFillBodyCell />
+        <DataGridTableFillBodyCell table={table} />
       ) : null}
       {rightVisibleColumns.map((column) => (
         <DataGridTableVirtualPinnedPlaceholderCell column={column} key={column.id} />
       ))}
       {props.tableLayout?.columnsResizable && !hasRightPinnedColumns ? (
-        <DataGridTableFillBodyCell />
+        <DataGridTableFillBodyCell table={table} />
       ) : null}
     </tr>
   )
@@ -432,22 +434,23 @@ function DataGridTableVirtualStatusRow<TData extends object>({
 }
 
 /**
- * A scroll frame only shifts the window, so every surviving row's inputs are
- * identical and its last render is reused; the per-frame cost is the rows
- * entering the window, not all mounted rows. Cell-level state (selection,
- * focus, row checks) repaints through each cell's own Subscribe, and any real
- * data change rebuilds the row wrappers, so identity comparison is safe.
+ * Props of `DataGridTableRenderedRow`, mirrored as a named generic type: the
+ * component declares them inline in data-grid-table, and the memo factory
+ * inside the body needs a named type so `memo` infers the concrete `TData`.
  */
-const MemoizedRenderedRow = memo(
-  DataGridTableRenderedRow,
-  (prev, next) =>
-    prev.row === next.row &&
-    prev.rowIndex === next.rowIndex &&
-    prev.rowRef === next.rowRef &&
-    prev.pinnedBoundary === next.pinnedBoundary &&
-    prev.centerWindow?.start === next.centerWindow?.start &&
-    prev.centerWindow?.end === next.centerWindow?.end
-) as typeof DataGridTableRenderedRow
+interface DataGridTableRenderedRowProps<TData extends object> {
+  row: Row<DataGridFeatures, TData>
+  pinnedBoundary?: DataGridTablePinnedBoundary
+  rowRef?: Ref<HTMLTableRowElement>
+  /** Virtualized list index, rendered as data-index for measureElement. */
+  rowIndex?: number
+  /**
+   * Column-virtualization window over the CENTER cells: only the inclusive
+   * [start, end] slice renders, and each flank collapses into one colSpan
+   * spacer.
+   */
+  centerWindow?: { start: number; end: number }
+}
 
 function DataGridTableVirtualBody<TData extends object>({
   table,
@@ -466,6 +469,30 @@ function DataGridTableVirtualBody<TData extends object>({
   centerColumnWindow
 }: VirtualBodyProps<TData>) {
   const { isLoading } = useDataGrid()
+  // A scroll frame only shifts the window, so every surviving row's inputs
+  // are identical and its last render is reused; the per-frame cost is the
+  // rows entering the window, not all mounted rows. Cell-level state
+  // (selection, focus, row checks) repaints through each cell's own
+  // Subscribe, and any real data change rebuilds the row wrappers, so
+  // identity comparison is safe. The factory lives inside the component so
+  // `memo` keeps the ambient generic `TData` instead of erasing it to
+  // `object`; identity is stable per component instance via useMemo.
+  const RenderedRowMemo = useMemo(
+    () =>
+      memo(
+        (rowProps: DataGridTableRenderedRowProps<TData>) => (
+          <DataGridTableRenderedRow {...rowProps} table={table} />
+        ),
+        (prev, next) =>
+          prev.row === next.row &&
+          prev.rowIndex === next.rowIndex &&
+          prev.rowRef === next.rowRef &&
+          prev.pinnedBoundary === next.pinnedBoundary &&
+          prev.centerWindow?.start === next.centerWindow?.start &&
+          prev.centerWindow?.end === next.centerWindow?.end
+      ),
+    []
+  )
   const totalRows = topRows.length + centerRows.length + bottomRows.length
 
   if (!totalRows) {
@@ -482,7 +509,7 @@ function DataGridTableVirtualBody<TData extends object>({
       )
     }
 
-    return <DataGridTableEmpty />
+    return <DataGridTableEmpty table={table} />
   }
 
   const hasCenterRows = centerRows.length > 0
@@ -502,7 +529,7 @@ function DataGridTableVirtualBody<TData extends object>({
 
   topRows.forEach((row, index) => {
     renderedRows.push(
-      <MemoizedRenderedRow
+      <RenderedRowMemo
         key={row.id}
         row={row}
         centerWindow={centerColumnWindow}
@@ -528,7 +555,7 @@ function DataGridTableVirtualBody<TData extends object>({
       if (!row) return
 
       renderedRows.push(
-        <MemoizedRenderedRow
+        <RenderedRowMemo
           key={row.id}
           row={row}
           rowRef={measureRowRef}
@@ -550,7 +577,7 @@ function DataGridTableVirtualBody<TData extends object>({
   } else {
     centerRows.forEach((row, rowIndex) => {
       renderedRows.push(
-        <MemoizedRenderedRow
+        <RenderedRowMemo
           key={row.id}
           row={row}
           rowIndex={rowIndex}
@@ -581,7 +608,7 @@ function DataGridTableVirtualBody<TData extends object>({
 
   bottomRows.forEach((row, index) => {
     renderedRows.push(
-      <MemoizedRenderedRow
+      <RenderedRowMemo
         key={row.id}
         row={row}
         centerWindow={centerColumnWindow}
@@ -595,20 +622,8 @@ function DataGridTableVirtualBody<TData extends object>({
   return <>{renderedRows}</>
 }
 
-/**
- * Memoized virtual body: skip re-renders during active column resize.
- * Column widths update via CSS variables on the <table> element,
- * so the browser handles width changes without React re-renders.
- * A cell-selection drag gets the same treatment: painting goes through each
- * cell's own Subscribe, and the virtualizer re-renders itself from inside the
- * memo boundary, so parent-driven reconciliation during the drag is waste.
- */
-const MemoizedVirtualBody = memo(
-  DataGridTableVirtualBody,
-  (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
-) as typeof DataGridTableVirtualBody
-
 function DataGridTableVirtual<TData extends object>({
+  table,
   height,
   estimateSize = 48,
   overscan = 10,
@@ -626,7 +641,24 @@ function DataGridTableVirtual<TData extends object>({
   fetchMoreOffset = 0,
   virtualizerOptions
 }: DataGridTableVirtualProps<TData>) {
-  const { i18n, table, props } = useDataGrid<TData>()
+  const { i18n, props } = useDataGrid<TData>()
+  // Memoized virtual body: skips re-renders during an active column resize.
+  // Column widths update via CSS variables on the <table> element, so the
+  // browser handles width changes without React re-renders. A cell-selection
+  // drag gets the same treatment: painting goes through each cell's own
+  // Subscribe, and the virtualizer re-renders itself from inside the memo
+  // boundary, so parent-driven reconciliation during the drag is waste. The
+  // factory lives inside the component so `memo` keeps the ambient generic
+  // `TData` instead of erasing it to `object`; identity is stable per
+  // component instance via useMemo.
+  const MemoizedVirtualBody = useMemo(
+    () =>
+      memo(
+        (bodyProps: VirtualBodyProps<TData>) => <DataGridTableVirtualBody {...bodyProps} />,
+        (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
+      ),
+    []
+  )
   const mergedHeaderGroups = getDataGridTableMergedHeaderGroups(table)
   const hasRightPinnedColumns = hasDataGridTableRightPinnedColumns(table)
   const centerVisibleColumns = table.getCenterVisibleLeafColumns()
@@ -995,12 +1027,12 @@ function DataGridTableVirtual<TData extends object>({
               ? headerGroup.headers
                   .filter((header) => header.column.getIsPinned() === 'start')
                   .map((header) => (
-                    <DataGridTableHeadRowCell header={header} key={header.id}>
+                    <DataGridTableHeadRowCell header={header} table={table} key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}
                       {props.tableLayout?.columnsResizable && header.column.getCanResize() && (
-                        <DataGridTableHeadRowCellResize header={header} />
+                        <DataGridTableHeadRowCellResize header={header} table={table} />
                       )}
                     </DataGridTableHeadRowCell>
                   ))
@@ -1018,12 +1050,12 @@ function DataGridTableVirtual<TData extends object>({
                   .filter((header) => !header.column.getIsPinned())
                   .slice(activeWindow.start, activeWindow.end + 1)
                   .map((header) => (
-                    <DataGridTableHeadRowCell header={header} key={header.id}>
+                    <DataGridTableHeadRowCell header={header} table={table} key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}
                       {props.tableLayout?.columnsResizable && header.column.getCanResize() && (
-                        <DataGridTableHeadRowCellResize header={header} />
+                        <DataGridTableHeadRowCellResize header={header} table={table} />
                       )}
                     </DataGridTableHeadRowCell>
                   ))
@@ -1043,18 +1075,18 @@ function DataGridTableVirtual<TData extends object>({
                   const { column } = header
 
                   return (
-                    <DataGridTableHeadRowCell header={header} key={header.id}>
+                    <DataGridTableHeadRowCell header={header} table={table} key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}
                       {props.tableLayout?.columnsResizable && column.getCanResize() && (
-                        <DataGridTableHeadRowCellResize header={header} />
+                        <DataGridTableHeadRowCellResize header={header} table={table} />
                       )}
                     </DataGridTableHeadRowCell>
                   )
                 })}
             {props.tableLayout?.columnsResizable && hasRightPinnedColumns ? (
-              <DataGridTableFillHeadCell />
+              <DataGridTableFillHeadCell table={table} />
             ) : null}
             {headerGroup.headers
               .filter((header) => header.column.getIsPinned() === 'end')
@@ -1062,18 +1094,18 @@ function DataGridTableVirtual<TData extends object>({
                 const { column } = header
 
                 return (
-                  <DataGridTableHeadRowCell header={header} key={header.id}>
+                  <DataGridTableHeadRowCell header={header} table={table} key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(header.column.columnDef.header, header.getContext())}
                     {props.tableLayout?.columnsResizable && column.getCanResize() && (
-                      <DataGridTableHeadRowCellResize header={header} />
+                      <DataGridTableHeadRowCellResize header={header} table={table} />
                     )}
                   </DataGridTableHeadRowCell>
                 )
               })}
             {props.tableLayout?.columnsResizable && !hasRightPinnedColumns ? (
-              <DataGridTableFillHeadCell />
+              <DataGridTableFillHeadCell table={table} />
             ) : null}
           </DataGridTableHeadRow>
         ))}
@@ -1091,6 +1123,7 @@ function DataGridTableVirtual<TData extends object>({
 
   return (
     <DataGridTableViewport
+      table={table}
       viewportRef={handleViewportRef}
       style={
         usesExternalScrollArea
@@ -1106,7 +1139,7 @@ function DataGridTableVirtual<TData extends object>({
             }
       }
     >
-      <DataGridTableBase>
+      <DataGridTableBase table={table}>
         {headerNode}
 
         {renderHeader && (props.tableLayout?.stripped || !props.tableLayout?.rowBorder) && (
@@ -1133,7 +1166,7 @@ function DataGridTableVirtual<TData extends object>({
           {/* Same appended region as the standard body, so onRowCreate and
               a consumer draft work in the virtual layout too. */}
           {props.appendRow}
-          <DataGridTableAddRow />
+          <DataGridTableAddRow table={table} />
         </DataGridTableBody>
 
         {footerContent && <DataGridTableFoot>{footerContent}</DataGridTableFoot>}

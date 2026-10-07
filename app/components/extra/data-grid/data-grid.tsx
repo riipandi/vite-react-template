@@ -36,9 +36,7 @@ import type {
   ColumnFiltersState,
   ReactTable,
   RowData,
-  SortingState,
-  Table,
-  TableFeatures
+  SortingState
 } from '@tanstack/react-table'
 import { createContext, useContext, useEffect, useId, useMemo, useRef } from 'react'
 import type { ReactNode } from 'react'
@@ -209,11 +207,11 @@ export type DataGridTableInstance<TData extends object> = ReactTable<DataGridFea
 export function getColumnHeaderLabel<TData extends RowData, TValue>(
   column: Column<DataGridFeatures, TData, TValue>
 ): string {
-  const meta = column.columnDef.meta as { headerTitle?: string } | undefined
+  const meta = column.columnDef.meta
   if (typeof meta?.headerTitle === 'string') return meta.headerTitle
   const defHeader = column.columnDef.header
   if (typeof defHeader === 'string') return defHeader
-  return String(column.id)
+  return column.id
 }
 
 /**
@@ -223,7 +221,7 @@ export function getColumnHeaderLabel<TData extends RowData, TValue>(
  * trap the row-selection checkbox documents.
  */
 export function getDataGridCellSelectionCellAttrs<TData extends object>(
-  cell: Cell<DataGridFeatures, TData, unknown>
+  cell: Cell<DataGridFeatures, TData>
 ): {
   'aria-selected': boolean
   'data-col-id': string
@@ -271,13 +269,29 @@ export interface DataGridApiResponse<T> {
  * TanStack features the consumer registered.
  */
 export type DataGridLayoutProps<TData extends object> = Omit<
-  DataGridProps<TableFeatures, TData>,
+  DataGridProps<TData>,
   'table' | 'children'
 >
 
+/**
+ * The layout contract as the context carries it: identical to
+ * `DataGridLayoutProps` except the TData-typed callbacks are methods.
+ * Method declarations check bivariantly, so the provider's concrete layout
+ * props assign into the erased `never` context and the erased value assigns
+ * into a consumer's `TData` claim — both without assertions.
+ */
+export interface DataGridContextLayoutProps<
+  TData extends object
+> extends DataGridLayoutProps<TData> {
+  onRowClick?(row: TData): void
+  onCellsChange?(details: DataGridCellsChangeDetails<TData>): void
+  onCellEditRequest?(request: DataGridCellEditRequest<TData>): void
+  getRowStatus?(row: TData): DataGridRowStatus | undefined
+  getCellStatus?(row: TData, columnId: string): DataGridCellStatus | undefined
+}
+
 export interface DataGridContextProps<TData extends object> {
-  props: DataGridLayoutProps<TData>
-  table: DataGridTableInstance<TData>
+  props: DataGridContextLayoutProps<TData>
   recordCount: number
   isLoading: boolean
   /** Stable per-grid prefix for the DOM ids ARIA relations point at. */
@@ -618,9 +632,9 @@ export interface DataGridTableStyleSlots {
   cellFillHandle?: StyleXStyles
 }
 
-export interface DataGridProps<TFeatures extends TableFeatures, TData extends object> {
+export interface DataGridProps<TData extends object> {
   style?: StyleXStyles
-  table?: Table<TFeatures, TData>
+  table?: DataGridTableInstance<TData>
   recordCount: number
   children?: ReactNode
   onRowClick?: (row: TData) => void
@@ -749,7 +763,10 @@ function useDataGrid<
   // only readable through an explicit generic) without falling back to `any`.
   TData extends object = Record<string, unknown>
 >(): DataGridContextProps<TData> {
-  const context = useContext(DataGridContext) as DataGridContextProps<TData> | undefined
+  // The provider publishes a `never`-erased value — one React context serves
+  // every TData. The method-syntax callbacks on the layout props make the
+  // erased value assignable to any claim, so this stays an annotation.
+  const context: DataGridContextProps<TData> | undefined = useContext(DataGridContext)
   if (!context) {
     throw new Error('useDataGrid must be used within a DataGridProvider')
   }
@@ -877,11 +894,8 @@ function DataGridProvider<TData extends object>({
       tableState.globalFilter
     )
     return {
-      get props() {
+      get props(): DataGridContextLayoutProps<TData> {
         return propsRef.current
-      },
-      get table() {
-        return tableRef.current
       },
       get i18n() {
         return i18nRef.current
@@ -913,23 +927,15 @@ function DataGridProvider<TData extends object>({
   ])
 
   return (
-    // One React context serves every TData, but v9 declares both TFeatures and
-    // TData invariant, so a `DataGridContextProps<TData>` context cannot accept a
-    // `DataGridContextProps<TData>` value from a differently-typed provider
-    // instance. The erasure happens here and is undone by the TData generic on
-    // each consumer component.
-    <DataGridContext.Provider value={value as unknown as DataGridContextProps<never>}>
-      {children}
-    </DataGridContext.Provider>
+    // One React context serves every TData: the method-syntax callbacks on
+    // the layout props make the concrete value assignable to the erased
+    // `never` context and back to each consumer's claim.
+    <DataGridContext.Provider value={value}>{children}</DataGridContext.Provider>
   )
 }
 
-function DataGrid<TFeatures extends TableFeatures, TData extends object>({
-  children,
-  table,
-  ...props
-}: DataGridProps<TFeatures, TData>) {
-  const defaultProps: Partial<DataGridProps<TFeatures, TData>> = {
+function DataGrid<TData extends object>({ children, table, ...props }: DataGridProps<TData>) {
+  const defaultProps: Partial<DataGridProps<TData>> = {
     loadingMode: 'skeleton',
     tableLayout: {
       dense: false,
@@ -957,7 +963,7 @@ function DataGrid<TFeatures extends TableFeatures, TData extends object>({
     tableStyles: {}
   }
 
-  const mergedProps: DataGridProps<TFeatures, TData> = {
+  const mergedProps: DataGridProps<TData> = {
     ...defaultProps,
     ...props,
     tableLayout: {
@@ -975,15 +981,8 @@ function DataGrid<TFeatures extends TableFeatures, TData extends object>({
     throw new Error('DataGrid requires a "table" prop')
   }
 
-  // The single widening point. Consumers own the TanStack core and may hand
-  // over any feature bundle; internals need a concrete one to resolve the
-  // feature-gated APIs they call, and v9's invariant TFeatures rules out
-  // expressing that with a generic constraint.
-  const internalTable = table as unknown as DataGridTableInstance<TData>
-  const internalProps = mergedProps as unknown as DataGridLayoutProps<TData>
-
   return (
-    <DataGridProvider table={internalTable} {...internalProps}>
+    <DataGridProvider {...mergedProps} table={table}>
       {children}
     </DataGridProvider>
   )

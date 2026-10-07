@@ -62,13 +62,23 @@ import {
   useSyncExternalStore
 } from 'react'
 import { createPortal } from 'react-dom'
-import { sortableStyles as s } from './sortable.stylex'
+import { overlayWidthStyle, sortableStyles as s } from './sortable.stylex'
 
 interface StyleProp {
   style?: stylex.StyleXStyles
 }
 
 type DivRenderProps = Omit<useRender.ComponentProps<'div'>, 'className' | 'style'> & StyleProp
+
+/** Props a sortable child exposes for overlay cloning (`value` + optional `style`). */
+interface SortableChildProps {
+  value?: string
+  style?: stylex.StyleXStyles
+}
+
+function isSortableChild(node: ReactNode): node is ReactElement<SortableChildProps> {
+  return isValidElement(node)
+}
 
 // ---------------------------------------------------------------------------
 // Contexts
@@ -265,16 +275,15 @@ function Sortable<T>({
 
     let result: ReactNode = null
     Children.forEach(children, (child) => {
-      if (isValidElement(child) && (child.props as { value?: string }).value === activeId) {
-        const childStyle = (child.props as { style?: stylex.StyleXStyles }).style
-        result = cloneElement(child as ReactElement<{ style?: stylex.StyleXStyles }>, {
+      if (isSortableChild(child) && child.props.value === activeId) {
+        result = cloneElement(child, {
           // Match the dragged item's measured width so the overlay doesn't
           // collapse or grow differently than its grid slot.
           style: [
             s.overlayContent,
-            activeWidth != null ? { width: activeWidth } : { width: 'fit-content' },
-            childStyle
-          ] as stylex.StyleXStyles
+            activeWidth != null ? overlayWidthStyle.width(activeWidth) : s.overlayContentAuto,
+            child.props.style
+          ]
         })
       }
     })
@@ -361,14 +370,14 @@ function SortableItem({ value, style, render, disabled, ...props }: SortableItem
   React.useLayoutEffect(() => {
     if (!isSortableDragging) {
       setActiveWidth(undefined)
-      return
+      return undefined
     }
 
-    const el = document.querySelector(
+    const el = document.querySelector<HTMLElement>(
       `[data-slot="sortable-item"][data-value="${value}"][data-dragging="true"]`
-    ) as HTMLElement | null
+    )
 
-    if (!el) return
+    if (!el) return undefined
 
     setActiveWidth(el.offsetWidth)
 

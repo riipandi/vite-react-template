@@ -42,7 +42,7 @@ import {
   useRef,
   useState
 } from 'react'
-import type { CSSProperties, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { Button } from '#/components/base/button'
 import { useDataGrid } from './data-grid'
@@ -112,16 +112,20 @@ type DataGridTableDndRowDecoration<TData extends object> = (context: {
 }) => ReactNode
 
 function DataGridTableDndHeader<TData extends object>({
-  header
+  header,
+  table
 }: {
-  header: Header<DataGridFeatures, TData, unknown>
+  header: Header<DataGridFeatures, TData>
+  table: DataGridTableInstance<TData>
 }) {
   const { i18n, props } = useDataGrid()
   const { column } = header
 
   // Check if column ordering is enabled for this column
   const canOrder =
-    (column.columnDef as { enableColumnOrdering?: boolean }).enableColumnOrdering !== false
+    'enableColumnOrdering' in column.columnDef
+      ? column.columnDef.enableColumnOrdering !== false
+      : true
 
   const { attributes, isDragging, listeners, setNodeRef, transform, transition } = useSortable({
     id: header.column.id
@@ -130,6 +134,7 @@ function DataGridTableDndHeader<TData extends object>({
   return (
     <DataGridTableHeadRowCell
       header={header}
+      table={table}
       dndStyle={dndCellDragStyle(isDragging, CSS.Translate.toString(transform), transition)}
       dndRef={setNodeRef}
     >
@@ -152,7 +157,7 @@ function DataGridTableDndHeader<TData extends object>({
             : flexRender(header.column.columnDef.header, header.getContext())}
         </div>
         {props.tableLayout?.columnsResizable && column.getCanResize() && (
-          <DataGridTableHeadRowCellResize header={header} />
+          <DataGridTableHeadRowCellResize header={header} table={table} />
         )}
       </div>
     </DataGridTableHeadRowCell>
@@ -160,9 +165,11 @@ function DataGridTableDndHeader<TData extends object>({
 }
 
 function DataGridTableDndCell<TData extends object>({
-  cell
+  cell,
+  table
 }: {
-  cell: Cell<DataGridFeatures, TData, unknown>
+  cell: Cell<DataGridFeatures, TData>
+  table: DataGridTableInstance<TData>
 }) {
   const { isDragging, setNodeRef, transform, transition } = useSortable({
     id: cell.column.id
@@ -171,6 +178,7 @@ function DataGridTableDndCell<TData extends object>({
   return (
     <DataGridTableBodyRowCell
       cell={cell}
+      table={table}
       dndStyle={dndCellDragStyle(isDragging, CSS.Translate.toString(transform), transition)}
       dndRef={setNodeRef}
     >
@@ -179,11 +187,13 @@ function DataGridTableDndCell<TData extends object>({
   )
 }
 
+interface DataGridTableDndBodyRowsProps<TData extends object> {
+  table: DataGridTableInstance<TData>
+}
+
 function DataGridTableDndBodyRows<TData extends object>({
   table
-}: {
-  table: DataGridTableInstance<TData>
-}) {
+}: DataGridTableDndBodyRowsProps<TData>) {
   const fragmentRef = useRef(null)
   const { isLoading, props } = useDataGrid()
   const pagination = table.state.pagination
@@ -197,34 +207,34 @@ function DataGridTableDndBodyRows<TData extends object>({
         ).map((rowKey, rowIndex) => (
           <DataGridTableBodyRowSkeleton key={rowKey} stripe={rowIndex % 2 === 0} wantsBorder>
             {table.getVisibleFlatColumns().map((column) => (
-              <DataGridTableBodyRowSkeletonCell column={column} key={column.id}>
+              <DataGridTableBodyRowSkeletonCell column={column} table={table} key={column.id}>
                 {column.columnDef.meta?.skeleton}
               </DataGridTableBodyRowSkeletonCell>
             ))}
-            <DataGridTableFillBodyCell />
+            <DataGridTableFillBodyCell table={table} />
           </DataGridTableBodyRowSkeleton>
         ))}
       </>
     )
   }
 
-  if (!table.getRowModel().rows.length) return <DataGridTableEmpty />
+  if (!table.getRowModel().rows.length) return <DataGridTableEmpty table={table} />
 
   return (
     <>
-      {table.getRowModel().rows.map((row: Row<DataGridFeatures, TData>, rowIndex) => {
+      {table.getRowModel().rows.map((row, rowIndex) => {
         return (
           <Fragment key={row.id} ref={fragmentRef}>
-            <DataGridTableBodyRow row={row} stripe={rowIndex % 2 === 0}>
+            <DataGridTableBodyRow row={row} table={table} stripe={rowIndex % 2 === 0}>
               <SortableContext
                 items={table.state.columnOrder}
                 strategy={horizontalListSortingStrategy}
               >
-                {row.getVisibleCells().map((cell: Cell<DataGridFeatures, TData, unknown>) => (
-                  <DataGridTableDndCell cell={cell} key={cell.id} />
+                {row.getVisibleCells().map((cell) => (
+                  <DataGridTableDndCell cell={cell} table={table} key={cell.id} />
                 ))}
               </SortableContext>
-              <DataGridTableFillBodyCell />
+              <DataGridTableFillBodyCell table={table} />
             </DataGridTableBodyRow>
             {row.getIsExpanded() && <DataGridTableBodyRowExpandded row={row} />}
           </Fragment>
@@ -234,24 +244,18 @@ function DataGridTableDndBodyRows<TData extends object>({
   )
 }
 
-/**
- * Memoized body rows: skip re-renders during active column resize.
- * Column widths update via CSS variables on the <table> element,
- * so the browser handles width changes without React re-renders.
- */
-const MemoizedDataGridTableDndBodyRows = memo(
-  DataGridTableDndBodyRows,
-  (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
-) as typeof DataGridTableDndBodyRows
+interface DataGridTableDndProps<TData extends object> {
+  handleDragEnd: (event: DragEndEvent) => void
+  footerContent?: ReactNode
+  table: DataGridTableInstance<TData>
+}
 
 function DataGridTableDnd<TData extends object>({
   handleDragEnd,
-  footerContent
-}: {
-  handleDragEnd: (event: DragEndEvent) => void
-  footerContent?: ReactNode
-}) {
-  const { table, props } = useDataGrid<TData>()
+  footerContent,
+  table
+}: DataGridTableDndProps<TData>) {
+  const { props } = useDataGrid()
   const containerRef = useRef<HTMLDivElement>(null)
   const [isDraggingColumn, setIsDraggingColumn] = useState(false)
 
@@ -266,7 +270,7 @@ function DataGridTableDnd<TData extends object>({
   )
 
   useEffect(() => {
-    if (!isDraggingColumn) return
+    if (!isDraggingColumn) return undefined
 
     const { body, documentElement } = document
     const previousBodyCursor = body.style.cursor
@@ -304,6 +308,24 @@ function DataGridTableDnd<TData extends object>({
     return [restrictToTableBounds]
   }, [])
 
+  // Memoized body rows: skip re-renders during active column resize. Column
+  // widths update via CSS variables on the <table> element, so the browser
+  // handles width changes without React re-renders. The memoized element type
+  // is built here, inside the component's generic scope: the arrow is
+  // non-generic and closes over the ambient `TData`, so `memo` infers the
+  // fully typed props without an assertion. Its identity is stable for the
+  // component instance's lifetime because the factory runs once via `useMemo`.
+  const BodyRowsMemo = useMemo(
+    () =>
+      memo(
+        (bodyRowsProps: DataGridTableDndBodyRowsProps<TData>) => (
+          <DataGridTableDndBodyRows {...bodyRowsProps} />
+        ),
+        (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
+      ),
+    []
+  )
+
   return (
     <DndContext
       collisionDetection={closestCenter}
@@ -318,12 +340,13 @@ function DataGridTableDnd<TData extends object>({
       sensors={sensors}
     >
       <DataGridTableViewport
+        table={table}
         viewportRef={containerRef}
         style={isDraggingColumn ? { cursor: 'grabbing' } : undefined}
       >
-        <DataGridTableBase>
+        <DataGridTableBase table={table}>
           <DataGridTableHead>
-            {table.getHeaderGroups().map((headerGroup: HeaderGroup<DataGridFeatures, TData>) => {
+            {table.getHeaderGroups().map((headerGroup) => {
               return (
                 <DataGridTableHeadRow key={headerGroup.id} rowId={headerGroup.id}>
                   <SortableContext
@@ -331,10 +354,10 @@ function DataGridTableDnd<TData extends object>({
                     strategy={horizontalListSortingStrategy}
                   >
                     {headerGroup.headers.map((header) => (
-                      <DataGridTableDndHeader header={header} key={header.id} />
+                      <DataGridTableDndHeader header={header} table={table} key={header.id} />
                     ))}
                   </SortableContext>
-                  <DataGridTableFillHeadCell />
+                  <DataGridTableFillHeadCell table={table} />
                 </DataGridTableHeadRow>
               )
             })}
@@ -345,7 +368,7 @@ function DataGridTableDnd<TData extends object>({
           )}
 
           <DataGridTableBody>
-            <MemoizedDataGridTableDndBodyRows table={table} />
+            <BodyRowsMemo table={table} />
           </DataGridTableBody>
 
           {footerContent && <DataGridTableFoot>{footerContent}</DataGridTableFoot>}
@@ -357,10 +380,6 @@ function DataGridTableDnd<TData extends object>({
 
 export { DataGridTableDnd }
 export type { DataGridTableDndProps }
-interface DataGridTableDndProps {
-  handleDragEnd: (event: DragEndEvent) => void
-  footerContent?: ReactNode
-}
 
 function DataGridTableDndRowHandle({
   style,
@@ -429,11 +448,13 @@ const holdRowsInPlaceStrategy: SortingStrategy = () => null
 
 function DataGridTableDndRow<TData extends object>({
   row,
+  table,
   stripe,
   renderRowDecoration,
   dropIndicator = true
 }: {
   row: Row<DataGridFeatures, TData>
+  table: DataGridTableInstance<TData>
   /** Striping parity under `tableLayout.stripped` (see DataGridTableBodyRow). */
   stripe?: boolean
   renderRowDecoration?: DataGridTableDndRowDecoration<TData>
@@ -481,13 +502,14 @@ function DataGridTableDndRow<TData extends object>({
     <SortableRowContext.Provider value={{ attributes, listeners }}>
       <DataGridTableBodyRow
         row={row}
+        table={table}
         stripe={stripe}
         dndRef={setNodeRef}
         dndStyle={dndRowDragStyle(isDragging, CSS.Transform.toString(transform))}
       >
-        {row.getVisibleCells().map((cell: Cell<DataGridFeatures, TData, unknown>, index, cells) => {
+        {row.getVisibleCells().map((cell, index, cells) => {
           return (
-            <DataGridTableBodyRowCell cell={cell} key={cell.id}>
+            <DataGridTableBodyRowCell cell={cell} table={table} key={cell.id}>
               {flexRender(cell.column.columnDef.cell, cell.getContext())}
               {decoration && index === cells.length - 1 ? (
                 // Rides inside the last cell rather than in a `td` of its own.
@@ -538,11 +560,19 @@ function DataGridTableDndRow<TData extends object>({
             </DataGridTableBodyRowCell>
           )
         })}
-        <DataGridTableFillBodyCell />
+        <DataGridTableFillBodyCell table={table} />
       </DataGridTableBodyRow>
       {row.getIsExpanded() && <DataGridTableBodyRowExpandded row={row} />}
     </SortableRowContext.Provider>
   )
+}
+
+interface DataGridTableDndRowsBodyProps<TData extends object> {
+  table: DataGridTableInstance<TData>
+  dataIds: UniqueIdentifier[]
+  renderRowDecoration?: DataGridTableDndRowDecoration<TData>
+  dropIndicator?: boolean
+  sortingStrategy: SortingStrategy
 }
 
 function DataGridTableDndRowsBody<TData extends object>({
@@ -551,13 +581,7 @@ function DataGridTableDndRowsBody<TData extends object>({
   renderRowDecoration,
   dropIndicator,
   sortingStrategy
-}: {
-  table: DataGridTableInstance<TData>
-  dataIds: UniqueIdentifier[]
-  renderRowDecoration?: DataGridTableDndRowDecoration<TData>
-  dropIndicator?: boolean
-  sortingStrategy: SortingStrategy
-}) {
+}: DataGridTableDndRowsBodyProps<TData>) {
   const { isLoading, props } = useDataGrid()
   const pagination = table.state.pagination
 
@@ -570,25 +594,26 @@ function DataGridTableDndRowsBody<TData extends object>({
         ).map((rowKey, rowIndex) => (
           <DataGridTableBodyRowSkeleton key={rowKey} stripe={rowIndex % 2 === 0} wantsBorder>
             {table.getVisibleFlatColumns().map((column) => (
-              <DataGridTableBodyRowSkeletonCell column={column} key={column.id}>
+              <DataGridTableBodyRowSkeletonCell column={column} table={table} key={column.id}>
                 {column.columnDef.meta?.skeleton}
               </DataGridTableBodyRowSkeletonCell>
             ))}
-            <DataGridTableFillBodyCell />
+            <DataGridTableFillBodyCell table={table} />
           </DataGridTableBodyRowSkeleton>
         ))}
       </>
     )
   }
 
-  if (!table.getRowModel().rows.length) return <DataGridTableEmpty />
+  if (!table.getRowModel().rows.length) return <DataGridTableEmpty table={table} />
 
   return (
     <SortableContext items={dataIds} strategy={sortingStrategy}>
-      {table.getRowModel().rows.map((row: Row<DataGridFeatures, TData>, rowIndex) => {
+      {table.getRowModel().rows.map((row, rowIndex) => {
         return (
           <DataGridTableDndRow
             row={row}
+            table={table}
             stripe={rowIndex % 2 === 0}
             renderRowDecoration={renderRowDecoration}
             dropIndicator={dropIndicator}
@@ -600,18 +625,9 @@ function DataGridTableDndRowsBody<TData extends object>({
   )
 }
 
-/**
- * Memoized body rows: skip re-renders during active column resize.
- * Column widths update via CSS variables on the <table> element,
- * so the browser handles width changes without React re-renders.
- */
-const MemoizedDataGridTableDndRowsBody = memo(
-  DataGridTableDndRowsBody,
-  (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
-) as typeof DataGridTableDndRowsBody
-
 function DataGridTableDndRows<TData extends object>({
   handleDragEnd,
+  table,
   dataIds,
   footerContent,
   collisionDetection = closestCenter,
@@ -625,6 +641,7 @@ function DataGridTableDndRows<TData extends object>({
   onDragCancel
 }: {
   handleDragEnd: (event: DragEndEvent) => void
+  table: DataGridTableInstance<TData>
   dataIds: UniqueIdentifier[]
   footerContent?: ReactNode
   /** Overrides the default `closestCenter` strategy. */
@@ -659,7 +676,7 @@ function DataGridTableDndRows<TData extends object>({
   onDragOver?: (event: DragOverEvent) => void
   onDragCancel?: (event: DragCancelEvent) => void
 }) {
-  const { table, props } = useDataGrid<TData>()
+  const { props } = useDataGrid<TData>()
   const tableContainerRef = useRef<HTMLDivElement>(null)
   const [isDraggingRow, setIsDraggingRow] = useState(false)
   // The overlay is portalled to the document body. dnd-kit renders DragOverlay
@@ -737,7 +754,7 @@ function DataGridTableDndRows<TData extends object>({
   )
 
   useEffect(() => {
-    if (!isDraggingRow) return
+    if (!isDraggingRow) return undefined
 
     const { body, documentElement } = document
     const previousBodyCursor = body.style.cursor
@@ -785,6 +802,24 @@ function DataGridTableDndRows<TData extends object>({
     return [...(modifiers ?? [restrictToVerticalAxis]), restrictToTableContainer]
   }, [modifiers])
 
+  // Memoized body rows: skip re-renders during active column resize. Column
+  // widths update via CSS variables on the <table> element, so the browser
+  // handles width changes without React re-renders. The memoized element type
+  // is built here, inside the component's generic scope: the arrow is
+  // non-generic and closes over the ambient `TData`, so `memo` infers the
+  // fully typed props without an assertion. Its identity is stable for the
+  // component instance's lifetime because the factory runs once via `useMemo`.
+  const RowsBodyMemo = useMemo(
+    () =>
+      memo(
+        (rowsBodyProps: DataGridTableDndRowsBodyProps<TData>) => (
+          <DataGridTableDndRowsBody {...rowsBodyProps} />
+        ),
+        (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
+      ),
+    []
+  )
+
   return (
     <DndContext
       id={useId()}
@@ -810,10 +845,11 @@ function DataGridTableDndRows<TData extends object>({
       sensors={sensors}
     >
       <DataGridTableViewport
+        table={table}
         viewportRef={tableContainerRef}
         style={isDraggingRow ? { cursor: 'grabbing' } : undefined}
       >
-        <DataGridTableBase>
+        <DataGridTableBase table={table}>
           <DataGridTableHead>
             {table.getHeaderGroups().map((headerGroup: HeaderGroup<DataGridFeatures, TData>) => {
               return (
@@ -822,17 +858,17 @@ function DataGridTableDndRows<TData extends object>({
                     const { column } = header
 
                     return (
-                      <DataGridTableHeadRowCell header={header} key={header.id}>
+                      <DataGridTableHeadRowCell header={header} table={table} key={header.id}>
                         {header.isPlaceholder
                           ? null
                           : flexRender(header.column.columnDef.header, header.getContext())}
                         {props.tableLayout?.columnsResizable && column.getCanResize() && (
-                          <DataGridTableHeadRowCellResize header={header} />
+                          <DataGridTableHeadRowCellResize header={header} table={table} />
                         )}
                       </DataGridTableHeadRowCell>
                     )
                   })}
-                  <DataGridTableFillHeadCell />
+                  <DataGridTableFillHeadCell table={table} />
                 </DataGridTableHeadRow>
               )
             })}
@@ -843,7 +879,7 @@ function DataGridTableDndRows<TData extends object>({
           )}
 
           <DataGridTableBody>
-            <MemoizedDataGridTableDndRowsBody
+            <RowsBodyMemo
               table={table}
               dataIds={dataIds}
               renderRowDecoration={renderRowDecoration}
@@ -872,12 +908,10 @@ function DataGridTableDndRows<TData extends object>({
               {carried && carriedRow ? (
                 <table
                   aria-hidden='true'
-                  style={
-                    {
-                      width: carried.width,
-                      tableLayout: 'fixed'
-                    } as CSSProperties
-                  }
+                  style={{
+                    width: carried.width,
+                    tableLayout: 'fixed'
+                  }}
                   {...stylex.props(rowStyles.overlayTable)}
                 >
                   <tbody>
@@ -891,23 +925,21 @@ function DataGridTableDndRows<TData extends object>({
                       style={{ height: carried.height || undefined }}
                       {...stylex.props(rowStyles.overlayCell)}
                     >
-                      {carriedRow
-                        .getVisibleCells()
-                        .map((cell: Cell<DataGridFeatures, TData, unknown>, index: number) => (
-                          <td
-                            key={cell.id}
-                            // Falls back to the column's own size so an unforeseen
-                            // header/cell count mismatch degrades to a real width
-                            // rather than to `auto`.
-                            style={{
-                              width: carried.columns[index] ?? cell.column.getSize()
-                            }}
-                          >
-                            <div {...stylex.props(rowStyles.overlayCellInner)}>
-                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                            </div>
-                          </td>
-                        ))}
+                      {carriedRow.getVisibleCells().map((cell, index: number) => (
+                        <td
+                          key={cell.id}
+                          // Falls back to the column's own size so an unforeseen
+                          // header/cell count mismatch degrades to a real width
+                          // rather than to `auto`.
+                          style={{
+                            width: carried.columns[index] ?? cell.column.getSize()
+                          }}
+                        >
+                          <div {...stylex.props(rowStyles.overlayCellInner)}>
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          </div>
+                        </td>
+                      ))}
                     </tr>
                   </tbody>
                 </table>

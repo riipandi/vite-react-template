@@ -71,7 +71,7 @@ const statesStyles = stylex.create({
   },
   cardBody: { padding: 0 },
   muted: {
-    color: s.muted.color as unknown as string
+    color: s.muted.color
   },
   numeric: { fontVariantNumeric: 'tabular-nums' },
   flag: {
@@ -186,7 +186,9 @@ export const CardContainer: Story = {
         {
           accessorKey: 'title',
           id: 'title',
-          header: ({ column }) => <DataGridColumnHeader title='Title' visibility column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeader table={table} title='Title' visibility column={column} />
+          ),
           cell: avatarCell32,
           minSize: 200,
           // Absorbs the free card width so the table follows the card.
@@ -199,7 +201,7 @@ export const CardContainer: Story = {
           accessorKey: 'country',
           id: 'country',
           header: ({ column }) => (
-            <DataGridColumnHeader title='Country' visibility column={column} />
+            <DataGridColumnHeader table={table} title='Country' visibility column={column} />
           ),
           cell: ({ row }) => (
             <div {...stylex.props(s.cellFlex)}>
@@ -220,7 +222,7 @@ export const CardContainer: Story = {
           accessorKey: 'status',
           id: 'status',
           header: ({ column }) => (
-            <DataGridColumnHeader title='Status' visibility column={column} />
+            <DataGridColumnHeader table={table} title='Status' visibility column={column} />
           ),
           cell: ({ row }) =>
             row.original.status === 'inPrint' ? (
@@ -260,8 +262,8 @@ export const CardContainer: Story = {
           </CardHeader>
           <CardContent style={statesStyles.cardBody}>
             <DataGridContainer>
-              <DataGridScrollArea>
-                <DataGridTable />
+              <DataGridScrollArea table={table}>
+                <DataGridTable table={table} />
               </DataGridScrollArea>
             </DataGridContainer>
           </CardContent>
@@ -329,11 +331,11 @@ export const LoadingSkeleton: Story = {
             {isLoading ? 'Disable loading' : 'Enable loading'}
           </Button>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTable />
+            <DataGridScrollArea table={table}>
+              <DataGridTable table={table} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -447,7 +449,7 @@ const localizedOrders: IOrderRow[] = demoData.slice(0, 6).map((row, index) => ({
   reference: `ORD-${2041 + index}`,
   item: row.title,
   city: row.country,
-  status: (index % 2 === 0 ? 'shipped' : 'processing') as 'shipped' | 'processing',
+  status: index % 2 === 0 ? 'shipped' : 'processing',
   total: 120.5 + index * 84.25
 }))
 
@@ -490,8 +492,8 @@ export const LocalizedLabels: Story = {
           cell: (info) => (
             <span {...stylex.props(statesStyles.numeric)}>
               {config.currency === 'IDR'
-                ? `Rp ${(info.getValue() as number).toLocaleString('id-ID')}`
-                : `${config.currency} ${(info.getValue() as number).toFixed(2)}`}
+                ? `Rp ${Number(info.getValue()).toLocaleString('id-ID')}`
+                : `${config.currency} ${Number(info.getValue()).toFixed(2)}`}
             </span>
           ),
           size: 140
@@ -505,7 +507,7 @@ export const LocalizedLabels: Story = {
       data: localizedOrders,
       getRowId: (row) => row.id,
       state: { pagination: { pageIndex: 0, pageSize: 6 } }
-    }) as never as ReturnType<typeof useTable>
+    })
 
     return (
       <DataGrid table={table} recordCount={localizedOrders.length} i18n={config.i18n}>
@@ -523,11 +525,11 @@ export const LocalizedLabels: Story = {
             ))}
           </div>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTable />
+            <DataGridScrollArea table={table}>
+              <DataGridTable table={table} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -539,6 +541,9 @@ export const LocalizedLabels: Story = {
 /* ------------------------------------------------------------------ */
 
 const serverRecords: IBook[] = demoData
+
+// SortingState erases the column key, so verify it names a book field.
+const isBookKey = (id: string): id is keyof IBook => id in serverRecords[0]!
 const STATUS_FILTERS: { label: string; value: StatusFilter }[] = [
   { label: 'In print', value: 'inPrint' },
   { label: 'Out of print', value: 'outOfPrint' }
@@ -569,11 +574,12 @@ async function fetchServerPage(params: {
   }
 
   const sort = params.sorting[0]
-  if (sort) {
+  if (sort && isBookKey(sort.id)) {
     const direction = sort.desc ? -1 : 1
+    const sortId: keyof IBook = sort.id
     rows = rows.toSorted((a, b) => {
-      const left = a[sort.id as keyof IBook]
-      const right = b[sort.id as keyof IBook]
+      const left = a[sortId]
+      const right = b[sortId]
       if (typeof left === 'number' && typeof right === 'number') {
         return (left - right) * direction
       }
@@ -628,7 +634,9 @@ export const ServerSidePagination: Story = {
         {
           accessorKey: 'title',
           id: 'title',
-          header: ({ column }) => <DataGridColumnHeader title='Title' column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeader table={table} title='Title' column={column} />
+          ),
           cell: ({ row }) => <AvatarCell32 {...row.original} />,
           size: 230,
           meta: {
@@ -645,13 +653,17 @@ export const ServerSidePagination: Story = {
         },
         {
           accessorKey: 'publisher',
-          header: ({ column }) => <DataGridColumnHeader title='Publisher' column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeader table={table} title='Publisher' column={column} />
+          ),
           size: 140,
           meta: { skeleton: <Skeleton style={skeletonStyles.bar} /> }
         },
         {
           accessorKey: 'status',
-          header: ({ column }) => <DataGridColumnHeader title='Status' column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeader table={table} title='Status' column={column} />
+          ),
           cell: ({ row }) =>
             row.original.status === 'inPrint' ? (
               <Badge variant='secondary'>In print</Badge>
@@ -663,10 +675,12 @@ export const ServerSidePagination: Story = {
         },
         {
           accessorKey: 'price',
-          header: ({ column }) => <DataGridColumnHeader title='Price ($)' column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeader table={table} title='Price ($)' column={column} />
+          ),
           cell: (info) => (
             <span {...stylex.props(statesStyles.numeric)}>
-              ${(info.getValue() as number).toFixed(2)}
+              ${Number(info.getValue()).toFixed(2)}
             </span>
           ),
           size: 130,
@@ -724,13 +738,13 @@ export const ServerSidePagination: Story = {
             </CardHeader>
             <CardContent style={statesStyles.cardBody}>
               <DataGridContainer>
-                <DataGridScrollArea>
-                  <DataGridTable />
+                <DataGridScrollArea table={table}>
+                  <DataGridTable table={table} />
                 </DataGridScrollArea>
               </DataGridContainer>
             </CardContent>
           </Card>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )

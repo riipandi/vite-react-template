@@ -1009,7 +1009,7 @@ export const PersistedToBackend: Story = {
 
     const handleValueCommit = (value: Record<string, BackendTask[]>) => {
       setIsSaving(true)
-      fakePersistToBackend(value).then(() => setIsSaving(false))
+      void fakePersistToBackend(value).then(() => setIsSaving(false))
     }
 
     return (
@@ -1066,7 +1066,7 @@ export const PersistedToBackend: Story = {
                       {columnLabel(String(activeId))}
                     </span>
                     <span {...stylex.props(styles.overlayCount)}>
-                      {columns[activeId as string]?.length ?? 0} tasks
+                      {columns[String(activeId)]?.length ?? 0} tasks
                     </span>
                   </div>
                 )

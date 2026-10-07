@@ -216,13 +216,13 @@ export const CrudFeatures: Story = {
           </CardHeader>
           <CardContent style={editingStyles.cardBody}>
             <DataGridContainer>
-              <DataGridScrollArea>
-                <DataGridTable />
+              <DataGridScrollArea table={table}>
+                <DataGridTable table={table} />
               </DataGridScrollArea>
             </DataGridContainer>
           </CardContent>
           <CardFooter style={editingStyles.frameFooter}>
-            <DataGridPagination />
+            <DataGridPagination table={table} />
           </CardFooter>
         </Card>
       </DataGrid>
@@ -261,7 +261,7 @@ export const CrudInFrameContainer: Story = {
         {
           accessorKey: 'price',
           header: 'Price ($)',
-          cell: (info) => <>${(info.getValue() as number).toFixed(2)}</>,
+          cell: (info) => <>${Number(info.getValue()).toFixed(2)}</>,
           size: 120
         }
       ],
@@ -302,13 +302,13 @@ export const CrudInFrameContainer: Story = {
           </CardHeader>
           <CardContent style={editingStyles.cardBody}>
             <DataGridContainer>
-              <DataGridScrollArea>
-                <DataGridTable />
+              <DataGridScrollArea table={table}>
+                <DataGridTable table={table} />
               </DataGridScrollArea>
             </DataGridContainer>
           </CardContent>
           <CardFooter style={editingStyles.frameFooter}>
-            <DataGridPagination />
+            <DataGridPagination table={table} />
           </CardFooter>
         </Card>
       </DataGrid>
@@ -352,7 +352,7 @@ export const SpreadsheetEditing: Story = {
         {
           accessorKey: 'id',
           header: 'SKU',
-          cell: (info) => <span {...stylex.props(s.muted)}>{info.getValue() as string}</span>,
+          cell: (info) => <span {...stylex.props(s.muted)}>{String(info.getValue())}</span>,
           enableSorting: false,
           size: 90
         },
@@ -378,9 +378,7 @@ export const SpreadsheetEditing: Story = {
           header: 'Price ($)',
           size: 140,
           cell: (info) => (
-            <span {...stylex.props(editingStyles.right)}>
-              {(info.getValue() as number).toFixed(2)}
-            </span>
+            <span {...stylex.props(editingStyles.right)}>{Number(info.getValue()).toFixed(2)}</span>
           ),
           meta: {
             cellEdit: {
@@ -396,7 +394,7 @@ export const SpreadsheetEditing: Story = {
           header: 'Stock',
           size: 140,
           cell: (info) => (
-            <span {...stylex.props(editingStyles.right)}>{info.getValue() as number}</span>
+            <span {...stylex.props(editingStyles.right)}>{Number(info.getValue())}</span>
           ),
           meta: {
             cellEdit: {
@@ -427,8 +425,9 @@ export const SpreadsheetEditing: Story = {
         for (const change of details.changes) {
           const rowIndex = next.findIndex((candidate) => candidate.id === change.rowId)
           if (rowIndex === -1) continue
-          const record = next[rowIndex]! as unknown as Record<string, unknown>
-          record[change.columnId] = change.value
+          const record = next[rowIndex]
+          if (!record) continue
+          Object.assign(record, { [change.columnId]: change.value })
         }
         return next
       })
@@ -462,18 +461,18 @@ export const SpreadsheetEditing: Story = {
           columnsPinnable: true
         }}
       >
-        <DataGridCellSelection />
+        <DataGridCellSelection table={table} />
         <Card style={editingStyles.frame}>
           <div {...stylex.props(s.stack)}>
             <span {...stylex.props(s.muted, editingStyles.hint)}>
               Drag, Shift+arrows or Ctrl/Cmd+A to select · type to edit · paste from a spreadsheet
             </span>
             <DataGridContainer>
-              <DataGridScrollArea>
-                <DataGridTable />
+              <DataGridScrollArea table={table}>
+                <DataGridTable table={table} />
               </DataGridScrollArea>
             </DataGridContainer>
-            <DataGridPagination style={editingStyles.bar} />
+            <DataGridPagination table={table} style={editingStyles.bar} />
           </div>
         </Card>
       </DataGrid>

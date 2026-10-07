@@ -1026,7 +1026,7 @@ export const PersistedOrder: Story = {
       const previous = commit.previousValue
       const movedTitle = next[commit.overIndex]?.title ?? 'item'
 
-      toast.promise(persistOrder(), {
+      void toast.promise(persistOrder(), {
         loading: { title: 'Saving order...' },
         success: { title: `Saved "${movedTitle}" at position ${commit.overIndex + 1}` },
         // Roll back to the pre-drag order. In production prefer a refetch

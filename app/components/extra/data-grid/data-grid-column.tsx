@@ -34,7 +34,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '#/components/base/popov
 import { Separator } from '#/components/base/separator'
 import { Badge } from '#/components/extra/badge'
 import { getColumnHeaderLabel, rekey, useDataGrid } from './data-grid'
-import type { DataGridFeatures } from './data-grid'
+import type { DataGridFeatures, DataGridTableInstance } from './data-grid'
 import {
   dataGridColumnFilterStyles as sFilter,
   dataGridColumnHeaderStyles as sHeader,
@@ -63,7 +63,11 @@ function DataGridColumnFilter<TData extends object, TValue>({
   const { i18n } = useDataGrid()
   const facets = column?.getFacetedUniqueValues()
   const filterValue = column?.getFilterValue()
-  const selectedValues = new Set(Array.isArray(filterValue) ? (filterValue as string[]) : [])
+  const selectedValues = new Set(
+    Array.isArray(filterValue)
+      ? filterValue.filter((value): value is string => typeof value === 'string')
+      : []
+  )
   const [searchQuery, setSearchQuery] = useState('')
 
   const filteredOptions = useMemo(() => {
@@ -189,6 +193,7 @@ interface DataGridColumnHeaderProps<TData extends object, TValue> extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'className' | 'style'
 > {
+  table: DataGridTableInstance<TData>
   column: Column<DataGridFeatures, TData, TValue>
   /** When omitted, uses `column.columnDef.meta.headerTitle`, then a string `columnDef.header`, then `column.id`. */
   title?: string
@@ -201,6 +206,7 @@ interface DataGridColumnHeaderProps<TData extends object, TValue> extends Omit<
 }
 
 function DataGridColumnHeaderInner<TData extends object, TValue>({
+  table,
   column,
   title,
   icon,
@@ -208,7 +214,7 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
   filter,
   visibility = false
 }: DataGridColumnHeaderProps<TData, TValue>) {
-  const { i18n, isLoading, table, props } = useDataGrid()
+  const { i18n, isLoading, props } = useDataGrid()
   const resolvedTitle = title ?? getColumnHeaderLabel(column)
 
   // TanStack's columnOrder defaults to [] until a consumer seeds it; fall
@@ -405,7 +411,7 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
                   key={col.id}
                   checked={col.getIsVisible()}
                   onSelect={(event) => event.preventDefault()}
-                  onCheckedChange={(value) => col.toggleVisibility(!!value)}
+                  onCheckedChange={(value) => col.toggleVisibility(value)}
                   style={sHeader.capitalize}
                 >
                   {getColumnHeaderLabel(col)}
@@ -498,13 +504,6 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
   )
 }
 
-const DataGridColumnHeaderMemo = memo(DataGridColumnHeaderInner) as <TData extends object, TValue>(
-  props: DataGridColumnHeaderProps<TData, TValue> & {
-    /** Internal: the state slices the header re-renders on. Not part of the public API. */
-    subscribedState?: unknown
-  }
-) => ReactNode
-
 /**
  * Sort and pin state reaches this header through builder calls on `column`
  * (`getIsSorted()`, `getIsPinned()`), and `column` is a stable reference. That
@@ -519,7 +518,22 @@ const DataGridColumnHeaderMemo = memo(DataGridColumnHeaderInner) as <TData exten
 function DataGridColumnHeader<TData extends object, TValue>(
   props: DataGridColumnHeaderProps<TData, TValue>
 ) {
-  const { table } = useDataGrid()
+  const { table } = props
+
+  // The memoized element type is created inside the caller's generic scope,
+  // so it keeps the caller's TData/TValue without a re-claiming assertion.
+  const HeaderMemo = useMemo(
+    () =>
+      memo(
+        (
+          headerProps: DataGridColumnHeaderProps<TData, TValue> & {
+            /** Internal: the state slices the header re-renders on. Not part of the public API. */
+            subscribedState?: unknown
+          }
+        ) => <DataGridColumnHeaderInner {...headerProps} />
+      ),
+    []
+  )
 
   return (
     <Subscribe
@@ -531,7 +545,7 @@ function DataGridColumnHeader<TData extends object, TValue>(
         columnVisibility: state.columnVisibility
       })}
     >
-      {(subscribed) => <DataGridColumnHeaderMemo {...props} subscribedState={subscribed} />}
+      {(subscribed) => <HeaderMemo {...props} subscribedState={subscribed} />}
     </Subscribe>
   )
 }
@@ -563,7 +577,7 @@ function DataGridColumnVisibility<TData extends object>({
                   style={sVisibility.item}
                   checked={column.getIsVisible()}
                   onSelect={(event) => event.preventDefault()}
-                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                  onCheckedChange={(value) => column.toggleVisibility(value)}
                 >
                   {getColumnHeaderLabel(column)}
                 </DropdownMenuCheckboxItem>

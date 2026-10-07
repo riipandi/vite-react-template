@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useTable } from '@tanstack/react-table'
-import type { ColumnDef, HeaderContext, SortingState } from '@tanstack/react-table'
+import type { Column, ColumnDef, SortingState } from '@tanstack/react-table'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
@@ -15,7 +15,8 @@ import {
   DataGridContainer,
   DataGridTableVirtual,
   dataGridFeatures,
-  type DataGridFeatures
+  type DataGridFeatures,
+  type DataGridTableInstance
 } from '../'
 import { stackStyles as s } from './_mocks.stylex'
 
@@ -114,13 +115,15 @@ function generateData(count: number): IRow[] {
   return Array.from({ length: count }, (_, index) => simulateRow(index))
 }
 
-function useColumns() {
+function useColumns(getReactTable: () => DataGridTableInstance<IRow>) {
   return useMemo<ColumnDef<DataGridFeatures, IRow>[]>(
     () => [
       {
         accessorKey: 'id',
         id: 'id',
-        header: ({ column }) => <DataGridColumnHeader title='#' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader table={getReactTable()} title='#' column={column} />
+        ),
         cell: ({ row }) => (
           <span {...stylex.props(infiniteStyles.mutedNumeric)}>{row.original.id}</span>
         ),
@@ -130,7 +133,9 @@ function useColumns() {
       {
         accessorKey: 'title',
         id: 'title',
-        header: ({ column }) => <DataGridColumnHeader title='Title' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader table={getReactTable()} title='Title' column={column} />
+        ),
         cell: ({ row }) => (
           <div {...stylex.props(s.cellFlexWide)}>
             <Avatar style={s.avatar24}>
@@ -156,24 +161,30 @@ function useColumns() {
       {
         accessorKey: 'author',
         id: 'author',
-        header: ({ column }) => <DataGridColumnHeader title='Author' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader table={getReactTable()} title='Author' column={column} />
+        ),
         size: 200,
         enableSorting: true
       },
       {
         accessorKey: 'status',
         id: 'status',
-        header: ({ column }) => <DataGridColumnHeader title='Status' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader table={getReactTable()} title='Status' column={column} />
+        ),
         size: 120,
         enableSorting: true
       },
       {
         accessorKey: 'price',
         id: 'price',
-        header: ({ column }) => <DataGridColumnHeader title='Price ($)' column={column} />,
+        header: ({ column }) => (
+          <DataGridColumnHeader table={getReactTable()} title='Price ($)' column={column} />
+        ),
         cell: (info) => (
           <span {...stylex.props(infiniteStyles.numeric)}>
-            ${(info.getValue() as number).toFixed(2)}
+            ${Number(info.getValue()).toFixed(2)}
           </span>
         ),
         size: 130,
@@ -194,7 +205,11 @@ const localAllData = generateData(LOCAL_TOTAL)
 export const LocalInfiniteScroll: Story = {
   name: 'Local infinite scroll',
   render: () => {
-    const columns = useColumns()
+    const tableHolder: { current?: DataGridTableInstance<IRow> } = {}
+    const columns = useColumns(() => {
+      if (!tableHolder.current) throw new Error('table not ready')
+      return tableHolder.current
+    })
     const [sorting, setSorting] = useState<SortingState>([])
     const [limit, setLimit] = useState(30)
     const [isFetching, setIsFetching] = useState(false)
@@ -216,6 +231,7 @@ export const LocalInfiniteScroll: Story = {
       state: { sorting },
       onSortingChange: setSorting
     })
+    tableHolder.current = table
 
     return (
       <DataGrid table={table} recordCount={limit}>
@@ -224,6 +240,7 @@ export const LocalInfiniteScroll: Story = {
             <DataGridContainer>
               <DataGridScrollAreaProxy>
                 <DataGridTableVirtual
+                  table={table}
                   estimateSize={41}
                   onFetchMore={hasMore ? fetchMore : undefined}
                   isFetchingMore={isFetching}
@@ -249,7 +266,11 @@ const REMOTE_PAGE = 20
 export const RemoteInfiniteScroll: Story = {
   name: 'Remote infinite scroll',
   render: () => {
-    const columns = useColumns()
+    const tableHolder: { current?: DataGridTableInstance<IRow> } = {}
+    const columns = useColumns(() => {
+      if (!tableHolder.current) throw new Error('table not ready')
+      return tableHolder.current
+    })
     const [sorting, setSorting] = useState<SortingState>([])
     const [data, setData] = useState<IRow[]>(() =>
       Array.from({ length: REMOTE_PAGE }, (_, index) => simulateRow(index))
@@ -285,6 +306,7 @@ export const RemoteInfiniteScroll: Story = {
       state: { sorting },
       onSortingChange: setSorting
     })
+    tableHolder.current = table
 
     return (
       <DataGrid table={table} recordCount={data.length}>
@@ -308,6 +330,7 @@ export const RemoteInfiniteScroll: Story = {
             <DataGridContainer>
               <DataGridScrollAreaProxy>
                 <DataGridTableVirtual
+                  table={table}
                   estimateSize={41}
                   onFetchMore={hasMore ? fetchMore : undefined}
                   isFetchingMore={isFetching}
@@ -334,12 +357,16 @@ const COLUMN_JUMP_SIZE = 8
 const matrixRows = generateData(ROW_COUNT)
 const columnVirtualizerOptions = { enabled: true, overscan: 3 }
 
-function matrixColumns(): ColumnDef<DataGridFeatures, IRow>[] {
+function matrixColumns(
+  getReactTable: () => DataGridTableInstance<IRow>
+): ColumnDef<DataGridFeatures, IRow>[] {
   return [
     {
       accessorKey: 'title',
       id: 'title',
-      header: ({ column }) => <DataGridColumnHeader title='Title' column={column} />,
+      header: ({ column }) => (
+        <DataGridColumnHeader table={getReactTable()} title='Title' column={column} />
+      ),
       cell: ({ row }) => <span {...stylex.props(s.strong)}>{row.original.title}</span>,
       size: 180,
       enablePinning: true,
@@ -349,17 +376,16 @@ function matrixColumns(): ColumnDef<DataGridFeatures, IRow>[] {
       return {
         accessorKey: 'price',
         id: `metric-${metric + 1}`,
-        // Matrix headers are uniform; the loose context typing keeps the
-        // generated columns simple.
-        header: (context: HeaderContext<DataGridFeatures, IRow>) => (
+        header: (headerContext: { column: Column<DataGridFeatures, IRow> }) => (
           <DataGridColumnHeader
+            table={getReactTable()}
             title={`M${String(metric + 1).padStart(2, '0')}`}
-            column={context.column}
+            column={headerContext.column}
           />
         ),
         cell: (info: { getValue: () => unknown }) => (
           <span {...stylex.props(infiniteStyles.numeric)}>
-            {(info.getValue() as number).toFixed(0)}
+            {Number(info.getValue()).toFixed(0)}
           </span>
         ),
         size: 110,
@@ -373,7 +399,15 @@ export const ColumnVirtualization: Story = {
   name: 'Column virtualization',
   render: () => {
     const [targetColumnIndex, setTargetColumnIndex] = useState(0)
-    const columns = useMemo(() => matrixColumns(), [])
+    const tableHolder: { current?: DataGridTableInstance<IRow> } = {}
+    const columns = useMemo(
+      () =>
+        matrixColumns(() => {
+          if (!tableHolder.current) throw new Error('table not ready')
+          return tableHolder.current
+        }),
+      []
+    )
     const [sorting, setSorting] = useState<SortingState>([])
     const table = useTable({
       features: dataGridFeatures,
@@ -430,6 +464,7 @@ export const ColumnVirtualization: Story = {
             <DataGridContainer>
               <DataGridScrollAreaProxy>
                 <DataGridTableVirtual
+                  table={table}
                   estimateSize={41}
                   height={420}
                   overscan={8}

@@ -95,5 +95,17 @@ export const sortableStyles = stylex.create({
     opacity: 0.85,
     minWidth: 0,
     pointerEvents: 'none'
+  },
+  overlayContentAuto: {
+    width: 'fit-content'
   }
+})
+
+/**
+ * The drag overlay must match the slot the item was dragged out of, which is
+ * only known at runtime — stylex's dynamic style keeps the width compile-safe
+ * without a raw style bag.
+ */
+export const overlayWidthStyle = stylex.create({
+  width: (px: number) => ({ width: `${px}px` })
 })

@@ -299,6 +299,22 @@ export interface DataGridCellEditorMetrics {
 }
 
 /**
+ * The live `getComputedStyle().textAlign` read carries any CSS value
+ * (`start`, `end`, `justify`, ...); the stylex rule accepts the directional
+ * subset, and a start/end value resolves like the browser would render it.
+ */
+function computedTextAlign(value: string): 'left' | 'center' | 'right' {
+  const resolved: Record<string, 'left' | 'center' | 'right'> = {
+    start: 'left',
+    left: 'left',
+    center: 'center',
+    end: 'right',
+    right: 'right'
+  }
+  return resolved[value] ?? 'left'
+}
+
+/**
  * The built-in free-text editor: a portal into the body viewport, positioned
  * flush over the focused cell with the cell's own font, alignment and
  * padding, so the text keeps its exact place - the Sheets model. The
@@ -329,8 +345,9 @@ export const dataGridCellEditorStyles = stylex.create({
     fontWeight: m.fontWeight,
     letterSpacing: m.letterSpacing,
     lineHeight: m.lineHeight,
-    // Computed-style values; the cast only satisfies the CSS union type.
-    textAlign: m.textAlign as 'left',
+    // Computed-style value passed through as-is (deliberate: the metric is a
+    // live getComputedStyle read; the map resolves the stylex-legal subset).
+    textAlign: computedTextAlign(m.textAlign),
     paddingTop: m.paddingTop,
     paddingBottom: m.paddingBottom,
     paddingLeft: m.paddingLeft,

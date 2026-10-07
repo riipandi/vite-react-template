@@ -173,7 +173,9 @@ interface CountryFlagProps {
 
 /** Circular 16px country flag rendered inline from the ISO code (no CDN). */
 export function CountryFlag({ code, title, style }: CountryFlagProps) {
-  const Flag = FLAGS[code.toUpperCase() as keyof typeof FLAGS]
+  const flagKey = code.toUpperCase()
+  const isFlagKey = (value: string): value is keyof typeof FLAGS => value in FLAGS
+  const Flag = isFlagKey(flagKey) ? FLAGS[flagKey] : undefined
   if (!Flag) return null
   return <Flag title={title} {...stylex.props(style)} />
 }

@@ -22,6 +22,7 @@ import {
   DataGridTable,
   DataGridTableDnd,
   dataGridFeatures,
+  type DataGridTableInstance,
   type DataGridFeatures
 } from '../'
 import { CountryFlag, demoData, type IBook } from './_mocks'
@@ -86,7 +87,10 @@ function AvatarCell({ row }: { row: IBook }) {
   )
 }
 
-function bookColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IBook>[] {
+function bookColumns(
+  withIcons: boolean,
+  getTable: () => DataGridTableInstance<IBook>
+): ColumnDef<DataGridFeatures, IBook>[] {
   const iconStyle = stylex.create({ icon: { height: 14, width: 14 } })
   const icon = (node: React.ReactNode) => <span {...stylex.props(iconStyle.icon)}>{node}</span>
   return [
@@ -95,9 +99,14 @@ function bookColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IBook>[] {
       id: 'title',
       header: ({ column }) =>
         withIcons ? (
-          <DataGridColumnHeader title='Title' column={column} icon={icon(<User />)} />
+          <DataGridColumnHeader
+            table={getTable()}
+            title='Title'
+            column={column}
+            icon={icon(<User />)}
+          />
         ) : (
-          <DataGridColumnHeader title='Title' column={column} />
+          <DataGridColumnHeader table={getTable()} title='Title' column={column} />
         ),
       cell: ({ row }) => <AvatarCell row={row.original} />,
       size: 200,
@@ -110,9 +119,14 @@ function bookColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IBook>[] {
       id: 'author',
       header: ({ column }) =>
         withIcons ? (
-          <DataGridColumnHeader title='Author' column={column} icon={icon(<Mail />)} />
+          <DataGridColumnHeader
+            table={getTable()}
+            title='Author'
+            column={column}
+            icon={icon(<Mail />)}
+          />
         ) : (
-          <DataGridColumnHeader title='Author' column={column} />
+          <DataGridColumnHeader table={getTable()} title='Author' column={column} />
         ),
       size: 160,
       enableSorting: true,
@@ -123,9 +137,14 @@ function bookColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IBook>[] {
       id: 'country',
       header: ({ column }) =>
         withIcons ? (
-          <DataGridColumnHeader title='Country' column={column} icon={icon(<MapPin />)} />
+          <DataGridColumnHeader
+            table={getTable()}
+            title='Country'
+            column={column}
+            icon={icon(<MapPin />)}
+          />
         ) : (
-          <DataGridColumnHeader title='Country' column={column} />
+          <DataGridColumnHeader table={getTable()} title='Country' column={column} />
         ),
       cell: ({ row }) => (
         <div {...stylex.props(s.cellFlex)}>
@@ -141,11 +160,16 @@ function bookColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IBook>[] {
       id: 'price',
       header: ({ column }) =>
         withIcons ? (
-          <DataGridColumnHeader title='Price' column={column} icon={icon(<Wallet />)} />
+          <DataGridColumnHeader
+            table={getTable()}
+            title='Price'
+            column={column}
+            icon={icon(<Wallet />)}
+          />
         ) : (
-          <DataGridColumnHeader title='Price' column={column} />
+          <DataGridColumnHeader table={getTable()} title='Price' column={column} />
         ),
-      cell: (info) => <>${(info.getValue() as number).toFixed(2)}</>,
+      cell: (info) => <>${Number(info.getValue()).toFixed(2)}</>,
       size: 120,
       enableSorting: true,
       enableHiding: false
@@ -157,18 +181,20 @@ function bookColumns(withIcons: boolean): ColumnDef<DataGridFeatures, IBook>[] {
 export const ColumnIcons: Story = {
   name: 'Column icons',
   render: () => {
-    const columns = useMemo(() => bookColumns(true), [])
+    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
+    const columns = useMemo(() => bookColumns(true, () => tableHolder.current!), [tableHolder])
     const table = useDemoTable(columns)
+    tableHolder.current = table
 
     return (
       <DataGrid table={table} recordCount={demoData?.length || 0}>
         <div {...stylex.props(s.stack)}>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTable />
+            <DataGridScrollArea table={table}>
+              <DataGridTable table={table} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -179,18 +205,20 @@ export const ColumnIcons: Story = {
 export const SortableColumns: Story = {
   name: 'Sortable columns',
   render: () => {
-    const columns = useMemo(() => bookColumns(false), [])
+    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
+    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [tableHolder])
     const table = useDemoTable(columns)
+    tableHolder.current = table
 
     return (
       <DataGrid table={table} recordCount={demoData?.length || 0}>
         <div {...stylex.props(s.stack)}>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTable />
+            <DataGridScrollArea table={table}>
+              <DataGridTable table={table} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -201,8 +229,10 @@ export const SortableColumns: Story = {
 export const MovableColumns: Story = {
   name: 'Movable columns',
   render: () => {
-    const columns = useMemo(() => bookColumns(false), [])
+    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
+    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [tableHolder])
     const table = useDemoTable(columns)
+    tableHolder.current = table
 
     return (
       <DataGrid
@@ -212,11 +242,11 @@ export const MovableColumns: Story = {
       >
         <div {...stylex.props(s.stack)}>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTable />
+            <DataGridScrollArea table={table}>
+              <DataGridTable table={table} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -229,7 +259,7 @@ export const DraggableColumns: Story = {
   render: () => {
     const columns = useMemo(
       () =>
-        bookColumns(false).map((column) => ({
+        bookColumns(false, () => table).map((column) => ({
           ...column,
           enableColumnOrdering: true
         })),
@@ -238,14 +268,14 @@ export const DraggableColumns: Story = {
     const table = useDemoTable(
       columns,
       5,
-      columns.map((column) => column.id as string)
+      columns.map((column) => column.id ?? '')
     )
     const handleDragEnd = (event: DragEndEvent) => {
       const { active, over } = event
       if (active && over && active.id !== over.id) {
         table.setColumnOrder((columnOrder) => {
-          const oldIndex = columnOrder.indexOf(active.id as string)
-          const newIndex = columnOrder.indexOf(over.id as string)
+          const oldIndex = columnOrder.indexOf(String(active.id))
+          const newIndex = columnOrder.indexOf(String(over.id))
           return arrayMove(columnOrder, oldIndex, newIndex)
         })
       }
@@ -259,11 +289,11 @@ export const DraggableColumns: Story = {
       >
         <div {...stylex.props(s.stack)}>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTableDnd handleDragEnd={handleDragEnd} />
+            <DataGridScrollArea table={table}>
+              <DataGridTableDnd table={table} handleDragEnd={handleDragEnd} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -274,12 +304,19 @@ export const DraggableColumns: Story = {
 export const ColumnResizing: Story = {
   name: 'Column resizing',
   render: () => {
+    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
+    const getTable = () => {
+      if (!tableHolder.current) throw new Error('table not ready')
+      return tableHolder.current
+    }
     const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
           accessorKey: 'title',
           id: 'title',
-          header: ({ column }) => <DataGridColumnHeader title='Title' column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeader table={getTable()} title='Title' column={column} />
+          ),
           cell: ({ row }) => <AvatarCell row={row.original} />,
           size: 400,
           minSize: 300,
@@ -291,14 +328,18 @@ export const ColumnResizing: Story = {
         {
           accessorKey: 'role',
           id: 'role',
-          header: ({ column }) => <DataGridColumnHeader title='Genre' column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeader table={getTable()} title='Genre' column={column} />
+          ),
           size: 200,
           enableResizing: true
         },
         {
           accessorKey: 'availability',
           id: 'availability',
-          header: ({ column }) => <DataGridColumnHeader title='Status' column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeader table={getTable()} title='Status' column={column} />
+          ),
           size: 200,
           enableResizing: true
         }
@@ -315,11 +356,11 @@ export const ColumnResizing: Story = {
       >
         <div {...stylex.props(s.stack)}>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTable />
+            <DataGridScrollArea table={table}>
+              <DataGridTable table={table} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -330,8 +371,10 @@ export const ColumnResizing: Story = {
 export const PinnableColumns: Story = {
   name: 'Pinnable columns',
   render: () => {
-    const columns = useMemo(() => bookColumns(false), [])
+    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
+    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [tableHolder])
     const table = useDemoTable(columns)
+    tableHolder.current = table
 
     return (
       <DataGrid
@@ -341,11 +384,11 @@ export const PinnableColumns: Story = {
       >
         <div {...stylex.props(s.stack)}>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTable />
+            <DataGridScrollArea table={table}>
+              <DataGridTable table={table} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -356,8 +399,10 @@ export const PinnableColumns: Story = {
 export const StickyHeader: Story = {
   name: 'Sticky header',
   render: () => {
-    const columns = useMemo(() => bookColumns(false), [])
+    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
+    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [tableHolder])
     const table = useDemoTable(columns, 10)
+    tableHolder.current = table
 
     return (
       <DataGrid
@@ -368,11 +413,11 @@ export const StickyHeader: Story = {
         <div {...stylex.props(s.stack)}>
           {/* Fixed viewport height: sticky needs vertical overflow to scroll. */}
           <DataGridContainer>
-            <DataGridScrollArea style={atoms.height['384px']}>
-              <DataGridTable />
+            <DataGridScrollArea table={table} style={atoms.height['384px']}>
+              <DataGridTable table={table} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -383,8 +428,10 @@ export const StickyHeader: Story = {
 export const ColumnControls: Story = {
   name: 'Column controls',
   render: () => {
-    const columns = useMemo(() => bookColumns(false), [])
+    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
+    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [tableHolder])
     const table = useDemoTable(columns)
+    tableHolder.current = table
 
     return (
       <DataGrid
@@ -399,11 +446,11 @@ export const ColumnControls: Story = {
       >
         <div {...stylex.props(s.stack)}>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTable />
+            <DataGridScrollArea table={table}>
+              <DataGridTable table={table} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )
@@ -414,12 +461,19 @@ export const ColumnControls: Story = {
 export const ColumnVisibilityControls: Story = {
   name: 'Column visibility controls',
   render: () => {
+    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
+    const getTable = () => {
+      if (!tableHolder.current) throw new Error('table not ready')
+      return tableHolder.current
+    }
     const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
           accessorKey: 'title',
           id: 'title',
-          header: ({ column }) => <DataGridColumnHeader title='Title' visibility column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeader table={getTable()} title='Title' visibility column={column} />
+          ),
           cell: ({ row }) => <AvatarCell row={row.original} />,
           minSize: 200,
           meta: { autoSize: true },
@@ -431,7 +485,7 @@ export const ColumnVisibilityControls: Story = {
           accessorKey: 'country',
           id: 'country',
           header: ({ column }) => (
-            <DataGridColumnHeader title='Country' visibility column={column} />
+            <DataGridColumnHeader table={getTable()} title='Country' visibility column={column} />
           ),
           size: 175,
           enableHiding: false
@@ -439,13 +493,17 @@ export const ColumnVisibilityControls: Story = {
         {
           accessorKey: 'genre',
           id: 'genre',
-          header: ({ column }) => <DataGridColumnHeader title='Genre' visibility column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeader table={getTable()} title='Genre' visibility column={column} />
+          ),
           size: 150
         },
         {
           accessorKey: 'price',
           id: 'price',
-          header: ({ column }) => <DataGridColumnHeader title='Price' visibility column={column} />,
+          header: ({ column }) => (
+            <DataGridColumnHeader table={getTable()} title='Price' visibility column={column} />
+          ),
           size: 120
         }
       ],
@@ -466,11 +524,11 @@ export const ColumnVisibilityControls: Story = {
       >
         <div {...stylex.props(s.stack)}>
           <DataGridContainer>
-            <DataGridScrollArea>
-              <DataGridTable />
+            <DataGridScrollArea table={table}>
+              <DataGridTable table={table} />
             </DataGridScrollArea>
           </DataGridContainer>
-          <DataGridPagination />
+          <DataGridPagination table={table} />
         </div>
       </DataGrid>
     )

@@ -294,7 +294,9 @@ export const dataGridTableStyles = stylex.create({
   fillHeadCellBackground: {
     backgroundColor: colors.backgroundNeutral
   },
-  // Quick-create affordance row.
+  // Quick-create affordance row. The dense variants ride as separate styles
+  // picked at the call site: stylex conditions produce a compiled shape the
+  // consumer style slots (StyleXStyles) cannot accept.
   addRowButton: {
     color: colors.foregroundNeutralFaded,
     display: 'flex',
@@ -304,14 +306,12 @@ export const dataGridTableStyles = stylex.create({
     // and push the icon and label off vertical center.
     alignItems: 'center',
     borderRadius: 0,
-    height: {
-      default: unit.x9,
-      '[data-dense]': unit.x8
-    },
-    paddingInline: {
-      default: unit.x3,
-      '[data-dense]': unit.x2
-    }
+    height: unit.x9,
+    paddingInline: unit.x3
+  },
+  addRowButtonDense: {
+    height: unit.x8,
+    paddingInline: unit.x2
   },
   addRowCell: {
     padding: 0

@@ -102,7 +102,7 @@ export const Horizontal: Story = {
       ],
       scales: {
         x: { scale: scaleLinear, nice: true, grid: true, axis: { label: 'Pages' } },
-        y: { scale: () => scaleBand<string>().padding(0.2) }
+        y: { scale: () => scaleBand().padding(0.2) }
       },
       motion: barMotion,
       theme: chartTheme,

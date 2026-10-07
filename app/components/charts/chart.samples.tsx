@@ -108,7 +108,7 @@ export const checkoutConfig = {
 } satisfies ChartConfig
 
 export const checkoutScales = {
-  x: { scale: () => scaleBand<string>().padding(0.2) },
+  x: { scale: () => scaleBand().padding(0.2) },
   y: { scale: scaleLinear, nice: true, grid: true }
 } as const
 
@@ -284,7 +284,7 @@ const NAME = 'RIIPANDI'
 /** One boolean column per week: which weekday cells are part of the art. */
 const artColumns: readonly (readonly boolean[])[] = (() => {
   const columns: boolean[][] = []
-  ;[...NAME].forEach((char, index) => {
+  Array.from(NAME).forEach((char, index) => {
     if (index > 0) columns.push([false, false, false, false, false, false, false])
     const glyph = GLYPHS[char]!
     const width = glyph[0]!.length

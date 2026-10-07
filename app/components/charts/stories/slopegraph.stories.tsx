@@ -38,7 +38,7 @@ const houses: readonly HouseRow[] = [
 ]
 
 const slopeScales = {
-  x: { scale: () => scalePoint<string>().padding(0.5) },
+  x: { scale: () => scalePoint().padding(0.5) },
   y: { scale: scaleLinear, nice: true, grid: false }
 } as const
 

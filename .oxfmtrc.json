@@ -13,15 +13,13 @@
     "overrides": [
         {
             "files": ["*.json", "*.jsonc"],
-            "options": {
-                "tabWidth": 4
-            }
+            "options": { "tabWidth": 4 }
         }
     ],
     "sortImports": {
         "order": "asc",
         "groups": [["builtin", "external"], ["internal"], ["parent", "sibling", "index"]],
-        "internalPattern": ["#/", "~/"],
+        "internalPattern": ["#/"],
         "partitionByComment": false,
         "partitionByNewline": false,
         "newlinesBetween": false,

@@ -25,7 +25,7 @@ export default meta
 // Sparklines drop every guide: no grid, no axis, no tooltip — the number in
 // the card carries the value, the spark carries the shape.
 const sparkScales = {
-  x: { scale: () => scaleBand<string>().padding(0.1) },
+  x: { scale: () => scaleBand().padding(0.1) },
   y: { scale: scaleLinear, nice: true }
 } as const
 

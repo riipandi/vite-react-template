@@ -106,6 +106,7 @@
         "oxc-transform-react": "^0.153.0",
         "oxfmt": "^0.72.0",
         "oxlint": "^1.87.0",
+        "oxlint-tsgolint": "^7.0.2003",
         "playwright": "^1.63.0",
         "remark-gfm": "^4.0.1",
         "storybook": "10.6.1",

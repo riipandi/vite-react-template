@@ -45,7 +45,7 @@ const dumbbellConfig = {
 
 const dumbbellScales = {
   x: { scale: scaleLinear, nice: true, grid: true },
-  y: { scale: () => scaleBand<string>().padding(0.4) }
+  y: { scale: () => scaleBand().padding(0.4) }
 } as const
 
 export const OwlVsNewt: Story = {

@@ -149,7 +149,7 @@ function CanvasControls({
 }
 
 export function GlobalDecorator({ context, children }: GlobalDecoratorProps) {
-  const globalTheme = (context.globals[STORYBOOK_THEME_GLOBAL] ?? 'system') as StorybookTheme
+  const globalTheme: StorybookTheme = context.globals[STORYBOOK_THEME_GLOBAL] ?? 'system'
   const forcedTheme = globalTheme === 'system' ? undefined : globalTheme
 
   const [direction, setDirection] = React.useState<Direction>('ltr')

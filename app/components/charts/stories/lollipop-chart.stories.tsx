@@ -42,7 +42,7 @@ const spells: readonly SpellRow[] = [
 
 const masteryScales = {
   x: { scale: scaleLinear, nice: true, grid: true },
-  y: { scale: () => scaleBand<string>().padding(0.35) }
+  y: { scale: () => scaleBand().padding(0.35) }
 } as const
 
 export const Ranked: Story = {

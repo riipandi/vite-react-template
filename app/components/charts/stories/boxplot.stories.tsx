@@ -47,7 +47,7 @@ const examScores: readonly ExamScore[] = (() => {
 })()
 
 const boxScales = {
-  x: { scale: () => scaleBand<string>().padding(0.35) },
+  x: { scale: () => scaleBand().padding(0.35) },
   y: { scale: scaleLinear, nice: true, grid: true }
 } as const
 

@@ -60,7 +60,7 @@ const priceConfig = {
 } as const
 
 const priceScales = {
-  x: { scale: () => scalePoint<string>().padding(0.4) },
+  x: { scale: () => scalePoint().padding(0.4) },
   y: { scale: scaleLinear, nice: true, grid: true }
 } as const
 

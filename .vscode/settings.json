@@ -1,7 +1,12 @@
 {
+    "npm.scriptRunner": "pnpm",
+    "oxc.disableNestedConfig": true,
+    "oxc.fmt.disableNestedConfig": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
     "editor.defaultFormatter": "oxc.oxc-vscode",
     "editor.codeActionsOnSave": {
-        "source.fixAll.oxc": "always"
+        "source.fixAll.oxc": "explicit"
     },
     "files.associations": {
         "*.vars": "dotenv",
@@ -17,6 +22,7 @@
         "**/.output/**": true,
         "**/routeTree.gen.ts": true,
         "**/routes.gen.ts": true,
+        "**/codegen/**": true,
         "**/build/**": true,
         "**/dist/**": true,
         "**/generated/**": true,
@@ -26,6 +32,7 @@
         "**/.output/**": true,
         "**/routeTree.gen.ts": true,
         "**/routes.gen.ts": true,
+        "**/codegen/**": true,
         "**/build/**": true,
         "**/dist/**": true,
         "**/generated/**": true,
@@ -36,6 +43,7 @@
         "**/.vitest/**": true,
         "**/routeTree.gen.ts": true,
         "**/routes.gen.ts": true,
+        "**/codegen/**": true,
         "**/build/**": true,
         "**/dist/**": true,
         "**/generated/**": true,
@@ -84,7 +92,7 @@
         "editor.defaultFormatter": "oxc.oxc-vscode"
     },
     "[markdown]": {
-        "editor.defaultFormatter": "darkriszty.markdown-table-prettify"
+        "editor.defaultFormatter": "oxc.oxc-vscode"
     },
     "[toml]": {
         "editor.defaultFormatter": "Shellomo.enhanced-toml",

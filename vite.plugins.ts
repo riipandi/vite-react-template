@@ -46,21 +46,19 @@ function demoAuthBackend(): Plugin {
 // vite preview does not redirect directory paths, so `/storybook` would 404
 // even though `/storybook/` serves the built Storybook. Netlify handles this
 // itself (Pretty URLs), so only the preview server needs it.
-const storybookSubpathHandler: Connect.NextHandleFunction = (req, res, next) => {
-  const url = new URL(req.url ?? '/', 'http://localhost')
-  if (url.pathname === '/storybook') {
-    res.statusCode = 301
-    res.setHeader('Location', `/storybook/${url.search}`)
-    return res.end()
-  }
-  next()
-}
-
 function storybookPreviewRedirect(): Plugin {
   return {
     name: 'storybook-preview-redirect',
     configurePreviewServer: (server) => {
-      server.middlewares.use(storybookSubpathHandler)
+      server.middlewares.use((req, res, next) => {
+        const url = new URL(req.url ?? '/', 'http://localhost')
+        if (url.pathname === '/storybook') {
+          res.statusCode = 301
+          res.setHeader('Location', `/storybook/${url.search}`)
+          return res.end()
+        }
+        return next()
+      })
     }
   }
 }

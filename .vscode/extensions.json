@@ -1,11 +1,11 @@
 {
     "recommendations": [
-        "darkriszty.markdown-table-prettify",
         "EditorConfig.EditorConfig",
         "foxundermoon.shell-format",
         "ms-playwright.playwright",
         "oxc.oxc-vscode",
         "redhat.vscode-yaml",
-        "Shellomo.enhanced-toml"
+        "Shellomo.enhanced-toml",
+        "vitest.explorer"
     ]
 }

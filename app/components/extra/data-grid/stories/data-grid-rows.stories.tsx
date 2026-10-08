@@ -1,4 +1,4 @@
-import type { UniqueIdentifier } from '@dnd-kit/core'
+import type { DragEndEvent, UniqueIdentifier } from '@dnd-kit/core'
 import { ChevronDown, ChevronUp, RefreshCw } from '@keyline-icons/react'
 import type { Meta, StoryObj } from '@storybook/tanstack-react'
 import atoms from '@stylexjs/atoms'
@@ -353,10 +353,6 @@ const orderData: IOrder[] = [
 /** Price cell shared by the order-line tables (currency, two decimals). */
 const priceCell = (info: { getValue: () => unknown }) => <>${Number(info.getValue()).toFixed(2)}</>
 
-/** The demo owns no data writes — the drag itself is the visible reorder;
- * persisting the new order is the consumer's concern. */
-function demoRowDragEnd() {}
-
 function SubTable({ items }: { items: IOrder['lines'] }) {
   const columns = useMemo<ColumnDef<DataGridFeatures, IOrder['lines'][number]>[]>(
     () => [
@@ -460,6 +456,9 @@ export const DraggableRows: Story = {
       pageIndex: 0,
       pageSize: 8
     })
+    // The reorder is the demo's visible effect: dropping a row onto another
+    // swaps their positions in a local copy of the data.
+    const [rows, setRows] = useState<IBook[]>(demoData)
     const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
@@ -495,7 +494,7 @@ export const DraggableRows: Story = {
     const table = useTable({
       features: dataGridFeatures,
       columns,
-      data: demoData,
+      data: rows,
       getRowId: (row: IBook) => row.id,
       state: { pagination },
       onPaginationChange: setPagination
@@ -504,17 +503,27 @@ export const DraggableRows: Story = {
       () => table.getRowModel().rows.map((row) => row.id),
       [table]
     )
+    const handleDragEnd = (event: DragEndEvent) => {
+      const { active, over } = event
+      if (!over || active.id === over.id) return
+      setRows((current) => {
+        const from = current.findIndex((row) => row.id === active.id)
+        const to = current.findIndex((row) => row.id === over.id)
+        if (from === -1 || to === -1) return current
+        const next = [...current]
+        const [moved] = next.splice(from, 1)
+        if (!moved) return current
+        next.splice(to, 0, moved)
+        return next
+      })
+    }
 
     return (
-      <DataGrid table={table} recordCount={demoData.length}>
+      <DataGrid table={table} recordCount={rows.length}>
         <div {...stylex.props(s.stack)}>
           <DataGridContainer>
             <DataGridScrollArea table={table}>
-              <DataGridTableDndRows
-                table={table}
-                handleDragEnd={demoRowDragEnd}
-                dataIds={dataIds}
-              />
+              <DataGridTableDndRows table={table} handleDragEnd={handleDragEnd} dataIds={dataIds} />
             </DataGridScrollArea>
           </DataGridContainer>
           <DataGridPagination table={table} />
@@ -539,13 +548,14 @@ export const RowPinningSupport: Story = {
       pageIndex: 0,
       pageSize: 8
     })
+    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
     const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
           id: 'pin',
           size: 40,
           header: () => null,
-          cell: ({ row }) => <DataGridTableRowPin row={row} />
+          cell: ({ row }) => <DataGridTableRowPin row={row} table={tableHolder.current!} />
         },
         {
           accessorKey: 'title',
@@ -584,6 +594,7 @@ export const RowPinningSupport: Story = {
       onPaginationChange: setPagination,
       paginateExpandedRows: false
     })
+    tableHolder.current = table
     const pinnedCount = rowPinning.top.length
 
     return (

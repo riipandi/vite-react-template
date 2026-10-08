@@ -46,9 +46,13 @@ export function authWorker(): AuthWorkerClient {
 }
 
 /**
- * The engine methods are already async, so the plain object is structurally
- * compatible with its Comlink remote proxy type.
+ * The engine methods are already async, so the plain object behaves like its
+ * Comlink remote proxy structurally. An empty instance typed via the
+ * interface type (not an assertion) widens the engine through `Object.assign`
+ * so both views of the same object are visible to callers.
  */
+const remoteView: AuthWorkerClient = Object.create(null)
+
 function createMainThreadEngine(): AuthWorkerClient {
-  return createAuthEngine(API_BASE_URL) as unknown as AuthWorkerClient
+  return Object.assign(createAuthEngine(API_BASE_URL), remoteView)
 }

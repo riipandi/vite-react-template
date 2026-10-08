@@ -4,7 +4,7 @@ import atoms from '@stylexjs/atoms'
 import * as stylex from '@stylexjs/stylex'
 import { useTable } from '@tanstack/react-table'
 import type { ColumnDef, PaginationState, SortingState } from '@tanstack/react-table'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Badge } from '#/components/extra/badge'
@@ -21,7 +21,8 @@ import {
   DataGridTable,
   dataGridFeatures,
   type DataGridFeatures,
-  type DataGridI18nOverrides
+  type DataGridI18nOverrides,
+  type DataGridTableInstance
 } from '../'
 import { CountryFlag, demoData, type IBook } from './_mocks'
 import { stackStyles as s } from './_mocks.stylex'
@@ -181,13 +182,19 @@ function usePagedTable(columns: ColumnDef<DataGridFeatures, IBook>[]) {
 export const CardContainer: Story = {
   name: 'Card container',
   render: () => {
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
     const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
           accessorKey: 'title',
           id: 'title',
           header: ({ column }) => (
-            <DataGridColumnHeader table={table} title='Title' visibility column={column} />
+            <DataGridColumnHeader
+              table={tableHolder.current!}
+              title='Title'
+              visibility
+              column={column}
+            />
           ),
           cell: avatarCell32,
           minSize: 200,
@@ -201,7 +208,12 @@ export const CardContainer: Story = {
           accessorKey: 'country',
           id: 'country',
           header: ({ column }) => (
-            <DataGridColumnHeader table={table} title='Country' visibility column={column} />
+            <DataGridColumnHeader
+              table={tableHolder.current!}
+              title='Country'
+              visibility
+              column={column}
+            />
           ),
           cell: ({ row }) => (
             <div {...stylex.props(s.cellFlex)}>
@@ -222,7 +234,12 @@ export const CardContainer: Story = {
           accessorKey: 'status',
           id: 'status',
           header: ({ column }) => (
-            <DataGridColumnHeader table={table} title='Status' visibility column={column} />
+            <DataGridColumnHeader
+              table={tableHolder.current!}
+              title='Status'
+              visibility
+              column={column}
+            />
           ),
           cell: ({ row }) =>
             row.original.status === 'inPrint' ? (
@@ -239,6 +256,7 @@ export const CardContainer: Story = {
       []
     )
     const table = usePagedTable(columns)
+    tableHolder.current = table
 
     return (
       <DataGrid
@@ -597,6 +615,7 @@ async function fetchServerPage(params: {
 export const ServerSidePagination: Story = {
   name: 'Server side pagination',
   render: () => {
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
     const [query, setQuery] = useState('')
     const [status, setStatus] = useState<StatusFilter>('all')
     const [pagination, setPagination] = useState<PaginationState>({
@@ -635,7 +654,7 @@ export const ServerSidePagination: Story = {
           accessorKey: 'title',
           id: 'title',
           header: ({ column }) => (
-            <DataGridColumnHeader table={table} title='Title' column={column} />
+            <DataGridColumnHeader table={tableHolder.current!} title='Title' column={column} />
           ),
           cell: ({ row }) => <AvatarCell32 {...row.original} />,
           size: 230,
@@ -654,7 +673,7 @@ export const ServerSidePagination: Story = {
         {
           accessorKey: 'publisher',
           header: ({ column }) => (
-            <DataGridColumnHeader table={table} title='Publisher' column={column} />
+            <DataGridColumnHeader table={tableHolder.current!} title='Publisher' column={column} />
           ),
           size: 140,
           meta: { skeleton: <Skeleton style={skeletonStyles.bar} /> }
@@ -662,7 +681,7 @@ export const ServerSidePagination: Story = {
         {
           accessorKey: 'status',
           header: ({ column }) => (
-            <DataGridColumnHeader table={table} title='Status' column={column} />
+            <DataGridColumnHeader table={tableHolder.current!} title='Status' column={column} />
           ),
           cell: ({ row }) =>
             row.original.status === 'inPrint' ? (
@@ -676,7 +695,7 @@ export const ServerSidePagination: Story = {
         {
           accessorKey: 'price',
           header: ({ column }) => (
-            <DataGridColumnHeader table={table} title='Price ($)' column={column} />
+            <DataGridColumnHeader table={tableHolder.current!} title='Price ($)' column={column} />
           ),
           cell: (info) => (
             <span {...stylex.props(statesStyles.numeric)}>
@@ -701,6 +720,7 @@ export const ServerSidePagination: Story = {
       manualPagination: true,
       manualSorting: true
     })
+    tableHolder.current = table
 
     return (
       <DataGrid table={table} recordCount={total} isLoading={isFetching}>

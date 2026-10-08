@@ -62,6 +62,12 @@ const svgStyle = {
   width: 'auto'
 } as const
 
+function isSvgElement(
+  value: React.ComponentType | React.ReactElement | null
+): value is React.ReactElement<React.SVGProps<SVGSVGElement>> {
+  return React.isValidElement(value)
+}
+
 export function Icon({
   svg,
   size = '1em',
@@ -71,9 +77,11 @@ export function Icon({
   render,
   ...props
 }: IconProps) {
-  const icon = (
-    React.isValidElement(svg) || svg === null ? svg : React.createElement(svg)
-  ) as React.ReactElement<React.SVGProps<SVGSVGElement>> | null
+  const icon = isSvgElement(svg)
+    ? svg
+    : svg === null || typeof svg !== 'function'
+      ? null
+      : React.createElement<React.SVGProps<SVGSVGElement>>(svg)
   const children = icon
     ? React.cloneElement(icon, {
         focusable: false,

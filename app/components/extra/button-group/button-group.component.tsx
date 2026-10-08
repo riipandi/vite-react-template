@@ -26,7 +26,9 @@ export function ButtonGroup({
   children,
   ...props
 }: ButtonGroupProps) {
-  const items = React.Children.toArray(children).filter(React.isValidElement)
+  const items = React.Children.toArray(children).filter(
+    (node): node is React.ReactElement<StyleProp> => React.isValidElement(node)
+  )
   return (
     <div role='group' {...props} {...stylex.props(s.root, orientations[orientation], style)}>
       {items.map((child, index) => {
@@ -38,13 +40,10 @@ export function ButtonGroup({
               : index === items.length - 1
                 ? 'last'
                 : 'middle'
-        const childStyle = (child.props as StyleProp).style
-        return React.cloneElement(child as React.ReactElement<StyleProp>, {
+        const childStyle = child.props.style
+        return React.cloneElement(child, {
           key: child.key ?? index,
-          style: [
-            position && joined[`${orientation}-${position}` as keyof typeof joined],
-            childStyle
-          ]
+          style: [position && joined[`${orientation}-${position}`], childStyle]
         })
       })}
     </div>

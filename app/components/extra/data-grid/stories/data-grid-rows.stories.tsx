@@ -12,7 +12,7 @@ import type {
   RowSelectionState,
   SortingState
 } from '@tanstack/react-table'
-import { Fragment, useMemo, useState } from 'react'
+import { Fragment, useMemo, useRef, useState } from 'react'
 import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import { Button } from '#/components/base/button'
 import { Badge } from '#/components/extra/badge'
@@ -151,14 +151,14 @@ export const RowSelection: Story = {
     const [sorting, setSorting] = useState<SortingState>([{ id: 'title', desc: true }])
     const selectedCount = Object.keys(rowSelection).length
 
-    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
     const columns = useMemo(
       () =>
         selectionColumns(() => {
           if (!tableHolder.current) throw new Error('table not ready')
           return tableHolder.current
         }),
-      [tableHolder]
+      []
     )
     const table = useTable({
       features: dataGridFeatures,
@@ -548,7 +548,7 @@ export const RowPinningSupport: Story = {
       pageIndex: 0,
       pageSize: 8
     })
-    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
     const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
@@ -723,7 +723,7 @@ export const TreeRows: Story = {
       eng: true,
       'eng-platform': true
     })
-    const tableHolder: { current?: DataGridTableInstance<ITreeNode> } = {}
+    const tableHolder = useRef<DataGridTableInstance<ITreeNode> | undefined>(undefined)
     const columns = useMemo<ColumnDef<DataGridFeatures, ITreeNode>[]>(
       () => [
         {

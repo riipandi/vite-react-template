@@ -452,6 +452,53 @@ interface DataGridTableRenderedRowProps<TData extends object> {
   centerWindow?: { start: number; end: number }
 }
 
+declare function renderRenderedRow<TData extends object>(
+  props: DataGridTableRenderedRowProps<TData> & { table: DataGridTableInstance<TData> }
+): ReactNode
+
+declare function renderVirtualBody<TData extends object>(props: VirtualBodyProps<TData>): ReactNode
+
+/**
+ * Memoized rendered row: identity comparison on row/window inputs. The
+ * memo component is hoisted to module scope (lint: no components during
+ * render); the generic call signature is restored via the `Object.assign`
+ * intersection (same pattern as `auth-worker-client`) — a widening, not a
+ * narrowing assertion. The table instance travels as an explicit prop so
+ * the memoized wrapper no longer closes over it.
+ */
+const RenderedRowMemo = Object.assign(
+  memo(
+    (rowProps: DataGridTableRenderedRowProps<never> & { table: DataGridTableInstance<never> }) => (
+      <DataGridTableRenderedRow {...rowProps} />
+    ),
+    (prev, next) =>
+      prev.row === next.row &&
+      prev.rowIndex === next.rowIndex &&
+      prev.rowRef === next.rowRef &&
+      prev.pinnedBoundary === next.pinnedBoundary &&
+      prev.centerWindow?.start === next.centerWindow?.start &&
+      prev.centerWindow?.end === next.centerWindow?.end &&
+      prev.table === next.table
+  ),
+  { renderRenderedRow }
+)
+
+/**
+ * Memoized virtual body: skips re-renders during an active column resize.
+ * Column widths update via CSS variables on the <table> element, so the
+ * browser handles width changes without React re-renders. A cell-selection
+ * drag gets the same treatment: painting goes through each cell's own
+ * Subscribe, and the virtualizer re-renders itself from inside the memo
+ * boundary, so parent-driven reconciliation during the drag is waste.
+ */
+const MemoizedVirtualBody = Object.assign(
+  memo(
+    (bodyProps: VirtualBodyProps<never>) => <DataGridTableVirtualBody {...bodyProps} />,
+    (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
+  ),
+  { renderVirtualBody }
+)
+
 function DataGridTableVirtualBody<TData extends object>({
   table,
   topRows,
@@ -474,25 +521,8 @@ function DataGridTableVirtualBody<TData extends object>({
   // rows entering the window, not all mounted rows. Cell-level state
   // (selection, focus, row checks) repaints through each cell's own
   // Subscribe, and any real data change rebuilds the row wrappers, so
-  // identity comparison is safe. The factory lives inside the component so
-  // `memo` keeps the ambient generic `TData` instead of erasing it to
-  // `object`; identity is stable per component instance via useMemo.
-  const RenderedRowMemo = useMemo(
-    () =>
-      memo(
-        (rowProps: DataGridTableRenderedRowProps<TData>) => (
-          <DataGridTableRenderedRow {...rowProps} table={table} />
-        ),
-        (prev, next) =>
-          prev.row === next.row &&
-          prev.rowIndex === next.rowIndex &&
-          prev.rowRef === next.rowRef &&
-          prev.pinnedBoundary === next.pinnedBoundary &&
-          prev.centerWindow?.start === next.centerWindow?.start &&
-          prev.centerWindow?.end === next.centerWindow?.end
-      ),
-    []
-  )
+  // identity comparison is safe. The memoized wrapper is hoisted to module
+  // scope (`RenderedRowMemo`).
   const totalRows = topRows.length + centerRows.length + bottomRows.length
 
   if (!totalRows) {
@@ -529,9 +559,10 @@ function DataGridTableVirtualBody<TData extends object>({
 
   topRows.forEach((row, index) => {
     renderedRows.push(
-      <RenderedRowMemo
+      <RenderedRowMemo.renderRenderedRow
         key={row.id}
         row={row}
+        table={table}
         centerWindow={centerColumnWindow}
         pinnedBoundary={index === topRows.length - 1 && hasMiddleSection ? 'top' : undefined}
       />
@@ -555,9 +586,10 @@ function DataGridTableVirtualBody<TData extends object>({
       if (!row) return
 
       renderedRows.push(
-        <RenderedRowMemo
+        <RenderedRowMemo.renderRenderedRow
           key={row.id}
           row={row}
+          table={table}
           rowRef={measureRowRef}
           rowIndex={virtualRow.index}
           centerWindow={centerColumnWindow}
@@ -577,9 +609,10 @@ function DataGridTableVirtualBody<TData extends object>({
   } else {
     centerRows.forEach((row, rowIndex) => {
       renderedRows.push(
-        <RenderedRowMemo
+        <RenderedRowMemo.renderRenderedRow
           key={row.id}
           row={row}
+          table={table}
           rowIndex={rowIndex}
           centerWindow={centerColumnWindow}
         />
@@ -608,9 +641,10 @@ function DataGridTableVirtualBody<TData extends object>({
 
   bottomRows.forEach((row, index) => {
     renderedRows.push(
-      <RenderedRowMemo
+      <RenderedRowMemo.renderRenderedRow
         key={row.id}
         row={row}
+        table={table}
         centerWindow={centerColumnWindow}
         pinnedBoundary={
           index === 0 && (topRows.length > 0 || hasMiddleSection) ? 'bottom' : undefined
@@ -648,17 +682,7 @@ function DataGridTableVirtual<TData extends object>({
   // drag gets the same treatment: painting goes through each cell's own
   // Subscribe, and the virtualizer re-renders itself from inside the memo
   // boundary, so parent-driven reconciliation during the drag is waste. The
-  // factory lives inside the component so `memo` keeps the ambient generic
-  // `TData` instead of erasing it to `object`; identity is stable per
-  // component instance via useMemo.
-  const MemoizedVirtualBody = useMemo(
-    () =>
-      memo(
-        (bodyProps: VirtualBodyProps<TData>) => <DataGridTableVirtualBody {...bodyProps} />,
-        (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
-      ),
-    []
-  )
+  // memoized wrapper is hoisted to module scope (`MemoizedVirtualBody`).
   const mergedHeaderGroups = getDataGridTableMergedHeaderGroups(table)
   const hasRightPinnedColumns = hasDataGridTableRightPinnedColumns(table)
   const centerVisibleColumns = table.getCenterVisibleLeafColumns()
@@ -1113,6 +1137,7 @@ function DataGridTableVirtual<TData extends object>({
     )
   }, [
     renderHeader,
+    table,
     mergedHeaderGroups,
     centerWindowStart,
     centerWindowEnd,
@@ -1147,7 +1172,7 @@ function DataGridTableVirtual<TData extends object>({
         )}
 
         <DataGridTableBody>
-          <MemoizedVirtualBody
+          <MemoizedVirtualBody.renderVirtualBody
             table={table}
             topRows={topRows}
             centerRows={centerRows}

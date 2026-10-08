@@ -11,7 +11,7 @@ import type {
   PaginationState,
   SortingState
 } from '@tanstack/react-table'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { Avatar, AvatarFallback } from '#/components/base/avatar'
 import {
   DataGrid,
@@ -181,8 +181,8 @@ function bookColumns(
 export const ColumnIcons: Story = {
   name: 'Column icons',
   render: () => {
-    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
-    const columns = useMemo(() => bookColumns(true, () => tableHolder.current!), [tableHolder])
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
+    const columns = useMemo(() => bookColumns(true, () => tableHolder.current!), [])
     const table = useDemoTable(columns)
     tableHolder.current = table
 
@@ -205,8 +205,8 @@ export const ColumnIcons: Story = {
 export const SortableColumns: Story = {
   name: 'Sortable columns',
   render: () => {
-    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
-    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [tableHolder])
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
+    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [])
     const table = useDemoTable(columns)
     tableHolder.current = table
 
@@ -229,8 +229,8 @@ export const SortableColumns: Story = {
 export const MovableColumns: Story = {
   name: 'Movable columns',
   render: () => {
-    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
-    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [tableHolder])
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
+    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [])
     const table = useDemoTable(columns)
     tableHolder.current = table
 
@@ -257,9 +257,10 @@ export const MovableColumns: Story = {
 export const DraggableColumns: Story = {
   name: 'Draggable columns',
   render: () => {
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
     const columns = useMemo(
       () =>
-        bookColumns(false, () => table).map((column) => ({
+        bookColumns(false, () => tableHolder.current!).map((column) => ({
           ...column,
           enableColumnOrdering: true
         })),
@@ -270,6 +271,7 @@ export const DraggableColumns: Story = {
       5,
       columns.map((column) => column.id ?? '')
     )
+    tableHolder.current = table
     const handleDragEnd = (event: DragEndEvent) => {
       const { active, over } = event
       if (active && over && active.id !== over.id) {
@@ -304,11 +306,11 @@ export const DraggableColumns: Story = {
 export const ColumnResizing: Story = {
   name: 'Column resizing',
   render: () => {
-    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
-    const getTable = () => {
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
+    const getTable = useCallback(() => {
       if (!tableHolder.current) throw new Error('table not ready')
       return tableHolder.current
-    }
+    }, [])
     const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
@@ -344,7 +346,7 @@ export const ColumnResizing: Story = {
           enableResizing: true
         }
       ],
-      []
+      [getTable]
     )
     const table = useDemoTable(columns)
 
@@ -373,8 +375,8 @@ export const ColumnResizing: Story = {
 export const PinnableColumns: Story = {
   name: 'Pinnable columns',
   render: () => {
-    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
-    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [tableHolder])
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
+    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [])
     const table = useDemoTable(columns)
     tableHolder.current = table
 
@@ -401,8 +403,8 @@ export const PinnableColumns: Story = {
 export const StickyHeader: Story = {
   name: 'Sticky header',
   render: () => {
-    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
-    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [tableHolder])
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
+    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [])
     const table = useDemoTable(columns, 10)
     tableHolder.current = table
 
@@ -430,8 +432,8 @@ export const StickyHeader: Story = {
 export const ColumnControls: Story = {
   name: 'Column controls',
   render: () => {
-    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
-    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [tableHolder])
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
+    const columns = useMemo(() => bookColumns(false, () => tableHolder.current!), [])
     const table = useDemoTable(columns)
     tableHolder.current = table
 
@@ -463,11 +465,11 @@ export const ColumnControls: Story = {
 export const ColumnVisibilityControls: Story = {
   name: 'Column visibility controls',
   render: () => {
-    const tableHolder: { current?: DataGridTableInstance<IBook> } = {}
-    const getTable = () => {
+    const tableHolder = useRef<DataGridTableInstance<IBook> | undefined>(undefined)
+    const getTable = useCallback(() => {
       if (!tableHolder.current) throw new Error('table not ready')
       return tableHolder.current
-    }
+    }, [])
     const columns = useMemo<ColumnDef<DataGridFeatures, IBook>[]>(
       () => [
         {
@@ -509,7 +511,7 @@ export const ColumnVisibilityControls: Story = {
           size: 120
         }
       ],
-      []
+      [getTable]
     )
     const table = useDemoTable(columns)
 

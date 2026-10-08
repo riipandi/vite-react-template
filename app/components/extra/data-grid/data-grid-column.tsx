@@ -515,25 +515,36 @@ function DataGridColumnHeaderInner<TData extends object, TValue>({
  * prop is what lets it past the `memo` - which would otherwise see unchanged
  * props and skip the render anyway.
  */
+declare function renderHeaderMemo<TData extends object, TValue>(
+  headerProps: DataGridColumnHeaderProps<TData, TValue> & {
+    /** Internal: the state slices the header re-renders on. Not part of the public API. */
+    subscribedState?: unknown
+  }
+): ReactNode
+
+/**
+ * Memoized header wrapper: the memo component is hoisted to module scope
+ * (lint: no components during render). The generic call signature is
+ * restored via the `Object.assign` intersection (same pattern as
+ * `auth-worker-client`) — a widening, not a narrowing assertion — so the
+ * caller's TData/TValue flow through without a per-site cast.
+ */
+const HeaderMemo = Object.assign(
+  memo(
+    (
+      headerProps: DataGridColumnHeaderProps<never, never> & {
+        /** Internal: the state slices the header re-renders on. Not part of the public API. */
+        subscribedState?: unknown
+      }
+    ) => <DataGridColumnHeaderInner {...headerProps} />
+  ),
+  { renderHeaderMemo }
+)
+
 function DataGridColumnHeader<TData extends object, TValue>(
   props: DataGridColumnHeaderProps<TData, TValue>
 ) {
   const { table } = props
-
-  // The memoized element type is created inside the caller's generic scope,
-  // so it keeps the caller's TData/TValue without a re-claiming assertion.
-  const HeaderMemo = useMemo(
-    () =>
-      memo(
-        (
-          headerProps: DataGridColumnHeaderProps<TData, TValue> & {
-            /** Internal: the state slices the header re-renders on. Not part of the public API. */
-            subscribedState?: unknown
-          }
-        ) => <DataGridColumnHeaderInner {...headerProps} />
-      ),
-    []
-  )
 
   return (
     <Subscribe
@@ -545,7 +556,7 @@ function DataGridColumnHeader<TData extends object, TValue>(
         columnVisibility: state.columnVisibility
       })}
     >
-      {(subscribed) => <HeaderMemo {...props} subscribedState={subscribed} />}
+      {(subscribed) => <HeaderMemo.renderHeaderMemo {...props} subscribedState={subscribed} />}
     </Subscribe>
   )
 }

@@ -99,13 +99,13 @@ export const ToastPromise: Story = {
     <ToastProvider>
       <Button
         variant='outline'
-        onClick={() =>
-          toast.promise(save(), {
+        onClick={() => {
+          void toast.promise(save(), {
             loading: 'Sealing the cryptex…',
             success: 'Cryptex sealed',
             error: 'The cryptex jammed'
           })
-        }
+        }}
       >
         Seal the cryptex
       </Button>

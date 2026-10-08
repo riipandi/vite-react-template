@@ -73,7 +73,7 @@ export function GlobalError({ error, reset }: ErrorComponentProps) {
         <div {...stylex.props(styles.message)}>
           <p {...stylex.props(atoms.lineHeight['2rem'])}>Something went wrong.</p>
           <p {...stylex.props(atoms.lineHeight['2rem'], styles.errorDetail)}>
-            {(error as Error | undefined)?.message ?? 'An unexpected error occurred.'}
+            {error instanceof Error ? error.message : 'An unexpected error occurred.'}
           </p>
         </div>
         <div {...stylex.props(styles.actionWrapper)}>

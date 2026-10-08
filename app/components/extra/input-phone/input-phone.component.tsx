@@ -85,7 +85,7 @@ function CountrySelect({
   const containerRef = React.useContext(PhoneContainerRefContext)
   const collection = React.useMemo(
     () =>
-      comboboxCreateItems(countryList as CountryEntry[], {
+      comboboxCreateItems(countryList, {
         getValue: (entry) => entry.value ?? '',
         getLabel: (entry) => entry.label
       }),
@@ -201,7 +201,7 @@ export function InputPhone({
         onCountryChange={onCountryChange}
         addInternationalOption={addInternationalOption}
         value={props.value || undefined}
-        onChange={(next) => onChange(next || ('' as Value))}
+        onChange={(next) => onChange(next || '')}
       />
     </PhoneContainerRefContext.Provider>
   )

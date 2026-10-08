@@ -82,7 +82,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
       if (target) {
         router.history.push(target)
       } else {
-        navigate({ to: '/overview' })
+        void navigate({ to: '/overview' })
       }
     },
     [navigate, router]
@@ -93,7 +93,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
       .logout()
       .finally(() => {
         clearAuth()
-        navigate({ to: '/login', search: { loggedOut: true } })
+        void navigate({ to: '/login', search: { loggedOut: true } })
       })
   }, [navigate])
 

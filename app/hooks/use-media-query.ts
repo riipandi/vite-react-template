@@ -16,6 +16,10 @@ const BREAKPOINTS = {
 
 type Breakpoint = keyof typeof BREAKPOINTS
 
+function isBreakpoint(value: string): value is Breakpoint {
+  return value in BREAKPOINTS
+}
+
 /**
  - `"medium"`       → `(min-width: 660px)`
  - `"max-medium"`   → `(max-width: 659px)`
@@ -52,12 +56,12 @@ function parseQuery(query: BreakpointQuery | MediaQueryInput | (string & {})): s
   for (const segment of query.split(':')) {
     if (segment.startsWith('max-')) {
       const bp = segment.slice(4)
-      if (bp in BREAKPOINTS) parts.push(resolveMax(bp as Breakpoint))
-    } else if (segment in BREAKPOINTS) {
+      if (isBreakpoint(bp)) parts.push(resolveMax(bp))
+    } else if (isBreakpoint(segment)) {
       // Named breakpoints are lower bounds in this system; the bare form
       // resolves to the matching range boundary defined by `breakpoints`
       // (small is <660 only, so "small" as a min falls through to raw passthrough).
-      parts.push(resolveMin(segment as Breakpoint))
+      parts.push(resolveMin(segment))
     }
   }
   return parts.length > 0 ? parts.join(' and ') : query

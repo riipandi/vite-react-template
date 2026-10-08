@@ -39,7 +39,8 @@ describe('auth engine (browser)', () => {
 
     expect(results).toEqual([true, true, true])
     expect(fetchMock).toHaveBeenCalledTimes(1)
-    expect(String(fetchMock.mock.calls[0]?.[0])).toContain('/auth/refresh')
+    const refreshUrl = fetchMock.mock.calls[0]?.[0]
+    expect(typeof refreshUrl === 'string' && refreshUrl.includes('/auth/refresh')).toBe(true)
   })
 
   it('short-circuits during the cooldown after a failed refresh', async () => {
@@ -93,10 +94,12 @@ describe('auth engine (browser)', () => {
     const engine = createAuthEngine('http://test.local')
 
     await engine.login({ username: 'emilys', password: 'emilyspass' }, { rememberMe: true })
-    const rememberedBody = JSON.parse(String(fetchMock.mock.calls[0]?.[1]?.body))
+    const rawRemembered = fetchMock.mock.calls[0]?.[1]?.body
+    const rememberedBody = JSON.parse(typeof rawRemembered === 'string' ? rawRemembered : '')
 
     await engine.login({ username: 'emilys', password: 'emilyspass' })
-    const plainBody = JSON.parse(String(fetchMock.mock.calls[1]?.[1]?.body))
+    const rawPlain = fetchMock.mock.calls[1]?.[1]?.body
+    const plainBody = JSON.parse(typeof rawPlain === 'string' ? rawPlain : '')
 
     expect(rememberedBody).toMatchObject({ rememberMe: true, expiresInMins: 60 * 24 * 30 })
     expect(plainBody).toMatchObject({ rememberMe: false, expiresInMins: 60 })

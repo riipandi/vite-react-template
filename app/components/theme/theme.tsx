@@ -5,6 +5,13 @@ import { getStorageAdapter } from './theme-storage'
 import { disableAnimation, getSystemTheme, handleAttribute, isServer, MEDIA } from './theme-utils'
 import type { ThemeProviderProps, UseThemeProps } from './types'
 
+function toSystemTheme(value: string, enabled: boolean): 'dark' | 'light' | undefined {
+  if (!enabled) return undefined
+  if (value === 'dark') return 'dark'
+  if (value === 'light') return 'light'
+  return undefined
+}
+
 const colorSchemes = ['light', 'dark']
 const ThemeContext = createContext<UseThemeProps | undefined>(undefined)
 const defaultContext: UseThemeProps = { setTheme: () => {}, themes: [] }
@@ -156,7 +163,7 @@ const Theme = ({
 
   // Cross-tab sync via storage adapter's subscribe method
   useEffect(() => {
-    if (!storageAdapter.subscribe) return
+    if (!storageAdapter.subscribe) return undefined
 
     return storageAdapter.subscribe(storageKey, (newValue) => {
       // If default theme set, use it if storage === null (happens on storage manual deletion)
@@ -180,7 +187,7 @@ const Theme = ({
       forcedTheme,
       resolvedTheme: theme === 'system' ? resolvedTheme : theme,
       themes: enableSystem ? [...themes, 'system'] : themes,
-      systemTheme: (enableSystem ? resolvedTheme : undefined) as 'light' | 'dark' | undefined
+      systemTheme: toSystemTheme(resolvedTheme, enableSystem)
     }),
     [theme, setTheme, forcedTheme, resolvedTheme, enableSystem, themes]
   )

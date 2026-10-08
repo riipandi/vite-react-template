@@ -149,6 +149,7 @@ export const Destructive: Story = {
       setDeleting(false)
       setOpen(false)
     }
+    const onDelete = () => void handleDelete()
 
     return (
       <AlertDialog open={open} onOpenChange={setOpen}>
@@ -165,7 +166,7 @@ export const Destructive: Story = {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
-            <AlertDialogAction variant='destructive' disabled={deleting} onClick={handleDelete}>
+            <AlertDialogAction variant='destructive' disabled={deleting} onClick={onDelete}>
               {deleting && <Spinner />}
               {deleting ? 'Closing…' : 'Close the vault'}
             </AlertDialogAction>

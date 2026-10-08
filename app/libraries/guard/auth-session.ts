@@ -28,8 +28,13 @@ async function hasSessionCookie(): Promise<boolean> {
     if (!response.ok) {
       throw new Error(`unexpected status ${response.status}`)
     }
-    const data = (await response.json()) as { authenticated?: boolean }
-    return data.authenticated === true
+    const data: unknown = await response.json()
+    return (
+      typeof data === 'object' &&
+      data !== null &&
+      'authenticated' in data &&
+      data.authenticated === true
+    )
   } catch {
     if (!probeWarned) {
       probeWarned = true

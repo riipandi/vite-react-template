@@ -25,7 +25,8 @@ function vitestStylexCleanup(): Plugin {
     configureServer(devServer) {
       server = devServer
       if (!devServer.httpServer) {
-        devServer.httpServer = new EventEmitter() as ViteDevServer['httpServer']
+        // Typed as an addition to avoid narrowing a typed property via `as`.
+        Object.assign(devServer, { httpServer: new EventEmitter() })
       }
     },
     buildEnd: closeHttpServer,

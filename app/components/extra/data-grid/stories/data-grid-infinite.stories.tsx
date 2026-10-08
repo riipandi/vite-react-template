@@ -110,13 +110,22 @@ function generateData(count: number): IRow[] {
 }
 
 function useColumns(getReactTable: () => DataGridTableInstance<IRow>) {
+  // Latest-ref pattern: the getter identity changes every render but the
+  // column defs must stay referentially stable for the table instance. The
+  // ref write happens in an effect (react/ref rule forbids render-phase
+  // access) — one render of stale headers is avoided because the first
+  // header render only happens after the table exists.
+  const getReactTableRef = useRef<() => DataGridTableInstance<IRow>>(getReactTable)
+  useEffect(() => {
+    getReactTableRef.current = getReactTable
+  }, [getReactTable])
   return useMemo<ColumnDef<DataGridFeatures, IRow>[]>(
     () => [
       {
         accessorKey: 'id',
         id: 'id',
         header: ({ column }) => (
-          <DataGridColumnHeader table={getReactTable()} title='#' column={column} />
+          <DataGridColumnHeader table={getReactTableRef.current()} title='#' column={column} />
         ),
         cell: ({ row }) => (
           <span {...stylex.props(infiniteStyles.mutedNumeric)}>{row.original.id}</span>
@@ -128,7 +137,7 @@ function useColumns(getReactTable: () => DataGridTableInstance<IRow>) {
         accessorKey: 'title',
         id: 'title',
         header: ({ column }) => (
-          <DataGridColumnHeader table={getReactTable()} title='Title' column={column} />
+          <DataGridColumnHeader table={getReactTableRef.current()} title='Title' column={column} />
         ),
         cell: ({ row }) => (
           <div {...stylex.props(s.cellFlexWide)}>
@@ -156,7 +165,7 @@ function useColumns(getReactTable: () => DataGridTableInstance<IRow>) {
         accessorKey: 'author',
         id: 'author',
         header: ({ column }) => (
-          <DataGridColumnHeader table={getReactTable()} title='Author' column={column} />
+          <DataGridColumnHeader table={getReactTableRef.current()} title='Author' column={column} />
         ),
         size: 200,
         enableSorting: true
@@ -165,7 +174,7 @@ function useColumns(getReactTable: () => DataGridTableInstance<IRow>) {
         accessorKey: 'status',
         id: 'status',
         header: ({ column }) => (
-          <DataGridColumnHeader table={getReactTable()} title='Status' column={column} />
+          <DataGridColumnHeader table={getReactTableRef.current()} title='Status' column={column} />
         ),
         size: 120,
         enableSorting: true
@@ -174,7 +183,11 @@ function useColumns(getReactTable: () => DataGridTableInstance<IRow>) {
         accessorKey: 'price',
         id: 'price',
         header: ({ column }) => (
-          <DataGridColumnHeader table={getReactTable()} title='Price ($)' column={column} />
+          <DataGridColumnHeader
+            table={getReactTableRef.current()}
+            title='Price ($)'
+            column={column}
+          />
         ),
         cell: (info) => (
           <span {...stylex.props(infiniteStyles.numeric)}>
@@ -199,7 +212,7 @@ const localAllData = generateData(LOCAL_TOTAL)
 export const LocalInfiniteScroll: Story = {
   name: 'Local infinite scroll',
   render: () => {
-    const tableHolder: { current?: DataGridTableInstance<IRow> } = {}
+    const tableHolder = useRef<DataGridTableInstance<IRow> | undefined>(undefined)
     const columns = useColumns(() => {
       if (!tableHolder.current) throw new Error('table not ready')
       return tableHolder.current
@@ -260,7 +273,7 @@ const REMOTE_PAGE = 20
 export const RemoteInfiniteScroll: Story = {
   name: 'Remote infinite scroll',
   render: () => {
-    const tableHolder: { current?: DataGridTableInstance<IRow> } = {}
+    const tableHolder = useRef<DataGridTableInstance<IRow> | undefined>(undefined)
     const columns = useColumns(() => {
       if (!tableHolder.current) throw new Error('table not ready')
       return tableHolder.current
@@ -393,7 +406,7 @@ export const ColumnVirtualization: Story = {
   name: 'Column virtualization',
   render: () => {
     const [targetColumnIndex, setTargetColumnIndex] = useState(0)
-    const tableHolder: { current?: DataGridTableInstance<IRow> } = {}
+    const tableHolder = useRef<DataGridTableInstance<IRow> | undefined>(undefined)
     const columns = useMemo(
       () =>
         matrixColumns(() => {

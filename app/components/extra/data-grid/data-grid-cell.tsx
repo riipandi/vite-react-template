@@ -1363,7 +1363,7 @@ function DataGridCellSelection<TData extends object>({
             : focused.column
       if (!targetRow || !targetColumn) return false
       if (extend) {
-        const bound = getDataGridActiveBound(table)
+        const bound = getDataGridActiveBound(getTable())
         const columnIndex = allColumns.findIndex((column) => column.id === focused.column.id)
         let anchorRowId = focused.row.id
         let anchorColumnId = focused.column.id
@@ -1376,7 +1376,7 @@ function DataGridCellSelection<TData extends object>({
               columnIndex === bound.minColumnIndex ? bound.maxColumnIndex : bound.minColumnIndex
             ]?.id ?? anchorColumnId
         }
-        table.selectCellRange(
+        tableNow.selectCellRange(
           {
             anchorRowId,
             anchorColumnId,
@@ -1386,7 +1386,7 @@ function DataGridCellSelection<TData extends object>({
           { mode: 'replace' }
         )
       } else {
-        table.setFocusedCell(targetRow.id, targetColumn.id)
+        tableNow.setFocusedCell(targetRow.id, targetColumn.id)
       }
       scrollFocusedIntoView(
         clampedRowIndex,
@@ -1412,10 +1412,10 @@ function DataGridCellSelection<TData extends object>({
         : null
       if (target === 'edge') return
       if (target) {
-        table.setFocusedCell(target.rowId, target.columnId)
+        tableNow.setFocusedCell(target.rowId, target.columnId)
         return
       }
-      table.moveCellSelection(direction)
+      tableNow.moveCellSelection(direction)
     }
 
     // One viewport's worth of rows for PageUp/PageDown, measured from the
@@ -1594,7 +1594,7 @@ function DataGridCellSelection<TData extends object>({
           // region (a draft row, or the add-row affordance), keeping one
           // keyboard model across the whole table.
           if (direction === 'down' && !event.shiftKey) {
-            const focused = table.getFocusedCell()
+            const focused = getTable().getFocusedCell()
             const renderedRows = viewport.querySelectorAll('tbody tr[data-row-id]')
             const lastRenderedId =
               renderedRows[renderedRows.length - 1]?.getAttribute('data-row-id')
@@ -1609,7 +1609,7 @@ function DataGridCellSelection<TData extends object>({
             }
           }
           if (event.shiftKey && isRangeSelectionEnabled()) {
-            const corner = extendDataGridSelection(table, viewport, direction)
+            const corner = extendDataGridSelection(getTable(), viewport, direction)
             event.preventDefault()
             scrollFocusedIntoView(undefined, undefined, corner ?? undefined)
             return
@@ -1617,10 +1617,11 @@ function DataGridCellSelection<TData extends object>({
           // Plain arrows step in visual space so navigation crosses
           // pinned rows and pagination windows the feature's own move
           // cannot resolve; at a visual edge the focus stays put.
-          const focused = table.getFocusedCell()
+          const activeTable = getTable()
+          const focused = activeTable.getFocusedCell()
           const target = focused
             ? getDataGridStepTarget(
-                table,
+                activeTable,
                 viewport,
                 { rowId: focused.row.id, columnId: focused.column.id },
                 direction
@@ -1631,12 +1632,12 @@ function DataGridCellSelection<TData extends object>({
             return
           }
           if (target) {
-            table.setFocusedCell(target.rowId, target.columnId)
+            activeTable.setFocusedCell(target.rowId, target.columnId)
             event.preventDefault()
             scrollFocusedIntoView()
             return
           }
-          table.moveCellSelection(direction)
+          activeTable.moveCellSelection(direction)
           event.preventDefault()
           scrollFocusedIntoView()
           return
@@ -1677,11 +1678,11 @@ function DataGridCellSelection<TData extends object>({
           return
         }
         case 'Tab': {
-          const before = table.getFocusedCell()
+          const before = getTable().getFocusedCell()
           // Logical directions, no RTL swap: Tab means "next cell" in both
           // reading directions, exactly like DOM tab order.
           moveFocusVisual(event.shiftKey ? 'left' : 'right')
-          const after = table.getFocusedCell()
+          const after = getTable().getFocusedCell()
           // Trap Tab only while it moved; at the edges focus leaves the grid,
           // which keyboard users need to escape it at all.
           if (after && after.id !== before?.id) {
@@ -1694,7 +1695,7 @@ function DataGridCellSelection<TData extends object>({
         case 'Backspace': {
           const onCellsChange = getOnCellsChange()
           if (!onCellsChange) return
-          const details = buildDataGridClearDetails<TData>(table, 'clear', false, viewport)
+          const details = buildDataGridClearDetails<TData>(getTable(), 'clear', false, viewport)
           if (details) onCellsChange(details)
           event.preventDefault()
           return
@@ -1702,8 +1703,8 @@ function DataGridCellSelection<TData extends object>({
         case 'Escape': {
           // Consume the key only while it has a selection to clear, so a
           // grid inside a dialog still lets Escape close the dialog.
-          if (table.getCellSelectionBounds().length) {
-            table.resetCellSelection(true)
+          if (getTable().getCellSelectionBounds().length) {
+            getTable().resetCellSelection(true)
             // The focused-cell attribute is gone after the commit;
             // aria-activedescendant must not keep naming it.
             requestAnimationFrame(syncActiveDescendant)
@@ -1743,7 +1744,7 @@ function DataGridCellSelection<TData extends object>({
 
       // Space that opened nothing (read-only cell) must not scroll the page
       // out from under the focused cell.
-      if (event.key === ' ' && table.getFocusedCell()) {
+      if (event.key === ' ' && getTable().getFocusedCell()) {
         event.preventDefault()
       }
     }
@@ -2051,7 +2052,7 @@ function DataGridCellSelection<TData extends object>({
       minColumnIndex: bound.minColumnIndex,
       maxColumnIndex: bound.maxColumnIndex
     })
-    const selectionSubscription = table.atoms.cellSelection?.subscribe(() => {
+    const selectionSubscription = getTable().atoms.cellSelection?.subscribe(() => {
       const onCellSelectionChange = wiringRef.current.context.props.onCellSelectionChange
       if (!onCellSelectionChange) return
       const tableNow = getTable()
@@ -2099,8 +2100,9 @@ function DataGridCellSelection<TData extends object>({
     // fresh props inside every handler, so the effect re-runs only when the
     // table itself is replaced. apiRef (via wiringRef) is only
     // read and written here: keeping it out of the deps means an inline ref
-    // object cannot tear the listeners down every render.
-  }, [enabled, keyboard, clipboard, table.atoms.cellSelection])
+    // object cannot tear the listeners down every render. The same getter
+    // indirection covers `table` inside the effect body's closures.
+  }, [enabled, keyboard, clipboard])
 
   // The editor overlay covers the cell but not the fill handle's
   // straddling half, which would poke out beneath it; the viewport flags

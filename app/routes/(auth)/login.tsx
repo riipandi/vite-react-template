@@ -137,7 +137,7 @@ function RouteComponent() {
             onSubmit={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              form.handleSubmit()
+              form.handleSubmit().catch(() => {})
             }}
           >
             <div id='login-form-grid' {...stylex.props(styles.formGrid)}>
@@ -202,7 +202,7 @@ function RouteComponent() {
                 id='remember'
                 name='remember'
                 checked={remember}
-                onCheckedChange={(checked) => setRemember(checked === true)}
+                onCheckedChange={(checked) => setRemember(checked)}
               />
               <FieldLabel htmlFor='remember'>Remember me on this device</FieldLabel>
             </Field>

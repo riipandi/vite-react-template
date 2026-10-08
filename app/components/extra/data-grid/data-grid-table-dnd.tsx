@@ -310,22 +310,8 @@ function DataGridTableDnd<TData extends object>({
 
   // Memoized body rows: skip re-renders during active column resize. Column
   // widths update via CSS variables on the <table> element, so the browser
-  // handles width changes without React re-renders. The memoized element type
-  // is built here, inside the component's generic scope: the arrow is
-  // non-generic and closes over the ambient `TData`, so `memo` infers the
-  // fully typed props without an assertion. Its identity is stable for the
-  // component instance's lifetime because the factory runs once via `useMemo`.
-  const BodyRowsMemo = useMemo(
-    () =>
-      memo(
-        (bodyRowsProps: DataGridTableDndBodyRowsProps<TData>) => (
-          <DataGridTableDndBodyRows {...bodyRowsProps} />
-        ),
-        (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
-      ),
-    []
-  )
-
+  // handles width changes without React re-renders. The memo component is
+  // hoisted to module scope (see `BodyRowsMemo` below the component).
   return (
     <DndContext
       collisionDetection={closestCenter}
@@ -368,7 +354,7 @@ function DataGridTableDnd<TData extends object>({
           )}
 
           <DataGridTableBody>
-            <BodyRowsMemo table={table} />
+            <BodyRowsMemo.renderBodyRowsMemo table={table} />
           </DataGridTableBody>
 
           {footerContent && <DataGridTableFoot>{footerContent}</DataGridTableFoot>}
@@ -380,6 +366,46 @@ function DataGridTableDnd<TData extends object>({
 
 export { DataGridTableDnd }
 export type { DataGridTableDndProps }
+
+declare function renderBodyRowsMemoGeneric<TData extends object>(
+  props: DataGridTableDndBodyRowsProps<TData>
+): ReactNode
+
+/**
+ * Memoized body rows for the column-drag grid: skip re-renders during
+ * active column resize. Column widths update via CSS variables on the
+ * <table> element, so the browser handles width changes without React
+ * re-renders. Hoisted to module scope (lint: no components during render);
+ * the generic call signature is restored via the `Object.assign`
+ * intersection (same pattern as `auth-worker-client`).
+ */
+const BodyRowsMemo = Object.assign(
+  memo(
+    (bodyRowsProps: DataGridTableDndBodyRowsProps<never>) => (
+      <DataGridTableDndBodyRows {...bodyRowsProps} />
+    ),
+    (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
+  ),
+  { renderBodyRowsMemo: renderBodyRowsMemoGeneric }
+)
+
+declare function renderRowsBodyMemoGeneric<TData extends object>(
+  props: DataGridTableDndRowsBodyProps<TData>
+): ReactNode
+
+/**
+ * Memoized rows body for the row-drag grid, same rationale as
+ * {@link BodyRowsMemo}.
+ */
+const RowsBodyMemo = Object.assign(
+  memo(
+    (rowsBodyProps: DataGridTableDndRowsBodyProps<never>) => (
+      <DataGridTableDndRowsBody {...rowsBodyProps} />
+    ),
+    (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
+  ),
+  { renderRowsBodyMemo: renderRowsBodyMemoGeneric }
+)
 
 function DataGridTableDndRowHandle({
   style,
@@ -804,21 +830,8 @@ function DataGridTableDndRows<TData extends object>({
 
   // Memoized body rows: skip re-renders during active column resize. Column
   // widths update via CSS variables on the <table> element, so the browser
-  // handles width changes without React re-renders. The memoized element type
-  // is built here, inside the component's generic scope: the arrow is
-  // non-generic and closes over the ambient `TData`, so `memo` infers the
-  // fully typed props without an assertion. Its identity is stable for the
-  // component instance's lifetime because the factory runs once via `useMemo`.
-  const RowsBodyMemo = useMemo(
-    () =>
-      memo(
-        (rowsBodyProps: DataGridTableDndRowsBodyProps<TData>) => (
-          <DataGridTableDndRowsBody {...rowsBodyProps} />
-        ),
-        (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
-      ),
-    []
-  )
+  // handles width changes without React re-renders. The memo component is
+  // hoisted to module scope (see `RowsBodyMemo` below the component).
 
   return (
     <DndContext
@@ -879,7 +892,7 @@ function DataGridTableDndRows<TData extends object>({
           )}
 
           <DataGridTableBody>
-            <RowsBodyMemo
+            <RowsBodyMemo.renderRowsBodyMemo
               table={table}
               dataIds={dataIds}
               renderRowDecoration={renderRowDecoration}

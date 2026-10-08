@@ -60,7 +60,7 @@ vi.mock('@tanstack/router-core/isServer', () => ({
 
 // Mock ScriptOnce from @tanstack/react-router to avoid useRouter issues
 vi.mock('@tanstack/react-router', async (importOriginal) => {
-  const actual = (await importOriginal()) as Record<string, unknown>
+  const actual = await importOriginal<typeof import('@tanstack/react-router')>()
   return {
     ...actual,
     ScriptOnce: ({ children }: { children: ReactNode }) => children

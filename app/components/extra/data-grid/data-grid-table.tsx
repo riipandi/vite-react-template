@@ -75,7 +75,7 @@ function getDataGridTreeIndentStyle<TData extends object>(
   indent: number = 20
 ): CSSProperties {
   return {
-    '--data-grid-tree-padding': `${row.depth * indent}px`
+    ['--data-grid-tree-padding' as string]: `${row.depth * indent}px`
   }
 }
 
@@ -532,21 +532,37 @@ function DataGridTableFillCol<TData extends object>({
   return <col data-slot='data-grid-table-fill-col' style={getFillCellWidth(table)} />
 }
 
-function DataGridTableFillHeadCell<TData extends object>({
-  table
-}: {
+/**
+ * The fill head cell for `columnsResizable` grids. The implementation lives
+ * in a generic inner function; the exported binding picks up its generic
+ * call signature through the `Object.assign` intersection (same pattern as
+ * `auth-worker-client`) — a widening, not a narrowing assertion.
+ */
+const DataGridTableFillHeadCell = Object.assign(
+  function DataGridTableFillHeadCell<TData extends object>(props: {
+    table: DataGridTableInstance<TData>
+  }) {
+    return renderFillHeadCellGeneric(props)
+  },
+  { renderFillHeadCell: renderFillHeadCellGeneric }
+)
+
+function renderFillHeadCellGeneric<TData extends object>(props: {
   table: DataGridTableInstance<TData>
 }) {
-  const { props } = useDataGrid()
+  const { props: gridProps } = useDataGrid()
 
-  if (!props.tableLayout?.columnsResizable) return null
+  if (!gridProps.tableLayout?.columnsResizable) return null
 
   return (
     <th
       aria-hidden='true'
       data-slot='data-grid-table-fill-head-cell'
-      style={getFillCellWidth(table)}
-      {...stylex.props(s.fillCell, props.tableLayout?.headerBackground && s.fillHeadCellBackground)}
+      style={getFillCellWidth(props.table)}
+      {...stylex.props(
+        s.fillCell,
+        gridProps.tableLayout?.headerBackground && s.fillHeadCellBackground
+      )}
     />
   )
 }
@@ -2317,22 +2333,33 @@ function DataGridTableBodyRows<TData extends object>({
  * cell crossed, but painting goes through each cell's own Subscribe, so row
  * reconciliation during the drag is pure waste.
  *
- * React.memo instantiates a generic component's TData to its constraint, so
- * the memoized element type is created inside the caller's generic scope
- * (`useMemoBodyRows`), where the memo identity stays stable per instance.
+ * `memo` erases the inner component's generic parameters, so the memo result
+ * is widened back to a generic callable through an `Object.assign`
+ * intersection (same pattern as `auth-worker-client`) — a widening, not a
+ * narrowing assertion. One stable component identity across renders.
  */
-function useMemoBodyRows<TData extends object>() {
-  return useMemo(
-    () =>
-      memo(
-        (bodyRowsProps: DataGridTableBodyRowsProps<TData>) => (
-          <DataGridTableBodyRows {...bodyRowsProps} />
-        ),
-        (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
-      ),
-    []
-  )
-}
+declare function renderBodyRows<TData extends object>(
+  props: DataGridTableBodyRowsProps<TData>
+): ReactNode
+
+/**
+ * The constraint-instantiated memo component widened back to a generic
+ * callable via `Object.assign`: the intersection adds the generic call
+ * signature to the memo component without replacing its static type, so no
+ * narrowing assertion is involved and the memo identity stays stable. JSX
+ * resolves against the added generic signature.
+ */
+const BodyRowsMemo = Object.assign(
+  memo(
+    (bodyRowsProps: DataGridTableBodyRowsProps<never>) => (
+      <DataGridTableBodyRows {...bodyRowsProps} />
+    ),
+    (_prev, next) => !!next.table.state.columnResizing.isResizingColumn
+  ),
+  {
+    renderBodyRows
+  }
+)
 
 function DataGridTableHeader<TData extends object>({
   table
@@ -2407,7 +2434,6 @@ function DataGridTable<TData extends object>({
   table: DataGridTableInstance<TData>
 }) {
   const { props } = useDataGrid()
-  const BodyRowsMemo = useMemoBodyRows<TData>()
   const mergedHeaderGroups = getDataGridTableMergedHeaderGroups(table)
   const hasRightPinnedColumns = hasDataGridTableRightPinnedColumns(table)
 
@@ -2468,7 +2494,7 @@ function DataGridTable<TData extends object>({
         )}
 
         <DataGridTableBody>
-          <BodyRowsMemo table={table} hasFollowingFooter={!!footerContent} />
+          <BodyRowsMemo.renderBodyRows table={table} hasFollowingFooter={!!footerContent} />
           {props.appendRow}
           <DataGridTableAddRow table={table} />
         </DataGridTableBody>

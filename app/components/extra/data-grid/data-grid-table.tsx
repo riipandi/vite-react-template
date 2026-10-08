@@ -1554,8 +1554,9 @@ function DataGridTableBodyRowExpandedSlot<TData extends object>({
   row: Row<DataGridFeatures, TData>
   table: DataGridTableInstance<TData>
 }) {
+  const tableInstance = table ?? row.table
   return (
-    <Subscribe source={table.atoms.expanded}>
+    <Subscribe source={tableInstance.atoms.expanded}>
       {() => (row.getIsExpanded() ? <DataGridTableBodyRowExpandded row={row} /> : null)}
     </Subscribe>
   )
@@ -2015,8 +2016,14 @@ function DataGridTableRowPin<TData extends object>({
 }) {
   const { i18n } = useDataGrid()
 
+  // `table` arrives through the caller's threaded prop; the row itself always
+  // knows its table, so a call site that has not threaded the prop yet (or a
+  // compiler-memoized cell evaluated before the caller's assignment) still
+  // resolves a valid instance instead of crashing on `.atoms` of undefined.
+  const tableInstance = table ?? row.table
+
   return (
-    <Subscribe source={table.atoms.rowPinning}>
+    <Subscribe source={tableInstance.atoms.rowPinning}>
       {() => {
         const isPinned = row.getIsPinned()
 
